@@ -1,22 +1,23 @@
 <div align="center" width="100%">
-  <img src="https://github.com/songjianet/songjianet/blob/main/images/working.gif" width="550" />
+  <img src="https://fgg6gzb6uk.feishu.cn/file/boxcn4nF1rhMFCbyIbQEIssK6MI?from=from_copylink" width="550" />
   
-  #### Hi 👋 coders
+  #### Hi 👋 Testers
   #### I am a tester who likes learning
-  #### A technocrat who loves to contribute to Open Source
+
 </div>
 
 ---
 
 ### About me
 
-- 💡 &nbsp;&nbsp;I like to explore new technologies and develop software solutions and quick hacks
-- 📖 &nbsp;&nbsp;I’m currently learning **TensolFlow**
-- 🎧 &nbsp;&nbsp;Like to listen to **music** and watch **movies**
-- 🐈‍ &nbsp;&nbsp;Like **kittens**
-- 🧑🏻‍💻 &nbsp;&nbsp;Like to write **code**
-- ⛏ &nbsp;&nbsp;Recently addicted to **blockchain** and **digital cryptocurrency**
-<!-- 📝 &nbsp;&nbsp;See my [**Curriculum Vitae**](https://) to get more info.-->
+- 💡 &nbsp;&nbsp;I like to explore new testing technologies, including automated testing and test development
+- 📖 &nbsp;&nbsp; I am currently learning **big_data** testing technology and using **kubernetes**
+- 🎧 &nbsp;&nbsp;Like to listen to **take a walk** and **Play badminton**
+- 🐈‍ &nbsp;&nbsp;Like **Alaska dog**
+- 🧑🏻‍💻 &nbsp;&nbsp;Like to study new **technologies**
+- ⛏ &nbsp;&nbsp;Recently indulged in business testing and worked hard to complete personal OKR
+
+📝 &nbsp;&nbsp;See my [**Personal Blog**](https://fgg6gzb6uk.feishu.cn/docx/LkwDdpLjnoIdGwxOH6zcRwEWnhd) to get more info.
 
 <br />
 
