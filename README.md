@@ -1,6 +1,5 @@
 <div align="center" width="100%">
 
-  <img src="https://fgg6gzb6uk.feishu.cn/file/boxcn4nF1rhMFCbyIbQEIssK6MI?from=from_copylink" width="550" />
 
   #### Hi 👋 Testers
   #### I am a tester who likes learning
