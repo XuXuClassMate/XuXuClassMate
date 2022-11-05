@@ -1,5 +1,6 @@
 <div align="center" width="100%">
 
+  <img src="./img/tester.gif" width="550" />
 
   #### Hi 👋 Testers
   #### I am a tester who likes learning
