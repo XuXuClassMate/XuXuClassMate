@@ -2,7 +2,8 @@
 
   <img src="https://github.com/XuXuClassMate/XuXuClassMate/blob/master/img/tester.gif" width="550" />
 
-  #### Hi 👋 Testers
+  ####  👋 Testers 👋
+  #### Hi, I'm 旭旭同學 
   #### I am a tester who likes learning
 
 </div>
