@@ -26,7 +26,7 @@
 ### GitHub Analytics
 
 <div align="center">
-  <img height="180em" width="48%" src="https://github-readme-stats.vercel.app/api?username=XuXuClassMate&show_icons=true&theme=vue&include_all_commits=true&count_private=true"/>
+  <img height="180em" width="48%" src="https://github-readme-stats.vercel.app/api?username=XuXuClassMate&show_icons=true&theme=vue&&show=prs_merged,prs_merged_percentage"/>
   <img height="180em" width="48%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=XuXuClassMate&layout=compact&langs_count=8&theme=vue"/>
 </p>
 
