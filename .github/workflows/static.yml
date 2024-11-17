@@ -10,7 +10,7 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
   schedule:
-    - cron: "0 0 * * *"
+    - cron:  '6 6 * * *'
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
