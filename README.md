@@ -13,7 +13,7 @@
 ### About me
 
 - 💡 &nbsp;&nbsp;I like to explore new testing technologies, including automated testing and test development
-- 📖 &nbsp;&nbsp; I am currently learning **big_data** testing technology and using **kubernetes**
+- 📖 &nbsp;&nbsp; I am currently learning **Wb3** testing technology and using **kubernetes**
 - 🎧 &nbsp;&nbsp;Like to listen to **take a walk** and **Play badminton**
 - 🐈‍ &nbsp;&nbsp;Like **Alaska dog**
 - 🧑🏻‍💻 &nbsp;&nbsp;Like to study new **technologies**
