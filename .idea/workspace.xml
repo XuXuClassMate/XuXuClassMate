@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b272501-ae2f-418b-b9a1-f246e9149e52" name="Changes" comment="">
+    <list default="true" id="2b272501-ae2f-418b-b9a1-f246e9149e52" name="Changes" comment="Update Copyright Notice">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/demo.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/demo.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index2.html" beforeDir="false" afterPath="$PROJECT_DIR$/index2.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index3.html" beforeDir="false" afterPath="$PROJECT_DIR$/index3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shortcut/pater.css" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,12 +32,22 @@
     &quot;assignee&quot;: &quot;XuXuClassMate&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "git@github.com:XuXuClassMate/XuXuClassMate.git",
-    "accountId": "c18ae311-4741-49ff-9770-afffbe398cb1"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:XuXuClassMate/XuXuClassMate.git&quot;,
+    &quot;accountId&quot;: &quot;c18ae311-4741-49ff-9770-afffbe398cb1&quot;
+  },
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
+    },
+    &quot;owner&quot;: &quot;XuXuClassMate&quot;,
+    &quot;repository&quot;: &quot;XuXuClassMate&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -67,9 +79,23 @@
       <option name="presentableId" value="Default" />
       <updated>1736497076767</updated>
     </task>
+    <task id="LOCAL-00001" summary="Update Copyright Notice">
+      <option name="closed" value="true" />
+      <created>1736498657631</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1736498657631</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Update index3.html&#10;&#10;Update resource links" />
+    <MESSAGE value="Update Copyright Notice" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update Copyright Notice" />
   </component>
 </project>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>旭旭同学</title>
+    <meta name="description" content="欢迎来到旭旭的个人网站，分享技术、生活和学习历程">
+    <meta name="keywords" content="个人作品集, 开发者, 技术, 学习">
+    <meta name="author" content="旭旭同学">
+    <link rel="shortcut icon" href="../images/logo.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="../zh/index.html" class="logo">
+                    <img src="../images/logo.svg" alt="XuXuClassMate Logo">
+                    <span class="logo-text">旭旭同学</span>
+                </a>
+                <div class="nav-links">
+                    <a href="life.html" class="nav-item">生活</a>
+                    <a href="learning.html" class="nav-item">学习</a>
+                    <a href="work.html" class="nav-item">工作</a>
+                    <a href="../index.html" class="language-switch">English</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <span class="subtitle">我的使命</span>
+                    <h1 class="hero-title">持续学习，不断成长</h1>
+                    <p class="hero-desc">探索技术，分享知识，共同构建未来</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="values">
+            <div class="container">
+                <h2 class="section-title">我的价值观</h2>
+                <div class="values-grid">
+                    <div class="value-card">
+                        <h3>持续学习</h3>
+                        <p>保持好奇心，不断学习新技术和技能</p>
+                    </div>
+                    <div class="value-card">
+                        <h3>分享成长</h3>
+                        <p>分享知识和经验，帮助他人一起成长</p>
+                    </div>
+                    <div class="value-card">
+                        <h3>追求卓越</h3>
+                        <p>在每个项目和挑战中追求卓越</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="quick-links">
+            <div class="container">
+                <div class="links-grid">
+                    <a href="learning.html" class="link-card">
+                        <h3>学习路径</h3>
+                        <p>查看我的学习笔记和资源</p>
+                    </a>
+                    <a href="work.html" class="link-card">
+                        <h3>项目展示</h3>
+                        <p>探索我最近的项目和作品</p>
+                    </a>
+                    <a href="life.html" class="link-card">
+                        <h3>生活历程</h3>
+                        <p>分享我的生活经历和故事</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <span class="logo-text">旭旭同学</span>
+                    <p class="footer-desc">一个用于学习和分享的个人空间</p>
+                </div>
+                <div class="footer-right">
+                    <div class="social-links">
+                        <a href="https://github.com/XuXuClassMate" target="_blank">
+                            <i class="fab fa-github"></i>
+                            <span>GitHub</span>
+                        </a>
+                        <a href="#" target="_blank">
+                            <i class="fas fa-blog"></i>
+                            <span>博客</span>
+                        </a>
+                        <a href="javascript:void(0);" class="wechat-link" id="footerWechatBtn">
+                            <i class="fab fa-weixin"></i>
+                            <span>微信</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="copyright">© 2020-2025 旭旭同学. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WeChat QR Code Modal -->
+    <div class="modal" id="wechatModal">
+        <div class="modal-content">
+            <button class="close-button" id="closeModal">×</button>
+            <img src="../images/wechat.jpg" alt="微信二维码">
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('wechatModal');
+            const navBtn = document.getElementById('wechatBtn');
+            const footerBtn = document.getElementById('footerWechatBtn');
+            const closeBtn = document.getElementById('closeModal');
+
+            function showModal(e) {
+                e.preventDefault();
+                modal.classList.add('show');
+            }
+
+            navBtn.addEventListener('click', showModal);
+            footerBtn.addEventListener('click', showModal);
+
+            closeBtn.addEventListener('click', function() {
+                modal.classList.remove('show');
+            });
+
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.classList.remove('show');
+                }
+            });
+        });
+    </script>
+</body>
+</html> 
