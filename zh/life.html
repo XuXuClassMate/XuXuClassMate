@@ -11,19 +11,54 @@
 </head>
 <body>
     <header class="header">
-        <nav class="nav container">
-            <a href="../zh/index.html" class="logo">
-                <img src="../images/logo.svg" alt="XuXuClassMate Logo">
-                <span class="logo-text">旭旭同学</span>
-            </a>
-            <div class="nav-links">
-                <a href="life.html" class="nav-item active">生活</a>
-                <a href="learning.html" class="nav-item">学习</a>
-                <a href="work.html" class="nav-item">工作</a>
-                <a href="../en/life.html" class="language-switch">English</a>
-            </div>
-        </nav>
+        <div class="container">
+            <nav class="nav">
+                <a href="../zh/index.html" class="logo">
+                    <img src="../images/logo.svg" alt="XuXuClassMate Logo">
+                    <span class="logo-text">旭旭同学</span>
+                </a>
+                <div class="nav-links">
+                    <a href="life.html" class="nav-item active">生活</a>
+                    <a href="learn.html" class="nav-item">学习</a>
+                    <a href="work.html" class="nav-item">工作</a>
+                    <a href="../en/life.html" class="language-switch">English</a>
+                </div>
+            </nav>
+        </div>
     </header>
+
+    <!-- 微信二维码弹窗 -->
+    <div class="modal" id="wechatModal">
+        <div class="modal-content">
+            <button class="close-button" id="closeModal">×</button>
+            <img src="../images/wechat.jpg" alt="微信二维码">
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('wechatModal');
+            const footerBtn = document.getElementById('footerWechatBtn');
+            const closeBtn = document.getElementById('closeModal');
+
+            function showModal(e) {
+                e.preventDefault();
+                modal.classList.add('show');
+            }
+
+            footerBtn.addEventListener('click', showModal);
+
+            closeBtn.addEventListener('click', function() {
+                modal.classList.remove('show');
+            });
+
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.classList.remove('show');
+                }
+            });
+        });
+    </script>
 
     <section class="hero">
         <div class="container hero-content">
@@ -210,4 +245,4 @@
         });
     </script>
 </body>
-</html> 
+</html>
