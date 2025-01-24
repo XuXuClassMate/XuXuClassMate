@@ -6,24 +6,34 @@
     <title>XuXuClassMate - Life Journey</title>
     <meta name="description" content="Sharing my life experiences and interests beyond work">
     <link rel="shortcut icon" href="../images/logo.svg">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <header class="header">
-        <nav class="nav">
-            <a href="../index.html" class="logo">
-                <img src="../images/logo.svg" alt="XuXuClassMate Logo">
-                <span class="logo-text">XuXuClassMate</span>
-            </a>
-            <div class="nav-links">
-                <a href="life.html" class="nav-item active">Life</a>
-                <a href="learning.html" class="nav-item">Learning</a>
-                <a href="work.html" class="nav-item">Work</a>
-                <a href="../zh/life.html" class="language-switch">中文</a>
-            </div>
-        </nav>
+        <div class="container">
+            <nav class="nav">
+                <a href="../index.html" class="logo">
+                    <img src="../images/logo.svg" alt="XuXuClassMate Logo">
+                    <span class="logo-text">XuXuClassMate</span>
+                </a>
+                <div class="nav-links">
+                    <a href="life.html" class="nav-item active">Life</a>
+                    <a href="learn.html" class="nav-item">Learn</a>
+                    <a href="work.html" class="nav-item">Work</a>
+                    <a href="../zh/life.html" class="language-switch">中文</a>
+                </div>
+            </nav>
+        </div>
     </header>
+
+    <!-- WeChat QR Code Modal -->
+    <div class="modal" id="wechatModal">
+        <div class="modal-content">
+            <button class="close-button" id="closeModal">×</button>
+            <img src="../images/wechat.jpg" alt="WeChat QR Code">
+        </div>
+    </div>
 
     <section class="hero">
         <div class="container hero-content">
@@ -96,48 +106,20 @@
                     <h3>Gaming</h3>
                     <p>Enjoying games while learning game development technologies</p>
                     <ul class="hobby-list">
-                        <li>Role-Playing Games</li>
                         <li>Strategy Games</li>
+                        <li>RPG Adventures</li>
                         <li>Indie Games</li>
                     </ul>
                 </article>
                 <article class="hobby-card">
-                    <div class="hobby-icon">🏃</div>
-                    <h3>Sports</h3>
-                    <p>Maintaining regular exercise routine and enjoying sports activities</p>
+                    <div class="hobby-icon">🎵</div>
+                    <h3>Music</h3>
+                    <p>Creating and enjoying music in different styles</p>
                     <ul class="hobby-list">
-                        <li>Hiking</li>
-                        <li>Mountain Climbing</li>
-                        <li>Badminton</li>
+                        <li>Electronic Music</li>
+                        <li>Classical Piano</li>
+                        <li>Jazz</li>
                     </ul>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <section class="blog">
-        <div class="container">
-            <h2 class="section-title">Life Blog</h2>
-            <div class="blog-grid">
-                <article class="blog-card">
-                    <div class="blog-image">
-                        <img src="../images/plan.jpg" alt="Annual Plan">
-                    </div>
-                    <div class="blog-content">
-                        <h3>Annual Plan</h3>
-                        <p>New year, new beginnings - sharing my goals and plans for the year</p>
-                        <a href="https://fgg6gzb6uk.feishu.cn/base/H07ebpIM1aBTuGsYtaacHK9NnBb?table=tblwIKtfaCQWbaKW" class="read-more" target="_blank">Read More</a>
-                    </div>
-                </article>
-                <article class="blog-card">
-                    <div class="blog-image">
-                        <img src="../images/summary.jpg" alt="Progress Summary">
-                    </div>
-                    <div class="blog-content">
-                        <h3>Progress Update</h3>
-                        <p>Tracking and sharing the progress of annual goals and growth journey</p>
-                        <a href="https://fgg6gzb6uk.feishu.cn/base/H07ebpIM1aBTuGsYtaacHK9NnBb?table=blkcP1vbErcMDacd" class="read-more" target="_blank">Read More</a>
-                    </div>
                 </article>
             </div>
         </div>
@@ -148,21 +130,23 @@
             <div class="footer-content">
                 <div class="footer-left">
                     <span class="logo-text">XuXuClassMate</span>
-                    <p class="footer-desc">Recording life, sharing happiness</p>
+                    <p class="footer-desc">A personal space for learning and sharing</p>
                 </div>
-                <div class="social-links">
-                    <a href="https://www.tiktok.com/@xuxuclassmate" target="_blank">
-                        <i class="fab fa-tiktok"></i>
-                        <span>TikTok</span>
-                    </a>
-                    <a href="https://www.instagram.com/xuxuclassmate" target="_blank">
-                        <i class="fab fa-instagram"></i>
-                        <span>Instagram</span>
-                    </a>
-                    <a href="javascript:void(0);" class="wechat-link" id="footerWechatBtn">
-                        <i class="fab fa-weixin"></i>
-                        <span>WeChat</span>
-                    </a>
+                <div class="footer-right">
+                    <div class="social-links">
+                        <a href="https://github.com/XuXuClassMate" target="_blank">
+                            <i class="fab fa-github"></i>
+                            <span>GitHub</span>
+                        </a>
+                        <a href="https://fgg6gzb6uk.feishu.cn/docx/LkwDdpLjnoIdGwxOH6zcRwEWnhd?from=from_copylink" target="_blank">
+                            <i class="fas fa-blog"></i>
+                            <span>Blog</span>
+                        </a>
+                        <a href="javascript:void(0);" class="wechat-link" id="footerWechatBtn">
+                            <i class="fab fa-weixin"></i>
+                            <span>WeChat</span>
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -171,19 +155,9 @@
         </div>
     </footer>
 
-    <!-- WeChat QR Code Modal -->
-    <div class="modal" id="wechatModal">
-        <div class="modal-content">
-            <button class="close-button" id="closeModal">×</button>
-            <img src="../images/wechat.jpg" alt="WeChat QR Code">
-        </div>
-    </div>
-
-    <script src="../js/main.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const modal = document.getElementById('wechatModal');
-            const navBtn = document.getElementById('wechatBtn');
             const footerBtn = document.getElementById('footerWechatBtn');
             const closeBtn = document.getElementById('closeModal');
 
@@ -192,7 +166,6 @@
                 modal.classList.add('show');
             }
 
-            navBtn.addEventListener('click', showModal);
             footerBtn.addEventListener('click', showModal);
 
             closeBtn.addEventListener('click', function() {
@@ -207,4 +180,4 @@
         });
     </script>
 </body>
-</html> 
+</html>
