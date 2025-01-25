@@ -8,6 +8,7 @@
     <link rel="shortcut icon" href="../images/logo.svg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/mobile-nav.css">
 </head>
 <body>
     <header class="header">
@@ -17,7 +18,12 @@
                     <img src="../images/logo.svg" alt="XuXuClassMate Logo">
                     <span class="logo-text">旭旭同学</span>
                 </a>
-                <div class="nav-links">
+                <button id="mobileNavToggle" class="mobile-nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="nav-links" id="navLinks">
                     <a href="life.html" class="nav-item active">生活</a>
                     <a href="learn.html" class="nav-item">学习</a>
                     <a href="work.html" class="nav-item">工作</a>
@@ -26,6 +32,8 @@
             </nav>
         </div>
     </header>
+
+    <script src="../js/mobile-nav.js"></script>
 
     <!-- 微信二维码弹窗 -->
     <div class="modal" id="wechatModal">
