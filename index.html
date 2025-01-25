@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/mobile-nav.css">
 </head>
 <body>
     <header class="header">
@@ -21,7 +22,12 @@
                     <img src="images/logo.svg" alt="XuXuClassMate Logo">
                     <span class="logo-text">XuXuClassMate</span>
                 </a>
-                <div class="nav-links">
+                <button id="mobileNavToggle" class="mobile-nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="nav-links" id="navLinks">
                     <a href="en/life.html" class="nav-item">Life</a>
                     <a href="en/learn.html" class="nav-item">Learn</a>
                     <a href="en/work.html" class="nav-item">Work</a>
@@ -120,6 +126,7 @@
         </div>
     </div>
 
+    <script src="js/mobile-nav.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const modal = document.getElementById('wechatModal');
