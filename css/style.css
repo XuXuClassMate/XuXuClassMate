@@ -130,7 +130,7 @@ body {
     border: 1px solid var(--primary-color);
     border-radius: 4px;
     color: var(--primary-color);
-    margin-left: 24px;
+    margin-left: 16px;
 }
 
 .language-switch:hover {
@@ -186,6 +186,11 @@ body {
     border: 1px solid var(--primary-color);
     border-radius: 4px;
     color: var(--primary-color);
+    margin: 0 auto;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .language-switch:hover {
