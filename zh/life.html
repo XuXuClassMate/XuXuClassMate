@@ -43,31 +43,6 @@
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const modal = document.getElementById('wechatModal');
-            const footerBtn = document.getElementById('footerWechatBtn');
-            const closeBtn = document.getElementById('closeModal');
-
-            function showModal(e) {
-                e.preventDefault();
-                modal.classList.add('show');
-            }
-
-            footerBtn.addEventListener('click', showModal);
-
-            closeBtn.addEventListener('click', function() {
-                modal.classList.remove('show');
-            });
-
-            modal.addEventListener('click', function(e) {
-                if (e.target === modal) {
-                    modal.classList.remove('show');
-                }
-            });
-        });
-    </script>
-
     <section class="hero">
         <div class="container hero-content">
             <span class="subtitle">生活与爱好</span>
@@ -197,9 +172,9 @@
                     <p class="footer-desc">记录生活，分享快乐</p>
                 </div>
                 <div class="social-links">
-                    <a href="https://www.tiktok.com/@xuxuclassmate" target="_blank">
+                    <a href="https://www.douyin.com/user/MS4wLjABAAAAXN8bo7p6CIUTCXg20Hthe1Jf3p44NRF9Xue4ms2NurE" target="_blank">
                         <i class="fab fa-tiktok"></i>
-                        <span>TikTok</span>
+                        <span>抖音</span>
                     </a>
                     <a href="https://www.instagram.com/xuxuclassmate" target="_blank">
                         <i class="fab fa-instagram"></i>
@@ -217,19 +192,10 @@
         </div>
     </footer>
 
-    <!-- WeChat QR Code Modal -->
-    <div class="modal" id="wechatModal">
-        <div class="modal-content">
-            <button class="close-button" id="closeModal">×</button>
-            <img src="../images/wechat.jpg" alt="微信二维码">
-        </div>
-    </div>
-
     <script src="../js/main.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const modal = document.getElementById('wechatModal');
-            const navBtn = document.getElementById('wechatBtn');
             const footerBtn = document.getElementById('footerWechatBtn');
             const closeBtn = document.getElementById('closeModal');
 
@@ -238,7 +204,6 @@
                 modal.classList.add('show');
             }
 
-            navBtn.addEventListener('click', showModal);
             footerBtn.addEventListener('click', showModal);
 
             closeBtn.addEventListener('click', function() {
