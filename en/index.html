@@ -10,7 +10,6 @@
     <link rel="shortcut icon" href="../images/logo.svg">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="../css/normalize.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/mobile-nav.css">
 </head>
@@ -142,7 +141,6 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const modal = document.getElementById('wechatModal');
-            const navBtn = document.getElementById('wechatBtn');
             const footerBtn = document.getElementById('footerWechatBtn');
             const closeBtn = document.getElementById('closeModal');
 
@@ -151,7 +149,6 @@
                 modal.classList.add('show');
             }
 
-            navBtn.addEventListener('click', showModal);
             footerBtn.addEventListener('click', showModal);
 
             closeBtn.addEventListener('click', function() {
