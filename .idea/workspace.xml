@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b272501-ae2f-418b-b9a1-f246e9149e52" name="Changes" comment="Update  Email">
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-    </list>
+    <list default="true" id="2b272501-ae2f-418b-b9a1-f246e9149e52" name="Changes" comment="fix：&#10;static.yml schedule is null" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -101,7 +99,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738217367131</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="fix：&#10;static.yml schedule is null">
+      <option name="closed" value="true" />
+      <created>1745067256322</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1745067256322</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -123,7 +129,8 @@
     <MESSAGE value="Update Copyright Notice" />
     <MESSAGE value="small optimization" />
     <MESSAGE value="Update  Email" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update  Email" />
+    <MESSAGE value="fix：&#10;static.yml schedule is null" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix：&#10;static.yml schedule is null" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
 </project>
