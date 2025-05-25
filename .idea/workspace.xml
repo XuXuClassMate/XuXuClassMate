@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2b272501-ae2f-418b-b9a1-f246e9149e52" name="Changes" comment="Update  Email">
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zh/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/zh/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zh/learn.html" beforeDir="false" afterPath="$PROJECT_DIR$/zh/learn.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zh/life.html" beforeDir="false" afterPath="$PROJECT_DIR$/zh/life.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zh/work.html" beforeDir="false" afterPath="$PROJECT_DIR$/zh/work.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +23,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
