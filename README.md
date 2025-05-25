@@ -7,6 +7,7 @@
   #### Welcome to my personal page!  
   #### I go by the name **XuXuClassMate**, also known in Chinese as **旭旭同学**.  
   #### I am a test engineer who likes learning
+
 </div>
 
 ---
@@ -19,6 +20,8 @@
 - 🐈‍ &nbsp;&nbsp;Like **Alaska dog**
 - 🧑🏻‍💻 &nbsp;&nbsp;Like to study new **technologies**
 - ⛏ &nbsp;&nbsp;Recently indulged in business testing and worked hard to complete personal OKR
+- You can find me across platforms with the handle `xuxuclassmate`  
+- Don't hesitate to reach out!
 
 📝 &nbsp;&nbsp;See my [**Personal Blog**](https://fgg6gzb6uk.feishu.cn/docx/LkwDdpLjnoIdGwxOH6zcRwEWnhd) to get more info.
 
@@ -27,7 +30,9 @@
 ### GitHub Analytics
 
 <div align="center">
+
   <img height="180em" width="48%" src="https://github-readme-stats.vercel.app/api?username=XuXuClassMate&show_icons=true&theme=vue&&show=prs_merged,prs_merged_percentage"/>
   <img height="180em" width="48%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=XuXuClassMate&layout=compact&langs_count=8&theme=vue"/>
-</p>
+
+</div>
 
