@@ -2,10 +2,11 @@
 
   <img src="https://github.com/XuXuClassMate/XuXuClassMate/blob/master/img/tester.gif" width="550" />
 
-  ####  👋 Testers 👋
-  #### Hi, I'm 旭旭同學 
-  #### I am a tester who likes learning
+  #### Hi, I’m XuXuClassMate 👋
 
+  #### Welcome to my personal page!  
+  #### I go by the name **XuXuClassMate**, also known in Chinese as **旭旭同学**.  
+  #### I am a test engineer who likes learning
 </div>
 
 ---
