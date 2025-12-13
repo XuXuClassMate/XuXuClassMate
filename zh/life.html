@@ -1,234 +1,295 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>旭旭同学 - 生活点滴</title>
-    <meta name="description" content="欢迎来到旭旭同学（xuxuclassmate）的个人网站，分享测试工程师的技术经验、学习过程与个人成长。">
-    <meta name="keywords" content="旭旭同学, xuxuclassmate, 软件测试, 自动化测试, 测试工程师, 技术博客, QA, 个人主页, 成长记录">
-    <meta name="author" content="旭旭同学">
-    <link rel="shortcut icon" href="../images/logo.svg">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/mobile-nav.css">
-</head>
-<body>
-    <header class="header">
-        <div class="container">
-            <nav class="nav">
-                <a href="../zh/index.html" class="logo">
-                    <img src="../images/logo.svg" alt="XuXuClassMate Logo">
-                    <span class="logo-text">旭旭同学</span>
-                </a>
-                <button id="mobileNavToggle" class="mobile-nav-toggle">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-                <div class="nav-links" id="navLinks">
-                    <a href="life.html" class="nav-item active">生活</a>
-                    <a href="learn.html" class="nav-item">学习</a>
-                    <a href="work.html" class="nav-item">工作</a>
-                    <a href="../en/life.html" class="language-switch">English</a>
-                </div>
-            </nav>
-        </div>
-    </header>
-
-    <script src="../js/mobile-nav.js"></script>
-
-    <!-- 微信二维码弹窗 -->
-    <div class="modal" id="wechatModal">
-        <div class="modal-content">
-            <button class="close-button" id="closeModal">×</button>
-            <img src="../images/wechat.jpg" alt="微信二维码">
-        </div>
-    </div>
-
-    <section class="hero">
-        <div class="container hero-content">
-            <span class="subtitle">生活与爱好</span>
-            <h1 class="hero-title">生活历程</h1>
-            <p class="hero-desc">分享编程之外的生活点滴和兴趣爱好</p>
-        </div>
-    </section>
-
-    <section class="life-gallery">
-        <div class="container">
-            <h2 class="section-title">生活瞬间</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <a href="https://www.douyin.com/user/MS4wLjABAAAAXN8bo7p6CIUTCXg20Hthe1Jf3p44NRF9Xue4ms2NurE" 
-                       target="_blank" 
-                       class="video-cover">
-                        <img src="../images/douyin-cover.jpg" alt="旅行视频封面 - 溪流自然风光">
-                        <div class="play-button">▶</div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>旭旭同学 - 生活点滴</title>
+        <link rel="canonical" href="https://www.xuxuclassmate.com/" />
+        <meta
+            name="description"
+            content="欢迎来到旭旭同学（xuxuclassmate）的个人网站，分享测试工程师的技术经验、学习过程与个人成长。"
+        />
+        <meta
+            name="keywords"
+            content="旭旭同学, xuxuclassmate, 软件测试, 自动化测试, 测试工程师, 技术博客, QA, 个人主页, 成长记录"
+        />
+        <meta name="author" content="旭旭同学" />
+        <link rel="shortcut icon" href="../images/logo.svg" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        />
+        <link rel="stylesheet" href="../css/style.css" />
+        <link rel="stylesheet" href="../css/mobile-nav.css" />
+    </head>
+    <body>
+        <header class="header">
+            <div class="container">
+                <nav class="nav">
+                    <a href="../zh/index.html" class="logo">
+                        <img
+                            src="../images/logo.svg"
+                            alt="XuXuClassMate Logo"
+                        />
+                        <span class="logo-text">旭旭同学</span>
                     </a>
-                    <div class="gallery-caption">
-                        <h3>旅行视频</h3>
-                        <p>用镜头记录大自然的美</p>
-                        <a href="https://www.douyin.com/user/MS4wLjABAAAAXN8bo7p6CIUTCXg20Hthe1Jf3p44NRF9Xue4ms2NurE" 
-                           target="_blank" 
-                           class="social-link">在抖音观看</a>
+                    <button id="mobileNavToggle" class="mobile-nav-toggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <div class="nav-links" id="navLinks">
+                        <a href="life.html" class="nav-item active">生活</a>
+                        <a href="learn.html" class="nav-item">学习</a>
+                        <a href="work.html" class="nav-item">工作</a>
+                        <a href="../en/life.html" class="language-switch"
+                            >English</a
+                        >
                     </div>
-                </div>
-                <div class="gallery-item">
-                    <a href="https://music.163.com/#/playlist?id=368129876" 
-                       target="_blank" 
-                       class="video-cover">
-                        <img src="../images/music.jpg" alt="音乐时光">
-                        <div class="play-button">▶</div>
-                    </a>
-                    <div class="gallery-caption">
-                        <h3>轻听时光</h3>
-                        <p>分享温暖治愈的音乐集</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <a href="https://www.iqiyi.com/playlist1921084202.html?vfrm=psbdl" 
-                       target="_blank" 
-                       class="video-cover">
-                        <img src="../images/movie.jpg" alt="电影时光 - 宫崎骏动画">
-                        <div class="play-button">▶</div>
-                    </a>
-                    <div class="gallery-caption">
-                        <h3>电影时光</h3>
-                        <p>沉浸在宫崎骏的动画世界</p>
-                    </div>
-                </div>
+                </nav>
+            </div>
+        </header>
+
+        <script src="../js/mobile-nav.js"></script>
+
+        <!-- 微信二维码弹窗 -->
+        <div class="modal" id="wechatModal">
+            <div class="modal-content">
+                <button class="close-button" id="closeModal">×</button>
+                <img src="../images/wechat.jpg" alt="微信二维码" />
             </div>
         </div>
-    </section>
 
-    <section class="hobbies">
-        <div class="container">
-            <h2 class="section-title">我的爱好</h2>
-            <div class="hobby-grid">
-                <article class="hobby-card">
-                    <div class="hobby-icon">📚</div>
-                    <h3>阅读</h3>
-                    <p>喜欢阅读技术书籍和文学作品，探索不同的知识领域</p>
-                    <ul class="hobby-list">
-                        <li>技术书籍</li>
-                        <li>科幻小说</li>
-                        <li>历史档案</li>
-                    </ul>
-                </article>
-                <article class="hobby-card">
-                    <div class="hobby-icon">🎮</div>
-                    <h3>游戏</h3>
-                    <p>享受游戏带来的乐趣，同时学习游戏开发技术</p>
-                    <ul class="hobby-list">
-                        <li>角色扮演</li>
-                        <li>策略游戏</li>
-                        <li>独立游戏</li>
-                    </ul>
-                </article>
-                <article class="hobby-card">
-                    <div class="hobby-icon">🏃</div>
-                    <h3>运动</h3>
-                    <p>保持规律运动，享受运动带来的快乐</p>
-                    <ul class="hobby-list">
-                        <li>徒步</li>
-                        <li>爬山</li>
-                        <li>羽毛球</li>
-                    </ul>
-                </article>
+        <section class="hero">
+            <div class="container hero-content">
+                <span class="subtitle">生活与爱好</span>
+                <h1 class="hero-title">生活历程</h1>
+                <p class="hero-desc">分享编程之外的生活点滴和兴趣爱好</p>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="blog">
-        <div class="container">
-            <h2 class="section-title">生活博客</h2>
-            <div class="blog-grid">
-                <article class="blog-card">
-                    <div class="blog-image">
-                        <img src="../images/plan.jpg" alt="年度计划配图">
+        <section class="life-gallery">
+            <div class="container">
+                <h2 class="section-title">生活瞬间</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <a
+                            href="https://www.douyin.com/user/MS4wLjABAAAAXN8bo7p6CIUTCXg20Hthe1Jf3p44NRF9Xue4ms2NurE"
+                            target="_blank"
+                            class="video-cover"
+                        >
+                            <img
+                                src="../images/douyin-cover.jpg"
+                                alt="旅行视频封面 - 溪流自然风光"
+                            />
+                            <div class="play-button">▶</div>
+                        </a>
+                        <div class="gallery-caption">
+                            <h3>旅行视频</h3>
+                            <p>用镜头记录大自然的美</p>
+                            <a
+                                href="https://www.douyin.com/user/MS4wLjABAAAAXN8bo7p6CIUTCXg20Hthe1Jf3p44NRF9Xue4ms2NurE"
+                                target="_blank"
+                                class="social-link"
+                                >在抖音观看</a
+                            >
+                        </div>
                     </div>
-                    <div class="blog-content">
-                        <h3>年度计划</h3>
-                        <p>新的一年，新的开始，分享我的年度计划和目标</p>
-                        <a href="https://fgg6gzb6uk.feishu.cn/base/H07ebpIM1aBTuGsYtaacHK9NnBb?table=tblwIKtfaCQWbaKW" class="read-more" target="_blank">阅读全文</a>
+                    <div class="gallery-item">
+                        <a
+                            href="https://music.163.com/#/playlist?id=368129876"
+                            target="_blank"
+                            class="video-cover"
+                        >
+                            <img src="../images/music.jpg" alt="音乐时光" />
+                            <div class="play-button">▶</div>
+                        </a>
+                        <div class="gallery-caption">
+                            <h3>轻听时光</h3>
+                            <p>分享温暖治愈的音乐集</p>
+                        </div>
                     </div>
-                </article>
-                <article class="blog-card">
-                    <div class="blog-image">
-                        <img src="../images/summary.jpg" alt="推进情况配图">
+                    <div class="gallery-item">
+                        <a
+                            href="https://www.iqiyi.com/playlist1921084202.html?vfrm=psbdl"
+                            target="_blank"
+                            class="video-cover"
+                        >
+                            <img
+                                src="../images/movie.jpg"
+                                alt="电影时光 - 宫崎骏动画"
+                            />
+                            <div class="play-button">▶</div>
+                        </a>
+                        <div class="gallery-caption">
+                            <h3>电影时光</h3>
+                            <p>沉浸在宫崎骏的动画世界</p>
+                        </div>
                     </div>
-                    <div class="blog-content">
-                        <h3>推进情况</h3>
-                        <p>记录和追踪年度计划的执行进展，分享成长历程</p>
-                        <a href="https://fgg6gzb6uk.feishu.cn/base/H07ebpIM1aBTuGsYtaacHK9NnBb?table=blkcP1vbErcMDacd" class="read-more" target="_blank">阅读全文</a>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <section class="contact-section" style="margin-bottom: 3rem;">
-        <div class="container">
-            <div class="contact-info" style="text-align: left; padding-left: 0;">
-                <h2>联系我：</h2>
-                <a href="mailto:mail@xuxuclassmate.com" style="color: #4a90e2; text-decoration: none;">
-                    mail@xuxuclassmate.com
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-left">
-                    <span class="logo-text">旭旭同学</span>
-                    <p class="footer-desc">记录生活，分享快乐</p>
-                </div>
-                <div class="social-links">
-                    <a href="https://www.douyin.com/user/MS4wLjABAAAAXN8bo7p6CIUTCXg20Hthe1Jf3p44NRF9Xue4ms2NurE" target="_blank">
-                        <i class="fab fa-tiktok"></i>
-                        <span>抖音</span>
-                    </a>
-                    <a href="https://www.instagram.com/xuxuclassmate" target="_blank">
-                        <i class="fab fa-instagram"></i>
-                        <span>Instagram</span>
-                    </a>
-                    <a href="javascript:void(0);" class="wechat-link" id="footerWechatBtn">
-                        <i class="fab fa-weixin"></i>
-                        <span>微信</span>
-                    </a>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p class="copyright">© 2020-2025 旭旭同学. 保留所有权利.</p>
+        </section>
+
+        <section class="hobbies">
+            <div class="container">
+                <h2 class="section-title">我的爱好</h2>
+                <div class="hobby-grid">
+                    <article class="hobby-card">
+                        <div class="hobby-icon">📚</div>
+                        <h3>阅读</h3>
+                        <p>喜欢阅读技术书籍和文学作品，探索不同的知识领域</p>
+                        <ul class="hobby-list">
+                            <li>技术书籍</li>
+                            <li>科幻小说</li>
+                            <li>历史档案</li>
+                        </ul>
+                    </article>
+                    <article class="hobby-card">
+                        <div class="hobby-icon">🎮</div>
+                        <h3>游戏</h3>
+                        <p>享受游戏带来的乐趣，同时学习游戏开发技术</p>
+                        <ul class="hobby-list">
+                            <li>角色扮演</li>
+                            <li>策略游戏</li>
+                            <li>独立游戏</li>
+                        </ul>
+                    </article>
+                    <article class="hobby-card">
+                        <div class="hobby-icon">🏃</div>
+                        <h3>运动</h3>
+                        <p>保持规律运动，享受运动带来的快乐</p>
+                        <ul class="hobby-list">
+                            <li>徒步</li>
+                            <li>爬山</li>
+                            <li>羽毛球</li>
+                        </ul>
+                    </article>
+                </div>
             </div>
-        </div>
-    </footer>
+        </section>
 
-    <script src="../js/main.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const modal = document.getElementById('wechatModal');
-            const footerBtn = document.getElementById('footerWechatBtn');
-            const closeBtn = document.getElementById('closeModal');
+        <section class="blog">
+            <div class="container">
+                <h2 class="section-title">生活博客</h2>
+                <div class="blog-grid">
+                    <article class="blog-card">
+                        <div class="blog-image">
+                            <img src="../images/plan.jpg" alt="年度计划配图" />
+                        </div>
+                        <div class="blog-content">
+                            <h3>年度计划</h3>
+                            <p>新的一年，新的开始，分享我的年度计划和目标</p>
+                            <a
+                                href="https://fgg6gzb6uk.feishu.cn/base/H07ebpIM1aBTuGsYtaacHK9NnBb?table=tblwIKtfaCQWbaKW"
+                                class="read-more"
+                                target="_blank"
+                                >阅读全文</a
+                            >
+                        </div>
+                    </article>
+                    <article class="blog-card">
+                        <div class="blog-image">
+                            <img
+                                src="../images/summary.jpg"
+                                alt="推进情况配图"
+                            />
+                        </div>
+                        <div class="blog-content">
+                            <h3>推进情况</h3>
+                            <p>记录和追踪年度计划的执行进展，分享成长历程</p>
+                            <a
+                                href="https://fgg6gzb6uk.feishu.cn/base/H07ebpIM1aBTuGsYtaacHK9NnBb?table=blkcP1vbErcMDacd"
+                                class="read-more"
+                                target="_blank"
+                                >阅读全文</a
+                            >
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
 
-            function showModal(e) {
-                e.preventDefault();
-                modal.classList.add('show');
-            }
+        <section class="contact-section" style="margin-bottom: 3rem">
+            <div class="container">
+                <div
+                    class="contact-info"
+                    style="text-align: left; padding-left: 0"
+                >
+                    <h2>联系我：</h2>
+                    <a
+                        href="mailto:mail@xuxuclassmate.com"
+                        style="color: #4a90e2; text-decoration: none"
+                    >
+                        mail@xuxuclassmate.com
+                    </a>
+                </div>
+            </div>
+        </section>
 
-            footerBtn.addEventListener('click', showModal);
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-left">
+                        <span class="logo-text">旭旭同学</span>
+                        <p class="footer-desc">记录生活，分享快乐</p>
+                    </div>
+                    <div class="social-links">
+                        <a
+                            href="https://www.douyin.com/user/MS4wLjABAAAAXN8bo7p6CIUTCXg20Hthe1Jf3p44NRF9Xue4ms2NurE"
+                            target="_blank"
+                        >
+                            <i class="fab fa-tiktok"></i>
+                            <span>抖音</span>
+                        </a>
+                        <a
+                            href="https://www.instagram.com/xuxuclassmate"
+                            target="_blank"
+                        >
+                            <i class="fab fa-instagram"></i>
+                            <span>Instagram</span>
+                        </a>
+                        <a
+                            href="javascript:void(0);"
+                            class="wechat-link"
+                            id="footerWechatBtn"
+                        >
+                            <i class="fab fa-weixin"></i>
+                            <span>微信</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p class="copyright">
+                        © 2020-2025 旭旭同学. 保留所有权利.
+                    </p>
+                </div>
+            </div>
+        </footer>
 
-            closeBtn.addEventListener('click', function() {
-                modal.classList.remove('show');
-            });
+        <script src="../js/main.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const modal = document.getElementById("wechatModal");
+                const footerBtn = document.getElementById("footerWechatBtn");
+                const closeBtn = document.getElementById("closeModal");
 
-            modal.addEventListener('click', function(e) {
-                if (e.target === modal) {
-                    modal.classList.remove('show');
+                function showModal(e) {
+                    e.preventDefault();
+                    modal.classList.add("show");
                 }
+
+                footerBtn.addEventListener("click", showModal);
+
+                closeBtn.addEventListener("click", function () {
+                    modal.classList.remove("show");
+                });
+
+                modal.addEventListener("click", function (e) {
+                    if (e.target === modal) {
+                        modal.classList.remove("show");
+                    }
+                });
             });
-        });
-    </script>
-</body>
+        </script>
+    </body>
 </html>
