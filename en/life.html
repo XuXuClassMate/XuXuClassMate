@@ -1,204 +1,259 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XuXuClassMate - Life Journey</title>
-    <meta name="description" content="Welcome to XuXuClassMate's personal website — sharing software testing insights, learning experiences, and personal growth stories.">
-    <meta name="keywords" content="xuxuclassmate, XuXuClassMate, QA engineer, software testing, technology blog, test automation, learning,旭旭同学">
-    <meta name="author" content="XuXuClassMate">
-    <link rel="shortcut icon" href="../images/logo.svg">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/mobile-nav.css">
-</head>
-<body>
-    <header class="header">
-        <div class="container">
-            <nav class="nav">
-                <a href="../index.html" class="logo">
-                    <img src="../images/logo.svg" alt="XuXuClassMate Logo">
-                    <span class="logo-text">XuXuClassMate</span>
-                </a>
-                <button id="mobileNavToggle" class="mobile-nav-toggle">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-                <div class="nav-links" id="navLinks">
-                    <a href="life.html" class="nav-item active">Life</a>
-                    <a href="learn.html" class="nav-item">Learn</a>
-                    <a href="work.html" class="nav-item">Work</a>
-                    <a href="../zh/life.html" class="language-switch">中文</a>
-                </div>
-            </nav>
-        </div>
-    </header>
-
-    <script src="../js/mobile-nav.js"></script>
-
-    <!-- WeChat QR Code Modal -->
-    <div class="modal" id="wechatModal">
-        <div class="modal-content">
-            <button class="close-button" id="closeModal">×</button>
-            <img src="../images/wechat.jpg" alt="WeChat QR Code">
-        </div>
-    </div>
-
-    <section class="hero">
-        <div class="container hero-content">
-            <span class="subtitle">LIFE & HOBBIES</span>
-            <h1 class="hero-title">Life Journey</h1>
-            <p class="hero-desc">Sharing my life experiences and interests beyond coding</p>
-        </div>
-    </section>
-
-    <section class="life-gallery">
-        <div class="container">
-            <h2 class="section-title">Life Moments</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <a href="https://www.tiktok.com/@xuxuclassmate" 
-                       target="_blank" 
-                       class="video-cover">
-                        <img src="../images/douyin-cover.jpg" alt="Travel Vlogs">
-                        <div class="play-button">▶</div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>XuXuClassMate - Life Journey</title>
+        <link rel="canonical" href="https://www.xuxuclassmate.com/" />
+        <meta
+            name="description"
+            content="Welcome to XuXuClassMate's personal website — sharing software testing insights, learning experiences, and personal growth stories."
+        />
+        <meta
+            name="keywords"
+            content="xuxuclassmate, XuXuClassMate, QA engineer, software testing, technology blog, test automation, learning,旭旭同学"
+        />
+        <meta name="author" content="XuXuClassMate" />
+        <link rel="shortcut icon" href="../images/logo.svg" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        />
+        <link rel="stylesheet" href="../css/style.css" />
+        <link rel="stylesheet" href="../css/mobile-nav.css" />
+    </head>
+    <body>
+        <header class="header">
+            <div class="container">
+                <nav class="nav">
+                    <a href="../index.html" class="logo">
+                        <img
+                            src="../images/logo.svg"
+                            alt="XuXuClassMate Logo"
+                        />
+                        <span class="logo-text">XuXuClassMate</span>
                     </a>
-                    <div class="gallery-caption">
-                        <h3>Travel Vlogs</h3>
-                        <p>Exploring nature's beauty through my lens</p>
+                    <button id="mobileNavToggle" class="mobile-nav-toggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <div class="nav-links" id="navLinks">
+                        <a href="life.html" class="nav-item active">Life</a>
+                        <a href="learn.html" class="nav-item">Learn</a>
+                        <a href="work.html" class="nav-item">Work</a>
+                        <a href="../zh/life.html" class="language-switch"
+                            >中文</a
+                        >
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <script src="../js/mobile-nav.js"></script>
+
+        <!-- WeChat QR Code Modal -->
+        <div class="modal" id="wechatModal">
+            <div class="modal-content">
+                <button class="close-button" id="closeModal">×</button>
+                <img src="../images/wechat.jpg" alt="WeChat QR Code" />
+            </div>
+        </div>
+
+        <section class="hero">
+            <div class="container hero-content">
+                <span class="subtitle">LIFE & HOBBIES</span>
+                <h1 class="hero-title">Life Journey</h1>
+                <p class="hero-desc">
+                    Sharing my life experiences and interests beyond coding
+                </p>
+            </div>
+        </section>
+
+        <section class="life-gallery">
+            <div class="container">
+                <h2 class="section-title">Life Moments</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <a
+                            href="https://www.tiktok.com/@xuxuclassmate"
+                            target="_blank"
+                            class="video-cover"
+                        >
+                            <img
+                                src="../images/douyin-cover.jpg"
+                                alt="Travel Vlogs"
+                            />
+                            <div class="play-button">▶</div>
+                        </a>
+                        <div class="gallery-caption">
+                            <h3>Travel Vlogs</h3>
+                            <p>Exploring nature's beauty through my lens</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <a
+                            href="https://music.163.com/#/playlist?id=368129876"
+                            target="_blank"
+                            class="video-cover"
+                        >
+                            <img src="../images/music.jpg" alt="Music Time" />
+                            <div class="play-button">▶</div>
+                        </a>
+                        <div class="gallery-caption">
+                            <h3>Music Time</h3>
+                            <p>My favorite playlist for coding and relaxing</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <a
+                            href="https://www.iqiyi.com/playlist1921084202.html?vfrm=psbdl"
+                            target="_blank"
+                            class="video-cover"
+                        >
+                            <img
+                                src="../images/movie.jpg"
+                                alt="Movie Time - Miyazaki Films"
+                            />
+                            <div class="play-button">▶</div>
+                        </a>
+                        <div class="gallery-caption">
+                            <h3>Movie Time</h3>
+                            <p>Enjoying the magical world of Miyazaki films</p>
+                        </div>
                     </div>
                 </div>
-                <div class="gallery-item">
-                    <a href="https://music.163.com/#/playlist?id=368129876" 
-                       target="_blank" 
-                       class="video-cover">
-                        <img src="../images/music.jpg" alt="Music Time">
-                        <div class="play-button">▶</div>
+            </div>
+        </section>
+
+        <section class="hobbies">
+            <div class="container">
+                <h2 class="section-title">My Hobbies</h2>
+                <div class="hobby-grid">
+                    <article class="hobby-card">
+                        <div class="hobby-icon">📚</div>
+                        <h3>Reading</h3>
+                        <p>
+                            Enjoying technical books and literature, exploring
+                            different fields of knowledge
+                        </p>
+                        <ul class="hobby-list">
+                            <li>Technical Books</li>
+                            <li>Science Fiction</li>
+                            <li>Historical Archives</li>
+                        </ul>
+                    </article>
+                    <article class="hobby-card">
+                        <div class="hobby-icon">🎮</div>
+                        <h3>Gaming</h3>
+                        <p>
+                            Enjoying games while learning game development
+                            technologies
+                        </p>
+                        <ul class="hobby-list">
+                            <li>Strategy Games</li>
+                            <li>RPG Adventures</li>
+                            <li>Indie Games</li>
+                        </ul>
+                    </article>
+                    <article class="hobby-card">
+                        <div class="hobby-icon">🎵</div>
+                        <h3>Music</h3>
+                        <p>Creating and enjoying music in different styles</p>
+                        <ul class="hobby-list">
+                            <li>Electronic Music</li>
+                            <li>Classical Piano</li>
+                            <li>Jazz</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-section" style="margin-bottom: 3rem">
+            <div class="container">
+                <div
+                    class="contact-info"
+                    style="text-align: left; padding-left: 0"
+                >
+                    <h2>Contact：</h2>
+                    <a
+                        href="mailto:mail@xuxuclassmate.com"
+                        style="color: #4a90e2; text-decoration: none"
+                    >
+                        mail@xuxuclassmate.com
                     </a>
-                    <div class="gallery-caption">
-                        <h3>Music Time</h3>
-                        <p>My favorite playlist for coding and relaxing</p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-left">
+                        <span class="logo-text">XuXuClassMate</span>
+                        <p class="footer-desc">
+                            A personal space for learning and sharing
+                        </p>
+                    </div>
+                    <div class="footer-right">
+                        <div class="social-links">
+                            <a
+                                href="https://www.tiktok.com/@xuxuclassmate"
+                                target="_blank"
+                            >
+                                <i class="fab fa-tiktok"></i>
+                                <span>TikTok</span>
+                            </a>
+                            <a
+                                href="https://www.instagram.com/xuxuclassmate"
+                                target="_blank"
+                            >
+                                <i class="fab fa-instagram"></i>
+                                <span>Instagram</span>
+                            </a>
+                            <a
+                                href="javascript:void(0);"
+                                class="wechat-link"
+                                id="footerWechatBtn"
+                            >
+                                <i class="fab fa-weixin"></i>
+                                <span>WeChat</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
-                <div class="gallery-item">
-                    <a href="https://www.iqiyi.com/playlist1921084202.html?vfrm=psbdl" 
-                       target="_blank" 
-                       class="video-cover">
-                        <img src="../images/movie.jpg" alt="Movie Time - Miyazaki Films">
-                        <div class="play-button">▶</div>
-                    </a>
-                    <div class="gallery-caption">
-                        <h3>Movie Time</h3>
-                        <p>Enjoying the magical world of Miyazaki films</p>
-                    </div>
+                <div class="footer-bottom">
+                    <p class="copyright">
+                        © 2020-2025 XuXuClassMate. All rights reserved.
+                    </p>
                 </div>
             </div>
-        </div>
-    </section>
+        </footer>
 
-    <section class="hobbies">
-        <div class="container">
-            <h2 class="section-title">My Hobbies</h2>
-            <div class="hobby-grid">
-                <article class="hobby-card">
-                    <div class="hobby-icon">📚</div>
-                    <h3>Reading</h3>
-                    <p>Enjoying technical books and literature, exploring different fields of knowledge</p>
-                    <ul class="hobby-list">
-                        <li>Technical Books</li>
-                        <li>Science Fiction</li>
-                        <li>Historical Archives</li>
-                    </ul>
-                </article>
-                <article class="hobby-card">
-                    <div class="hobby-icon">🎮</div>
-                    <h3>Gaming</h3>
-                    <p>Enjoying games while learning game development technologies</p>
-                    <ul class="hobby-list">
-                        <li>Strategy Games</li>
-                        <li>RPG Adventures</li>
-                        <li>Indie Games</li>
-                    </ul>
-                </article>
-                <article class="hobby-card">
-                    <div class="hobby-icon">🎵</div>
-                    <h3>Music</h3>
-                    <p>Creating and enjoying music in different styles</p>
-                    <ul class="hobby-list">
-                        <li>Electronic Music</li>
-                        <li>Classical Piano</li>
-                        <li>Jazz</li>
-                    </ul>
-                </article>
-            </div>
-        </div>
-    </section>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const modal = document.getElementById("wechatModal");
+                const footerBtn = document.getElementById("footerWechatBtn");
+                const closeBtn = document.getElementById("closeModal");
 
-    <section class="contact-section" style="margin-bottom: 3rem;">
-        <div class="container">
-            <div class="contact-info" style="text-align: left; padding-left: 0;">
-                <h2>Contact：</h2>
-                <a href="mailto:mail@xuxuclassmate.com" style="color: #4a90e2; text-decoration: none;">
-                    mail@xuxuclassmate.com
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-left">
-                    <span class="logo-text">XuXuClassMate</span>
-                    <p class="footer-desc">A personal space for learning and sharing</p>
-                </div>
-                <div class="footer-right">
-                    <div class="social-links">
-                        <a href="https://www.tiktok.com/@xuxuclassmate" target="_blank">
-                            <i class="fab fa-tiktok"></i>
-                            <span>TikTok</span>
-                        </a>
-                        <a href="https://www.instagram.com/xuxuclassmate" target="_blank">
-                            <i class="fab fa-instagram"></i>
-                            <span>Instagram</span>
-                        </a>
-                        <a href="javascript:void(0);" class="wechat-link" id="footerWechatBtn">
-                            <i class="fab fa-weixin"></i>
-                            <span>WeChat</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p class="copyright">© 2020-2025 XuXuClassMate. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const modal = document.getElementById('wechatModal');
-            const footerBtn = document.getElementById('footerWechatBtn');
-            const closeBtn = document.getElementById('closeModal');
-
-            function showModal(e) {
-                e.preventDefault();
-                modal.classList.add('show');
-            }
-
-            footerBtn.addEventListener('click', showModal);
-
-            closeBtn.addEventListener('click', function() {
-                modal.classList.remove('show');
-            });
-
-            modal.addEventListener('click', function(e) {
-                if (e.target === modal) {
-                    modal.classList.remove('show');
+                function showModal(e) {
+                    e.preventDefault();
+                    modal.classList.add("show");
                 }
+
+                footerBtn.addEventListener("click", showModal);
+
+                closeBtn.addEventListener("click", function () {
+                    modal.classList.remove("show");
+                });
+
+                modal.addEventListener("click", function (e) {
+                    if (e.target === modal) {
+                        modal.classList.remove("show");
+                    }
+                });
             });
-        });
-    </script>
-</body>
+        </script>
+    </body>
 </html>
