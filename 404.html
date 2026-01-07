@@ -5,7 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>XuXuClassMate</title>
         <meta name="robots" content="noindex" />
-        <link rel="canonical" href="https://www.xuxuclassmate.com/" />
 
         <link
             rel="alternate"
@@ -34,10 +33,10 @@
         <meta name="author" content="XuXuClassMate" />
         <link href="https://fonts.googleapis.com" rel="preconnect" />
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
-        <link rel="stylesheet" href="cdnjs.cloudflare.com" />
-        <link rel="shortcut icon" href="images/logo.svg" />
-        <link rel="stylesheet" href="css/style.css" />
-        <link rel="stylesheet" href="css/mobile-nav.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com" />
+        <link rel="shortcut icon" href="/images/logo.svg" />
+        <link rel="stylesheet" href="/css/style.css" />
+        <link rel="stylesheet" href="/css/mobile-nav.css" />
         <link
             href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
             rel="stylesheet"
@@ -51,8 +50,8 @@
         <header class="header">
             <div class="container">
                 <nav class="nav">
-                    <a href="./index.html" class="logo">
-                        <img src="images/logo.svg" alt="XuXuClassMate Logo" />
+                    <a href="/index.html" class="logo">
+                        <img src="/images/logo.svg" alt="XuXuClassMate Logo" />
                         <span class="logo-text">XuXuClassMate</span>
                     </a>
                     <button id="mobileNavToggle" class="mobile-nav-toggle">
@@ -61,10 +60,12 @@
                         <span></span>
                     </button>
                     <div class="nav-links" id="navLinks">
-                        <a href="en/life.html" class="nav-item">Life</a>
-                        <a href="en/learn.html" class="nav-item">Learn</a>
-                        <a href="en/work.html" class="nav-item">Work</a>
-                        <a href="zh/index.html" class="language-switch">中文</a>
+                        <a href="/en/life.html" class="nav-item">Life</a>
+                        <a href="/en/learn.html" class="nav-item">Learn</a>
+                        <a href="/en/work.html" class="nav-item">Work</a>
+                        <a href="/zh/index.html" class="language-switch"
+                            >中文</a
+                        >
                     </div>
                 </nav>
             </div>
@@ -150,11 +151,11 @@
         <div class="modal" id="wechatModal">
             <div class="modal-content">
                 <button class="close-button" id="closeModal">×</button>
-                <img src="images/wechat.jpg" alt="WeChat QR Code" />
+                <img src="/images/wechat.jpg" alt="WeChat QR Code" />
             </div>
         </div>
 
-        <script src="js/mobile-nav.js"></script>
+        <script src="/js/mobile-nav.js"></script>
         <script>
             document.addEventListener("DOMContentLoaded", function () {
                 const modal = document.getElementById("wechatModal");
