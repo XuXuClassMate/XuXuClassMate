@@ -1,0 +1,68 @@
+{
+  "messages": {
+    "Hero": {
+      "title": "XuXu",
+      "subtitle": "Senior Test Engineer & Automation Expert",
+      "description": "Exploring cutting-edge testing technologies, from automated testing to test development. Currently focused on Web3 testing and Kubernetes.",
+      "cta_primary": "View Projects",
+      "cta_secondary": "Contact Me"
+    },
+    "Nav": {
+      "home": "Home",
+      "about": "About",
+      "skills": "Skills",
+      "projects": "Projects",
+      "experience": "Experience",
+      "contact": "Contact"
+    },
+    "Skills": {
+      "title": "Technical Skills",
+      "subtitle": "My expertise spans across testing, automation, and modern technologies",
+      "testing": "Testing & QA",
+      "automation": "Test Automation",
+      "devops": "DevOps & Cloud",
+      "programming": "Programming Languages",
+      "web3": "Web3 & Blockchain",
+      "tools": "Tools & Frameworks"
+    },
+    "Projects": {
+      "title": "Featured Projects",
+      "subtitle": "Showcasing my latest work and contributions",
+      "view_code": "View Code",
+      "live_demo": "Live Demo",
+      "technologies": "Technologies"
+    },
+    "Experience": {
+      "title": "Work Experience",
+      "subtitle": "My professional journey and career highlights"
+    },
+    "Contact": {
+      "title": "Get In Touch",
+      "subtitle": "Feel free to reach out for collaborations or opportunities",
+      "email": "Email",
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "twitter": "Twitter"
+    },
+    "Footer": {
+      "rights": "All rights reserved.",
+      "built_with": "Built with Next.js & Tailwind CSS"
+    },
+    "Theme": {
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    },
+    "Language": {
+      "en": "English",
+      "zh": "中文"
+    },
+    "Common": {
+      "loading": "Loading...",
+      "error": "Error",
+      "retry": "Retry",
+      "more": "More",
+      "years": "years"
+    }
+  }
+}

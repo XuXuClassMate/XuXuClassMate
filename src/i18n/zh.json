@@ -1,0 +1,68 @@
+{
+  "messages": {
+    "Hero": {
+      "title": "XuXu",
+      "subtitle": "高级测试工程师 & 自动化专家",
+      "description": "探索前沿测试技术，包括自动化测试和测试开发。目前专注于 Web3 测试和 Kubernetes 领域。",
+      "cta_primary": "查看项目",
+      "cta_secondary": "联系我"
+    },
+    "Nav": {
+      "home": "首页",
+      "about": "关于",
+      "skills": "技能",
+      "projects": "项目",
+      "experience": "经历",
+      "contact": "联系"
+    },
+    "Skills": {
+      "title": "技术技能",
+      "subtitle": "我的专业技能覆盖测试、自动化和现代技术领域",
+      "testing": "测试与质量保证",
+      "automation": "测试自动化",
+      "devops": "DevOps 与云计算",
+      "programming": "编程语言",
+      "web3": "Web3 与区块链",
+      "tools": "工具与框架"
+    },
+    "Projects": {
+      "title": "精选项目",
+      "subtitle": "展示我的最新作品和贡献",
+      "view_code": "查看代码",
+      "live_demo": "在线演示",
+      "technologies": "技术栈"
+    },
+    "Experience": {
+      "title": "工作经历",
+      "subtitle": "我的职业历程和成就"
+    },
+    "Contact": {
+      "title": "联系我",
+      "subtitle": "欢迎联系合作或工作机会",
+      "email": "邮箱",
+      "github": "GitHub",
+      "linkedin": "领英",
+      "twitter": "推特"
+    },
+    "Footer": {
+      "rights": "版权所有.",
+      "built_with": "使用 Next.js & Tailwind CSS 构建"
+    },
+    "Theme": {
+      "light": "浅色",
+      "dark": "深色",
+      "system": "系统"
+    },
+    "Language": {
+      "en": "English",
+      "zh": "中文"
+    },
+    "Common": {
+      "loading": "加载中...",
+      "error": "错误",
+      "retry": "重试",
+      "more": "更多",
+      "years": "年"
+    }
+  }
+}
