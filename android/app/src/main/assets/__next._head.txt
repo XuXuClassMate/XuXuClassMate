@@ -1,0 +1,6 @@
+1:"$Sreact.fragment"
+2:I[484,[],"ViewportBoundary"]
+3:I[484,[],"MetadataBoundary"]
+4:"$Sreact.suspense"
+5:I[6869,[],"IconMark"]
+0:{"rsc":["$","$1","h",{"children":[null,["$","$L2",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$L3",null,{"children":["$","$4",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"XuXu - Senior Test Engineer & Automation Expert"}],["$","meta","1",{"name":"description","content":"Exploring cutting-edge testing technologies, from automated testing to test development. Currently focused on Web3 testing and Kubernetes."}],["$","link","2",{"rel":"author","href":"https://www.xuxuclassmate.com"}],["$","meta","3",{"name":"author","content":"XuXu"}],["$","link","4",{"rel":"manifest","href":"/manifest.json"}],["$","meta","5",{"name":"keywords","content":"Test Engineer,Automation,QA,Kubernetes,Web3,Testing"}],["$","meta","6",{"name":"creator","content":"XuXu"}],["$","link","7",{"rel":"icon","href":"/favicon.ico?603d046c9a6fdfbb","type":"image/x-icon","sizes":"16x16"}],["$","$L5","8",{}]]}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"XpM77BTH9bDRZm7knBOpA"}
