@@ -1,7 +1,6 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useTranslations } from 'next-intl'
 import { 
   TestTube2, 
   Code2, 
@@ -63,7 +62,6 @@ const skillCategories = [
 ]
 
 export default function Skills() {
-  const t = useTranslations('Skills')
 
   return (
     <section id="skills" className="py-20 bg-white dark:bg-slate-950">
@@ -76,10 +74,10 @@ export default function Skills() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
-            {t('title')}
+            Title
           </h2>
           <p className="text-xl text-slate-600 dark:text-slate-400">
-            {t('subtitle')}
+            Subtitle
           </p>
         </motion.div>
 
@@ -100,7 +98,10 @@ export default function Skills() {
                   <category.icon className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
-                  {t(category.key)}
+                  {category.key === 'testing' && 'Testing & Automation'}
+                  {category.key === 'automation' && 'CI/CD & DevOps'}
+                  {category.key === 'devops' && 'Cloud & Infrastructure'}
+                  {category.key === 'programming' && 'Programming Languages'}
                 </h3>
               </div>
 

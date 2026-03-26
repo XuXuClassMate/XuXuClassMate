@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { useTranslations } from 'next-intl'
 import { 
   Menu, 
   X, 
@@ -23,7 +22,6 @@ export default function Navbar() {
   const [theme, setTheme] = useState<Theme>('system')
   const [scrolled, setScrolled] = useState(false)
 
-  const t = useTranslations('Nav')
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,11 +55,11 @@ export default function Navbar() {
   }
 
   const navItems = [
-    { name: t('home'), href: '#' },
-    { name: t('skills'), href: '#skills' },
-    { name: t('projects'), href: '#projects' },
-    { name: t('experience'), href: '#experience' },
-    { name: t('contact'), href: '#contact' },
+    { name: 'Home', href: '#' },
+    { name: 'Skills', href: '#skills' },
+    { name: 'Projects', href: '#projects' },
+    { name: 'Experience', href: '#experience' },
+    { name: 'Contact', href: '#contact' },
   ]
 
   return (

@@ -1,12 +1,11 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useTranslations } from 'next-intl'
 import { 
   Mail, 
-  Github, 
-  Linkedin, 
-  Twitter, 
+  CodeXml, 
+  UserRoundCheck, 
+  Bird, 
   Send,
   MapPin,
   Clock
@@ -14,7 +13,6 @@ import {
 import { useState } from 'react'
 
 export default function Contact() {
-  const t = useTranslations('Contact')
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -37,21 +35,21 @@ export default function Contact() {
       color: 'from-red-500 to-pink-600'
     },
     {
-      icon: Github,
+      icon: CodeXml,
       label: 'GitHub',
       value: 'XuXuClassMate',
       href: 'https://github.com/XuXuClassMate',
       color: 'from-slate-700 to-slate-900'
     },
     {
-      icon: Linkedin,
+      icon: UserRoundCheck,
       label: 'LinkedIn',
       value: 'XuXuClassMate',
       href: 'https://linkedin.com/in/xuxuclassmate',
       color: 'from-blue-600 to-blue-700'
     },
     {
-      icon: Twitter,
+      icon: Bird,
       label: 'Twitter',
       value: '@xuxuclassmate',
       href: 'https://twitter.com/xuxuclassmate',
@@ -70,10 +68,10 @@ export default function Contact() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
-            {t('title')}
+            Title
           </h2>
           <p className="text-xl text-slate-600 dark:text-slate-400">
-            {t('subtitle')}
+            Subtitle
           </p>
         </motion.div>
 

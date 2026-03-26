@@ -1,7 +1,6 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useTranslations } from 'next-intl'
 import { 
   Briefcase, 
   Building2, 
@@ -79,7 +78,6 @@ const education = [
 ]
 
 export default function Experience() {
-  const t = useTranslations('Experience')
 
   return (
     <section id="experience" className="py-20 bg-slate-50 dark:bg-slate-900">
@@ -92,10 +90,10 @@ export default function Experience() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
-            {t('title')}
+            Title
           </h2>
           <p className="text-xl text-slate-600 dark:text-slate-400">
-            {t('subtitle')}
+            Subtitle
           </p>
         </motion.div>
 

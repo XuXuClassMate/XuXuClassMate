@@ -1,9 +1,8 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useTranslations } from 'next-intl'
 import { 
-  Github, 
+  CodeXml, 
   ExternalLink, 
   Code2, 
   TestTube2, 
@@ -90,7 +89,6 @@ const projects = [
 ]
 
 export default function Projects() {
-  const t = useTranslations('Projects')
 
   return (
     <section id="projects" className="py-20 bg-slate-50 dark:bg-slate-900">
@@ -103,10 +101,10 @@ export default function Projects() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
-            {t('title')}
+            Title
           </h2>
           <p className="text-xl text-slate-600 dark:text-slate-400">
-            {t('subtitle')}
+            Subtitle
           </p>
         </motion.div>
 
@@ -169,8 +167,8 @@ export default function Projects() {
                   rel="noopener noreferrer"
                   className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 rounded-xl font-medium transition-colors"
                 >
-                  <Github className="w-5 h-5" />
-                  {t('view_code')}
+                  <CodeXml className="w-5 h-5" />
+                  View Code
                 </a>
                 {project.live && (
                   <a
@@ -180,7 +178,7 @@ export default function Projects() {
                     className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-medium transition-colors"
                   >
                     <ExternalLink className="w-5 h-5" />
-                    {t('live_demo')}
+                    Live Demo
                   </a>
                 )}
               </div>
@@ -204,7 +202,7 @@ export default function Projects() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-8 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl font-semibold hover:bg-slate-800 dark:hover:bg-slate-100 transition-colors"
           >
-            <Github className="w-5 h-5" />
+            <CodeXml className="w-5 h-5" />
             View All Projects on GitHub
           </a>
         </motion.div>

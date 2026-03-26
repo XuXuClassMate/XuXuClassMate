@@ -1,11 +1,9 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
-import { Heart, Github, Linkedin, Twitter, Mail } from 'lucide-react'
+import { Heart, CodeXml, UserRoundCheck, Bird, Mail } from 'lucide-react'
 import Link from 'next/link'
 
 export default function Footer() {
-  const t = useTranslations('Footer')
   const currentYear = new Date().getFullYear()
 
   return (
@@ -47,7 +45,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-slate-800 hover:bg-slate-700 rounded-lg flex items-center justify-center transition-colors"
               >
-                <Github className="w-5 h-5" />
+                <CodeXml className="w-5 h-5" />
               </a>
               <a
                 href="https://linkedin.com/in/xuxuclassmate"
@@ -55,7 +53,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-slate-800 hover:bg-slate-700 rounded-lg flex items-center justify-center transition-colors"
               >
-                <Linkedin className="w-5 h-5" />
+                <UserRoundCheck className="w-5 h-5" />
               </a>
               <a
                 href="https://twitter.com/xuxuclassmate"
@@ -63,7 +61,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-slate-800 hover:bg-slate-700 rounded-lg flex items-center justify-center transition-colors"
               >
-                <Twitter className="w-5 h-5" />
+                <Bird className="w-5 h-5" />
               </a>
               <a
                 href="mailto:contact@xuxuclassmate.com"
@@ -78,11 +76,11 @@ export default function Footer() {
         {/* Bottom */}
         <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-slate-500 text-sm">
-            © {currentYear} XuXu. {t('rights')}
+            © {currentYear} XuXu. All rights reserved.
           </p>
           
           <p className="text-slate-500 text-sm flex items-center gap-2">
-            {t('built_with')}
+            Built with
             <Heart className="w-4 h-4 text-red-500 fill-red-500" />
           </p>
         </div>

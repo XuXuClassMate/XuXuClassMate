@@ -4,17 +4,12 @@
   "webDir": "out",
   "bundledWebRuntime": false,
   "server": {
-    "androidScheme": "https",
-    "allowNavigation": ["*"],
-    "allowIntents": ["*"]
+    "androidScheme": "https"
   },
   "plugins": {
     "SplashScreen": {
       "launchShowDuration": 2000,
-      "backgroundColor": "#2563EB",
-      "showSpinner": false,
-      "androidSplashResourceName": "splash",
-      "androidScaleType": "CENTER_CROP"
+      "backgroundColor": "#2563EB"
     },
     "StatusBar": {
       "style": "dark",
@@ -22,35 +17,11 @@
     },
     "Notifications": {
       "presentationOptions": ["badge", "sound", "alert"]
-    },
-    "Geolocation": {
-      "requiresPermission": true,
-      "showAccuracy": true
     }
   },
   "android": {
     "buildOptions": {
-      "keystorePath": "xuxu-pro.keystore",
-      "keystorePassword": "xuxu2026",
-      "keystoreAlias": "xuxu-pro",
-      "keystoreAliasPassword": "xuxu2026",
       "releaseType": "APK"
-    },
-    "signing": {
-      "debug": {
-        "storeFile": "debug.keystore",
-        "storePassword": "android",
-        "keyAlias": "androiddebugkey",
-        "keyPassword": "android"
-      }
-    },
-    "webContentsDebuggingEnabled": true
-  },
-  "ios": {
-    "contentInset": "automatic",
-    "allowsLinkPreview": false,
-    "scheme": "xuxupro",
-    "contentMode": "mobile"
-  },
-  "cordova": {}
+    }
+  }
 }
