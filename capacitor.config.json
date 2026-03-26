@@ -1,10 +1,12 @@
 {
   "appId": "com.xuxuclassmate.portfolio",
-  "appName": "XuXu Portfolio",
+  "appName": "XuXu Pro",
   "webDir": "out",
   "bundledWebRuntime": false,
   "server": {
-    "androidScheme": "https"
+    "androidScheme": "https",
+    "allowNavigation": ["*"],
+    "allowIntents": ["*"]
   },
   "plugins": {
     "SplashScreen": {
@@ -17,20 +19,38 @@
     "StatusBar": {
       "style": "dark",
       "backgroundColor": "#2563EB"
+    },
+    "Notifications": {
+      "presentationOptions": ["badge", "sound", "alert"]
+    },
+    "Geolocation": {
+      "requiresPermission": true,
+      "showAccuracy": true
     }
   },
   "android": {
     "buildOptions": {
-      "keystorePath": "",
-      "keystorePassword": "",
-      "keystoreAlias": "",
-      "keystoreAliasPassword": "",
+      "keystorePath": "xuxu-pro.keystore",
+      "keystorePassword": "xuxu2026",
+      "keystoreAlias": "xuxu-pro",
+      "keystoreAliasPassword": "xuxu2026",
       "releaseType": "APK"
-    }
+    },
+    "signing": {
+      "debug": {
+        "storeFile": "debug.keystore",
+        "storePassword": "android",
+        "keyAlias": "androiddebugkey",
+        "keyPassword": "android"
+      }
+    },
+    "webContentsDebuggingEnabled": true
   },
   "ios": {
     "contentInset": "automatic",
     "allowsLinkPreview": false,
-    "scheme": "xuxuportfolio"
-  }
+    "scheme": "xuxupro",
+    "contentMode": "mobile"
+  },
+  "cordova": {}
 }
