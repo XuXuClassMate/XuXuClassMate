@@ -1,21 +1,25 @@
-import Hero from '@/components/Hero'
-import Navbar from '@/components/Navbar'
-import Skills from '@/components/Skills'
-import Projects from '@/components/Projects'
-import Experience from '@/components/Experience'
-import Contact from '@/components/Contact'
-import Footer from '@/components/Footer'
+'use client';
+
+import Header from '@/components/Header';
+import Hero from '@/components/Hero';
+import Values from '@/components/Values';
+import QuickLinks from '@/components/QuickLinks';
+import Contact from '@/components/Contact';
+import Footer from '@/components/Footer';
+import WeChatModal from '@/components/WeChatModal';
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
-      <Navbar />
-      <Hero />
-      <Skills />
-      <Projects />
-      <Experience />
+    <>
+      <Header />
+      <main>
+        <Hero />
+        <Values />
+        <QuickLinks />
+      </main>
       <Contact />
       <Footer />
-    </main>
-  )
+      <WeChatModal />
+    </>
+  );
 }
