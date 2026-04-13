@@ -36,7 +36,7 @@
 
   <br/>
 
-  <img height="180em" width="48%" src="https://docker-hub-pull-counter.vercel.app/api/docker-stats?username=xuxuclassmate"/>
+  <img height="180em" width="60%" src="https://docker-hub-pull-counter.vercel.app/api/docker-stats?username=xuxuclassmate"/>
 
 </div>
 
