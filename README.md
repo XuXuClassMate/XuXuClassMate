@@ -3,40 +3,83 @@
   <img src="https://github.com/XuXuClassMate/XuXuClassMate/blob/master/img/tester.gif" width="550" />
 
   #### Hi, I’m XuXuClassMate 👋
+  #### 🧪 Software Test Engineer | ⚡ Automation | 🚀 Builder
 
   #### Welcome to my personal page!  
-  #### I go by the name **XuXuClassMate**, also known in Chinese as **旭旭同学**.  
-  #### I am a test engineer who likes learning
+  #### Also known in Chinese as **旭旭同学**  
+  #### Passionate about testing, automation, and building useful tools
 
 </div>
 
 ---
 
-### About me
+### 👨‍💻 About Me
 
-- 💡 &nbsp;&nbsp;I like to explore new testing technologies, including automated testing and test development
-- 📖 &nbsp;&nbsp; I am currently learning **Wb3** testing technology and using **kubernetes**
-- 🎧 &nbsp;&nbsp;Like to listen to **take a walk** and **Play badminton**
-- 🐈‍ &nbsp;&nbsp;Like **Alaska dog**
-- 🧑🏻‍💻 &nbsp;&nbsp;Like to study new **technologies**
-- ⛏ &nbsp;&nbsp;Recently indulged in business testing and worked hard to complete personal OKR
-- You can find me across platforms with the handle `xuxuclassmate`  
-- Don't hesitate to reach out!
+- 💡 Exploring **automation testing**, **test development**, and system quality  
+- 🌐 Currently learning **Web3 testing** and **Kubernetes**  
+- 🧠 Passionate about **new technologies** and engineering efficiency  
+- 🐳 Built a **Docker Hub Analytics API** (REST + SVG Stats Card)  
+- 🎧 Enjoy music, walking, and playing **badminton**  
+- 🐶 Dog lover (especially Alaska 🐾)  
+- 📈 Focused on **business testing** and achieving personal OKRs  
 
-📝 &nbsp;&nbsp;See my [**Personal Blog**](https://fgg6gzb6uk.feishu.cn/docx/LkwDdpLjnoIdGwxOH6zcRwEWnhd) to get more info.
+- 🌍 You can find me across platforms as `xuxuclassmate`  
+- 📬 Feel free to reach out!
+
+📝 See my [**Personal Blog**](https://fgg6gzb6uk.feishu.cn/docx/LkwDdpLjnoIdGwxOH6zcRwEWnhd)
 
 <br />
 
-### GitHub Analytics
+---
+
+### 🚀 Tech & Product Analytics
 
 <div align="center">
 
-  <img height="180em" width="48%" src="https://github-readme-stats.vercel.app/api?username=XuXuClassMate&show_icons=true&theme=vue&&show=prs_merged,prs_merged_percentage"/>
-  <img height="180em" width="48%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=XuXuClassMate&layout=compact&langs_count=8&theme=vue"/>
+  <!-- GitHub Stats -->
+  <img height="170em" src="https://github-readme-stats-fast.vercel.app/api?username=XuXuClassMate&theme=vue"/>
+  <img height="170em" src="https://github-readme-stats-fast.vercel.app/api/top-langs/?username=XuXuClassMate&layout=compact&theme=vue"/>
 
   <br/>
 
-  <img height="180em" width="60%" src="https://docker-hub-pull-counter.vercel.app/api/docker-stats?username=xuxuclassmate"/>
+  <!-- ⭐ 核心亮点 -->
+  <img height="190em" src="https://docker-hub-pull-counter.vercel.app/api/docker-stats?username=xuxuclassmate"/>
+
+  <br/>
+
+  <sub>🐳 Powered by my own Docker Hub Analytics API</sub>
 
 </div>
 
+---
+
+### 🧩 Featured Project
+
+#### 🐳 Docker Hub Pull Counter
+- 🔗 https://docker-hub-pull-counter.vercel.app  
+- 📊 Aggregates **pulls, repositories, and stars**  
+- ⚡ Provides **REST API + GitHub README SVG cards**  
+- 🚀 Optimized with **cache strategy (memory + scheduled updates)**  
+
+---
+
+### 📊 System Design Highlights
+
+- Designed API with caching layer (memory + DB fallback)
+- Reduced external API calls and improved performance
+- Built reusable SVG rendering system for stats visualization
+
+---
+
+### 🛠 Tech Stack
+
+- **Testing**: Automation Testing · API Testing · Performance Testing  
+- **Backend**: Node.js · TypeScript  
+- **DevOps**: Docker · Kubernetes  
+- **Engineering**: REST API Design · System Optimization  
+
+---
+
+### 💡 Motto
+
+> Build tools · Improve systems · Scale impact
