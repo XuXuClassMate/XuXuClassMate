@@ -82,4 +82,4 @@
 
 ### 💡 Motto
 
-> Build tools · Improve systems · Scale impact
+> Learn continuously · Build tools · Improve systems · Scale impact
