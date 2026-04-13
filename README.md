@@ -34,5 +34,9 @@
   <img height="180em" width="48%" src="https://github-readme-stats.vercel.app/api?username=XuXuClassMate&show_icons=true&theme=vue&&show=prs_merged,prs_merged_percentage"/>
   <img height="180em" width="48%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=XuXuClassMate&layout=compact&langs_count=8&theme=vue"/>
 
+  <br/>
+
+  <img height="180em" width="48%" src="https://docker-hub-pull-counter.vercel.app/api/docker-stats?username=xuxuclassmate"/>
+
 </div>
 
