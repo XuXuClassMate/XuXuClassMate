@@ -13,15 +13,15 @@
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.xuxuclassmate.com/en/life.html</loc>
+    <loc>https://www.xuxuclassmate.com/en/life</loc>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.xuxuclassmate.com/en/learn.html</loc>
+    <loc>https://www.xuxuclassmate.com/en/learn</loc>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.xuxuclassmate.com/en/work.html</loc>
+    <loc>https://www.xuxuclassmate.com/en/work</loc>
     <priority>0.80</priority>
   </url>
 
@@ -31,15 +31,15 @@
     <priority>0.64</priority>
   </url>
   <url>
-    <loc>https://www.xuxuclassmate.com/zh/life.html</loc>
+    <loc>https://www.xuxuclassmate.com/zh/life</loc>
     <priority>0.64</priority>
   </url>
   <url>
-    <loc>https://www.xuxuclassmate.com/zh/learn.html</loc>
+    <loc>https://www.xuxuclassmate.com/zh/learn</loc>
     <priority>0.64</priority>
   </url>
   <url>
-    <loc>https://www.xuxuclassmate.com/zh/work.html</loc>
+    <loc>https://www.xuxuclassmate.com/zh/work</loc>
     <priority>0.64</priority>
   </url>
 
