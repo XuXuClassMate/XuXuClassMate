@@ -98,6 +98,7 @@ export const PROJECTS: Record<ProjectId, ProjectDef> = {
     id: "globalpulse",
     category: "Product",
     href: "https://github.com/InnoNestX/GlobalPulse",
+    ctaHref: "https://pulse.xuxuclassmate.com/",
     image: "/images/cover-globalpulse.jpg",
     en: {
       title: "GlobalPulse",
@@ -105,6 +106,7 @@ export const PROJECTS: Record<ProjectId, ProjectDef> = {
         "Self-hosted market intelligence and scheduled finance/global hotspot briefings on Cloudflare Workers — Admin UI, cron delivery, and Feishu / WeChat / Telegram push.",
       tags: ["Cloudflare", "Workers", "Briefings"],
       linkLabel: "GitHub",
+      ctaLabel: "Live",
       imageAlt: "GlobalPulse cover",
       caseLabel: "Case study",
     },
@@ -114,6 +116,7 @@ export const PROJECTS: Record<ProjectId, ProjectDef> = {
         "自托管的市场情报与定时财经/全球热点简报（Cloudflare Workers）— Admin UI、Cron 投递，以及飞书 / 微信 / Telegram 推送。",
       tags: ["Cloudflare", "Workers", "简报"],
       linkLabel: "GitHub",
+      ctaLabel: "在线体验",
       imageAlt: "GlobalPulse 封面",
       caseLabel: "案例详解",
     },

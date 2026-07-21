@@ -115,6 +115,9 @@ test("learn page covers management and Locust", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Test Management" })).toBeVisible();
   await expect(page.getByText("Locust performance & load testing")).toBeVisible();
   await expect(page.getByRole("heading", { name: "GlobalPulse (InnoNestX)" })).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Open live site" }),
+  ).toHaveAttribute("href", "https://pulse.xuxuclassmate.com/");
 });
 
 test("copy email button updates label", async ({ page, context }) => {

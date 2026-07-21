@@ -256,9 +256,9 @@ export const zh: LocaleCopy = {
       {
         title: "GlobalPulse（InnoNestX）",
         description:
-          "自托管市场情报与定时简报（Cloudflare Workers）——从单点工具走向产品线实践。",
-        href: "https://github.com/InnoNestX/GlobalPulse",
-        linkLabel: "查看 GitHub",
+          "自托管市场情报与定时简报（Cloudflare Workers）——先上线体验，再看从单点工具走向产品线的实践。",
+        href: "https://pulse.xuxuclassmate.com/",
+        linkLabel: "打开在线站点",
       },
       {
         title: "Python 测试实践",
@@ -543,6 +543,7 @@ export const zh: LocaleCopy = {
         ],
         links: [
           { label: "GitHub", href: "https://github.com/InnoNestX/GlobalPulse" },
+          { label: "在线体验", href: "https://pulse.xuxuclassmate.com/" },
           { label: "InnoNestX", href: "https://github.com/InnoNestX" },
         ],
         meta: {

@@ -265,9 +265,9 @@ export const en: LocaleCopy = {
       {
         title: "GlobalPulse (InnoNestX)",
         description:
-          "Self-hosted market intelligence and scheduled briefings on Cloudflare Workers — a product-line practice beyond single tools.",
-        href: "https://github.com/InnoNestX/GlobalPulse",
-        linkLabel: "View on GitHub",
+          "Self-hosted market intelligence and scheduled briefings on Cloudflare Workers — try the live app, then dig into the product-line practice beyond single tools.",
+        href: "https://pulse.xuxuclassmate.com/",
+        linkLabel: "Open live site",
       },
       {
         title: "Python QA Practice",
@@ -557,6 +557,7 @@ export const en: LocaleCopy = {
         ],
         links: [
           { label: "GitHub", href: "https://github.com/InnoNestX/GlobalPulse" },
+          { label: "Live", href: "https://pulse.xuxuclassmate.com/" },
           { label: "InnoNestX", href: "https://github.com/InnoNestX" },
         ],
         meta: {
