@@ -1,10 +1,14 @@
 export type MetricId =
   | "clawhub:ai-testcase-generator"
   | "clawhub:trading-assistant-core"
+  | "clawhub:total-downloads"
   | "docker:dameng"
   | "docker:highgo"
   | "docker:kingbase"
-  | "docker:tidb";
+  | "docker:tidb"
+  | "docker:total-pulls"
+  | "docker:repo-count"
+  | "api:gateway-calls";
 
 export const CLAWHUB_SKILLS = {
   "ai-testcase-generator": {
@@ -19,14 +23,20 @@ export const CLAWHUB_SKILLS = {
 
 export const DOCKER_REPOS = ["dameng", "highgo", "kingbase", "tidb"] as const;
 
+const GATEWAY_ORIGIN = "https://docker-hub-pull-counter.vercel.app";
+
 /** Fallback values used when live APIs are unavailable. */
 export const METRIC_FALLBACKS: Record<MetricId, number> = {
   "clawhub:ai-testcase-generator": 703,
-  "clawhub:trading-assistant-core": 907,
-  "docker:dameng": 29793,
-  "docker:highgo": 16871,
-  "docker:kingbase": 1610,
-  "docker:tidb": 941,
+  "clawhub:trading-assistant-core": 908,
+  "clawhub:total-downloads": 1611,
+  "docker:dameng": 29795,
+  "docker:highgo": 16873,
+  "docker:kingbase": 1613,
+  "docker:tidb": 943,
+  "docker:total-pulls": 53935,
+  "docker:repo-count": 12,
+  "api:gateway-calls": 501,
 };
 
 export type MetricsMap = Record<MetricId, number>;
@@ -76,33 +86,72 @@ function dockerPulls(payload: unknown): number | null {
 }
 
 export async function fetchLiveMetrics(): Promise<Partial<MetricsMap>> {
-  const clawhubJobs = (
-    Object.keys(CLAWHUB_SKILLS) as (keyof typeof CLAWHUB_SKILLS)[]
-  ).map((key) =>
-    fetchJson(`https://clawhub.ai/api/v1/skills/${CLAWHUB_SKILLS[key].slug}`).then(
-      (json) => {
-        const value = clawhubDownloads(json);
-        if (value == null) throw new Error("missing downloads");
-        return [`clawhub:${key}` as MetricId, value] as const;
-      },
+  const pairJobs: Promise<readonly [MetricId, number] | ReadonlyArray<readonly [MetricId, number]>>[] = [
+    ...(Object.keys(CLAWHUB_SKILLS) as (keyof typeof CLAWHUB_SKILLS)[]).map(
+      (key) =>
+        fetchJson(
+          `https://clawhub.ai/api/v1/skills/${CLAWHUB_SKILLS[key].slug}`,
+        ).then((json) => {
+          const value = clawhubDownloads(json);
+          if (value == null) throw new Error("missing downloads");
+          return [`clawhub:${key}` as MetricId, value] as const;
+        }),
     ),
-  );
-
-  const dockerJobs = DOCKER_REPOS.map((repo) =>
-    fetchJson(`https://hub.docker.com/v2/repositories/xuxuclassmate/${repo}/`).then(
-      (json) => {
+    ...DOCKER_REPOS.map((repo) =>
+      fetchJson(
+        `https://hub.docker.com/v2/repositories/xuxuclassmate/${repo}/`,
+      ).then((json) => {
         const value = dockerPulls(json);
         if (value == null) throw new Error("missing pulls");
         return [`docker:${repo}` as MetricId, value] as const;
-      },
+      }),
     ),
-  );
+    fetchJson(
+      `${GATEWAY_ORIGIN}/api/user/stats?username=xuxuclassmate`,
+    ).then((json) => {
+      if (!json || typeof json !== "object") throw new Error("bad user stats");
+      const data = json as {
+        totalPulls?: unknown;
+        repositoryCount?: unknown;
+      };
+      if (
+        typeof data.totalPulls !== "number" ||
+        !Number.isFinite(data.totalPulls)
+      ) {
+        throw new Error("missing totalPulls");
+      }
+      const pairs: Array<readonly [MetricId, number]> = [
+        ["docker:total-pulls", data.totalPulls],
+      ];
+      if (
+        typeof data.repositoryCount === "number" &&
+        Number.isFinite(data.repositoryCount)
+      ) {
+        pairs.push(["docker:repo-count", data.repositoryCount]);
+      }
+      return pairs;
+    }),
+    fetchJson(`${GATEWAY_ORIGIN}/api/stats`).then((json) => {
+      if (!json || typeof json !== "object") throw new Error("bad api stats");
+      const total = (json as { totalCalls?: unknown }).totalCalls;
+      if (typeof total !== "number" || !Number.isFinite(total)) {
+        throw new Error("missing totalCalls");
+      }
+      return ["api:gateway-calls" as MetricId, total] as const;
+    }),
+  ];
 
-  const entries = await Promise.allSettled([...clawhubJobs, ...dockerJobs]);
+  const entries = await Promise.allSettled(pairJobs);
   const live: Partial<MetricsMap> = {};
   for (const entry of entries) {
-    if (entry.status === "fulfilled") {
-      live[entry.value[0]] = entry.value[1];
+    if (entry.status !== "fulfilled") continue;
+    const value = entry.value;
+    if (Array.isArray(value) && typeof value[0] === "string") {
+      live[value[0] as MetricId] = value[1] as number;
+    } else if (Array.isArray(value)) {
+      for (const pair of value as Array<readonly [MetricId, number]>) {
+        live[pair[0]] = pair[1];
+      }
     }
   }
   return live;
@@ -113,7 +162,13 @@ let metricsPromise: Promise<MetricsMap> | null = null;
 export async function getMetrics(): Promise<MetricsMap> {
   if (!metricsPromise) {
     metricsPromise = fetchLiveMetrics()
-      .then((live) => ({ ...METRIC_FALLBACKS, ...live }))
+      .then((live) => {
+        const merged = { ...METRIC_FALLBACKS, ...live };
+        merged["clawhub:total-downloads"] =
+          merged["clawhub:ai-testcase-generator"] +
+          merged["clawhub:trading-assistant-core"];
+        return merged;
+      })
       .catch(() => ({ ...METRIC_FALLBACKS }));
   }
   return metricsPromise;

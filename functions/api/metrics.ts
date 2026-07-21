@@ -1,23 +1,31 @@
 type MetricsPayload = {
   "clawhub:ai-testcase-generator": number;
   "clawhub:trading-assistant-core": number;
+  "clawhub:total-downloads": number;
   "docker:dameng": number;
   "docker:highgo": number;
   "docker:kingbase": number;
   "docker:tidb": number;
+  "docker:total-pulls": number;
+  "docker:repo-count": number;
+  "api:gateway-calls": number;
   updatedAt: string;
 };
 
 const FALLBACKS: Omit<MetricsPayload, "updatedAt"> = {
   "clawhub:ai-testcase-generator": 703,
-  "clawhub:trading-assistant-core": 907,
-  "docker:dameng": 29793,
-  "docker:highgo": 16871,
-  "docker:kingbase": 1610,
-  "docker:tidb": 941,
+  "clawhub:trading-assistant-core": 908,
+  "clawhub:total-downloads": 1611,
+  "docker:dameng": 29795,
+  "docker:highgo": 16873,
+  "docker:kingbase": 1613,
+  "docker:tidb": 943,
+  "docker:total-pulls": 53935,
+  "docker:repo-count": 12,
+  "api:gateway-calls": 501,
 };
 
-/** Edge cache TTL for live metrics (seconds). */
+const GATEWAY_ORIGIN = "https://docker-hub-pull-counter.vercel.app";
 const CACHE_TTL_SECONDS = 600;
 
 async function readDownloads(slug: string): Promise<number | null> {
@@ -42,25 +50,65 @@ async function readPulls(repo: string): Promise<number | null> {
   return typeof data.pull_count === "number" ? data.pull_count : null;
 }
 
+async function readGatewayUserStats(): Promise<{
+  pulls: number | null;
+  repos: number | null;
+}> {
+  const response = await fetch(
+    `${GATEWAY_ORIGIN}/api/user/stats?username=xuxuclassmate`,
+    { headers: { Accept: "application/json" } },
+  );
+  if (!response.ok) return { pulls: null, repos: null };
+  const data = (await response.json()) as {
+    totalPulls?: number;
+    repositoryCount?: number;
+  };
+  return {
+    pulls: typeof data.totalPulls === "number" ? data.totalPulls : null,
+    repos: typeof data.repositoryCount === "number" ? data.repositoryCount : null,
+  };
+}
+
+async function readGatewayCalls(): Promise<number | null> {
+  const response = await fetch(`${GATEWAY_ORIGIN}/api/stats`, {
+    headers: { Accept: "application/json" },
+  });
+  if (!response.ok) return null;
+  const data = (await response.json()) as { totalCalls?: number };
+  return typeof data.totalCalls === "number" ? data.totalCalls : null;
+}
+
 async function buildPayload(): Promise<MetricsPayload> {
-  const [testcase, trading, dameng, highgo, kingbase, tidb] = await Promise.all([
-    readDownloads("ai-testcase-generator"),
-    readDownloads("trading-assistant-core"),
-    readPulls("dameng"),
-    readPulls("highgo"),
-    readPulls("kingbase"),
-    readPulls("tidb"),
-  ]);
+  const [testcase, trading, dameng, highgo, kingbase, tidb, userStats, apiCalls] =
+    await Promise.all([
+      readDownloads("ai-testcase-generator"),
+      readDownloads("trading-assistant-core"),
+      readPulls("dameng"),
+      readPulls("highgo"),
+      readPulls("kingbase"),
+      readPulls("tidb"),
+      readGatewayUserStats(),
+      readGatewayCalls(),
+    ]);
+
+  const testcaseValue = testcase ?? FALLBACKS["clawhub:ai-testcase-generator"];
+  const tradingValue = trading ?? FALLBACKS["clawhub:trading-assistant-core"];
 
   return {
-    "clawhub:ai-testcase-generator":
-      testcase ?? FALLBACKS["clawhub:ai-testcase-generator"],
-    "clawhub:trading-assistant-core":
-      trading ?? FALLBACKS["clawhub:trading-assistant-core"],
+    "clawhub:ai-testcase-generator": testcaseValue,
+    "clawhub:trading-assistant-core": tradingValue,
+    "clawhub:total-downloads":
+      (testcase ?? FALLBACKS["clawhub:ai-testcase-generator"]) +
+      (trading ?? FALLBACKS["clawhub:trading-assistant-core"]),
     "docker:dameng": dameng ?? FALLBACKS["docker:dameng"],
     "docker:highgo": highgo ?? FALLBACKS["docker:highgo"],
     "docker:kingbase": kingbase ?? FALLBACKS["docker:kingbase"],
     "docker:tidb": tidb ?? FALLBACKS["docker:tidb"],
+    "docker:total-pulls":
+      userStats.pulls ?? FALLBACKS["docker:total-pulls"],
+    "docker:repo-count":
+      userStats.repos ?? FALLBACKS["docker:repo-count"],
+    "api:gateway-calls": apiCalls ?? FALLBACKS["api:gateway-calls"],
     updatedAt: new Date().toISOString(),
   };
 }

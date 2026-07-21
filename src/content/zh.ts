@@ -79,34 +79,24 @@ export const zh: LocaleCopy = {
     highlightsTitle: "数据一览",
     highlights: [
       {
-        value: "700+",
-        label: "ClawHub AI 用例生成器安装量",
-        metric: "clawhub:ai-testcase-generator",
-      },
-      {
-        value: "900+",
-        label: "ClawHub Trading Assistant Core 安装量",
-        metric: "clawhub:trading-assistant-core",
-      },
-      {
-        value: "30k+",
-        label: "达梦 Docker 拉取量",
-        metric: "docker:dameng",
-      },
-      {
-        value: "17k+",
-        label: "瀚高 Docker 拉取量",
-        metric: "docker:highgo",
+        value: "54k+",
+        label: "Docker Hub 全镜像总拉取",
+        metric: "docker:total-pulls",
       },
       {
         value: "1.6k+",
-        label: "人大金仓 Docker 拉取量",
-        metric: "docker:kingbase",
+        label: "ClawHub 技能总下载",
+        metric: "clawhub:total-downloads",
       },
       {
-        value: "900+",
-        label: "TiDB Docker 拉取量",
-        metric: "docker:tidb",
+        value: "500+",
+        label: "Docker Hub API Gateway 请求次数",
+        metric: "api:gateway-calls",
+      },
+      {
+        value: "12",
+        label: "已发布 Docker 镜像数",
+        metric: "docker:repo-count",
       },
     ],
     featuredTitle: "精选作品",

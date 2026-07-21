@@ -308,10 +308,14 @@ function initHighlightCountUp(): void {
 type MetricId =
   | "clawhub:ai-testcase-generator"
   | "clawhub:trading-assistant-core"
+  | "clawhub:total-downloads"
   | "docker:dameng"
   | "docker:highgo"
   | "docker:kingbase"
-  | "docker:tidb";
+  | "docker:tidb"
+  | "docker:total-pulls"
+  | "docker:repo-count"
+  | "api:gateway-calls";
 
 function formatMetric(value: number): string {
   if (!Number.isFinite(value) || value < 0) return "0";
@@ -335,10 +339,14 @@ async function fetchMetricsBundle(): Promise<Partial<Record<MetricId, number>>> 
     for (const key of [
       "clawhub:ai-testcase-generator",
       "clawhub:trading-assistant-core",
+      "clawhub:total-downloads",
       "docker:dameng",
       "docker:highgo",
       "docker:kingbase",
       "docker:tidb",
+      "docker:total-pulls",
+      "docker:repo-count",
+      "api:gateway-calls",
     ] as const) {
       const value = data[key];
       if (typeof value === "number" && Number.isFinite(value)) {
