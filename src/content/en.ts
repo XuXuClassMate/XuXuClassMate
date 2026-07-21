@@ -1,11 +1,7 @@
 import type { LocaleCopy } from "./types";
 
-const sharedMeta = {
-  description:
-    "XuXuClassMate builds AI-native quality tools and OpenClaw agent skills — from multimodal testcase generation to trading assistants and reusable Docker test environments.",
-  keywords:
-    "xuxuclassmate, XuXuClassMate, AI testing, OpenClaw, ClawHub, agent skills, testcase generator, trading assistant, QA engineer, Docker,旭旭同学",
-};
+const sharedKeywords =
+  "xuxuclassmate, XuXuClassMate, 旭旭同学, QA engineer, software testing, test automation, AI testing, quality engineering, OpenClaw, ClawHub, testcase generator, Playwright, API testing, Docker test environment";
 
 const homeSocial = [
   {
@@ -47,10 +43,31 @@ export const en: LocaleCopy = {
     work: "Work",
   },
   meta: {
-    home: { title: "XuXuClassMate", ...sharedMeta },
-    life: { title: "XuXuClassMate - Life Journey", ...sharedMeta },
-    learn: { title: "XuXuClassMate - Learning Journey", ...sharedMeta },
-    work: { title: "XuXuClassMate - Work Projects", ...sharedMeta },
+    home: {
+      title: "XuXuClassMate | AI Testing Tools & Quality Engineering",
+      description:
+        "XuXuClassMate (旭旭同学) — QA engineer building AI testing tools, OpenClaw agent skills, multimodal test case generation, and reusable Docker test environments.",
+      keywords: sharedKeywords,
+      ogTitle: "XuXuClassMate — AI Testing & Quality Engineering",
+    },
+    life: {
+      title: "Life Journey | XuXuClassMate",
+      description:
+        "Travel, music, and life outside the keyboard — the personal side of XuXuClassMate, QA engineer and AI testing tool builder.",
+      keywords: `${sharedKeywords}, travel, hobbies`,
+    },
+    learn: {
+      title: "Learning Path: QA to AI Testing | XuXuClassMate",
+      description:
+        "From QA craft to AI-native testing: Playwright, automation frameworks, multimodal test generation, OpenClaw / ClawHub skills, and Docker test environments.",
+      keywords: `${sharedKeywords}, learning path, QA training, test framework`,
+    },
+    work: {
+      title: "Testing Projects & AI Tools Portfolio | XuXuClassMate",
+      description:
+        "Portfolio of AI Test Case Generator, Trading Assistant, Dameng/Highgo Docker test DB images, and automation frameworks — built for real QA teams.",
+      keywords: `${sharedKeywords}, test portfolio, Dameng Docker, Highgo Docker, ClawHub skills`,
+    },
   },
   home: {
     subtitle: "AI × Quality // Systems",

@@ -1,11 +1,7 @@
 import type { LocaleCopy } from "./types";
 
-const sharedMeta = {
-  description:
-    "旭旭同学（xuxuclassmate）专注 AI 质量工具与 OpenClaw Agent 技能：多模态用例生成、交易助手，以及可复用的 Docker 测试环境。",
-  keywords:
-    "旭旭同学, xuxuclassmate, AI测试, OpenClaw, ClawHub, Agent技能, 用例生成, 交易助手, 软件测试, Docker, 自动化测试",
-};
+const sharedKeywords =
+  "旭旭同学, xuxuclassmate, XuXuClassMate, 软件测试, 自动化测试, AI测试, 质量工程, 测试工程师, 用例生成, Playwright, 接口测试, Docker测试环境, OpenClaw, ClawHub";
 
 export const zh: LocaleCopy = {
   brand: "旭旭同学",
@@ -27,10 +23,31 @@ export const zh: LocaleCopy = {
     work: "工作",
   },
   meta: {
-    home: { title: "旭旭同学", ...sharedMeta },
-    life: { title: "旭旭同学 - 生活点滴", ...sharedMeta },
-    learn: { title: "旭旭同学 - 学习历程", ...sharedMeta },
-    work: { title: "旭旭同学 - 工作项目", ...sharedMeta },
+    home: {
+      title: "旭旭同学 | AI 测试工具与质量工程",
+      description:
+        "旭旭同学（xuxuclassmate）— 质量工程师，专注 AI 测试工具、OpenClaw Agent 技能、多模态用例生成，以及可复用的 Docker 测试环境。",
+      keywords: sharedKeywords,
+      ogTitle: "旭旭同学 — AI 测试与质量工程",
+    },
+    life: {
+      title: "生活点滴 | 旭旭同学",
+      description:
+        "旅行、音乐与键盘之外的日常 — 质量工程师、AI 测试工具作者旭旭同学的生活侧写。",
+      keywords: `${sharedKeywords}, 旅行, 爱好`,
+    },
+    learn: {
+      title: "学习路径：从测试到手 AI 测试 | 旭旭同学",
+      description:
+        "从测试手艺到 AI 原生质量工具：Playwright、自动化框架、多模态用例生成、OpenClaw / ClawHub 技能与 Docker 测试环境。",
+      keywords: `${sharedKeywords}, 学习路径, 测试框架, 质量体系`,
+    },
+    work: {
+      title: "测试项目与 AI 工具作品集 | 旭旭同学",
+      description:
+        "作品集：AI 测试用例生成器、Trading Assistant、达梦/瀚高 Docker 测试库镜像与自动化框架 — 面向真实 QA 团队交付。",
+      keywords: `${sharedKeywords}, 测试作品集, 达梦 Docker, 瀚高 Docker, ClawHub`,
+    },
   },
   home: {
     subtitle: "AI × 质量 // 系统",

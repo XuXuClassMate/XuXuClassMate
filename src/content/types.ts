@@ -39,6 +39,8 @@ export type PageMeta = {
   title: string;
   description: string;
   keywords: string;
+  /** Optional Open Graph title override */
+  ogTitle?: string;
 };
 
 export type LocaleCopy = {
