@@ -3,6 +3,7 @@ import Contact from "./Contact.astro";
 import Footer from "./Footer.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCase, getCopy, pageHref, type CaseSlug, type Locale } from "../lib/i18n";
+import { getMetrics, resolveMetric } from "../lib/metrics";
 
 type Props = {
   locale: Locale;
@@ -13,6 +14,7 @@ const { locale, slug } = Astro.props;
 const copy = getCopy(locale);
 const page = copy.work;
 const study = getCase(locale, slug);
+const metrics = await getMetrics();
 
 if (!study) {
   throw new Error(`Unknown case study: ${slug}`);
@@ -72,12 +74,21 @@ if (!study) {
           <h2>{page.caseMetricsTitle}</h2>
           <div class="case-metrics">
             {
-              study.metrics.map((metric) => (
-                <div class="case-metric">
-                  <span class="case-metric-value">{metric.value}</span>
-                  <span class="case-metric-label">{metric.label}</span>
-                </div>
-              ))
+              study.metrics.map((metric) => {
+                const value = resolveMetric(metrics, metric.metric, metric.value);
+                return (
+                  <div class="case-metric">
+                    <span
+                      class="case-metric-value"
+                      data-metric={metric.metric}
+                      data-metric-fallback={metric.value}
+                    >
+                      {value}
+                    </span>
+                    <span class="case-metric-label">{metric.label}</span>
+                  </div>
+                );
+              })
             }
           </div>
         </article>

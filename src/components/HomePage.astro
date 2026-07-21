@@ -7,6 +7,7 @@ import ProjectCard from "./ProjectCard.astro";
 import WechatModal from "./WechatModal.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCopy } from "../lib/i18n";
+import { getMetrics, resolveMetric } from "../lib/metrics";
 import type { IconName } from "../content/types";
 import type { Locale } from "../lib/i18n";
 
@@ -18,6 +19,7 @@ type Props = {
 const { locale, rootHome = false } = Astro.props;
 const copy = getCopy(locale);
 const { home } = copy;
+const metrics = await getMetrics();
 ---
 
 <BaseLayout locale={locale} page="home" rootHome={rootHome}>
@@ -47,16 +49,24 @@ const { home } = copy;
         <h2 class="section-title reveal-on-scroll">{home.highlightsTitle}</h2>
         <div class="highlights-grid">
           {
-            home.highlights.map((item, index) => (
-              <div
-                class={`highlight-card reveal-on-scroll reveal-delay-${(index % 3) + 1}`}
-              >
-                <span class="highlight-value" data-count-to={item.value}>
-                  {item.value}
-                </span>
-                <span class="highlight-label">{item.label}</span>
-              </div>
-            ))
+            home.highlights.map((item, index) => {
+              const value = resolveMetric(metrics, item.metric, item.value);
+              return (
+                <div
+                  class={`highlight-card reveal-on-scroll reveal-delay-${(index % 3) + 1}`}
+                >
+                  <span
+                    class="highlight-value"
+                    data-count-to={value}
+                    data-metric={item.metric}
+                    data-metric-fallback={item.value}
+                  >
+                    {value}
+                  </span>
+                  <span class="highlight-label">{item.label}</span>
+                </div>
+              );
+            })
           }
         </div>
       </div>

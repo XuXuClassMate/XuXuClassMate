@@ -247,37 +247,45 @@ function parseCountTarget(raw: string): { end: number; suffix: string } | null {
   return { end, suffix: match[2] ?? "" };
 }
 
+function animateCount(node: HTMLElement, display: string): void {
+  const target = parseCountTarget(display);
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!target || reduceMotion) {
+    node.textContent = display;
+    return;
+  }
+
+  const duration = 900;
+  const start = performance.now();
+
+  const tick = (now: number) => {
+    const progress = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current =
+      target.suffix.toLowerCase().includes("k")
+        ? Math.round(target.end * eased * 10) / 10
+        : Math.round(target.end * eased);
+    node.textContent = `${current}${target.suffix}`;
+    if (progress < 1) {
+      requestAnimationFrame(tick);
+    } else {
+      node.textContent = display;
+    }
+  };
+
+  requestAnimationFrame(tick);
+}
+
 function initHighlightCountUp(): void {
   const nodes = document.querySelectorAll<HTMLElement>("[data-count-to]");
   if (nodes.length === 0) return;
 
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  const animate = (node: HTMLElement) => {
-    const target = parseCountTarget(node.dataset.countTo ?? node.textContent ?? "");
-    if (!target || reduceMotion) {
-      node.textContent = node.dataset.countTo ?? node.textContent;
-      return;
-    }
-
-    const duration = 900;
-    const start = performance.now();
-
-    const tick = (now: number) => {
-      const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      const current = Math.round(target.end * eased);
-      node.textContent = `${current}${target.suffix}`;
-      if (progress < 1) {
-        requestAnimationFrame(tick);
-      }
-    };
-
-    requestAnimationFrame(tick);
+  const run = (node: HTMLElement) => {
+    animateCount(node, node.dataset.countTo ?? node.textContent ?? "");
   };
 
   if (!("IntersectionObserver" in window)) {
-    for (const node of nodes) animate(node);
+    for (const node of nodes) run(node);
     return;
   }
 
@@ -285,7 +293,7 @@ function initHighlightCountUp(): void {
     (entries) => {
       for (const entry of entries) {
         if (!entry.isIntersecting || !(entry.target instanceof HTMLElement)) continue;
-        animate(entry.target);
+        run(entry.target);
         observer.unobserve(entry.target);
       }
     },
@@ -295,6 +303,88 @@ function initHighlightCountUp(): void {
   for (const node of nodes) {
     observer.observe(node);
   }
+}
+
+type MetricId =
+  | "clawhub:ai-testcase-generator"
+  | "clawhub:trading-assistant-core"
+  | "docker:dameng"
+  | "docker:highgo";
+
+function formatMetric(value: number): string {
+  if (!Number.isFinite(value) || value < 0) return "0";
+  if (value >= 10_000) {
+    const thousands = value / 1000;
+    const rounded =
+      value >= 100_000 ? Math.round(thousands) : Math.round(thousands * 10) / 10;
+    return `${String(rounded).replace(/\.0$/, "")}k+`;
+  }
+  return String(Math.round(value));
+}
+
+async function fetchMetricValue(id: MetricId): Promise<number | null> {
+  try {
+    if (id.startsWith("clawhub:")) {
+      const slug = id.slice("clawhub:".length);
+      const response = await fetch(`https://clawhub.ai/api/v1/skills/${slug}`, {
+        headers: { Accept: "application/json" },
+      });
+      if (!response.ok) return null;
+      const data = (await response.json()) as {
+        skill?: { stats?: { downloads?: number } };
+      };
+      const downloads = data.skill?.stats?.downloads;
+      return typeof downloads === "number" ? downloads : null;
+    }
+
+    const repo = id.slice("docker:".length);
+    const response = await fetch(
+      `https://hub.docker.com/v2/repositories/xuxuclassmate/${repo}/`,
+      { headers: { Accept: "application/json" } },
+    );
+    if (!response.ok) return null;
+    const data = (await response.json()) as { pull_count?: number };
+    return typeof data.pull_count === "number" ? data.pull_count : null;
+  } catch {
+    return null;
+  }
+}
+
+function initLiveMetrics(): void {
+  const nodes = [
+    ...document.querySelectorAll<HTMLElement>("[data-metric]"),
+  ].filter((node) => Boolean(node.dataset.metric));
+  if (nodes.length === 0) return;
+
+  const ids = [
+    ...new Set(nodes.map((node) => node.dataset.metric as MetricId)),
+  ];
+
+  void Promise.all(
+    ids.map(async (id) => {
+      const value = await fetchMetricValue(id);
+      return [id, value] as const;
+    }),
+  ).then((results) => {
+    const live = new Map<MetricId, number>();
+    for (const [id, value] of results) {
+      if (value != null) live.set(id, value);
+    }
+    if (live.size === 0) return;
+
+    for (const node of nodes) {
+      const id = node.dataset.metric as MetricId;
+      const raw = live.get(id);
+      if (raw == null) continue;
+      const display = formatMetric(raw);
+      node.dataset.countTo = display;
+      if (node.classList.contains("highlight-value")) {
+        animateCount(node, display);
+      } else {
+        node.textContent = display;
+      }
+    }
+  });
 }
 
 function initBackToTop(): void {
@@ -407,6 +497,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initProjectFilters();
   initCopyEmail();
   initHighlightCountUp();
+  initLiveMetrics();
   initBackToTop();
   initTypewriter();
   initThemeToggle();

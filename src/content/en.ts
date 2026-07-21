@@ -97,10 +97,26 @@ export const en: LocaleCopy = {
     ],
     highlightsTitle: "By the Numbers",
     highlights: [
-      { value: "700+", label: "ClawHub AI Test Case Generator installs" },
-      { value: "900+", label: "ClawHub Trading Assistant Core installs" },
-      { value: "30k+", label: "Dameng Docker pulls" },
-      { value: "17k+", label: "Highgo Docker pulls" },
+      {
+        value: "700+",
+        label: "ClawHub AI Test Case Generator installs",
+        metric: "clawhub:ai-testcase-generator",
+      },
+      {
+        value: "900+",
+        label: "ClawHub Trading Assistant Core installs",
+        metric: "clawhub:trading-assistant-core",
+      },
+      {
+        value: "30k+",
+        label: "Dameng Docker pulls",
+        metric: "docker:dameng",
+      },
+      {
+        value: "17k+",
+        label: "Highgo Docker pulls",
+        metric: "docker:highgo",
+      },
     ],
     featuredTitle: "Featured Work",
     featuredCta: "View all projects",
@@ -517,7 +533,7 @@ export const en: LocaleCopy = {
           "Exportable Excel / Markdown / XMind deliverables",
         ],
         metrics: [
-          { label: "ClawHub installs", value: "700+" },
+          { label: "ClawHub installs", value: "700+", metric: "clawhub:ai-testcase-generator" },
           { label: "Packaging", value: "Docker · npm · skill" },
         ],
         links: [
@@ -529,7 +545,7 @@ export const en: LocaleCopy = {
             label: "Docker Hub",
             href: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
           },
-          { label: "ClawHub", href: "https://clawhub.ai/xuxuclassmate/ai-test-case-generator" },
+          { label: "ClawHub", href: "https://clawhub.ai/xuxuclassmate/ai-testcase-generator" },
         ],
         meta: {
           title: "AI Test Case Generator Case Study | XuXuClassMate",
@@ -556,7 +572,7 @@ export const en: LocaleCopy = {
           "Risk-first defaults instead of signal-only demos",
         ],
         metrics: [
-          { label: "ClawHub installs", value: "900+" },
+          { label: "ClawHub installs", value: "900+", metric: "clawhub:trading-assistant-core" },
           { label: "Surfaces", value: "Skill · Docker · CLI" },
         ],
         links: [
@@ -591,8 +607,8 @@ export const en: LocaleCopy = {
           "A reusable foundation under AI tooling demos",
         ],
         metrics: [
-          { label: "Dameng pulls", value: "30k+" },
-          { label: "Highgo pulls", value: "17k+" },
+          { label: "Dameng pulls", value: "30k+", metric: "docker:dameng" },
+          { label: "Highgo pulls", value: "17k+", metric: "docker:highgo" },
         ],
         links: [
           {

@@ -2,6 +2,12 @@ export type Locale = "en" | "zh";
 
 export type PageId = "home" | "life" | "learn" | "work";
 
+export type MetricId =
+  | "clawhub:ai-testcase-generator"
+  | "clawhub:trading-assistant-core"
+  | "docker:dameng"
+  | "docker:highgo";
+
 export type IconName =
   | "github"
   | "docker"
@@ -52,6 +58,8 @@ export type Card = {
 export type Highlight = {
   value: string;
   label: string;
+  /** Live metric key refreshed from ClawHub / Docker Hub. */
+  metric?: MetricId;
 };
 
 export type SkillEvidence = {
@@ -83,7 +91,7 @@ export type CaseStudy = {
   problem: string;
   solution: string;
   outcomes: string[];
-  metrics: { label: string; value: string }[];
+  metrics: { label: string; value: string; metric?: MetricId }[];
   links: { label: string; href: string }[];
   meta: PageMeta;
 };
