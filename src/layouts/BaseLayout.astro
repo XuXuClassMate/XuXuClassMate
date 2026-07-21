@@ -23,6 +23,8 @@ type Props = {
   rootHome?: boolean;
   noindex?: boolean;
   caseSlug?: CaseSlug;
+  /** Absolute or site-relative Open Graph image path. */
+  ogImagePath?: string;
   metaOverride?: {
     title: string;
     description: string;
@@ -37,6 +39,7 @@ const {
   rootHome = false,
   noindex = false,
   caseSlug,
+  ogImagePath,
   metaOverride,
 } = Astro.props;
 const copy = getCopy(locale);
@@ -58,7 +61,7 @@ const alternates = caseSlug
 const homeHref = locale === "zh" ? pageHref("zh", "home") : "/";
 const active = page === "home" ? undefined : page;
 const ogTitle = meta.ogTitle ?? meta.title;
-const ogImage = absoluteUrl("/images/og-default.jpg");
+const ogImage = absoluteUrl(ogImagePath ?? "/images/og-default.jpg");
 const structuredData = noindex
   ? null
   : jsonLdGraph(locale, page, rootHome, caseSlug);

@@ -17,6 +17,9 @@ const FALLBACKS: Omit<MetricsPayload, "updatedAt"> = {
   "docker:tidb": 941,
 };
 
+/** Edge cache TTL for live metrics (seconds). */
+const CACHE_TTL_SECONDS = 600;
+
 async function readDownloads(slug: string): Promise<number | null> {
   const response = await fetch(`https://clawhub.ai/api/v1/skills/${slug}`, {
     headers: { Accept: "application/json" },
@@ -39,7 +42,7 @@ async function readPulls(repo: string): Promise<number | null> {
   return typeof data.pull_count === "number" ? data.pull_count : null;
 }
 
-export async function onRequestGet(): Promise<Response> {
+async function buildPayload(): Promise<MetricsPayload> {
   const [testcase, trading, dameng, highgo, kingbase, tidb] = await Promise.all([
     readDownloads("ai-testcase-generator"),
     readDownloads("trading-assistant-core"),
@@ -49,7 +52,7 @@ export async function onRequestGet(): Promise<Response> {
     readPulls("tidb"),
   ]);
 
-  const payload: MetricsPayload = {
+  return {
     "clawhub:ai-testcase-generator":
       testcase ?? FALLBACKS["clawhub:ai-testcase-generator"],
     "clawhub:trading-assistant-core":
@@ -60,11 +63,47 @@ export async function onRequestGet(): Promise<Response> {
     "docker:tidb": tidb ?? FALLBACKS["docker:tidb"],
     updatedAt: new Date().toISOString(),
   };
+}
 
+function jsonResponse(payload: MetricsPayload, hit: boolean): Response {
   return Response.json(payload, {
     headers: {
-      "Cache-Control": "no-store",
+      "Cache-Control": `public, s-maxage=${CACHE_TTL_SECONDS}, max-age=60`,
       "Access-Control-Allow-Origin": "*",
+      "X-Metrics-Cache": hit ? "HIT" : "MISS",
     },
   });
+}
+
+type PagesContext = {
+  request: Request;
+  waitUntil: (promise: Promise<unknown>) => void;
+};
+
+export async function onRequestGet(context: PagesContext): Promise<Response> {
+  const cacheKey = new Request(new URL(context.request.url).toString(), {
+    method: "GET",
+  });
+
+  try {
+    const cacheStorage = caches as CacheStorage & { default: Cache };
+    const cache = cacheStorage.default;
+    const cached = await cache.match(cacheKey);
+    if (cached) {
+      const headers = new Headers(cached.headers);
+      headers.set("X-Metrics-Cache", "HIT");
+      return new Response(cached.body, {
+        status: cached.status,
+        headers,
+      });
+    }
+
+    const payload = await buildPayload();
+    const response = jsonResponse(payload, false);
+    context.waitUntil(cache.put(cacheKey, response.clone()));
+    return response;
+  } catch {
+    const payload = await buildPayload();
+    return jsonResponse(payload, false);
+  }
 }

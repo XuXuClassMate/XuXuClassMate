@@ -74,5 +74,9 @@ describe("i18n paths", () => {
     expect(getCase("zh", "testcase-generator")?.slug).toBe(
       "testcase-generator",
     );
+    expect(getCase("en", "globalpulse")?.slug).toBe("globalpulse");
+    expect(getCase("zh", "docker-hub-api-gateway")?.title).toBe(
+      "Docker Hub API Gateway",
+    );
   });
 });

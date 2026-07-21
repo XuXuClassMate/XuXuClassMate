@@ -19,13 +19,16 @@ const { alt, closeLabel } = Astro.props;
     <button class="close-button" id="closeModal" type="button" aria-label={closeLabel}>
       ×
     </button>
-    <img
-      src="/images/wechat.jpg"
-      alt={alt}
-      width="800"
-      height="1080"
-      loading="lazy"
-      decoding="async"
-    />
+    <picture>
+      <source srcset="/images/wechat.webp" type="image/webp" />
+      <img
+        src="/images/wechat.jpg"
+        alt={alt}
+        width="800"
+        height="1080"
+        loading="lazy"
+        decoding="async"
+      />
+    </picture>
   </div>
 </div>

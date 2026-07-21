@@ -328,7 +328,6 @@ async function fetchMetricsBundle(): Promise<Partial<Record<MetricId, number>>> 
   try {
     const response = await fetch("/api/metrics", {
       headers: { Accept: "application/json" },
-      cache: "no-store",
     });
     if (!response.ok) return {};
     const data = (await response.json()) as Partial<Record<MetricId, number>>;
