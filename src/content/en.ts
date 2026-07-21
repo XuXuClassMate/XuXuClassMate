@@ -1,4 +1,5 @@
 import type { LocaleCopy } from "./types";
+import { getFeaturedProjects, getWorkProjects } from "./projects";
 
 const sharedKeywords =
   "xuxuclassmate, XuXuClassMate, 旭旭同学, QA engineer, software testing, test automation, AI testing, quality engineering, OpenClaw, ClawHub, testcase generator, Playwright, API testing, Docker test environment";
@@ -62,14 +63,14 @@ export const en: LocaleCopy = {
     learn: {
       title: "Learning Path: QA to AI Testing | XuXuClassMate",
       description:
-        "From QA craft to AI-native testing: Playwright, automation frameworks, multimodal test generation, OpenClaw / ClawHub skills, and Docker test environments.",
-      keywords: `${sharedKeywords}, learning path, QA training, test framework`,
+        "From QA craft and multi-stage test management to Locust performance, Playwright automation, OpenClaw / ClawHub skills, and InnoNestX product systems.",
+      keywords: `${sharedKeywords}, learning path, test management, Locust, QA training`,
     },
     work: {
       title: "Testing Projects & AI Tools Portfolio | XuXuClassMate",
       description:
-        "Portfolio of AI Test Case Generator, Trading Assistant, Dameng/Highgo Docker test DB images, and automation frameworks — built for real QA teams.",
-      keywords: `${sharedKeywords}, test portfolio, Dameng Docker, Highgo Docker, ClawHub skills`,
+        "Portfolio of AI Test Case Generator, Trading Assistant, GlobalPulse, Docker Hub API Gateway, Dameng/Highgo Docker DB images, and automation frameworks — built for real QA teams.",
+      keywords: `${sharedKeywords}, test portfolio, GlobalPulse, Dameng Docker, Highgo Docker, ClawHub skills`,
     },
   },
   home: {
@@ -117,87 +118,20 @@ export const en: LocaleCopy = {
         label: "Highgo Docker pulls",
         metric: "docker:highgo",
       },
+      {
+        value: "1.6k+",
+        label: "Kingbase Docker pulls",
+        metric: "docker:kingbase",
+      },
+      {
+        value: "900+",
+        label: "TiDB Docker pulls",
+        metric: "docker:tidb",
+      },
     ],
     featuredTitle: "Featured Work",
     featuredCta: "View all projects",
-    featured: [
-      {
-        title: "AI Test Case Generator",
-        description:
-          "Multimodal QA inputs (PDF, Word, images, video) → structured cases with Test / Dev / Product review loops. Ships as Docker, npm, and OpenClaw plugin; published on ClawHub as AI Test Case Generator.",
-        tags: ["TypeScript", "Multimodal AI", "ClawHub"],
-        href: "https://github.com/XuXuClassMate/testcase-generator",
-        linkLabel: "GitHub",
-        ctaHref: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
-        ctaLabel: "Docker Hub",
-        category: "AI",
-        image: "/images/cover-testcase.jpg",
-        imageAlt: "AI Test Case Generator cover",
-        slug: "testcase-generator",
-        caseHref: "/en/work/testcase-generator.html",
-        caseLabel: "Case study",
-      },
-      {
-        title: "Trading Assistant Core",
-        description:
-          "OpenClaw agent skill for support/resistance, multi-indicator signals, position sizing, and risk alerts. Install via ClawHub, Docker, or `pip` / `ta` CLI.",
-        tags: ["Agent Skill", "ClawHub", "CLI"],
-        href: "https://github.com/XuXuClassMate/trading-assistant",
-        linkLabel: "GitHub",
-        ctaHref: "https://clawhub.ai/xuxuclassmate/trading-assistant-core",
-        ctaLabel: "ClawHub",
-        category: "AI",
-        image: "/images/cover-trading.jpg",
-        imageAlt: "Trading Assistant Core cover",
-        slug: "trading-assistant",
-        caseHref: "/en/work/trading-assistant.html",
-        caseLabel: "Case study",
-      },
-      {
-        title: "GlobalPulse",
-        description:
-          "Self-hosted market intelligence and scheduled finance/global hotspot briefings on Cloudflare Workers — Admin UI, cron delivery, and Feishu / WeChat / Telegram push.",
-        tags: ["Cloudflare", "Workers", "Briefings"],
-        href: "https://github.com/InnoNestX/GlobalPulse",
-        linkLabel: "GitHub",
-        category: "Product",
-        image: "/images/cover-globalpulse.jpg",
-        imageAlt: "GlobalPulse cover",
-        slug: "globalpulse",
-        caseHref: "/en/work/globalpulse.html",
-        caseLabel: "Case study",
-      },
-      {
-        title: "Docker Hub API Gateway",
-        description:
-          "Unified REST API gateway for Docker Hub — user stats, SVG cards, repo/tag lookup, OpenAPI docs, and interactive testing (EN/ZH).",
-        tags: ["API", "Docker Hub", "Hono"],
-        href: "https://github.com/InnoNestX/docker-hub-pull-counter",
-        linkLabel: "GitHub",
-        ctaHref: "https://docker-hub-pull-counter.vercel.app",
-        ctaLabel: "Live API",
-        category: "Infra",
-        image: "/images/cover-docker-gateway.jpg",
-        imageAlt: "Docker Hub API Gateway cover",
-        slug: "docker-hub-api-gateway",
-        caseHref: "/en/work/docker-hub-api-gateway.html",
-        caseLabel: "Case study",
-      },
-      {
-        title: "Test DB Docker Suite",
-        description:
-          "Ready-to-run database images for QA environments — Dameng, Highgo, Kingbase, TiDB and more, ranked by live Docker Hub pulls.",
-        tags: ["Docker", "Dameng", "Highgo"],
-        href: "https://hub.docker.com/u/xuxuclassmate",
-        linkLabel: "Docker Hub",
-        category: "Infra",
-        image: "/images/cover-docker.jpg",
-        imageAlt: "Test DB Docker Suite cover",
-        slug: "docker-suite",
-        caseHref: "/en/work/docker-suite.html",
-        caseLabel: "Case study",
-      },
-    ],
+    featured: getFeaturedProjects("en"),
     principlesTitle: "What I Optimize For",
     principles: [
       {
@@ -251,7 +185,8 @@ export const en: LocaleCopy = {
       },
       {
         title: "Project Gallery",
-        description: "Testcase Generator, Trading Assistant, Docker suites",
+        description:
+          "Testcase Generator, Trading Assistant, GlobalPulse, Docker suites",
         href: "/en/work.html",
       },
       {
@@ -281,13 +216,23 @@ export const en: LocaleCopy = {
         ],
       },
       {
+        title: "Test Management",
+        description: "",
+        items: [
+          "QA leadership across ByteDance, SOE, and startups",
+          "Release readiness and quality gates",
+          "Hiring, mentoring, and capacity planning",
+          "Cross-functional delivery with product & engineering",
+        ],
+      },
+      {
         title: "Automation Testing",
         description: "",
         items: [
-          "Playwright & cross-browser UI",
+          "Playwright / Selenium UI automation",
           "API automation (language-agnostic)",
+          "Locust performance & load testing",
           "Framework design & reusable suites",
-          "CI-ready environments",
         ],
       },
       {
@@ -318,11 +263,18 @@ export const en: LocaleCopy = {
         linkLabel: "View on GitHub",
       },
       {
-        title: "Ministry of Testing",
+        title: "GlobalPulse (InnoNestX)",
         description:
-          "Community learning on modern testing practice, AI-assisted QA, and craft excellence.",
-        href: "https://www.ministryoftesting.com/learn",
-        linkLabel: "Explore Testing Insights",
+          "Self-hosted market intelligence and scheduled briefings on Cloudflare Workers — a product-line practice beyond single tools.",
+        href: "https://github.com/InnoNestX/GlobalPulse",
+        linkLabel: "View on GitHub",
+      },
+      {
+        title: "Python QA Practice",
+        description:
+          "Locust performance scripts plus API, Selenium, and Appium examples in one practice repo.",
+        href: "https://github.com/XuXuClassMate/My_Test_PyProject",
+        linkLabel: "View on GitHub",
       },
       {
         title: "ClawHub",
@@ -340,9 +292,14 @@ export const en: LocaleCopy = {
           "Built solid functional, API, and exploratory testing habits — the judgment that still guides every tool I ship.",
       },
       {
-        title: "Automation at Scale",
+        title: "Team Leadership Across Stages",
         description:
-          "Grew from scripts to frameworks — Playwright and reusable environments, no longer tied to one language.",
+          "Led QA through ByteDance, SOE, and startup contexts — process, people, and release readiness under different constraints.",
+      },
+      {
+        title: "Automation & Performance at Scale",
+        description:
+          "Grew from scripts to frameworks — Playwright, Locust, and reusable environments, no longer tied to one language.",
       },
       {
         title: "AI-Native Tooling",
@@ -350,20 +307,20 @@ export const en: LocaleCopy = {
           "Turned repetitive QA work into products — multimodal generation, review loops, and exportable deliverables.",
       },
       {
-        title: "OpenClaw Agent Skills",
+        title: "OpenClaw Skills & Product Systems",
         description:
-          "Packaging skills on ClawHub so agents can install and run real workflows, not just demos.",
+          "Packaging ClawHub skills and InnoNestX products (GlobalPulse, Docker Hub API Gateway) so workflows run beyond demos.",
       },
     ],
     focusTitle: "Current Learning Focus",
-    focusHeading: "Agent Skills & Multimodal QA",
+    focusHeading: "Agent Skills, Multimodal QA & Product Systems",
     focusIntro:
-      "Right now I am deepening the loop from idea → agent skill → packaged tool that teams can run:",
+      "Right now I am deepening the loop from idea → agent skill / product → packaged system that teams can run:",
     focusItems: [
       "Publishing and iterating OpenClaw / ClawHub skills",
       "Multimodal requirement → structured test artifacts",
-      "Reviewer personas that raise generation quality",
-      "Docker / CLI packaging so AI tools are installable, not just demos",
+      "Locust and automation craft behind AI tools",
+      "InnoNestX product systems on Workers and APIs",
     ],
     footerDesc: "Learning in public — AI tools with quality roots",
     social: [
@@ -391,98 +348,7 @@ export const en: LocaleCopy = {
       "AI products on GitHub / Docker / ClawHub, plus the quality foundations behind them",
     projectsTitle: "Featured Projects",
     filterAll: "All",
-    projects: [
-      {
-        title: "AI Test Case Generator",
-        description:
-          "Multimodal QA inputs (PDF, Word, images, video) → structured cases with Test / Dev / Product review loops. Ships as Docker, npm, and OpenClaw plugin; published on ClawHub as AI Test Case Generator.",
-        tags: ["TypeScript", "Multimodal AI", "ClawHub"],
-        href: "https://github.com/XuXuClassMate/testcase-generator",
-        linkLabel: "GitHub",
-        ctaHref: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
-        ctaLabel: "Docker Hub",
-        category: "AI",
-        image: "/images/cover-testcase.jpg",
-        imageAlt: "AI Test Case Generator cover",
-        slug: "testcase-generator",
-        caseHref: "/en/work/testcase-generator.html",
-        caseLabel: "Case study",
-      },
-      {
-        title: "Trading Assistant Core",
-        description:
-          "OpenClaw agent skill for support/resistance, multi-indicator signals, position sizing, and risk alerts. Install via ClawHub, Docker, or `pip` / `ta` CLI.",
-        tags: ["Agent Skill", "ClawHub", "CLI"],
-        href: "https://github.com/XuXuClassMate/trading-assistant",
-        linkLabel: "GitHub",
-        ctaHref: "https://clawhub.ai/xuxuclassmate/trading-assistant-core",
-        ctaLabel: "ClawHub",
-        category: "AI",
-        image: "/images/cover-trading.jpg",
-        imageAlt: "Trading Assistant Core cover",
-        slug: "trading-assistant",
-        caseHref: "/en/work/trading-assistant.html",
-        caseLabel: "Case study",
-      },
-      {
-        title: "GlobalPulse",
-        description:
-          "Self-hosted market intelligence and scheduled finance/global hotspot briefings on Cloudflare Workers — Admin UI, cron delivery, and Feishu / WeChat / Telegram push.",
-        tags: ["Cloudflare", "Workers", "Briefings"],
-        href: "https://github.com/InnoNestX/GlobalPulse",
-        linkLabel: "GitHub",
-        category: "Product",
-        image: "/images/cover-globalpulse.jpg",
-        imageAlt: "GlobalPulse cover",
-        slug: "globalpulse",
-        caseHref: "/en/work/globalpulse.html",
-        caseLabel: "Case study",
-      },
-      {
-        title: "Docker Hub API Gateway",
-        description:
-          "Unified REST API gateway for Docker Hub — user stats, SVG cards, repo/tag lookup, OpenAPI docs, and interactive testing (EN/ZH).",
-        tags: ["API", "Docker Hub", "Hono"],
-        href: "https://github.com/InnoNestX/docker-hub-pull-counter",
-        linkLabel: "GitHub",
-        ctaHref: "https://docker-hub-pull-counter.vercel.app",
-        ctaLabel: "Live API",
-        category: "Infra",
-        image: "/images/cover-docker-gateway.jpg",
-        imageAlt: "Docker Hub API Gateway cover",
-        slug: "docker-hub-api-gateway",
-        caseHref: "/en/work/docker-hub-api-gateway.html",
-        caseLabel: "Case study",
-      },
-      {
-        title: "Test DB Docker Suite",
-        description:
-          "Ready-to-run database images for QA environments — Dameng, Highgo, Kingbase, TiDB and more, ranked by live Docker Hub pulls.",
-        tags: ["Docker", "Dameng", "Highgo"],
-        href: "https://hub.docker.com/u/xuxuclassmate",
-        linkLabel: "Docker Hub",
-        category: "Infra",
-        image: "/images/cover-docker.jpg",
-        imageAlt: "Test DB Docker Suite cover",
-        slug: "docker-suite",
-        caseHref: "/en/work/docker-suite.html",
-        caseLabel: "Case study",
-      },
-      {
-        title: "Automation Framework Craft",
-        description:
-          "Reusable API / UI automation patterns and practice projects — the craft underneath the AI tools, not locked to one language.",
-        tags: ["Framework", "API", "Playwright"],
-        href: "https://github.com/XuXuClassMate/My_Test_JAProject",
-        linkLabel: "GitHub",
-        category: "Automation",
-        image: "/images/cover-automation.jpg",
-        imageAlt: "Automation Framework cover",
-        slug: "automation-framework",
-        caseHref: "/en/work/automation-framework.html",
-        caseLabel: "Case study",
-      },
-    ],
+    projects: getWorkProjects("en"),
     approachTitle: "How Projects Ship",
     approach: [
       {
@@ -845,14 +711,14 @@ export const en: LocaleCopy = {
         title: "Music Time",
         description: "My favorite playlist for coding and relaxing",
         href: "https://music.163.com/#/playlist?id=368129876",
-        image: "/images/music.jpg",
+        image: "/images/music.webp",
         imageAlt: "Music Time",
       },
       {
         title: "Movie Time",
         description: "Enjoying the magical world of Miyazaki films",
         href: "https://www.iqiyi.com/playlist1921084202.html?vfrm=psbdl",
-        image: "/images/movie.jpg",
+        image: "/images/movie.webp",
         imageAlt: "Movie Time - Miyazaki Films",
       },
     ],
@@ -885,6 +751,27 @@ export const en: LocaleCopy = {
           "Steady movement that keeps rhythm alive off the screen.",
         icon: "Move",
         items: ["Hiking", "Climbing", "Badminton"],
+      },
+    ],
+    blogTitle: "Life Notes",
+    blog: [
+      {
+        title: "Annual Plan",
+        description:
+          "A new year, a fresh start — sharing yearly goals and focus areas.",
+        image: "/images/plan.webp",
+        imageAlt: "Annual plan cover",
+        href: "https://fgg6gzb6uk.feishu.cn/base/H07ebpIM1aBTuGsYtaacHK9NnBb?table=tblwIKtfaCQWbaKW",
+        linkLabel: "Read more",
+      },
+      {
+        title: "Progress Tracker",
+        description:
+          "Tracking execution against the annual plan and sharing the growth trail.",
+        image: "/images/summary.webp",
+        imageAlt: "Progress tracker cover",
+        href: "https://fgg6gzb6uk.feishu.cn/base/H07ebpIM1aBTuGsYtaacHK9NnBb?table=blkcP1vbErcMDacd",
+        linkLabel: "Read more",
       },
     ],
     footerDesc: "A personal space for learning and sharing",

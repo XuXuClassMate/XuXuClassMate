@@ -1,4 +1,5 @@
 import type { LocaleCopy } from "./types";
+import { getFeaturedProjects, getWorkProjects } from "./projects";
 
 const sharedKeywords =
   "旭旭同学, xuxuclassmate, XuXuClassMate, 软件测试, 自动化测试, AI测试, 质量工程, 测试工程师, 用例生成, Playwright, 接口测试, Docker测试环境, OpenClaw, ClawHub";
@@ -42,14 +43,14 @@ export const zh: LocaleCopy = {
     learn: {
       title: "学习路径：从测试到手 AI 测试 | 旭旭同学",
       description:
-        "从测试手艺到 AI 原生质量工具：Playwright、自动化框架、多模态用例生成、OpenClaw / ClawHub 技能与 Docker 测试环境。",
-      keywords: `${sharedKeywords}, 学习路径, 测试框架, 质量体系`,
+        "从测试手艺与多阶段测试管理，到 Locust 性能、Playwright 自动化、OpenClaw / ClawHub 技能，以及 InnoNestX 产品系统。",
+      keywords: `${sharedKeywords}, 学习路径, 测试管理, Locust, 质量体系`,
     },
     work: {
       title: "测试项目与 AI 工具作品集 | 旭旭同学",
       description:
-        "作品集：AI 测试用例生成器、Trading Assistant、达梦/瀚高 Docker 测试库镜像与自动化框架 — 面向真实 QA 团队交付。",
-      keywords: `${sharedKeywords}, 测试作品集, 达梦 Docker, 瀚高 Docker, ClawHub`,
+        "作品集：AI 测试用例生成器、Trading Assistant、GlobalPulse、Docker Hub API Gateway、达梦/瀚高 Docker 测试库镜像与自动化框架 — 面向真实 QA 团队交付。",
+      keywords: `${sharedKeywords}, 测试作品集, GlobalPulse, 达梦 Docker, 瀚高 Docker, ClawHub`,
     },
   },
   home: {
@@ -97,87 +98,20 @@ export const zh: LocaleCopy = {
         label: "瀚高 Docker 拉取量",
         metric: "docker:highgo",
       },
+      {
+        value: "1.6k+",
+        label: "人大金仓 Docker 拉取量",
+        metric: "docker:kingbase",
+      },
+      {
+        value: "900+",
+        label: "TiDB Docker 拉取量",
+        metric: "docker:tidb",
+      },
     ],
     featuredTitle: "精选作品",
     featuredCta: "查看全部项目",
-    featured: [
-      {
-        title: "AI 测试用例生成器",
-        description:
-          "多模态 QA 输入（PDF、Word、图片、视频）→ 结构化用例，含测试/开发/产品三角色评审。支持 Docker、npm、OpenClaw 插件，并在 ClawHub 发布为 AI Test Case Generator。",
-        tags: ["TypeScript", "多模态 AI", "ClawHub"],
-        href: "https://github.com/XuXuClassMate/testcase-generator",
-        linkLabel: "GitHub",
-        ctaHref: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
-        ctaLabel: "Docker Hub",
-        category: "AI",
-        image: "/images/cover-testcase.jpg",
-        imageAlt: "AI 测试用例生成器封面",
-        slug: "testcase-generator",
-        caseHref: "/zh/work/testcase-generator.html",
-        caseLabel: "案例详解",
-      },
-      {
-        title: "Trading Assistant Core",
-        description:
-          "OpenClaw Agent 技能：支撑阻力、多指标信号、仓位与风险提醒。可通过 ClawHub、Docker 或 pip / `ta` CLI 安装。",
-        tags: ["Agent 技能", "ClawHub", "CLI"],
-        href: "https://github.com/XuXuClassMate/trading-assistant",
-        linkLabel: "GitHub",
-        ctaHref: "https://clawhub.ai/xuxuclassmate/trading-assistant-core",
-        ctaLabel: "ClawHub",
-        category: "AI",
-        image: "/images/cover-trading.jpg",
-        imageAlt: "Trading Assistant 封面",
-        slug: "trading-assistant",
-        caseHref: "/zh/work/trading-assistant.html",
-        caseLabel: "案例详解",
-      },
-      {
-        title: "GlobalPulse",
-        description:
-          "自托管的市场情报与定时财经/全球热点简报（Cloudflare Workers）— Admin UI、Cron 投递，以及飞书 / 微信 / Telegram 推送。",
-        tags: ["Cloudflare", "Workers", "简报"],
-        href: "https://github.com/InnoNestX/GlobalPulse",
-        linkLabel: "GitHub",
-        category: "Product",
-        image: "/images/cover-globalpulse.jpg",
-        imageAlt: "GlobalPulse 封面",
-        slug: "globalpulse",
-        caseHref: "/zh/work/globalpulse.html",
-        caseLabel: "案例详解",
-      },
-      {
-        title: "Docker Hub API Gateway",
-        description:
-          "面向 Docker Hub 的统一 REST API 网关 — 用户统计、SVG 卡片、仓库/标签查询、OpenAPI 文档与交互式调试（中英）。",
-        tags: ["API", "Docker Hub", "Hono"],
-        href: "https://github.com/InnoNestX/docker-hub-pull-counter",
-        linkLabel: "GitHub",
-        ctaHref: "https://docker-hub-pull-counter.vercel.app",
-        ctaLabel: "在线 API",
-        category: "Infra",
-        image: "/images/cover-docker-gateway.jpg",
-        imageAlt: "Docker Hub API Gateway 封面",
-        slug: "docker-hub-api-gateway",
-        caseHref: "/zh/work/docker-hub-api-gateway.html",
-        caseLabel: "案例详解",
-      },
-      {
-        title: "测试库 Docker 套件",
-        description:
-          "面向 QA 环境的即用数据库镜像——达梦（约 3 万次拉取）、瀚高（约 1.7 万）、人大金仓、TiDB 等，见 Docker Hub。",
-        tags: ["Docker", "Dameng", "Highgo"],
-        href: "https://hub.docker.com/u/xuxuclassmate",
-        linkLabel: "Docker Hub",
-        category: "Infra",
-        image: "/images/cover-docker.jpg",
-        imageAlt: "测试库 Docker 套件封面",
-        slug: "docker-suite",
-        caseHref: "/zh/work/docker-suite.html",
-        caseLabel: "案例详解",
-      },
-    ],
+    featured: getFeaturedProjects("zh"),
     principlesTitle: "我在优化什么",
     principles: [
       {
@@ -227,7 +161,7 @@ export const zh: LocaleCopy = {
       },
       {
         title: "项目展示",
-        description: "用例生成器、交易助手、Docker 测试库套件",
+        description: "用例生成器、交易助手、GlobalPulse、Docker 测试库套件",
         href: "/zh/work.html",
       },
       {
@@ -273,13 +207,23 @@ export const zh: LocaleCopy = {
         ],
       },
       {
+        title: "测试管理",
+        description: "",
+        items: [
+          "覆盖字节、国企、初创等多阶段测试团队管理",
+          "发布就绪与质量门禁",
+          "招聘培养与产能规划",
+          "与产品、研发协同推进交付",
+        ],
+      },
+      {
         title: "自动化测试",
         description: "",
         items: [
-          "Playwright 与跨浏览器 UI",
+          "Playwright / Selenium UI 自动化",
           "接口自动化（不绑死语言）",
+          "Locust 性能与负载测试",
           "框架设计与可复用套件",
-          "面向 CI 的环境",
         ],
       },
       {
@@ -310,10 +254,18 @@ export const zh: LocaleCopy = {
         linkLabel: "查看 GitHub",
       },
       {
-        title: "Ministry of Testing",
-        description: "现代测试实践、AI 辅助 QA 与质量手艺的社区学习资源。",
-        href: "https://www.ministryoftesting.com/learn",
-        linkLabel: "探索测试洞见",
+        title: "GlobalPulse（InnoNestX）",
+        description:
+          "自托管市场情报与定时简报（Cloudflare Workers）——从单点工具走向产品线实践。",
+        href: "https://github.com/InnoNestX/GlobalPulse",
+        linkLabel: "查看 GitHub",
+      },
+      {
+        title: "Python 测试实践",
+        description:
+          "Locust 性能脚本，以及接口、Selenium、Appium 等实践示例集中在一个仓库。",
+        href: "https://github.com/XuXuClassMate/My_Test_PyProject",
+        linkLabel: "查看 GitHub",
       },
       {
         title: "ClawHub",
@@ -331,9 +283,14 @@ export const zh: LocaleCopy = {
           "打牢功能、接口与探索式测试的判断力——至今仍指导我做的每一款工具。",
       },
       {
-        title: "规模化自动化",
+        title: "多阶段团队管理",
         description:
-          "从脚本走向框架：Playwright 与可复用环境，不再被某一种语言绑住。",
+          "在字节、国企、初创等不同约束下带测试团队——流程、人与发布就绪。",
+      },
+      {
+        title: "自动化与性能规模化",
+        description:
+          "从脚本走向框架：Playwright、Locust 与可复用环境，不再被某一种语言绑住。",
       },
       {
         title: "AI 原生工具",
@@ -341,19 +298,19 @@ export const zh: LocaleCopy = {
           "把重复的质量工作产品化——多模态生成、评审闭环与可导出交付物。",
       },
       {
-        title: "OpenClaw Agent 技能",
+        title: "OpenClaw 技能与产品系统",
         description:
-          "在 ClawHub 上打包技能，让 Agent 能安装并跑通真实工作流，而不只是演示。",
+          "在 ClawHub 打包技能，并在 InnoNestX 推进 GlobalPulse、Docker Hub API Gateway 等可运行系统。",
       },
     ],
     focusTitle: "当前学习重点",
-    focusHeading: "Agent 技能与多模态 QA",
-    focusIntro: "正在把「想法 → Agent 技能 → 可安装工具」这条链路打磨扎实：",
+    focusHeading: "Agent 技能、多模态 QA 与产品系统",
+    focusIntro: "正在把「想法 → Agent 技能 / 产品 → 可运行系统」这条链路打磨扎实：",
     focusItems: [
       "发布并迭代 OpenClaw / ClawHub 技能",
       "多模态需求到结构化测试产物",
-      "用评审角色提升生成质量",
-      "Docker / CLI 打包，让 AI 工具真正可安装",
+      "Locust 与自动化手艺支撑 AI 工具",
+      "InnoNestX 产品系统（Workers / API）",
     ],
     footerDesc: "公开学习——带着质量根基做 AI 工具",
     social: [
@@ -380,98 +337,7 @@ export const zh: LocaleCopy = {
     description: "GitHub / Docker / ClawHub 上的 AI 作品，以及背后的质量基础",
     projectsTitle: "精选项目",
     filterAll: "全部",
-    projects: [
-      {
-        title: "AI 测试用例生成器",
-        description:
-          "多模态 QA 输入（PDF、Word、图片、视频）→ 结构化用例，含测试/开发/产品三角色评审。支持 Docker、npm、OpenClaw 插件，并在 ClawHub 发布为 AI Test Case Generator。",
-        tags: ["TypeScript", "多模态 AI", "ClawHub"],
-        href: "https://github.com/XuXuClassMate/testcase-generator",
-        linkLabel: "GitHub",
-        ctaHref: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
-        ctaLabel: "Docker Hub",
-        category: "AI",
-        image: "/images/cover-testcase.jpg",
-        imageAlt: "AI 测试用例生成器封面",
-        slug: "testcase-generator",
-        caseHref: "/zh/work/testcase-generator.html",
-        caseLabel: "案例详解",
-      },
-      {
-        title: "Trading Assistant Core",
-        description:
-          "OpenClaw Agent 技能：支撑阻力、多指标信号、仓位与风险提醒。可通过 ClawHub、Docker 或 pip / `ta` CLI 安装。",
-        tags: ["Agent 技能", "ClawHub", "CLI"],
-        href: "https://github.com/XuXuClassMate/trading-assistant",
-        linkLabel: "GitHub",
-        ctaHref: "https://clawhub.ai/xuxuclassmate/trading-assistant-core",
-        ctaLabel: "ClawHub",
-        category: "AI",
-        image: "/images/cover-trading.jpg",
-        imageAlt: "Trading Assistant 封面",
-        slug: "trading-assistant",
-        caseHref: "/zh/work/trading-assistant.html",
-        caseLabel: "案例详解",
-      },
-      {
-        title: "GlobalPulse",
-        description:
-          "自托管的市场情报与定时财经/全球热点简报（Cloudflare Workers）— Admin UI、Cron 投递，以及飞书 / 微信 / Telegram 推送。",
-        tags: ["Cloudflare", "Workers", "简报"],
-        href: "https://github.com/InnoNestX/GlobalPulse",
-        linkLabel: "GitHub",
-        category: "Product",
-        image: "/images/cover-globalpulse.jpg",
-        imageAlt: "GlobalPulse 封面",
-        slug: "globalpulse",
-        caseHref: "/zh/work/globalpulse.html",
-        caseLabel: "案例详解",
-      },
-      {
-        title: "Docker Hub API Gateway",
-        description:
-          "面向 Docker Hub 的统一 REST API 网关 — 用户统计、SVG 卡片、仓库/标签查询、OpenAPI 文档与交互式调试（中英）。",
-        tags: ["API", "Docker Hub", "Hono"],
-        href: "https://github.com/InnoNestX/docker-hub-pull-counter",
-        linkLabel: "GitHub",
-        ctaHref: "https://docker-hub-pull-counter.vercel.app",
-        ctaLabel: "在线 API",
-        category: "Infra",
-        image: "/images/cover-docker-gateway.jpg",
-        imageAlt: "Docker Hub API Gateway 封面",
-        slug: "docker-hub-api-gateway",
-        caseHref: "/zh/work/docker-hub-api-gateway.html",
-        caseLabel: "案例详解",
-      },
-      {
-        title: "测试库 Docker 套件",
-        description:
-          "面向 QA 环境的即用数据库镜像——达梦（约 3 万次拉取）、瀚高（约 1.7 万）、人大金仓、TiDB 等，见 Docker Hub。",
-        tags: ["Docker", "Dameng", "Highgo"],
-        href: "https://hub.docker.com/u/xuxuclassmate",
-        linkLabel: "Docker Hub",
-        category: "Infra",
-        image: "/images/cover-docker.jpg",
-        imageAlt: "测试库 Docker 套件封面",
-        slug: "docker-suite",
-        caseHref: "/zh/work/docker-suite.html",
-        caseLabel: "案例详解",
-      },
-      {
-        title: "自动化框架手艺",
-        description:
-          "可复用的接口 / UI 自动化模式与练习项目——AI 工具底下的手艺底座，不绑死某一种语言。",
-        tags: ["Framework", "API", "Playwright"],
-        href: "https://github.com/XuXuClassMate/My_Test_JAProject",
-        linkLabel: "GitHub",
-        category: "Automation",
-        image: "/images/cover-automation.jpg",
-        imageAlt: "自动化框架封面",
-        slug: "automation-framework",
-        caseHref: "/zh/work/automation-framework.html",
-        caseLabel: "案例详解",
-      },
-    ],
+    projects: getWorkProjects("zh"),
     approachTitle: "项目怎么交付",
     approach: [
       {
@@ -830,14 +696,14 @@ export const zh: LocaleCopy = {
         title: "轻听时光",
         description: "分享温暖治愈的音乐集",
         href: "https://music.163.com/#/playlist?id=368129876",
-        image: "/images/music.jpg",
+        image: "/images/music.webp",
         imageAlt: "音乐时光",
       },
       {
         title: "电影时光",
         description: "沉浸在宫崎骏的动画世界",
         href: "https://www.iqiyi.com/playlist1921084202.html?vfrm=psbdl",
-        image: "/images/movie.jpg",
+        image: "/images/movie.webp",
         imageAlt: "电影时光 - 宫崎骏动画",
       },
     ],
@@ -873,7 +739,7 @@ export const zh: LocaleCopy = {
       {
         title: "年度计划",
         description: "新的一年，新的开始，分享我的年度计划和目标",
-        image: "/images/plan.jpg",
+        image: "/images/plan.webp",
         imageAlt: "年度计划配图",
         href: "https://fgg6gzb6uk.feishu.cn/base/H07ebpIM1aBTuGsYtaacHK9NnBb?table=tblwIKtfaCQWbaKW",
         linkLabel: "阅读全文",
@@ -881,7 +747,7 @@ export const zh: LocaleCopy = {
       {
         title: "推进情况",
         description: "记录和追踪年度计划的执行进展，分享成长历程",
-        image: "/images/summary.jpg",
+        image: "/images/summary.webp",
         imageAlt: "推进情况配图",
         href: "https://fgg6gzb6uk.feishu.cn/base/H07ebpIM1aBTuGsYtaacHK9NnBb?table=blkcP1vbErcMDacd",
         linkLabel: "阅读全文",

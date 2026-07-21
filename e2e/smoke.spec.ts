@@ -26,13 +26,20 @@ test("work project filters toggle", async ({ page }) => {
   await page.goto("/en/work.html");
   const aiCards = page.locator('.project-card[data-category="AI"]');
   const infraCards = page.locator('.project-card[data-category="Infra"]');
+  const productCards = page.locator('.project-card[data-category="Product"]');
   await expect(aiCards.first()).toBeVisible();
   await expect(infraCards.first()).toBeVisible();
+  await expect(productCards.first()).toBeVisible();
   await page.getByRole("button", { name: "AI", exact: true }).click();
   await expect(aiCards.first()).toBeVisible();
   await expect(infraCards.first()).toBeHidden();
+  await expect(productCards.first()).toBeHidden();
+  await page.getByRole("button", { name: "Product", exact: true }).click();
+  await expect(productCards.first()).toBeVisible();
+  await expect(aiCards.first()).toBeHidden();
   await page.getByRole("button", { name: "All", exact: true }).click();
   await expect(infraCards.first()).toBeVisible();
+  await expect(productCards.first()).toBeVisible();
 });
 
 test("case study page renders", async ({ page }) => {
@@ -41,6 +48,73 @@ test("case study page renders", async ({ page }) => {
     "AI Test Case Generator",
   );
   await expect(page.getByRole("heading", { name: "Problem" })).toBeVisible();
+});
+
+test("new case studies render with project OG covers", async ({ page }) => {
+  await page.goto("/en/work/globalpulse.html");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("GlobalPulse");
+  const og = page.locator('meta[property="og:image"]');
+  await expect(og).toHaveAttribute(
+    "content",
+    "https://www.xuxuclassmate.com/images/cover-globalpulse.jpg",
+  );
+
+  await page.goto("/zh/work/docker-hub-api-gateway.html");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "Docker Hub API Gateway",
+  );
+});
+
+test("docker suite proof shows top pull metrics", async ({ page }) => {
+  await page.goto("/zh/work/docker-suite.html");
+  await expect(page.locator('[data-metric="docker:dameng"]')).toBeVisible();
+  await expect(page.locator('[data-metric="docker:highgo"]')).toBeVisible();
+  await expect(page.locator('[data-metric="docker:kingbase"]')).toBeVisible();
+  await expect(page.locator('[data-metric="docker:tidb"]')).toBeVisible();
+});
+
+test("home live metrics hydrate from api payload", async ({ page }) => {
+  await page.route("**/api/metrics", async (route) => {
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({
+        "clawhub:ai-testcase-generator": 1200,
+        "clawhub:trading-assistant-core": 1500,
+        "docker:dameng": 30000,
+        "docker:highgo": 17000,
+        "docker:kingbase": 2000,
+        "docker:tidb": 1000,
+        updatedAt: new Date().toISOString(),
+      }),
+    });
+  });
+  await page.goto("/");
+  const testcase = page.locator('[data-metric="clawhub:ai-testcase-generator"]');
+  const kingbase = page.locator('[data-metric="docker:kingbase"]');
+  await testcase.scrollIntoViewIfNeeded();
+  await kingbase.scrollIntoViewIfNeeded();
+  await expect(testcase).toHaveText("1.2k+", { timeout: 5000 });
+  await expect(kingbase).toHaveText("2k+", { timeout: 5000 });
+});
+
+test("life page shows four hobbies and blog in both locales", async ({ page }) => {
+  await page.goto("/en/life.html");
+  const enHobbies = page.locator(".hobby-card h3");
+  await expect(enHobbies).toHaveText(["Reading", "Gaming", "Music", "Sports"]);
+  await expect(page.locator(".blog .section-title")).toHaveText("Life Notes");
+
+  await page.goto("/zh/life.html");
+  const zhHobbies = page.locator(".hobby-card h3");
+  await expect(zhHobbies).toHaveText(["阅读", "游戏", "音乐", "运动"]);
+  await expect(page.locator(".blog .section-title")).toHaveText("生活博客");
+});
+
+test("learn page covers management and Locust", async ({ page }) => {
+  await page.goto("/en/learn.html");
+  await expect(page.getByRole("heading", { name: "Test Management" })).toBeVisible();
+  await expect(page.getByText("Locust performance & load testing")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "GlobalPulse (InnoNestX)" })).toBeVisible();
 });
 
 test("copy email button updates label", async ({ page, context }) => {

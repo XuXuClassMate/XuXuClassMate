@@ -20,16 +20,18 @@ npm run check        # Astro type check
 npm run lint         # ESLint
 npm test             # Vitest unit tests
 npm run test:e2e     # Playwright smoke tests (builds first)
+npm run images       # compress life photos + emit WebP
 npm run deploy       # build + wrangler pages deploy
 ```
 
-Live metrics (ClawHub downloads / Docker Hub pulls) are embedded at build time, then refreshed on every page load via the Cloudflare Pages Function `GET /api/metrics`.
+Live metrics (ClawHub downloads / Docker Hub pulls) are embedded at build time, then refreshed on page load via `GET /api/metrics` (browser `max-age=60`, edge `s-maxage=600`).
 
 ## Project layout
 
-- `src/content/` — EN/ZH copy and case studies
+- `src/content/` — EN/ZH copy, shared project catalog (`projects.ts`), and case studies
 - `src/components/` — page shells and shared UI
 - `src/pages/` — routes (`/`, `/en/*`, `/zh/*`, case studies)
+- `src/styles/` — modular CSS (`base`, `hero`, `home`, `work`, `life`, `learn`, `case`, …)
 - `functions/api/metrics.ts` — live metrics endpoint for Cloudflare Pages
 - `public/_redirects` / `public/_headers` — Cloudflare Pages routing & security headers
 - `public/fonts/` — self-hosted Outfit + IBM Plex Mono
