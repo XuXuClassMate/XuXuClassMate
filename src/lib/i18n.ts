@@ -109,7 +109,7 @@ export function jsonLdGraph(
     sameAs: [
       "https://github.com/XuXuClassMate",
       "https://hub.docker.com/u/xuxuclassmate",
-      "https://clawhub.ai",
+      "https://clawhub.ai/xuxuclassmate",
       "https://medium.com/@xuxuclassmate",
       "https://blog.csdn.net/XuXuClassMate",
     ],
