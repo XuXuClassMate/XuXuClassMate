@@ -2195,7 +2195,17 @@ body {
   overflow: hidden;
   border-bottom: 1px solid var(--line);
   aspect-ratio: 16 / 9;
-  background: var(--bg-soft);
+  background: var(--surface);
+}
+
+.project-cover img,
+.case-cover-image,
+.gallery-item img,
+.video-cover img,
+.blog-image img,
+.modal-content img {
+  background: var(--surface);
+  color-scheme: only light;
 }
 
 .project-cover img {
