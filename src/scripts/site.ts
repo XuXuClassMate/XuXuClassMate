@@ -322,31 +322,29 @@ function formatMetric(value: number): string {
   return String(Math.round(value));
 }
 
-async function fetchMetricValue(id: MetricId): Promise<number | null> {
+async function fetchMetricsBundle(): Promise<Partial<Record<MetricId, number>>> {
   try {
-    if (id.startsWith("clawhub:")) {
-      const slug = id.slice("clawhub:".length);
-      const response = await fetch(`https://clawhub.ai/api/v1/skills/${slug}`, {
-        headers: { Accept: "application/json" },
-      });
-      if (!response.ok) return null;
-      const data = (await response.json()) as {
-        skill?: { stats?: { downloads?: number } };
-      };
-      const downloads = data.skill?.stats?.downloads;
-      return typeof downloads === "number" ? downloads : null;
+    const response = await fetch("/api/metrics", {
+      headers: { Accept: "application/json" },
+      cache: "no-store",
+    });
+    if (!response.ok) return {};
+    const data = (await response.json()) as Partial<Record<MetricId, number>>;
+    const live: Partial<Record<MetricId, number>> = {};
+    for (const key of [
+      "clawhub:ai-testcase-generator",
+      "clawhub:trading-assistant-core",
+      "docker:dameng",
+      "docker:highgo",
+    ] as const) {
+      const value = data[key];
+      if (typeof value === "number" && Number.isFinite(value)) {
+        live[key] = value;
+      }
     }
-
-    const repo = id.slice("docker:".length);
-    const response = await fetch(
-      `https://hub.docker.com/v2/repositories/xuxuclassmate/${repo}/`,
-      { headers: { Accept: "application/json" } },
-    );
-    if (!response.ok) return null;
-    const data = (await response.json()) as { pull_count?: number };
-    return typeof data.pull_count === "number" ? data.pull_count : null;
+    return live;
   } catch {
-    return null;
+    return {};
   }
 }
 
@@ -356,25 +354,12 @@ function initLiveMetrics(): void {
   ].filter((node) => Boolean(node.dataset.metric));
   if (nodes.length === 0) return;
 
-  const ids = [
-    ...new Set(nodes.map((node) => node.dataset.metric as MetricId)),
-  ];
-
-  void Promise.all(
-    ids.map(async (id) => {
-      const value = await fetchMetricValue(id);
-      return [id, value] as const;
-    }),
-  ).then((results) => {
-    const live = new Map<MetricId, number>();
-    for (const [id, value] of results) {
-      if (value != null) live.set(id, value);
-    }
-    if (live.size === 0) return;
+  void fetchMetricsBundle().then((live) => {
+    if (Object.keys(live).length === 0) return;
 
     for (const node of nodes) {
       const id = node.dataset.metric as MetricId;
-      const raw = live.get(id);
+      const raw = live[id];
       if (raw == null) continue;
       const display = formatMetric(raw);
       node.dataset.countTo = display;
