@@ -15,7 +15,7 @@ Bilingual personal site for **XuXuClassMate / 旭旭同学** — QA engineer bui
 npm ci
 npm run dev          # local dev server
 npm run build        # generate sitemap + Astro build
-npm run preview      # preview production build
+npm run preview      # preview production build (static only)
 npm run check        # Astro type check
 npm run lint         # ESLint
 npm test             # Vitest unit tests
@@ -23,11 +23,14 @@ npm run test:e2e     # Playwright smoke tests (builds first)
 npm run deploy       # build + wrangler pages deploy
 ```
 
+Live metrics (ClawHub downloads / Docker Hub pulls) are embedded at build time, then refreshed on every page load via the Cloudflare Pages Function `GET /api/metrics`.
+
 ## Project layout
 
 - `src/content/` — EN/ZH copy and case studies
 - `src/components/` — page shells and shared UI
 - `src/pages/` — routes (`/`, `/en/*`, `/zh/*`, case studies)
+- `functions/api/metrics.ts` — live metrics endpoint for Cloudflare Pages
 - `public/_redirects` / `public/_headers` — Cloudflare Pages routing & security headers
 - `public/fonts/` — self-hosted Outfit + IBM Plex Mono
 

@@ -29,5 +29,6 @@ jobs:
           test -f dist/_redirects
           test -f dist/_headers
           grep -q "Content-Security-Policy" dist/_headers
+          test -f functions/api/metrics.ts
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
