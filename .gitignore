@@ -1,1 +1,14 @@
-*.DS_Store
+dist/
+.astro/
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.env
+.env.*
+.DS_Store
+.idea/
+test-results/
+playwright-report/
+.wrangler/

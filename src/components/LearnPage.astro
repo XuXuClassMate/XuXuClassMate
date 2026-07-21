@@ -1,0 +1,122 @@
+---
+import Contact from "./Contact.astro";
+import Footer from "./Footer.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCopy, type Locale } from "../lib/i18n";
+
+type Props = { locale: Locale };
+
+const { locale } = Astro.props;
+const copy = getCopy(locale);
+const page = copy.learn;
+---
+
+<BaseLayout locale={locale} page="learn">
+  <section class="hero">
+    <div class="hero-atmosphere" aria-hidden="true"></div>
+    <div class="container hero-content reveal">
+      <span class="subtitle">{page.subtitle}</span>
+      <h1 class="hero-title">{page.title}</h1>
+      <p class="hero-desc">{page.description}</p>
+    </div>
+  </section>
+
+  <section class="timeline-section">
+    <div class="container">
+      <h2 class="section-title reveal-on-scroll">{page.timelineTitle}</h2>
+      <ol class="timeline">
+        {
+          page.timeline.map((item, index) => (
+            <li
+              class={`timeline-item reveal-on-scroll reveal-delay-${(index % 3) + 1}`}
+            >
+              <span class="timeline-index" aria-hidden="true">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <div class="timeline-body">
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="skills">
+    <div class="container">
+      <h2 class="section-title reveal-on-scroll">{page.stackTitle}</h2>
+      <div class="skills-grid">
+        {
+          page.stack.map((item, index) => (
+            <div
+              class={`skill-card reveal-on-scroll reveal-delay-${index + 1}`}
+            >
+              <h3>{item.title}</h3>
+              <ul class="skill-list">
+                {item.items?.map((entry) => (
+                  <li>{entry}</li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="learning-path">
+    <div class="container">
+      <h2 class="section-title reveal-on-scroll">{page.resourcesTitle}</h2>
+      <div class="notes-grid">
+        {
+          page.resources.map((item, index) => (
+            <article
+              class={`note-card reveal-on-scroll reveal-delay-${(index % 3) + 1}`}
+            >
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+              <a
+                href={item.href}
+                class="read-more"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {item.linkLabel}
+              </a>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="current-learning">
+    <div class="container">
+      <h2 class="section-title reveal-on-scroll">{page.focusTitle}</h2>
+      <div class="focus-content reveal-on-scroll">
+        <div class="focus-item">
+          <h3>{page.focusHeading}</h3>
+          <p>{page.focusIntro}</p>
+          <ul>
+            {page.focusItems.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Contact
+    label={copy.contactLabel}
+    hint={copy.contactHint}
+    copyLabel={copy.copyEmail}
+    copiedLabel={copy.copiedEmail}
+  />
+  <Footer
+    brand={copy.brand}
+    description={page.footerDesc}
+    copyright={copy.copyright}
+    social={page.social}
+  />
+</BaseLayout>

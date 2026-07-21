@@ -1,0 +1,16 @@
+---
+type Props = {
+  alt: string;
+};
+
+const { alt } = Astro.props;
+---
+
+<div class="modal" id="wechatModal">
+  <div class="modal-content">
+    <button class="close-button" id="closeModal" type="button" aria-label="Close">
+      ×
+    </button>
+    <img src="/images/wechat.jpg" alt={alt} />
+  </div>
+</div>

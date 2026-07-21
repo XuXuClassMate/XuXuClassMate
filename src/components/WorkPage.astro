@@ -1,0 +1,175 @@
+---
+import Contact from "./Contact.astro";
+import Footer from "./Footer.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCopy, type Locale } from "../lib/i18n";
+
+type Props = { locale: Locale };
+
+const { locale } = Astro.props;
+const copy = getCopy(locale);
+const page = copy.work;
+const categories = [
+  ...new Set(
+    page.projects
+      .map((project) => project.category)
+      .filter((category): category is string => Boolean(category)),
+  ),
+];
+---
+
+<BaseLayout locale={locale} page="work">
+  <section class="hero">
+    <div class="hero-atmosphere" aria-hidden="true"></div>
+    <div class="container hero-content reveal">
+      <span class="subtitle">{page.subtitle}</span>
+      <h1 class="hero-title">{page.title}</h1>
+      <p class="hero-desc">{page.description}</p>
+    </div>
+  </section>
+
+  <section class="featured-projects">
+    <div class="container">
+      <div class="section-head reveal-on-scroll">
+        <h2 class="section-title">{page.projectsTitle}</h2>
+        <div class="project-filters" role="tablist" aria-label={page.projectsTitle}>
+          <button
+            type="button"
+            class="filter-btn is-active"
+            data-filter="all"
+            role="tab"
+            aria-selected="true"
+          >
+            {page.filterAll}
+          </button>
+          {
+            categories.map((category) => (
+              <button
+                type="button"
+                class="filter-btn"
+                data-filter={category}
+                role="tab"
+                aria-selected="false"
+              >
+                {category}
+              </button>
+            ))
+          }
+        </div>
+      </div>
+      <div class="project-grid">
+        {
+          page.projects.map((item, index) => (
+            <article
+              class={`project-card featured reveal-on-scroll reveal-delay-${(index % 3) + 1}`}
+              data-category={item.category ?? "all"}
+            >
+              <div class="project-content">
+                {item.category ? (
+                  <span class="project-category">{item.category}</span>
+                ) : null}
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+                <div class="project-tech">
+                  {item.tags?.map((tag) => (
+                    <span>{tag}</span>
+                  ))}
+                </div>
+                <div class="project-links">
+                  <a
+                    href={item.href}
+                    class="project-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {item.linkLabel}
+                  </a>
+                  {item.ctaHref && item.ctaLabel ? (
+                    <a
+                      href={item.ctaHref}
+                      class="project-link project-link--secondary"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {item.ctaLabel}
+                    </a>
+                  ) : null}
+                </div>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="approach">
+    <div class="container">
+      <h2 class="section-title reveal-on-scroll">{page.approachTitle}</h2>
+      <div class="approach-grid">
+        {
+          page.approach.map((item, index) => (
+            <div
+              class={`approach-card reveal-on-scroll reveal-delay-${index + 1}`}
+            >
+              <span class="approach-index" aria-hidden="true">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="technical-skills">
+    <div class="container">
+      <h2 class="section-title reveal-on-scroll">{page.skillsTitle}</h2>
+      <div class="skills-grid">
+        <div class="skill-category">
+          {
+            page.skills.map((skill, index) => (
+              <div
+                class={`skill-item reveal-on-scroll reveal-delay-${(index % 3) + 1}`}
+              >
+                <div class="skill-header">
+                  <h4>{skill.title}</h4>
+                  <span class="skill-percent">{skill.progress}%</span>
+                </div>
+                <div class="skill-details">
+                  <div class="skill-progress">
+                    <div
+                      class="progress-bar"
+                      data-progress={skill.progress}
+                      style="width: 0%;"
+                    />
+                  </div>
+                  <ul class="skill-list">
+                    {skill.items.map((entry) => (
+                      <li>{entry}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Contact
+    label={copy.contactLabel}
+    hint={copy.contactHint}
+    copyLabel={copy.copyEmail}
+    copiedLabel={copy.copiedEmail}
+  />
+  <Footer
+    brand={copy.brand}
+    description={page.footerDesc}
+    copyright={copy.copyright}
+    social={page.social}
+  />
+</BaseLayout>

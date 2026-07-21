@@ -1,0 +1,43 @@
+---
+import type { SocialLink } from "../content/types";
+
+type Props = {
+  brand: string;
+  description: string;
+  copyright: string;
+  social: SocialLink[];
+};
+
+const { brand, description, copyright, social } = Astro.props;
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-left">
+        <span class="logo-text">{brand}</span>
+        <p class="footer-desc">{description}</p>
+      </div>
+      <div class="social-links">
+        {
+          social.map((item) =>
+            item.wechat ? (
+              <a href="#" class="wechat-link" id="footerWechatBtn">
+                <i class={item.icon}></i>
+                <span>{item.label}</span>
+              </a>
+            ) : (
+              <a href={item.href} target="_blank" rel="noopener noreferrer">
+                <i class={item.icon}></i>
+                <span>{item.label}</span>
+              </a>
+            ),
+          )
+        }
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="copyright">{copyright}</p>
+    </div>
+  </div>
+</footer>

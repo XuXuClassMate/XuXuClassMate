@@ -1,0 +1,41 @@
+---
+import Contact from "../components/Contact.astro";
+import Footer from "../components/Footer.astro";
+import WechatModal from "../components/WechatModal.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCopy } from "../lib/i18n";
+
+const copy = getCopy("en");
+const page = copy.notFound;
+---
+
+<BaseLayout locale="en" page="home" rootHome={true} noindex={true}>
+  <main class="error-wrapper">
+    <div class="error-content">
+      <div class="error-icon">
+        <i class="fas fa-ghost"></i>
+      </div>
+      <h1 class="error-code">404</h1>
+      <h2 class="error-title">{page.title}</h2>
+      <p class="error-message">{page.message}</p>
+      <a href="/" class="btn-home">
+        <i class="fas fa-arrow-left"></i>
+        {page.homeLabel}
+      </a>
+    </div>
+  </main>
+
+  <Contact
+    label={copy.contactLabel}
+    hint={copy.contactHint}
+    copyLabel={copy.copyEmail}
+    copiedLabel={copy.copiedEmail}
+  />
+  <Footer
+    brand={copy.brand}
+    description={page.footerDesc}
+    copyright={copy.copyright}
+    social={page.social}
+  />
+  <WechatModal alt={copy.wechatAlt} />
+</BaseLayout>
