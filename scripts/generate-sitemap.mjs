@@ -20,6 +20,8 @@ const pages = [
 const cases = [
   "testcase-generator",
   "trading-assistant",
+  "globalpulse",
+  "docker-hub-api-gateway",
   "docker-suite",
   "automation-framework",
 ];

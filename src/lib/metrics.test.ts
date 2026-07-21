@@ -8,6 +8,7 @@ describe("formatMetric", () => {
   });
 
   it("compacts large counts", () => {
+    expect(formatMetric(1610)).toBe("1.6k+");
     expect(formatMetric(16871)).toBe("16.9k+");
     expect(formatMetric(29793)).toBe("29.8k+");
   });
@@ -17,7 +18,7 @@ describe("resolveMetric", () => {
   it("uses live map when present", () => {
     const metrics = { ...METRIC_FALLBACKS, "clawhub:trading-assistant-core": 1200 };
     expect(resolveMetric(metrics, "clawhub:trading-assistant-core", "900+")).toBe(
-      "1200",
+      "1.2k+",
     );
   });
 
