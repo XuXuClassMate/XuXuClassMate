@@ -108,7 +108,7 @@ export const zh: LocaleCopy = {
         tags: ["Agent 技能", "ClawHub", "CLI"],
         href: "https://github.com/XuXuClassMate/trading-assistant",
         linkLabel: "GitHub",
-        ctaHref: "https://clawhub.ai",
+        ctaHref: "https://clawhub.ai/xuxuclassmate/trading-assistant-core",
         ctaLabel: "ClawHub",
         category: "AI",
         image: "/images/cover-trading.jpg",
@@ -168,7 +168,7 @@ export const zh: LocaleCopy = {
         title: "ClawHub",
         description:
           "可安装的 OpenClaw Agent 技能——用例生成器与交易助手。",
-        href: "https://clawhub.ai",
+        href: "https://clawhub.ai/xuxuclassmate",
         linkLabel: "访问 ClawHub",
         icon: "robot",
       },
@@ -273,7 +273,7 @@ export const zh: LocaleCopy = {
         title: "ClawHub",
         description:
           "发现并安装 OpenClaw Agent 技能——包括我发布的 QA 与交易相关工具。",
-        href: "https://clawhub.ai",
+        href: "https://clawhub.ai/xuxuclassmate",
         linkLabel: "浏览 ClawHub",
       },
     ],
@@ -358,7 +358,7 @@ export const zh: LocaleCopy = {
         tags: ["Agent 技能", "ClawHub", "CLI"],
         href: "https://github.com/XuXuClassMate/trading-assistant",
         linkLabel: "GitHub",
-        ctaHref: "https://clawhub.ai",
+        ctaHref: "https://clawhub.ai/xuxuclassmate/trading-assistant-core",
         ctaLabel: "ClawHub",
         category: "AI",
         image: "/images/cover-trading.jpg",
@@ -425,7 +425,7 @@ export const zh: LocaleCopy = {
           "Docker / npm / pip 打包",
         ],
         evidence: [
-          { label: "ClawHub", href: "https://clawhub.ai" },
+          { label: "ClawHub", href: "https://clawhub.ai/xuxuclassmate" },
           {
             label: "用例生成器",
             href: "https://github.com/XuXuClassMate/testcase-generator",
@@ -517,7 +517,7 @@ export const zh: LocaleCopy = {
             label: "Docker Hub",
             href: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
           },
-          { label: "ClawHub", href: "https://clawhub.ai" },
+          { label: "ClawHub", href: "https://clawhub.ai/xuxuclassmate/ai-test-case-generator" },
         ],
         meta: {
           title: "AI 测试用例生成器案例 | 旭旭同学",
@@ -551,7 +551,7 @@ export const zh: LocaleCopy = {
             label: "GitHub",
             href: "https://github.com/XuXuClassMate/trading-assistant",
           },
-          { label: "ClawHub", href: "https://clawhub.ai" },
+          { label: "ClawHub", href: "https://clawhub.ai/xuxuclassmate/trading-assistant-core" },
         ],
         meta: {
           title: "Trading Assistant 案例 | 旭旭同学",

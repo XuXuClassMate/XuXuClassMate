@@ -128,7 +128,7 @@ export const en: LocaleCopy = {
         tags: ["Agent Skill", "ClawHub", "CLI"],
         href: "https://github.com/XuXuClassMate/trading-assistant",
         linkLabel: "GitHub",
-        ctaHref: "https://clawhub.ai",
+        ctaHref: "https://clawhub.ai/xuxuclassmate/trading-assistant-core",
         ctaLabel: "ClawHub",
         category: "AI",
         image: "/images/cover-trading.jpg",
@@ -192,7 +192,7 @@ export const en: LocaleCopy = {
         title: "ClawHub",
         description:
           "Installable OpenClaw agent skills — Test Case Generator and Trading Assistant.",
-        href: "https://clawhub.ai",
+        href: "https://clawhub.ai/xuxuclassmate",
         linkLabel: "Visit ClawHub",
         icon: "robot",
       },
@@ -282,7 +282,7 @@ export const en: LocaleCopy = {
         title: "ClawHub",
         description:
           "Discover and install OpenClaw agent skills — including tools I publish for QA and trading workflows.",
-        href: "https://clawhub.ai",
+        href: "https://clawhub.ai/xuxuclassmate",
         linkLabel: "Browse ClawHub",
       },
     ],
@@ -369,7 +369,7 @@ export const en: LocaleCopy = {
         tags: ["Agent Skill", "ClawHub", "CLI"],
         href: "https://github.com/XuXuClassMate/trading-assistant",
         linkLabel: "GitHub",
-        ctaHref: "https://clawhub.ai",
+        ctaHref: "https://clawhub.ai/xuxuclassmate/trading-assistant-core",
         ctaLabel: "ClawHub",
         category: "AI",
         image: "/images/cover-trading.jpg",
@@ -436,7 +436,7 @@ export const en: LocaleCopy = {
           "Docker / npm / pip packaging",
         ],
         evidence: [
-          { label: "ClawHub", href: "https://clawhub.ai" },
+          { label: "ClawHub", href: "https://clawhub.ai/xuxuclassmate" },
           {
             label: "Testcase Generator",
             href: "https://github.com/XuXuClassMate/testcase-generator",
@@ -529,7 +529,7 @@ export const en: LocaleCopy = {
             label: "Docker Hub",
             href: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
           },
-          { label: "ClawHub", href: "https://clawhub.ai" },
+          { label: "ClawHub", href: "https://clawhub.ai/xuxuclassmate/ai-test-case-generator" },
         ],
         meta: {
           title: "AI Test Case Generator Case Study | XuXuClassMate",
@@ -564,7 +564,7 @@ export const en: LocaleCopy = {
             label: "GitHub",
             href: "https://github.com/XuXuClassMate/trading-assistant",
           },
-          { label: "ClawHub", href: "https://clawhub.ai" },
+          { label: "ClawHub", href: "https://clawhub.ai/xuxuclassmate/trading-assistant-core" },
         ],
         meta: {
           title: "Trading Assistant Core Case Study | XuXuClassMate",
