@@ -1,6 +1,7 @@
 ---
 import Contact from "../components/Contact.astro";
 import Footer from "../components/Footer.astro";
+import Icon from "../components/Icon.astro";
 import WechatModal from "../components/WechatModal.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCopy } from "../lib/i18n";
@@ -10,16 +11,16 @@ const page = copy.notFound;
 ---
 
 <BaseLayout locale="en" page="home" rootHome={true} noindex={true}>
-  <main class="error-wrapper">
+  <main id="main-content" class="error-wrapper">
     <div class="error-content">
-      <div class="error-icon">
-        <i class="fas fa-ghost"></i>
+      <div class="error-icon" aria-hidden="true">
+        <Icon name="ghost" />
       </div>
       <h1 class="error-code">404</h1>
       <h2 class="error-title">{page.title}</h2>
       <p class="error-message">{page.message}</p>
       <a href="/" class="btn-home">
-        <i class="fas fa-arrow-left"></i>
+        <Icon name="arrow-left" />
         {page.homeLabel}
       </a>
     </div>
@@ -37,5 +38,5 @@ const page = copy.notFound;
     copyright={copy.copyright}
     social={page.social}
   />
-  <WechatModal alt={copy.wechatAlt} />
+  <WechatModal alt={copy.wechatAlt} closeLabel={copy.closeModal} />
 </BaseLayout>

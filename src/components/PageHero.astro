@@ -1,0 +1,53 @@
+---
+type Props = {
+  subtitle: string;
+  title: string;
+  description: string;
+  home?: boolean;
+  brand?: string;
+  actions?: { href: string; label: string; primary?: boolean }[];
+  typewriter?: boolean;
+};
+
+const {
+  subtitle,
+  title,
+  description,
+  home = false,
+  brand,
+  actions = [],
+  typewriter = false,
+} = Astro.props;
+---
+
+<section class:list={["hero", { "hero--home": home, "hero--signature": home }]}>
+  {home ? <div class="hero-blob" aria-hidden="true"></div> : null}
+  <div class="hero-atmosphere" aria-hidden="true"></div>
+  <div class="container">
+    <div class="hero-content reveal">
+      {brand ? <p class="hero-brand">{brand}</p> : null}
+      <p
+        class:list={["subtitle", { "subtitle--type": typewriter }]}
+        {...(typewriter ? { "data-typewriter": true } : {})}
+      >
+        {subtitle}
+      </p>
+      <h1 class="hero-title">{title}</h1>
+      <p class="hero-desc">{description}</p>
+      {
+        actions.length > 0 ? (
+          <div class="hero-actions">
+            {actions.map((action) => (
+              <a
+                class={action.primary ? "btn-primary" : "btn-ghost"}
+                href={action.href}
+              >
+                {action.label}
+              </a>
+            ))}
+          </div>
+        ) : null
+      }
+    </div>
+  </div>
+</section>

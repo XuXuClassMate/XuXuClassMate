@@ -1,15 +1,19 @@
 ---
+import Icon from "../components/Icon.astro";
 import {
   absoluteUrl,
   canonicalPath,
+  caseHref,
   getCopy,
   hreflangLinks,
   jsonLdGraph,
   languageHref,
   pageHref,
+  type CaseSlug,
   type Locale,
   type PageId,
 } from "../lib/i18n";
+import "../styles/fonts.css";
 import "../styles/global.css";
 
 type Props = {
@@ -18,18 +22,49 @@ type Props = {
   /** Root `/` English home (legacy URL). */
   rootHome?: boolean;
   noindex?: boolean;
+  caseSlug?: CaseSlug;
+  metaOverride?: {
+    title: string;
+    description: string;
+    keywords: string;
+    ogTitle?: string;
+  };
 };
 
-const { locale, page, rootHome = false, noindex = false } = Astro.props;
+const {
+  locale,
+  page,
+  rootHome = false,
+  noindex = false,
+  caseSlug,
+  metaOverride,
+} = Astro.props;
 const copy = getCopy(locale);
-const meta = copy.meta[page === "home" ? "home" : page];
-const canonical = absoluteUrl(canonicalPath(locale, page, rootHome));
-const alternates = hreflangLinks(locale, page, rootHome);
+const meta =
+  metaOverride ??
+  copy.meta[page === "home" ? "home" : page];
+const canonical = absoluteUrl(
+  caseSlug
+    ? `/${locale}/work/${caseSlug}`
+    : canonicalPath(locale, page, rootHome),
+);
+const alternates = caseSlug
+  ? [
+      { hreflang: "en", href: absoluteUrl(`/en/work/${caseSlug}`) },
+      { hreflang: "zh", href: absoluteUrl(`/zh/work/${caseSlug}`) },
+      { hreflang: "x-default", href: absoluteUrl(`/en/work/${caseSlug}`) },
+    ]
+  : hreflangLinks(locale, page, rootHome);
 const homeHref = locale === "zh" ? pageHref("zh", "home") : "/";
 const active = page === "home" ? undefined : page;
 const ogTitle = meta.ogTitle ?? meta.title;
-const ogImage = absoluteUrl("/images/logo.svg");
-const structuredData = noindex ? null : jsonLdGraph(locale, page, rootHome);
+const ogImage = absoluteUrl("/images/og-default.jpg");
+const structuredData = noindex
+  ? null
+  : jsonLdGraph(locale, page, rootHome, caseSlug);
+const langSwitchHref = caseSlug
+  ? caseHref(locale === "en" ? "zh" : "en", caseSlug)
+  : languageHref(locale, page);
 ---
 
 <!doctype html>
@@ -82,9 +117,11 @@ const structuredData = noindex ? null : jsonLdGraph(locale, page, rootHome);
     <meta property="og:title" content={ogTitle} />
     <meta property="og:description" content={meta.description} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={copy.brand} />
 
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={ogTitle} />
     <meta name="twitter:description" content={meta.description} />
     <meta name="twitter:image" content={ogImage} />
@@ -92,15 +129,19 @@ const structuredData = noindex ? null : jsonLdGraph(locale, page, rootHome);
     <link rel="shortcut icon" href="/images/logo.svg" />
     <link rel="icon" type="image/svg+xml" href="/images/logo.svg" />
     <link rel="apple-touch-icon" href="/images/logo.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      href="/fonts/outfit-latin-700-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
     />
     <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      rel="preload"
+      href="/fonts/outfit-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
     />
     {
       structuredData ? (
@@ -113,11 +154,17 @@ const structuredData = noindex ? null : jsonLdGraph(locale, page, rootHome);
     }
   </head>
   <body>
+    <a class="skip-link" href="#main-content">{copy.skipToContent}</a>
     <header class="header" id="siteHeader">
       <div class="container">
         <nav class="nav" aria-label="Primary">
           <a href={homeHref} class="logo">
-            <img src="/images/logo.svg" alt={`${copy.brand} logo`} />
+            <img
+              src="/images/logo.svg"
+              alt={`${copy.brand} logo`}
+              width="36"
+              height="36"
+            />
             <span class="logo-text">{copy.brand}</span>
           </a>
           <div class="nav-end">
@@ -129,14 +176,21 @@ const structuredData = noindex ? null : jsonLdGraph(locale, page, rootHome);
               data-label-light={copy.themeToLight}
               data-label-dark={copy.themeToDark}
             >
-              <i class="fas fa-moon" aria-hidden="true"></i>
+              <span class="theme-toggle-icon" data-theme-icon="moon">
+                <Icon name="moon" />
+              </span>
+              <span class="theme-toggle-icon is-hidden" data-theme-icon="sun">
+                <Icon name="sun" />
+              </span>
               <span class="theme-toggle-label">{copy.themeToLight}</span>
             </button>
             <button
               id="mobileNavToggle"
               class="mobile-nav-toggle"
               type="button"
-              aria-label="Menu"
+              aria-label={copy.menuLabel}
+              aria-expanded="false"
+              aria-controls="navLinks"
             >
               <span></span>
               <span></span>
@@ -161,7 +215,7 @@ const structuredData = noindex ? null : jsonLdGraph(locale, page, rootHome);
               >
                 {copy.nav.work}
               </a>
-              <a href={languageHref(locale, page)} class="language-switch">
+              <a href={langSwitchHref} class="language-switch">
                 {copy.languageSwitch}
               </a>
             </div>

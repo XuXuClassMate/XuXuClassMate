@@ -1,9 +1,13 @@
 ---
 import Contact from "./Contact.astro";
 import Footer from "./Footer.astro";
+import Icon from "./Icon.astro";
+import PageHero from "./PageHero.astro";
+import ProjectCard from "./ProjectCard.astro";
 import WechatModal from "./WechatModal.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCopy } from "../lib/i18n";
+import type { IconName } from "../content/types";
 import type { Locale } from "../lib/i18n";
 
 type Props = {
@@ -17,27 +21,26 @@ const { home } = copy;
 ---
 
 <BaseLayout locale={locale} page="home" rootHome={rootHome}>
-  <main>
-    <section class="hero hero--home">
-      <div class="hero-blob" aria-hidden="true"></div>
-      <div class="hero-atmosphere" aria-hidden="true"></div>
-      <div class="container">
-        <div class="hero-content reveal">
-          <p class="hero-brand">{copy.brand}</p>
-          <p class="subtitle subtitle--type" data-typewriter>{home.subtitle}</p>
-          <h1 class="hero-title">{home.title}</h1>
-          <p class="hero-desc">{home.description}</p>
-          <div class="hero-actions">
-            <a class="btn-primary" href={home.links[1]?.href ?? "/en/work.html"}>
-              {home.links[1]?.title ?? "Work"}
-            </a>
-            <a class="btn-ghost" href={home.links[0]?.href ?? "/en/learn.html"}>
-              {home.links[0]?.title ?? "Learn"}
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
+  <main id="main-content">
+    <PageHero
+      home
+      brand={copy.brand}
+      subtitle={home.subtitle}
+      title={home.title}
+      description={home.description}
+      typewriter
+      actions={[
+        {
+          href: home.links[1]?.href ?? "/en/work.html",
+          label: home.links[1]?.title ?? "Work",
+          primary: true,
+        },
+        {
+          href: home.links[0]?.href ?? "/en/learn.html",
+          label: home.links[0]?.title ?? "Learn",
+        },
+      ]}
+    />
 
     <section class="highlights">
       <div class="container">
@@ -92,42 +95,7 @@ const { home } = copy;
         <div class="project-grid project-grid--home">
           {
             home.featured.map((item, index) => (
-              <article
-                class={`project-card featured reveal-on-scroll reveal-delay-${index + 1}`}
-              >
-                <div class="project-content">
-                  {item.category ? (
-                    <span class="project-category">{item.category}</span>
-                  ) : null}
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-                  <div class="project-tech">
-                    {item.tags?.map((tag) => (
-                      <span>{tag}</span>
-                    ))}
-                  </div>
-                  <div class="project-links">
-                    <a
-                      href={item.href}
-                      class="project-link"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {item.linkLabel}
-                    </a>
-                    {item.ctaHref && item.ctaLabel ? (
-                      <a
-                        href={item.ctaHref}
-                        class="project-link project-link--secondary"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {item.ctaLabel}
-                      </a>
-                    ) : null}
-                  </div>
-                </div>
-              </article>
+              <ProjectCard item={item} index={index} />
             ))
           }
         </div>
@@ -167,7 +135,9 @@ const { home } = copy;
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {item.icon ? <i class={item.icon} aria-hidden="true" /> : null}
+                {item.icon ? (
+                  <Icon name={item.icon as IconName} class="channel-icon" />
+                ) : null}
                 <h3>{item.title}</h3>
                 <p>{item.description}</p>
                 <span class="channel-cta">
@@ -215,5 +185,5 @@ const { home } = copy;
     copyright={copy.copyright}
     social={home.social}
   />
-  <WechatModal alt={copy.wechatAlt} />
+  <WechatModal alt={copy.wechatAlt} closeLabel={copy.closeModal} />
 </BaseLayout>

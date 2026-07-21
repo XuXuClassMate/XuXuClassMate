@@ -1,3 +1,17 @@
+function setMobileNavOpen(
+  toggle: HTMLElement,
+  links: HTMLElement,
+  open: boolean,
+): void {
+  toggle.classList.toggle("active", open);
+  links.classList.toggle("show", open);
+  toggle.setAttribute("aria-expanded", open ? "true" : "false");
+  if (open) {
+    const firstLink = links.querySelector<HTMLElement>("a");
+    firstLink?.focus();
+  }
+}
+
 function initMobileNav(): void {
   const toggle = document.getElementById("mobileNavToggle");
   const links = document.getElementById("navLinks");
@@ -6,14 +20,13 @@ function initMobileNav(): void {
   }
 
   toggle.addEventListener("click", () => {
-    toggle.classList.toggle("active");
-    links.classList.toggle("show");
+    const open = !links.classList.contains("show");
+    setMobileNavOpen(toggle, links, open);
   });
 
   for (const link of links.querySelectorAll("a")) {
     link.addEventListener("click", () => {
-      toggle.classList.remove("active");
-      links.classList.remove("show");
+      setMobileNavOpen(toggle, links, false);
     });
   }
 
@@ -23,8 +36,14 @@ function initMobileNav(): void {
     const themeBtn = document.getElementById("themeToggle");
     if (themeBtn?.contains(target)) return;
     if (!toggle.contains(target) && !links.contains(target)) {
-      toggle.classList.remove("active");
-      links.classList.remove("show");
+      setMobileNavOpen(toggle, links, false);
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && links.classList.contains("show")) {
+      setMobileNavOpen(toggle, links, false);
+      toggle.focus();
     }
   });
 }
@@ -41,18 +60,63 @@ function initWechatModal(): void {
     return;
   }
 
+  const panel = modal.querySelector<HTMLElement>(".modal-content");
+  let lastFocus: HTMLElement | null = null;
+
+  const getFocusable = () =>
+    [
+      ...modal.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+      ),
+    ].filter((el) => !el.hasAttribute("disabled") && el.offsetParent !== null);
+
+  const open = () => {
+    lastFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    modal.classList.add("show");
+    modal.hidden = false;
+    modal.setAttribute("aria-hidden", "false");
+    (panel ?? closeBtn).focus();
+  };
+
+  const close = () => {
+    modal.classList.remove("show");
+    modal.hidden = true;
+    modal.setAttribute("aria-hidden", "true");
+    lastFocus?.focus();
+  };
+
   openBtn.addEventListener("click", (event) => {
     event.preventDefault();
-    modal.classList.add("show");
+    open();
   });
 
   closeBtn.addEventListener("click", () => {
-    modal.classList.remove("show");
+    close();
   });
 
   modal.addEventListener("click", (event) => {
     if (event.target === modal) {
-      modal.classList.remove("show");
+      close();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (!modal.classList.contains("show")) return;
+    if (event.key === "Escape") {
+      close();
+      return;
+    }
+    if (event.key !== "Tab") return;
+    const focusable = getFocusable();
+    if (focusable.length === 0) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
     }
   });
 }
@@ -97,34 +161,6 @@ function initScrollReveal(): void {
   }
 }
 
-function initSkillBars(): void {
-  const bars = document.querySelectorAll<HTMLElement>(".progress-bar[data-progress]");
-  if (bars.length === 0) return;
-
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (reduceMotion || !("IntersectionObserver" in window)) {
-    for (const bar of bars) {
-      bar.style.width = `${bar.dataset.progress ?? 0}%`;
-    }
-    return;
-  }
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      for (const entry of entries) {
-        if (!entry.isIntersecting || !(entry.target instanceof HTMLElement)) continue;
-        entry.target.style.width = `${entry.target.dataset.progress ?? 0}%`;
-        observer.unobserve(entry.target);
-      }
-    },
-    { threshold: 0.35 },
-  );
-
-  for (const bar of bars) {
-    observer.observe(bar);
-  }
-}
-
 function initProjectFilters(): void {
   const filters = document.querySelector(".project-filters");
   if (!(filters instanceof HTMLElement)) return;
@@ -139,12 +175,13 @@ function initProjectFilters(): void {
     for (const button of buttons) {
       const active = button.dataset.filter === value;
       button.classList.toggle("is-active", active);
-      button.setAttribute("aria-selected", active ? "true" : "false");
+      button.setAttribute("aria-pressed", active ? "true" : "false");
     }
 
     for (const card of cards) {
       const match = value === "all" || card.dataset.category === value;
       card.classList.toggle("is-filtered-out", !match);
+      card.toggleAttribute("hidden", !match);
       card.setAttribute("aria-hidden", match ? "false" : "true");
     }
   };
@@ -334,17 +371,16 @@ function applyTheme(theme: Theme): void {
   if (!(button instanceof HTMLButtonElement)) return;
 
   const label = button.querySelector(".theme-toggle-label");
-  const icon = button.querySelector("i");
+  const moon = button.querySelector('[data-theme-icon="moon"]');
+  const sun = button.querySelector('[data-theme-icon="sun"]');
   const nextLabel =
     theme === "dark"
       ? (button.dataset.labelLight ?? "Light")
       : (button.dataset.labelDark ?? "Dark");
 
   if (label) label.textContent = nextLabel;
-  if (icon) {
-    icon.classList.toggle("fa-moon", theme === "dark");
-    icon.classList.toggle("fa-sun", theme === "light");
-  }
+  moon?.classList.toggle("is-hidden", theme !== "dark");
+  sun?.classList.toggle("is-hidden", theme !== "light");
   button.setAttribute(
     "aria-label",
     theme === "dark" ? (button.dataset.labelLight ?? "Light") : (button.dataset.labelDark ?? "Dark"),
@@ -368,7 +404,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initWechatModal();
   initHeaderScroll();
   initScrollReveal();
-  initSkillBars();
   initProjectFilters();
   initCopyEmail();
   initHighlightCountUp();

@@ -2,10 +2,32 @@ export type Locale = "en" | "zh";
 
 export type PageId = "home" | "life" | "learn" | "work";
 
+export type IconName =
+  | "github"
+  | "docker"
+  | "wechat"
+  | "blog"
+  | "robot"
+  | "medium"
+  | "blogger"
+  | "tiktok"
+  | "instagram"
+  | "moon"
+  | "sun"
+  | "ghost"
+  | "arrow-left"
+  | "external";
+
+export type CaseSlug =
+  | "testcase-generator"
+  | "trading-assistant"
+  | "docker-suite"
+  | "automation-framework";
+
 export type SocialLink = {
   href: string;
   label: string;
-  icon: string;
+  icon: IconName;
   wechat?: boolean;
 };
 
@@ -16,12 +38,15 @@ export type Card = {
   linkLabel?: string;
   tags?: string[];
   items?: string[];
-  icon?: string;
+  icon?: IconName | string;
   image?: string;
   imageAlt?: string;
   ctaHref?: string;
   ctaLabel?: string;
   category?: string;
+  caseHref?: string;
+  caseLabel?: string;
+  slug?: CaseSlug;
 };
 
 export type Highlight = {
@@ -29,10 +54,15 @@ export type Highlight = {
   label: string;
 };
 
-export type SkillMeter = {
+export type SkillEvidence = {
+  label: string;
+  href: string;
+};
+
+export type SkillGroup = {
   title: string;
-  progress: number;
   items: string[];
+  evidence?: SkillEvidence[];
 };
 
 export type PageMeta = {
@@ -41,6 +71,21 @@ export type PageMeta = {
   keywords: string;
   /** Optional Open Graph title override */
   ogTitle?: string;
+};
+
+export type CaseStudy = {
+  slug: CaseSlug;
+  title: string;
+  subtitle: string;
+  description: string;
+  cover: string;
+  coverAlt: string;
+  problem: string;
+  solution: string;
+  outcomes: string[];
+  metrics: { label: string; value: string }[];
+  links: { label: string; href: string }[];
+  meta: PageMeta;
 };
 
 export type LocaleCopy = {
@@ -57,6 +102,9 @@ export type LocaleCopy = {
   themeToDark: string;
   copyright: string;
   wechatAlt: string;
+  closeModal: string;
+  menuLabel: string;
+  skipToContent: string;
   nav: {
     life: string;
     learn: string;
@@ -109,7 +157,14 @@ export type LocaleCopy = {
     approachTitle: string;
     approach: Card[];
     skillsTitle: string;
-    skills: SkillMeter[];
+    skills: SkillGroup[];
+    caseBackLabel: string;
+    caseProblemTitle: string;
+    caseSolutionTitle: string;
+    caseOutcomesTitle: string;
+    caseMetricsTitle: string;
+    caseLinksTitle: string;
+    cases: CaseStudy[];
     footerDesc: string;
     social: SocialLink[];
   };

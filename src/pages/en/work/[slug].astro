@@ -1,0 +1,18 @@
+---
+import CaseStudyPage from "../../../components/CaseStudyPage.astro";
+import type { CaseSlug } from "../../../lib/i18n";
+
+export function getStaticPaths() {
+  const slugs: CaseSlug[] = [
+    "testcase-generator",
+    "trading-assistant",
+    "docker-suite",
+    "automation-framework",
+  ];
+  return slugs.map((slug) => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+---
+
+<CaseStudyPage locale="en" slug={slug as CaseSlug} />
