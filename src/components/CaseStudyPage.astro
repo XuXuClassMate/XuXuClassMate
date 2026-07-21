@@ -19,6 +19,9 @@ const metrics = await getMetrics();
 if (!study) {
   throw new Error(`Unknown case study: ${slug}`);
 }
+
+const coverDark =
+  study.coverDark ?? study.cover.replace(/\.jpg$/i, "-dark.jpg");
 ---
 
 <BaseLayout
@@ -42,15 +45,25 @@ if (!study) {
     </section>
 
     <section class="case-cover">
-      <div class="container">
+      <div class="container case-cover-frame reveal-on-scroll">
         <img
-          class="case-cover-image reveal-on-scroll"
+          class="case-cover-image theme-cover theme-cover--light"
           src={study.cover}
           alt={study.coverAlt}
           width="960"
           height="540"
           loading="eager"
           decoding="async"
+        />
+        <img
+          class="case-cover-image theme-cover theme-cover--dark"
+          src={coverDark}
+          alt=""
+          width="960"
+          height="540"
+          loading="eager"
+          decoding="async"
+          aria-hidden="true"
         />
       </div>
     </section>

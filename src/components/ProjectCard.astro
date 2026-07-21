@@ -9,6 +9,7 @@ type Props = {
 
 const { item, index = 0, filterable = false } = Astro.props;
 const delay = (index % 3) + 1;
+const imageDark = item.imageDark ?? item.image?.replace(/\.jpg$/i, "-dark.jpg");
 ---
 
 <article
@@ -24,6 +25,7 @@ const delay = (index % 3) + 1;
         rel={item.caseHref ? undefined : "noopener noreferrer"}
       >
         <img
+          class="theme-cover theme-cover--light"
           src={item.image}
           alt={item.imageAlt ?? item.title}
           width="960"
@@ -31,6 +33,18 @@ const delay = (index % 3) + 1;
           loading="lazy"
           decoding="async"
         />
+        {imageDark ? (
+          <img
+            class="theme-cover theme-cover--dark"
+            src={imageDark}
+            alt=""
+            width="960"
+            height="540"
+            loading="lazy"
+            decoding="async"
+            aria-hidden="true"
+          />
+        ) : null}
       </a>
     ) : null
   }
