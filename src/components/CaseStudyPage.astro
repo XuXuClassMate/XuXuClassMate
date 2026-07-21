@@ -80,8 +80,12 @@ if (!study) {
                   <div class="case-metric">
                     <span
                       class="case-metric-value"
-                      data-metric={metric.metric}
-                      data-metric-fallback={metric.value}
+                      {...(metric.metric
+                        ? {
+                            "data-metric": metric.metric,
+                            "data-metric-fallback": metric.value,
+                          }
+                        : {})}
                     >
                       {value}
                     </span>
