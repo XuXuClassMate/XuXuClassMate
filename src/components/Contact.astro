@@ -1,0 +1,36 @@
+---
+import { CONTACT_EMAIL } from "../lib/i18n";
+
+type Props = {
+  label: string;
+  hint: string;
+  copyLabel: string;
+  copiedLabel: string;
+};
+
+const { label, hint, copyLabel, copiedLabel } = Astro.props;
+---
+
+<section class="contact-section reveal-on-scroll">
+  <div class="container">
+    <div class="contact-panel">
+      <div class="contact-info">
+        <h2>{label}</h2>
+        <p class="contact-hint">{hint}</p>
+        <div class="contact-actions">
+          <a class="contact-email" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+          <button
+            type="button"
+            class="copy-email-btn"
+            id="copyEmailBtn"
+            data-email={CONTACT_EMAIL}
+            data-copy-label={copyLabel}
+            data-copied-label={copiedLabel}
+          >
+            {copyLabel}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

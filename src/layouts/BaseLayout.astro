@@ -1,0 +1,141 @@
+---
+import {
+  absoluteUrl,
+  canonicalPath,
+  getCopy,
+  hreflangLinks,
+  languageHref,
+  pageHref,
+  type Locale,
+  type PageId,
+} from "../lib/i18n";
+import "../styles/global.css";
+
+type Props = {
+  locale: Locale;
+  page: PageId;
+  /** Root `/` English home (legacy URL). */
+  rootHome?: boolean;
+  noindex?: boolean;
+};
+
+const { locale, page, rootHome = false, noindex = false } = Astro.props;
+const copy = getCopy(locale);
+const meta = copy.meta[page === "home" ? "home" : page];
+const canonical = absoluteUrl(canonicalPath(locale, page, rootHome));
+const alternates = hreflangLinks(locale, page, rootHome);
+const homeHref = locale === "zh" ? pageHref("zh", "home") : "/";
+const active = page === "home" ? undefined : page;
+---
+
+<!doctype html>
+<html lang={locale} data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{meta.title}</title>
+    <script is:inline>
+      (function () {
+        try {
+          let theme = localStorage.getItem("xuxu-theme");
+          if (theme !== "light" && theme !== "dark") theme = "dark";
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      })();
+    </script>
+    {noindex ? <meta name="robots" content="noindex" /> : null}
+    {!noindex ? <link rel="canonical" href={canonical} /> : null}
+    {
+      alternates.map((link) => (
+        <link rel="alternate" hreflang={link.hreflang} href={link.href} />
+      ))
+    }
+    <meta name="description" content={meta.description} />
+    <meta name="keywords" content={meta.keywords} />
+    <meta name="author" content={copy.author} />
+    <link rel="shortcut icon" href="/images/logo.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header class="header" id="siteHeader">
+      <div class="container">
+        <nav class="nav">
+          <a href={homeHref} class="logo">
+            <img src="/images/logo.svg" alt="XuXuClassMate Logo" />
+            <span class="logo-text">{copy.brand}</span>
+          </a>
+          <div class="nav-end">
+            <button
+              type="button"
+              class="theme-toggle"
+              id="themeToggle"
+              aria-label={copy.themeToggle}
+              data-label-light={copy.themeToLight}
+              data-label-dark={copy.themeToDark}
+            >
+              <i class="fas fa-moon" aria-hidden="true"></i>
+              <span class="theme-toggle-label">{copy.themeToLight}</span>
+            </button>
+            <button
+              id="mobileNavToggle"
+              class="mobile-nav-toggle"
+              type="button"
+              aria-label="Menu"
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+            <div class="nav-links" id="navLinks">
+              <a
+                href={pageHref(locale, "life")}
+                class:list={["nav-item", { active: active === "life" }]}
+              >
+                {copy.nav.life}
+              </a>
+              <a
+                href={pageHref(locale, "learn")}
+                class:list={["nav-item", { active: active === "learn" }]}
+              >
+                {copy.nav.learn}
+              </a>
+              <a
+                href={pageHref(locale, "work")}
+                class:list={["nav-item", { active: active === "work" }]}
+              >
+                {copy.nav.work}
+              </a>
+              <a href={languageHref(locale, page)} class="language-switch">
+                {copy.languageSwitch}
+              </a>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <slot />
+
+    <button
+      type="button"
+      class="back-to-top"
+      id="backToTop"
+      aria-label={copy.backToTop}
+      title={copy.backToTop}
+    >
+      ↑
+    </button>
+    <script src="../scripts/site.ts"></script>
+  </body>
+</html>

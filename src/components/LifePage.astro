@@ -1,0 +1,130 @@
+---
+import Contact from "./Contact.astro";
+import Footer from "./Footer.astro";
+import WechatModal from "./WechatModal.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCopy, type Locale } from "../lib/i18n";
+
+type Props = { locale: Locale };
+
+const { locale } = Astro.props;
+const copy = getCopy(locale);
+const page = copy.life;
+---
+
+<BaseLayout locale={locale} page="life">
+  <WechatModal alt={copy.wechatAlt} />
+
+  <section class="hero">
+    <div class="hero-atmosphere" aria-hidden="true"></div>
+    <div class="container hero-content reveal">
+      <span class="subtitle">{page.subtitle}</span>
+      <h1 class="hero-title">{page.title}</h1>
+      <p class="hero-desc">{page.description}</p>
+    </div>
+  </section>
+
+  <section class="life-gallery">
+    <div class="container">
+      <h2 class="section-title reveal-on-scroll">{page.galleryTitle}</h2>
+      <div class="gallery-grid">
+        {
+          page.gallery.map((item, index) => (
+            <div
+              class={`gallery-item reveal-on-scroll reveal-delay-${(index % 3) + 1}`}
+            >
+              <a href={item.href} target="_blank" rel="noopener noreferrer" class="video-cover">
+                <img src={item.image} alt={item.imageAlt ?? item.title} />
+                <div class="play-button">▶</div>
+              </a>
+              <div class="gallery-caption">
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+                {item.ctaHref && item.ctaLabel ? (
+                  <a
+                    href={item.ctaHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="social-link"
+                  >
+                    {item.ctaLabel}
+                  </a>
+                ) : null}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="hobbies">
+    <div class="container">
+      <h2 class="section-title reveal-on-scroll">{page.hobbiesTitle}</h2>
+      <div class="hobby-grid">
+        {
+          page.hobbies.map((item, index) => (
+            <article
+              class={`hobby-card reveal-on-scroll reveal-delay-${(index % 3) + 1}`}
+            >
+              <div class="hobby-icon">{item.icon}</div>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+              <ul class="hobby-list">
+                {item.items?.map((entry) => (
+                  <li>{entry}</li>
+                ))}
+              </ul>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {
+    page.blogTitle && page.blog ? (
+      <section class="blog">
+        <div class="container">
+          <h2 class="section-title reveal-on-scroll">{page.blogTitle}</h2>
+          <div class="blog-grid">
+            {page.blog.map((item, index) => (
+              <article
+                class={`blog-card reveal-on-scroll reveal-delay-${(index % 3) + 1}`}
+              >
+                <div class="blog-image">
+                  <img src={item.image} alt={item.imageAlt ?? item.title} />
+                </div>
+                <div class="blog-content">
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                  <a
+                    href={item.href}
+                    class="read-more"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {item.linkLabel}
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    ) : null
+  }
+
+  <Contact
+    label={copy.contactLabel}
+    hint={copy.contactHint}
+    copyLabel={copy.copyEmail}
+    copiedLabel={copy.copiedEmail}
+  />
+  <Footer
+    brand={copy.brand}
+    description={page.footerDesc}
+    copyright={copy.copyright}
+    social={page.social}
+  />
+</BaseLayout>
