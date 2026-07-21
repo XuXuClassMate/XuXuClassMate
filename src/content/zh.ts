@@ -77,10 +77,26 @@ export const zh: LocaleCopy = {
     ],
     highlightsTitle: "数据一览",
     highlights: [
-      { value: "700+", label: "ClawHub AI 用例生成器安装量" },
-      { value: "900+", label: "ClawHub Trading Assistant Core 安装量" },
-      { value: "30k+", label: "达梦 Docker 拉取量" },
-      { value: "17k+", label: "瀚高 Docker 拉取量" },
+      {
+        value: "700+",
+        label: "ClawHub AI 用例生成器安装量",
+        metric: "clawhub:ai-testcase-generator",
+      },
+      {
+        value: "900+",
+        label: "ClawHub Trading Assistant Core 安装量",
+        metric: "clawhub:trading-assistant-core",
+      },
+      {
+        value: "30k+",
+        label: "达梦 Docker 拉取量",
+        metric: "docker:dameng",
+      },
+      {
+        value: "17k+",
+        label: "瀚高 Docker 拉取量",
+        metric: "docker:highgo",
+      },
     ],
     featuredTitle: "精选作品",
     featuredCta: "查看全部项目",
@@ -505,7 +521,7 @@ export const zh: LocaleCopy = {
           "支持导出 Excel / Markdown / XMind",
         ],
         metrics: [
-          { label: "ClawHub 安装", value: "700+" },
+          { label: "ClawHub 安装", value: "700+", metric: "clawhub:ai-testcase-generator" },
           { label: "分发形态", value: "Docker · npm · 技能" },
         ],
         links: [
@@ -517,7 +533,7 @@ export const zh: LocaleCopy = {
             label: "Docker Hub",
             href: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
           },
-          { label: "ClawHub", href: "https://clawhub.ai/xuxuclassmate/ai-test-case-generator" },
+          { label: "ClawHub", href: "https://clawhub.ai/xuxuclassmate/ai-testcase-generator" },
         ],
         meta: {
           title: "AI 测试用例生成器案例 | 旭旭同学",
@@ -543,7 +559,7 @@ export const zh: LocaleCopy = {
           "以风险优先默认值替代纯信号演示",
         ],
         metrics: [
-          { label: "ClawHub 安装", value: "900+" },
+          { label: "ClawHub 安装", value: "900+", metric: "clawhub:trading-assistant-core" },
           { label: "使用面", value: "技能 · Docker · CLI" },
         ],
         links: [
@@ -577,8 +593,8 @@ export const zh: LocaleCopy = {
           "成为 AI 工具演示下的可复用底座",
         ],
         metrics: [
-          { label: "达梦拉取", value: "3 万+" },
-          { label: "瀚高拉取", value: "1.7 万+" },
+          { label: "达梦拉取", value: "30k+", metric: "docker:dameng" },
+          { label: "瀚高拉取", value: "17k+", metric: "docker:highgo" },
         ],
         links: [
           {
