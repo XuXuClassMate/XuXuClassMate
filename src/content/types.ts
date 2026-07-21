@@ -6,7 +6,9 @@ export type MetricId =
   | "clawhub:ai-testcase-generator"
   | "clawhub:trading-assistant-core"
   | "docker:dameng"
-  | "docker:highgo";
+  | "docker:highgo"
+  | "docker:kingbase"
+  | "docker:tidb";
 
 export type IconName =
   | "github"
@@ -27,6 +29,8 @@ export type IconName =
 export type CaseSlug =
   | "testcase-generator"
   | "trading-assistant"
+  | "globalpulse"
+  | "docker-hub-api-gateway"
   | "docker-suite"
   | "automation-framework";
 

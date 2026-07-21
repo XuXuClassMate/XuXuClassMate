@@ -154,9 +154,39 @@ export const en: LocaleCopy = {
         caseLabel: "Case study",
       },
       {
+        title: "GlobalPulse",
+        description:
+          "Self-hosted market intelligence and scheduled finance/global hotspot briefings on Cloudflare Workers — Admin UI, cron delivery, and Feishu / WeChat / Telegram push.",
+        tags: ["Cloudflare", "Workers", "Briefings"],
+        href: "https://github.com/InnoNestX/GlobalPulse",
+        linkLabel: "GitHub",
+        category: "Product",
+        image: "/images/cover-globalpulse.jpg",
+        imageAlt: "GlobalPulse cover",
+        slug: "globalpulse",
+        caseHref: "/en/work/globalpulse.html",
+        caseLabel: "Case study",
+      },
+      {
+        title: "Docker Hub API Gateway",
+        description:
+          "Unified REST API gateway for Docker Hub — user stats, SVG cards, repo/tag lookup, OpenAPI docs, and interactive testing (EN/ZH).",
+        tags: ["API", "Docker Hub", "Hono"],
+        href: "https://github.com/InnoNestX/docker-hub-pull-counter",
+        linkLabel: "GitHub",
+        ctaHref: "https://docker-hub-pull-counter.vercel.app",
+        ctaLabel: "Live API",
+        category: "Infra",
+        image: "/images/cover-docker-gateway.jpg",
+        imageAlt: "Docker Hub API Gateway cover",
+        slug: "docker-hub-api-gateway",
+        caseHref: "/en/work/docker-hub-api-gateway.html",
+        caseLabel: "Case study",
+      },
+      {
         title: "Test DB Docker Suite",
         description:
-          "Ready-to-run database images for QA environments — Dameng (~30k pulls), Highgo (~17k), Kingbase, TiDB, and more on Docker Hub.",
+          "Ready-to-run database images for QA environments — Dameng, Highgo, Kingbase, TiDB and more, ranked by live Docker Hub pulls.",
         tags: ["Docker", "Dameng", "Highgo"],
         href: "https://hub.docker.com/u/xuxuclassmate",
         linkLabel: "Docker Hub",
@@ -395,9 +425,39 @@ export const en: LocaleCopy = {
         caseLabel: "Case study",
       },
       {
+        title: "GlobalPulse",
+        description:
+          "Self-hosted market intelligence and scheduled finance/global hotspot briefings on Cloudflare Workers — Admin UI, cron delivery, and Feishu / WeChat / Telegram push.",
+        tags: ["Cloudflare", "Workers", "Briefings"],
+        href: "https://github.com/InnoNestX/GlobalPulse",
+        linkLabel: "GitHub",
+        category: "Product",
+        image: "/images/cover-globalpulse.jpg",
+        imageAlt: "GlobalPulse cover",
+        slug: "globalpulse",
+        caseHref: "/en/work/globalpulse.html",
+        caseLabel: "Case study",
+      },
+      {
+        title: "Docker Hub API Gateway",
+        description:
+          "Unified REST API gateway for Docker Hub — user stats, SVG cards, repo/tag lookup, OpenAPI docs, and interactive testing (EN/ZH).",
+        tags: ["API", "Docker Hub", "Hono"],
+        href: "https://github.com/InnoNestX/docker-hub-pull-counter",
+        linkLabel: "GitHub",
+        ctaHref: "https://docker-hub-pull-counter.vercel.app",
+        ctaLabel: "Live API",
+        category: "Infra",
+        image: "/images/cover-docker-gateway.jpg",
+        imageAlt: "Docker Hub API Gateway cover",
+        slug: "docker-hub-api-gateway",
+        caseHref: "/en/work/docker-hub-api-gateway.html",
+        caseLabel: "Case study",
+      },
+      {
         title: "Test DB Docker Suite",
         description:
-          "Ready-to-run database images for QA environments — Dameng (~30k pulls), Highgo (~17k), Kingbase, TiDB, and more on Docker Hub.",
+          "Ready-to-run database images for QA environments — Dameng, Highgo, Kingbase, TiDB and more, ranked by live Docker Hub pulls.",
         tags: ["Docker", "Dameng", "Highgo"],
         href: "https://hub.docker.com/u/xuxuclassmate",
         linkLabel: "Docker Hub",
@@ -460,6 +520,15 @@ export const en: LocaleCopy = {
         ],
       },
       {
+        title: "Test Management",
+        items: [
+          "QA team leadership across ByteDance, SOE, and startup stages",
+          "Release readiness, risk triage, and quality gates",
+          "Hiring, mentoring, and capacity planning",
+          "Cross-functional delivery with product and engineering",
+        ],
+      },
+      {
         title: "Functional Testing",
         items: [
           "Requirements analysis & test design",
@@ -471,25 +540,35 @@ export const en: LocaleCopy = {
       {
         title: "Test Automation",
         items: [
-          "Web UI automation (Playwright)",
+          "Web UI automation (Playwright / Selenium)",
           "API automation",
-          "Mobile automation",
+          "Mobile automation (Appium)",
           "Reusable framework design",
         ],
         evidence: [
           {
-            label: "Framework repo",
+            label: "Java practice",
             href: "https://github.com/XuXuClassMate/My_Test_JAProject",
+          },
+          {
+            label: "Python practice",
+            href: "https://github.com/XuXuClassMate/My_Test_PyProject",
           },
         ],
       },
       {
         title: "Performance Testing",
         items: [
-          "Stress & load testing",
-          "Monitoring & analysis",
-          "Performance optimization",
+          "Locust load & stress testing",
+          "API / scenario performance scripts",
+          "Monitoring, analysis, and tuning",
           "Concurrency design",
+        ],
+        evidence: [
+          {
+            label: "Locust examples",
+            href: "https://github.com/XuXuClassMate/My_Test_PyProject/tree/main/Performance_Test",
+          },
         ],
       },
       {
@@ -590,6 +669,76 @@ export const en: LocaleCopy = {
         },
       },
       {
+        slug: "globalpulse",
+        title: "GlobalPulse",
+        subtitle: "CASE STUDY",
+        description:
+          "Scheduled market intelligence briefings with multi-channel delivery on Cloudflare Workers.",
+        cover: "/images/cover-globalpulse.jpg",
+        coverAlt: "GlobalPulse",
+        problem:
+          "Teams needed reliable finance and hotspot briefings — not one-off scripts — with calendars, templates, and push channels they control.",
+        solution:
+          "Built a self-hosted Cloudflare Workers app with Admin UI, KV config, cron schedules, market calendars, and Feishu / WeChat / Telegram providers.",
+        outcomes: [
+          "Password-protected Admin UI for schedule and provider settings",
+          "Cron-driven delivery with timezone-aware market calendars",
+          "Previewable multi-channel push before send",
+        ],
+        metrics: [
+          { label: "Runtime", value: "Cloudflare Workers" },
+          { label: "Channels", value: "Feishu · WeChat · Telegram" },
+        ],
+        links: [
+          { label: "GitHub", href: "https://github.com/InnoNestX/GlobalPulse" },
+          { label: "InnoNestX", href: "https://github.com/InnoNestX" },
+        ],
+        meta: {
+          title: "GlobalPulse Case Study | XuXuClassMate",
+          description:
+            "How XuXuClassMate built GlobalPulse — scheduled finance and global hotspot briefings on Cloudflare Workers.",
+          keywords: `${sharedKeywords}, GlobalPulse, finance briefing`,
+        },
+      },
+      {
+        slug: "docker-hub-api-gateway",
+        title: "Docker Hub API Gateway",
+        subtitle: "CASE STUDY",
+        description:
+          "A unified REST gateway for Docker Hub stats, cards, and interactive docs.",
+        cover: "/images/cover-docker-gateway.jpg",
+        coverAlt: "Docker Hub API Gateway",
+        problem:
+          "Docker Hub data was fragmented — pull totals, repo details, and badges needed a single, documentable API surface for tools and READMEs.",
+        solution:
+          "Shipped a Hono-based gateway with user stats, SVG cards, repo/tag APIs, OpenAPI docs, bilingual UI, and live request testing.",
+        outcomes: [
+          "Public REST endpoints for user and repository stats",
+          "Embeddable Docker stats SVG cards",
+          "Interactive OpenAPI docs for real-time testing",
+        ],
+        metrics: [
+          { label: "Stack", value: "Hono · Vercel" },
+          { label: "Docs", value: "OpenAPI · EN/ZH" },
+        ],
+        links: [
+          {
+            label: "GitHub",
+            href: "https://github.com/InnoNestX/docker-hub-pull-counter",
+          },
+          {
+            label: "Live API",
+            href: "https://docker-hub-pull-counter.vercel.app",
+          },
+        ],
+        meta: {
+          title: "Docker Hub API Gateway Case Study | XuXuClassMate",
+          description:
+            "How XuXuClassMate shipped a unified Docker Hub REST API gateway with interactive docs and SVG stats cards.",
+          keywords: `${sharedKeywords}, Docker Hub API gateway`,
+        },
+      },
+      {
         slug: "docker-suite",
         title: "Test DB Docker Suite",
         subtitle: "CASE STUDY",
@@ -609,6 +758,8 @@ export const en: LocaleCopy = {
         metrics: [
           { label: "Dameng pulls", value: "30k+", metric: "docker:dameng" },
           { label: "Highgo pulls", value: "17k+", metric: "docker:highgo" },
+          { label: "Kingbase pulls", value: "1.6k+", metric: "docker:kingbase" },
+          { label: "TiDB pulls", value: "900+", metric: "docker:tidb" },
         ],
         links: [
           {
@@ -723,9 +874,17 @@ export const en: LocaleCopy = {
       },
       {
         title: "Music",
-        description: "Playlists for deep work and weekends away from the keyboard.",
+        description:
+          "Playlists for deep work and weekends away from the keyboard.",
         icon: "Tune",
         items: ["Electronic", "Classical piano", "Jazz"],
+      },
+      {
+        title: "Sports",
+        description:
+          "Steady movement that keeps rhythm alive off the screen.",
+        icon: "Move",
+        items: ["Hiking", "Climbing", "Badminton"],
       },
     ],
     footerDesc: "A personal space for learning and sharing",

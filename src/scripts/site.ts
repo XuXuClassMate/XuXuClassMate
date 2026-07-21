@@ -309,11 +309,13 @@ type MetricId =
   | "clawhub:ai-testcase-generator"
   | "clawhub:trading-assistant-core"
   | "docker:dameng"
-  | "docker:highgo";
+  | "docker:highgo"
+  | "docker:kingbase"
+  | "docker:tidb";
 
 function formatMetric(value: number): string {
   if (!Number.isFinite(value) || value < 0) return "0";
-  if (value >= 10_000) {
+  if (value >= 1000) {
     const thousands = value / 1000;
     const rounded =
       value >= 100_000 ? Math.round(thousands) : Math.round(thousands * 10) / 10;
@@ -336,6 +338,8 @@ async function fetchMetricsBundle(): Promise<Partial<Record<MetricId, number>>> 
       "clawhub:trading-assistant-core",
       "docker:dameng",
       "docker:highgo",
+      "docker:kingbase",
+      "docker:tidb",
     ] as const) {
       const value = data[key];
       if (typeof value === "number" && Number.isFinite(value)) {

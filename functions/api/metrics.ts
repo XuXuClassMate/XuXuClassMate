@@ -3,6 +3,8 @@ type MetricsPayload = {
   "clawhub:trading-assistant-core": number;
   "docker:dameng": number;
   "docker:highgo": number;
+  "docker:kingbase": number;
+  "docker:tidb": number;
   updatedAt: string;
 };
 
@@ -11,6 +13,8 @@ const FALLBACKS: Omit<MetricsPayload, "updatedAt"> = {
   "clawhub:trading-assistant-core": 907,
   "docker:dameng": 29793,
   "docker:highgo": 16871,
+  "docker:kingbase": 1610,
+  "docker:tidb": 941,
 };
 
 async function readDownloads(slug: string): Promise<number | null> {
@@ -36,11 +40,13 @@ async function readPulls(repo: string): Promise<number | null> {
 }
 
 export async function onRequestGet(): Promise<Response> {
-  const [testcase, trading, dameng, highgo] = await Promise.all([
+  const [testcase, trading, dameng, highgo, kingbase, tidb] = await Promise.all([
     readDownloads("ai-testcase-generator"),
     readDownloads("trading-assistant-core"),
     readPulls("dameng"),
     readPulls("highgo"),
+    readPulls("kingbase"),
+    readPulls("tidb"),
   ]);
 
   const payload: MetricsPayload = {
@@ -50,12 +56,13 @@ export async function onRequestGet(): Promise<Response> {
       trading ?? FALLBACKS["clawhub:trading-assistant-core"],
     "docker:dameng": dameng ?? FALLBACKS["docker:dameng"],
     "docker:highgo": highgo ?? FALLBACKS["docker:highgo"],
+    "docker:kingbase": kingbase ?? FALLBACKS["docker:kingbase"],
+    "docker:tidb": tidb ?? FALLBACKS["docker:tidb"],
     updatedAt: new Date().toISOString(),
   };
 
   return Response.json(payload, {
     headers: {
-      // Always revalidate on visit/refresh so the site shows current installs.
       "Cache-Control": "no-store",
       "Access-Control-Allow-Origin": "*",
     },

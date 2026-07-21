@@ -134,6 +134,36 @@ export const zh: LocaleCopy = {
         caseLabel: "案例详解",
       },
       {
+        title: "GlobalPulse",
+        description:
+          "自托管的市场情报与定时财经/全球热点简报（Cloudflare Workers）— Admin UI、Cron 投递，以及飞书 / 微信 / Telegram 推送。",
+        tags: ["Cloudflare", "Workers", "简报"],
+        href: "https://github.com/InnoNestX/GlobalPulse",
+        linkLabel: "GitHub",
+        category: "Product",
+        image: "/images/cover-globalpulse.jpg",
+        imageAlt: "GlobalPulse 封面",
+        slug: "globalpulse",
+        caseHref: "/zh/work/globalpulse.html",
+        caseLabel: "案例详解",
+      },
+      {
+        title: "Docker Hub API Gateway",
+        description:
+          "面向 Docker Hub 的统一 REST API 网关 — 用户统计、SVG 卡片、仓库/标签查询、OpenAPI 文档与交互式调试（中英）。",
+        tags: ["API", "Docker Hub", "Hono"],
+        href: "https://github.com/InnoNestX/docker-hub-pull-counter",
+        linkLabel: "GitHub",
+        ctaHref: "https://docker-hub-pull-counter.vercel.app",
+        ctaLabel: "在线 API",
+        category: "Infra",
+        image: "/images/cover-docker-gateway.jpg",
+        imageAlt: "Docker Hub API Gateway 封面",
+        slug: "docker-hub-api-gateway",
+        caseHref: "/zh/work/docker-hub-api-gateway.html",
+        caseLabel: "案例详解",
+      },
+      {
         title: "测试库 Docker 套件",
         description:
           "面向 QA 环境的即用数据库镜像——达梦（约 3 万次拉取）、瀚高（约 1.7 万）、人大金仓、TiDB 等，见 Docker Hub。",
@@ -384,6 +414,36 @@ export const zh: LocaleCopy = {
         caseLabel: "案例详解",
       },
       {
+        title: "GlobalPulse",
+        description:
+          "自托管的市场情报与定时财经/全球热点简报（Cloudflare Workers）— Admin UI、Cron 投递，以及飞书 / 微信 / Telegram 推送。",
+        tags: ["Cloudflare", "Workers", "简报"],
+        href: "https://github.com/InnoNestX/GlobalPulse",
+        linkLabel: "GitHub",
+        category: "Product",
+        image: "/images/cover-globalpulse.jpg",
+        imageAlt: "GlobalPulse 封面",
+        slug: "globalpulse",
+        caseHref: "/zh/work/globalpulse.html",
+        caseLabel: "案例详解",
+      },
+      {
+        title: "Docker Hub API Gateway",
+        description:
+          "面向 Docker Hub 的统一 REST API 网关 — 用户统计、SVG 卡片、仓库/标签查询、OpenAPI 文档与交互式调试（中英）。",
+        tags: ["API", "Docker Hub", "Hono"],
+        href: "https://github.com/InnoNestX/docker-hub-pull-counter",
+        linkLabel: "GitHub",
+        ctaHref: "https://docker-hub-pull-counter.vercel.app",
+        ctaLabel: "在线 API",
+        category: "Infra",
+        image: "/images/cover-docker-gateway.jpg",
+        imageAlt: "Docker Hub API Gateway 封面",
+        slug: "docker-hub-api-gateway",
+        caseHref: "/zh/work/docker-hub-api-gateway.html",
+        caseLabel: "案例详解",
+      },
+      {
         title: "测试库 Docker 套件",
         description:
           "面向 QA 环境的即用数据库镜像——达梦（约 3 万次拉取）、瀚高（约 1.7 万）、人大金仓、TiDB 等，见 Docker Hub。",
@@ -449,6 +509,15 @@ export const zh: LocaleCopy = {
         ],
       },
       {
+        title: "测试管理",
+        items: [
+          "覆盖字节、国企、初创等多阶段类型的测试团队管理经验",
+          "发布就绪、风险分流与质量门禁",
+          "招聘培养与产能规划",
+          "与产品、研发协同推进交付",
+        ],
+      },
+      {
         title: "功能测试",
         items: [
           "需求分析与测试用例设计",
@@ -460,25 +529,35 @@ export const zh: LocaleCopy = {
       {
         title: "自动化测试",
         items: [
-          "Web UI 自动化（Playwright）",
+          "Web UI 自动化（Playwright / Selenium）",
           "接口自动化",
-          "移动端自动化",
+          "移动端自动化（Appium）",
           "可复用框架设计",
         ],
         evidence: [
           {
-            label: "框架仓库",
+            label: "Java 实践",
             href: "https://github.com/XuXuClassMate/My_Test_JAProject",
+          },
+          {
+            label: "Python 实践",
+            href: "https://github.com/XuXuClassMate/My_Test_PyProject",
           },
         ],
       },
       {
         title: "性能测试",
         items: [
-          "压力测试与负载测试",
-          "性能监控与分析",
-          "性能调优建议",
+          "Locust 压测与负载测试",
+          "接口 / 场景性能脚本",
+          "性能监控、分析与调优",
           "并发测试设计",
+        ],
+        evidence: [
+          {
+            label: "Locust 示例",
+            href: "https://github.com/XuXuClassMate/My_Test_PyProject/tree/main/Performance_Test",
+          },
         ],
       },
       {
@@ -577,6 +656,74 @@ export const zh: LocaleCopy = {
         },
       },
       {
+        slug: "globalpulse",
+        title: "GlobalPulse",
+        subtitle: "案例详解",
+        description: "基于 Cloudflare Workers 的定时市场情报简报与多通道推送。",
+        cover: "/images/cover-globalpulse.jpg",
+        coverAlt: "GlobalPulse",
+        problem:
+          "团队需要稳定的财经与热点简报，而不是一次性脚本——还要日历、模板和可自控的推送通道。",
+        solution:
+          "打造自托管 Cloudflare Workers 应用：Admin UI、KV 配置、Cron 调度、市场日历，以及飞书 / 微信 / Telegram 提供商。",
+        outcomes: [
+          "带密码保护的 Admin UI，可配置调度与推送参数",
+          "按时区与市场日历触发的 Cron 投递",
+          "发送前可预览多通道消息",
+        ],
+        metrics: [
+          { label: "运行时", value: "Cloudflare Workers" },
+          { label: "通道", value: "飞书 · 微信 · Telegram" },
+        ],
+        links: [
+          { label: "GitHub", href: "https://github.com/InnoNestX/GlobalPulse" },
+          { label: "InnoNestX", href: "https://github.com/InnoNestX" },
+        ],
+        meta: {
+          title: "GlobalPulse 案例 | 旭旭同学",
+          description:
+            "旭旭同学如何打造 GlobalPulse — 运行在 Cloudflare Workers 上的定时财经与全球热点简报。",
+          keywords: `${sharedKeywords}, GlobalPulse, 财经简报`,
+        },
+      },
+      {
+        slug: "docker-hub-api-gateway",
+        title: "Docker Hub API Gateway",
+        subtitle: "案例详解",
+        description: "统一的 Docker Hub REST 网关：统计、卡片与交互文档。",
+        cover: "/images/cover-docker-gateway.jpg",
+        coverAlt: "Docker Hub API Gateway",
+        problem:
+          "Docker Hub 数据分散——拉取总量、仓库详情与徽章需要一个可文档化、可调用的统一 API。",
+        solution:
+          "用 Hono 交付网关：用户统计、SVG 卡片、仓库/标签 API、OpenAPI 文档、双语界面与在线调试。",
+        outcomes: [
+          "公开 REST 接口查询用户与仓库统计",
+          "可嵌入 README 的 Docker 统计 SVG 卡片",
+          "支持实时调试的 OpenAPI 文档",
+        ],
+        metrics: [
+          { label: "技术栈", value: "Hono · Vercel" },
+          { label: "文档", value: "OpenAPI · 中英" },
+        ],
+        links: [
+          {
+            label: "GitHub",
+            href: "https://github.com/InnoNestX/docker-hub-pull-counter",
+          },
+          {
+            label: "在线 API",
+            href: "https://docker-hub-pull-counter.vercel.app",
+          },
+        ],
+        meta: {
+          title: "Docker Hub API Gateway 案例 | 旭旭同学",
+          description:
+            "旭旭同学如何交付统一的 Docker Hub REST API 网关，含交互文档与 SVG 统计卡片。",
+          keywords: `${sharedKeywords}, Docker Hub API 网关`,
+        },
+      },
+      {
         slug: "docker-suite",
         title: "测试库 Docker 套件",
         subtitle: "案例详解",
@@ -595,6 +742,8 @@ export const zh: LocaleCopy = {
         metrics: [
           { label: "达梦拉取", value: "30k+", metric: "docker:dameng" },
           { label: "瀚高拉取", value: "17k+", metric: "docker:highgo" },
+          { label: "人大金仓拉取", value: "1.6k+", metric: "docker:kingbase" },
+          { label: "TiDB 拉取", value: "900+", metric: "docker:tidb" },
         ],
         links: [
           {
@@ -705,6 +854,12 @@ export const zh: LocaleCopy = {
         description: "策略与 RPG，保持对系统与节奏的敏感。",
         icon: "玩",
         items: ["策略", "RPG", "独立游戏"],
+      },
+      {
+        title: "音乐",
+        description: "深度工作与远离键盘周末的歌单。",
+        icon: "乐",
+        items: ["电子", "古典钢琴", "爵士"],
       },
       {
         title: "运动",
