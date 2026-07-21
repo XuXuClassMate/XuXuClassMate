@@ -54,6 +54,8 @@ export type Card = {
   items?: string[];
   icon?: IconName | string;
   image?: string;
+  /** Optional dark-theme cover; defaults to image with `-dark` suffix. */
+  imageDark?: string;
   imageAlt?: string;
   ctaHref?: string;
   ctaLabel?: string;
@@ -95,6 +97,8 @@ export type CaseStudy = {
   subtitle: string;
   description: string;
   cover: string;
+  /** Optional dark-theme cover; defaults to cover with `-dark` suffix. */
+  coverDark?: string;
   coverAlt: string;
   problem: string;
   solution: string;

@@ -18,10 +18,10 @@
 .blog-image img,
 .modal-content img {
   background: var(--surface);
-  color-scheme: only light;
 }
 
-.project-cover img {
+.project-cover img,
+.theme-cover {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -29,11 +29,46 @@
   object-fit: cover;
   object-position: center;
   display: block;
-  transition: transform 0.35s ease;
+  transition: transform 0.35s ease, opacity 0.2s ease;
 }
 
-.project-card:hover .project-cover img {
+.theme-cover--dark {
+  opacity: 0;
+  pointer-events: none;
+}
+
+html[data-theme="dark"] .theme-cover--light {
+  opacity: 0;
+  pointer-events: none;
+}
+
+html[data-theme="dark"] .theme-cover--dark {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+html[data-theme="light"] .theme-cover--light {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+html[data-theme="light"] .theme-cover--dark {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.project-card:hover .project-cover .theme-cover--light,
+.project-card:hover .project-cover .theme-cover--dark {
   transform: scale(1.03);
+}
+
+/* Only scale the visible cover to avoid ghosting */
+html[data-theme="dark"] .project-card:hover .project-cover .theme-cover--light {
+  transform: none;
+}
+
+html[data-theme="light"] .project-card:hover .project-cover .theme-cover--dark {
+  transform: none;
 }
 
 .channel-icon {
@@ -121,6 +156,15 @@
   padding: 0 0 2rem;
 }
 
+.case-cover-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
 .case-cover-image {
   display: block;
   width: 100%;
@@ -129,9 +173,17 @@
   aspect-ratio: 16 / 9;
   object-fit: cover;
   object-position: center;
-  border-radius: var(--radius);
-  border: 1px solid var(--line);
+  border-radius: 0;
+  border: 0;
   background: var(--surface);
+}
+
+.case-cover-frame .case-cover-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
 }
 
 .case-body {

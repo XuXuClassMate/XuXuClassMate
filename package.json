@@ -17,6 +17,7 @@
     "test:e2e": "playwright test",
     "sitemap": "node scripts/generate-sitemap.mjs",
     "images": "node scripts/optimize-images.mjs",
+    "covers": "node scripts/generate-covers.mjs",
     "deploy": "npm run build && wrangler pages deploy dist"
   },
   "dependencies": {
