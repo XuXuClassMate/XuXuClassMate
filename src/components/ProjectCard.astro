@@ -1,0 +1,84 @@
+---
+import type { Card } from "../content/types";
+
+type Props = {
+  item: Card;
+  index?: number;
+  filterable?: boolean;
+};
+
+const { item, index = 0, filterable = false } = Astro.props;
+const delay = (index % 3) + 1;
+---
+
+<article
+  class={`project-card featured reveal-on-scroll reveal-delay-${delay}`}
+  data-category={filterable ? (item.category ?? "all") : undefined}
+>
+  {
+    item.image ? (
+      <a
+        class="project-cover"
+        href={item.caseHref ?? item.href}
+        target={item.caseHref ? undefined : "_blank"}
+        rel={item.caseHref ? undefined : "noopener noreferrer"}
+      >
+        <img
+          src={item.image}
+          alt={item.imageAlt ?? item.title}
+          width="960"
+          height="540"
+          loading="lazy"
+          decoding="async"
+        />
+      </a>
+    ) : null
+  }
+  <div class="project-content">
+    {item.category ? <span class="project-category">{item.category}</span> : null}
+    <h3>{item.title}</h3>
+    <p>{item.description}</p>
+    {
+      item.tags?.length ? (
+        <div class="project-tech">
+          {item.tags.map((tag) => (
+            <span>{tag}</span>
+          ))}
+        </div>
+      ) : null
+    }
+    <div class="project-links">
+      {
+        item.caseHref && item.caseLabel ? (
+          <a href={item.caseHref} class="project-link">
+            {item.caseLabel}
+          </a>
+        ) : null
+      }
+      {
+        item.href && item.linkLabel ? (
+          <a
+            href={item.href}
+            class={`project-link${item.caseHref ? " project-link--secondary" : ""}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {item.linkLabel}
+          </a>
+        ) : null
+      }
+      {
+        item.ctaHref && item.ctaLabel ? (
+          <a
+            href={item.ctaHref}
+            class="project-link project-link--secondary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {item.ctaLabel}
+          </a>
+        ) : null
+      }
+    </div>
+  </div>
+</article>

@@ -1,16 +1,16 @@
 ---
-import Contact from "../components/Contact.astro";
-import Footer from "../components/Footer.astro";
-import Icon from "../components/Icon.astro";
-import WechatModal from "../components/WechatModal.astro";
-import BaseLayout from "../layouts/BaseLayout.astro";
-import { getCopy } from "../lib/i18n";
+import Contact from "../../components/Contact.astro";
+import Footer from "../../components/Footer.astro";
+import Icon from "../../components/Icon.astro";
+import WechatModal from "../../components/WechatModal.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCopy } from "../../lib/i18n";
 
-const copy = getCopy("en");
+const copy = getCopy("zh");
 const page = copy.notFound;
 ---
 
-<BaseLayout locale="en" page="home" rootHome={true} noindex={true}>
+<BaseLayout locale="zh" page="home" noindex={true}>
   <main id="main-content" class="error-wrapper">
     <div class="error-content">
       <div class="error-icon" aria-hidden="true">
@@ -19,7 +19,7 @@ const page = copy.notFound;
       <h1 class="error-code">404</h1>
       <h2 class="error-title">{page.title}</h2>
       <p class="error-message">{page.message}</p>
-      <a href="/" class="btn-home">
+      <a href="/zh/index.html" class="btn-home">
         <Icon name="arrow-left" />
         {page.homeLabel}
       </a>

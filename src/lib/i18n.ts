@@ -1,6 +1,11 @@
 import { en } from "../content/en";
 import { zh } from "../content/zh";
-import type { Locale, LocaleCopy, PageId } from "../content/types";
+import type {
+  CaseSlug,
+  Locale,
+  LocaleCopy,
+  PageId,
+} from "../content/types";
 
 export const SITE_ORIGIN = "https://www.xuxuclassmate.com";
 export const CONTACT_EMAIL = "mail@xuxuclassmate.com";
@@ -11,12 +16,20 @@ export function getCopy(locale: Locale): LocaleCopy {
   return catalogs[locale];
 }
 
+export function getCase(locale: Locale, slug: CaseSlug) {
+  return getCopy(locale).work.cases.find((entry) => entry.slug === slug);
+}
+
 /** Public path for a page. Root `/` is the English home (same as legacy). */
 export function pageHref(locale: Locale, page: PageId): string {
   if (page === "home") {
     return locale === "zh" ? "/zh/index.html" : "/";
   }
   return `/${locale}/${page}.html`;
+}
+
+export function caseHref(locale: Locale, slug: CaseSlug): string {
+  return `/${locale}/work/${slug}.html`;
 }
 
 export function languageHref(locale: Locale, page: PageId): string {
@@ -63,10 +76,20 @@ export function hreflangLinks(
   ];
 }
 
-export function jsonLdGraph(locale: Locale, page: PageId, rootHome = false) {
+export function jsonLdGraph(
+  locale: Locale,
+  page: PageId,
+  rootHome = false,
+  caseSlug?: CaseSlug,
+) {
   const copy = getCopy(locale);
-  const meta = copy.meta[page];
-  const pageUrl = absoluteUrl(canonicalPath(locale, page, rootHome));
+  const caseStudy = caseSlug ? getCase(locale, caseSlug) : undefined;
+  const meta = caseStudy?.meta ?? copy.meta[page];
+  const pageUrl = absoluteUrl(
+    caseSlug
+      ? `/${locale}/work/${caseSlug}`
+      : canonicalPath(locale, page, rootHome),
+  );
   const isZh = locale === "zh";
 
   const person = {
@@ -82,7 +105,7 @@ export function jsonLdGraph(locale: Locale, page: PageId, rootHome = false) {
       ? "质量工程师 / AI 测试工具作者"
       : "QA Engineer / AI Testing Tool Builder",
     description: meta.description,
-    image: absoluteUrl("/images/logo.svg"),
+    image: absoluteUrl("/images/og-default.jpg"),
     sameAs: [
       "https://github.com/XuXuClassMate",
       "https://hub.docker.com/u/xuxuclassmate",
@@ -143,4 +166,4 @@ export function jsonLdGraph(locale: Locale, page: PageId, rootHome = false) {
   };
 }
 
-export type { Locale, PageId, LocaleCopy };
+export type { CaseSlug, Locale, PageId, LocaleCopy };

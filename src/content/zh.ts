@@ -17,6 +17,9 @@ export const zh: LocaleCopy = {
   themeToDark: "深色",
   copyright: "© 2020-2026 旭旭同学",
   wechatAlt: "微信二维码",
+  closeModal: "关闭",
+  menuLabel: "菜单",
+  skipToContent: "跳到主要内容",
   nav: {
     life: "生活",
     learn: "学习",
@@ -88,10 +91,15 @@ export const zh: LocaleCopy = {
           "多模态 QA 输入（PDF、Word、图片、视频）→ 结构化用例，含测试/开发/产品三角色评审。支持 Docker、npm、OpenClaw 插件，并在 ClawHub 发布为 AI Test Case Generator。",
         tags: ["TypeScript", "多模态 AI", "ClawHub"],
         href: "https://github.com/XuXuClassMate/testcase-generator",
-        linkLabel: "查看 GitHub",
+        linkLabel: "GitHub",
         ctaHref: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
         ctaLabel: "Docker Hub",
         category: "AI",
+        image: "/images/cover-testcase.jpg",
+        imageAlt: "AI 测试用例生成器封面",
+        slug: "testcase-generator",
+        caseHref: "/zh/work/testcase-generator.html",
+        caseLabel: "案例详解",
       },
       {
         title: "Trading Assistant Core",
@@ -99,10 +107,15 @@ export const zh: LocaleCopy = {
           "OpenClaw Agent 技能：支撑阻力、多指标信号、仓位与风险提醒。可通过 ClawHub、Docker 或 pip / `ta` CLI 安装。",
         tags: ["Agent 技能", "ClawHub", "CLI"],
         href: "https://github.com/XuXuClassMate/trading-assistant",
-        linkLabel: "查看 GitHub",
+        linkLabel: "GitHub",
         ctaHref: "https://clawhub.ai",
         ctaLabel: "ClawHub",
         category: "AI",
+        image: "/images/cover-trading.jpg",
+        imageAlt: "Trading Assistant 封面",
+        slug: "trading-assistant",
+        caseHref: "/zh/work/trading-assistant.html",
+        caseLabel: "案例详解",
       },
       {
         title: "测试库 Docker 套件",
@@ -110,8 +123,13 @@ export const zh: LocaleCopy = {
           "面向 QA 环境的即用数据库镜像——达梦（约 3 万次拉取）、瀚高（约 1.7 万）、人大金仓、TiDB 等，见 Docker Hub。",
         tags: ["Docker", "Dameng", "Highgo"],
         href: "https://hub.docker.com/u/xuxuclassmate",
-        linkLabel: "查看 Docker Hub",
+        linkLabel: "Docker Hub",
         category: "Infra",
+        image: "/images/cover-docker.jpg",
+        imageAlt: "测试库 Docker 套件封面",
+        slug: "docker-suite",
+        caseHref: "/zh/work/docker-suite.html",
+        caseLabel: "案例详解",
       },
     ],
     principlesTitle: "我在优化什么",
@@ -137,14 +155,14 @@ export const zh: LocaleCopy = {
         description: "开源 AI 工具、Agent 技能与测试自动化框架。",
         href: "https://github.com/XuXuClassMate",
         linkLabel: "查看 GitHub",
-        icon: "fab fa-github",
+        icon: "github",
       },
       {
         title: "Docker Hub",
         description: "面向 QA 团队的可复用数据库与测试环境镜像。",
         href: "https://hub.docker.com/u/xuxuclassmate",
         linkLabel: "查看 Docker Hub",
-        icon: "fab fa-docker",
+        icon: "docker",
       },
       {
         title: "ClawHub",
@@ -152,7 +170,7 @@ export const zh: LocaleCopy = {
           "可安装的 OpenClaw Agent 技能——用例生成器与交易助手。",
         href: "https://clawhub.ai",
         linkLabel: "访问 ClawHub",
-        icon: "fas fa-robot",
+        icon: "robot",
       },
     ],
     links: [
@@ -177,17 +195,17 @@ export const zh: LocaleCopy = {
       {
         href: "https://github.com/XuXuClassMate",
         label: "GitHub",
-        icon: "fab fa-github",
+        icon: "github",
       },
       {
         href: "https://fgg6gzb6uk.feishu.cn/docx/LkwDdpLjnoIdGwxOH6zcRwEWnhd?from=from_copylink",
         label: "博客",
-        icon: "fas fa-blog",
+        icon: "blog",
       },
       {
         href: "#",
         label: "微信",
-        icon: "fab fa-weixin",
+        icon: "wechat",
         wechat: true,
       },
     ],
@@ -296,17 +314,17 @@ export const zh: LocaleCopy = {
       {
         href: "https://github.com/XuXuClassMate",
         label: "GitHub",
-        icon: "fab fa-github",
+        icon: "github",
       },
       {
         href: "https://hub.docker.com/u/xuxuclassmate",
         label: "Docker Hub",
-        icon: "fab fa-docker",
+        icon: "docker",
       },
       {
         href: "https://medium.com/@xuxuclassmate",
         label: "Medium",
-        icon: "fab fa-medium",
+        icon: "medium",
       },
     ],
   },
@@ -323,10 +341,15 @@ export const zh: LocaleCopy = {
           "多模态 QA 输入（PDF、Word、图片、视频）→ 结构化用例，含测试/开发/产品三角色评审。支持 Docker、npm、OpenClaw 插件，并在 ClawHub 发布为 AI Test Case Generator。",
         tags: ["TypeScript", "多模态 AI", "ClawHub"],
         href: "https://github.com/XuXuClassMate/testcase-generator",
-        linkLabel: "查看 GitHub",
+        linkLabel: "GitHub",
         ctaHref: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
         ctaLabel: "Docker Hub",
         category: "AI",
+        image: "/images/cover-testcase.jpg",
+        imageAlt: "AI 测试用例生成器封面",
+        slug: "testcase-generator",
+        caseHref: "/zh/work/testcase-generator.html",
+        caseLabel: "案例详解",
       },
       {
         title: "Trading Assistant Core",
@@ -334,10 +357,15 @@ export const zh: LocaleCopy = {
           "OpenClaw Agent 技能：支撑阻力、多指标信号、仓位与风险提醒。可通过 ClawHub、Docker 或 pip / `ta` CLI 安装。",
         tags: ["Agent 技能", "ClawHub", "CLI"],
         href: "https://github.com/XuXuClassMate/trading-assistant",
-        linkLabel: "查看 GitHub",
+        linkLabel: "GitHub",
         ctaHref: "https://clawhub.ai",
         ctaLabel: "ClawHub",
         category: "AI",
+        image: "/images/cover-trading.jpg",
+        imageAlt: "Trading Assistant 封面",
+        slug: "trading-assistant",
+        caseHref: "/zh/work/trading-assistant.html",
+        caseLabel: "案例详解",
       },
       {
         title: "测试库 Docker 套件",
@@ -345,8 +373,13 @@ export const zh: LocaleCopy = {
           "面向 QA 环境的即用数据库镜像——达梦（约 3 万次拉取）、瀚高（约 1.7 万）、人大金仓、TiDB 等，见 Docker Hub。",
         tags: ["Docker", "Dameng", "Highgo"],
         href: "https://hub.docker.com/u/xuxuclassmate",
-        linkLabel: "查看 Docker Hub",
+        linkLabel: "Docker Hub",
         category: "Infra",
+        image: "/images/cover-docker.jpg",
+        imageAlt: "测试库 Docker 套件封面",
+        slug: "docker-suite",
+        caseHref: "/zh/work/docker-suite.html",
+        caseLabel: "案例详解",
       },
       {
         title: "自动化框架手艺",
@@ -354,8 +387,13 @@ export const zh: LocaleCopy = {
           "可复用的接口 / UI 自动化模式与练习项目——AI 工具底下的手艺底座，不绑死某一种语言。",
         tags: ["Framework", "API", "Playwright"],
         href: "https://github.com/XuXuClassMate/My_Test_JAProject",
-        linkLabel: "查看 GitHub",
+        linkLabel: "GitHub",
         category: "Automation",
+        image: "/images/cover-automation.jpg",
+        imageAlt: "自动化框架封面",
+        slug: "automation-framework",
+        caseHref: "/zh/work/automation-framework.html",
+        caseLabel: "案例详解",
       },
     ],
     approachTitle: "项目怎么交付",
@@ -376,21 +414,26 @@ export const zh: LocaleCopy = {
           "TypeScript、Python、Java 或其他都行——约束是交付质量，不是语言身份。",
       },
     ],
-    skillsTitle: "技术能力",
+    skillsTitle: "能力与证据",
     skills: [
       {
         title: "AI 工具与 Agent",
-        progress: 90,
         items: [
           "OpenClaw / ClawHub 技能设计",
           "多模态用例生成",
           "LLM 评审与导出流水线",
           "Docker / npm / pip 打包",
         ],
+        evidence: [
+          { label: "ClawHub", href: "https://clawhub.ai" },
+          {
+            label: "用例生成器",
+            href: "https://github.com/XuXuClassMate/testcase-generator",
+          },
+        ],
       },
       {
         title: "功能测试",
-        progress: 95,
         items: [
           "需求分析与测试用例设计",
           "黑盒测试与白盒测试",
@@ -400,17 +443,21 @@ export const zh: LocaleCopy = {
       },
       {
         title: "自动化测试",
-        progress: 95,
         items: [
-          "Web UI 自动化",
+          "Web UI 自动化（Playwright）",
           "接口自动化",
           "移动端自动化",
-          "自动化框架设计与开发",
+          "可复用框架设计",
+        ],
+        evidence: [
+          {
+            label: "框架仓库",
+            href: "https://github.com/XuXuClassMate/My_Test_JAProject",
+          },
         ],
       },
       {
         title: "性能测试",
-        progress: 90,
         items: [
           "压力测试与负载测试",
           "性能监控与分析",
@@ -420,13 +467,163 @@ export const zh: LocaleCopy = {
       },
       {
         title: "测试环境",
-        progress: 90,
         items: [
           "容器化数据库与服务栈",
           "CI/CD 流程优化",
           "国产与开源数据库镜像",
           "测试工具集成与管理",
         ],
+        evidence: [
+          {
+            label: "Docker Hub",
+            href: "https://hub.docker.com/u/xuxuclassmate",
+          },
+        ],
+      },
+    ],
+    caseBackLabel: "全部项目",
+    caseProblemTitle: "问题",
+    caseSolutionTitle: "方案",
+    caseOutcomesTitle: "交付物",
+    caseMetricsTitle: "证据",
+    caseLinksTitle: "链接",
+    cases: [
+      {
+        slug: "testcase-generator",
+        title: "AI 测试用例生成器",
+        subtitle: "案例详解",
+        description: "把多模态需求变成可评审、可导出的测试产物。",
+        cover: "/images/cover-testcase.jpg",
+        coverAlt: "AI 测试用例生成器",
+        problem:
+          "QA 团队要把 PDF、截图和零散说明整理成结构化用例，成本很高；没有评审闭环的 AI 草稿只会增加噪音。",
+        solution:
+          "搭建多模态流水线（PDF、Word、图片、视频），加入测试/开发/产品三角色评审，并打包为 Docker、npm 与 OpenClaw / ClawHub 技能。",
+        outcomes: [
+          "在 ClawHub 以 AI Test Case Generator 发布",
+          "提供 Docker Hub 与 npm 本地运行路径",
+          "支持导出 Excel / Markdown / XMind",
+        ],
+        metrics: [
+          { label: "ClawHub 安装", value: "700+" },
+          { label: "分发形态", value: "Docker · npm · 技能" },
+        ],
+        links: [
+          {
+            label: "GitHub",
+            href: "https://github.com/XuXuClassMate/testcase-generator",
+          },
+          {
+            label: "Docker Hub",
+            href: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
+          },
+          { label: "ClawHub", href: "https://clawhub.ai" },
+        ],
+        meta: {
+          title: "AI 测试用例生成器案例 | 旭旭同学",
+          description:
+            "旭旭同学如何交付带评审闭环、Docker/npm 打包与 ClawHub 分发的多模态 AI 用例生成器。",
+          keywords: `${sharedKeywords}, 用例生成器案例`,
+        },
+      },
+      {
+        slug: "trading-assistant",
+        title: "Trading Assistant Core",
+        subtitle: "案例详解",
+        description: "可安装的 OpenClaw 技能：信号、仓位与风险检查。",
+        cover: "/images/cover-trading.jpg",
+        coverAlt: "Trading Assistant Core",
+        problem:
+          "交易工作流停留在笔记本和聊天提示词里——Agent 无法安装带风险护栏的稳定技能。",
+        solution:
+          "将支撑阻力、多指标信号、仓位与风险提醒打包为 ClawHub 技能，并提供 Docker 与 pip / CLI 入口。",
+        outcomes: [
+          "作为可安装 OpenClaw / ClawHub 技能发布",
+          "提供非 Agent 场景的 CLI 与 Docker 路径",
+          "以风险优先默认值替代纯信号演示",
+        ],
+        metrics: [
+          { label: "ClawHub 安装", value: "900+" },
+          { label: "使用面", value: "技能 · Docker · CLI" },
+        ],
+        links: [
+          {
+            label: "GitHub",
+            href: "https://github.com/XuXuClassMate/trading-assistant",
+          },
+          { label: "ClawHub", href: "https://clawhub.ai" },
+        ],
+        meta: {
+          title: "Trading Assistant 案例 | 旭旭同学",
+          description:
+            "旭旭同学如何把 Trading Assistant Core 打包为 OpenClaw / ClawHub 技能，并支持 Docker 与 CLI。",
+          keywords: `${sharedKeywords}, 交易助手案例`,
+        },
+      },
+      {
+        slug: "docker-suite",
+        title: "测试库 Docker 套件",
+        subtitle: "案例详解",
+        description: "让 QA 环境几分钟就绪，而不是几天。",
+        cover: "/images/cover-docker.jpg",
+        coverAlt: "测试库 Docker 套件",
+        problem:
+          "国产与开源数据库对 QA 来说难拉起——缺少文档化安装会卡住自动化与新人上手。",
+        solution:
+          "在 Docker Hub 发布达梦、瀚高、人大金仓、TiDB 等即用镜像，统一标签与文档。",
+        outcomes: [
+          "达梦与瀚高镜像被大量 QA 团队使用",
+          "CI 可复用的 pull-and-run 流程",
+          "成为 AI 工具演示下的可复用底座",
+        ],
+        metrics: [
+          { label: "达梦拉取", value: "3 万+" },
+          { label: "瀚高拉取", value: "1.7 万+" },
+        ],
+        links: [
+          {
+            label: "Docker Hub",
+            href: "https://hub.docker.com/u/xuxuclassmate",
+          },
+        ],
+        meta: {
+          title: "测试库 Docker 套件案例 | 旭旭同学",
+          description:
+            "旭旭同学如何交付达梦、瀚高等 Docker 数据库镜像，服务可复用 QA 环境。",
+          keywords: `${sharedKeywords}, Docker 测试库案例`,
+        },
+      },
+      {
+        slug: "automation-framework",
+        title: "自动化框架手艺",
+        subtitle: "案例详解",
+        description: "AI 工具底下可复用的自动化模式。",
+        cover: "/images/cover-automation.jpg",
+        coverAlt: "自动化框架手艺",
+        problem:
+          "一次性脚本经不起团队交接——AI 工具需要底下的稳定自动化手艺。",
+        solution:
+          "沉淀接口与 UI 自动化（含 Playwright）的练习框架，强调复用、清晰与语言灵活。",
+        outcomes: [
+          "可复用的 API / UI 套件结构",
+          "反哺 AI 工具打包方式的模式",
+          "GitHub 上的开放练习项目",
+        ],
+        metrics: [
+          { label: "焦点", value: "API · UI · Playwright" },
+          { label: "约束", value: "交付质量" },
+        ],
+        links: [
+          {
+            label: "GitHub",
+            href: "https://github.com/XuXuClassMate/My_Test_JAProject",
+          },
+        ],
+        meta: {
+          title: "自动化框架案例 | 旭旭同学",
+          description: "支撑旭旭同学 AI 测试工具的可复用 API / UI 自动化手艺。",
+          keywords: `${sharedKeywords}, 自动化框架案例`,
+        },
       },
     ],
     footerDesc: "能安装的 AI 工具，信得过的质量",
@@ -434,17 +631,17 @@ export const zh: LocaleCopy = {
       {
         href: "https://github.com/XuXuClassMate",
         label: "GitHub",
-        icon: "fab fa-github",
+        icon: "github",
       },
       {
         href: "https://hub.docker.com/u/xuxuclassmate",
         label: "Docker Hub",
-        icon: "fab fa-docker",
+        icon: "docker",
       },
       {
         href: "https://blog.csdn.net/XuXuClassMate",
         label: "CSDN",
-        icon: "fab fa-blogger",
+        icon: "blogger",
       },
     ],
   },
@@ -483,20 +680,20 @@ export const zh: LocaleCopy = {
     hobbies: [
       {
         title: "阅读",
-        description: "喜欢阅读技术书籍和文学作品，探索不同的知识领域",
-        icon: "📚",
-        items: ["技术书籍", "科幻小说", "历史档案"],
+        description: "技术书与文学并读，保持对系统与故事的好奇。",
+        icon: "读",
+        items: ["技术书籍", "科幻小说", "历史"],
       },
       {
         title: "游戏",
-        description: "享受游戏带来的乐趣，同时学习游戏开发技术",
-        icon: "🎮",
-        items: ["角色扮演", "策略游戏", "独立游戏"],
+        description: "策略与 RPG，保持对系统与节奏的敏感。",
+        icon: "玩",
+        items: ["策略", "RPG", "独立游戏"],
       },
       {
         title: "运动",
-        description: "保持规律运动，享受运动带来的快乐",
-        icon: "🏃",
+        description: "规律运动，把屏幕外的节奏也练出来。",
+        icon: "行",
         items: ["徒步", "爬山", "羽毛球"],
       },
     ],
@@ -524,42 +721,41 @@ export const zh: LocaleCopy = {
       {
         href: "https://www.douyin.com/user/MS4wLjABAAAAXN8bo7p6CIUTCXg20Hthe1Jf3p44NRF9Xue4ms2NurE",
         label: "抖音",
-        icon: "fab fa-tiktok",
+        icon: "tiktok",
       },
       {
         href: "https://www.instagram.com/xuxuclassmate",
         label: "Instagram",
-        icon: "fab fa-instagram",
+        icon: "instagram",
       },
       {
         href: "#",
         label: "微信",
-        icon: "fab fa-weixin",
+        icon: "wechat",
         wechat: true,
       },
     ],
   },
   notFound: {
-    title: "Uh-oh! Page Missing",
-    message:
-      "This page seems to have taken a coffee break ☕. Let’s get you back on track!",
-    homeLabel: "Back to Home",
+    title: "页面走丢了",
+    message: "这个地址好像去喝咖啡了。我们带你回主页。",
+    homeLabel: "返回首页",
     footerDesc: "用质量思维建造 AI 工具",
     social: [
       {
         href: "https://github.com/XuXuClassMate",
         label: "GitHub",
-        icon: "fab fa-github",
+        icon: "github",
       },
       {
         href: "https://fgg6gzb6uk.feishu.cn/docx/LkwDdpLjnoIdGwxOH6zcRwEWnhd?from=from_copylink",
         label: "Blog",
-        icon: "fas fa-blog",
+        icon: "blog",
       },
       {
         href: "#",
         label: "WeChat",
-        icon: "fab fa-weixin",
+        icon: "wechat",
         wechat: true,
       },
     ],

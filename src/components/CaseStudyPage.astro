@@ -1,0 +1,117 @@
+---
+import Contact from "./Contact.astro";
+import Footer from "./Footer.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCase, getCopy, pageHref, type CaseSlug, type Locale } from "../lib/i18n";
+
+type Props = {
+  locale: Locale;
+  slug: CaseSlug;
+};
+
+const { locale, slug } = Astro.props;
+const copy = getCopy(locale);
+const page = copy.work;
+const study = getCase(locale, slug);
+
+if (!study) {
+  throw new Error(`Unknown case study: ${slug}`);
+}
+---
+
+<BaseLayout
+  locale={locale}
+  page="work"
+  caseSlug={slug}
+  metaOverride={study.meta}
+>
+  <main id="main-content" class="case-page">
+    <section class="hero hero--case">
+      <div class="hero-atmosphere" aria-hidden="true"></div>
+      <div class="container hero-content reveal">
+        <a class="case-back" href={pageHref(locale, "work")}>
+          ← {page.caseBackLabel}
+        </a>
+        <span class="subtitle">{study.subtitle}</span>
+        <h1 class="hero-title">{study.title}</h1>
+        <p class="hero-desc">{study.description}</p>
+      </div>
+    </section>
+
+    <section class="case-cover">
+      <div class="container">
+        <img
+          class="case-cover-image reveal-on-scroll"
+          src={study.cover}
+          alt={study.coverAlt}
+          width="960"
+          height="540"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+    </section>
+
+    <section class="case-body">
+      <div class="container case-grid">
+        <article class="case-block reveal-on-scroll">
+          <h2>{page.caseProblemTitle}</h2>
+          <p>{study.problem}</p>
+        </article>
+        <article class="case-block reveal-on-scroll">
+          <h2>{page.caseSolutionTitle}</h2>
+          <p>{study.solution}</p>
+        </article>
+        <article class="case-block reveal-on-scroll">
+          <h2>{page.caseOutcomesTitle}</h2>
+          <ul>
+            {study.outcomes.map((item) => <li>{item}</li>)}
+          </ul>
+        </article>
+        <article class="case-block reveal-on-scroll">
+          <h2>{page.caseMetricsTitle}</h2>
+          <div class="case-metrics">
+            {
+              study.metrics.map((metric) => (
+                <div class="case-metric">
+                  <span class="case-metric-value">{metric.value}</span>
+                  <span class="case-metric-label">{metric.label}</span>
+                </div>
+              ))
+            }
+          </div>
+        </article>
+        <article class="case-block reveal-on-scroll">
+          <h2>{page.caseLinksTitle}</h2>
+          <div class="project-links">
+            {
+              study.links.map((link) => (
+                <a
+                  href={link.href}
+                  class="project-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {link.label}
+                </a>
+              ))
+            }
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <Contact
+    label={copy.contactLabel}
+    hint={copy.contactHint}
+    copyLabel={copy.copyEmail}
+    copiedLabel={copy.copiedEmail}
+  />
+  <Footer
+    brand={copy.brand}
+    description={page.footerDesc}
+    copyright={copy.copyright}
+    social={page.social}
+  />
+</BaseLayout>
