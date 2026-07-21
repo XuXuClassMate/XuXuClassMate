@@ -30,9 +30,9 @@ export function languageHref(locale: Locale, page: PageId): string {
 export function canonicalPath(locale: Locale, page: PageId, rootHome = false): string {
   if (page === "home") {
     if (rootHome) return "/";
-    return locale === "zh" ? "/zh/index.html" : "/en/index.html";
+    return locale === "zh" ? "/zh/" : "/en/";
   }
-  return pageHref(locale, page);
+  return `/${locale}/${page}`;
 }
 
 export function absoluteUrl(path: string): string {
@@ -53,14 +53,94 @@ export function hreflangLinks(
     ];
   }
 
-  const enPath = page === "home" ? "/en/index.html" : pageHref("en", page);
-  const zhPath = page === "home" ? "/zh/index.html" : pageHref("zh", page);
+  const enPath = page === "home" ? "/en/" : `/en/${page}`;
+  const zhPath = page === "home" ? "/zh/" : `/zh/${page}`;
 
   return [
     { hreflang: "en", href: absoluteUrl(enPath) },
     { hreflang: "zh", href: absoluteUrl(zhPath) },
     { hreflang: "x-default", href: absoluteUrl(enPath) },
   ];
+}
+
+export function jsonLdGraph(locale: Locale, page: PageId, rootHome = false) {
+  const copy = getCopy(locale);
+  const meta = copy.meta[page];
+  const pageUrl = absoluteUrl(canonicalPath(locale, page, rootHome));
+  const isZh = locale === "zh";
+
+  const person = {
+    "@type": "Person",
+    "@id": `${SITE_ORIGIN}/#person`,
+    name: isZh ? "旭旭同学" : "XuXuClassMate",
+    alternateName: isZh
+      ? ["XuXuClassMate", "xuxuclassmate"]
+      : ["旭旭同学", "xuxuclassmate"],
+    url: SITE_ORIGIN,
+    email: CONTACT_EMAIL,
+    jobTitle: isZh
+      ? "质量工程师 / AI 测试工具作者"
+      : "QA Engineer / AI Testing Tool Builder",
+    description: meta.description,
+    image: absoluteUrl("/images/logo.svg"),
+    sameAs: [
+      "https://github.com/XuXuClassMate",
+      "https://hub.docker.com/u/xuxuclassmate",
+      "https://clawhub.ai",
+      "https://medium.com/@xuxuclassmate",
+      "https://blog.csdn.net/XuXuClassMate",
+    ],
+    knowsAbout: isZh
+      ? [
+          "软件测试",
+          "自动化测试",
+          "AI 测试",
+          "测试用例生成",
+          "接口测试",
+          "性能测试",
+          "Playwright",
+          "Docker 测试环境",
+          "OpenClaw",
+          "质量工程",
+        ]
+      : [
+          "Software testing",
+          "Test automation",
+          "AI testing",
+          "Test case generation",
+          "API testing",
+          "Performance testing",
+          "Playwright",
+          "Docker test environments",
+          "OpenClaw",
+          "Quality engineering",
+        ],
+  };
+
+  const website = {
+    "@type": "WebSite",
+    "@id": `${SITE_ORIGIN}/#website`,
+    name: isZh ? "旭旭同学" : "XuXuClassMate",
+    url: SITE_ORIGIN,
+    inLanguage: ["en", "zh"],
+    publisher: { "@id": `${SITE_ORIGIN}/#person` },
+  };
+
+  const webPage = {
+    "@type": "WebPage",
+    "@id": `${pageUrl}#webpage`,
+    url: pageUrl,
+    name: meta.title,
+    description: meta.description,
+    isPartOf: { "@id": `${SITE_ORIGIN}/#website` },
+    about: { "@id": `${SITE_ORIGIN}/#person` },
+    inLanguage: locale,
+  };
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [person, website, webPage],
+  };
 }
 
 export type { Locale, PageId, LocaleCopy };

@@ -23,10 +23,11 @@ describe("i18n paths", () => {
 
   it("builds canonicals for root and locale homes", () => {
     expect(canonicalPath("en", "home", true)).toBe("/");
-    expect(canonicalPath("en", "home", false)).toBe("/en/index.html");
-    expect(canonicalPath("zh", "home")).toBe("/zh/index.html");
-    expect(absoluteUrl("/en/life.html")).toBe(
-      "https://www.xuxuclassmate.com/en/life.html",
+    expect(canonicalPath("en", "home", false)).toBe("/en/");
+    expect(canonicalPath("zh", "home")).toBe("/zh/");
+    expect(canonicalPath("en", "learn")).toBe("/en/learn");
+    expect(absoluteUrl("/en/life")).toBe(
+      "https://www.xuxuclassmate.com/en/life",
     );
   });
 });
