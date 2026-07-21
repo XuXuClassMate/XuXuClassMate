@@ -81,21 +81,26 @@ test("home live metrics hydrate from api payload", async ({ page }) => {
       body: JSON.stringify({
         "clawhub:ai-testcase-generator": 1200,
         "clawhub:trading-assistant-core": 1500,
+        "clawhub:total-downloads": 2700,
         "docker:dameng": 30000,
         "docker:highgo": 17000,
         "docker:kingbase": 2000,
         "docker:tidb": 1000,
+        "docker:total-pulls": 60000,
+        "docker:repo-count": 12,
+        "api:gateway-calls": 800,
         updatedAt: new Date().toISOString(),
       }),
     });
   });
   await page.goto("/");
-  const testcase = page.locator('[data-metric="clawhub:ai-testcase-generator"]');
-  const kingbase = page.locator('[data-metric="docker:kingbase"]');
-  await testcase.scrollIntoViewIfNeeded();
-  await kingbase.scrollIntoViewIfNeeded();
-  await expect(testcase).toHaveText("1.2k+", { timeout: 5000 });
-  await expect(kingbase).toHaveText("2k+", { timeout: 5000 });
+  const dockerTotal = page.locator('[data-metric="docker:total-pulls"]');
+  const clawhubTotal = page.locator('[data-metric="clawhub:total-downloads"]');
+  const apiCalls = page.locator('[data-metric="api:gateway-calls"]');
+  await dockerTotal.scrollIntoViewIfNeeded();
+  await expect(dockerTotal).toHaveText("60k+", { timeout: 5000 });
+  await expect(clawhubTotal).toHaveText("2.7k+", { timeout: 5000 });
+  await expect(apiCalls).toHaveText("800", { timeout: 5000 });
 });
 
 test("life page shows four hobbies and blog in both locales", async ({ page }) => {

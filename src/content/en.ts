@@ -99,34 +99,24 @@ export const en: LocaleCopy = {
     highlightsTitle: "By the Numbers",
     highlights: [
       {
-        value: "700+",
-        label: "ClawHub AI Test Case Generator installs",
-        metric: "clawhub:ai-testcase-generator",
-      },
-      {
-        value: "900+",
-        label: "ClawHub Trading Assistant Core installs",
-        metric: "clawhub:trading-assistant-core",
-      },
-      {
-        value: "30k+",
-        label: "Dameng Docker pulls",
-        metric: "docker:dameng",
-      },
-      {
-        value: "17k+",
-        label: "Highgo Docker pulls",
-        metric: "docker:highgo",
+        value: "54k+",
+        label: "Docker Hub pulls across all images",
+        metric: "docker:total-pulls",
       },
       {
         value: "1.6k+",
-        label: "Kingbase Docker pulls",
-        metric: "docker:kingbase",
+        label: "ClawHub skill downloads",
+        metric: "clawhub:total-downloads",
       },
       {
-        value: "900+",
-        label: "TiDB Docker pulls",
-        metric: "docker:tidb",
+        value: "500+",
+        label: "Docker Hub API Gateway requests",
+        metric: "api:gateway-calls",
+      },
+      {
+        value: "12",
+        label: "Published Docker images",
+        metric: "docker:repo-count",
       },
     ],
     featuredTitle: "Featured Work",

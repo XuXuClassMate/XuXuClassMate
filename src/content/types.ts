@@ -5,10 +5,14 @@ export type PageId = "home" | "life" | "learn" | "work";
 export type MetricId =
   | "clawhub:ai-testcase-generator"
   | "clawhub:trading-assistant-core"
+  | "clawhub:total-downloads"
   | "docker:dameng"
   | "docker:highgo"
   | "docker:kingbase"
-  | "docker:tidb";
+  | "docker:tidb"
+  | "docker:total-pulls"
+  | "docker:repo-count"
+  | "api:gateway-calls";
 
 export type IconName =
   | "github"
