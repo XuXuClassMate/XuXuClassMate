@@ -1,4 +1,5 @@
 ---
+import BackNav from "./BackNav.astro";
 import Contact from "./Contact.astro";
 import Footer from "./Footer.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
@@ -16,6 +17,7 @@ const copy = getCopy(locale);
 const page = copy.notes;
 const note = getNote(locale, slug);
 const metrics = await getMetrics();
+const notesHref = pageHref(locale, "notes");
 
 if (!note) {
   throw new Error(`Unknown note: ${slug}`);
@@ -34,9 +36,7 @@ const ctas = note.ctas ?? [];
     <section class="hero hero--case">
       <div class="hero-atmosphere" aria-hidden="true"></div>
       <div class="container hero-content reveal">
-        <a class="case-back" href={pageHref(locale, "notes")}>
-          ← {page.backLabel}
-        </a>
+        <BackNav href={notesHref} label={page.backLabel} />
         <span class="subtitle">{page.subtitle}</span>
         <h1 class="hero-title">{note.title}</h1>
         <p class="hero-desc">{note.description}</p>
@@ -216,7 +216,7 @@ const ctas = note.ctas ?? [];
 
           {
             ctas.length > 0 ? (
-              <p class="note-cta reveal-on-scroll">
+              <div class="note-cta reveal-on-scroll">
                 {ctas.map((cta) => (
                   <a
                     class={cta.primary ? "btn-primary" : "btn-ghost"}
@@ -227,12 +227,24 @@ const ctas = note.ctas ?? [];
                     {cta.label}
                   </a>
                 ))}
-                <a class="btn-ghost" href={pageHref(locale, "notes")}>
-                  {page.backLabel}
-                </a>
-              </p>
+              </div>
             ) : null
           }
+        </div>
+      </div>
+    </section>
+
+    <section class="back-nav-footer">
+      <div class="container">
+        <div class="back-nav-footer-panel">
+          <p class="back-nav-footer-hint">
+            {
+              locale === "zh"
+                ? "看完了？回到笔记列表继续浏览。"
+                : "Done reading? Return to all notes."
+            }
+          </p>
+          <BackNav href={notesHref} label={page.backLabel} prominent />
         </div>
       </div>
     </section>

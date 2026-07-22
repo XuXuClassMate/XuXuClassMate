@@ -1,4 +1,5 @@
 ---
+import BackNav from "./BackNav.astro";
 import Contact from "./Contact.astro";
 import Footer from "./Footer.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
@@ -15,6 +16,7 @@ const copy = getCopy(locale);
 const page = copy.work;
 const study = getCase(locale, slug);
 const metrics = await getMetrics();
+const workHref = pageHref(locale, "work");
 
 if (!study) {
   throw new Error(`Unknown case study: ${slug}`);
@@ -35,9 +37,7 @@ const coverDark =
     <section class="hero hero--case">
       <div class="hero-atmosphere" aria-hidden="true"></div>
       <div class="container hero-content reveal">
-        <a class="case-back" href={pageHref(locale, "work")}>
-          ← {page.caseBackLabel}
-        </a>
+        <BackNav href={workHref} label={page.caseBackLabel} />
         <span class="subtitle">{study.subtitle}</span>
         <h1 class="hero-title">{study.title}</h1>
         <p class="hero-desc">{study.description}</p>
@@ -184,6 +184,21 @@ const coverDark =
             }
           </div>
         </article>
+      </div>
+    </section>
+
+    <section class="back-nav-footer">
+      <div class="container">
+        <div class="back-nav-footer-panel">
+          <p class="back-nav-footer-hint">
+            {
+              locale === "zh"
+                ? "看完了？回到项目列表继续浏览。"
+                : "Done reading? Return to the project gallery."
+            }
+          </p>
+          <BackNav href={workHref} label={page.caseBackLabel} prominent />
+        </div>
       </div>
     </section>
   </main>
