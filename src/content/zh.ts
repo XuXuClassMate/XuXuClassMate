@@ -18,7 +18,7 @@ export const zh: LocaleCopy = {
     "AI 测试工具 / ClawHub 技能定制",
     "测试团队管理顾问（初创 → 规模化）",
     "数据库 / Docker 测试环境落地",
-    "加入 InnoNestX 开源项目——一起学习、一起做",
+    "加入 InnoNestX 开源项目 —— 一起学习、一起做",
   ],
   copyEmail: "复制邮箱",
   copiedEmail: "已复制",
