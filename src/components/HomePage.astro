@@ -1,4 +1,5 @@
 ---
+import Contact from "./Contact.astro";
 import Footer from "./Footer.astro";
 import WechatModal from "./WechatModal.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
@@ -7,7 +8,6 @@ import {
   getPortfolioHome,
 } from "../content/portfolio-home";
 import { getCopy, pageHref, type Locale } from "../lib/i18n";
-import { CONTACT_EMAIL } from "../lib/i18n";
 import { getMetrics, resolveMetric } from "../lib/metrics";
 
 type Props = {
@@ -247,24 +247,16 @@ const highlights = copy.home.highlights;
       </div>
     </section>
 
-    <section class="home-section connect-section" id="contact">
-      <div class="container">
-        <h2 class="section-title reveal-on-scroll">{home.connectTitle}</h2>
-        <div class="connect-links reveal-on-scroll">
-          <a
-            href={home.connectGithub}
-            target="_blank"
-            rel="noopener noreferrer">GitHub</a
-          >
-          <a href={`mailto:${CONTACT_EMAIL}`}>Email</a>
-        </div>
-        <p class="connect-email reveal-on-scroll">
-          <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
-        </p>
-      </div>
     </section>
   </main>
 
+  <Contact
+    label={copy.contactLabel}
+    hint={copy.contactHint}
+    offers={copy.contactOffers}
+    copyLabel={copy.copyEmail}
+    copiedLabel={copy.copiedEmail}
+  />
   <Footer
     brand={copy.brand}
     description={copy.home.footerDesc}
