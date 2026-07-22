@@ -188,20 +188,27 @@ test("open source page introduces InnoNestX", async ({ page }) => {
     "Open Source",
   );
   await expect(page.getByRole("heading", { name: "What InnoNestX is" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "AI" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Testing" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "AI", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Testing", exact: true })).toBeVisible();
   await expect(
-    page.getByRole("heading", { name: "Developer Tools" }),
+    page.getByRole("heading", { name: "Developer Tools", exact: true }),
   ).toBeVisible();
   await expect(
-    page.getByRole("heading", { name: "Infrastructure" }),
+    page.getByRole("heading", { name: "Infrastructure", exact: true }),
   ).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Automation" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "GlobalPulse" })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Automation", exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "GlobalPulse", exact: true }),
+  ).toBeVisible();
   await expect(page.getByRole("heading", { name: "Join & contact" })).toBeVisible();
   await expect(
     page.getByRole("link", { name: "GitHub organization" }).first(),
   ).toHaveAttribute("href", "https://github.com/InnoNestX");
+  await expect(
+    page.getByRole("link", { name: "Try on Playground" }),
+  ).toHaveAttribute("href", "/en/playground.html");
   await expect(page.locator(".nav-more-toggle")).toHaveClass(/active/);
   await expect(
     page.locator(".nav-more-menu .nav-item.active"),
@@ -213,28 +220,58 @@ test("desktop nav keeps primary links and a compact More menu", async ({
 }) => {
   await page.setViewportSize({ width: 1280, height: 800 });
   await page.goto("/");
-  await expect(page.getByRole("link", { name: "About", exact: true })).toBeVisible();
+  const nav = page.getByRole("navigation", { name: "Primary" });
+  await expect(nav.getByRole("link", { name: "About", exact: true })).toBeVisible();
   await expect(
-    page.getByRole("link", { name: "Experience", exact: true }),
+    nav.getByRole("link", { name: "Experience", exact: true }),
   ).toBeVisible();
   await expect(
-    page.getByRole("link", { name: "Projects", exact: true }),
+    nav.getByRole("link", { name: "Projects", exact: true }),
   ).toBeVisible();
   await expect(
-    page.getByRole("link", { name: "AI Testing", exact: true }),
+    nav.getByRole("link", { name: "AI Testing", exact: true }),
   ).toBeVisible();
-  await expect(page.getByRole("link", { name: "Notes", exact: true })).toBeVisible();
+  await expect(nav.getByRole("link", { name: "Notes", exact: true })).toBeVisible();
   await expect(page.getByRole("button", { name: /More/ })).toBeVisible();
-  await expect(page.getByRole("link", { name: "EN" })).toBeVisible();
+  await expect(nav.getByRole("link", { name: "EN" })).toBeVisible();
   await expect(page.locator("#themeToggle")).toBeVisible();
   await page.getByRole("button", { name: /More/ }).click();
   await expect(
     page.getByRole("menuitem", { name: "Open Source" }),
   ).toBeVisible();
+  await expect(page.getByRole("menuitem", { name: "Playground" })).toBeVisible();
   await expect(page.getByRole("menuitem", { name: "Life" })).toBeVisible();
   await expect(page.getByRole("menuitem", { name: "Contact" })).toBeVisible();
   const moreItems = page.locator(".nav-more-menu .nav-item");
-  await expect(moreItems).toHaveText(["Open Source", "Life", "Contact"]);
+  await expect(moreItems).toHaveText([
+    "Open Source",
+    "Playground",
+    "Life",
+    "Contact",
+  ]);
+});
+
+test("playground page lists tryable experiences", async ({ page }) => {
+  await page.goto("/en/playground.html");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Playground");
+  await expect(
+    page.getByRole("heading", { name: "AI Test Case Generator" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Docker Hub API Gateway" }),
+  ).toBeVisible();
+  await expect(page.getByRole("heading", { name: "GlobalPulse" })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Test DB Docker Suite" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Open interactive demo" }),
+  ).toHaveAttribute("href", "/en/demo/ai-testcase-generator.html");
+  await expect(page.locator("#try-docker-hub-api")).toBeVisible();
+  await expect(page.locator(".nav-more-toggle")).toHaveClass(/active/);
+  await expect(
+    page.locator(".nav-more-menu .nav-item.active"),
+  ).toHaveText("Playground");
 });
 
 test("mobile nav is hamburger-only with a compact drawer", async ({
@@ -266,6 +303,7 @@ test("mobile nav is hamburger-only with a compact drawer", async ({
   await expect(
     page.getByRole("menuitem", { name: "Open Source" }),
   ).toBeVisible();
+  await expect(page.getByRole("menuitem", { name: "Playground" })).toBeVisible();
   await expect(page.getByRole("menuitem", { name: "Life" })).toBeVisible();
   await expect(page.getByRole("menuitem", { name: "Contact" })).toBeVisible();
   await expect(page.locator(".nav-links .language-switch")).toBeVisible();

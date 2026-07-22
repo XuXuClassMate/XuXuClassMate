@@ -1,0 +1,209 @@
+---
+import Contact from "./Contact.astro";
+import Footer from "./Footer.astro";
+import PageHero from "./PageHero.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getPlaygroundExperiences } from "../content/playground";
+import { getCopy, pageHref, type Locale } from "../lib/i18n";
+
+type Props = { locale: Locale };
+
+const { locale } = Astro.props;
+const copy = getCopy(locale);
+const page = copy.playground;
+const experiences = getPlaygroundExperiences(locale);
+const orgHref = pageHref(locale, "open-source");
+---
+
+<BaseLayout locale={locale} page="playground">
+  <main id="main-content" class="playground-page">
+    <PageHero
+      subtitle={page.subtitle}
+      title={page.title}
+      description={page.description}
+      actions={[
+        {
+          href: "#playground-experiences",
+          label: page.experiencesTitle,
+          primary: true,
+        },
+        {
+          href: orgHref,
+          label: page.openSourceLabel,
+        },
+      ]}
+    />
+
+    <section
+      class="playground-experiences"
+      id="playground-experiences"
+      aria-labelledby="playground-experiences-heading"
+    >
+      <div class="container">
+        <h2
+          class="section-title reveal-on-scroll"
+          id="playground-experiences-heading"
+        >
+          {page.experiencesTitle}
+        </h2>
+        <div class="playground-grid">
+          {
+            experiences.map((item, index) => (
+              <article
+                class={`playground-card reveal-on-scroll reveal-delay-${(index % 3) + 1}`}
+                id={`experience-${item.id}`}
+              >
+                <div class="playground-card-head">
+                  <h3>{item.title}</h3>
+                  <span
+                    class={`playground-mode playground-mode--${item.mode}`}
+                  >
+                    {item.modeLabel}
+                  </span>
+                </div>
+                <p>{item.description}</p>
+                <div class="playground-card-actions">
+                  <a
+                    class="btn-primary"
+                    href={item.ctaHref}
+                    target={item.ctaExternal ? "_blank" : undefined}
+                    rel={item.ctaExternal ? "noopener noreferrer" : undefined}
+                  >
+                    {item.ctaLabel}
+                  </a>
+                  {item.githubHref ? (
+                    <a
+                      class="project-link"
+                      href={item.githubHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {page.githubLabel}
+                    </a>
+                  ) : null}
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="playground-try"
+      id="try-docker-hub-api"
+      aria-labelledby="playground-try-heading"
+    >
+      <div class="container">
+        <div class="playground-try-panel reveal-on-scroll">
+          <h2 id="playground-try-heading">{page.tryTitle}</h2>
+          <p>{page.tryIntro}</p>
+          <form class="playground-try-form" data-playground-docker-form>
+            <label class="playground-try-label" for="playground-docker-user">
+              {page.tryUsernameLabel}
+            </label>
+            <div class="playground-try-row">
+              <input
+                id="playground-docker-user"
+                class="playground-try-input"
+                type="text"
+                name="username"
+                autocomplete="username"
+                spellcheck="false"
+                value={page.tryDefaultUsername}
+                data-playground-docker-user
+              />
+              <button
+                type="submit"
+                class="btn-primary"
+                data-playground-docker-submit
+              >
+                {page.tryButton}
+              </button>
+            </div>
+          </form>
+          <p
+            class="playground-try-status"
+            data-playground-docker-status
+            hidden
+          >
+          </p>
+          <div
+            class="playground-try-result"
+            data-playground-docker-result
+            hidden
+          >
+            <div>
+              <span class="playground-try-metric-label"
+                >{page.tryResultPulls}</span
+              >
+              <strong data-playground-docker-pulls>—</strong>
+            </div>
+            <div>
+              <span class="playground-try-metric-label"
+                >{page.tryResultRepos}</span
+              >
+              <strong data-playground-docker-repos>—</strong>
+            </div>
+          </div>
+          <p class="playground-try-empty" data-playground-docker-empty>
+            {page.tryEmpty}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="playground-modes" aria-labelledby="playground-modes-heading">
+      <div class="container">
+        <h2 class="section-title reveal-on-scroll" id="playground-modes-heading">
+          {page.modesTitle}
+        </h2>
+        <div class="playground-modes-grid">
+          {
+            page.modes.map((mode, index) => (
+              <article
+                class={`playground-mode-card reveal-on-scroll reveal-delay-${(index % 3) + 1}`}
+              >
+                <h3>{mode.label}</h3>
+                <p>{mode.description}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Contact
+    label={copy.contactLabel}
+    hint={copy.contactHint}
+    offers={copy.contactOffers}
+    copyLabel={copy.copyEmail}
+    copiedLabel={copy.copiedEmail}
+  />
+  <Footer
+    brand={copy.brand}
+    description={page.footerDesc}
+    copyright={copy.copyright}
+    social={page.social}
+  />
+
+  <script
+    is:inline
+    type="application/json"
+    id="playground-docker-i18n"
+    set:html={JSON.stringify({
+      loading: page.tryLoading,
+      error: page.tryError,
+      button: page.tryButton,
+    })}
+  ></script>
+  <script>
+    import { initPlaygroundDocker } from "../scripts/playground-docker";
+
+    const root = document.querySelector(".playground-page");
+    if (root instanceof HTMLElement) {
+      initPlaygroundDocker(root);
+    }
+  </script>
+</BaseLayout>

@@ -9,6 +9,7 @@ export type PageId =
   | "blog"
   | "innonestx"
   | "open-source"
+  | "playground"
   | "now"
   | "about"
   | "ai-testing"
@@ -285,6 +286,7 @@ export type LocaleCopy = {
     more?: string;
     innonestx?: string;
     openSource?: string;
+    playground?: string;
     now?: string;
   };
   meta: Record<PageId, PageMeta>;
@@ -423,6 +425,29 @@ export type LocaleCopy = {
     joinItems: string[];
     orgCtaLabel: string;
     orgCtaHref: string;
+    playgroundCtaLabel: string;
+    footerDesc: string;
+    social: SocialLink[];
+  };
+  playground: {
+    subtitle: string;
+    title: string;
+    description: string;
+    experiencesTitle: string;
+    modesTitle: string;
+    modes: Array<{ id: string; label: string; description: string }>;
+    githubLabel: string;
+    tryTitle: string;
+    tryIntro: string;
+    tryUsernameLabel: string;
+    tryButton: string;
+    tryLoading: string;
+    tryError: string;
+    tryEmpty: string;
+    tryResultPulls: string;
+    tryResultRepos: string;
+    tryDefaultUsername: string;
+    openSourceLabel: string;
     footerDesc: string;
     social: SocialLink[];
   };

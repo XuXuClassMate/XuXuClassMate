@@ -5,7 +5,7 @@ import Footer from "./Footer.astro";
 import PageHero from "./PageHero.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getGeneratorDemo, getGeneratorDemoPayload } from "../content/demo-generator";
-import { caseHref, getCopy, type Locale } from "../lib/i18n";
+import { caseHref, getCopy, pageHref, type Locale } from "../lib/i18n";
 
 type Props = { locale: Locale };
 
@@ -14,6 +14,7 @@ const copy = getCopy(locale);
 const demo = getGeneratorDemo(locale);
 const payload = getGeneratorDemoPayload(locale);
 const studyHref = caseHref(locale, "testcase-generator");
+const playgroundHref = pageHref(locale, "playground");
 const dockerHref =
   "https://hub.docker.com/r/xuxuclassmate/testcase-generator";
 ---
@@ -39,6 +40,7 @@ const dockerHref =
       actions={[
         { href: "#demo-workspace", label: demo.generateLabel, primary: true },
         { href: studyHref, label: demo.caseStudyLabel },
+        { href: playgroundHref, label: demo.playgroundLabel },
       ]}
     />
 
@@ -130,6 +132,7 @@ const dockerHref =
               {demo.dockerLabel}
             </a>
             <a class="btn-ghost" href={studyHref}>{demo.caseStudyLabel}</a>
+            <a class="btn-ghost" href={playgroundHref}>{demo.playgroundLabel}</a>
           </div>
         </div>
       </div>

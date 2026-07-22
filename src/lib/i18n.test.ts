@@ -23,6 +23,7 @@ describe("i18n paths", () => {
     expect(pageHref("en", "about")).toBe("/en/about.html");
     expect(pageHref("en", "innonestx")).toBe("/en/innonestx.html");
     expect(pageHref("en", "open-source")).toBe("/en/open-source.html");
+    expect(pageHref("en", "playground")).toBe("/en/playground.html");
     expect(pageHref("en", "now")).toBe("/en/now.html");
   });
 
