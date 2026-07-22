@@ -934,10 +934,10 @@ export const en: LocaleCopy = {
     subtitle: "NOTES",
     title: "Practical Notes",
     description:
-      "Searchable write-ups on domestic DB Docker setups and shipping installable ClawHub skills.",
+      "Long-form field notes with live Docker / ClawHub numbers — domestic DB environments and installable agent skills.",
     backLabel: "All notes",
-    readingLabel: "min read",
-    publishedLabel: "Published",
+    tocLabel: "On this page",
+    relatedLabel: "Related",
     items: getNotes("en"),
     footerDesc: "Installable quality engineering — written down",
     social: [...homeSocial],

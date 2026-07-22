@@ -912,10 +912,11 @@ export const zh: LocaleCopy = {
   notes: {
     subtitle: "笔记",
     title: "实操笔记",
-    description: "关于国产库 Docker 与 ClawHub 技能发布的可检索长文。",
+    description:
+      "带实时 Docker / ClawHub 数据的长文——国产库测试环境与可安装 Agent 技能。",
     backLabel: "全部笔记",
-    readingLabel: "分钟阅读",
-    publishedLabel: "发布于",
+    tocLabel: "本页目录",
+    relatedLabel: "相关链接",
     items: getNotes("zh"),
     footerDesc: "可安装的质量工程——写下来",
     social: [

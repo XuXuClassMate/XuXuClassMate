@@ -3,6 +3,7 @@ import Contact from "./Contact.astro";
 import Footer from "./Footer.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCopy, getNote, pageHref, type Locale } from "../lib/i18n";
+import { getMetrics, resolveMetric } from "../lib/metrics";
 import type { NoteSlug } from "../content/types";
 
 type Props = {
@@ -14,10 +15,13 @@ const { locale, slug } = Astro.props;
 const copy = getCopy(locale);
 const page = copy.notes;
 const note = getNote(locale, slug);
+const metrics = await getMetrics();
 
 if (!note) {
   throw new Error(`Unknown note: ${slug}`);
 }
+
+const ctas = note.ctas ?? [];
 ---
 
 <BaseLayout
@@ -36,54 +40,200 @@ if (!note) {
         <span class="subtitle">{page.subtitle}</span>
         <h1 class="hero-title">{note.title}</h1>
         <p class="hero-desc">{note.description}</p>
-        <p class="note-byline">
-          <span>
-            {page.publishedLabel}
-            <time datetime={note.publishedAt}>{note.publishedAt}</time>
-          </span>
-          <span>
-            {note.readingMinutes} {page.readingLabel}
-          </span>
-        </p>
+        {
+          note.proof ? (
+            <p class="note-proof">{note.proof}</p>
+          ) : null
+        }
+        <ul class="note-tags note-tags--hero">
+          {note.tags.map((tag) => (
+            <li>{tag}</li>
+          ))}
+        </ul>
       </div>
     </section>
 
     <section class="note-body">
-      <div class="container note-prose">
-        {
-          note.sections.map((section) => (
-            <article class="note-section reveal-on-scroll">
-              <h2>{section.heading}</h2>
-              {section.paragraphs.map((paragraph) => (
-                <p>{paragraph}</p>
-              ))}
-              {section.bullets && section.bullets.length > 0 ? (
+      <div class="container note-layout">
+        <aside class="note-toc reveal-on-scroll">
+          <p class="note-toc-label">{page.tocLabel}</p>
+          <nav aria-label={page.tocLabel}>
+            <ol>
+              {
+                note.sections.map((section) => (
+                  <li>
+                    <a href={`#${section.id}`}>{section.heading}</a>
+                  </li>
+                ))
+              }
+            </ol>
+          </nav>
+        </aside>
+
+        <div class="note-prose">
+          {
+            note.sections.map((section) => (
+              <article class="note-section reveal-on-scroll" id={section.id}>
+                <h2>{section.heading}</h2>
+                {section.paragraphs?.map((paragraph) => (
+                  <p>{paragraph}</p>
+                ))}
+                {section.stats && section.stats.length > 0 ? (
+                  <div class="note-stats">
+                    {section.stats.map((stat) => {
+                      const value = resolveMetric(
+                        metrics,
+                        stat.metric,
+                        stat.value,
+                      );
+                      const inner = (
+                        <>
+                          <span
+                            class="note-stat-value"
+                            {...(stat.metric
+                              ? {
+                                  "data-metric": stat.metric,
+                                  "data-metric-fallback": stat.value,
+                                }
+                              : {})}
+                          >
+                            {value}
+                          </span>
+                          <span class="note-stat-label">{stat.label}</span>
+                        </>
+                      );
+                      return stat.href ? (
+                        <a
+                          class="note-stat"
+                          href={stat.href}
+                          target={stat.href.startsWith("http") ? "_blank" : undefined}
+                          rel={
+                            stat.href.startsWith("http")
+                              ? "noopener noreferrer"
+                              : undefined
+                          }
+                        >
+                          {inner}
+                        </a>
+                      ) : (
+                        <div class="note-stat">{inner}</div>
+                      );
+                    })}
+                  </div>
+                ) : null}
+                {section.bullets && section.bullets.length > 0 ? (
+                  <ul>
+                    {section.bullets.map((bullet) => (
+                      <li>{bullet}</li>
+                    ))}
+                  </ul>
+                ) : null}
+                {section.code ? (
+                  <figure class="note-code">
+                    {section.code.label ? (
+                      <figcaption>{section.code.label}</figcaption>
+                    ) : null}
+                    <pre>
+                      <code>{section.code.content}</code>
+                    </pre>
+                  </figure>
+                ) : null}
+                {section.callout ? (
+                  <aside class="note-callout">
+                    {section.callout.title ? (
+                      <strong>{section.callout.title}</strong>
+                    ) : null}
+                    <p>{section.callout.body}</p>
+                  </aside>
+                ) : null}
+                {section.links && section.links.length > 0 ? (
+                  <div class="note-inline-links">
+                    {section.links.map((link) => (
+                      <a
+                        href={link.href}
+                        class="project-link"
+                        target={link.href.startsWith("http") ? "_blank" : undefined}
+                        rel={
+                          link.href.startsWith("http")
+                            ? "noopener noreferrer"
+                            : undefined
+                        }
+                      >
+                        {link.label}
+                      </a>
+                    ))}
+                  </div>
+                ) : null}
+              </article>
+            ))
+          }
+
+          {
+            note.embed ? (
+              <p class="note-embed reveal-on-scroll">
+                <a
+                  href={note.embed.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src={note.embed.src}
+                    alt={note.embed.alt}
+                    width="480"
+                    height="120"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </a>
+              </p>
+            ) : null
+          }
+
+          {
+            note.related && note.related.length > 0 ? (
+              <section class="note-related reveal-on-scroll">
+                <h2>{page.relatedLabel}</h2>
                 <ul>
-                  {section.bullets.map((bullet) => (
-                    <li>{bullet}</li>
+                  {note.related.map((item) => (
+                    <li>
+                      <a
+                        href={item.href}
+                        target={item.href.startsWith("http") ? "_blank" : undefined}
+                        rel={
+                          item.href.startsWith("http")
+                            ? "noopener noreferrer"
+                            : undefined
+                        }
+                      >
+                        {item.label}
+                      </a>
+                    </li>
                   ))}
                 </ul>
-              ) : null}
-            </article>
-          ))
-        }
-        {
-          note.cta ? (
-            <p class="note-cta reveal-on-scroll">
-              <a
-                class="btn-primary"
-                href={note.cta.href}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {note.cta.label}
-              </a>
-              <a class="btn-ghost" href={pageHref(locale, "notes")}>
-                {page.backLabel}
-              </a>
-            </p>
-          ) : null
-        }
+              </section>
+            ) : null
+          }
+
+          {
+            ctas.length > 0 ? (
+              <p class="note-cta reveal-on-scroll">
+                {ctas.map((cta) => (
+                  <a
+                    class={cta.primary ? "btn-primary" : "btn-ghost"}
+                    href={cta.href}
+                    target={cta.external ? "_blank" : undefined}
+                    rel={cta.external ? "noopener noreferrer" : undefined}
+                  >
+                    {cta.label}
+                  </a>
+                ))}
+                <a class="btn-ghost" href={pageHref(locale, "notes")}>
+                  {page.backLabel}
+                </a>
+              </p>
+            ) : null
+          }
+        </div>
       </div>
     </section>
   </main>

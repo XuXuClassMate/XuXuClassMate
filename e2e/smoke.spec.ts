@@ -60,13 +60,33 @@ test("notes index and article render", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "Practical Notes",
   );
+  await expect(page.locator(".note-card-proof").first()).toBeVisible();
+  await expect(page.locator(".note-byline")).toHaveCount(0);
+  await expect(page.locator(".note-meta")).toHaveCount(0);
   await page
     .getByRole("link", {
-      name: "Stand up Dameng / Highgo for QA in minutes with Docker",
+      name: /Domestic DB Docker for QA/i,
     })
+    .first()
     .click();
   await expect(page).toHaveURL(/\/en\/notes\/domestic-db-docker-qa\.html$/);
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Dameng");
+  await expect(page.locator(".note-toc")).toBeVisible();
+  await expect(page.locator(".note-stats").first()).toBeVisible();
+  await expect(page.locator('[data-metric="docker:total-pulls"]')).toBeVisible();
+  await expect(page.locator(".note-byline")).toHaveCount(0);
+
+  await page.goto("/en/notes/clawhub-skill-shipping.html");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("ClawHub");
+  await expect(
+    page.locator('[data-metric="clawhub:total-downloads"]'),
+  ).toBeVisible();
+  await expect(
+    page.locator('[data-metric="clawhub:trading-assistant-core"]'),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: /Release gate/i }),
+  ).toBeVisible();
 });
 
 test("contact offers list is visible", async ({ page }) => {

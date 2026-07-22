@@ -22,29 +22,26 @@ const page = copy.notes;
 
     <section class="notes-index">
       <div class="container">
-        <div class="notes-grid">
+        <div class="notes-grid notes-grid--index">
           {
             page.items.map((item, index) => (
               <article
-                class={`note-card reveal-on-scroll reveal-delay-${(index % 3) + 1}`}
+                class={`note-card note-card--rich reveal-on-scroll reveal-delay-${(index % 3) + 1}`}
               >
-                <div class="note-meta">
-                  <time datetime={item.publishedAt}>
-                    {item.publishedAt}
-                  </time>
-                  <span>
-                    {item.readingMinutes} {page.readingLabel}
-                  </span>
-                </div>
-                <h2>
-                  <a href={noteHref(locale, item.slug)}>{item.title}</a>
-                </h2>
-                <p>{item.description}</p>
                 <ul class="note-tags">
                   {item.tags.map((tag) => (
                     <li>{tag}</li>
                   ))}
                 </ul>
+                <h2>
+                  <a href={noteHref(locale, item.slug)}>{item.title}</a>
+                </h2>
+                <p>{item.description}</p>
+                {item.proof ? <p class="note-card-proof">{item.proof}</p> : null}
+                <a class="read-more" href={noteHref(locale, item.slug)}>
+                  {locale === "zh" ? "阅读全文" : "Read the note"}
+                  <span aria-hidden="true">→</span>
+                </a>
               </article>
             ))
           }
