@@ -29,7 +29,8 @@ const homeSocial = [
 export const en: LocaleCopy = {
   brand: "XuXuClassMate",
   author: "XuXuClassMate",
-  languageSwitch: "中文",
+  languageSwitch: "EN",
+  languageSwitchHint: "Switch to Chinese",
   contactLabel: "Contact：",
   contactHint:
     "Open for collaboration — pick a lane and email me.",
@@ -43,8 +44,8 @@ export const en: LocaleCopy = {
   copiedEmail: "Copied",
   backToTop: "Back to top",
   themeToggle: "Theme",
-  themeToLight: "Light",
-  themeToDark: "Dark",
+  themeToLight: "Switch to light theme",
+  themeToDark: "Switch to dark theme",
   copyright: "© 2020-2026 XuXuClassMate",
   wechatAlt: "WeChat QR Code",
   closeModal: "Close",
@@ -54,14 +55,15 @@ export const en: LocaleCopy = {
     about: "About",
     experience: "Experience",
     projects: "Projects",
-    blog: "Engineering Notes",
+    blog: "Notes",
     aiTesting: "AI Testing",
     github: "GitHub",
     life: "Life",
     contact: "Contact",
     learn: "Experience",
     work: "Projects",
-    notes: "Engineering Notes",
+    notes: "Notes",
+    more: "More",
     innonestx: "Open Source",
     openSource: "Open Source",
     now: "Now",
@@ -99,10 +101,10 @@ export const en: LocaleCopy = {
       keywords: `${sharedKeywords}, Docker Testing, Test Infrastructure`,
     },
     blog: {
-      title: "Engineering Notes | QA Engineer & SDET Technical Blog | XuXuClassMate",
+      title: "Engineering Notes | QA Engineer & SDET Field Guides | XuXuClassMate",
       description:
         "Engineering Notes on QA Engineering, AI Testing, Playwright, API Testing, Performance Testing, Docker, Cloudflare, OpenClaw, and DevOps.",
-      keywords: `${sharedKeywords}, Engineering Notes, Technical Blog, Test Automation`,
+      keywords: `${sharedKeywords}, Engineering Notes, QA field guides, Test Automation`,
     },
     life: {
       title: "Life Journey | XuXuClassMate",
@@ -123,10 +125,10 @@ export const en: LocaleCopy = {
       keywords: `${sharedKeywords}, SDET Portfolio, Test Automation projects`,
     },
     notes: {
-      title: "Engineering Notes | QA / SDET Technical Blog | XuXuClassMate",
+      title: "Engineering Notes | QA / SDET Field Guides | XuXuClassMate",
       description:
         "Searchable Engineering Notes for QA Engineers and SDETs — AI Testing, Playwright, Docker Testing, Performance Testing, and more.",
-      keywords: `${sharedKeywords}, Engineering Notes, Technical Blog, Docker Testing`,
+      keywords: `${sharedKeywords}, Engineering Notes, QA field guides, Docker Testing`,
     },
     "open-source": {
       title: "Open Source | InnoNestX · AI Tools · QA Tools | XuXuClassMate",
@@ -268,7 +270,7 @@ export const en: LocaleCopy = {
       },
       {
         title: "Engineering Notes",
-        description: "Searchable QA / SDET articles — Playwright, AI Testing, Docker, and more",
+        description: "QA / SDET field guides — Playwright, AI Testing, Docker, and shipping notes",
         href: "/en/blog.html",
       },
       {
@@ -1553,7 +1555,7 @@ export const en: LocaleCopy = {
     subtitle: "ENGINEERING NOTES",
     title: "Engineering Notes",
     description:
-      "Technical articles for QA Engineers and SDETs — searchable SEO landing pages on AI Testing, Playwright, API Testing, Performance Testing, Docker, and more.",
+      "Field guides and shipping notes for QA Engineers and SDETs — searchable pages on AI Testing, Playwright, API Testing, Performance Testing, Docker, and more.",
     backLabel: "All Engineering Notes",
     tocLabel: "On this page",
     relatedLabel: "Related",

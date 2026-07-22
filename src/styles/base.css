@@ -256,6 +256,7 @@ body {
 }
 
 .nav-item,
+.nav-more-toggle,
 .language-switch {
   text-decoration: none;
   color: var(--muted);
@@ -270,13 +271,67 @@ body {
 }
 
 .nav-item:hover,
-.nav-item.active {
+.nav-item.active,
+.nav-more-toggle:hover,
+.nav-more-toggle.active {
   color: var(--ink);
   background: rgba(61, 125, 255, 0.1);
 }
 
-.nav-item.active {
+.nav-item.active,
+.nav-more-toggle.active {
   color: var(--primary);
+}
+
+.nav-more {
+  position: relative;
+}
+
+.nav-more-toggle {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  gap: 0.35rem;
+}
+
+.nav-more-caret {
+  font-size: 0.7rem;
+  line-height: 1;
+  opacity: 0.85;
+  transition: transform 0.2s ease;
+}
+
+.nav-more.is-open .nav-more-caret {
+  transform: rotate(180deg);
+}
+
+.nav-more-menu {
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  right: 0;
+  z-index: 1002;
+  display: none;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.15rem;
+  min-width: 11.5rem;
+  padding: 0.45rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface, var(--bg));
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+}
+
+.nav-more.is-open .nav-more-menu {
+  display: flex;
+}
+
+.nav-more-menu .nav-item {
+  width: 100%;
+  justify-content: flex-start;
+  height: auto;
+  min-height: 2.4rem;
 }
 
 .language-switch {
@@ -302,18 +357,14 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
+  width: 40px;
   min-width: 40px;
   height: 40px;
-  padding: 0 12px;
+  padding: 0;
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
   background: var(--surface-ghost-soft);
   color: var(--ink);
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
   cursor: pointer;
   position: relative;
   z-index: 1001;
@@ -339,8 +390,12 @@ body {
 }
 
 .theme-toggle .icon {
-  width: 0.95rem;
-  height: 0.95rem;
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+.theme-toggle-label {
+  display: none;
 }
 
 .mobile-nav-toggle {

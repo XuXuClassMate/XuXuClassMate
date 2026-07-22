@@ -48,6 +48,51 @@ function initMobileNav(): void {
   });
 }
 
+function setNavMoreOpen(root: HTMLElement, open: boolean): void {
+  const toggle = root.querySelector<HTMLButtonElement>("[data-nav-more-toggle]");
+  root.classList.toggle("is-open", open);
+  toggle?.setAttribute("aria-expanded", open ? "true" : "false");
+}
+
+function initNavMore(): void {
+  const roots = [
+    ...document.querySelectorAll<HTMLElement>("[data-nav-more]"),
+  ];
+  if (roots.length === 0) return;
+
+  for (const root of roots) {
+    const toggle = root.querySelector<HTMLButtonElement>(
+      "[data-nav-more-toggle]",
+    );
+    if (!toggle) continue;
+
+    toggle.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const willOpen = !root.classList.contains("is-open");
+      for (const other of roots) {
+        setNavMoreOpen(other, other === root ? willOpen : false);
+      }
+    });
+  }
+
+  document.addEventListener("click", (event) => {
+    const target = event.target;
+    if (!(target instanceof Node)) return;
+    for (const root of roots) {
+      if (!root.contains(target)) {
+        setNavMoreOpen(root, false);
+      }
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    for (const root of roots) {
+      setNavMoreOpen(root, false);
+    }
+  });
+}
+
 function initWechatModal(): void {
   const modal = document.getElementById("wechatModal");
   const openBtn = document.getElementById("footerWechatBtn");
@@ -458,21 +503,17 @@ function applyTheme(theme: Theme): void {
   const button = document.getElementById("themeToggle");
   if (!(button instanceof HTMLButtonElement)) return;
 
-  const label = button.querySelector(".theme-toggle-label");
   const moon = button.querySelector('[data-theme-icon="moon"]');
   const sun = button.querySelector('[data-theme-icon="sun"]');
   const nextLabel =
     theme === "dark"
-      ? (button.dataset.labelLight ?? "Light")
-      : (button.dataset.labelDark ?? "Dark");
+      ? (button.dataset.labelLight ?? "Switch to light theme")
+      : (button.dataset.labelDark ?? "Switch to dark theme");
 
-  if (label) label.textContent = nextLabel;
   moon?.classList.toggle("is-hidden", theme !== "dark");
   sun?.classList.toggle("is-hidden", theme !== "light");
-  button.setAttribute(
-    "aria-label",
-    theme === "dark" ? (button.dataset.labelLight ?? "Light") : (button.dataset.labelDark ?? "Dark"),
-  );
+  button.setAttribute("aria-label", nextLabel);
+  button.setAttribute("title", nextLabel);
 }
 
 function initThemeToggle(): void {
@@ -489,6 +530,7 @@ function initThemeToggle(): void {
 
 document.addEventListener("DOMContentLoaded", () => {
   initMobileNav();
+  initNavMore();
   initWechatModal();
   initHeaderScroll();
   initScrollReveal();

@@ -153,7 +153,7 @@ export function getPortfolioHome(locale: Locale): PortfolioHome {
       "Test Infrastructure",
       "CI/CD",
     ],
-    articlesTitle: isZh ? "最新技术文章" : "Latest Technical Articles",
+    articlesTitle: isZh ? "最新工程笔记" : "Latest Engineering Notes",
     articlesCta: isZh ? "查看全部" : "View all",
     ossTitle: isZh ? "GitHub / 开源" : "GitHub / Open Source",
     ossDescription: isZh

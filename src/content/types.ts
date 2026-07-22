@@ -252,6 +252,8 @@ export type LocaleCopy = {
   brand: string;
   author: string;
   languageSwitch: string;
+  /** Accessible hint: where the language control navigates. */
+  languageSwitchHint: string;
   contactLabel: string;
   contactHint: string;
   /** Concrete collaboration types shown under contact. */
@@ -280,6 +282,7 @@ export type LocaleCopy = {
     learn?: string;
     work?: string;
     notes?: string;
+    more?: string;
     innonestx?: string;
     openSource?: string;
     now?: string;
