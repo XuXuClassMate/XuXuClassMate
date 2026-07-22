@@ -974,10 +974,8 @@ export const en: LocaleCopy = {
     joinItems: [
       "Pick a repo that interests you and open an issue or PR",
       "Suggest a feature, fix docs, or help with bilingual UX",
-      "Email me if you want to pair on something new under the org",
+      "Want to start something new under the org? Use Contact below",
     ],
-    joinCtaLabel: "Email me",
-    joinCtaHref: "mailto:mail@xuxuclassmate.com",
     orgCtaLabel: "GitHub organization",
     orgCtaHref: "https://github.com/InnoNestX",
     footerDesc: "Practical open-source tools — learn and build",

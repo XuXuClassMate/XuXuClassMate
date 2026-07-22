@@ -25,10 +25,6 @@ const page = copy.innonestx;
           primary: true,
           external: true,
         },
-        {
-          href: page.joinCtaHref,
-          label: page.joinCtaLabel,
-        },
       ]}
     />
 
@@ -111,19 +107,14 @@ const page = copy.innonestx;
               <li>{item}</li>
             ))}
           </ul>
-          <div class="hero-actions">
-            <a class="btn-primary" href={page.joinCtaHref}>
-              {page.joinCtaLabel}
-            </a>
-            <a
-              class="btn-ghost"
-              href={page.orgCtaHref}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {page.orgCtaLabel}
-            </a>
-          </div>
+          <a
+            class="btn-primary"
+            href={page.orgCtaHref}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {page.orgCtaLabel}
+          </a>
         </div>
       </div>
     </section>

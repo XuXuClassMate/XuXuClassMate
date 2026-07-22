@@ -284,8 +284,6 @@ export type LocaleCopy = {
     joinTitle: string;
     joinIntro: string;
     joinItems: string[];
-    joinCtaLabel: string;
-    joinCtaHref: string;
     orgCtaLabel: string;
     orgCtaHref: string;
     footerDesc: string;
