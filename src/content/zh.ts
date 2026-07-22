@@ -1557,12 +1557,13 @@ export const zh: LocaleCopy = {
     subtitle: "开源",
     title: "开源",
     description:
-      "InnoNestX 是 XuXuClassMate 个人品牌下的开源组织——可安装的 AI 工具、QA 工具与基础设施，欢迎 fork 与共建。",
+      "InnoNestX 是旭旭同学个人品牌下的开源组织——可安装的 AI 工具、QA 工具与基础设施，欢迎 fork 与共建。",
     orgLabel: "组织",
     orgName: "InnoNestX",
-    brandTitle: "个人品牌 → 开源组织",
+    brandTitle: "个人品牌与开源组织的关系",
     brandLead:
-      "XuXuClassMate 是个人品牌；InnoNestX 是其下的 GitHub 开源组织，用来交付可安装工具。",
+      "旭旭同学是个人品牌；InnoNestX 是其下的 GitHub 开源组织，用来交付可安装工具。",
+    brandConnector: "下设",
     brandPersonalLabel: "个人品牌",
     brandPersonalItems: ["QA / SDET", "AI Testing", "工程笔记"],
     brandOrgLabel: "开源组织",

@@ -1572,12 +1572,13 @@ export const en: LocaleCopy = {
       "InnoNestX is the open-source organization under the XuXuClassMate personal brand — installable AI tools, QA tooling, and infrastructure you can run and fork.",
     orgLabel: "Organization",
     orgName: "InnoNestX",
-    brandTitle: "Personal brand → open-source org",
+    brandTitle: "How the brand and org relate",
     brandLead:
-      "XuXuClassMate is the personal brand. InnoNestX is the GitHub organization that ships open tools under it.",
-    brandPersonalLabel: "Personal Brand",
+      "XuXuClassMate is the personal brand. InnoNestX is the GitHub org under it — where installable tools ship.",
+    brandConnector: "hosts",
+    brandPersonalLabel: "Personal brand",
     brandPersonalItems: ["QA / SDET", "AI Testing", "Engineering Notes"],
-    brandOrgLabel: "Open Source Org",
+    brandOrgLabel: "Open-source organization",
     brandOrgItems: ["Open Source", "AI Tools", "QA Tools", "Infrastructure"],
     aboutTitle: "What InnoNestX is",
     about: [

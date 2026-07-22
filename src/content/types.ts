@@ -403,6 +403,7 @@ export type LocaleCopy = {
     orgName: string;
     brandTitle: string;
     brandLead: string;
+    brandConnector: string;
     brandPersonalLabel: string;
     brandPersonalItems: string[];
     brandOrgLabel: string;
