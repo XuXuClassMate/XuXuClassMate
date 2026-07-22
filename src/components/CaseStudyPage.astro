@@ -34,13 +34,17 @@ const coverDark =
   metaOverride={study.meta}
 >
   <main id="main-content" class="case-page">
-    <section class="hero hero--case">
+    <section class="hero hero--detail">
       <div class="hero-atmosphere" aria-hidden="true"></div>
-      <div class="container hero-content reveal">
-        <BackNav href={workHref} label={page.caseBackLabel} />
-        <span class="subtitle">{study.subtitle}</span>
-        <h1 class="hero-title">{study.title}</h1>
-        <p class="hero-desc">{study.description}</p>
+      <div class="container">
+        <div class="detail-topbar reveal">
+          <BackNav href={workHref} label={page.caseBackLabel} />
+        </div>
+        <div class="hero-content hero-content--detail reveal">
+          <span class="subtitle">{study.subtitle}</span>
+          <h1 class="hero-title">{study.title}</h1>
+          <p class="hero-desc">{study.description}</p>
+        </div>
       </div>
     </section>
 
@@ -193,8 +197,8 @@ const coverDark =
           <p class="back-nav-footer-hint">
             {
               locale === "zh"
-                ? "看完了？回到项目列表继续浏览。"
-                : "Done reading? Return to the project gallery."
+                ? "继续浏览其他项目"
+                : "Browse more projects"
             }
           </p>
           <BackNav href={workHref} label={page.caseBackLabel} prominent />

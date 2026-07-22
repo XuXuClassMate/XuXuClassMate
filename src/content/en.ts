@@ -34,7 +34,7 @@ export const en: LocaleCopy = {
   contactOffers: [
     "AI testing tool / ClawHub skill customization",
     "QA team leadership advisory (startup → scale-up)",
-    "Domestic DB / Docker test-environment enablement",
+    "Database / Docker test-environment enablement",
     "Open-source collaboration on InnoNestX systems",
   ],
   copyEmail: "Copy email",
@@ -83,7 +83,7 @@ export const en: LocaleCopy = {
     notes: {
       title: "Notes | XuXuClassMate",
       description:
-        "Practical notes on domestic DB Docker setups, ClawHub skill shipping, and installable quality engineering.",
+        "Practical notes on database Docker setups, ClawHub skill shipping, and installable quality engineering.",
       keywords: `${sharedKeywords}, notes, Dameng Docker, ClawHub`,
     },
   },
@@ -109,7 +109,7 @@ export const en: LocaleCopy = {
       {
         title: "Environments that reuse",
         description:
-          "Containers, domestic DB images, and gateways so teams can boot the same stack in CI and on laptops.",
+          "Containers, database images, and gateways so teams can boot the same stack in CI and on laptops.",
       },
     ],
     highlightsTitle: "By the Numbers",
@@ -204,7 +204,7 @@ export const en: LocaleCopy = {
       },
       {
         title: "Notes",
-        description: "Dameng Docker QA setups and ClawHub shipping notes",
+        description: "Database Docker for QA and ClawHub shipping notes",
         href: "/en/notes.html",
       },
     ],
@@ -466,7 +466,7 @@ export const en: LocaleCopy = {
         ],
       },
     ],
-    caseBackLabel: "Back to all projects",
+    caseBackLabel: "All projects",
     caseProblemTitle: "Problem",
     caseSolutionTitle: "Solution",
     caseTradeoffsTitle: "Tradeoffs",
@@ -717,7 +717,7 @@ export const en: LocaleCopy = {
         tradeoffs: [
           "Boring, predictable tags over clever names — CI suites need stability first.",
           "One service per image so failures stay diagnosable in pull-and-run flows.",
-          "Published Dameng / Highgo early — pull volume validated that domestic DB pain was real."
+          "Published Dameng / Highgo early — pull volume validated that the database pain was real."
         ],
         artifacts: [
           {
@@ -934,8 +934,8 @@ export const en: LocaleCopy = {
     subtitle: "NOTES",
     title: "Practical Notes",
     description:
-      "Long-form field notes with live Docker / ClawHub numbers — domestic DB environments and installable agent skills.",
-    backLabel: "Back to all notes",
+      "Long-form field notes with live Docker / ClawHub numbers — database environments and installable agent skills.",
+    backLabel: "All notes",
     tocLabel: "On this page",
     relatedLabel: "Related",
     items: getNotes("en"),

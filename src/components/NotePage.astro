@@ -33,23 +33,27 @@ const ctas = note.ctas ?? [];
   metaOverride={note.meta}
 >
   <main id="main-content" class="note-page">
-    <section class="hero hero--case">
+    <section class="hero hero--detail">
       <div class="hero-atmosphere" aria-hidden="true"></div>
-      <div class="container hero-content reveal">
-        <BackNav href={notesHref} label={page.backLabel} />
-        <span class="subtitle">{page.subtitle}</span>
-        <h1 class="hero-title">{note.title}</h1>
-        <p class="hero-desc">{note.description}</p>
-        {
-          note.proof ? (
-            <p class="note-proof">{note.proof}</p>
-          ) : null
-        }
-        <ul class="note-tags note-tags--hero">
-          {note.tags.map((tag) => (
-            <li>{tag}</li>
-          ))}
-        </ul>
+      <div class="container">
+        <div class="detail-topbar reveal">
+          <BackNav href={notesHref} label={page.backLabel} />
+        </div>
+        <div class="hero-content hero-content--detail reveal">
+          <span class="subtitle">{page.subtitle}</span>
+          <h1 class="hero-title">{note.title}</h1>
+          <p class="hero-desc">{note.description}</p>
+          {
+            note.proof ? (
+              <p class="note-proof">{note.proof}</p>
+            ) : null
+          }
+          <ul class="note-tags note-tags--hero">
+            {note.tags.map((tag) => (
+              <li>{tag}</li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
 
@@ -240,8 +244,8 @@ const ctas = note.ctas ?? [];
           <p class="back-nav-footer-hint">
             {
               locale === "zh"
-                ? "看完了？回到笔记列表继续浏览。"
-                : "Done reading? Return to all notes."
+                ? "继续浏览其他笔记"
+                : "Browse more notes"
             }
           </p>
           <BackNav href={notesHref} label={page.backLabel} prominent />

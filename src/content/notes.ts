@@ -94,16 +94,16 @@ const NOTES: NoteDef[] = [
       ],
     },
     en: {
-      title: "Domestic DB Docker for QA: Dameng / Highgo without the install tax",
+      title: "Database Docker for QA: Dameng / Highgo without the install tax",
       description:
-        "A field guide for standing up Dameng, Highgo, Kingbase, and TiDB in minutes — with real pull numbers, CI pin rules, and the failure modes that waste sprint days.",
+        "Stand up Dameng, Highgo, Kingbase, and TiDB in minutes — with live pull numbers, CI pin rules, and the failure modes that waste sprint days.",
       sections: [
         {
           id: "why",
           heading: "The real problem is not “can we install Dameng?”",
           paragraphs: [
-            "In regulated and enterprise China stacks, Dameng / Highgo / Kingbase show up as hard requirements. QA rarely fails because the database is mysterious — teams fail because the path to a working instance is tribal knowledge: bare-metal installers, missing glibc packages, one-off VM snapshots, and “ask the DBA when he is free.”",
-            "That tax shows up before a single assertion runs. New hires burn a day on environment. CI flakes on DB boot. Automation authors hard-code credentials into scripts because nobody documented a reusable contract. If Postgres can be pull → run → connect, domestic DBs should feel the same for testers.",
+            "In regulated and enterprise stacks, Dameng / Highgo / Kingbase show up as hard requirements. QA rarely fails because the database is mysterious — teams fail because the path to a working instance is tribal knowledge: bare-metal installers, missing packages, one-off VM snapshots, and “ask the DBA when he is free.”",
+            "That tax shows up before a single assertion runs. New hires burn a day on environment. CI flakes on DB boot. Automation authors hard-code credentials into scripts because nobody documented a reusable contract. If Postgres can be pull → run → connect, these databases should feel the same for testers.",
             "This note is not a DBA handbook. It is the QA contract I optimized for: predictable tags, one service per container when possible, env-based credentials, and smoke connectivity before the full regression.",
           ],
           callout: {
@@ -212,7 +212,7 @@ docker run -d --name qa-dameng \\
           id: "failures",
           heading: "Failure modes I keep seeing",
           paragraphs: [
-            "Most “flaky domestic DB CI” stories are environment contracts, not assertion bugs. Fix the contract once and whole suites calm down.",
+            "Most “flaky database CI” stories are environment contracts, not assertion bugs. Fix the contract once and whole suites calm down.",
           ],
           bullets: [
             "Floating tags: Friday green, Monday red because upstream rebuilt latest",
@@ -257,25 +257,25 @@ docker run -d --name qa-dameng \\
         description:
           "Field guide to reusable Dameng, Highgo, Kingbase, and TiDB Docker images for QA and CI — with live pull metrics and failure-mode checklists.",
         keywords:
-          "Dameng Docker, Highgo Docker, Kingbase Docker, QA test environment, domestic database, XuXuClassMate",
+          "Dameng Docker, Highgo Docker, Kingbase Docker, QA test environment, database Docker, XuXuClassMate",
       },
     },
     zh: {
-      title: "国产库 Docker 给 QA：达梦 / 瀚高少交安装税",
+      title: "数据库 Docker 给 QA：达梦 / 瀚高少交安装税",
       description:
-        "面向测试团队的实操指南：几分钟拉起达梦、瀚高、人大金仓、TiDB——附真实拉取量、CI 钉标签规则，以及那些烧掉冲刺天数的失败模式。",
+        "几分钟拉起达梦、瀚高、人大金仓、TiDB——附实时拉取量、CI 钉标签规则，以及那些烧掉冲刺天数的失败模式。",
       sections: [
         {
           id: "why",
           heading: "真正的问题不是「达梦能不能装」",
           paragraphs: [
-            "在政企与合规栈里，达梦 / 瀚高 / 人大金仓经常是硬性要求。QA 很少死在「库很神秘」上——死在通往可用实例的路径全靠口口相传：裸机安装包、缺 glibc、一次性虚拟机快照，以及「等 DBA 有空」。",
-            "这税在第一条断言跑起来之前就已经交了。新人环境要一天；CI 在数据库启动阶段就抖；自动化作者把账号密码写进脚本，因为没人留下可复用的约定。如果 Postgres 能 pull → run → connect，国产库对测试也应该是同一套体感。",
+            "在政企与合规栈里，达梦 / 瀚高 / 人大金仓经常是硬性要求。QA 很少死在「库很神秘」上——死在通往可用实例的路径全靠口口相传：裸机安装包、缺依赖、一次性虚拟机快照，以及「等 DBA 有空」。",
+            "这税在第一条断言跑起来之前就已经交了。新人环境要一天；CI 在数据库启动阶段就抖；自动化作者把账号密码写进脚本，因为没人留下可复用的约定。如果 Postgres 能 pull → run → connect，这些数据库对测试也应该是同一套体感。",
             "这篇不是 DBA 手册。我优化的是 QA 契约：可预期的标签、尽量一容器一服务、凭据走环境变量、全量回归前先做连通性冒烟。",
           ],
           callout: {
             title: "北极星",
-            body: "如果测试同学不能像起 Postgres 一样在 CI 里起国产库，上面的「AI 测试演示」就还是幻灯片。",
+            body: "如果测试同学不能像起 Postgres 一样在 CI 里起数据库，上面的「AI 测试演示」就还是幻灯片。",
           },
         },
         {
@@ -379,7 +379,7 @@ docker run -d --name qa-dameng \\
           id: "failures",
           heading: "我反复看到的失败模式",
           paragraphs: [
-            "大多数「国产库 CI 不稳定」故事，本质是环境契约问题，不是断言写错。契约修一次，整组套件都会安静下来。",
+            "大多数「数据库 CI 不稳定」故事，本质是环境契约问题，不是断言写错。契约修一次，整组套件都会安静下来。",
           ],
           bullets: [
             "浮动标签：周五绿、周一红，因为上游重建了 latest",
@@ -423,7 +423,7 @@ docker run -d --name qa-dameng \\
         title: "达梦 / 瀚高 Docker 测试环境 | 旭旭同学",
         description:
           "面向 QA 与 CI 的达梦、瀚高、人大金仓、TiDB 可复用 Docker 实践——含实时拉取指标与失败模式清单。",
-        keywords: "达梦 Docker, 瀚高 Docker, 人大金仓, 测试环境, 国产数据库, 旭旭同学",
+        keywords: "达梦 Docker, 瀚高 Docker, 人大金仓, 测试环境, 数据库 Docker, 旭旭同学",
       },
     },
   },
