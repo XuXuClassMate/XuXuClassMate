@@ -1589,13 +1589,13 @@ export const en: LocaleCopy = {
     categoriesTitle: "Open-source focus areas",
     categories: getOrgCategories("en"),
     emptyCategory: "No public repos in this lane yet — suggestions welcome.",
-    joinTitle: "Join InnoNestX",
+    joinTitle: "Join & contact",
     joinIntro:
-      "Looking for collaborators who want to learn by building — not by watching slides.",
+      "Looking for collaborators who learn by building — open a PR, improve docs, or email a new idea.",
     joinItems: [
       "Pick a repo that interests you and open an issue or PR",
       "Suggest a feature, fix docs, or help with bilingual UX",
-      "Want to start something new under the org? Use Contact below",
+      "Want to start something new under the org? Email me",
     ],
     orgCtaLabel: "GitHub organization",
     orgCtaHref: "https://github.com/InnoNestX",

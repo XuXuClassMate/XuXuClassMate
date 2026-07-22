@@ -198,7 +198,7 @@ test("open source page introduces InnoNestX", async ({ page }) => {
   ).toBeVisible();
   await expect(page.getByRole("heading", { name: "Automation" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "GlobalPulse" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Join InnoNestX" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Join & contact" })).toBeVisible();
   await expect(
     page.getByRole("link", { name: "GitHub organization" }).first(),
   ).toHaveAttribute("href", "https://github.com/InnoNestX");

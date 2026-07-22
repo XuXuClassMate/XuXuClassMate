@@ -36,6 +36,18 @@
   min-width: 12.5rem;
 }
 
+.org-join-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+}
+
+.org-join-actions .contact-email {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+}
+
 @media (max-width: 560px) {
   .org-page .hero-actions {
     width: 100%;
@@ -45,6 +57,15 @@
   .org-page .hero-actions .btn-primary,
   .org-page .hero-actions .btn-ghost,
   .org-join-panel .btn-primary {
+    width: 100%;
+  }
+
+  .org-join-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .org-join-actions .copy-email-btn {
     width: 100%;
   }
 }
@@ -319,7 +340,7 @@
 }
 
 .org-join {
-  padding: 0 0 3rem;
+  padding: 0 0 4rem;
 }
 
 .org-join-panel {

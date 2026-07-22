@@ -1577,13 +1577,13 @@ export const zh: LocaleCopy = {
     categoriesTitle: "开源方向",
     categories: getOrgCategories("zh"),
     emptyCategory: "这个方向暂无公开仓库——欢迎提议。",
-    joinTitle: "加入 InnoNestX",
+    joinTitle: "加入与联系",
     joinIntro:
-      "更想找愿意边做边学的协作者——而不是只看演示的人。",
+      "更想找愿意边做边学的协作者——提 PR、补文档，或发邮件聊新想法。",
     joinItems: [
       "选一个感兴趣的仓库，提 Issue 或 PR",
       "补文档、改双语体验，或提一个你想做的功能",
-      "想一起开新项目，用页底「联系我」即可",
+      "想一起开新项目，直接发邮件即可",
     ],
     orgCtaLabel: "GitHub 组织主页",
     orgCtaHref: "https://github.com/InnoNestX",

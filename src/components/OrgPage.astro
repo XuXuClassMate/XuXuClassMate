@@ -1,9 +1,8 @@
 ---
-import Contact from "./Contact.astro";
 import Footer from "./Footer.astro";
 import PageHero from "./PageHero.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { getCopy, type Locale } from "../lib/i18n";
+import { CONTACT_EMAIL, getCopy, type Locale } from "../lib/i18n";
 
 type Props = { locale: Locale };
 
@@ -157,36 +156,44 @@ const page = copy.openSource;
       </div>
     </section>
 
-    <section class="org-join">
+    <section class="org-join" id="contact" aria-labelledby="org-join-heading">
       <div class="container">
         <div class="org-join-panel reveal-on-scroll">
-          <h2>{page.joinTitle}</h2>
+          <h2 id="org-join-heading">{page.joinTitle}</h2>
           <p>{page.joinIntro}</p>
           <ul>
             {page.joinItems.map((item) => (
               <li>{item}</li>
             ))}
           </ul>
-          <a
-            class="btn-primary"
-            href={page.orgCtaHref}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {page.orgCtaLabel}
-          </a>
+          <div class="org-join-actions">
+            <a
+              class="btn-primary"
+              href={page.orgCtaHref}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {page.orgCtaLabel}
+            </a>
+            <a class="contact-email" href={`mailto:${CONTACT_EMAIL}`}>
+              {CONTACT_EMAIL}
+            </a>
+            <button
+              type="button"
+              class="copy-email-btn"
+              id="copyEmailBtn"
+              data-email={CONTACT_EMAIL}
+              data-copy-label={copy.copyEmail}
+              data-copied-label={copy.copiedEmail}
+            >
+              {copy.copyEmail}
+            </button>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
-  <Contact
-    label={copy.contactLabel}
-    hint={copy.contactHint}
-    offers={copy.contactOffers}
-    copyLabel={copy.copyEmail}
-    copiedLabel={copy.copiedEmail}
-  />
   <Footer
     brand={copy.brand}
     description={page.footerDesc}
