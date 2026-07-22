@@ -121,17 +121,43 @@ export type CaseStudy = {
 
 export type NoteSlug = "domestic-db-docker-qa" | "clawhub-skill-shipping";
 
+export type NoteStat = {
+  label: string;
+  value: string;
+  metric?: MetricId;
+  href?: string;
+};
+
+export type NoteSection = {
+  id: string;
+  heading: string;
+  paragraphs?: string[];
+  bullets?: string[];
+  /** Optional fenced code sample shown under the section. */
+  code?: { label?: string; content: string };
+  /** Optional live or static proof numbers. */
+  stats?: NoteStat[];
+  /** Optional callout / takeaway box. */
+  callout?: { title?: string; body: string };
+  /** Optional inline resource links. */
+  links?: { label: string; href: string }[];
+};
+
 export type Note = {
   slug: NoteSlug;
   title: string;
   description: string;
-  publishedAt: string;
-  readingMinutes: number;
+  /** Short proof line shown on the index card (e.g. live pulls / downloads). */
+  proof?: string;
   tags: string[];
-  sections: { heading: string; paragraphs: string[]; bullets?: string[] }[];
-  cta?: { label: string; href: string };
+  sections: NoteSection[];
+  related?: { label: string; href: string }[];
+  ctas?: { label: string; href: string; primary?: boolean; external?: boolean }[];
+  /** Optional embed (e.g. Docker stats SVG). */
+  embed?: { src: string; alt: string; href: string };
   meta: PageMeta;
 };
+
 
 export type LocaleCopy = {
   brand: string;
@@ -238,8 +264,8 @@ export type LocaleCopy = {
     title: string;
     description: string;
     backLabel: string;
-    readingLabel: string;
-    publishedLabel: string;
+    tocLabel: string;
+    relatedLabel: string;
     items: Note[];
     footerDesc: string;
     social: SocialLink[];

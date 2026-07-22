@@ -174,7 +174,6 @@ export function jsonLdGraph(
     inLanguage: locale,
     ...(note
       ? {
-          datePublished: note.publishedAt,
           headline: note.title,
           author: { "@id": `${SITE_ORIGIN}/#person` },
         }

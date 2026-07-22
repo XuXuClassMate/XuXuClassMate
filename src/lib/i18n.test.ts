@@ -100,5 +100,9 @@ describe("i18n paths", () => {
     expect(getNote("zh", "clawhub-skill-shipping")?.slug).toBe(
       "clawhub-skill-shipping",
     );
+    expect(
+      getNote("en", "clawhub-skill-shipping")?.sections.length,
+    ).toBeGreaterThan(5);
+    expect(getNote("en", "domestic-db-docker-qa")?.proof).toContain("54k+");
   });
 });
