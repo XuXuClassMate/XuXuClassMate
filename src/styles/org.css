@@ -2,6 +2,49 @@
   padding: 0 0 2.5rem;
 }
 
+.org-page .hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.org-page .hero-desc {
+  max-width: 38rem;
+  text-wrap: pretty;
+}
+
+.org-page .hero-actions {
+  width: min(100%, 28rem);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.org-page .hero-actions .btn-primary,
+.org-page .hero-actions .btn-ghost {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  clip-path: none;
+  box-shadow: none;
+}
+
+.org-page .org-join-panel .hero-actions {
+  width: auto;
+  max-width: 28rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 560px) {
+  .org-page .hero-actions,
+  .org-page .org-join-panel .hero-actions {
+    grid-template-columns: 1fr;
+    width: 100%;
+    max-width: 20rem;
+  }
+}
+
 .org-about-grid {
   display: grid;
   gap: 1rem;

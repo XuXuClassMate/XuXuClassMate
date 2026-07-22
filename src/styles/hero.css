@@ -288,6 +288,17 @@
   color: var(--page-hero-desc);
 }
 
+.hero:not(.hero--home) .hero-actions {
+  justify-content: center;
+  align-items: stretch;
+}
+
+.hero:not(.hero--home) .btn-primary,
+.hero:not(.hero--home) .btn-ghost {
+  min-width: 12.5rem;
+  clip-path: none;
+}
+
 .section-title {
   font-family: var(--font-display);
   font-size: clamp(1.75rem, 3vw, 2.35rem);
