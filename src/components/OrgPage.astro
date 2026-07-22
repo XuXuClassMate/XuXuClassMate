@@ -1,0 +1,144 @@
+---
+import Contact from "./Contact.astro";
+import Footer from "./Footer.astro";
+import PageHero from "./PageHero.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCopy, type Locale } from "../lib/i18n";
+
+type Props = { locale: Locale };
+
+const { locale } = Astro.props;
+const copy = getCopy(locale);
+const page = copy.innonestx;
+---
+
+<BaseLayout locale={locale} page="innonestx">
+  <main id="main-content" class="org-page">
+    <PageHero
+      subtitle={page.subtitle}
+      title={page.title}
+      description={page.description}
+      actions={[
+        {
+          href: page.orgCtaHref,
+          label: page.orgCtaLabel,
+          primary: true,
+        },
+        {
+          href: page.joinCtaHref,
+          label: page.joinCtaLabel,
+        },
+      ]}
+    />
+
+    <section class="org-about">
+      <div class="container">
+        <h2 class="section-title reveal-on-scroll">{page.aboutTitle}</h2>
+        <div class="org-about-grid">
+          {
+            page.about.map((paragraph, index) => (
+              <p
+                class={`org-about-copy reveal-on-scroll reveal-delay-${(index % 3) + 1}`}
+              >
+                {paragraph}
+              </p>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="org-projects">
+      <div class="container">
+        <h2 class="section-title reveal-on-scroll">{page.projectsTitle}</h2>
+        <div class="org-project-grid">
+          {
+            page.projects.map((project, index) => (
+              <article
+                class={`org-project-card reveal-on-scroll reveal-delay-${(index % 3) + 1}`}
+              >
+                <div class="org-project-head">
+                  <h3>{project.title}</h3>
+                  {project.status ? (
+                    <span class="org-project-status">{project.status}</span>
+                  ) : null}
+                </div>
+                <p>{project.description}</p>
+                {project.tags && project.tags.length > 0 ? (
+                  <ul class="org-project-tags">
+                    {project.tags.map((tag) => (
+                      <li>{tag}</li>
+                    ))}
+                  </ul>
+                ) : null}
+                <div class="org-project-actions">
+                  {project.href ? (
+                    <a
+                      class="project-link"
+                      href={project.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {project.linkLabel ?? "GitHub"}
+                    </a>
+                  ) : null}
+                  {project.ctaHref ? (
+                    <a
+                      class="project-link"
+                      href={project.ctaHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {project.ctaLabel}
+                    </a>
+                  ) : null}
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="org-join">
+      <div class="container">
+        <div class="org-join-panel reveal-on-scroll">
+          <h2>{page.joinTitle}</h2>
+          <p>{page.joinIntro}</p>
+          <ul>
+            {page.joinItems.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+          <div class="hero-actions">
+            <a class="btn-primary" href={page.joinCtaHref}>
+              {page.joinCtaLabel}
+            </a>
+            <a
+              class="btn-ghost"
+              href={page.orgCtaHref}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {page.orgCtaLabel}
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Contact
+    label={copy.contactLabel}
+    hint={copy.contactHint}
+    offers={copy.contactOffers}
+    copyLabel={copy.copyEmail}
+    copiedLabel={copy.copiedEmail}
+  />
+  <Footer
+    brand={copy.brand}
+    description={page.footerDesc}
+    copyright={copy.copyright}
+    social={page.social}
+  />
+</BaseLayout>

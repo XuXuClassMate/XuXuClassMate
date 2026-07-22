@@ -1,6 +1,7 @@
 import type { LocaleCopy } from "./types";
 import { getFeaturedProjects, getWorkProjects } from "./projects";
 import { getNotes } from "./notes";
+import { getOrgProjects } from "./org";
 
 const sharedKeywords =
   "旭旭同学, xuxuclassmate, XuXuClassMate, 软件测试, 自动化测试, AI测试, 质量工程, 测试工程师, 用例生成, Playwright, 接口测试, Docker测试环境, OpenClaw, ClawHub";
@@ -15,7 +16,7 @@ export const zh: LocaleCopy = {
     "AI 测试工具 / ClawHub 技能定制",
     "测试团队管理顾问（初创 → 规模化）",
     "数据库 / Docker 测试环境落地",
-    "InnoNestX 开源与产品协作",
+    "加入 InnoNestX 开源项目——一起学习、一起做",
   ],
   copyEmail: "复制邮箱",
   copiedEmail: "已复制",
@@ -33,12 +34,13 @@ export const zh: LocaleCopy = {
     learn: "学习",
     work: "工作",
     notes: "笔记",
+    innonestx: "InnoNestX",
   },
   meta: {
     home: {
       title: "旭旭同学 | 可安装的质量工程",
       description:
-        "旭旭同学把质量工程做成可安装的产品——AI 测试工具、OpenClaw / ClawHub 技能，以及可复用的 Docker 环境。产品系统在 InnoNestX 交付。",
+        "旭旭同学把质量工程做成可安装的产品——AI 测试工具、OpenClaw / ClawHub 技能、可复用的 Docker 环境，以及 GlobalPulse 这类可运行系统。",
       keywords: sharedKeywords,
       ogTitle: "旭旭同学 — 可安装的质量工程",
     },
@@ -51,13 +53,13 @@ export const zh: LocaleCopy = {
     learn: {
       title: "学习路径：从测试到手 AI 测试 | 旭旭同学",
       description:
-        "从测试手艺与多阶段测试管理，到 Locust 性能、Playwright 自动化、OpenClaw / ClawHub 技能，以及 InnoNestX 产品系统。",
+        "从测试手艺与多阶段测试管理，到 Locust 性能、Playwright 自动化、OpenClaw / ClawHub 技能，以及 GlobalPulse 这类产品系统。",
       keywords: `${sharedKeywords}, 学习路径, 测试管理, Locust, 质量体系`,
     },
     work: {
       title: "测试项目与 AI 工具作品集 | 旭旭同学",
       description:
-        "可安装的质量产品：AI 用例生成器、ClawHub 技能、Docker 测试库镜像，以及 InnoNestX 的 GlobalPulse 与 Docker Hub API Gateway。",
+        "可安装的质量产品：AI 用例生成器、ClawHub 技能、Docker 测试库镜像、GlobalPulse 与 Docker Hub API Gateway。",
       keywords: `${sharedKeywords}, 测试作品集, GlobalPulse, 达梦 Docker, 瀚高 Docker, ClawHub`,
     },
     notes: {
@@ -66,6 +68,12 @@ export const zh: LocaleCopy = {
         "关于数据库 Docker 测试环境、ClawHub 技能发布与可安装质量工程的实操笔记。",
       keywords: `${sharedKeywords}, 笔记, 达梦 Docker, ClawHub`,
     },
+    innonestx: {
+      title: "InnoNestX | 开源实验室",
+      description:
+        "InnoNestX 是我创建的开源组织——可学习、可运行、可参与的工具与产品系统。",
+      keywords: `${sharedKeywords}, InnoNestX, GlobalPulse, 开源`,
+    },
   },
   home: {
     subtitle: "可安装的质量工程",
@@ -73,7 +81,7 @@ export const zh: LocaleCopy = {
     description:
       "我交付 AI 测试工具、OpenClaw / ClawHub 技能与可复用环境，并用 Docker、ClawHub、API 的实时数据证明它们在被使用。",
     positioning:
-      "旭旭同学是个人手艺品牌；InnoNestX 承载 GlobalPulse、Docker Hub API Gateway 等产品系统。",
+      "我把质量工具做成可安装的产品——再把能跑的系统持续交付出去。",
     valuesTitle: "我的做事方式",
     values: [
       {
@@ -160,7 +168,7 @@ export const zh: LocaleCopy = {
       },
       {
         title: "GlobalPulse",
-        description: "InnoNestX 在线产品——定时市场情报简报。",
+        description: "在线产品——定时市场情报简报。",
         href: "https://pulse.xuxuclassmate.com/",
         linkLabel: "打开 Pulse",
         icon: "robot",
@@ -182,8 +190,13 @@ export const zh: LocaleCopy = {
         description: "数据库 Docker 与 ClawHub 技能发布实操",
         href: "/zh/notes.html",
       },
+      {
+        title: "InnoNestX",
+        description: "我的开源组织——项目、学习与加入方式",
+        href: "/zh/innonestx.html",
+      },
     ],
-    footerDesc: "可安装的质量工程——旭旭同学 × InnoNestX",
+    footerDesc: "可安装的质量工程",
     social: [
       {
         href: "https://github.com/XuXuClassMate",
@@ -267,7 +280,7 @@ export const zh: LocaleCopy = {
         linkLabel: "查看 GitHub",
       },
       {
-        title: "GlobalPulse（InnoNestX）",
+        title: "GlobalPulse",
         description:
           "自托管市场情报与定时简报（Cloudflare Workers）——先上线体验，再看从单点工具走向产品线的实践。",
         href: "https://pulse.xuxuclassmate.com/",
@@ -313,7 +326,7 @@ export const zh: LocaleCopy = {
       {
         title: "OpenClaw 技能与产品系统",
         description:
-          "在 ClawHub 打包技能，并在 InnoNestX 推进 GlobalPulse、Docker Hub API Gateway 等可运行系统。",
+          "在 ClawHub 打包技能，并推进 GlobalPulse、Docker Hub API Gateway 等可运行系统。",
       },
     ],
     focusTitle: "当前学习重点",
@@ -323,7 +336,7 @@ export const zh: LocaleCopy = {
       "发布并迭代 OpenClaw / ClawHub 技能",
       "多模态需求到结构化测试产物",
       "Locust 与自动化手艺支撑 AI 工具",
-      "InnoNestX 产品系统（Workers / API）",
+      "产品系统（Workers / API）",
     ],
     footerDesc: "公开学习——带着质量根基做 AI 工具",
     social: [
@@ -604,7 +617,7 @@ export const zh: LocaleCopy = {
             "linkLabel": "打开 Pulse"
           },
           {
-            "title": "InnoNestX 源码",
+            "title": "源码仓库",
             "description": "Workers 应用、提供商与 Admin 流程开源可查。",
             "href": "https://github.com/InnoNestX/GlobalPulse",
             "linkLabel": "GitHub"
@@ -919,6 +932,51 @@ export const zh: LocaleCopy = {
     relatedLabel: "相关链接",
     items: getNotes("zh"),
     footerDesc: "可安装的质量工程——写下来",
+    social: [
+      {
+        href: "https://github.com/XuXuClassMate",
+        label: "GitHub",
+        icon: "github",
+      },
+      {
+        href: "https://fgg6gzb6uk.feishu.cn/docx/LkwDdpLjnoIdGwxOH6zcRwEWnhd?from=from_copylink",
+        label: "Blog",
+        icon: "blog",
+      },
+      {
+        href: "#",
+        label: "微信",
+        icon: "wechat",
+        wechat: true,
+      },
+    ],
+  },
+  innonestx: {
+    subtitle: "开源组织",
+    title: "InnoNestX",
+    description:
+      "我创建的开源组织——做可安装、可运行的工具与产品系统；欢迎一起学习、一起做感兴趣的项目。",
+    aboutTitle: "InnoNestX 是什么",
+    about: [
+      "InnoNestX 是我在 GitHub 上创立的开源组织，用来承载可复用的工具与产品系统——不是本站另一套品牌叙事。",
+      "标准很简单：别人能安装、能跑、能 fork。没有安装路径的演示，不放进来。",
+      "如果你也关注质量工程、Agent、Cloudflare Workers 或 Docker 工具链，欢迎一起学习，并参与你感兴趣的项目。",
+    ],
+    projectsTitle: "组织下的项目",
+    projects: getOrgProjects("zh"),
+    joinTitle: "加入我们",
+    joinIntro:
+      "更想找愿意边做边学的协作者——而不是只看演示的人。",
+    joinItems: [
+      "选一个感兴趣的仓库，提 Issue 或 PR",
+      "补文档、改双语体验，或提一个你想做的功能",
+      "想一起开新项目，直接发邮件联系我",
+    ],
+    joinCtaLabel: "发邮件联系",
+    joinCtaHref: "mailto:mail@xuxuclassmate.com",
+    orgCtaLabel: "GitHub 组织主页",
+    orgCtaHref: "https://github.com/InnoNestX",
+    footerDesc: "可落地的开源工具——一起学、一起做",
     social: [
       {
         href: "https://github.com/XuXuClassMate",

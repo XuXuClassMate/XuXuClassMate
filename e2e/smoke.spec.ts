@@ -7,12 +7,15 @@ test("home renders and language switch works", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "Turn quality work into products teams can run.",
   );
-  await expect(page.locator(".hero-positioning")).toContainText("InnoNestX");
+  await expect(page.locator(".hero-positioning")).toContainText(
+    "installable quality tools",
+  );
   await page.getByRole("link", { name: "中文" }).click();
   await expect(page).toHaveURL(/\/zh\/index\.html$/);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "把质量工作做成团队真能跑起来的产品",
   );
+  await expect(page.locator(".hero-positioning")).toContainText("可安装");
 });
 
 test("wechat modal opens and closes", async ({ page }) => {
@@ -97,6 +100,18 @@ test("notes index and article render", async ({ page }) => {
     page.getByRole("heading", { name: /Release gate/i }),
   ).toBeVisible();
   await expect(page.locator(".back-nav-footer .back-nav")).toBeVisible();
+});
+
+test("innonestx org page invites collaboration", async ({ page }) => {
+  await page.goto("/en/innonestx.html");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("InnoNestX");
+  await expect(page.getByRole("heading", { name: "What InnoNestX is" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "GlobalPulse" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Join us" })).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "GitHub organization" }).first(),
+  ).toHaveAttribute("href", "https://github.com/InnoNestX");
+  await expect(page.locator(".nav-item.active")).toHaveText("InnoNestX");
 });
 
 test("contact offers list is visible", async ({ page }) => {

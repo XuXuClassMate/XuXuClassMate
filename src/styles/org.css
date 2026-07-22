@@ -1,0 +1,128 @@
+.org-about {
+  padding: 0 0 2.5rem;
+}
+
+.org-about-grid {
+  display: grid;
+  gap: 1rem;
+  max-width: 46rem;
+}
+
+.org-about-copy {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+  font-size: 1.02rem;
+}
+
+.org-projects {
+  padding: 0 0 2.75rem;
+}
+
+.org-project-grid {
+  display: grid;
+  gap: 1.1rem;
+}
+
+@media (min-width: 860px) {
+  .org-project-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.org-project-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.35rem 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface-ghost);
+}
+
+.org-project-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.org-project-head h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.org-project-status {
+  flex-shrink: 0;
+  padding: 0.2rem 0.55rem;
+  border: 1px solid rgba(92, 225, 255, 0.35);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent-cyan);
+}
+
+.org-project-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.org-project-tags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+}
+
+.org-project-tags li {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 0.2rem 0.55rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.org-project-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: auto;
+  padding-top: 0.35rem;
+}
+
+.org-join {
+  padding: 0 0 3rem;
+}
+
+.org-join-panel {
+  padding: 1.6rem 1.4rem;
+  border: 1px solid rgba(92, 225, 255, 0.35);
+  border-radius: var(--radius);
+  background: var(--surface-ghost);
+}
+
+.org-join-panel h2 {
+  margin: 0 0 0.55rem;
+  font-size: 1.45rem;
+}
+
+.org-join-panel > p {
+  margin: 0 0 0.9rem;
+  color: var(--muted);
+  max-width: 40rem;
+  line-height: 1.65;
+}
+
+.org-join-panel ul {
+  margin: 0 0 1.25rem;
+  padding-left: 1.15rem;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.org-join-panel li + li {
+  margin-top: 0.4rem;
+}

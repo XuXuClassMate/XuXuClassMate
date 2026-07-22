@@ -1,6 +1,6 @@
 export type Locale = "en" | "zh";
 
-export type PageId = "home" | "life" | "learn" | "work" | "notes";
+export type PageId = "home" | "life" | "learn" | "work" | "notes" | "innonestx";
 
 export type MetricId =
   | "clawhub:ai-testcase-generator"
@@ -63,6 +63,8 @@ export type Card = {
   caseHref?: string;
   caseLabel?: string;
   slug?: CaseSlug;
+  /** Optional status chip (e.g. Live / Open source). */
+  status?: string;
 };
 
 export type Highlight = {
@@ -183,6 +185,7 @@ export type LocaleCopy = {
     learn: string;
     work: string;
     notes?: string;
+    innonestx?: string;
   };
   meta: Record<PageId, PageMeta>;
   home: {
@@ -267,6 +270,24 @@ export type LocaleCopy = {
     tocLabel: string;
     relatedLabel: string;
     items: Note[];
+    footerDesc: string;
+    social: SocialLink[];
+  };
+  innonestx: {
+    subtitle: string;
+    title: string;
+    description: string;
+    aboutTitle: string;
+    about: string[];
+    projectsTitle: string;
+    projects: Card[];
+    joinTitle: string;
+    joinIntro: string;
+    joinItems: string[];
+    joinCtaLabel: string;
+    joinCtaHref: string;
+    orgCtaLabel: string;
+    orgCtaHref: string;
     footerDesc: string;
     social: SocialLink[];
   };
