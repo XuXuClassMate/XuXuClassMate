@@ -890,9 +890,9 @@ export const en: LocaleCopy = {
       {
         title: "Music",
         description:
-          "Playlists for deep work and weekends away from the keyboard.",
+          "Folk songs, piano and violin pieces, and pop I still hum on the road.",
         icon: "Tune",
-        items: ["Electronic", "Classical piano", "Jazz"],
+        items: ["Folk", "Piano & violin", "Pop"],
       },
       {
         title: "Sports",
