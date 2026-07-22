@@ -21,7 +21,7 @@ test("home renders and language switch works", async ({ page }) => {
   await expect(page.getByRole("link", { name: /View Docker Hub/i }).first()).toBeVisible();
   await expect(page.getByRole("link", { name: /View ClawHub/i }).first()).toBeVisible();
   await expect(page.getByRole("heading", { name: "Quality Engineering" })).toBeVisible();
-  await page.getByRole("link", { name: "中文" }).click();
+  await page.getByRole("link", { name: "Switch to Chinese" }).click();
   await expect(page).toHaveURL(/\/zh\/index\.html$/);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "你好，我是旭旭。",
@@ -176,7 +176,6 @@ test("now page shows building learning exploring", async ({ page }) => {
   ).toBeVisible();
   await expect(page.getByText("MCP")).toBeVisible();
   await expect(page.getByText("Autonomous Testing")).toBeVisible();
-  await expect(page.locator(".nav-item.active")).toHaveText("Now");
   await expect(page.locator(".now-updated time")).toHaveAttribute(
     "datetime",
     "2026-07",
@@ -203,7 +202,64 @@ test("open source page introduces InnoNestX", async ({ page }) => {
   await expect(
     page.getByRole("link", { name: "GitHub organization" }).first(),
   ).toHaveAttribute("href", "https://github.com/InnoNestX");
-  await expect(page.locator(".nav-item.active")).toHaveText("Open Source");
+  await expect(page.locator(".nav-more-toggle")).toHaveClass(/active/);
+  await expect(
+    page.locator(".nav-more-menu .nav-item.active"),
+  ).toHaveText("Open Source");
+});
+
+test("desktop nav keeps primary links and a compact More menu", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto("/");
+  await expect(page.getByRole("link", { name: "About" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Experience" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Projects" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "AI Testing" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Notes" })).toBeVisible();
+  await expect(page.getByRole("button", { name: /More/ })).toBeVisible();
+  await expect(page.getByRole("link", { name: "EN" })).toBeVisible();
+  await expect(page.locator("#themeToggle")).toBeVisible();
+  await page.getByRole("button", { name: /More/ }).click();
+  await expect(
+    page.getByRole("menuitem", { name: "Open Source" }),
+  ).toBeVisible();
+  await expect(page.getByRole("menuitem", { name: "Life" })).toBeVisible();
+  await expect(page.getByRole("menuitem", { name: "Contact" })).toBeVisible();
+  const moreItems = page.locator(".nav-more-menu .nav-item");
+  await expect(moreItems).toHaveText(["Open Source", "Life", "Contact"]);
+});
+
+test("mobile nav is hamburger-only with a vertical drawer", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/");
+  await expect(page.locator(".nav-links")).not.toHaveClass(/show/);
+  await expect(page.getByRole("button", { name: /More/ })).toBeHidden();
+  await expect(page.locator("#mobileNavToggle")).toBeVisible();
+  await expect(page.locator("#themeToggle")).toBeHidden();
+  await page.locator("#mobileNavToggle").click();
+  await expect(page.locator(".nav-links")).toHaveClass(/show/);
+  for (const label of [
+    "About",
+    "Experience",
+    "Projects",
+    "AI Testing",
+    "Notes",
+    "Open Source",
+    "Life",
+    "Contact",
+    "EN",
+  ]) {
+    await expect(page.locator(".nav-links").getByText(label, { exact: true })).toBeVisible();
+  }
+  await expect(page.locator("#themeToggle")).toBeVisible();
+  await expect(page.locator(".theme-toggle-label")).toHaveText("Theme");
+  await expect(page.getByRole("link", { name: /^Home$/i })).toHaveCount(0);
+  await expect(page.locator(".nav-item--ai-testing")).toHaveCSS("order", "4");
+  await expect(page.locator(".nav-item--notes")).toHaveCSS("order", "5");
 });
 
 test("contact offers list is visible", async ({ page }) => {

@@ -10,7 +10,8 @@ const sharedKeywords =
 export const zh: LocaleCopy = {
   brand: "旭旭同学",
   author: "旭旭同学",
-  languageSwitch: "English",
+  languageSwitch: "中文",
+  languageSwitchHint: "切换到 English",
   contactLabel: "联系我：",
   contactHint: "欢迎合作——先选方向，再发邮件。",
   contactOffers: [
@@ -23,8 +24,8 @@ export const zh: LocaleCopy = {
   copiedEmail: "已复制",
   backToTop: "回到顶部",
   themeToggle: "主题",
-  themeToLight: "浅色",
-  themeToDark: "深色",
+  themeToLight: "切换到浅色主题",
+  themeToDark: "切换到深色主题",
   copyright: "© 2020-2026 旭旭同学",
   wechatAlt: "微信二维码",
   closeModal: "关闭",
@@ -34,14 +35,15 @@ export const zh: LocaleCopy = {
     about: "关于",
     experience: "经历",
     projects: "项目",
-    blog: "工程笔记",
+    blog: "笔记",
     aiTesting: "AI 测试",
     github: "GitHub",
     life: "生活",
     contact: "联系",
     learn: "经历",
     work: "项目",
-    notes: "工程笔记",
+    notes: "笔记",
+    more: "更多",
     innonestx: "开源",
     openSource: "开源",
     now: "Now",
@@ -79,10 +81,10 @@ export const zh: LocaleCopy = {
       keywords: `${sharedKeywords}, Docker Testing, Test Infrastructure`,
     },
     blog: {
-      title: "工程笔记 | QA Engineer & SDET 技术博客 | 旭旭同学",
+      title: "工程笔记 | QA Engineer & SDET 实战笔记 | 旭旭同学",
       description:
         "Engineering Notes：QA Engineering、AI Testing、Playwright、接口测试、性能测试、Docker、Cloudflare、OpenClaw、DevOps。",
-      keywords: `${sharedKeywords}, 工程笔记, 技术博客`,
+      keywords: `${sharedKeywords}, 工程笔记, QA 实战笔记`,
     },
     life: {
       title: "生活点滴 | 旭旭同学",
@@ -103,10 +105,10 @@ export const zh: LocaleCopy = {
       keywords: `${sharedKeywords}, SDET Portfolio, 测试自动化项目`,
     },
     notes: {
-      title: "工程笔记 | QA Engineer & SDET 技术博客 | 旭旭同学",
+      title: "工程笔记 | QA / SDET 实战笔记 | 旭旭同学",
       description:
         "可检索的工程笔记：QA Engineering、AI Testing、Playwright、接口测试、性能测试、Docker、Cloudflare、OpenClaw、DevOps。",
-      keywords: `${sharedKeywords}, 工程笔记, 技术博客, Docker Testing`,
+      keywords: `${sharedKeywords}, 工程笔记, QA 实战笔记, Docker Testing`,
     },
     "open-source": {
       title: "开源 | InnoNestX · AI Tools · QA Tools | 旭旭同学",
@@ -241,7 +243,7 @@ export const zh: LocaleCopy = {
       },
       {
         title: "工程笔记",
-        description: "可被搜索的 QA / SDET 技术文章 — Playwright、AI Testing、Docker 等",
+        description: "QA / SDET 实战笔记 — Playwright、AI Testing、Docker 与交付手记",
         href: "/zh/blog.html",
       },
       {
@@ -1524,7 +1526,7 @@ export const zh: LocaleCopy = {
     subtitle: "工程笔记",
     title: "工程笔记",
     description:
-      "面向 QA Engineer / SDET 的可检索技术文章——AI Testing、Playwright、接口测试、性能测试、Docker 等独立 SEO 落地页。",
+      "面向 QA Engineer / SDET 的实战笔记与交付手记——AI Testing、Playwright、接口测试、性能测试、Docker 等独立 SEO 落地页。",
     backLabel: "全部工程笔记",
     tocLabel: "本页目录",
     relatedLabel: "相关链接",

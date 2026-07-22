@@ -72,6 +72,10 @@ const alternates = caseSlug
     : hreflangLinks(locale, page, rootHome);
 const homeHref = locale === "zh" ? pageHref("zh", "home") : "/";
 const active = page === "home" ? undefined : page;
+const moreActive =
+  active === "life" ||
+  active === "open-source" ||
+  active === "innonestx";
 const ogTitle = meta.ogTitle ?? meta.title;
 const ogImage = absoluteUrl(ogImagePath ?? "/images/og-default.jpg");
 const structuredData = noindex
@@ -185,22 +189,147 @@ const langSwitchHref = caseSlug
             <span class="logo-text">{copy.brand}</span>
           </a>
           <div class="nav-end">
-            <button
-              type="button"
-              class="theme-toggle"
-              id="themeToggle"
-              aria-label={copy.themeToggle}
-              data-label-light={copy.themeToLight}
-              data-label-dark={copy.themeToDark}
-            >
-              <span class="theme-toggle-icon" data-theme-icon="moon">
-                <Icon name="moon" />
-              </span>
-              <span class="theme-toggle-icon is-hidden" data-theme-icon="sun">
-                <Icon name="sun" />
-              </span>
-              <span class="theme-toggle-label">{copy.themeToLight}</span>
-            </button>
+            <div class="nav-links" id="navLinks">
+              <a
+                href={pageHref(locale, "about")}
+                class:list={[
+                  "nav-item",
+                  "nav-item--about",
+                  { active: active === "about" },
+                ]}
+              >
+                {copy.nav.about}
+              </a>
+              <a
+                href={pageHref(locale, "learn")}
+                class:list={[
+                  "nav-item",
+                  "nav-item--experience",
+                  { active: active === "learn" },
+                ]}
+              >
+                {copy.nav.experience}
+              </a>
+              <a
+                href={pageHref(locale, "work")}
+                class:list={[
+                  "nav-item",
+                  "nav-item--projects",
+                  { active: active === "work" },
+                ]}
+              >
+                {copy.nav.projects}
+              </a>
+              <a
+                href={pageHref(locale, "ai-testing")}
+                class:list={[
+                  "nav-item",
+                  "nav-item--ai-testing",
+                  { active: active === "ai-testing" },
+                ]}
+              >
+                {copy.nav.aiTesting}
+              </a>
+              <a
+                href={pageHref(locale, "blog")}
+                class:list={[
+                  "nav-item",
+                  "nav-item--notes",
+                  { active: active === "blog" || active === "notes" },
+                ]}
+              >
+                {copy.nav.notes ?? copy.nav.blog}
+              </a>
+              <div class="nav-more" data-nav-more>
+                <button
+                  type="button"
+                  class:list={[
+                    "nav-item",
+                    "nav-more-toggle",
+                    { active: moreActive },
+                  ]}
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                  aria-controls="navMoreMenu"
+                  data-nav-more-toggle
+                >
+                  {copy.nav.more ?? "More"}
+                  <span class="nav-more-caret" aria-hidden="true">▾</span>
+                </button>
+                <div
+                  class="nav-more-menu"
+                  id="navMoreMenu"
+                  role="menu"
+                  data-nav-more-menu
+                >
+                  <a
+                    href={pageHref(locale, "open-source")}
+                    class:list={[
+                      "nav-item",
+                      "nav-item--open-source",
+                      {
+                        active:
+                          active === "open-source" || active === "innonestx",
+                      },
+                    ]}
+                    role="menuitem"
+                  >
+                    {copy.nav.openSource ?? copy.nav.innonestx}
+                  </a>
+                  <a
+                    href={pageHref(locale, "life")}
+                    class:list={[
+                      "nav-item",
+                      "nav-item--life",
+                      { active: active === "life" },
+                    ]}
+                    role="menuitem"
+                  >
+                    {copy.nav.life}
+                  </a>
+                  <a
+                    href="#contact"
+                    class="nav-item nav-item--contact"
+                    role="menuitem"
+                  >
+                    {copy.nav.contact}
+                  </a>
+                </div>
+              </div>
+              <a
+                href={langSwitchHref}
+                class="language-switch"
+                aria-label={copy.languageSwitchHint}
+                title={copy.languageSwitchHint}
+              >
+                {copy.languageSwitch}
+              </a>
+              <button
+                type="button"
+                class="theme-toggle"
+                id="themeToggle"
+                aria-label={copy.themeToLight}
+                title={copy.themeToLight}
+                data-label-light={copy.themeToLight}
+                data-label-dark={copy.themeToDark}
+              >
+                <span
+                  class="theme-toggle-icon"
+                  data-theme-icon="moon"
+                  aria-hidden="true"
+                >
+                  <Icon name="moon" />
+                </span>
+                <span
+                  class="theme-toggle-icon is-hidden"
+                  data-theme-icon="sun"
+                  aria-hidden="true"
+                >
+                  <Icon name="sun" />
+                </span>
+                <span class="theme-toggle-label">{copy.themeToggle}</span>
+              </button>
+            </div>
             <button
               id="mobileNavToggle"
               class="mobile-nav-toggle"
@@ -213,71 +342,6 @@ const langSwitchHref = caseSlug
               <span></span>
               <span></span>
             </button>
-            <div class="nav-links" id="navLinks">
-              <a
-                href={pageHref(locale, "about")}
-                class:list={["nav-item", { active: active === "about" }]}
-              >
-                {copy.nav.about}
-              </a>
-              <a
-                href={pageHref(locale, "now")}
-                class:list={["nav-item", { active: active === "now" }]}
-              >
-                {copy.nav.now ?? "Now"}
-              </a>
-              <a
-                href={pageHref(locale, "learn")}
-                class:list={["nav-item", { active: active === "learn" }]}
-              >
-                {copy.nav.experience}
-              </a>
-              <a
-                href={pageHref(locale, "work")}
-                class:list={["nav-item", { active: active === "work" }]}
-              >
-                {copy.nav.projects}
-              </a>
-              <a
-                href={pageHref(locale, "open-source")}
-                class:list={[
-                  "nav-item",
-                  {
-                    active:
-                      active === "open-source" || active === "innonestx",
-                  },
-                ]}
-              >
-                {copy.nav.openSource ?? copy.nav.innonestx}
-              </a>
-              <a
-                href={pageHref(locale, "blog")}
-                class:list={[
-                  "nav-item",
-                  { active: active === "blog" || active === "notes" },
-                ]}
-              >
-                {copy.nav.blog}
-              </a>
-              <a
-                href={pageHref(locale, "ai-testing")}
-                class:list={["nav-item", { active: active === "ai-testing" }]}
-              >
-                {copy.nav.aiTesting}
-              </a>
-              <a
-                href={pageHref(locale, "life")}
-                class:list={["nav-item", { active: active === "life" }]}
-              >
-                {copy.nav.life}
-              </a>
-              <a href="#contact" class="nav-item">
-                {copy.nav.contact}
-              </a>
-              <a href={langSwitchHref} class="language-switch">
-                {copy.languageSwitch}
-              </a>
-            </div>
           </div>
         </nav>
       </div>
