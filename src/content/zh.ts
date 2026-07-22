@@ -970,10 +970,8 @@ export const zh: LocaleCopy = {
     joinItems: [
       "选一个感兴趣的仓库，提 Issue 或 PR",
       "补文档、改双语体验，或提一个你想做的功能",
-      "想一起开新项目，直接发邮件联系我",
+      "想一起开新项目，用页底「联系我」即可",
     ],
-    joinCtaLabel: "发邮件联系",
-    joinCtaHref: "mailto:mail@xuxuclassmate.com",
     orgCtaLabel: "GitHub 组织主页",
     orgCtaHref: "https://github.com/InnoNestX",
     footerDesc: "可落地的开源工具——一起学、一起做",
