@@ -1,6 +1,6 @@
 export type Locale = "en" | "zh";
 
-export type PageId = "home" | "life" | "learn" | "work";
+export type PageId = "home" | "life" | "learn" | "work" | "notes";
 
 export type MetricId =
   | "clawhub:ai-testcase-generator"
@@ -91,6 +91,13 @@ export type PageMeta = {
   ogTitle?: string;
 };
 
+export type CaseArtifact = {
+  title: string;
+  description: string;
+  href?: string;
+  linkLabel?: string;
+};
+
 export type CaseStudy = {
   slug: CaseSlug;
   title: string;
@@ -102,9 +109,27 @@ export type CaseStudy = {
   coverAlt: string;
   problem: string;
   solution: string;
+  /** Explicit product/engineering tradeoffs — why this path, not another. */
+  tradeoffs?: string[];
   outcomes: string[];
+  /** Concrete, inspectable proof (repos, live demos, exports). */
+  artifacts?: CaseArtifact[];
   metrics: { label: string; value: string; metric?: MetricId }[];
   links: { label: string; href: string }[];
+  meta: PageMeta;
+};
+
+export type NoteSlug = "domestic-db-docker-qa" | "clawhub-skill-shipping";
+
+export type Note = {
+  slug: NoteSlug;
+  title: string;
+  description: string;
+  publishedAt: string;
+  readingMinutes: number;
+  tags: string[];
+  sections: { heading: string; paragraphs: string[]; bullets?: string[] }[];
+  cta?: { label: string; href: string };
   meta: PageMeta;
 };
 
@@ -114,6 +139,8 @@ export type LocaleCopy = {
   languageSwitch: string;
   contactLabel: string;
   contactHint: string;
+  /** Concrete collaboration types shown under contact. */
+  contactOffers: string[];
   copyEmail: string;
   copiedEmail: string;
   backToTop: string;
@@ -129,12 +156,15 @@ export type LocaleCopy = {
     life: string;
     learn: string;
     work: string;
+    notes?: string;
   };
   meta: Record<PageId, PageMeta>;
   home: {
     subtitle: string;
     title: string;
     description: string;
+    /** One-line brand / product-system relationship. */
+    positioning: string;
     valuesTitle: string;
     values: Card[];
     highlightsTitle: string;
@@ -181,7 +211,9 @@ export type LocaleCopy = {
     caseBackLabel: string;
     caseProblemTitle: string;
     caseSolutionTitle: string;
+    caseTradeoffsTitle: string;
     caseOutcomesTitle: string;
+    caseArtifactsTitle: string;
     caseMetricsTitle: string;
     caseLinksTitle: string;
     cases: CaseStudy[];
@@ -198,6 +230,17 @@ export type LocaleCopy = {
     hobbies: Card[];
     blogTitle?: string;
     blog?: Card[];
+    footerDesc: string;
+    social: SocialLink[];
+  };
+  notes: {
+    subtitle: string;
+    title: string;
+    description: string;
+    backLabel: string;
+    readingLabel: string;
+    publishedLabel: string;
+    items: Note[];
     footerDesc: string;
     social: SocialLink[];
   };

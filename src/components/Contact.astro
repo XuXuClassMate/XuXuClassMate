@@ -4,11 +4,12 @@ import { CONTACT_EMAIL } from "../lib/i18n";
 type Props = {
   label: string;
   hint: string;
+  offers?: string[];
   copyLabel: string;
   copiedLabel: string;
 };
 
-const { label, hint, copyLabel, copiedLabel } = Astro.props;
+const { label, hint, offers = [], copyLabel, copiedLabel } = Astro.props;
 ---
 
 <section class="contact-section reveal-on-scroll">
@@ -17,6 +18,15 @@ const { label, hint, copyLabel, copiedLabel } = Astro.props;
       <div class="contact-info">
         <h2>{label}</h2>
         <p class="contact-hint">{hint}</p>
+        {
+          offers.length > 0 ? (
+            <ul class="contact-offers">
+              {offers.map((offer) => (
+                <li>{offer}</li>
+              ))}
+            </ul>
+          ) : null
+        }
         <div class="contact-actions">
           <a class="contact-email" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
           <button

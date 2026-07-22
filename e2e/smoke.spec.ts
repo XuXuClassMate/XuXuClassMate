@@ -5,12 +5,13 @@ import { join } from "node:path";
 test("home renders and language switch works", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "Build with AI. Ship with Quality.",
+    "Turn quality work into products teams can run.",
   );
+  await expect(page.locator(".hero-positioning")).toContainText("InnoNestX");
   await page.getByRole("link", { name: "中文" }).click();
   await expect(page).toHaveURL(/\/zh\/index\.html$/);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "用 AI 建造工具，用质量守住交付",
+    "把质量工作做成团队真能跑起来的产品",
   );
 });
 
@@ -48,6 +49,29 @@ test("case study page renders", async ({ page }) => {
     "AI Test Case Generator",
   );
   await expect(page.getByRole("heading", { name: "Problem" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Tradeoffs" })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Inspectable proof" }),
+  ).toBeVisible();
+});
+
+test("notes index and article render", async ({ page }) => {
+  await page.goto("/en/notes.html");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "Practical Notes",
+  );
+  await page
+    .getByRole("link", {
+      name: "Stand up Dameng / Highgo for QA in minutes with Docker",
+    })
+    .click();
+  await expect(page).toHaveURL(/\/en\/notes\/domestic-db-docker-qa\.html$/);
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Dameng");
+});
+
+test("contact offers list is visible", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.locator(".contact-offers li").first()).toBeVisible();
 });
 
 test("new case studies render with project OG covers", async ({ page }) => {

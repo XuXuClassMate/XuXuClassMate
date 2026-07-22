@@ -168,6 +168,19 @@
   line-height: 1.65;
 }
 
+.hero-positioning {
+  font-size: 0.98rem;
+  color: var(--muted);
+  max-width: 38rem;
+  margin: -1.1rem 0 28px;
+  line-height: 1.55;
+  opacity: 0.92;
+}
+
+.hero-desc:has(+ .hero-positioning) {
+  margin-bottom: 0.75rem;
+}
+
 .hero-actions {
   display: flex;
   flex-wrap: wrap;

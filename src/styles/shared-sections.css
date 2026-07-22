@@ -125,6 +125,32 @@
   margin-bottom: 1rem;
 }
 
+.contact-offers {
+  list-style: none;
+  display: grid;
+  gap: 0.45rem;
+  margin: 0 0 1.1rem;
+  padding: 0;
+}
+
+.contact-offers li {
+  position: relative;
+  padding-left: 1rem;
+  color: var(--ink);
+  font-size: 0.95rem;
+}
+
+.contact-offers li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+}
+
 .contact-actions {
   display: flex;
   flex-wrap: wrap;

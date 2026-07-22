@@ -11,10 +11,12 @@ const pages = [
   { path: "/en/life", changefreq: "monthly", priority: "0.80" },
   { path: "/en/learn", changefreq: "monthly", priority: "0.80" },
   { path: "/en/work", changefreq: "monthly", priority: "0.80" },
+  { path: "/en/notes", changefreq: "weekly", priority: "0.80" },
   { path: "/zh/", changefreq: "weekly", priority: "0.90" },
   { path: "/zh/life", changefreq: "monthly", priority: "0.80" },
   { path: "/zh/learn", changefreq: "monthly", priority: "0.80" },
   { path: "/zh/work", changefreq: "monthly", priority: "0.80" },
+  { path: "/zh/notes", changefreq: "weekly", priority: "0.80" },
 ];
 
 const cases = [
@@ -26,6 +28,8 @@ const cases = [
   "automation-framework",
 ];
 
+const notes = ["domestic-db-docker-qa", "clawhub-skill-shipping"];
+
 for (const slug of cases) {
   pages.push({
     path: `/en/work/${slug}`,
@@ -34,6 +38,19 @@ for (const slug of cases) {
   });
   pages.push({
     path: `/zh/work/${slug}`,
+    changefreq: "monthly",
+    priority: "0.70",
+  });
+}
+
+for (const slug of notes) {
+  pages.push({
+    path: `/en/notes/${slug}`,
+    changefreq: "monthly",
+    priority: "0.70",
+  });
+  pages.push({
+    path: `/zh/notes/${slug}`,
     changefreq: "monthly",
     priority: "0.70",
   });

@@ -30,5 +30,8 @@ jobs:
           test -f dist/_headers
           grep -q "Content-Security-Policy" dist/_headers
           test -f functions/api/metrics.ts
+          test -f dist/en/notes.html
+          test -f dist/zh/notes/domestic-db-docker-qa.html
+      - run: npm run check:links
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
