@@ -171,14 +171,14 @@
 .hero-positioning {
   font-size: 0.98rem;
   color: var(--muted);
-  max-width: 38rem;
-  margin: -1.1rem 0 28px;
-  line-height: 1.55;
-  opacity: 0.92;
+  max-width: 40rem;
+  margin: 0 0 28px;
+  line-height: 1.65;
+  opacity: 0.95;
 }
 
 .hero-desc:has(+ .hero-positioning) {
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.9rem;
 }
 
 .hero-actions {
@@ -284,8 +284,15 @@
 }
 
 .hero:not(.hero--home) .hero-desc {
-  margin: 0 auto;
+  margin: 0 auto 1.15rem;
   color: var(--page-hero-desc);
+  text-wrap: pretty;
+}
+
+.hero:not(.hero--home) .hero-positioning {
+  margin: 0 auto 1.75rem;
+  color: var(--page-hero-desc);
+  text-wrap: pretty;
 }
 
 .hero:not(.hero--home) .hero-actions {
