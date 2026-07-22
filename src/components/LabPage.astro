@@ -1,0 +1,182 @@
+---
+import Contact from "./Contact.astro";
+import Footer from "./Footer.astro";
+import PageHero from "./PageHero.astro";
+import WechatModal from "./WechatModal.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import type { LabPage } from "../content/labs";
+import { getCopy, type Locale, type PageId } from "../lib/i18n";
+
+type Props = {
+  locale: Locale;
+  pageId: PageId;
+  lab: LabPage;
+};
+
+const { locale, pageId, lab } = Astro.props;
+const copy = getCopy(locale);
+---
+
+<BaseLayout locale={locale} page={pageId} metaOverride={lab.meta}>
+  <main id="main-content" class="lab-page">
+    <PageHero
+      subtitle={lab.subtitle}
+      title={lab.title}
+      description={lab.description}
+    />
+
+    {
+      lab.capabilities && lab.capabilities.length > 0 ? (
+        <section class="home-section">
+          <div class="container">
+            <h2 class="section-title reveal-on-scroll">
+              {lab.capabilitiesTitle}
+            </h2>
+            <ul class="stack-list reveal-on-scroll">
+              {lab.capabilities.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      ) : null
+    }
+
+    {
+      lab.tracks && lab.tracks.length > 0 ? (
+        <section class="home-section">
+          <div class="container">
+            <h2 class="section-title reveal-on-scroll">{lab.tracksTitle}</h2>
+            <div class="track-grid">
+              {lab.tracks.map((track, index) => (
+                <article
+                  class={`track-card reveal-on-scroll reveal-delay-${(index % 3) + 1}`}
+                >
+                  <div class="track-head">
+                    <h3>{track.title}</h3>
+                    <span
+                      class:list={[
+                        "track-status",
+                        { "track-status--live": track.status === "live" },
+                      ]}
+                    >
+                      {track.statusLabel}
+                    </span>
+                  </div>
+                  {track.input ? (
+                    <p class="track-io">
+                      <strong>Input:</strong> {track.input}
+                    </p>
+                  ) : null}
+                  {track.output ? (
+                    <ul class="track-output">
+                      {track.output.map((item) => (
+                        <li>{item}</li>
+                      ))}
+                    </ul>
+                  ) : null}
+                  <ol class="arch-chain">
+                    {track.chain.map((layer) => (
+                      <li>{layer}</li>
+                    ))}
+                  </ol>
+                  {track.href ? (
+                    <a class="project-link" href={track.href}>
+                      {track.linkLabel}
+                    </a>
+                  ) : null}
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null
+    }
+
+    {
+      lab.featured ? (
+        <section class="home-section">
+          <div class="container">
+            <h2 class="section-title reveal-on-scroll">{lab.featuredTitle}</h2>
+            <a href={lab.featured.href} class="featured-row reveal-on-scroll">
+              <div>
+                <p class="track-status">{lab.featured.status}</p>
+                <h3>{lab.featured.title}</h3>
+                <p>{lab.featured.description}</p>
+              </div>
+              <span class="featured-arrow" aria-hidden="true">
+                →
+              </span>
+            </a>
+          </div>
+        </section>
+      ) : null
+    }
+
+    {
+      lab.cloudTitle ? (
+        <section class="home-section">
+          <div class="container">
+            <h2 class="section-title reveal-on-scroll">{lab.cloudTitle}</h2>
+            {lab.cloudLive ? (
+              <ul class="capability-list reveal-on-scroll">
+                {lab.cloudLive.map((item) => (
+                  <li>
+                    <span class="track-status track-status--live">Live</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+            {lab.cloudExploring ? (
+              <ul class="capability-list reveal-on-scroll">
+                {lab.cloudExploring.map((item) => (
+                  <li>
+                    <span class="track-status">Exploring</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+          </div>
+        </section>
+      ) : null
+    }
+
+    {
+      lab.proofs && lab.proofs.length > 0 ? (
+        <section class="home-section">
+          <div class="container">
+            <h2 class="section-title reveal-on-scroll">{lab.proofTitle}</h2>
+            <div class="article-list">
+              {lab.proofs.map((item, index) => (
+                <a
+                  href={item.href}
+                  class={`article-row reveal-on-scroll reveal-delay-${(index % 3) + 1}`}
+                >
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null
+    }
+  </main>
+
+  <Contact
+    label={copy.contactLabel}
+    hint={copy.contactHint}
+    offers={copy.contactOffers}
+    copyLabel={copy.copyEmail}
+    copiedLabel={copy.copiedEmail}
+  />
+  <Footer
+    brand={copy.brand}
+    description={copy.home.footerDesc}
+    copyright={copy.copyright}
+    social={copy.home.social}
+  />
+  <WechatModal alt={copy.wechatAlt} closeLabel={copy.closeModal} />
+</BaseLayout>

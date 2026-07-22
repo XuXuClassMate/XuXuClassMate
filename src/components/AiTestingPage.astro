@@ -1,0 +1,142 @@
+---
+import Contact from "./Contact.astro";
+import Footer from "./Footer.astro";
+import PageHero from "./PageHero.astro";
+import WechatModal from "./WechatModal.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getAiTestingLab } from "../content/ai-testing";
+import { getCopy, type Locale } from "../lib/i18n";
+
+type Props = { locale: Locale };
+
+const { locale } = Astro.props;
+const copy = getCopy(locale);
+const lab = getAiTestingLab(locale);
+---
+
+<BaseLayout locale={locale} page="ai-testing" metaOverride={lab.meta}>
+  <main id="main-content" class="lab-page ai-lab-page">
+    <PageHero
+      subtitle={lab.subtitle}
+      title={lab.title}
+      description={lab.description}
+      positioning={lab.positioning}
+      actions={[
+        {
+          href: lab.live.href,
+          label: lab.live.linkLabel,
+          primary: true,
+        },
+      ]}
+    />
+
+    <section class="home-section ai-live">
+      <div class="container">
+        <h2 class="section-title reveal-on-scroll">{lab.liveTitle}</h2>
+        <article class="ai-live-panel reveal-on-scroll">
+          <div class="ai-live-head">
+            <h3>{lab.live.title}</h3>
+            <span class="track-status track-status--live">{lab.live.status}</span>
+          </div>
+          <div class="ai-live-grid">
+            <div>
+              <h4>{locale === "zh" ? "问题" : "Problem"}</h4>
+              <p>{lab.live.problem}</p>
+            </div>
+            <div>
+              <h4>{locale === "zh" ? "做法" : "Approach"}</h4>
+              <p>{lab.live.approach}</p>
+            </div>
+          </div>
+          <div class="ai-live-flow">
+            <p class="ai-live-label">
+              {locale === "zh" ? "输入" : "Input"} → {lab.live.input}
+            </p>
+            <ul class="stack-list stack-list--inline">
+              {lab.live.outputs.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+            <ol class="arch-chain">
+              {lab.live.pipeline.map((step) => (
+                <li>{step}</li>
+              ))}
+            </ol>
+          </div>
+          <ul class="capability-list">
+            {lab.live.proof.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+          <a class="btn-primary" href={lab.live.href}>{lab.live.linkLabel}</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="home-section">
+      <div class="container">
+        <h2 class="section-title reveal-on-scroll">{lab.methodsTitle}</h2>
+        <p class="section-lead reveal-on-scroll">{lab.methodsIntro}</p>
+        <div class="method-list">
+          {
+            lab.methods.map((method, index) => (
+              <article
+                class={`method-row reveal-on-scroll reveal-delay-${(index % 3) + 1}`}
+              >
+                <div class="method-index" aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
+                </div>
+                <div class="method-body">
+                  <div class="track-head">
+                    <h3>{method.title}</h3>
+                    <span class="track-status">{method.status}</span>
+                  </div>
+                  <p>{method.premise}</p>
+                  <ol class="arch-chain">
+                    {method.pipeline.map((step) => (
+                      <li>{step}</li>
+                    ))}
+                  </ol>
+                  <p class="method-outcome">{method.outcome}</p>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="home-section">
+      <div class="container">
+        <h2 class="section-title reveal-on-scroll">{lab.principlesTitle}</h2>
+        <div class="principles-grid">
+          {
+            lab.principles.map((item, index) => (
+              <div
+                class={`principle-card reveal-on-scroll reveal-delay-${index + 1}`}
+              >
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Contact
+    label={copy.contactLabel}
+    hint={copy.contactHint}
+    offers={copy.contactOffers}
+    copyLabel={copy.copyEmail}
+    copiedLabel={copy.copiedEmail}
+  />
+  <Footer
+    brand={copy.brand}
+    description={copy.home.footerDesc}
+    copyright={copy.copyright}
+    social={copy.home.social}
+  />
+  <WechatModal alt={copy.wechatAlt} closeLabel={copy.closeModal} />
+</BaseLayout>

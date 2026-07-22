@@ -23,20 +23,21 @@ type ProjectDef = {
 };
 
 const FEATURED_IDS: ProjectId[] = [
-  "testcase-generator",
-  "trading-assistant",
-  "globalpulse",
-  "docker-hub-api-gateway",
+  "fullstack-e2e",
+  "automation-framework",
   "docker-suite",
+  "testcase-generator",
+  "globalpulse",
 ];
 
 const PROJECT_ORDER: ProjectId[] = [
-  "testcase-generator",
-  "trading-assistant",
-  "globalpulse",
-  "docker-hub-api-gateway",
-  "docker-suite",
+  "fullstack-e2e",
   "automation-framework",
+  "testcase-generator",
+  "docker-suite",
+  "docker-hub-api-gateway",
+  "globalpulse",
+  "trading-assistant",
 ];
 
 export const PROJECTS: Record<ProjectId, ProjectDef> = {
@@ -178,21 +179,45 @@ export const PROJECTS: Record<ProjectId, ProjectDef> = {
     href: "https://github.com/XuXuClassMate/My_Test_JAProject",
     image: "/images/cover-automation.jpg",
     en: {
-      title: "Automation Framework Craft",
+      title: "Java API Automation",
       description:
-        "Reusable API / UI automation patterns and practice projects — the craft underneath the AI tools, not locked to one language.",
-      tags: ["Framework", "API", "Playwright"],
+        "Scalable API automation with Java, JUnit, RestAssured, Maven, and Allure.",
+      tags: ["Java", "RestAssured", "API"],
       linkLabel: "GitHub",
-      imageAlt: "Automation Framework cover",
+      imageAlt: "Java API Automation cover",
       caseLabel: "Case study",
     },
     zh: {
-      title: "自动化框架手艺",
+      title: "Java 接口自动化",
       description:
-        "可复用的接口 / UI 自动化模式与练习项目——AI 工具底下的手艺底座，不绑死某一种语言。",
-      tags: ["Framework", "API", "Playwright"],
+        "基于 Java、JUnit、RestAssured、Maven 与 Allure 的可扩展接口自动化。",
+      tags: ["Java", "RestAssured", "API"],
       linkLabel: "GitHub",
-      imageAlt: "自动化框架封面",
+      imageAlt: "Java 接口自动化封面",
+      caseLabel: "案例详解",
+    },
+  },
+  "fullstack-e2e": {
+    id: "fullstack-e2e",
+    category: "E2E",
+    href: "#",
+    image: "/images/cover-automation.jpg",
+    en: {
+      title: "Playwright E2E Framework",
+      description:
+        "Full-chain automation covering frontend, API, backend, MySQL, Redis, and MQ. Repository coming soon.",
+      tags: ["Playwright", "E2E", "TypeScript"],
+      linkLabel: "Coming soon",
+      imageAlt: "Full-Stack E2E Framework cover",
+      caseLabel: "Case study",
+    },
+    zh: {
+      title: "Playwright 全链路 E2E",
+      description:
+        "覆盖前端、API、后端、MySQL、Redis 与消息队列的全链路自动化。仓库即将公开。",
+      tags: ["Playwright", "E2E", "TypeScript"],
+      linkLabel: "即将上线",
+      imageAlt: "全链路 E2E 框架封面",
       caseLabel: "案例详解",
     },
   },

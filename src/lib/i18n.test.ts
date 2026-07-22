@@ -19,6 +19,8 @@ describe("i18n paths", () => {
     expect(pageHref("en", "learn")).toBe("/en/learn.html");
     expect(pageHref("zh", "work")).toBe("/zh/work.html");
     expect(pageHref("en", "notes")).toBe("/en/notes.html");
+    expect(pageHref("en", "blog")).toBe("/en/blog.html");
+    expect(pageHref("en", "about")).toBe("/en/about.html");
     expect(pageHref("en", "innonestx")).toBe("/en/innonestx.html");
   });
 
@@ -31,10 +33,10 @@ describe("i18n paths", () => {
 
   it("maps note routes", () => {
     expect(noteHref("en", "domestic-db-docker-qa")).toBe(
-      "/en/notes/domestic-db-docker-qa.html",
+      "/en/blog/domestic-db-docker-qa.html",
     );
     expect(noteHref("zh", "clawhub-skill-shipping")).toBe(
-      "/zh/notes/clawhub-skill-shipping.html",
+      "/zh/blog/clawhub-skill-shipping.html",
     );
   });
 
@@ -72,12 +74,19 @@ describe("i18n paths", () => {
   it("builds JSON-LD graph with person and webpage", () => {
     const graph = jsonLdGraph("en", "home", true);
     expect(graph["@context"]).toBe("https://schema.org");
-    expect(graph["@graph"]).toHaveLength(3);
+    expect(graph["@graph"].length).toBeGreaterThanOrEqual(3);
     expect(graph["@graph"][0]).toMatchObject({ "@type": "Person" });
     expect(graph["@graph"][2]).toMatchObject({
       "@type": "WebPage",
       url: "https://www.xuxuclassmate.com/",
     });
+  });
+
+  it("adds SoftwareSourceCode for case studies with repos", () => {
+    const graph = jsonLdGraph("en", "work", false, "automation-framework");
+    expect(
+      graph["@graph"].some((node) => node["@type"] === "SoftwareSourceCode"),
+    ).toBe(true);
   });
 
   it("resolves case studies in both locales", () => {

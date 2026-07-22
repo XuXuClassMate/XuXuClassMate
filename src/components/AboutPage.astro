@@ -1,0 +1,63 @@
+---
+import Contact from "./Contact.astro";
+import Footer from "./Footer.astro";
+import PageHero from "./PageHero.astro";
+import WechatModal from "./WechatModal.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getAbout } from "../content/about";
+import { getCopy, type Locale } from "../lib/i18n";
+
+type Props = { locale: Locale };
+
+const { locale } = Astro.props;
+const copy = getCopy(locale);
+const about = getAbout(locale);
+---
+
+<BaseLayout
+  locale={locale}
+  page="about"
+  metaOverride={about.meta}
+>
+  <main id="main-content" class="lab-page about-page">
+    <PageHero
+      subtitle={about.subtitle}
+      title={about.title}
+      description={about.intro}
+      actions={[
+        { href: about.ctaWorkHref, label: about.ctaWork, primary: true },
+        { href: about.ctaLabHref, label: about.ctaLab },
+      ]}
+    />
+
+    {
+      about.sections.map((section) => (
+        <section class="home-section">
+          <div class="container">
+            <h2 class="section-title reveal-on-scroll">{section.title}</h2>
+            <ul class="capability-list reveal-on-scroll">
+              {section.items.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      ))
+    }
+  </main>
+
+  <Contact
+    label={copy.contactLabel}
+    hint={copy.contactHint}
+    offers={copy.contactOffers}
+    copyLabel={copy.copyEmail}
+    copiedLabel={copy.copiedEmail}
+  />
+  <Footer
+    brand={copy.brand}
+    description={copy.home.footerDesc}
+    copyright={copy.copyright}
+    social={copy.home.social}
+  />
+  <WechatModal alt={copy.wechatAlt} closeLabel={copy.closeModal} />
+</BaseLayout>

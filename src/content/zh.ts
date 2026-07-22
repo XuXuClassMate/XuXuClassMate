@@ -30,19 +30,56 @@ export const zh: LocaleCopy = {
   menuLabel: "菜单",
   skipToContent: "跳到主要内容",
   nav: {
+    about: "关于",
+    experience: "经历",
+    projects: "项目",
+    blog: "技术博客",
+    aiTesting: "AI 测试",
+    github: "GitHub",
     life: "生活",
-    learn: "学习",
-    work: "工作",
-    notes: "笔记",
+    contact: "联系",
+    learn: "经历",
+    work: "项目",
+    notes: "技术博客",
     innonestx: "InnoNestX",
   },
   meta: {
     home: {
-      title: "旭旭同学 | 可安装的质量工程",
+      title: "旭旭同学 | QA Engineer & Test Automation Engineer",
       description:
-        "旭旭同学把质量工程做成可安装的产品——AI 测试工具、OpenClaw / ClawHub 技能、可复用的 Docker 环境，以及 GlobalPulse 这类可运行系统。",
-      keywords: sharedKeywords,
-      ogTitle: "旭旭同学 — 可安装的质量工程",
+        "QA Engineer，专注测试自动化、接口测试、性能测试、Playwright、Python、Java、Docker 与 AI 辅助测试。",
+      keywords: `${sharedKeywords}, QA Engineer, SDET, Test Automation Engineer, AI Testing Engineer`,
+      ogTitle: "旭旭同学 | QA Engineer & Test Automation Engineer",
+    },
+    about: {
+      title: "关于我 | QA / SDET / AI Testing | 旭旭同学",
+      description:
+        "我是一名 QA / Test Engineer，专注测试自动化、接口测试、性能测试与 AI 辅助测试。",
+      keywords: `${sharedKeywords}, About, SDET`,
+    },
+    "ai-testing": {
+      title: "AI Testing Lab | 旭旭同学",
+      description:
+        "AI 用例生成、LLM 接口测试、缺陷分析与测试 Agent。",
+      keywords: `${sharedKeywords}, AI Testing Lab`,
+    },
+    playwright: {
+      title: "Playwright Testing Lab | 旭旭同学",
+      description:
+        "Playwright + TypeScript 自动化实验室：UI、API、夹具、并行与 CI/CD。",
+      keywords: `${sharedKeywords}, Playwright Testing Lab`,
+    },
+    infrastructure: {
+      title: "Test Infrastructure | 旭旭同学",
+      description:
+        "Docker、CI/CD、GitHub Actions、Cloudflare Workers 与容器化测试基础设施。",
+      keywords: `${sharedKeywords}, Test Infrastructure`,
+    },
+    blog: {
+      title: "技术博客 | QA / SDET 知识库 | 旭旭同学",
+      description:
+        "关于 Playwright、性能测试、Docker for QA 与 AI 辅助测试的技术文章。",
+      keywords: `${sharedKeywords}, 技术博客`,
     },
     life: {
       title: "生活点滴 | 旭旭同学",
@@ -51,22 +88,22 @@ export const zh: LocaleCopy = {
       keywords: `${sharedKeywords}, 旅行, 爱好`,
     },
     learn: {
-      title: "学习路径：从测试到手 AI 测试 | 旭旭同学",
+      title: "经历 | 从测试到 AI Testing | 旭旭同学",
       description:
-        "从测试手艺与多阶段测试管理，到 Locust 性能、Playwright 自动化、OpenClaw / ClawHub 技能，以及 GlobalPulse 这类产品系统。",
-      keywords: `${sharedKeywords}, 学习路径, 测试管理, Locust, 质量体系`,
+        "从测试手艺与测试管理，到 Locust、Playwright、AI 测试与产品系统的经历路径。",
+      keywords: `${sharedKeywords}, 经历, SDET, Locust`,
     },
     work: {
-      title: "测试项目与 AI 工具作品集 | 旭旭同学",
+      title: "项目 | SDET Portfolio | 旭旭同学",
       description:
-        "可安装的质量产品：AI 用例生成器、ClawHub 技能、Docker 测试库镜像、GlobalPulse 与 Docker Hub API Gateway。",
-      keywords: `${sharedKeywords}, 测试作品集, GlobalPulse, 达梦 Docker, 瀚高 Docker, ClawHub`,
+        "项目案例：Playwright E2E、Java 接口自动化、Docker 测试基础设施与 AI 测试工具。",
+      keywords: `${sharedKeywords}, SDET Portfolio, 测试自动化项目`,
     },
     notes: {
-      title: "笔记 | 旭旭同学",
+      title: "技术博客 | 旭旭同学",
       description:
-        "关于数据库 Docker 测试环境、ClawHub 技能发布与可安装质量工程的实操笔记。",
-      keywords: `${sharedKeywords}, 笔记, 达梦 Docker, ClawHub`,
+        "关于数据库 Docker、ClawHub 技能发布与质量工程的技术文章。",
+      keywords: `${sharedKeywords}, 技术博客, 达梦 Docker, ClawHub`,
     },
     innonestx: {
       title: "InnoNestX | 开源实验室",
@@ -217,9 +254,9 @@ export const zh: LocaleCopy = {
     ],
   },
   learn: {
-    subtitle: "学习之路",
-    title: "从测试手艺到 AI 工具",
-    description: "研究 Agent、多模态生成，以及在生产中站得住的质量系统",
+    subtitle: "经历",
+    title: "从测试手艺到 AI Testing",
+    description: "覆盖测试管理、自动化框架、性能、Playwright 与 AI 辅助测试的经历路径",
     stackTitle: "技术栈",
     stack: [
       {
@@ -476,6 +513,12 @@ export const zh: LocaleCopy = {
     caseArtifactsTitle: "可检查的证据",
     caseMetricsTitle: "数据证据",
     caseLinksTitle: "链接",
+    caseOverviewTitle: "概述",
+    caseStackTitle: "技术栈",
+    caseArchitectureTitle: "架构",
+    caseFeaturesTitle: "关键特性",
+    caseContributionTitle: "我的贡献",
+    caseResultsTitle: "结果",
     cases: [
       {
         slug: "testcase-generator",
@@ -756,53 +799,179 @@ export const zh: LocaleCopy = {
       },
       {
         slug: "automation-framework",
-        title: "自动化框架手艺",
+        title: "Java 接口自动化框架",
         subtitle: "案例详解",
-        description: "AI 工具底下可复用的自动化模式。",
+        description:
+          "基于 Java、JUnit 与 RestAssured 的可扩展接口自动化框架。",
         cover: "/images/cover-automation.jpg",
-        coverAlt: "自动化框架手艺",
-        problem:
-          "一次性脚本经不起团队交接——AI 工具需要底下的稳定自动化手艺。",
+        coverAlt: "Java 接口自动化框架",
+        overview:
+          "基于 Java、JUnit 与 RestAssured 的可扩展接口自动化框架——面向多环境、鉴权模式与 CI 流水线复用。",
+        techStack: ["Java", "JUnit", "RestAssured", "Maven", "Allure"],
+        architecture: [
+          {
+            title: "测试链路",
+            layers: [
+              "Test Cases",
+              "Page / API Objects",
+              "Service Layer",
+              "RestAssured",
+              "API",
+            ],
+          },
+        ],
+        features: [
+          "API 请求抽象",
+          "环境配置",
+          "测试数据管理",
+          "鉴权处理",
+          "断言工具",
+          "Allure 报告",
+          "CI/CD 集成",
+        ],
+        contribution: [
+          "设计可维护的 API Object / Service 分层抽象。",
+          "统一环境配置、鉴权辅助与断言工具。",
+          "接入 Allure 报告与适合 CI 的 Maven 执行方式。",
+        ],
+        results: [
+          "可复用的 Java 接口套件结构已公开在 GitHub",
+          "模式与 Python / Locust 练习仓并列复用",
+          "成为 AI 测试工具下的手艺底座",
+        ],
+        proof: {
+          github: "https://github.com/XuXuClassMate/My_Test_JAProject",
+          readme: "https://github.com/XuXuClassMate/My_Test_JAProject#readme",
+        },
+        status: "live",
+        problem: "一次性脚本经不起团队交接——接口套件需要稳定结构。",
         solution:
-          "沉淀接口与 UI 自动化（含 Playwright）的练习框架，强调复用、清晰与语言灵活。",
+          "打造 Java + RestAssured 框架，分层清晰，带报告与 CI 钩子。",
         tradeoffs: [
-          "框架保持语言灵活，而不是绑定单一语言身份——约束是交付质量。",
-          "练习仓库公开，模式可直接复制，不必等一门课。",
-          "Locust + Playwright 与接口套件并列——性能不是事后补丁。"
+          "分层 API Object 优于扁平脚本——首条用例更慢，第二年改动更快。",
+          "Allure + Maven 优于临时日志——报告经得起交接。",
+          "公开练习仓，模式可直接复制，不必依赖私有 Wiki。",
         ],
         artifacts: [
           {
-            "title": "Java 实践套件",
-            "description": "可复用的接口 / UI 自动化模式。",
-            "href": "https://github.com/XuXuClassMate/My_Test_JAProject",
-            "linkLabel": "GitHub"
+            title: "Java 实践套件",
+            description: "可复用的接口自动化模式。",
+            href: "https://github.com/XuXuClassMate/My_Test_JAProject",
+            linkLabel: "GitHub",
           },
           {
-            "title": "Python + Locust 示例",
-            "description": "性能、接口、Selenium、Appium 实践集中一仓。",
-            "href": "https://github.com/XuXuClassMate/My_Test_PyProject",
-            "linkLabel": "GitHub"
-          }
+            title: "Python + Locust 示例",
+            description: "性能、接口、Selenium、Appium 实践。",
+            href: "https://github.com/XuXuClassMate/My_Test_PyProject",
+            linkLabel: "GitHub",
+          },
         ],
         outcomes: [
-          "可复用的 API / UI 套件结构",
-          "反哺 AI 工具打包方式的模式",
+          "可复用的 API 套件结构",
+          "Allure 就绪的报告路径",
           "GitHub 上的开放练习项目",
         ],
         metrics: [
-          { label: "焦点", value: "API · UI · Playwright" },
-          { label: "约束", value: "交付质量" },
+          { label: "技术栈", value: "Java · JUnit · RestAssured" },
+          { label: "焦点", value: "接口自动化" },
         ],
         links: [
           {
-            label: "GitHub",
+            label: "GitHub 仓库",
             href: "https://github.com/XuXuClassMate/My_Test_JAProject",
           },
         ],
         meta: {
-          title: "自动化框架案例 | 旭旭同学",
-          description: "支撑旭旭同学 AI 测试工具的可复用 API / UI 自动化手艺。",
-          keywords: `${sharedKeywords}, 自动化框架案例`,
+          title: "Java 接口自动化框架 | 旭旭同学",
+          description:
+            "基于 Java、JUnit、RestAssured、Maven 与 Allure 的可扩展接口自动化框架。",
+          keywords: `${sharedKeywords}, Java 接口自动化, RestAssured, JUnit`,
+        },
+      },
+      {
+        slug: "fullstack-e2e",
+        title: "全链路 E2E 测试框架",
+        subtitle: "旗舰 Showcase",
+        description:
+          "覆盖前端、API、数据库、Redis 与消息队列校验的全链路自动化框架。",
+        cover: "/images/cover-automation.jpg",
+        coverAlt: "全链路 E2E 测试框架",
+        overview:
+          "覆盖前端、API、数据库、Redis 与消息队列校验的全链路自动化框架——超越单纯 Web UI Automation 的 End-to-End Testing。",
+        techStack: [
+          "Playwright",
+          "TypeScript",
+          "API clients",
+          "MySQL",
+          "Redis",
+          "MQ",
+          "Docker",
+          "CI/CD",
+        ],
+        architecture: [
+          {
+            title: "系统链路",
+            layers: [
+              "Frontend",
+              "API",
+              "Backend",
+              "Database",
+              "Redis",
+              "MQ",
+            ],
+          },
+          {
+            title: "测试链路",
+            layers: [
+              "Playwright",
+              "API",
+              "Backend",
+              "MySQL",
+              "Redis",
+              "MQ",
+            ],
+          },
+        ],
+        features: [
+          "跨层断言（UI + API + 数据）",
+          "缓存与消息侧校验",
+          "环境夹具与隔离",
+          "并行执行与丰富 Trace",
+          "容器化运行与 CI 钩子",
+        ],
+        contribution: [
+          "定义从 UI 到 MQ 的全链路架构。",
+          "以 Playwright 为主干，串联 API 与数据校验。",
+          "准备公开的 TypeScript + Playwright 仓库（即将上线）。",
+        ],
+        results: [
+          "本站已发布案例与架构说明",
+          "定位为 Playwright / E2E 核心 Showcase",
+          "GitHub 仓库状态：即将上线",
+        ],
+        status: "upcoming",
+        problem: "只测 UI 会漏掉 API、缓存与消息路径上的回归。",
+        solution:
+          "校验全链路：Playwright → API → 后端 → MySQL → Redis → MQ。",
+        tradeoffs: [
+          "全链路覆盖优于浅层 UI 检查——少一些「假绿」。",
+          "以 TypeScript + Playwright 作为主执行脊柱。",
+          "案例页先上线，仓库就绪前不放假 GitHub 链接。",
+        ],
+        outcomes: [
+          "面向招聘审阅的清晰全链路 E2E 叙事",
+          "架构已就绪，等待开源仓库公开",
+        ],
+        metrics: [
+          { label: "范围", value: "UI · API · DB · Redis · MQ" },
+          { label: "状态", value: "即将上线" },
+        ],
+        links: [],
+        meta: {
+          title: "全链路 E2E 测试框架 | 旭旭同学",
+          description:
+            "覆盖前端、API、MySQL、Redis 与消息队列的 Playwright 全链路自动化。",
+          keywords: `${sharedKeywords}, 全链路 E2E, Playwright E2E, End-to-End Testing`,
         },
       },
     ],

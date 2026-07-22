@@ -4,7 +4,7 @@ import { getNotes } from "./notes";
 import { getOrgProjects } from "./org";
 
 const sharedKeywords =
-  "xuxuclassmate, XuXuClassMate, 旭旭同学, QA engineer, software testing, test automation, AI testing, quality engineering, OpenClaw, ClawHub, testcase generator, Playwright, API testing, Docker test environment";
+  "xuxuclassmate, XuXuClassMate, QA Engineer, SDET, Test Automation Engineer, Software Test Engineer, AI Testing Engineer, Playwright QA Engineer, SDET Portfolio, API Automation Testing, Python Test Automation, QA Engineer Dubai, Playwright, Docker, OpenClaw, ClawHub";
 
 const homeSocial = [
   {
@@ -50,19 +50,56 @@ export const en: LocaleCopy = {
   menuLabel: "Menu",
   skipToContent: "Skip to content",
   nav: {
+    about: "About",
+    experience: "Experience",
+    projects: "Projects",
+    blog: "Tech Blog",
+    aiTesting: "AI Testing",
+    github: "GitHub",
     life: "Life",
-    learn: "Learn",
-    work: "Work",
-    notes: "Notes",
+    contact: "Contact",
+    learn: "Experience",
+    work: "Projects",
+    notes: "Tech Blog",
     innonestx: "InnoNestX",
   },
   meta: {
     home: {
-      title: "XuXuClassMate | Installable Quality Engineering",
+      title: "XuXuClassMate | QA Engineer & Test Automation Engineer",
       description:
-        "XuXuClassMate turns quality engineering into installable products — AI testing tools, OpenClaw / ClawHub skills, reusable Docker environments, and systems like GlobalPulse.",
+        "QA Engineer specializing in test automation, API testing, performance testing, Playwright, Python, Java, Docker and AI-assisted testing.",
       keywords: sharedKeywords,
-      ogTitle: "XuXuClassMate — Installable Quality Engineering",
+      ogTitle: "XuXuClassMate | QA Engineer & Test Automation Engineer",
+    },
+    about: {
+      title: "About | QA Engineer & SDET | XuXuClassMate",
+      description:
+        "I'm a QA / Test Engineer focused on test automation, API testing, performance testing, and AI-assisted testing.",
+      keywords: `${sharedKeywords}, About`,
+    },
+    "ai-testing": {
+      title: "AI Testing Lab | AI Testing Engineer | XuXuClassMate",
+      description:
+        "AI test case generation, LLM-based API testing, bug analysis, and testing agents.",
+      keywords: `${sharedKeywords}, AI Testing Lab`,
+    },
+    playwright: {
+      title: "Playwright Testing Lab | XuXuClassMate",
+      description:
+        "Playwright + TypeScript automation lab for UI, API, fixtures, parallel testing, and CI/CD.",
+      keywords: `${sharedKeywords}, Playwright Testing Lab`,
+    },
+    infrastructure: {
+      title: "Test Infrastructure | Docker & Cloudflare | XuXuClassMate",
+      description:
+        "Docker, CI/CD, GitHub Actions, Cloudflare Workers, and containerized testing infrastructure.",
+      keywords: `${sharedKeywords}, Test Infrastructure`,
+    },
+    blog: {
+      title: "Technical Blog | QA / SDET Knowledge Base | XuXuClassMate",
+      description:
+        "Technical articles on Playwright, performance testing, Docker for QA, and AI-assisted testing.",
+      keywords: `${sharedKeywords}, Technical Blog, Playwright vs Selenium`,
     },
     life: {
       title: "Life Journey | XuXuClassMate",
@@ -71,22 +108,22 @@ export const en: LocaleCopy = {
       keywords: `${sharedKeywords}, travel, hobbies`,
     },
     learn: {
-      title: "Learning Path: QA to AI Testing | XuXuClassMate",
+      title: "Experience | QA to AI Testing | XuXuClassMate",
       description:
-        "From QA craft and multi-stage test management to Locust performance, Playwright automation, OpenClaw / ClawHub skills, and product systems like GlobalPulse.",
-      keywords: `${sharedKeywords}, learning path, test management, Locust, QA training`,
+        "Experience path from QA craft and test management to Locust, Playwright, AI testing, and product systems.",
+      keywords: `${sharedKeywords}, Experience, SDET, Locust, QA training`,
     },
     work: {
-      title: "Testing Projects & AI Tools Portfolio | XuXuClassMate",
+      title: "Projects | SDET Portfolio & Test Automation | XuXuClassMate",
       description:
-        "Installable QA products: AI Test Case Generator, ClawHub skills, Docker DB images, GlobalPulse, and the Docker Hub API Gateway.",
-      keywords: `${sharedKeywords}, test portfolio, GlobalPulse, Dameng Docker, Highgo Docker, ClawHub skills`,
+        "Project case studies: Playwright E2E, Java API automation, Docker test infrastructure, and AI testing tools.",
+      keywords: `${sharedKeywords}, SDET Portfolio, test automation projects`,
     },
     notes: {
-      title: "Notes | XuXuClassMate",
+      title: "Technical Blog | XuXuClassMate",
       description:
-        "Practical notes on database Docker setups, ClawHub skill shipping, and installable quality engineering.",
-      keywords: `${sharedKeywords}, notes, Dameng Docker, ClawHub`,
+        "Technical articles on database Docker setups, ClawHub skill shipping, and quality engineering.",
+      keywords: `${sharedKeywords}, Technical Blog, Dameng Docker, ClawHub`,
     },
     innonestx: {
       title: "InnoNestX | Open-source Lab",
@@ -225,10 +262,10 @@ export const en: LocaleCopy = {
     social: [...homeSocial],
   },
   learn: {
-    subtitle: "LEARNING PATH",
-    title: "From QA Craft to AI Tools",
+    subtitle: "EXPERIENCE",
+    title: "From QA Craft to AI Testing",
     description:
-      "Studying agents, multimodal generation, and quality systems that still hold up in production",
+      "Experience across test management, automation frameworks, performance, Playwright, and AI-assisted testing",
     stackTitle: "Tech Stack",
     stack: [
       {
@@ -487,6 +524,12 @@ export const en: LocaleCopy = {
     caseArtifactsTitle: "Inspectable proof",
     caseMetricsTitle: "Proof metrics",
     caseLinksTitle: "Links",
+    caseOverviewTitle: "Overview",
+    caseStackTitle: "Tech Stack",
+    caseArchitectureTitle: "Architecture",
+    caseFeaturesTitle: "Key Features",
+    caseContributionTitle: "My Contribution",
+    caseResultsTitle: "Results",
     cases: [
       {
         slug: "testcase-generator",
@@ -772,55 +815,181 @@ export const en: LocaleCopy = {
       },
       {
         slug: "automation-framework",
-        title: "Automation Framework Craft",
+        title: "Java API Automation Framework",
         subtitle: "CASE STUDY",
         description:
-          "The reusable automation patterns underneath the AI tools.",
+          "A scalable API automation framework based on Java, JUnit and RestAssured.",
         cover: "/images/cover-automation.jpg",
-        coverAlt: "Automation Framework Craft",
+        coverAlt: "Java API Automation Framework",
+        overview:
+          "A scalable API automation framework based on Java, JUnit and RestAssured — built for reuse across environments, auth modes, and CI pipelines.",
+        techStack: ["Java", "JUnit", "RestAssured", "Maven", "Allure"],
+        architecture: [
+          {
+            title: "Test chain",
+            layers: [
+              "Test Cases",
+              "Page / API Objects",
+              "Service Layer",
+              "RestAssured",
+              "API",
+            ],
+          },
+        ],
+        features: [
+          "API request abstraction",
+          "Environment configuration",
+          "Test data management",
+          "Authentication handling",
+          "Assertion utilities",
+          "Allure reporting",
+          "CI/CD integration",
+        ],
+        contribution: [
+          "Designed layered API object and service abstractions for maintainable suites.",
+          "Standardized environment config, auth helpers, and assertion utilities.",
+          "Integrated Allure reporting and CI-friendly Maven execution.",
+        ],
+        results: [
+          "Reusable Java API suite structure published on GitHub",
+          "Patterns reused beside Python / Locust practice repos",
+          "Clear craft base under AI testing tooling",
+        ],
+        proof: {
+          github: "https://github.com/XuXuClassMate/My_Test_JAProject",
+          readme: "https://github.com/XuXuClassMate/My_Test_JAProject#readme",
+        },
+        status: "live",
         problem:
-          "One-off scripts do not survive team handoffs — AI tools need a durable automation craft underneath them.",
+          "One-off scripts do not survive team handoffs — API suites need durable structure.",
         solution:
-          "Built practice frameworks for API and UI automation (including Playwright) that emphasize reuse, clarity, and language flexibility.",
+          "Built a Java + RestAssured framework with clear layers, reporting, and CI hooks.",
         tradeoffs: [
-          "Language-flexible frameworks over a single-stack identity — delivery quality is the constraint.",
-          "Practice repos stay public so patterns can be copied without waiting for a course.",
-          "Locust + Playwright examples live beside API suites — performance is not an afterthought."
+          "Layered API objects over flat scripts — slower first test, faster year-two changes.",
+          "Allure + Maven over ad-hoc logs — reports that survive handoffs.",
+          "Public practice repo so patterns can be copied without a private wiki.",
         ],
         artifacts: [
           {
-            "title": "Java practice suite",
-            "description": "Reusable API / UI automation patterns.",
-            "href": "https://github.com/XuXuClassMate/My_Test_JAProject",
-            "linkLabel": "GitHub"
+            title: "Java practice suite",
+            description: "Reusable API automation patterns.",
+            href: "https://github.com/XuXuClassMate/My_Test_JAProject",
+            linkLabel: "GitHub",
           },
           {
-            "title": "Python + Locust examples",
-            "description": "Performance, API, Selenium, and Appium practice in one repo.",
-            "href": "https://github.com/XuXuClassMate/My_Test_PyProject",
-            "linkLabel": "GitHub"
-          }
+            title: "Python + Locust examples",
+            description: "Performance, API, Selenium, and Appium practice.",
+            href: "https://github.com/XuXuClassMate/My_Test_PyProject",
+            linkLabel: "GitHub",
+          },
         ],
         outcomes: [
-          "Reusable suite structure for API / UI work",
-          "Patterns that inform AI tool packaging",
-          "Open practice projects on GitHub",
+          "Reusable suite structure for API work",
+          "Allure-ready reporting path",
+          "Open practice project on GitHub",
         ],
         metrics: [
-          { label: "Focus", value: "API · UI · Playwright" },
-          { label: "Constraint", value: "Delivery quality" },
+          { label: "Stack", value: "Java · JUnit · RestAssured" },
+          { label: "Focus", value: "API automation" },
         ],
         links: [
           {
-            label: "GitHub",
+            label: "GitHub Repository",
             href: "https://github.com/XuXuClassMate/My_Test_JAProject",
           },
         ],
         meta: {
-          title: "Automation Framework Case Study | XuXuClassMate",
+          title: "Java API Automation Framework | XuXuClassMate",
           description:
-            "Reusable API and UI automation craft behind XuXuClassMate AI testing tools.",
-          keywords: `${sharedKeywords}, automation framework case study`,
+            "Scalable API automation framework with Java, JUnit, RestAssured, Maven and Allure.",
+          keywords: `${sharedKeywords}, Java API automation, RestAssured, JUnit`,
+        },
+      },
+      {
+        slug: "fullstack-e2e",
+        title: "Full-Stack E2E Testing Framework",
+        subtitle: "SHOWCASE",
+        description:
+          "A full-chain automation framework covering frontend, API, database, Redis and message queue validation.",
+        cover: "/images/cover-automation.jpg",
+        coverAlt: "Full-Stack E2E Testing Framework",
+        overview:
+          "A full-chain automation framework covering frontend, API, database, Redis and message queue validation — End-to-End Testing beyond Web UI Automation.",
+        techStack: [
+          "Playwright",
+          "TypeScript",
+          "API clients",
+          "MySQL",
+          "Redis",
+          "MQ",
+          "Docker",
+          "CI/CD",
+        ],
+        architecture: [
+          {
+            title: "System chain",
+            layers: [
+              "Frontend",
+              "API",
+              "Backend",
+              "Database",
+              "Redis",
+              "MQ",
+            ],
+          },
+          {
+            title: "Test chain",
+            layers: [
+              "Playwright",
+              "API",
+              "Backend",
+              "MySQL",
+              "Redis",
+              "MQ",
+            ],
+          },
+        ],
+        features: [
+          "Cross-layer assertions (UI + API + data)",
+          "Cache and message-side validation",
+          "Environment fixtures and isolation",
+          "Parallel execution and rich traces",
+          "Dockerized runners and CI hooks",
+        ],
+        contribution: [
+          "Defined full-chain architecture from UI through MQ validation.",
+          "Designed Playwright-first execution with API and data checks in one flow.",
+          "Preparing a public TypeScript + Playwright repository (coming soon).",
+        ],
+        results: [
+          "Case study and architecture published on this portfolio",
+          "Positioned as the core Playwright / E2E showcase",
+          "GitHub repository status: upcoming",
+        ],
+        status: "upcoming",
+        problem:
+          "UI-only automation misses regressions in API, cache, and message paths.",
+        solution:
+          "Validate the full chain: Playwright through API, backend, MySQL, Redis, and MQ.",
+        tradeoffs: [
+          "Full-chain coverage over shallow UI checks — fewer green lies.",
+          "TypeScript + Playwright as the primary execution spine.",
+          "Public case study ships before the repo is ready — no fake GitHub links.",
+        ],
+        outcomes: [
+          "Clear full-stack E2E narrative for hiring review",
+          "Architecture ready for the upcoming open-source repo",
+        ],
+        metrics: [
+          { label: "Scope", value: "UI · API · DB · Redis · MQ" },
+          { label: "Status", value: "Coming soon" },
+        ],
+        links: [],
+        meta: {
+          title: "Full-Stack E2E Testing Framework | XuXuClassMate",
+          description:
+            "Full-chain Playwright automation covering frontend, API, MySQL, Redis and message queues.",
+          keywords: `${sharedKeywords}, Full-Stack E2E, Playwright E2E, End-to-End Testing`,
         },
       },
     ],

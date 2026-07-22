@@ -54,7 +54,7 @@ const canonical = absoluteUrl(
   caseSlug
     ? `/${locale}/work/${caseSlug}`
     : noteSlug
-      ? `/${locale}/notes/${noteSlug}`
+      ? `/${locale}/blog/${noteSlug}`
       : canonicalPath(locale, page, rootHome),
 );
 const alternates = caseSlug
@@ -65,9 +65,9 @@ const alternates = caseSlug
     ]
   : noteSlug
     ? [
-        { hreflang: "en", href: absoluteUrl(`/en/notes/${noteSlug}`) },
-        { hreflang: "zh", href: absoluteUrl(`/zh/notes/${noteSlug}`) },
-        { hreflang: "x-default", href: absoluteUrl(`/en/notes/${noteSlug}`) },
+        { hreflang: "en", href: absoluteUrl(`/en/blog/${noteSlug}`) },
+        { hreflang: "zh", href: absoluteUrl(`/zh/blog/${noteSlug}`) },
+        { hreflang: "x-default", href: absoluteUrl(`/en/blog/${noteSlug}`) },
       ]
     : hreflangLinks(locale, page, rootHome);
 const homeHref = locale === "zh" ? pageHref("zh", "home") : "/";
@@ -215,43 +215,47 @@ const langSwitchHref = caseSlug
             </button>
             <div class="nav-links" id="navLinks">
               <a
-                href={pageHref(locale, "life")}
-                class:list={["nav-item", { active: active === "life" }]}
+                href={pageHref(locale, "about")}
+                class:list={["nav-item", { active: active === "about" }]}
               >
-                {copy.nav.life}
+                {copy.nav.about}
               </a>
               <a
                 href={pageHref(locale, "learn")}
                 class:list={["nav-item", { active: active === "learn" }]}
               >
-                {copy.nav.learn}
+                {copy.nav.experience}
               </a>
               <a
                 href={pageHref(locale, "work")}
                 class:list={["nav-item", { active: active === "work" }]}
               >
-                {copy.nav.work}
+                {copy.nav.projects}
               </a>
-              {
-                copy.nav.notes ? (
-                  <a
-                    href={pageHref(locale, "notes")}
-                    class:list={["nav-item", { active: active === "notes" }]}
-                  >
-                    {copy.nav.notes}
-                  </a>
-                ) : null
-              }
-              {
-                copy.nav.innonestx ? (
-                  <a
-                    href={pageHref(locale, "innonestx")}
-                    class:list={["nav-item", { active: active === "innonestx" }]}
-                  >
-                    {copy.nav.innonestx}
-                  </a>
-                ) : null
-              }
+              <a
+                href={pageHref(locale, "blog")}
+                class:list={[
+                  "nav-item",
+                  { active: active === "blog" || active === "notes" },
+                ]}
+              >
+                {copy.nav.blog}
+              </a>
+              <a
+                href={pageHref(locale, "ai-testing")}
+                class:list={["nav-item", { active: active === "ai-testing" }]}
+              >
+                {copy.nav.aiTesting}
+              </a>
+              <a
+                href={pageHref(locale, "life")}
+                class:list={["nav-item", { active: active === "life" }]}
+              >
+                {copy.nav.life}
+              </a>
+              <a href="#contact" class="nav-item">
+                {copy.nav.contact}
+              </a>
               <a href={langSwitchHref} class="language-switch">
                 {copy.languageSwitch}
               </a>

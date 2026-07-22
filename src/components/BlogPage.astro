@@ -1,0 +1,88 @@
+---
+import Contact from "./Contact.astro";
+import Footer from "./Footer.astro";
+import PageHero from "./PageHero.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCopy, noteHref, type Locale } from "../lib/i18n";
+
+type Props = { locale: Locale };
+
+const { locale } = Astro.props;
+const copy = getCopy(locale);
+const page = copy.notes;
+const isZh = locale === "zh";
+const title = isZh ? "技术博客" : "Technical Blog";
+const subtitle = isZh ? "QA / SDET 知识库" : "QA / SDET KNOWLEDGE BASE";
+const description = isZh
+  ? "可检索的技术文章：Playwright、性能测试、Docker for QA、AI Testing。"
+  : "Searchable articles on Playwright, performance testing, Docker for QA, and AI testing.";
+---
+
+<BaseLayout locale={locale} page="blog">
+  <main id="main-content">
+    <PageHero
+      subtitle={subtitle}
+      title={title}
+      description={description}
+    />
+
+    <section class="notes-index">
+      <div class="container">
+        <div class="notes-grid notes-grid--index">
+          {
+            page.items.map((item, index) => (
+              <article
+                class={`note-card note-card--rich reveal-on-scroll reveal-delay-${(index % 3) + 1}`}
+              >
+                <ul class="note-tags">
+                  {item.tags.map((tag) => (
+                    <li>{tag}</li>
+                  ))}
+                </ul>
+                <h2>
+                  <a href={noteHref(locale, item.slug).replace("/notes/", "/blog/")}>
+                    {item.title}
+                  </a>
+                </h2>
+                <p>{item.description}</p>
+                {item.proof ? <p class="note-card-proof">{item.proof}</p> : null}
+              </article>
+            ))
+          }
+        </div>
+
+        <div class="home-section roadmap-block reveal-on-scroll">
+          <h2 class="section-title">
+            {isZh ? "写作路线图" : "Writing roadmap"}
+          </h2>
+          <ul class="capability-list">
+            <li>Playwright vs Selenium</li>
+            <li>Playwright API Testing</li>
+            <li>Playwright Authentication</li>
+            <li>Playwright Parallel Testing</li>
+            <li>Playwright Docker / CI/CD</li>
+            <li>Locust 500 QPS Performance Testing</li>
+            <li>How to Find Database Bottlenecks</li>
+            <li>Docker Compose for QA</li>
+            <li>How to Use LLM to Generate Test Cases</li>
+            <li>AI Agent for Software Testing</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Contact
+    label={copy.contactLabel}
+    hint={copy.contactHint}
+    offers={copy.contactOffers}
+    copyLabel={copy.copyEmail}
+    copiedLabel={copy.copiedEmail}
+  />
+  <Footer
+    brand={copy.brand}
+    description={page.footerDesc}
+    copyright={copy.copyright}
+    social={page.social}
+  />
+</BaseLayout>

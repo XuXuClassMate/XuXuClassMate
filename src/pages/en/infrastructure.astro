@@ -1,0 +1,10 @@
+---
+import LabPage from "../../components/LabPage.astro";
+import { getInfrastructureLab } from "../../content/labs";
+---
+
+<LabPage
+  locale="en"
+  pageId="infrastructure"
+  lab={getInfrastructureLab("en")}
+/>
