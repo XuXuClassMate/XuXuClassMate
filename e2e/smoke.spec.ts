@@ -5,17 +5,28 @@ import { join } from "node:path";
 test("home renders and language switch works", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "Turn quality work into products teams can run.",
+    "Hi, I'm XuXu.",
   );
-  await expect(page.locator(".hero-positioning")).toContainText(
-    "installable quality tools",
+  await expect(page.locator(".hero-role-line")).toHaveText(
+    "QA Engineer · SDET · AI Testing",
   );
+  await expect(page.locator(".hero-tagline")).toHaveText(
+    "Installable Quality Engineering",
+  );
+  await expect(page.locator(".hero-desc")).toContainText("QA Engineer");
+  await expect(page.locator(".hero-desc")).toContainText("test automation");
+  await expect(page.locator(".hero-desc")).toContainText("AI testing");
+  await expect(page.getByRole("heading", { name: "By the Numbers" })).toBeVisible();
+  await expect(page.getByText("Live Public Metrics · Updated Automatically")).toBeVisible();
+  await expect(page.getByRole("link", { name: /View Docker Hub/i }).first()).toBeVisible();
+  await expect(page.getByRole("link", { name: /View ClawHub/i }).first()).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Quality Engineering" })).toBeVisible();
   await page.getByRole("link", { name: "中文" }).click();
   await expect(page).toHaveURL(/\/zh\/index\.html$/);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "把质量工作做成团队真能跑起来的产品",
+    "你好，我是旭旭。",
   );
-  await expect(page.locator(".hero-positioning")).toContainText("可安装");
+  await expect(page.locator(".hero-tagline")).toHaveText("可安装的质量工程");
 });
 
 test("wechat modal opens and closes", async ({ page }) => {
@@ -26,69 +37,121 @@ test("wechat modal opens and closes", async ({ page }) => {
   await expect(page.locator("#wechatModal")).not.toHaveClass(/show/);
 });
 
-test("work project filters toggle", async ({ page }) => {
+test("projects page shows categorized sections", async ({ page }) => {
   await page.goto("/en/work.html");
-  const aiCards = page.locator('.project-card[data-category="AI"]');
-  const infraCards = page.locator('.project-card[data-category="Infra"]');
-  const productCards = page.locator('.project-card[data-category="Product"]');
-  await expect(aiCards.first()).toBeVisible();
-  await expect(infraCards.first()).toBeVisible();
-  await expect(productCards.first()).toBeVisible();
-  await page.getByRole("button", { name: "AI", exact: true }).click();
-  await expect(aiCards.first()).toBeVisible();
-  await expect(infraCards.first()).toBeHidden();
-  await expect(productCards.first()).toBeHidden();
-  await page.getByRole("button", { name: "Product", exact: true }).click();
-  await expect(productCards.first()).toBeVisible();
-  await expect(aiCards.first()).toBeHidden();
-  await page.getByRole("button", { name: "All", exact: true }).click();
-  await expect(infraCards.first()).toBeVisible();
-  await expect(productCards.first()).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Quality Engineering" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Developer Infrastructure" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "AI / Agent Projects" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "AI Test Case Generator" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Test DB Docker Suite" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Docker Hub API Gateway" }),
+  ).toBeVisible();
+  await expect(page.getByRole("heading", { name: "GlobalPulse" })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Trading Assistant Core" }),
+  ).toBeVisible();
 });
 
-test("case study page renders", async ({ page }) => {
+test("unified case study template renders", async ({ page }) => {
   await page.goto("/en/work/testcase-generator.html");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "AI Test Case Generator",
   );
-  await expect(page.getByRole("heading", { name: "Problem" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Tradeoffs" })).toBeVisible();
+  await expect(page.locator(".subtitle")).toContainText("FLAGSHIP");
   await expect(
-    page.getByRole("heading", { name: "Inspectable proof" }),
+    page.getByRole("heading", { name: "01. Project Overview" }),
   ).toBeVisible();
+  await expect(page.getByRole("heading", { name: "02. Problem" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "03. Solution" })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "06. My Role" }),
+  ).toBeVisible();
+  await expect(page.getByText("What did I specifically do?")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Try it now" })).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Open interactive demo" }),
+  ).toHaveAttribute("href", "/en/demo/ai-testcase-generator.html");
+  await expect(page.locator(".pipeline-inputs")).toContainText("PDF");
   const back = page.getByRole("link", { name: /All projects/i });
   await expect(back.first()).toBeVisible();
-  await expect(back.first()).toHaveClass(/back-nav/);
-  await expect(page.locator(".detail-topbar .back-nav")).toBeVisible();
 });
 
-test("notes index and article render", async ({ page }) => {
-  await page.goto("/en/notes.html");
+test("generator interactive demo runs sample flow", async ({ page }) => {
+  await page.goto("/en/demo/ai-testcase-generator.html");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "Practical Notes",
+    "AI Test Case Generator",
   );
+  await page.getByRole("button", { name: "Load sample PRD" }).click();
+  await page.getByRole("button", { name: "Generate cases" }).click();
+  await expect(page.getByText("TC-01")).toBeVisible({ timeout: 5000 });
+  await expect(
+    page.getByRole("heading", { name: "Request OTP with a valid email" }),
+  ).toBeVisible();
+});
+
+test("non-flagship case study uses same template", async ({ page }) => {
+  await page.goto("/en/work/globalpulse.html");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("GlobalPulse");
+  await expect(
+    page.getByRole("heading", { name: "01. Project Overview" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "06. My Role" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "11. Live Demo" }),
+  ).toBeVisible();
+});
+
+test("engineering notes index and article render", async ({ page }) => {
+  await page.goto("/en/blog.html");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "Engineering Notes",
+  );
+  await expect(page.getByRole("button", { name: "AI Testing" })).toBeVisible();
   await expect(page.locator(".note-card-proof").first()).toBeVisible();
   await expect(page.locator(".note-byline")).toHaveCount(0);
   await expect(page.locator(".note-meta")).toHaveCount(0);
+  await expect(
+    page.getByRole("heading", {
+      name: /How I Built an AI Test Case Generator/i,
+    }),
+  ).toBeVisible();
   await page
     .getByRole("link", {
-      name: /Database Docker for QA/i,
+      name: /How I Built an AI Test Case Generator/i,
     })
     .first()
     .click();
-  await expect(page).toHaveURL(/\/en\/notes\/domestic-db-docker-qa\.html$/);
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("Dameng");
+  await expect(page).toHaveURL(
+    /\/en\/blog\/ai-testcase-generator-multimodal\.html$/,
+  );
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(
+    "AI Test Case Generator",
+  );
   await expect(page.locator(".detail-topbar .back-nav")).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: /^All Engineering Notes$/i }).first(),
+  ).toBeVisible();
+
+  await page.goto("/en/blog/domestic-db-docker-qa.html");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Dameng");
   await expect(page.locator(".note-toc")).toBeVisible();
   await expect(page.locator(".note-stats").first()).toBeVisible();
   await expect(page.locator('[data-metric="docker:total-pulls"]')).toBeVisible();
-  await expect(page.locator(".note-byline")).toHaveCount(0);
-  await expect(page.getByRole("link", { name: /^All notes$/i }).first()).toBeVisible();
-  await expect(
-    page.getByRole("link", { name: /^All notes$/i }).first(),
-  ).toHaveClass(/back-nav/);
 
-  await page.goto("/en/notes/clawhub-skill-shipping.html");
+  await page.goto("/en/blog/clawhub-skill-shipping.html");
   await expect(page.getByRole("heading", { level: 1 })).toContainText("ClawHub");
   await expect(
     page.locator('[data-metric="clawhub:total-downloads"]'),
@@ -102,16 +165,45 @@ test("notes index and article render", async ({ page }) => {
   await expect(page.locator(".back-nav-footer .back-nav")).toBeVisible();
 });
 
-test("innonestx org page invites collaboration", async ({ page }) => {
-  await page.goto("/en/innonestx.html");
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText("InnoNestX");
+test("now page shows building learning exploring", async ({ page }) => {
+  await page.goto("/en/now.html");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Now");
+  await expect(page.getByRole("heading", { name: "Building" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Learning" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Exploring" })).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "AI Test Case Generator" }),
+  ).toBeVisible();
+  await expect(page.getByText("MCP")).toBeVisible();
+  await expect(page.getByText("Autonomous Testing")).toBeVisible();
+  await expect(page.locator(".nav-item.active")).toHaveText("Now");
+  await expect(page.locator(".now-updated time")).toHaveAttribute(
+    "datetime",
+    "2026-07",
+  );
+});
+
+test("open source page introduces InnoNestX", async ({ page }) => {
+  await page.goto("/en/open-source.html");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "Open Source",
+  );
   await expect(page.getByRole("heading", { name: "What InnoNestX is" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "AI" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Testing" })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Developer Tools" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Infrastructure" }),
+  ).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Automation" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "GlobalPulse" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Join us" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Join InnoNestX" })).toBeVisible();
   await expect(
     page.getByRole("link", { name: "GitHub organization" }).first(),
   ).toHaveAttribute("href", "https://github.com/InnoNestX");
-  await expect(page.locator(".nav-item.active")).toHaveText("InnoNestX");
+  await expect(page.locator(".nav-item.active")).toHaveText("Open Source");
 });
 
 test("contact offers list is visible", async ({ page }) => {

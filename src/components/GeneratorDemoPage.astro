@@ -1,0 +1,172 @@
+---
+import BackNav from "./BackNav.astro";
+import Contact from "./Contact.astro";
+import Footer from "./Footer.astro";
+import PageHero from "./PageHero.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getGeneratorDemo, getGeneratorDemoPayload } from "../content/demo-generator";
+import { caseHref, getCopy, type Locale } from "../lib/i18n";
+
+type Props = { locale: Locale };
+
+const { locale } = Astro.props;
+const copy = getCopy(locale);
+const demo = getGeneratorDemo(locale);
+const payload = getGeneratorDemoPayload(locale);
+const studyHref = caseHref(locale, "testcase-generator");
+const dockerHref =
+  "https://hub.docker.com/r/xuxuclassmate/testcase-generator";
+---
+
+<BaseLayout
+  locale={locale}
+  page="work"
+  metaOverride={{
+    title:
+      locale === "zh"
+        ? "Demo｜AI 测试用例生成器交互演示 | 旭旭同学"
+        : "Demo | AI Test Case Generator Interactive Demo | XuXuClassMate",
+    description: demo.description,
+    keywords:
+      "AI Test Case Generation, AI Testing, QA Engineer, SDET, Try it now, Demo, XuXuClassMate",
+  }}
+>
+  <main id="main-content" class="demo-generator-page">
+    <PageHero
+      subtitle={demo.subtitle}
+      title={demo.title}
+      description={demo.description}
+      actions={[
+        { href: "#demo-workspace", label: demo.generateLabel, primary: true },
+        { href: studyHref, label: demo.caseStudyLabel },
+      ]}
+    />
+
+    <section class="demo-banner">
+      <div class="container">
+        <p class="demo-badge">{demo.badge}</p>
+        <p class="demo-banner-note">{demo.badgeNote}</p>
+      </div>
+    </section>
+
+    <section class="demo-workspace" id="demo-workspace">
+      <div class="container demo-layout">
+        <div class="demo-panel">
+          <div class="demo-panel-head">
+            <h2>{demo.inputLabel}</h2>
+            <div class="demo-panel-actions">
+              <button type="button" class="btn-ghost" data-demo-sample>
+                {demo.sampleLabel}
+              </button>
+              <label class="btn-ghost demo-upload">
+                {demo.uploadLabel}
+                <input
+                  type="file"
+                  accept=".pdf,.doc,.docx,.png,.jpg,.jpeg,.webp,.mp4,.mov,.txt,.md"
+                  data-demo-file
+                  hidden
+                />
+              </label>
+            </div>
+          </div>
+          <p class="demo-upload-hint" data-demo-file-label>{demo.uploadHint}</p>
+          <textarea
+            class="demo-input"
+            data-demo-input
+            rows="12"
+            placeholder={demo.emptyHint}
+          ></textarea>
+          <div class="demo-run-actions">
+            <button type="button" class="btn-primary" data-demo-generate>
+              {demo.generateLabel}
+            </button>
+            <button type="button" class="btn-ghost" data-demo-reset>
+              {demo.resetLabel}
+            </button>
+          </div>
+        </div>
+
+        <div class="demo-panel">
+          <h2>{demo.pipelineLabel}</h2>
+          <ol class="demo-pipeline" data-demo-pipeline>
+            {
+              demo.stages.map((stage, index) => (
+                <li data-stage={index}>
+                  <span class="demo-stage-index">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span>{stage}</span>
+                </li>
+              ))
+            }
+          </ol>
+
+          <h2 class="demo-results-title">{demo.resultsLabel}</h2>
+          <p class="demo-empty" data-demo-empty>{demo.emptyHint}</p>
+          <div class="demo-results is-hidden" data-demo-results></div>
+
+          <div class="demo-review is-hidden" data-demo-review>
+            <h3>{demo.reviewLabel}</h3>
+            <ul class="demo-personas">
+              {demo.personas.map((persona) => <li>{persona}</li>)}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="demo-real">
+      <div class="container">
+        <div class="demo-real-panel">
+          <h2>{demo.realProductTitle}</h2>
+          <p>{demo.realProductBody}</p>
+          <div class="hero-actions">
+            <a
+              class="btn-primary"
+              href={dockerHref}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {demo.dockerLabel}
+            </a>
+            <a class="btn-ghost" href={studyHref}>{demo.caseStudyLabel}</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="back-nav-footer">
+      <div class="container">
+        <div class="back-nav-footer-panel">
+          <BackNav href={studyHref} label={demo.backLabel} prominent />
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Contact
+    label={copy.contactLabel}
+    hint={copy.contactHint}
+    offers={copy.contactOffers}
+    copyLabel={copy.copyEmail}
+    copiedLabel={copy.copiedEmail}
+  />
+  <Footer
+    brand={copy.brand}
+    description={demo.description}
+    copyright={copy.copyright}
+    social={copy.home.social}
+  />
+
+  <script is:inline type="application/json" id="demo-generator-data"
+    set:html={JSON.stringify(payload)}
+  ></script>
+  <script>
+    import { initGeneratorDemo } from "../scripts/demo-generator";
+
+    const root = document.querySelector(".demo-generator-page");
+    if (root instanceof HTMLElement) {
+      initGeneratorDemo(root);
+    }
+  </script>
+</BaseLayout>

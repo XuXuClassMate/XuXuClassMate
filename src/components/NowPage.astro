@@ -1,0 +1,79 @@
+---
+import Contact from "./Contact.astro";
+import Footer from "./Footer.astro";
+import PageHero from "./PageHero.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCopy, type Locale } from "../lib/i18n";
+
+type Props = { locale: Locale };
+
+const { locale } = Astro.props;
+const copy = getCopy(locale);
+const page = copy.now;
+---
+
+<BaseLayout locale={locale} page="now">
+  <main id="main-content" class="now-page">
+    <PageHero
+      subtitle={page.subtitle}
+      title={page.title}
+      description={page.description}
+    />
+
+    <section class="now-meta">
+      <div class="container">
+        <p class="now-updated reveal-on-scroll">
+          <span>{page.updatedLabel}</span>
+          <time datetime={page.updatedIso}>{page.updated}</time>
+        </p>
+        <p class="now-cadence reveal-on-scroll">{page.cadence}</p>
+      </div>
+    </section>
+
+    <section class="now-sections">
+      <div class="container">
+        {
+          page.sections.map((section, index) => (
+            <div
+              class={`now-section reveal-on-scroll reveal-delay-${(index % 3) + 1}`}
+              id={section.id}
+            >
+              <div class="now-section-head">
+                <h2>{section.title}</h2>
+                <p>{section.description}</p>
+              </div>
+              <ul class="now-item-list">
+                {section.items.map((item) => (
+                  <li class="now-item">
+                    {item.href ? (
+                      <a class="now-item-title" href={item.href}>
+                        {item.title}
+                      </a>
+                    ) : (
+                      <span class="now-item-title">{item.title}</span>
+                    )}
+                    {item.note ? <p>{item.note}</p> : null}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+  </main>
+
+  <Contact
+    label={copy.contactLabel}
+    hint={copy.contactHint}
+    offers={copy.contactOffers}
+    copyLabel={copy.copyEmail}
+    copiedLabel={copy.copiedEmail}
+  />
+  <Footer
+    brand={copy.brand}
+    description={page.footerDesc}
+    copyright={copy.copyright}
+    social={page.social}
+  />
+</BaseLayout>

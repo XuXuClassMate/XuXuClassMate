@@ -1,5 +1,24 @@
-.notes-index {
-  padding: 0 0 3rem;
+.note-category {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+.note-card.is-filtered-out,
+.note-card[hidden] {
+  display: none !important;
+}
+
+.notes-index .section-head {
+  margin-bottom: 1.5rem;
+}
+
+.notes-index .project-filters {
+  margin-top: 0.85rem;
 }
 
 .notes-grid--index {

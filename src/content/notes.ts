@@ -1,7 +1,15 @@
-import type { Note, NoteSection, PageMeta } from "./types";
+import type { Note, NoteCategory, NoteSection, PageMeta } from "./types";
+import {
+  ENGINEERING_ARTICLES,
+  NOTE_CATEGORIES,
+  toNote,
+} from "./engineering-articles";
+
+export { NOTE_CATEGORIES };
 
 type NoteDef = {
   slug: Note["slug"];
+  category: NoteCategory;
   tags: { en: string[]; zh: string[] };
   proof: { en: string; zh: string };
   embed?: Note["embed"];
@@ -30,9 +38,10 @@ type NoteDef = {
 const NOTES: NoteDef[] = [
   {
     slug: "domestic-db-docker-qa",
+    category: "Docker",
     tags: {
-      en: ["Docker", "Dameng", "Highgo", "Kingbase", "CI"],
-      zh: ["Docker", "达梦", "瀚高", "人大金仓", "CI"],
+      en: ["Docker", "Docker Testing", "Test Infrastructure", "Dameng", "Highgo"],
+      zh: ["Docker", "Docker Testing", "Test Infrastructure", "达梦", "瀚高"],
     },
     proof: {
       en: "Live proof: 54k+ Docker pulls · 12 QA images · Dameng 29k+ / Highgo 16k+",
@@ -94,7 +103,7 @@ const NOTES: NoteDef[] = [
       ],
     },
     en: {
-      title: "Database Docker for QA: Dameng / Highgo without the install tax",
+      title: "Building a Dockerized Test Environment: Dameng / Highgo for QA",
       description:
         "Stand up Dameng, Highgo, Kingbase, and TiDB in minutes — with live pull numbers, CI pin rules, and the failure modes that waste sprint days.",
       sections: [
@@ -253,11 +262,12 @@ docker run -d --name qa-dameng \\
         },
       ],
       meta: {
-        title: "Dameng / Highgo Docker for QA | XuXuClassMate",
+        title:
+          "Building a Dockerized Test Environment: Dameng / Highgo for QA | XuXuClassMate",
         description:
-          "Field guide to reusable Dameng, Highgo, Kingbase, and TiDB Docker images for QA and CI — with live pull metrics and failure-mode checklists.",
+          "QA Engineer field guide to Docker Testing with Dameng and Highgo — pull-and-run images, CI stability, and live Docker Hub proof.",
         keywords:
-          "Dameng Docker, Highgo Docker, Kingbase Docker, QA test environment, database Docker, XuXuClassMate",
+          "Docker Testing, Test Infrastructure, Dameng Docker, Highgo Docker, QA Engineer, XuXuClassMate",
       },
     },
     zh: {
@@ -429,9 +439,10 @@ docker run -d --name qa-dameng \\
   },
   {
     slug: "clawhub-skill-shipping",
+    category: "OpenClaw",
     tags: {
-      en: ["ClawHub", "OpenClaw", "Packaging", "Downloads", "Docker"],
-      zh: ["ClawHub", "OpenClaw", "打包", "下载量", "Docker"],
+      en: ["OpenClaw", "ClawHub", "AI Testing", "DevOps"],
+      zh: ["OpenClaw", "ClawHub", "AI Testing", "DevOps"],
     },
     proof: {
       en: "Live proof: 1.6k+ ClawHub downloads · Test Case Generator 700+ · Trading Assistant 900+",
@@ -852,12 +863,13 @@ CLI / pip/npm     npm 路径                pip / CLI 路径
 ];
 
 export function getNotes(locale: "en" | "zh"): Note[] {
-  return NOTES.map((note) => {
+  const fieldGuides = NOTES.map((note) => {
     const copy = note[locale];
     return {
       slug: note.slug,
       title: copy.title,
       description: copy.description,
+      category: note.category,
       proof: note.proof[locale],
       tags: note.tags[locale],
       sections: copy.sections,
@@ -865,12 +877,18 @@ export function getNotes(locale: "en" | "zh"): Note[] {
       ctas: note.ctas[locale],
       embed: note.embed,
       meta: copy.meta,
-    };
+    } satisfies Note;
   });
+
+  const landings = ENGINEERING_ARTICLES.map((article) => toNote(locale, article));
+  return [...landings, ...fieldGuides];
 }
 
 export function getNote(locale: "en" | "zh", slug: string): Note | undefined {
   return getNotes(locale).find((note) => note.slug === slug);
 }
 
-export const NOTE_SLUGS = NOTES.map((note) => note.slug);
+export const NOTE_SLUGS = [
+  ...ENGINEERING_ARTICLES.map((article) => article.slug),
+  ...NOTES.map((note) => note.slug),
+];

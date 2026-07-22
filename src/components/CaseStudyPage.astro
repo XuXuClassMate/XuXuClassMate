@@ -3,7 +3,13 @@ import BackNav from "./BackNav.astro";
 import Contact from "./Contact.astro";
 import Footer from "./Footer.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { getCase, getCopy, pageHref, type CaseSlug, type Locale } from "../lib/i18n";
+import {
+  getCase,
+  getCopy,
+  pageHref,
+  type CaseSlug,
+  type Locale,
+} from "../lib/i18n";
 import { getMetrics, resolveMetric } from "../lib/metrics";
 
 type Props = {
@@ -24,6 +30,31 @@ if (!study) {
 
 const coverDark =
   study.coverDark ?? study.cover.replace(/\.jpg$/i, "-dark.jpg");
+const isZh = locale === "zh";
+const heading = (n: number, title: string) =>
+  `${String(n).padStart(2, "0")}. ${title}`;
+
+const githubHref =
+  study.proof?.github ??
+  study.links.find((link) => /github/i.test(link.label))?.href;
+
+const liveDemoHref =
+  study.proof?.demo ??
+  study.tryItNow?.primary.href ??
+  study.proof?.docker ??
+  study.links.find((link) =>
+    /live|demo|docker|clawhub|pulse|api/i.test(link.label),
+  )?.href;
+const liveDemoExternal = Boolean(liveDemoHref?.startsWith("http"));
+const tryPrimaryExternal = Boolean(
+  study.tryItNow?.primary.href.startsWith("http"),
+);
+
+const overviewText = study.overview ?? study.description;
+const roleItems =
+  study.contribution && study.contribution.length > 0
+    ? study.contribution
+    : null;
 ---
 
 <BaseLayout
@@ -33,7 +64,10 @@ const coverDark =
   ogImagePath={study.cover}
   metaOverride={study.meta}
 >
-  <main id="main-content" class="case-page">
+  <main
+    id="main-content"
+    class:list={["case-page", { "case-page--flagship": study.flagship }]}
+  >
     <section class="hero hero--detail">
       <div class="hero-atmosphere" aria-hidden="true"></div>
       <div class="container">
@@ -44,6 +78,36 @@ const coverDark =
           <span class="subtitle">{study.subtitle}</span>
           <h1 class="hero-title">{study.title}</h1>
           <p class="hero-desc">{study.description}</p>
+          <div class="hero-actions">
+            {
+              study.tryItNow ? (
+                <a class="btn-primary" href="#try-it-now">
+                  {study.tryItNow.title}
+                </a>
+              ) : liveDemoHref ? (
+                <a
+                  class="btn-primary"
+                  href={liveDemoHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {page.caseLiveDemoTitle}
+                </a>
+              ) : null
+            }
+            {
+              githubHref ? (
+                <a
+                  class="btn-ghost"
+                  href={githubHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  GitHub
+                </a>
+              ) : null
+            }
+          </div>
         </div>
       </div>
     </section>
@@ -72,43 +136,56 @@ const coverDark =
       </div>
     </section>
 
-    <section class="case-body">
-      <div class="container case-grid">
-        {
-          study.overview ? (
-            <article class="case-block reveal-on-scroll" id="overview">
-              <h2>{page.caseOverviewTitle}</h2>
-              <p>{study.overview}</p>
-            </article>
-          ) : (
-            <>
-              <article class="case-block reveal-on-scroll">
-                <h2>{page.caseProblemTitle}</h2>
-                <p>{study.problem}</p>
-              </article>
-              <article class="case-block reveal-on-scroll">
-                <h2>{page.caseSolutionTitle}</h2>
-                <p>{study.solution}</p>
-              </article>
-            </>
-          )
-        }
-        {
-          study.techStack && study.techStack.length > 0 ? (
-            <article class="case-block reveal-on-scroll" id="stack">
-              <h2>{page.caseStackTitle}</h2>
-              <ul class="stack-list stack-list--inline">
-                {study.techStack.map((item) => (
-                  <li>{item}</li>
+    {
+      study.pipeline ? (
+        <section class="case-pipeline" aria-label="Product pipeline">
+          <div class="container">
+            <div class="pipeline-board reveal-on-scroll">
+              <ul class="pipeline-inputs">
+                {study.pipeline.inputs.map((input) => (
+                  <li>{input}</li>
                 ))}
               </ul>
-            </article>
-          ) : null
-        }
+              <ol class="pipeline-stages">
+                {study.pipeline.stages.map((stage) => (
+                  <li>
+                    <span class="pipeline-arrow" aria-hidden="true">
+                      ↓
+                    </span>
+                    <span class="pipeline-stage">{stage}</span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </div>
+        </section>
+      ) : null
+    }
+
+    <section class="case-body">
+      <div class="container case-grid">
+        <article class="case-block reveal-on-scroll" id="overview">
+          <h2>{heading(1, page.caseOverviewTitle)}</h2>
+          <p>{overviewText}</p>
+        </article>
+
+        <article class="case-block reveal-on-scroll" id="problem">
+          <h2>{heading(2, page.caseProblemTitle)}</h2>
+          <p class="case-section-lead">{page.caseProblemLead}</p>
+          <p>{study.problem}</p>
+        </article>
+
+        <article class="case-block reveal-on-scroll" id="solution">
+          <h2>{heading(3, page.caseSolutionTitle)}</h2>
+          <p class="case-section-lead">{page.caseSolutionLead}</p>
+          <p>{study.solution}</p>
+        </article>
+
         {
           study.architecture && study.architecture.length > 0 ? (
             <article class="case-block reveal-on-scroll" id="architecture">
-              <h2>{page.caseArchitectureTitle}</h2>
+              <h2>{heading(4, page.caseArchitectureTitle)}</h2>
+              <p class="case-section-lead">{page.caseArchitectureLead}</p>
               {study.architecture.map((chain) => (
                 <div class="arch-block">
                   <h3>{chain.title}</h3>
@@ -122,10 +199,12 @@ const coverDark =
             </article>
           ) : null
         }
+
         {
           study.features && study.features.length > 0 ? (
-            <article class="case-block reveal-on-scroll">
-              <h2>{page.caseFeaturesTitle}</h2>
+            <article class="case-block reveal-on-scroll" id="features">
+              <h2>{heading(5, page.caseFeaturesTitle)}</h2>
+              <p class="case-section-lead">{page.caseFeaturesLead}</p>
               <ul>
                 {study.features.map((item) => (
                   <li>{item}</li>
@@ -134,82 +213,52 @@ const coverDark =
             </article>
           ) : null
         }
-        {
-          study.contribution && study.contribution.length > 0 ? (
-            <article class="case-block reveal-on-scroll">
-              <h2>{page.caseContributionTitle}</h2>
+
+        <article class="case-block reveal-on-scroll" id="role">
+          <h2>{heading(6, page.caseRoleTitle)}</h2>
+          <p class="case-section-lead">{page.caseRoleLead}</p>
+          {
+            roleItems ? (
               <ul>
-                {study.contribution.map((item) => (
+                {roleItems.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            ) : (
+              <p>
+                {isZh
+                  ? "角色说明补充中。"
+                  : "Role details are being expanded."}
+              </p>
+            )
+          }
+        </article>
+
+        {
+          study.techStack && study.techStack.length > 0 ? (
+            <article class="case-block reveal-on-scroll" id="stack">
+              <h2>{heading(7, page.caseStackTitle)}</h2>
+              <p class="case-section-lead">{page.caseStackLead}</p>
+              <ul class="stack-list stack-list--inline">
+                {study.techStack.map((item) => (
                   <li>{item}</li>
                 ))}
               </ul>
             </article>
           ) : null
         }
-        {
-          study.results && study.results.length > 0 ? (
-            <article class="case-block reveal-on-scroll">
-              <h2>{page.caseResultsTitle}</h2>
-              <ul>
-                {study.results.map((item) => (
-                  <li>{item}</li>
-                ))}
-              </ul>
-            </article>
-          ) : (
-            <article class="case-block reveal-on-scroll">
-              <h2>{page.caseOutcomesTitle}</h2>
-              <ul>
-                {study.outcomes.map((item) => (
-                  <li>{item}</li>
-                ))}
-              </ul>
-            </article>
-          )
-        }
-        {
-          study.tradeoffs && study.tradeoffs.length > 0 ? (
-            <article class="case-block reveal-on-scroll">
-              <h2>{page.caseTradeoffsTitle}</h2>
-              <ul>
-                {study.tradeoffs.map((item) => (
-                  <li>{item}</li>
-                ))}
-              </ul>
-            </article>
-          ) : null
-        }
-        {
-          study.artifacts && study.artifacts.length > 0 ? (
-            <article class="case-block reveal-on-scroll">
-              <h2>{page.caseArtifactsTitle}</h2>
-              <div class="case-artifacts">
-                {study.artifacts.map((artifact) => (
-                  <div class="case-artifact">
-                    <h3>{artifact.title}</h3>
-                    <p>{artifact.description}</p>
-                    {artifact.href ? (
-                      <a
-                        href={artifact.href}
-                        class="project-link"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {artifact.linkLabel ?? artifact.href}
-                      </a>
-                    ) : null}
-                  </div>
-                ))}
-              </div>
-            </article>
-          ) : null
-        }
-        <article class="case-block reveal-on-scroll">
-          <h2>{page.caseMetricsTitle}</h2>
+
+        <article class="case-block reveal-on-scroll" id="metrics">
+          <h2>{heading(8, page.caseMetricsTitle)}</h2>
+          <p class="case-section-lead">{page.caseMetricsLead}</p>
           <div class="case-metrics">
             {
               study.metrics.map((metric) => {
-                const value = resolveMetric(metrics, metric.metric, metric.value);
+                const value = resolveMetric(
+                  metrics,
+                  metric.metric,
+                  metric.value,
+                );
                 return (
                   <div class="case-metric">
                     <span
@@ -250,23 +299,133 @@ const coverDark =
             ) : null
           }
         </article>
-        <article class="case-block reveal-on-scroll">
-          <h2>{page.caseLinksTitle}</h2>
-          <div class="project-links">
-            {
-              study.links.map((link) => (
+
+        <article class="case-block reveal-on-scroll" id="deployment">
+          <h2>{heading(9, page.caseDeploymentTitle)}</h2>
+          <p class="case-section-lead">{page.caseDeploymentLead}</p>
+          {
+            study.deployment ? (
+              <>
+                <p>{study.deployment.summary}</p>
+                <ol class="deployment-steps">
+                  {study.deployment.steps.map((step) => (
+                    <li>{step}</li>
+                  ))}
+                </ol>
+                <div class="project-links">
+                  {study.deployment.channels.map((channel) => (
+                    <a
+                      href={channel.href}
+                      class="project-link"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {channel.label}
+                    </a>
+                  ))}
+                </div>
+              </>
+            ) : (
+              <p>
+                {isZh
+                  ? "部署与运行说明见下方 GitHub / Live Demo。"
+                  : "See GitHub / Live Demo below for how to run this project."}
+              </p>
+            )
+          }
+        </article>
+
+        <article class="case-block reveal-on-scroll" id="github">
+          <h2>{heading(10, page.caseGithubTitle)}</h2>
+          {
+            githubHref ? (
+              <div class="project-links">
                 <a
-                  href={link.href}
+                  href={githubHref}
                   class="project-link"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  {link.label}
+                  {isZh ? "打开 GitHub 仓库" : "Open GitHub repository"}
                 </a>
-              ))
-            }
-          </div>
+              </div>
+            ) : (
+              <p>
+                {study.status === "upcoming"
+                  ? isZh
+                    ? "源码仓库即将公开。"
+                    : "Source repository coming soon."
+                  : isZh
+                    ? "暂无公开 GitHub 仓库。"
+                    : "No public GitHub repository yet."}
+              </p>
+            )
+          }
         </article>
+
+        <article class="case-block reveal-on-scroll" id="live-demo">
+          <h2>{heading(11, page.caseLiveDemoTitle)}</h2>
+          {
+            liveDemoHref ? (
+              <div class="project-links">
+                <a
+                  href={liveDemoHref}
+                  class="project-link"
+                  target={liveDemoExternal ? "_blank" : undefined}
+                  rel={liveDemoExternal ? "noopener noreferrer" : undefined}
+                >
+                  {isZh ? "打开在线体验 / 安装入口" : "Open live demo / install path"}
+                </a>
+                {study.tryItNow ? (
+                  <a class="project-link project-link--secondary" href="#try-it-now">
+                    {study.tryItNow.title}
+                  </a>
+                ) : null}
+              </div>
+            ) : (
+              <p>
+                {isZh
+                  ? "在线体验入口即将补充。"
+                  : "Live demo link coming soon."}
+              </p>
+            )
+          }
+        </article>
+
+        {
+          study.tryItNow ? (
+            <article class="case-block case-try reveal-on-scroll" id="try-it-now">
+              <h2>{study.tryItNow.title}</h2>
+              <p>{study.tryItNow.description}</p>
+              {study.tryItNow.note ? (
+                <p class="case-try-note">{study.tryItNow.note}</p>
+              ) : null}
+              {study.tryItNow.command ? (
+                <pre class="case-try-command"><code>{study.tryItNow.command}</code></pre>
+              ) : null}
+              <div class="hero-actions">
+                <a
+                  class="btn-primary"
+                  href={study.tryItNow.primary.href}
+                  target={tryPrimaryExternal ? "_blank" : undefined}
+                  rel={tryPrimaryExternal ? "noopener noreferrer" : undefined}
+                >
+                  {study.tryItNow.primary.label}
+                </a>
+                {study.tryItNow.secondary?.map((link) => (
+                  <a
+                    class="btn-ghost"
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            </article>
+          ) : null
+        }
       </div>
     </section>
 
@@ -274,11 +433,7 @@ const coverDark =
       <div class="container">
         <div class="back-nav-footer-panel">
           <p class="back-nav-footer-hint">
-            {
-              locale === "zh"
-                ? "继续浏览其他项目"
-                : "Browse more projects"
-            }
+            {isZh ? "继续浏览其他项目" : "Browse more projects"}
           </p>
           <BackNav href={workHref} label={page.caseBackLabel} prominent />
         </div>

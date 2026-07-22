@@ -1,10 +1,11 @@
 import type { LocaleCopy } from "./types";
 import { getFeaturedProjects, getWorkProjects } from "./projects";
 import { getNotes } from "./notes";
-import { getOrgProjects } from "./org";
+import { getOrgCategories } from "./org";
+import { getNowSections, NOW_UPDATED } from "./now";
 
 const sharedKeywords =
-  "旭旭同学, xuxuclassmate, XuXuClassMate, 软件测试, 自动化测试, AI测试, 质量工程, 测试工程师, 用例生成, Playwright, 接口测试, Docker测试环境, OpenClaw, ClawHub";
+  "旭旭同学, xuxuclassmate, XuXuClassMate, QA Engineer, SDET, Test Automation Engineer, AI Testing, AI Test Automation, Playwright, API Testing, Performance Testing, Docker Testing, Test Infrastructure, AI Test Case Generation, 软件测试, 自动化测试, AI测试, 接口测试, 性能测试";
 
 export const zh: LocaleCopy = {
   brand: "旭旭同学",
@@ -33,149 +34,165 @@ export const zh: LocaleCopy = {
     about: "关于",
     experience: "经历",
     projects: "项目",
-    blog: "技术博客",
+    blog: "工程笔记",
     aiTesting: "AI 测试",
     github: "GitHub",
     life: "生活",
     contact: "联系",
     learn: "经历",
     work: "项目",
-    notes: "技术博客",
-    innonestx: "InnoNestX",
+    notes: "工程笔记",
+    innonestx: "开源",
+    openSource: "开源",
+    now: "Now",
   },
   meta: {
     home: {
-      title: "旭旭同学 | QA Engineer & Test Automation Engineer",
+      title: "旭旭同学 | QA Engineer · SDET · AI Testing",
       description:
-        "QA Engineer，专注测试自动化、接口测试、性能测试、Playwright、Python、Java、Docker 与 AI 辅助测试。",
-      keywords: `${sharedKeywords}, QA Engineer, SDET, Test Automation Engineer, AI Testing Engineer`,
-      ogTitle: "旭旭同学 | QA Engineer & Test Automation Engineer",
+        "QA Engineer / SDET，专注测试自动化、AI Testing、接口测试、性能测试、Playwright、Docker Testing 与 AI 用例生成。",
+      keywords: sharedKeywords,
+      ogTitle: "旭旭同学 | QA Engineer · SDET · AI Testing",
     },
     about: {
-      title: "关于我 | QA / SDET / AI Testing | 旭旭同学",
+      title: "关于我 | QA Engineer · SDET · AI Testing | 旭旭同学",
       description:
-        "我是一名 QA / Test Engineer，专注测试自动化、接口测试、性能测试与 AI 辅助测试。",
+        "QA Engineer / SDET，专注测试自动化、接口测试、性能测试、Playwright 与 AI Testing。",
       keywords: `${sharedKeywords}, About, SDET`,
     },
     "ai-testing": {
-      title: "AI Testing Lab | 旭旭同学",
+      title: "AI Testing Lab | AI 测试自动化与用例生成 | 旭旭同学",
       description:
-        "AI 用例生成、LLM 接口测试、缺陷分析与测试 Agent。",
-      keywords: `${sharedKeywords}, AI Testing Lab`,
+        "AI Testing Lab：AI 用例生成、AI 测试自动化、LLM 接口测试、缺陷分析与 Testing Agent。",
+      keywords: `${sharedKeywords}, AI Testing Lab, AI Test Case Generation`,
     },
     playwright: {
-      title: "Playwright Testing Lab | 旭旭同学",
+      title: "Playwright Testing Lab | Test Automation | 旭旭同学",
       description:
-        "Playwright + TypeScript 自动化实验室：UI、API、夹具、并行与 CI/CD。",
+        "面向 QA Engineer / SDET 的 Playwright 测试自动化实验室：UI、API、Fixtures、并行与 CI/CD。",
       keywords: `${sharedKeywords}, Playwright Testing Lab`,
     },
     infrastructure: {
-      title: "Test Infrastructure | 旭旭同学",
+      title: "Test Infrastructure | Docker Testing | 旭旭同学",
       description:
-        "Docker、CI/CD、GitHub Actions、Cloudflare Workers 与容器化测试基础设施。",
-      keywords: `${sharedKeywords}, Test Infrastructure`,
+        "Test Infrastructure：Docker Testing 环境、CI/CD、GitHub Actions 与容器化 QA 栈。",
+      keywords: `${sharedKeywords}, Docker Testing, Test Infrastructure`,
     },
     blog: {
-      title: "技术博客 | QA / SDET 知识库 | 旭旭同学",
+      title: "工程笔记 | QA Engineer & SDET 技术博客 | 旭旭同学",
       description:
-        "关于 Playwright、性能测试、Docker for QA 与 AI 辅助测试的技术文章。",
-      keywords: `${sharedKeywords}, 技术博客`,
+        "Engineering Notes：QA Engineering、AI Testing、Playwright、接口测试、性能测试、Docker、Cloudflare、OpenClaw、DevOps。",
+      keywords: `${sharedKeywords}, 工程笔记, 技术博客`,
     },
     life: {
       title: "生活点滴 | 旭旭同学",
       description:
-        "旅行、音乐与键盘之外的日常 — 质量工程师、AI 测试工具作者旭旭同学的生活侧写。",
+        "旅行、音乐与键盘之外的日常 — QA Engineer / SDET 旭旭同学的生活侧写。",
       keywords: `${sharedKeywords}, 旅行, 爱好`,
     },
     learn: {
-      title: "经历 | 从测试到 AI Testing | 旭旭同学",
+      title: "经历 | QA Engineer 到 SDET & AI Testing | 旭旭同学",
       description:
-        "从测试手艺与测试管理，到 Locust、Playwright、AI 测试与产品系统的经历路径。",
-      keywords: `${sharedKeywords}, 经历, SDET, Locust`,
+        "从 QA 工程与测试管理，到 Playwright、性能测试、AI Testing 与 Test Infrastructure 的经历路径。",
+      keywords: `${sharedKeywords}, 经历, SDET, Test Automation Engineer`,
     },
     work: {
-      title: "项目 | SDET Portfolio | 旭旭同学",
+      title: "项目 | QA Engineer & SDET Portfolio | 旭旭同学",
       description:
-        "项目案例：Playwright E2E、Java 接口自动化、Docker 测试基础设施与 AI 测试工具。",
+        "SDET Portfolio：AI 用例生成、Playwright E2E、接口自动化、Docker Testing 与 Test Infrastructure 项目。",
       keywords: `${sharedKeywords}, SDET Portfolio, 测试自动化项目`,
     },
     notes: {
-      title: "技术博客 | 旭旭同学",
+      title: "工程笔记 | QA Engineer & SDET 技术博客 | 旭旭同学",
       description:
-        "关于数据库 Docker、ClawHub 技能发布与质量工程的技术文章。",
-      keywords: `${sharedKeywords}, 技术博客, 达梦 Docker, ClawHub`,
+        "可检索的工程笔记：QA Engineering、AI Testing、Playwright、接口测试、性能测试、Docker、Cloudflare、OpenClaw、DevOps。",
+      keywords: `${sharedKeywords}, 工程笔记, 技术博客, Docker Testing`,
+    },
+    "open-source": {
+      title: "开源 | InnoNestX · AI Tools · QA Tools | 旭旭同学",
+      description:
+        "XuXuClassMate 个人品牌下的开源：InnoNestX 承载可安装的 AI 工具、QA 工具、开发者工具、基础设施与自动化。",
+      keywords: `${sharedKeywords}, 开源, InnoNestX, AI Tools, QA Tools, Test Infrastructure`,
+    },
+    now: {
+      title: "Now | 正在做 · 正在学 · 正在探索 | 旭旭同学",
+      description:
+        "旭旭同学当前在做、在学、在探索的事——AI 用例生成器、OpenClaw QA Skills、Playwright、MCP 等。每月更新。",
+      keywords: `${sharedKeywords}, Now, AI 用例生成, OpenClaw, Playwright, MCP, LLM Evaluation`,
     },
     innonestx: {
-      title: "InnoNestX | 开源实验室",
+      title: "开源 | InnoNestX · AI Tools · QA Tools | 旭旭同学",
       description:
-        "InnoNestX 是我创建的开源组织——可学习、可运行、可参与的工具与产品系统。",
-      keywords: `${sharedKeywords}, InnoNestX, GlobalPulse, 开源`,
+        "XuXuClassMate 个人品牌下的开源：InnoNestX 承载可安装的 AI 工具、QA 工具、开发者工具、基础设施与自动化。",
+      keywords: `${sharedKeywords}, 开源, InnoNestX, AI Tools, QA Tools, Test Infrastructure`,
     },
   },
   home: {
     subtitle: "可安装的质量工程",
-    title: "把质量工作做成团队真能跑起来的产品",
+    title: "QA Engineer · SDET · AI Testing",
     description:
-      "我交付 AI 测试工具、OpenClaw / ClawHub 技能与可复用环境，并用 Docker、ClawHub、API 的实时数据证明它们在被使用。",
+      "QA Engineer / SDET，专注测试自动化、AI Testing、接口测试与性能测试——以及 Playwright、Docker Testing 与 AI 用例生成。",
     positioning:
-      "我把质量工具做成可安装的产品——再把能跑的系统持续交付出去。",
-    valuesTitle: "我的做事方式",
-    values: [
-      {
-        title: "能安装，才算完成",
-        description:
-          "跑不起来 Docker / CLI / ClawHub，就不算交付——幻灯片不算数。",
-      },
-      {
-        title: "AI 必须带评审闭环",
-        description:
-          "多模态生成只有在测试/开发/产品判断仍在环里时才有用。",
-      },
-      {
-        title: "环境要能复用",
-        description:
-          "容器、数据库镜像与网关，让团队在 CI 和笔记本上启动同一套栈。",
-      },
-    ],
+      "QA Engineer + SDET + AI Testing——团队可运行的可安装质量工程。",
     highlightsTitle: "数据一览",
+    highlightsSubtitle: "公开实时指标 · 自动更新",
+    highlightsProof: "能验证，才算展示。",
     highlights: [
       {
         value: "54k+",
-        label: "Docker 拉取——团队在复用的测试环境",
+        label: "Docker 拉取",
         metric: "docker:total-pulls",
+        href: "https://hub.docker.com/u/xuxuclassmate",
+        linkLabel: "查看 Docker Hub →",
       },
       {
         value: "1.6k+",
-        label: "ClawHub 下载——Agent 真在安装的技能",
+        label: "ClawHub 下载",
         metric: "clawhub:total-downloads",
+        href: "https://clawhub.ai/xuxuclassmate",
+        linkLabel: "查看 ClawHub →",
       },
       {
         value: "500+",
-        label: "API Gateway 请求——README 与工具在打实时统计",
+        label: "API Gateway 请求",
         metric: "api:gateway-calls",
+        href: "https://docker-hub-pull-counter.vercel.app",
+        linkLabel: "查看 API Gateway →",
       },
       {
         value: "12",
-        label: "已发布的 QA 向 Docker 镜像",
+        label: "Docker 镜像",
         metric: "docker:repo-count",
+        href: "https://hub.docker.com/u/xuxuclassmate",
+        linkLabel: "查看 Docker Hub →",
       },
     ],
-    featuredTitle: "精选作品",
+    featuredTitle: "质量工程",
     featuredCta: "查看全部项目",
     featured: getFeaturedProjects("zh"),
-    principlesTitle: "我在优化什么",
+    principlesTitle: "工程原则",
+    principlesLead: "不能安装、不能运行、不能集成，就不算完成。",
     principles: [
       {
-        title: "能安装，才算完成",
-        description: "跑不起来 Docker / CLI / ClawHub，就不算交付。",
-      },
-      {
-        title: "语言只是工具",
+        title: "Installable > Demoable",
         description:
-          "选能最快交付质量的栈——框架与环境比绑定某一种语言更重要。",
+          "Docker、CLI 或 ClawHub——团队装不上、跑不起来，幻灯片就不算交付。",
       },
       {
-        title: "判断力仍是主线",
+        title: "AI with Human Review",
+        description:
+          "多模态生成只有在测试 / 开发 / 产品判断仍在环里时才有用。",
+      },
+      {
+        title: "Reusable Environments",
+        description: "容器、数据库镜像与网关，让 CI 与笔记本启动同一套栈。",
+      },
+      {
+        title: "Quality Is a System",
+        description: "自动化、基础设施与评审闭环会复利——质量不是一次性清单。",
+      },
+      {
+        title: "Judgment Still Leads",
         description: "AI 加速草稿；质量手艺决定什么够格上线。",
       },
     ],
@@ -223,17 +240,17 @@ export const zh: LocaleCopy = {
         href: "/zh/work.html",
       },
       {
-        title: "笔记",
-        description: "数据库 Docker 与 ClawHub 技能发布实操",
-        href: "/zh/notes.html",
+        title: "工程笔记",
+        description: "可被搜索的 QA / SDET 技术文章 — Playwright、AI Testing、Docker 等",
+        href: "/zh/blog.html",
       },
       {
-        title: "InnoNestX",
-        description: "我的开源组织——项目、学习与加入方式",
-        href: "/zh/innonestx.html",
+        title: "开源",
+        description: "InnoNestX —— 个人品牌下的 AI / QA 工具与基础设施",
+        href: "/zh/open-source.html",
       },
     ],
-    footerDesc: "可安装的质量工程",
+    footerDesc: "QA Engineer · SDET · AI Testing — 可安装的质量工程",
     social: [
       {
         href: "https://github.com/XuXuClassMate",
@@ -395,10 +412,11 @@ export const zh: LocaleCopy = {
     ],
   },
   work: {
-    subtitle: "作品集",
-    title: "工具、技能与环境",
-    description: "GitHub / Docker / ClawHub 上的 AI 作品，以及背后的质量基础",
-    projectsTitle: "精选项目",
+    subtitle: "项目",
+    title: "开源、AI 工具与基础设施",
+    description:
+      "质量工程、开发者基础设施与 AI / Agent 项目——团队可安装、可运行的工具。",
+    projectsTitle: "项目",
     filterAll: "全部",
     projects: getWorkProjects("zh"),
     approachTitle: "项目怎么交付",
@@ -507,63 +525,199 @@ export const zh: LocaleCopy = {
     ],
     caseBackLabel: "全部项目",
     caseProblemTitle: "问题",
+    caseProblemLead: "为什么做？",
     caseSolutionTitle: "方案",
+    caseSolutionLead: "怎么解决？",
     caseTradeoffsTitle: "取舍",
     caseOutcomesTitle: "交付物",
     caseArtifactsTitle: "可检查的证据",
-    caseMetricsTitle: "数据证据",
+    caseMetricsTitle: "成果指标",
+    caseMetricsLead: "取得什么成果？",
     caseLinksTitle: "链接",
-    caseOverviewTitle: "概述",
+    caseOverviewTitle: "项目概述",
     caseStackTitle: "技术栈",
+    caseStackLead: "使用什么技术？",
     caseArchitectureTitle: "架构",
+    caseArchitectureLead: "系统架构",
     caseFeaturesTitle: "关键特性",
+    caseFeaturesLead: "核心功能",
     caseContributionTitle: "我的贡献",
     caseResultsTitle: "结果",
+    caseRoleTitle: "我的角色",
+    caseRoleLead: "我具体做了什么？",
+    caseDeploymentTitle: "部署",
+    caseDeploymentLead: "如何运行？",
+    caseGithubTitle: "GitHub",
+    caseLiveDemoTitle: "在线体验",
     cases: [
       {
         slug: "testcase-generator",
         title: "AI 测试用例生成器",
-        subtitle: "案例详解",
-        description: "把多模态需求变成可评审、可导出的测试产物。",
+        subtitle: "旗舰案例",
+        description:
+          "旗舰产品：多模态需求进入 → 可评审、可导出的测试用例产出——支持 Docker、npm 与 ClawHub 安装。",
         cover: "/images/cover-testcase.jpg",
         coverAlt: "AI 测试用例生成器",
+        flagship: true,
+        status: "live",
+        overview:
+          "旗舰多模态 AI 产品：将 PDF、Word、图片与视频转化为可评审、可导出的测试用例——含人工评审闭环，并支持 Docker、npm 与 ClawHub 安装。",
         problem:
-          "QA 团队要把 PDF、截图和零散说明整理成结构化用例，成本很高；没有评审闭环的 AI 草稿只会增加噪音。",
+          "QA 团队要把 PDF、Word、截图甚至短视频整理成结构化用例，成本很高。表格复制粘贴太慢；没有评审闭环的 LLM 草稿只会增加噪音。团队需要一条能吃进真实需求产物、并交付人类愿意接受的用例流水线。",
         solution:
-          "搭建多模态流水线（PDF、Word、图片、视频），加入测试/开发/产品三角色评审，并打包为 Docker、npm 与 OpenClaw / ClawHub 技能。",
+          "我做成了可安装的多模态生成器：接入 PDF / Word / 图片 / 视频，经 Multimodal AI 生成结构化场景与用例，再走测试 / 开发 / 产品三角色人工评审，最后导出并对接自动化。同一产品以 Docker Web UI、npm 包与 OpenClaw / ClawHub 技能分发——人和 Agent 共用一条交付路径。",
+        pipeline: {
+          inputs: ["PDF", "Word", "Image", "Video"],
+          stages: [
+            "Multimodal AI",
+            "Structured Test Cases",
+            "Human Review",
+            "Automation / Integration",
+          ],
+        },
+        architecture: [
+          {
+            title: "产品流水线",
+            layers: [
+              "多模态输入（PDF · Word · Image · Video）",
+              "Multimodal AI 生成",
+              "结构化测试用例与场景",
+              "人工评审（测试 · 开发 · 产品）",
+              "导出 + 自动化 / 集成",
+            ],
+          },
+          {
+            title: "分发路径",
+            layers: [
+              "Docker Web UI（本地上传）",
+              "npm 包",
+              "OpenClaw / ClawHub 技能",
+              "CI / 笔记本运行",
+            ],
+          },
+        ],
+        features: [
+          "多模态接入：PDF、Word、TXT、图片与视频",
+          "结构化场景、用例、边界与反向覆盖",
+          "三角色评审闭环：测试经理 · 开发经理 · 产品经理",
+          "导出 Excel、Markdown、XMind",
+          "中英文生成",
+          "安装路径：Docker、npm、ClawHub / OpenClaw",
+        ],
+        contribution: [
+          "主导产品方向：可安装的质量工具，而不是一次性演示笔记本。",
+          "设计「多模态 → 结构化用例 → 人工评审 → 导出」流水线。",
+          "完成 Docker Web UI、npm 与 ClawHub 技能的打包分发。",
+          "接入评审阈值与 QA 日常已在用的导出格式。",
+        ],
+        techStack: [
+          "TypeScript",
+          "Multimodal LLMs",
+          "Docker",
+          "npm",
+          "OpenClaw",
+          "ClawHub",
+          "Excel / Markdown / XMind 导出",
+        ],
+        metrics: [
+          {
+            label: "ClawHub 安装",
+            value: "700+",
+            metric: "clawhub:ai-testcase-generator",
+          },
+          { label: "输入形态", value: "PDF · Word · Image · Video" },
+          { label: "分发形态", value: "Docker · npm · 技能" },
+          { label: "导出格式", value: "Excel · Markdown · XMind" },
+        ],
+        deployment: {
+          summary: "一个产品，三条安装面——按团队工作方式选择路径。",
+          steps: [
+            "Docker：拉取 xuxuclassmate/testcase-generator，配置 AI Provider Key，在 3456 端口运行，打开 Web UI 上传需求。",
+            "npm：安装 @classmatexuxu/testcase-generator，用于 CLI / 库集成。",
+            "ClawHub / OpenClaw：安装 AI Test Case Generator 技能，用于 Agent 工作流。",
+            "CI：复用同一 Docker 镜像，让笔记本与流水线保持一致。",
+          ],
+          channels: [
+            {
+              label: "Docker Hub",
+              href: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
+            },
+            {
+              label: "npm",
+              href: "https://www.npmjs.com/package/@classmatexuxu/testcase-generator",
+            },
+            {
+              label: "ClawHub",
+              href: "https://clawhub.ai/xuxuclassmate/ai-testcase-generator",
+            },
+            {
+              label: "GitHub",
+              href: "https://github.com/XuXuClassMate/testcase-generator",
+            },
+          ],
+        },
+        tryItNow: {
+          title: "立即体验",
+          description:
+            "先走交互 Demo（示例 PRD → 结构化用例 → 评审角色），再用 Docker 做真实多模态上传。",
+          note:
+            "浏览器 Demo 使用精选示例输出——不是实时 LLM。本机上传 PDF / Word / 图片 / 视频请用 Docker 镜像。",
+          primary: {
+            label: "打开交互 Demo",
+            href: "/zh/demo/ai-testcase-generator.html",
+          },
+          secondary: [
+            {
+              label: "Docker Hub",
+              href: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
+            },
+            {
+              label: "GitHub",
+              href: "https://github.com/XuXuClassMate/testcase-generator",
+            },
+            {
+              label: "ClawHub 技能",
+              href: "https://clawhub.ai/xuxuclassmate/ai-testcase-generator",
+            },
+          ],
+          command:
+            "docker pull xuxuclassmate/testcase-generator:latest\n# 在 .env 中配置 AI Provider Key，然后：\ndocker run -d -p 3456:3456 --env-file .env xuxuclassmate/testcase-generator:latest\n# 打开 http://localhost:3456 — 上传需求并生成用例",
+        },
+        proof: {
+          github: "https://github.com/XuXuClassMate/testcase-generator",
+          docker: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
+          demo: "/zh/demo/ai-testcase-generator.html",
+          readme: "https://github.com/XuXuClassMate/testcase-generator",
+        },
         tradeoffs: [
           "用三角色评审代替裸 LLM 倾倒——草稿更安静，QA 负责人更好接受。",
           "Docker + npm + ClawHub 一起交付，让 Agent 与人共用一个产品，而不是三套演示。",
-          "接受首答稍慢，换取团队已在用的 Excel / Markdown / XMind 可导出产物。"
+          "接受首答稍慢，换取团队已在用的 Excel / Markdown / XMind 可导出产物。",
         ],
         artifacts: [
           {
-            "title": "ClawHub 技能页",
-            "description": "Agent 真实安装路径——下载量在首页实时刷新。",
-            "href": "https://clawhub.ai/xuxuclassmate/ai-testcase-generator",
-            "linkLabel": "打开 ClawHub"
+            title: "ClawHub 技能页",
+            description: "Agent 真实安装路径——下载量在首页实时刷新。",
+            href: "https://clawhub.ai/xuxuclassmate/ai-testcase-generator",
+            linkLabel: "打开 ClawHub",
           },
           {
-            "title": "Docker 镜像",
-            "description": "非 Agent 场景的本地 / CI 运行路径。",
-            "href": "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
-            "linkLabel": "Docker Hub"
+            title: "Docker 镜像",
+            description: "本地 Web UI：上传 PDF / Word / 图片 / 视频并生成用例。",
+            href: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
+            linkLabel: "Docker Hub",
           },
           {
-            "title": "源码仓库",
-            "description": "多模态输入与评审闭环的实现开源可查。",
-            "href": "https://github.com/XuXuClassMate/testcase-generator",
-            "linkLabel": "GitHub"
-          }
+            title: "源码仓库",
+            description: "多模态输入与评审闭环的实现开源可查。",
+            href: "https://github.com/XuXuClassMate/testcase-generator",
+            linkLabel: "GitHub",
+          },
         ],
         outcomes: [
-          "在 ClawHub 以 AI Test Case Generator 发布",
-          "提供 Docker Hub 与 npm 本地运行路径",
-          "支持导出 Excel / Markdown / XMind",
-        ],
-        metrics: [
-          { label: "ClawHub 安装", value: "700+", metric: "clawhub:ai-testcase-generator" },
-          { label: "分发形态", value: "Docker · npm · 技能" },
+          "本站旗舰可安装 AI 测试产品",
+          "Docker Hub 与 npm 支持本地上传生成",
+          "ClawHub 技能带实时安装数据",
         ],
         links: [
           {
@@ -574,13 +728,20 @@ export const zh: LocaleCopy = {
             label: "Docker Hub",
             href: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
           },
-          { label: "ClawHub", href: "https://clawhub.ai/xuxuclassmate/ai-testcase-generator" },
+          {
+            label: "ClawHub",
+            href: "https://clawhub.ai/xuxuclassmate/ai-testcase-generator",
+          },
+          {
+            label: "npm",
+            href: "https://www.npmjs.com/package/@classmatexuxu/testcase-generator",
+          },
         ],
         meta: {
-          title: "AI 测试用例生成器案例 | 旭旭同学",
+          title: "AI 测试用例生成器 — 旗舰案例 | 旭旭同学",
           description:
-            "旭旭同学如何交付带评审闭环、Docker/npm 打包与 ClawHub 分发的多模态 AI 用例生成器。",
-          keywords: `${sharedKeywords}, 用例生成器案例`,
+            "旗舰多模态 AI 用例生成器：PDF/Word/图片/视频 → 结构化用例 → 人工评审 → Docker、npm 与 ClawHub 安装。",
+          keywords: `${sharedKeywords}, AI 测试用例生成器, 多模态测试, 旗舰案例, ClawHub`,
         },
       },
       {
@@ -590,28 +751,96 @@ export const zh: LocaleCopy = {
         description: "可安装的 OpenClaw 技能：信号、仓位与风险检查。",
         cover: "/images/cover-trading.jpg",
         coverAlt: "Trading Assistant Core",
+        status: "live",
+        overview:
+          "可安装的 OpenClaw / ClawHub 交易技能：支撑阻力分析、多指标信号、仓位测算与风险提醒——并提供 Docker 与 CLI 路径，供非 Agent 用户使用。",
         problem:
           "交易工作流停留在笔记本和聊天提示词里——Agent 无法安装带风险护栏的稳定技能。",
         solution:
-          "将支撑阻力、多指标信号、仓位与风险提醒打包为 ClawHub 技能，并提供 Docker 与 pip / CLI 入口。",
+          "将支撑阻力、多指标信号、仓位测算与风险提醒打包为 ClawHub 技能，并提供 Docker 与 pip / CLI 入口。",
+        architecture: [
+          {
+            title: "决策闭环",
+            layers: [
+              "市场输入",
+              "指标 / 支撑阻力引擎",
+              "信号合成",
+              "仓位测算",
+              "风险提醒",
+              "Agent / CLI 输出",
+            ],
+          },
+          {
+            title: "安装面",
+            layers: ["ClawHub 技能", "Docker 镜像", "pip / ta CLI"],
+          },
+        ],
+        features: [
+          "支撑与阻力分析",
+          "多指标交易信号",
+          "仓位测算辅助",
+          "风险优先提醒与护栏",
+          "ClawHub / OpenClaw 技能安装",
+          "Docker 与 CLI 供人工场景运行",
+        ],
+        contribution: [
+          "定义技能契约：没有风险控制的信号不可交付。",
+          "实现指标 / 支撑阻力逻辑，并完成 ClawHub、Docker 与 CLI 打包。",
+          "发布并维护可安装技能，下载量实时可见。",
+        ],
+        techStack: [
+          "Python",
+          "OpenClaw",
+          "ClawHub",
+          "Docker",
+          "pip / CLI",
+          "Technical indicators",
+        ],
+        deployment: {
+          summary: "作为 Agent 技能安装，或在没有 Agent 运行时本地运行。",
+          steps: [
+            "ClawHub：为 OpenClaw Agent 安装 Trading Assistant Core。",
+            "Docker：拉取并运行已发布镜像，容器化使用。",
+            "CLI：通过 pip 安装，使用 ta 入口进行本地工作流。",
+          ],
+          channels: [
+            {
+              label: "ClawHub",
+              href: "https://clawhub.ai/xuxuclassmate/trading-assistant-core",
+            },
+            {
+              label: "GitHub",
+              href: "https://github.com/XuXuClassMate/trading-assistant",
+            },
+            {
+              label: "Docker Hub",
+              href: "https://hub.docker.com/r/xuxuclassmate/trading-assistant",
+            },
+          ],
+        },
+        proof: {
+          github: "https://github.com/XuXuClassMate/trading-assistant",
+          demo: "https://clawhub.ai/xuxuclassmate/trading-assistant-core",
+          docker: "https://hub.docker.com/r/xuxuclassmate/trading-assistant",
+        },
         tradeoffs: [
-          "仓位与风险提醒优先于花哨信号——只会喊进场的技能不安全。",
+          "仓位测算与风险提醒优先于花哨信号——只会喊进场的技能不安全。",
           "保留 CLI / Docker，让没有 Agent 运行时的人也能跑同一套逻辑。",
-          "发到 ClawHub，而不是停在笔记本工作流，让 Agent 拿到可安装包。"
+          "发布到 ClawHub，而不是停在笔记本工作流，让 Agent 拿到可安装包。",
         ],
         artifacts: [
           {
-            "title": "ClawHub 技能",
-            "description": "可安装的 OpenClaw 技能，下载量实时可见。",
-            "href": "https://clawhub.ai/xuxuclassmate/trading-assistant-core",
-            "linkLabel": "打开 ClawHub"
+            title: "ClawHub 技能",
+            description: "可安装的 OpenClaw 技能，下载量实时可见。",
+            href: "https://clawhub.ai/xuxuclassmate/trading-assistant-core",
+            linkLabel: "打开 ClawHub",
           },
           {
-            "title": "GitHub + Docker",
-            "description": "面向人的安装路径与 Agent 技能并行。",
-            "href": "https://github.com/XuXuClassMate/trading-assistant",
-            "linkLabel": "GitHub"
-          }
+            title: "GitHub + Docker",
+            description: "面向人的安装路径与 Agent 技能并行。",
+            href: "https://github.com/XuXuClassMate/trading-assistant",
+            linkLabel: "GitHub",
+          },
         ],
         outcomes: [
           "作为可安装 OpenClaw / ClawHub 技能发布",
@@ -619,7 +848,11 @@ export const zh: LocaleCopy = {
           "以风险优先默认值替代纯信号演示",
         ],
         metrics: [
-          { label: "ClawHub 安装", value: "900+", metric: "clawhub:trading-assistant-core" },
+          {
+            label: "ClawHub 安装",
+            value: "900+",
+            metric: "clawhub:trading-assistant-core",
+          },
           { label: "使用面", value: "技能 · Docker · CLI" },
         ],
         links: [
@@ -627,12 +860,15 @@ export const zh: LocaleCopy = {
             label: "GitHub",
             href: "https://github.com/XuXuClassMate/trading-assistant",
           },
-          { label: "ClawHub", href: "https://clawhub.ai/xuxuclassmate/trading-assistant-core" },
+          {
+            label: "ClawHub",
+            href: "https://clawhub.ai/xuxuclassmate/trading-assistant-core",
+          },
         ],
         meta: {
-          title: "Trading Assistant 案例 | 旭旭同学",
+          title: "Trading Assistant Core 案例 | 旭旭同学",
           description:
-            "旭旭同学如何把 Trading Assistant Core 打包为 OpenClaw / ClawHub 技能，并支持 Docker 与 CLI。",
+            "旭旭同学如何把 Trading Assistant Core 打包为 OpenClaw / ClawHub 技能，并支持 Docker 与 CLI 安装。",
           keywords: `${sharedKeywords}, 交易助手案例`,
         },
       },
@@ -643,28 +879,85 @@ export const zh: LocaleCopy = {
         description: "基于 Cloudflare Workers 的定时市场情报简报与多通道推送。",
         cover: "/images/cover-globalpulse.jpg",
         coverAlt: "GlobalPulse",
+        status: "live",
+        overview:
+          "自托管 Cloudflare Workers 市场情报产品——Admin UI、KV 配置、Cron 调度、市场日历，以及飞书 / 微信 / Telegram 推送。",
         problem:
           "团队需要稳定的财经与热点简报，而不是一次性脚本——还要日历、模板和可自控的推送通道。",
         solution:
           "打造自托管 Cloudflare Workers 应用：Admin UI、KV 配置、Cron 调度、市场日历，以及飞书 / 微信 / Telegram 提供商。",
+        architecture: [
+          {
+            title: "运行时链路",
+            layers: [
+              "Admin UI",
+              "KV 配置",
+              "Cron 调度器",
+              "市场日历 / 模板",
+              "通道提供商",
+              "飞书 / 微信 / Telegram",
+            ],
+          },
+        ],
+        features: [
+          "密码保护的 Admin UI",
+          "时区感知的市场日历",
+          "Cron 驱动的定时简报",
+          "多通道推送（飞书 / 微信 / Telegram）",
+          "发送前预览",
+          "自托管 Workers + KV 控制面",
+        ],
+        contribution: [
+          "从 Admin UI 到多通道提供商，主导产品架构。",
+          "实现 Workers 运行时、KV 配置与 Cron 投递流程。",
+          "交付并运维 pulse.xuxuclassmate.com 在线实例。",
+        ],
+        techStack: [
+          "Cloudflare Workers",
+          "KV",
+          "Cron Triggers",
+          "TypeScript",
+          "Feishu / WeChat / Telegram APIs",
+        ],
+        deployment: {
+          summary:
+            "在 Cloudflare Workers 上部署并绑定 KV，然后在 Admin UI 中配置日历与通道。",
+          steps: [
+            "克隆 InnoNestX 下的 GlobalPulse 仓库。",
+            "配置 Workers + KV，使用 Wrangler 部署。",
+            "打开 Admin UI，设置调度与提供商，启用 Cron 投递。",
+            "参考 pulse.xuxuclassmate.com 在线实例作为部署样例。",
+          ],
+          channels: [
+            { label: "在线体验", href: "https://pulse.xuxuclassmate.com/" },
+            {
+              label: "GitHub",
+              href: "https://github.com/InnoNestX/GlobalPulse",
+            },
+          ],
+        },
+        proof: {
+          github: "https://github.com/InnoNestX/GlobalPulse",
+          demo: "https://pulse.xuxuclassmate.com/",
+        },
         tradeoffs: [
           "自托管 Workers + KV，而不是纯 SaaS 简报——日历与凭据留在团队手里。",
           "带密码的 Admin UI，而不是纯 Cron 脚本——发送前可预览。",
-          "飞书 / 微信 / Telegram 多通道，而不是只做邮件。"
+          "飞书 / 微信 / Telegram 多通道，而不是只做邮件。",
         ],
         artifacts: [
           {
-            "title": "在线产品",
-            "description": "定时市场情报简报的运行实例。",
-            "href": "https://pulse.xuxuclassmate.com/",
-            "linkLabel": "打开 Pulse"
+            title: "在线产品",
+            description: "定时市场情报简报的运行实例。",
+            href: "https://pulse.xuxuclassmate.com/",
+            linkLabel: "打开 Pulse",
           },
           {
-            "title": "源码仓库",
-            "description": "Workers 应用、提供商与 Admin 流程开源可查。",
-            "href": "https://github.com/InnoNestX/GlobalPulse",
-            "linkLabel": "GitHub"
-          }
+            title: "源码仓库",
+            description: "Workers 应用、提供商与 Admin 流程开源可查。",
+            href: "https://github.com/InnoNestX/GlobalPulse",
+            linkLabel: "GitHub",
+          },
         ],
         outcomes: [
           "带密码保护的 Admin UI，可配置调度与推送参数",
@@ -694,28 +987,78 @@ export const zh: LocaleCopy = {
         description: "统一的 Docker Hub REST 网关：统计、卡片与交互文档。",
         cover: "/images/cover-docker-gateway.jpg",
         coverAlt: "Docker Hub API Gateway",
+        status: "live",
+        overview:
+          "统一的 Docker Hub REST API 网关——用户统计、SVG 卡片、仓库/标签查询、OpenAPI 文档，以及中英双语交互测试。",
         problem:
           "Docker Hub 数据分散——拉取总量、仓库详情与徽章需要一个可文档化、可调用的统一 API。",
         solution:
           "用 Hono 交付网关：用户统计、SVG 卡片、仓库/标签 API、OpenAPI 文档、双语界面与在线调试。",
+        architecture: [
+          {
+            title: "API 面",
+            layers: [
+              "客户端 / README 嵌入",
+              "Gateway (Hono)",
+              "Docker Hub 上游",
+              "Stats · SVG · OpenAPI 响应",
+            ],
+          },
+        ],
+        features: [
+          "用户与仓库统计 API",
+          "可嵌入的 Docker 统计 SVG 卡片",
+          "仓库 / 标签查询端点",
+          "交互式 OpenAPI 文档",
+          "中英双语调试 UI",
+          "本站实时指标自用同一网关",
+        ],
+        contribution: [
+          "设计统一的 Hub 数据 REST + SVG 卡片契约。",
+          "实现 Hono 网关、OpenAPI 文档与双语调试台。",
+          "将生产用法接入本站实时指标流水线。",
+        ],
+        techStack: ["Hono", "TypeScript", "Vercel", "OpenAPI", "Docker Hub API"],
+        deployment: {
+          summary: "部署在 Vercel 上，调用公开 REST / SVG 端点。",
+          steps: [
+            "打开在线网关，使用交互文档与调试功能。",
+            "调用 /api/user/stats，或在 README 中嵌入 SVG docker-stats 卡片。",
+            "克隆 InnoNestX 仓库以自托管或扩展网关。",
+          ],
+          channels: [
+            {
+              label: "在线 API",
+              href: "https://docker-hub-pull-counter.vercel.app",
+            },
+            {
+              label: "GitHub",
+              href: "https://github.com/InnoNestX/docker-hub-pull-counter",
+            },
+          ],
+        },
+        proof: {
+          github: "https://github.com/InnoNestX/docker-hub-pull-counter",
+          demo: "https://docker-hub-pull-counter.vercel.app",
+        },
         tradeoffs: [
           "统一 REST + SVG 卡片，而不是爬 Hub 页面——适合 README 嵌入。",
           "OpenAPI + 双语调试台，调用方接生产前可先验证。",
-          "自用 /api/stats——本站首页指标也走同一网关。"
+          "自用 /api/stats——本站首页指标也走同一网关。",
         ],
         artifacts: [
           {
-            "title": "在线 API 与文档",
-            "description": "用户统计、仓库详情与交互式 OpenAPI。",
-            "href": "https://docker-hub-pull-counter.vercel.app",
-            "linkLabel": "打开网关"
+            title: "在线 API 与文档",
+            description: "用户统计、仓库详情与交互式 OpenAPI。",
+            href: "https://docker-hub-pull-counter.vercel.app",
+            linkLabel: "打开网关",
           },
           {
-            "title": "可嵌入统计卡片",
-            "description": "README 与本站使用的 SVG 卡片。",
-            "href": "https://docker-hub-pull-counter.vercel.app/api/docker-stats?username=xuxuclassmate",
-            "linkLabel": "查看 SVG"
-          }
+            title: "可嵌入统计卡片",
+            description: "README 与本站使用的 SVG 卡片。",
+            href: "https://docker-hub-pull-counter.vercel.app/api/docker-stats?username=xuxuclassmate",
+            linkLabel: "查看 SVG",
+          },
         ],
         outcomes: [
           "公开 REST 接口查询用户与仓库统计",
@@ -750,28 +1093,79 @@ export const zh: LocaleCopy = {
         description: "让 QA 环境几分钟就绪，而不是几天。",
         cover: "/images/cover-docker.jpg",
         coverAlt: "测试库 Docker 套件",
+        status: "live",
+        overview:
+          "面向 QA 的即用数据库镜像——达梦、瀚高、人大金仓、TiDB 等，统一标签、文档与 Docker Hub 实时拉取证明。",
         problem:
           "国产与开源数据库对 QA 来说难拉起——缺少文档化安装会卡住自动化与新人上手。",
         solution:
-          "在 Docker Hub 发布达梦、瀚高、人大金仓、TiDB 等即用镜像，统一标签与文档。",
+          "在 Docker Hub 发布达梦、瀚高、人大金仓、TiDB 等即用镜像，统一标签与文档，服务测试团队。",
+        architecture: [
+          {
+            title: "QA 环境路径",
+            layers: [
+              "Docker Hub 镜像",
+              "Pull & Run",
+              "本地 / CI 环境",
+              "自动化套件",
+              "证据（实时拉取）",
+            ],
+          },
+        ],
+        features: [
+          "达梦、瀚高、人大金仓、TiDB 等 QA 镜像",
+          "可预期标签保障 CI 稳定",
+          "一镜像一服务，失败更好定位",
+          "面向 pull-and-run 工作流的文档",
+          "本站展示实时拉取指标",
+        ],
+        contribution: [
+          "识别国产数据库缺少文档化安装带来的 QA 痛点。",
+          "构建、打标签并发布可复用 Docker 镜像套件。",
+          "维护文档与实时拉取证据，推动团队采用。",
+        ],
+        techStack: ["Docker", "Docker Hub", "Dameng", "Highgo", "Kingbase", "TiDB"],
+        deployment: {
+          summary: "从 Docker Hub 拉取镜像，在本地或 CI 环境中启动。",
+          steps: [
+            "浏览 xuxuclassmate Docker Hub 命名空间。",
+            "拉取所需数据库镜像（如达梦 / 瀚高）。",
+            "按文档配置端口与环境变量，供 QA 套件使用。",
+            "可选：通过 Docker Hub API Gateway 验证实时拉取总量。",
+          ],
+          channels: [
+            {
+              label: "Docker Hub",
+              href: "https://hub.docker.com/u/xuxuclassmate",
+            },
+            {
+              label: "实时统计",
+              href: "https://docker-hub-pull-counter.vercel.app/api/user/stats?username=xuxuclassmate",
+            },
+          ],
+        },
+        proof: {
+          demo: "https://hub.docker.com/u/xuxuclassmate",
+          docker: "https://hub.docker.com/u/xuxuclassmate",
+        },
         tradeoffs: [
           "标签保持无聊可预期——CI 套件要的是稳定，不是花哨。",
-          "尽量一镜像一服务，pull-and-run 失败更好定位。",
-          "早期发布达梦 / 瀚高——拉取量验证了数据库痛点真实存在。"
+          "一镜像一服务，pull-and-run 失败更好定位。",
+          "早期发布达梦 / 瀚高——拉取量验证了数据库痛点真实存在。",
         ],
         artifacts: [
           {
-            "title": "Docker Hub 命名空间",
-            "description": "QA 向镜像合集，总拉取在首页实时展示。",
-            "href": "https://hub.docker.com/u/xuxuclassmate",
-            "linkLabel": "浏览镜像"
+            title: "Docker Hub 命名空间",
+            description: "QA 向镜像合集，总拉取在首页实时展示。",
+            href: "https://hub.docker.com/u/xuxuclassmate",
+            linkLabel: "浏览镜像",
           },
           {
-            "title": "实时用户统计 API",
-            "description": "经 Docker Hub API Gateway 聚合的拉取量。",
-            "href": "https://docker-hub-pull-counter.vercel.app/api/user/stats?username=xuxuclassmate",
-            "linkLabel": "JSON 统计"
-          }
+            title: "实时用户统计 API",
+            description: "经 Docker Hub API Gateway 聚合的拉取量。",
+            href: "https://docker-hub-pull-counter.vercel.app/api/user/stats?username=xuxuclassmate",
+            linkLabel: "JSON 统计",
+          },
         ],
         outcomes: [
           "达梦与瀚高镜像被大量 QA 团队使用",
@@ -842,8 +1236,28 @@ export const zh: LocaleCopy = {
         proof: {
           github: "https://github.com/XuXuClassMate/My_Test_JAProject",
           readme: "https://github.com/XuXuClassMate/My_Test_JAProject#readme",
+          demo: "https://github.com/XuXuClassMate/My_Test_JAProject",
         },
         status: "live",
+        deployment: {
+          summary: "克隆 Java 实践套件，在本地或 CI 中运行基于 Maven 的接口测试。",
+          steps: [
+            "克隆 https://github.com/XuXuClassMate/My_Test_JAProject",
+            "为目标 API 配置环境与鉴权参数。",
+            "运行 Maven 测试并查看 Allure 报告。",
+            "可选：与 Python / Locust 练习仓对比模式差异。",
+          ],
+          channels: [
+            {
+              label: "GitHub",
+              href: "https://github.com/XuXuClassMate/My_Test_JAProject",
+            },
+            {
+              label: "Python 练习仓",
+              href: "https://github.com/XuXuClassMate/My_Test_PyProject",
+            },
+          ],
+        },
         problem: "一次性脚本经不起团队交接——接口套件需要稳定结构。",
         solution:
           "打造 Java + RestAssured 框架，分层清晰，带报告与 CI 钩子。",
@@ -950,6 +1364,21 @@ export const zh: LocaleCopy = {
           "GitHub 仓库状态：即将上线",
         ],
         status: "upcoming",
+        deployment: {
+          summary:
+            "仓库即将上线——架构与案例先发布；公开仓库就绪后将补充克隆/运行步骤。",
+          steps: [
+            "在本案例页阅读系统链路与测试链路。",
+            "以架构为蓝图，规划 Playwright + API + 数据校验方案。",
+            "关注即将发布的 TypeScript + Playwright 公开仓库。",
+          ],
+          channels: [
+            {
+              label: "Playwright Lab",
+              href: "/zh/playwright.html",
+            },
+          ],
+        },
         problem: "只测 UI 会漏掉 API、缓存与消息路径上的回归。",
         solution:
           "校验全链路：Playwright → API → 后端 → MySQL → Redis → MQ。",
@@ -1092,15 +1521,17 @@ export const zh: LocaleCopy = {
     ],
   },
   notes: {
-    subtitle: "笔记",
-    title: "实操笔记",
+    subtitle: "工程笔记",
+    title: "工程笔记",
     description:
-      "带实时 Docker / ClawHub 数据的长文——数据库测试环境与可安装 Agent 技能。",
-    backLabel: "全部笔记",
+      "面向 QA Engineer / SDET 的可检索技术文章——AI Testing、Playwright、接口测试、性能测试、Docker 等独立 SEO 落地页。",
+    backLabel: "全部工程笔记",
     tocLabel: "本页目录",
     relatedLabel: "相关链接",
+    filterAll: "全部",
+    categoriesLabel: "按主题浏览",
     items: getNotes("zh"),
-    footerDesc: "可安装的质量工程——写下来",
+    footerDesc: "QA Engineer · SDET · AI Testing — 写成工程笔记",
     social: [
       {
         href: "https://github.com/XuXuClassMate",
@@ -1120,20 +1551,30 @@ export const zh: LocaleCopy = {
       },
     ],
   },
-  innonestx: {
-    subtitle: "开源组织",
-    title: "InnoNestX",
+  openSource: {
+    subtitle: "开源",
+    title: "开源",
     description:
-      "我创建的开源组织——做可安装、可运行的工具与产品系统；欢迎一起学习、一起做感兴趣的项目。",
+      "InnoNestX 是 XuXuClassMate 个人品牌下的开源组织——可安装的 AI 工具、QA 工具与基础设施，欢迎 fork 与共建。",
+    orgLabel: "组织",
+    orgName: "InnoNestX",
+    brandTitle: "个人品牌 → 开源组织",
+    brandLead:
+      "XuXuClassMate 是个人品牌；InnoNestX 是其下的 GitHub 开源组织，用来交付可安装工具。",
+    brandPersonalLabel: "个人品牌",
+    brandPersonalItems: ["QA / SDET", "AI Testing", "工程笔记"],
+    brandOrgLabel: "开源组织",
+    brandOrgItems: ["Open Source", "AI Tools", "QA Tools", "Infrastructure"],
     aboutTitle: "InnoNestX 是什么",
     about: [
-      "InnoNestX 是我在 GitHub 上创立的开源组织，用来承载可复用的工具与产品系统——不是本站另一套品牌叙事。",
-      "标准很简单：别人能安装、能跑、能 fork。没有安装路径的演示，不放进来。",
-      "如果你也关注质量工程、Agent、Cloudflare Workers 或 Docker 工具链，欢迎一起学习，并参与你感兴趣的项目。",
+      "InnoNestX 承载别人能安装、能跑、能 fork 的开源工具与产品系统——不是本站另一套公司叙事。",
+      "标准很简单：没有安装路径的演示，不放进来。",
+      "如果你也关注质量工程、Agent、Cloudflare Workers 或 Docker 工具链，欢迎一起学习与贡献。",
     ],
-    projectsTitle: "组织下的项目",
-    projects: getOrgProjects("zh"),
-    joinTitle: "加入我们",
+    categoriesTitle: "开源方向",
+    categories: getOrgCategories("zh"),
+    emptyCategory: "这个方向暂无公开仓库——欢迎提议。",
+    joinTitle: "加入 InnoNestX",
     joinIntro:
       "更想找愿意边做边学的协作者——而不是只看演示的人。",
     joinItems: [
@@ -1143,7 +1584,37 @@ export const zh: LocaleCopy = {
     ],
     orgCtaLabel: "GitHub 组织主页",
     orgCtaHref: "https://github.com/InnoNestX",
-    footerDesc: "可落地的开源工具——一起学、一起做",
+    footerDesc: "InnoNestX —— XuXuClassMate 的开源侧",
+    social: [
+      {
+        href: "https://github.com/XuXuClassMate",
+        label: "GitHub",
+        icon: "github",
+      },
+      {
+        href: "https://fgg6gzb6uk.feishu.cn/docx/LkwDdpLjnoIdGwxOH6zcRwEWnhd?from=from_copylink",
+        label: "Blog",
+        icon: "blog",
+      },
+      {
+        href: "#",
+        label: "微信",
+        icon: "wechat",
+        wechat: true,
+      },
+    ],
+  },
+  now: {
+    subtitle: "NOW",
+    title: "Now",
+    description:
+      "作为专注 AI Testing 的 QA Engineer / SDET，我每月更新一次：正在做、正在学、正在探索。",
+    updatedLabel: "最近更新",
+    updated: NOW_UPDATED.zh,
+    updatedIso: NOW_UPDATED.iso,
+    cadence: "大约每月更新一次。",
+    sections: getNowSections("zh"),
+    footerDesc: "我正在做的事——每月更新",
     social: [
       {
         href: "https://github.com/XuXuClassMate",

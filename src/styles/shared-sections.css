@@ -234,6 +234,21 @@
   margin-top: 2rem;
 }
 
+.principles-grid--five {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.principles-lead {
+  margin: 0.75rem 0 0;
+  max-width: 40rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 2.4vw, 1.45rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.45;
+  color: var(--ink);
+}
+
 .principle-card,
 .approach-card {
   background: var(--surface);

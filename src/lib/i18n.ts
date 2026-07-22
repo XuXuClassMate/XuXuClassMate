@@ -120,8 +120,8 @@ export function jsonLdGraph(
     url: SITE_ORIGIN,
     email: CONTACT_EMAIL,
     jobTitle: isZh
-      ? "QA / SDET / AI Testing Engineer"
-      : "QA Engineer / SDET / AI Testing Engineer",
+      ? "QA Engineer / SDET / AI Testing"
+      : "QA Engineer / SDET / AI Testing",
     description: meta.description,
     image: absoluteUrl("/images/og-default.jpg"),
     sameAs: [
@@ -131,31 +131,22 @@ export function jsonLdGraph(
       "https://medium.com/@xuxuclassmate",
       "https://blog.csdn.net/XuXuClassMate",
     ],
-    knowsAbout: isZh
-      ? [
-          "QA Engineer",
-          "SDET",
-          "Test Automation",
-          "API Testing",
-          "Performance Testing",
-          "Playwright",
-          "AI Testing",
-          "Docker",
-          "CI/CD",
-          "Full-Stack E2E",
-        ]
-      : [
-          "QA Engineer",
-          "SDET",
-          "Test Automation Engineer",
-          "API Automation Testing",
-          "Performance Testing",
-          "Playwright",
-          "AI Testing Engineer",
-          "Docker",
-          "CI/CD",
-          "Full-Stack E2E Testing",
-        ],
+    knowsAbout: [
+      "QA Engineer",
+      "SDET",
+      "Test Automation Engineer",
+      "Test Automation",
+      "AI Testing",
+      "AI Test Automation",
+      "Playwright",
+      "API Testing",
+      "Performance Testing",
+      "Docker Testing",
+      "Test Infrastructure",
+      "AI Test Case Generation",
+      "CI/CD",
+      "Full-Stack E2E Testing",
+    ],
   };
 
   const website = {

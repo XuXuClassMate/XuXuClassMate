@@ -167,7 +167,9 @@ function initProjectFilters(): void {
 
   const buttons = [...filters.querySelectorAll<HTMLButtonElement>(".filter-btn")];
   const cards = [
-    ...document.querySelectorAll<HTMLElement>(".featured-projects .project-card[data-category]"),
+    ...document.querySelectorAll<HTMLElement>(
+      ".featured-projects .project-card[data-category], .notes-index .note-card[data-category]",
+    ),
   ];
   if (buttons.length === 0 || cards.length === 0) return;
 
@@ -180,7 +182,7 @@ function initProjectFilters(): void {
 
     for (const card of cards) {
       const match = value === "all" || card.dataset.category === value;
-      card.classList.toggle("is-filtered-out", !match);
+      card.classList.toggle("is-filtered-out", match ? false : true);
       card.toggleAttribute("hidden", !match);
       card.setAttribute("aria-hidden", match ? "false" : "true");
     }

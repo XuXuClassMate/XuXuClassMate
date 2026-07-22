@@ -221,6 +221,12 @@ const langSwitchHref = caseSlug
                 {copy.nav.about}
               </a>
               <a
+                href={pageHref(locale, "now")}
+                class:list={["nav-item", { active: active === "now" }]}
+              >
+                {copy.nav.now ?? "Now"}
+              </a>
+              <a
                 href={pageHref(locale, "learn")}
                 class:list={["nav-item", { active: active === "learn" }]}
               >
@@ -231,6 +237,18 @@ const langSwitchHref = caseSlug
                 class:list={["nav-item", { active: active === "work" }]}
               >
                 {copy.nav.projects}
+              </a>
+              <a
+                href={pageHref(locale, "open-source")}
+                class:list={[
+                  "nav-item",
+                  {
+                    active:
+                      active === "open-source" || active === "innonestx",
+                  },
+                ]}
+              >
+                {copy.nav.openSource ?? copy.nav.innonestx}
               </a>
               <a
                 href={pageHref(locale, "blog")}

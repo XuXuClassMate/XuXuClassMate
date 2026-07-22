@@ -2,6 +2,8 @@ import type { Card, CaseSlug, Locale } from "./types";
 
 type ProjectId = CaseSlug;
 
+type ProjectGroupId = "quality" | "infra" | "agent";
+
 type LocalizedFields = {
   title: string;
   description: string;
@@ -14,7 +16,7 @@ type LocalizedFields = {
 
 type ProjectDef = {
   id: ProjectId;
-  category: string;
+  group: ProjectGroupId;
   href: string;
   ctaHref?: string;
   image: string;
@@ -22,19 +24,40 @@ type ProjectDef = {
   zh: LocalizedFields;
 };
 
-const FEATURED_IDS: ProjectId[] = [
-  "fullstack-e2e",
-  "automation-framework",
-  "docker-suite",
-  "testcase-generator",
-  "globalpulse",
-];
+export type ProjectGroup = {
+  id: ProjectGroupId;
+  title: string;
+  projects: Card[];
+};
+
+const GROUP_LABELS: Record<
+  ProjectGroupId,
+  { en: string; zh: string }
+> = {
+  quality: {
+    en: "Quality Engineering",
+    zh: "质量工程",
+  },
+  infra: {
+    en: "Developer Infrastructure",
+    zh: "开发者基础设施",
+  },
+  agent: {
+    en: "AI / Agent Projects",
+    zh: "AI / Agent 项目",
+  },
+};
+
+const GROUP_ORDER: ProjectGroupId[] = ["quality", "infra", "agent"];
+
+/** Homepage highlights Quality Engineering products. */
+const FEATURED_IDS: ProjectId[] = ["testcase-generator", "docker-suite"];
 
 const PROJECT_ORDER: ProjectId[] = [
-  "fullstack-e2e",
-  "automation-framework",
   "testcase-generator",
   "docker-suite",
+  "fullstack-e2e",
+  "automation-framework",
   "docker-hub-api-gateway",
   "globalpulse",
   "trading-assistant",
@@ -43,7 +66,7 @@ const PROJECT_ORDER: ProjectId[] = [
 export const PROJECTS: Record<ProjectId, ProjectDef> = {
   "testcase-generator": {
     id: "testcase-generator",
-    category: "AI",
+    group: "quality",
     href: "https://github.com/XuXuClassMate/testcase-generator",
     ctaHref: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
     image: "/images/cover-testcase.jpg",
@@ -70,7 +93,7 @@ export const PROJECTS: Record<ProjectId, ProjectDef> = {
   },
   "trading-assistant": {
     id: "trading-assistant",
-    category: "AI",
+    group: "agent",
     href: "https://github.com/XuXuClassMate/trading-assistant",
     ctaHref: "https://clawhub.ai/xuxuclassmate/trading-assistant-core",
     image: "/images/cover-trading.jpg",
@@ -97,7 +120,7 @@ export const PROJECTS: Record<ProjectId, ProjectDef> = {
   },
   globalpulse: {
     id: "globalpulse",
-    category: "Product",
+    group: "infra",
     href: "https://github.com/InnoNestX/GlobalPulse",
     ctaHref: "https://pulse.xuxuclassmate.com/",
     image: "/images/cover-globalpulse.jpg",
@@ -124,7 +147,7 @@ export const PROJECTS: Record<ProjectId, ProjectDef> = {
   },
   "docker-hub-api-gateway": {
     id: "docker-hub-api-gateway",
-    category: "Infra",
+    group: "infra",
     href: "https://github.com/InnoNestX/docker-hub-pull-counter",
     ctaHref: "https://docker-hub-pull-counter.vercel.app",
     image: "/images/cover-docker-gateway.jpg",
@@ -151,7 +174,7 @@ export const PROJECTS: Record<ProjectId, ProjectDef> = {
   },
   "docker-suite": {
     id: "docker-suite",
-    category: "Infra",
+    group: "quality",
     href: "https://hub.docker.com/u/xuxuclassmate",
     image: "/images/cover-docker.jpg",
     en: {
@@ -175,7 +198,7 @@ export const PROJECTS: Record<ProjectId, ProjectDef> = {
   },
   "automation-framework": {
     id: "automation-framework",
-    category: "Automation",
+    group: "quality",
     href: "https://github.com/XuXuClassMate/My_Test_JAProject",
     image: "/images/cover-automation.jpg",
     en: {
@@ -199,7 +222,7 @@ export const PROJECTS: Record<ProjectId, ProjectDef> = {
   },
   "fullstack-e2e": {
     id: "fullstack-e2e",
-    category: "E2E",
+    group: "quality",
     href: "#",
     image: "/images/cover-automation.jpg",
     en: {
@@ -223,6 +246,10 @@ export const PROJECTS: Record<ProjectId, ProjectDef> = {
   },
 };
 
+function groupLabel(locale: Locale, group: ProjectGroupId): string {
+  return GROUP_LABELS[group][locale];
+}
+
 function toCard(locale: Locale, id: ProjectId): Card {
   const project = PROJECTS[id];
   const copy = project[locale];
@@ -234,7 +261,7 @@ function toCard(locale: Locale, id: ProjectId): Card {
     linkLabel: copy.linkLabel,
     ctaHref: project.ctaHref,
     ctaLabel: copy.ctaLabel,
-    category: project.category,
+    category: groupLabel(locale, project.group),
     image: project.image,
     imageAlt: copy.imageAlt,
     slug: project.id,
@@ -249,6 +276,16 @@ export function getFeaturedProjects(locale: Locale): Card[] {
 
 export function getWorkProjects(locale: Locale): Card[] {
   return PROJECT_ORDER.map((id) => toCard(locale, id));
+}
+
+export function getProjectGroups(locale: Locale): ProjectGroup[] {
+  return GROUP_ORDER.map((group) => ({
+    id: group,
+    title: groupLabel(locale, group),
+    projects: PROJECT_ORDER.filter((id) => PROJECTS[id].group === group).map(
+      (id) => toCard(locale, id),
+    ),
+  })).filter((section) => section.projects.length > 0);
 }
 
 export function projectCover(slug: CaseSlug): string {

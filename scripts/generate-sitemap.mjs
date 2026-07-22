@@ -16,7 +16,9 @@ const staticPages = [
   "/en/playwright",
   "/en/infrastructure",
   "/en/life",
-  "/en/innonestx",
+  "/en/open-source",
+  "/en/now",
+  "/en/demo/ai-testcase-generator",
   "/zh/",
   "/zh/about",
   "/zh/learn",
@@ -26,7 +28,9 @@ const staticPages = [
   "/zh/playwright",
   "/zh/infrastructure",
   "/zh/life",
-  "/zh/innonestx",
+  "/zh/open-source",
+  "/zh/now",
+  "/zh/demo/ai-testcase-generator",
 ];
 
 const pages = staticPages.map((path, index) => ({
@@ -45,7 +49,16 @@ const cases = [
   "docker-suite",
 ];
 
-const posts = ["domestic-db-docker-qa", "clawhub-skill-shipping"];
+const posts = [
+  "ai-testcase-generator-multimodal",
+  "playwright-e2e-framework",
+  "locust-api-performance-testing",
+  "dockerized-test-environment",
+  "ai-assisted-test-case-generation",
+  "ai-agent-software-testing",
+  "domestic-db-docker-qa",
+  "clawhub-skill-shipping",
+];
 
 for (const slug of cases) {
   pages.push({

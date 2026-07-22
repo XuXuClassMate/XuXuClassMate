@@ -458,6 +458,121 @@ html[data-theme="light"] .back-nav--prominent {
   margin-bottom: 0.65rem;
 }
 
+.case-pipeline {
+  padding: 0 0 1.5rem;
+}
+
+.pipeline-board {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 1.5rem 1.35rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface-ghost);
+}
+
+.pipeline-inputs {
+  list-style: none;
+  margin: 0 0 0.35rem;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.pipeline-inputs li {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid color-mix(in srgb, var(--primary) 35%, var(--line));
+  border-radius: 4px;
+  color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 10%, transparent);
+}
+
+.pipeline-stages {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.pipeline-stages li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.pipeline-arrow {
+  color: var(--accent-cyan);
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.pipeline-stage {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-align: center;
+  color: var(--ink);
+}
+
+.case-page .case-block h2 {
+  font-variant-numeric: tabular-nums;
+}
+
+.case-section-lead {
+  margin: -0.35rem 0 0.85rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  color: var(--primary);
+}
+
+.deployment-steps {
+  margin: 0.85rem 0 1.25rem;
+  padding-left: 1.2rem;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.deployment-steps li + li {
+  margin-top: 0.55rem;
+}
+
+.case-try {
+  border: 1px solid color-mix(in srgb, var(--primary) 30%, var(--line));
+  background: color-mix(in srgb, var(--primary) 6%, var(--surface-ghost));
+}
+
+.case-try-note {
+  font-size: 0.92rem;
+  color: var(--muted);
+  opacity: 0.95;
+}
+
+.case-try-command {
+  margin: 1rem 0 1.35rem;
+  padding: 1rem 1.1rem;
+  overflow-x: auto;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: var(--surface-solid);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--ink);
+  white-space: pre-wrap;
+}
+
 .btn-home {
   display: inline-flex;
   align-items: center;

@@ -9,10 +9,10 @@ type Props = { locale: Locale };
 
 const { locale } = Astro.props;
 const copy = getCopy(locale);
-const page = copy.innonestx;
+const page = copy.openSource;
 ---
 
-<BaseLayout locale={locale} page="innonestx">
+<BaseLayout locale={locale} page="open-source">
   <main id="main-content" class="org-page">
     <PageHero
       subtitle={page.subtitle}
@@ -27,6 +27,37 @@ const page = copy.innonestx;
         },
       ]}
     />
+
+    <section class="org-brand" aria-labelledby="org-brand-heading">
+      <div class="container">
+        <h2 class="section-title reveal-on-scroll" id="org-brand-heading">
+          {page.brandTitle}
+        </h2>
+        <p class="org-brand-lead reveal-on-scroll">{page.brandLead}</p>
+        <div class="org-brand-map reveal-on-scroll">
+          <p class="org-brand-name">{copy.brand}</p>
+          <p class="org-brand-role">{page.brandPersonalLabel}</p>
+          <ul class="org-brand-tree">
+            {
+              page.brandPersonalItems.map((item) => (
+                <li>{item}</li>
+              ))
+            }
+            <li class="org-brand-tree-org">
+              <span class="org-brand-org-name">
+                <span class="org-brand-kicker">{page.orgLabel}</span>
+                {page.orgName}
+              </span>
+              <ul>
+                {page.brandOrgItems.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
     <section class="org-about">
       <div class="container">
@@ -47,53 +78,73 @@ const page = copy.innonestx;
 
     <section class="org-projects">
       <div class="container">
-        <h2 class="section-title reveal-on-scroll">{page.projectsTitle}</h2>
-        <div class="org-project-grid">
-          {
-            page.projects.map((project, index) => (
-              <article
-                class={`org-project-card reveal-on-scroll reveal-delay-${(index % 3) + 1}`}
-              >
-                <div class="org-project-head">
-                  <h3>{project.title}</h3>
-                  {project.status ? (
-                    <span class="org-project-status">{project.status}</span>
-                  ) : null}
+        <h2 class="section-title reveal-on-scroll">{page.categoriesTitle}</h2>
+        {
+          page.categories.map((category, categoryIndex) => (
+            <div
+              class={`org-category reveal-on-scroll reveal-delay-${(categoryIndex % 3) + 1}`}
+              id={`oss-${category.id.toLowerCase().replace(/\s+/g, "-")}`}
+            >
+              <div class="org-category-head">
+                <h3>{category.title}</h3>
+                <p>{category.description}</p>
+              </div>
+              {category.projects.length > 0 ? (
+                <div class="org-project-grid">
+                  {category.projects.map((project) => (
+                    <article class="org-project-card">
+                      <div class="org-project-head">
+                        <h4>{project.title}</h4>
+                        {project.status ? (
+                          <span class="org-project-status">{project.status}</span>
+                        ) : null}
+                      </div>
+                      {project.org ? (
+                        <p class="org-project-org">{project.org}</p>
+                      ) : null}
+                      <p>{project.description}</p>
+                      {project.tags && project.tags.length > 0 ? (
+                        <ul class="org-project-tags">
+                          {project.tags.map((tag) => (
+                            <li>{tag}</li>
+                          ))}
+                        </ul>
+                      ) : null}
+                      <div class="org-project-actions">
+                        {project.href && project.href !== "#" ? (
+                          <a
+                            class="project-link"
+                            href={project.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {project.linkLabel ?? "GitHub"}
+                          </a>
+                        ) : (
+                          <span class="org-project-soon">
+                            {project.linkLabel}
+                          </span>
+                        )}
+                        {project.ctaHref ? (
+                          <a
+                            class="project-link"
+                            href={project.ctaHref}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {project.ctaLabel}
+                          </a>
+                        ) : null}
+                      </div>
+                    </article>
+                  ))}
                 </div>
-                <p>{project.description}</p>
-                {project.tags && project.tags.length > 0 ? (
-                  <ul class="org-project-tags">
-                    {project.tags.map((tag) => (
-                      <li>{tag}</li>
-                    ))}
-                  </ul>
-                ) : null}
-                <div class="org-project-actions">
-                  {project.href ? (
-                    <a
-                      class="project-link"
-                      href={project.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {project.linkLabel ?? "GitHub"}
-                    </a>
-                  ) : null}
-                  {project.ctaHref ? (
-                    <a
-                      class="project-link"
-                      href={project.ctaHref}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {project.ctaLabel}
-                    </a>
-                  ) : null}
-                </div>
-              </article>
-            ))
-          }
-        </div>
+              ) : (
+                <p class="org-category-empty">{page.emptyCategory}</p>
+              )}
+            </div>
+          ))
+        }
       </div>
     </section>
 
