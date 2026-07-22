@@ -35,26 +35,35 @@ const page = copy.openSource;
         </h2>
         <p class="org-brand-lead reveal-on-scroll">{page.brandLead}</p>
         <div class="org-brand-map reveal-on-scroll">
-          <p class="org-brand-name">{copy.brand}</p>
-          <p class="org-brand-role">{page.brandPersonalLabel}</p>
-          <ul class="org-brand-tree">
-            {
-              page.brandPersonalItems.map((item) => (
-                <li>{item}</li>
-              ))
-            }
-            <li class="org-brand-tree-org">
-              <span class="org-brand-org-name">
-                <span class="org-brand-kicker">{page.orgLabel}</span>
-                {page.orgName}
-              </span>
-              <ul>
-                {page.brandOrgItems.map((item) => (
+          <article class="org-brand-panel">
+            <p class="org-brand-kicker">{page.brandPersonalLabel}</p>
+            <h3 class="org-brand-name">{copy.brand}</h3>
+            <ul class="org-brand-items">
+              {
+                page.brandPersonalItems.map((item) => (
                   <li>{item}</li>
-                ))}
-              </ul>
-            </li>
-          </ul>
+                ))
+              }
+            </ul>
+          </article>
+
+          <div class="org-brand-connector" aria-hidden="true">
+            <span class="org-brand-connector-line"></span>
+            <span class="org-brand-connector-label">{page.brandConnector}</span>
+            <span class="org-brand-connector-line"></span>
+          </div>
+
+          <article class="org-brand-panel org-brand-panel--org">
+            <p class="org-brand-kicker">{page.brandOrgLabel}</p>
+            <h3 class="org-brand-name">{page.orgName}</h3>
+            <ul class="org-brand-items">
+              {
+                page.brandOrgItems.map((item) => (
+                  <li>{item}</li>
+                ))
+              }
+            </ul>
+          </article>
         </div>
       </div>
     </section>
