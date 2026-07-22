@@ -1,6 +1,7 @@
 import type { LocaleCopy } from "./types";
 import { getFeaturedProjects, getWorkProjects } from "./projects";
 import { getNotes } from "./notes";
+import { getOrgProjects } from "./org";
 
 const sharedKeywords =
   "xuxuclassmate, XuXuClassMate, 旭旭同学, QA engineer, software testing, test automation, AI testing, quality engineering, OpenClaw, ClawHub, testcase generator, Playwright, API testing, Docker test environment";
@@ -35,7 +36,7 @@ export const en: LocaleCopy = {
     "AI testing tool / ClawHub skill customization",
     "QA team leadership advisory (startup → scale-up)",
     "Database / Docker test-environment enablement",
-    "Open-source collaboration on InnoNestX systems",
+    "Join InnoNestX open-source projects — learn and build together",
   ],
   copyEmail: "Copy email",
   copiedEmail: "Copied",
@@ -53,12 +54,13 @@ export const en: LocaleCopy = {
     learn: "Learn",
     work: "Work",
     notes: "Notes",
+    innonestx: "InnoNestX",
   },
   meta: {
     home: {
       title: "XuXuClassMate | Installable Quality Engineering",
       description:
-        "XuXuClassMate turns quality engineering into installable products — AI testing tools, OpenClaw / ClawHub skills, and reusable Docker environments. Product systems ship under InnoNestX.",
+        "XuXuClassMate turns quality engineering into installable products — AI testing tools, OpenClaw / ClawHub skills, reusable Docker environments, and systems like GlobalPulse.",
       keywords: sharedKeywords,
       ogTitle: "XuXuClassMate — Installable Quality Engineering",
     },
@@ -71,13 +73,13 @@ export const en: LocaleCopy = {
     learn: {
       title: "Learning Path: QA to AI Testing | XuXuClassMate",
       description:
-        "From QA craft and multi-stage test management to Locust performance, Playwright automation, OpenClaw / ClawHub skills, and InnoNestX product systems.",
+        "From QA craft and multi-stage test management to Locust performance, Playwright automation, OpenClaw / ClawHub skills, and product systems like GlobalPulse.",
       keywords: `${sharedKeywords}, learning path, test management, Locust, QA training`,
     },
     work: {
       title: "Testing Projects & AI Tools Portfolio | XuXuClassMate",
       description:
-        "Installable QA products: AI Test Case Generator, ClawHub skills, Docker DB images, plus InnoNestX systems like GlobalPulse and the Docker Hub API Gateway.",
+        "Installable QA products: AI Test Case Generator, ClawHub skills, Docker DB images, GlobalPulse, and the Docker Hub API Gateway.",
       keywords: `${sharedKeywords}, test portfolio, GlobalPulse, Dameng Docker, Highgo Docker, ClawHub skills`,
     },
     notes: {
@@ -86,6 +88,12 @@ export const en: LocaleCopy = {
         "Practical notes on database Docker setups, ClawHub skill shipping, and installable quality engineering.",
       keywords: `${sharedKeywords}, notes, Dameng Docker, ClawHub`,
     },
+    innonestx: {
+      title: "InnoNestX | Open-source Lab",
+      description:
+        "InnoNestX is my open-source organization — practical tools and product systems you can learn from, run, and contribute to.",
+      keywords: `${sharedKeywords}, InnoNestX, GlobalPulse, open source`,
+    },
   },
   home: {
     subtitle: "Installable quality engineering",
@@ -93,7 +101,7 @@ export const en: LocaleCopy = {
     description:
       "I ship AI testing tools, OpenClaw / ClawHub skills, and reusable environments — then prove them with live Docker, ClawHub, and API metrics.",
     positioning:
-      "XuXuClassMate is the personal craft brand. InnoNestX is where product systems like GlobalPulse and the Docker Hub API Gateway ship.",
+      "I build installable quality tools — then keep shipping systems teams can actually run.",
     valuesTitle: "How I Work",
     values: [
       {
@@ -185,7 +193,7 @@ export const en: LocaleCopy = {
       {
         title: "GlobalPulse",
         description:
-          "Live InnoNestX product — scheduled market intelligence briefings.",
+          "Live product — scheduled market intelligence briefings.",
         href: "https://pulse.xuxuclassmate.com/",
         linkLabel: "Open Pulse",
         icon: "robot",
@@ -207,8 +215,13 @@ export const en: LocaleCopy = {
         description: "Database Docker for QA and ClawHub shipping notes",
         href: "/en/notes.html",
       },
+      {
+        title: "InnoNestX",
+        description: "My open-source org — projects, learning, and ways to join",
+        href: "/en/innonestx.html",
+      },
     ],
-    footerDesc: "Installable quality engineering — XuXuClassMate × InnoNestX",
+    footerDesc: "Installable quality engineering",
     social: [...homeSocial],
   },
   learn: {
@@ -276,9 +289,9 @@ export const en: LocaleCopy = {
         linkLabel: "View on GitHub",
       },
       {
-        title: "GlobalPulse (InnoNestX)",
+        title: "GlobalPulse",
         description:
-          "Self-hosted market intelligence and scheduled briefings on Cloudflare Workers — try the live app, then dig into the product-line practice beyond single tools.",
+          "Self-hosted market intelligence and scheduled briefings on Cloudflare Workers — try the live app, then dig into how the system is built.",
         href: "https://pulse.xuxuclassmate.com/",
         linkLabel: "Open live site",
       },
@@ -322,7 +335,7 @@ export const en: LocaleCopy = {
       {
         title: "OpenClaw Skills & Product Systems",
         description:
-          "Packaging ClawHub skills and InnoNestX products (GlobalPulse, Docker Hub API Gateway) so workflows run beyond demos.",
+          "Packaging ClawHub skills and shipping systems like GlobalPulse and the Docker Hub API Gateway so workflows run beyond demos.",
       },
     ],
     focusTitle: "Current Learning Focus",
@@ -333,7 +346,7 @@ export const en: LocaleCopy = {
       "Publishing and iterating OpenClaw / ClawHub skills",
       "Multimodal requirement → structured test artifacts",
       "Locust and automation craft behind AI tools",
-      "InnoNestX product systems on Workers and APIs",
+      "Product systems on Workers and APIs",
     ],
     footerDesc: "Learning in public — AI tools with quality roots",
     social: [
@@ -618,7 +631,7 @@ export const en: LocaleCopy = {
             "linkLabel": "Open Pulse"
           },
           {
-            "title": "InnoNestX source",
+            "title": "Source repository",
             "description": "Workers app, providers, and admin flows in the open.",
             "href": "https://github.com/InnoNestX/GlobalPulse",
             "linkLabel": "GitHub"
@@ -940,6 +953,34 @@ export const en: LocaleCopy = {
     relatedLabel: "Related",
     items: getNotes("en"),
     footerDesc: "Installable quality engineering — written down",
+    social: [...homeSocial],
+  },
+  innonestx: {
+    subtitle: "OPEN SOURCE",
+    title: "InnoNestX",
+    description:
+      "My open-source organization for practical tools and product systems — learn together, ship together.",
+    aboutTitle: "What InnoNestX is",
+    about: [
+      "InnoNestX is the GitHub organization I founded to host open tools and product systems — not a separate company narrative on this site.",
+      "The bar is simple: something others can install, run, or fork. Demos without an install path do not belong here.",
+      "If you like quality engineering, agents, Cloudflare Workers, or Docker tooling, you are welcome to learn with us and contribute to projects that interest you.",
+    ],
+    projectsTitle: "Projects under InnoNestX",
+    projects: getOrgProjects("en"),
+    joinTitle: "Join us",
+    joinIntro:
+      "Looking for collaborators who want to learn by building — not by watching slides.",
+    joinItems: [
+      "Pick a repo that interests you and open an issue or PR",
+      "Suggest a feature, fix docs, or help with bilingual UX",
+      "Email me if you want to pair on something new under the org",
+    ],
+    joinCtaLabel: "Email me",
+    joinCtaHref: "mailto:mail@xuxuclassmate.com",
+    orgCtaLabel: "GitHub organization",
+    orgCtaHref: "https://github.com/InnoNestX",
+    footerDesc: "Practical open-source tools — learn and build",
     social: [...homeSocial],
   },
   notFound: {

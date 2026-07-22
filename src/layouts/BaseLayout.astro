@@ -242,6 +242,16 @@ const langSwitchHref = caseSlug
                   </a>
                 ) : null
               }
+              {
+                copy.nav.innonestx ? (
+                  <a
+                    href={pageHref(locale, "innonestx")}
+                    class:list={["nav-item", { active: active === "innonestx" }]}
+                  >
+                    {copy.nav.innonestx}
+                  </a>
+                ) : null
+              }
               <a href={langSwitchHref} class="language-switch">
                 {copy.languageSwitch}
               </a>

@@ -12,11 +12,13 @@ const pages = [
   { path: "/en/learn", changefreq: "monthly", priority: "0.80" },
   { path: "/en/work", changefreq: "monthly", priority: "0.80" },
   { path: "/en/notes", changefreq: "weekly", priority: "0.80" },
+  { path: "/en/innonestx", changefreq: "monthly", priority: "0.80" },
   { path: "/zh/", changefreq: "weekly", priority: "0.90" },
   { path: "/zh/life", changefreq: "monthly", priority: "0.80" },
   { path: "/zh/learn", changefreq: "monthly", priority: "0.80" },
   { path: "/zh/work", changefreq: "monthly", priority: "0.80" },
   { path: "/zh/notes", changefreq: "weekly", priority: "0.80" },
+  { path: "/zh/innonestx", changefreq: "monthly", priority: "0.80" },
 ];
 
 const cases = [

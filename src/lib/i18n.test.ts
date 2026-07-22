@@ -19,6 +19,7 @@ describe("i18n paths", () => {
     expect(pageHref("en", "learn")).toBe("/en/learn.html");
     expect(pageHref("zh", "work")).toBe("/zh/work.html");
     expect(pageHref("en", "notes")).toBe("/en/notes.html");
+    expect(pageHref("en", "innonestx")).toBe("/en/innonestx.html");
   });
 
   it("maps case study routes", () => {
