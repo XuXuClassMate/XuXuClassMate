@@ -1,0 +1,18 @@
+---
+type Props = {
+  href: string;
+  label: string;
+  /** Emphasize as a full-width end-of-page action. */
+  prominent?: boolean;
+};
+
+const { href, label, prominent = false } = Astro.props;
+---
+
+<a
+  class:list={["back-nav", { "back-nav--prominent": prominent }]}
+  href={href}
+>
+  <span class="back-nav-icon" aria-hidden="true">←</span>
+  <span class="back-nav-label">{label}</span>
+</a>

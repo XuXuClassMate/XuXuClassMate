@@ -466,7 +466,7 @@ export const en: LocaleCopy = {
         ],
       },
     ],
-    caseBackLabel: "All projects",
+    caseBackLabel: "Back to all projects",
     caseProblemTitle: "Problem",
     caseSolutionTitle: "Solution",
     caseTradeoffsTitle: "Tradeoffs",
@@ -935,7 +935,7 @@ export const en: LocaleCopy = {
     title: "Practical Notes",
     description:
       "Long-form field notes with live Docker / ClawHub numbers — domestic DB environments and installable agent skills.",
-    backLabel: "All notes",
+    backLabel: "Back to all notes",
     tocLabel: "On this page",
     relatedLabel: "Related",
     items: getNotes("en"),

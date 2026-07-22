@@ -455,7 +455,7 @@ export const zh: LocaleCopy = {
         ],
       },
     ],
-    caseBackLabel: "全部项目",
+    caseBackLabel: "返回全部项目",
     caseProblemTitle: "问题",
     caseSolutionTitle: "方案",
     caseTradeoffsTitle: "取舍",
@@ -914,7 +914,7 @@ export const zh: LocaleCopy = {
     title: "实操笔记",
     description:
       "带实时 Docker / ClawHub 数据的长文——国产库测试环境与可安装 Agent 技能。",
-    backLabel: "全部笔记",
+    backLabel: "返回全部笔记",
     tocLabel: "本页目录",
     relatedLabel: "相关链接",
     items: getNotes("zh"),
