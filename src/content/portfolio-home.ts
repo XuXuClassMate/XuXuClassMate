@@ -6,6 +6,7 @@ export type HomeLink = { title: string; href: string; external?: boolean };
 export type PortfolioHome = {
   greeting: string;
   roles: string[];
+  tagline: string;
   description: string;
   ctaWork: string;
   ctaGithub: string;
@@ -39,89 +40,49 @@ const GITHUB = "https://github.com/XuXuClassMate";
 
 const featuredEn = [
   {
-    title: "Playwright E2E Framework",
+    title: "AI Test Case Generator",
     description:
-      "Full-chain automation covering frontend, API, backend, MySQL, Redis, and message queues.",
-    href: "/en/work/fullstack-e2e.html",
-    tags: ["Playwright", "E2E", "TypeScript"],
+      "Flagship AI Testing product: multimodal QA inputs → structured cases with review loops. Install via Docker, npm, or ClawHub.",
+    href: "/en/work/testcase-generator.html",
+    tags: ["Flagship", "AI Testing", "AI Test Case Generation"],
   },
   {
-    title: "Java API Automation",
+    title: "Test DB Docker Suite",
     description:
-      "Scalable API automation with Java, JUnit, RestAssured, Maven, and Allure.",
-    href: "/en/work/automation-framework.html",
-    tags: ["Java", "RestAssured", "API"],
-  },
-  {
-    title: "Python Automation",
-    description:
-      "Python practice suites for API, UI, performance (Locust), and mobile automation.",
-    href: "https://github.com/XuXuClassMate/My_Test_PyProject",
-    tags: ["Python", "Pytest", "Locust"],
-  },
-  {
-    title: "Docker Test Infrastructure",
-    description:
-      "Reusable database and QA environment images teams can pull and boot in CI.",
+      "Docker Testing infrastructure for QA — Dameng, Highgo, Kingbase, TiDB and more.",
     href: "/en/work/docker-suite.html",
-    tags: ["Docker", "CI/CD", "Infra"],
-  },
-  {
-    title: "AI Testing Lab",
-    description:
-      "AI test case generation, API testing with LLMs, bug analysis, and testing agents.",
-    href: "/en/ai-testing.html",
-    tags: ["AI Testing", "LLM", "SDET"],
+    tags: ["Docker Testing", "Test Infrastructure", "QA"],
   },
 ];
 
 const featuredZh = [
   {
-    title: "Playwright 全链路 E2E",
+    title: "AI 测试用例生成器",
     description:
-      "覆盖前端、API、后端、MySQL、Redis 与消息队列的全链路自动化框架。",
-    href: "/zh/work/fullstack-e2e.html",
-    tags: ["Playwright", "E2E", "TypeScript"],
+      "旗舰 AI Testing 产品：多模态 QA 输入 → 结构化用例与评审闭环。可通过 Docker、npm 或 ClawHub 安装。",
+    href: "/zh/work/testcase-generator.html",
+    tags: ["旗舰", "AI Testing", "AI Test Case Generation"],
   },
   {
-    title: "Java 接口自动化",
-    description: "基于 Java、JUnit、RestAssured、Maven 与 Allure 的可扩展接口自动化。",
-    href: "/zh/work/automation-framework.html",
-    tags: ["Java", "RestAssured", "API"],
-  },
-  {
-    title: "Python 自动化",
-    description: "Python 练习套件：接口、UI、性能（Locust）与移动端自动化。",
-    href: "https://github.com/XuXuClassMate/My_Test_PyProject",
-    tags: ["Python", "Pytest", "Locust"],
-  },
-  {
-    title: "Docker 测试基础设施",
-    description: "可复用的数据库与 QA 环境镜像，支持本地与 CI 一键启动。",
+    title: "测试库 Docker 套件",
+    description:
+      "面向 QA 的 Docker Testing 基础设施——达梦、瀚高、人大金仓、TiDB 等。",
     href: "/zh/work/docker-suite.html",
-    tags: ["Docker", "CI/CD", "Infra"],
-  },
-  {
-    title: "AI Testing Lab",
-    description: "AI 用例生成、LLM 接口测试、缺陷分析与测试 Agent。",
-    href: "/zh/ai-testing.html",
-    tags: ["AI Testing", "LLM", "SDET"],
+    tags: ["Docker Testing", "Test Infrastructure", "QA"],
   },
 ];
 
 export function getPortfolioHome(locale: Locale): PortfolioHome {
   const isZh = locale === "zh";
-  const notes = getNotes(locale).slice(0, 3);
 
   return {
     greeting: isZh ? "你好，我是旭旭。" : "Hi, I'm XuXu.",
-    roles: isZh
-      ? ["QA Engineer", "Test Automation Engineer", "AI Testing Explorer"]
-      : ["QA Engineer", "Test Automation Engineer", "AI Testing Explorer"],
+    roles: ["QA Engineer", "SDET", "AI Testing"],
+    tagline: isZh ? "可安装的质量工程" : "Installable Quality Engineering",
     description: isZh
-      ? "我构建可靠的测试系统、自动化框架，以及 AI 辅助的测试解决方案。"
-      : "I build reliable testing systems, automation frameworks and AI-assisted testing solutions.",
-    ctaWork: isZh ? "查看项目" : "View My Work",
+      ? "我是 QA Engineer / SDET，专注测试自动化、AI Testing、接口测试与性能测试；并构建 Playwright、Docker Testing 与 AI 用例生成工具。"
+      : "I'm a QA Engineer / SDET focused on test automation, AI testing, API testing, and performance testing — building Playwright suites, Docker testing infrastructure, and AI test case generation.",
+    ctaWork: isZh ? "查看项目" : "View Projects",
     ctaGithub: "GitHub",
     ctaContact: isZh ? "联系我" : "Contact Me",
     whatIDoTitle: isZh ? "我在做什么" : "What I Do",
@@ -141,14 +102,12 @@ export function getPortfolioHome(locale: Locale): PortfolioHome {
         href: isZh ? "/zh/blog.html" : "/en/blog.html",
       },
       {
-        title: "E2E Testing",
-        href: isZh
-          ? "/zh/work/fullstack-e2e.html"
-          : "/en/work/fullstack-e2e.html",
-      },
-      {
         title: "AI Testing",
         href: isZh ? "/zh/ai-testing.html" : "/en/ai-testing.html",
+      },
+      {
+        title: "Playwright",
+        href: isZh ? "/zh/playwright.html" : "/en/playwright.html",
       },
       {
         title: "Test Infrastructure",
@@ -159,11 +118,11 @@ export function getPortfolioHome(locale: Locale): PortfolioHome {
     achievements: [
       {
         value: "80%+",
-        label: isZh ? "自动化覆盖率" : "Automation Coverage",
+        label: isZh ? "测试自动化覆盖率" : "Test Automation Coverage",
       },
       {
         value: isZh ? "5万+" : "50k+",
-        label: isZh ? "QPS 性能测试" : "QPS Performance Testing",
+        label: isZh ? "性能测试 QPS" : "Performance Testing QPS",
       },
       {
         value: "40%",
@@ -174,35 +133,37 @@ export function getPortfolioHome(locale: Locale): PortfolioHome {
         label: isZh ? "响应时间改善" : "Response Time Improvement",
       },
     ],
-    featuredTitle: isZh ? "精选项目" : "Featured Projects",
+    featuredTitle: isZh ? "质量工程" : "Quality Engineering",
     featuredCta: isZh ? "查看全部项目" : "View all projects",
     featured: isZh ? featuredZh : featuredEn,
     stackTitle: isZh ? "技术栈" : "Technical Stack",
     stack: [
+      "Playwright",
+      "API Testing",
+      "Performance Testing",
+      "AI Testing",
       "Java",
       "Python",
       "TypeScript",
-      "Playwright",
       "Pytest",
       "JUnit",
       "RestAssured",
       "Locust",
-      "Docker",
+      "Docker Testing",
+      "Test Infrastructure",
       "CI/CD",
-      "AI",
     ],
     articlesTitle: isZh ? "最新技术文章" : "Latest Technical Articles",
     articlesCta: isZh ? "查看全部" : "View all",
     ossTitle: isZh ? "GitHub / 开源" : "GitHub / Open Source",
     ossDescription: isZh
-      ? "开源 QA 工具、自动化框架与可安装的测试产品。"
-      : "Open-source QA tools, frameworks, and installable testing products.",
+      ? "XuXuClassMate 个人品牌下的 InnoNestX：AI 工具、QA 工具与基础设施开源。"
+      : "InnoNestX under the XuXuClassMate personal brand — open AI tools, QA tools, and infrastructure.",
     ossGithubLabel: isZh ? "打开 GitHub" : "Open GitHub",
-    ossOrgLabel: isZh ? "InnoNestX 组织" : "InnoNestX org",
+    ossOrgLabel: isZh ? "开源页面" : "Open Source page",
     connectTitle: isZh ? "保持联系" : "Let's Connect",
     connectGithub: GITHUB,
     connectEmail: "mail@xuxuclassmate.com",
-    // articles pulled live in HomePage via notes
   };
 }
 

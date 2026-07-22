@@ -22,6 +22,8 @@ describe("i18n paths", () => {
     expect(pageHref("en", "blog")).toBe("/en/blog.html");
     expect(pageHref("en", "about")).toBe("/en/about.html");
     expect(pageHref("en", "innonestx")).toBe("/en/innonestx.html");
+    expect(pageHref("en", "open-source")).toBe("/en/open-source.html");
+    expect(pageHref("en", "now")).toBe("/en/now.html");
   });
 
   it("maps case study routes", () => {
@@ -114,5 +116,11 @@ describe("i18n paths", () => {
       getNote("en", "clawhub-skill-shipping")?.sections.length,
     ).toBeGreaterThan(5);
     expect(getNote("en", "domestic-db-docker-qa")?.proof).toContain("54k+");
+    expect(getNote("en", "ai-testcase-generator-multimodal")?.category).toBe(
+      "AI Testing",
+    );
+    expect(getNote("en", "playwright-e2e-framework")?.title).toContain(
+      "Playwright",
+    );
   });
 });

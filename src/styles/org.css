@@ -9,7 +9,7 @@
 }
 
 .org-page .hero-desc {
-  max-width: 38rem;
+  max-width: 40rem;
   text-wrap: pretty;
 }
 
@@ -49,6 +49,87 @@
   }
 }
 
+.org-brand {
+  padding: 0 0 2.75rem;
+}
+
+.org-brand-lead {
+  margin: 0 0 1.25rem;
+  max-width: 42rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.org-brand-map {
+  max-width: 36rem;
+  padding: 1.35rem 1.3rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface-ghost);
+}
+
+.org-brand-name {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.org-brand-role {
+  margin: 0.2rem 0 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.org-brand-tree {
+  margin: 0;
+  padding-left: 1.15rem;
+  color: var(--text);
+  line-height: 1.7;
+}
+
+.org-brand-tree > li + li {
+  margin-top: 0.35rem;
+}
+
+.org-brand-tree-org {
+  margin-top: 0.75rem;
+  list-style: none;
+  margin-left: -1.15rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(92, 225, 255, 0.28);
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--accent-cyan) 6%, transparent);
+}
+
+.org-brand-org-name {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.45rem;
+  font-weight: 650;
+}
+
+.org-brand-kicker {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+}
+
+.org-brand-tree-org ul {
+  margin: 0.55rem 0 0;
+  padding-left: 1.1rem;
+  color: var(--muted);
+}
+
+.org-brand-tree-org li + li {
+  margin-top: 0.25rem;
+}
+
 .org-about-grid {
   display: grid;
   gap: 1rem;
@@ -64,6 +145,32 @@
 
 .org-projects {
   padding: 0 0 2.75rem;
+}
+
+.org-category + .org-category {
+  margin-top: 2.25rem;
+}
+
+.org-category-head {
+  margin-bottom: 1rem;
+  max-width: 42rem;
+}
+
+.org-category-head h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.35rem;
+}
+
+.org-category-head p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.org-category-empty {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
 }
 
 .org-project-grid {
@@ -94,9 +201,9 @@
   gap: 0.75rem;
 }
 
-.org-project-head h3 {
+.org-project-head h4 {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1.15rem;
 }
 
 .org-project-status {
@@ -109,7 +216,14 @@
   color: var(--accent-cyan);
 }
 
-.org-project-card p {
+.org-project-org {
+  margin: -0.25rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.org-project-card > p:not(.org-project-org) {
   margin: 0;
   color: var(--muted);
   line-height: 1.65;
@@ -138,6 +252,12 @@
   gap: 0.55rem;
   margin-top: auto;
   padding-top: 0.35rem;
+}
+
+.org-project-soon {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--muted);
 }
 
 .org-join {

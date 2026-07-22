@@ -1,10 +1,11 @@
 import type { LocaleCopy } from "./types";
 import { getFeaturedProjects, getWorkProjects } from "./projects";
 import { getNotes } from "./notes";
-import { getOrgProjects } from "./org";
+import { getOrgCategories } from "./org";
+import { getNowSections, NOW_UPDATED } from "./now";
 
 const sharedKeywords =
-  "xuxuclassmate, XuXuClassMate, QA Engineer, SDET, Test Automation Engineer, Software Test Engineer, AI Testing Engineer, Playwright QA Engineer, SDET Portfolio, API Automation Testing, Python Test Automation, QA Engineer Dubai, Playwright, Docker, OpenClaw, ClawHub";
+  "QA Engineer, SDET, Test Automation Engineer, AI Testing, AI Test Automation, Playwright, API Testing, Performance Testing, Docker Testing, Test Infrastructure, AI Test Case Generation, XuXuClassMate, xuxuclassmate, SDET Portfolio, QA Engineer Dubai";
 
 const homeSocial = [
   {
@@ -53,147 +54,165 @@ export const en: LocaleCopy = {
     about: "About",
     experience: "Experience",
     projects: "Projects",
-    blog: "Tech Blog",
+    blog: "Engineering Notes",
     aiTesting: "AI Testing",
     github: "GitHub",
     life: "Life",
     contact: "Contact",
     learn: "Experience",
     work: "Projects",
-    notes: "Tech Blog",
-    innonestx: "InnoNestX",
+    notes: "Engineering Notes",
+    innonestx: "Open Source",
+    openSource: "Open Source",
+    now: "Now",
   },
   meta: {
     home: {
-      title: "XuXuClassMate | QA Engineer & Test Automation Engineer",
+      title: "XuXuClassMate | QA Engineer · SDET · AI Testing",
       description:
-        "QA Engineer specializing in test automation, API testing, performance testing, Playwright, Python, Java, Docker and AI-assisted testing.",
+        "QA Engineer and SDET specializing in test automation, AI testing, API testing, performance testing, Playwright, Docker testing, and AI test case generation.",
       keywords: sharedKeywords,
-      ogTitle: "XuXuClassMate | QA Engineer & Test Automation Engineer",
+      ogTitle: "XuXuClassMate | QA Engineer · SDET · AI Testing",
     },
     about: {
-      title: "About | QA Engineer & SDET | XuXuClassMate",
+      title: "About | QA Engineer · SDET · AI Testing | XuXuClassMate",
       description:
-        "I'm a QA / Test Engineer focused on test automation, API testing, performance testing, and AI-assisted testing.",
+        "QA Engineer / SDET focused on test automation, API testing, performance testing, Playwright, and AI testing.",
       keywords: `${sharedKeywords}, About`,
     },
     "ai-testing": {
-      title: "AI Testing Lab | AI Testing Engineer | XuXuClassMate",
+      title: "AI Testing Lab | AI Test Automation & Case Generation | XuXuClassMate",
       description:
-        "AI test case generation, LLM-based API testing, bug analysis, and testing agents.",
-      keywords: `${sharedKeywords}, AI Testing Lab`,
+        "AI Testing Lab for AI test case generation, AI test automation, LLM-based API testing, bug analysis, and testing agents.",
+      keywords: `${sharedKeywords}, AI Testing Lab, AI Test Case Generation`,
     },
     playwright: {
-      title: "Playwright Testing Lab | XuXuClassMate",
+      title: "Playwright Testing Lab | Test Automation Engineer | XuXuClassMate",
       description:
-        "Playwright + TypeScript automation lab for UI, API, fixtures, parallel testing, and CI/CD.",
-      keywords: `${sharedKeywords}, Playwright Testing Lab`,
+        "Playwright test automation lab for UI testing, API testing, fixtures, parallel runs, and CI/CD — built for QA Engineers and SDETs.",
+      keywords: `${sharedKeywords}, Playwright Testing Lab, Test Automation`,
     },
     infrastructure: {
-      title: "Test Infrastructure | Docker & Cloudflare | XuXuClassMate",
+      title: "Test Infrastructure | Docker Testing & CI/CD | XuXuClassMate",
       description:
-        "Docker, CI/CD, GitHub Actions, Cloudflare Workers, and containerized testing infrastructure.",
-      keywords: `${sharedKeywords}, Test Infrastructure`,
+        "Test infrastructure for Docker testing environments, CI/CD, GitHub Actions, and containerized QA stacks.",
+      keywords: `${sharedKeywords}, Docker Testing, Test Infrastructure`,
     },
     blog: {
-      title: "Technical Blog | QA / SDET Knowledge Base | XuXuClassMate",
+      title: "Engineering Notes | QA Engineer & SDET Technical Blog | XuXuClassMate",
       description:
-        "Technical articles on Playwright, performance testing, Docker for QA, and AI-assisted testing.",
-      keywords: `${sharedKeywords}, Technical Blog, Playwright vs Selenium`,
+        "Engineering Notes on QA Engineering, AI Testing, Playwright, API Testing, Performance Testing, Docker, Cloudflare, OpenClaw, and DevOps.",
+      keywords: `${sharedKeywords}, Engineering Notes, Technical Blog, Test Automation`,
     },
     life: {
       title: "Life Journey | XuXuClassMate",
       description:
-        "Travel, music, and life outside the keyboard — the personal side of XuXuClassMate, QA engineer and AI testing tool builder.",
+        "Travel, music, and life outside the keyboard — the personal side of XuXuClassMate, QA Engineer and SDET.",
       keywords: `${sharedKeywords}, travel, hobbies`,
     },
     learn: {
-      title: "Experience | QA to AI Testing | XuXuClassMate",
+      title: "Experience | QA Engineer to SDET & AI Testing | XuXuClassMate",
       description:
-        "Experience path from QA craft and test management to Locust, Playwright, AI testing, and product systems.",
-      keywords: `${sharedKeywords}, Experience, SDET, Locust, QA training`,
+        "Experience path from QA engineering and test management to Playwright, performance testing, AI testing, and test infrastructure.",
+      keywords: `${sharedKeywords}, Experience, Test Automation Engineer`,
     },
     work: {
-      title: "Projects | SDET Portfolio & Test Automation | XuXuClassMate",
+      title: "Projects | QA Engineer & SDET Portfolio | XuXuClassMate",
       description:
-        "Project case studies: Playwright E2E, Java API automation, Docker test infrastructure, and AI testing tools.",
-      keywords: `${sharedKeywords}, SDET Portfolio, test automation projects`,
+        "SDET portfolio: AI test case generation, Playwright E2E, API testing frameworks, Docker testing, and test infrastructure projects.",
+      keywords: `${sharedKeywords}, SDET Portfolio, Test Automation projects`,
     },
     notes: {
-      title: "Technical Blog | XuXuClassMate",
+      title: "Engineering Notes | QA / SDET Technical Blog | XuXuClassMate",
       description:
-        "Technical articles on database Docker setups, ClawHub skill shipping, and quality engineering.",
-      keywords: `${sharedKeywords}, Technical Blog, Dameng Docker, ClawHub`,
+        "Searchable Engineering Notes for QA Engineers and SDETs — AI Testing, Playwright, Docker Testing, Performance Testing, and more.",
+      keywords: `${sharedKeywords}, Engineering Notes, Technical Blog, Docker Testing`,
+    },
+    "open-source": {
+      title: "Open Source | InnoNestX · AI Tools · QA Tools | XuXuClassMate",
+      description:
+        "Open Source under XuXuClassMate: InnoNestX hosts installable AI tools, QA tooling, developer tools, infrastructure, and automation.",
+      keywords: `${sharedKeywords}, Open Source, InnoNestX, AI Tools, QA Tools, Test Infrastructure`,
+    },
+    now: {
+      title: "Now | What I’m Building & Learning | XuXuClassMate",
+      description:
+        "What XuXuClassMate is building, learning, and exploring right now — AI Test Case Generator, OpenClaw QA Skills, Playwright, MCP, and more. Updated monthly.",
+      keywords: `${sharedKeywords}, Now, AI Test Case Generator, OpenClaw, Playwright, MCP, LLM Evaluation`,
     },
     innonestx: {
-      title: "InnoNestX | Open-source Lab",
+      title: "Open Source | InnoNestX · AI Tools · QA Tools | XuXuClassMate",
       description:
-        "InnoNestX is my open-source organization — practical tools and product systems you can learn from, run, and contribute to.",
-      keywords: `${sharedKeywords}, InnoNestX, GlobalPulse, open source`,
+        "Open Source under XuXuClassMate: InnoNestX hosts installable AI tools, QA tooling, developer tools, infrastructure, and automation.",
+      keywords: `${sharedKeywords}, Open Source, InnoNestX, AI Tools, QA Tools, Test Infrastructure`,
     },
   },
   home: {
-    subtitle: "Installable quality engineering",
-    title: "Turn quality work into products teams can run.",
+    subtitle: "Installable Quality Engineering",
+    title: "QA Engineer · SDET · AI Testing",
     description:
-      "I ship AI testing tools, OpenClaw / ClawHub skills, and reusable environments — then prove them with live Docker, ClawHub, and API metrics.",
+      "QA Engineer and SDET focused on test automation, AI testing, API testing, and performance testing — plus Playwright, Docker testing, and AI test case generation.",
     positioning:
-      "I build installable quality tools — then keep shipping systems teams can actually run.",
-    valuesTitle: "How I Work",
-    values: [
-      {
-        title: "Installable > Demoable",
-        description:
-          "If it cannot run via Docker, CLI, or ClawHub, it is not finished — slides do not count as delivery.",
-      },
-      {
-        title: "AI with review loops",
-        description:
-          "Multimodal generation is useful only when Test / Dev / Product judgment stays in the loop.",
-      },
-      {
-        title: "Environments that reuse",
-        description:
-          "Containers, database images, and gateways so teams can boot the same stack in CI and on laptops.",
-      },
-    ],
+      "QA Engineer + SDET + AI Testing — installable quality engineering teams can run.",
     highlightsTitle: "By the Numbers",
+    highlightsSubtitle: "Live Public Metrics · Updated Automatically",
+    highlightsProof: "Prove, don't just show.",
     highlights: [
       {
         value: "54k+",
-        label: "Docker pulls — environments teams reuse",
+        label: "Docker Pulls",
         metric: "docker:total-pulls",
+        href: "https://hub.docker.com/u/xuxuclassmate",
+        linkLabel: "View Docker Hub →",
       },
       {
         value: "1.6k+",
-        label: "ClawHub downloads — skills agents install",
+        label: "ClawHub Downloads",
         metric: "clawhub:total-downloads",
+        href: "https://clawhub.ai/xuxuclassmate",
+        linkLabel: "View ClawHub →",
       },
       {
         value: "500+",
-        label: "API Gateway calls — READMEs & tools hitting live stats",
+        label: "API Gateway Calls",
         metric: "api:gateway-calls",
+        href: "https://docker-hub-pull-counter.vercel.app",
+        linkLabel: "View API Gateway →",
       },
       {
         value: "12",
-        label: "Docker images published for QA stacks",
+        label: "Docker Images",
         metric: "docker:repo-count",
+        href: "https://hub.docker.com/u/xuxuclassmate",
+        linkLabel: "View Docker Hub →",
       },
     ],
-    featuredTitle: "Featured Work",
+    featuredTitle: "Quality Engineering",
     featuredCta: "View all projects",
     featured: getFeaturedProjects("en"),
-    principlesTitle: "What I Optimize For",
+    principlesTitle: "Engineering Principles",
+    principlesLead:
+      "If it cannot be installed, run, or integrated, it is not finished.",
     principles: [
       {
         title: "Installable > Demoable",
         description:
-          "If it cannot run via Docker, CLI, or ClawHub, it is not finished.",
+          "Docker, CLI, or ClawHub — if teams cannot install and run it, slides do not count as delivery.",
       },
       {
-        title: "Language Is a Tool",
+        title: "AI with Human Review",
         description:
-          "Pick the stack that ships quality fastest — frameworks and environments matter more than a single language.",
+          "Multimodal generation is useful only when Test / Dev / Product judgment stays in the loop.",
+      },
+      {
+        title: "Reusable Environments",
+        description:
+          "Containers, database images, and gateways so CI and laptops boot the same stack.",
+      },
+      {
+        title: "Quality Is a System",
+        description:
+          "Automation, infrastructure, and review loops compound — quality is not a one-off checklist.",
       },
       {
         title: "Judgment Still Leads",
@@ -248,17 +267,17 @@ export const en: LocaleCopy = {
         href: "/en/work.html",
       },
       {
-        title: "Notes",
-        description: "Database Docker for QA and ClawHub shipping notes",
-        href: "/en/notes.html",
+        title: "Engineering Notes",
+        description: "Searchable QA / SDET articles — Playwright, AI Testing, Docker, and more",
+        href: "/en/blog.html",
       },
       {
-        title: "InnoNestX",
-        description: "My open-source org — projects, learning, and ways to join",
-        href: "/en/innonestx.html",
+        title: "Open Source",
+        description: "InnoNestX — AI tools, QA tools, and infrastructure under the personal brand",
+        href: "/en/open-source.html",
       },
     ],
-    footerDesc: "Installable quality engineering",
+    footerDesc: "QA Engineer · SDET · AI Testing — Installable Quality Engineering",
     social: [...homeSocial],
   },
   learn: {
@@ -405,11 +424,11 @@ export const en: LocaleCopy = {
     ],
   },
   work: {
-    subtitle: "PORTFOLIO",
-    title: "Tools, Skills & Environments",
+    subtitle: "PROJECTS",
+    title: "Open Source, AI Tools & Infrastructure",
     description:
-      "AI products on GitHub / Docker / ClawHub, plus the quality foundations behind them",
-    projectsTitle: "Featured Projects",
+      "Quality Engineering, developer infrastructure, and AI / agent projects — installable tools teams can run.",
+    projectsTitle: "Projects",
     filterAll: "All",
     projects: getWorkProjects("en"),
     approachTitle: "How Projects Ship",
@@ -518,64 +537,203 @@ export const en: LocaleCopy = {
     ],
     caseBackLabel: "All projects",
     caseProblemTitle: "Problem",
+    caseProblemLead: "Why build this?",
     caseSolutionTitle: "Solution",
+    caseSolutionLead: "How was it solved?",
     caseTradeoffsTitle: "Tradeoffs",
     caseOutcomesTitle: "What shipped",
     caseArtifactsTitle: "Inspectable proof",
-    caseMetricsTitle: "Proof metrics",
+    caseMetricsTitle: "Metrics",
+    caseMetricsLead: "What results can we show?",
     caseLinksTitle: "Links",
-    caseOverviewTitle: "Overview",
+    caseOverviewTitle: "Project Overview",
     caseStackTitle: "Tech Stack",
+    caseStackLead: "What technologies power it?",
     caseArchitectureTitle: "Architecture",
+    caseArchitectureLead: "System architecture",
     caseFeaturesTitle: "Key Features",
+    caseFeaturesLead: "Core capabilities",
     caseContributionTitle: "My Contribution",
     caseResultsTitle: "Results",
+    caseRoleTitle: "My Role",
+    caseRoleLead: "What did I specifically do?",
+    caseDeploymentTitle: "Deployment",
+    caseDeploymentLead: "How do you run it?",
+    caseGithubTitle: "GitHub",
+    caseLiveDemoTitle: "Live Demo",
     cases: [
       {
         slug: "testcase-generator",
         title: "AI Test Case Generator",
-        subtitle: "CASE STUDY",
+        subtitle: "FLAGSHIP CASE STUDY",
         description:
-          "Turn multimodal requirements into reviewable test artifacts teams can export and run.",
+          "Flagship product: multimodal requirements in → reviewable, exportable test cases out — installable via Docker, npm, and ClawHub.",
         cover: "/images/cover-testcase.jpg",
         coverAlt: "AI Test Case Generator",
+        flagship: true,
+        status: "live",
+        overview:
+          "Flagship multimodal AI product that turns PDFs, Word docs, images, and video into reviewable, exportable test cases — with a human review loop and install paths via Docker, npm, and ClawHub.",
         problem:
-          "QA teams spend hours turning PDFs, screenshots, and rough notes into structured cases — and AI drafts without review loops create noise, not coverage.",
+          "QA teams burn hours turning PDFs, Word specs, screenshots, and even short videos into structured test cases. Spreadsheet copy-paste is slow; raw LLM dumps without review create noise, not coverage. Teams needed one pipeline that accepts real requirement artifacts and ships cases humans will actually accept.",
         solution:
-          "Built a multimodal pipeline (PDF, Word, images, video) with Test / Dev / Product review personas, then packaged it as Docker, npm, and an OpenClaw / ClawHub skill.",
+          "I built an installable multimodal generator: ingest PDF / Word / image / video, run Multimodal AI to produce structured scenarios and cases, then apply a Test / Dev / Product human review loop before export and automation handoff. The same product ships as Docker web UI, npm package, and OpenClaw / ClawHub skill — so agents and humans share one delivery path.",
+        pipeline: {
+          inputs: ["PDF", "Word", "Image", "Video"],
+          stages: [
+            "Multimodal AI",
+            "Structured Test Cases",
+            "Human Review",
+            "Automation / Integration",
+          ],
+        },
+        architecture: [
+          {
+            title: "Product pipeline",
+            layers: [
+              "Multimodal inputs (PDF · Word · Image · Video)",
+              "Multimodal AI generation",
+              "Structured test cases & scenarios",
+              "Human review (Test · Dev · Product)",
+              "Export + automation / integration",
+            ],
+          },
+          {
+            title: "Distribution",
+            layers: [
+              "Docker web UI (local upload)",
+              "npm package",
+              "OpenClaw / ClawHub skill",
+              "CI / laptop runs",
+            ],
+          },
+        ],
+        features: [
+          "Multimodal intake: PDF, Word, TXT, images, and video",
+          "Structured scenarios, cases, boundary and negative coverage",
+          "Three-persona review loop: Test Manager · Dev Manager · Product Manager",
+          "Export to Excel, Markdown, and XMind",
+          "English and Chinese generation",
+          "Install paths: Docker, npm, and ClawHub / OpenClaw",
+        ],
+        contribution: [
+          "Owned product direction: installable quality tool, not a one-off demo notebook.",
+          "Designed the multimodal → structured cases → human review → export pipeline.",
+          "Implemented packaging for Docker web UI, npm, and ClawHub skill distribution.",
+          "Wired review thresholds and export formats QA teams already use day to day.",
+        ],
+        techStack: [
+          "TypeScript",
+          "Multimodal LLMs",
+          "Docker",
+          "npm",
+          "OpenClaw",
+          "ClawHub",
+          "Excel / Markdown / XMind export",
+        ],
+        metrics: [
+          {
+            label: "ClawHub installs",
+            value: "700+",
+            metric: "clawhub:ai-testcase-generator",
+          },
+          { label: "Input modes", value: "PDF · Word · Image · Video" },
+          { label: "Packaging", value: "Docker · npm · skill" },
+          { label: "Exports", value: "Excel · Markdown · XMind" },
+        ],
+        deployment: {
+          summary:
+            "One product, three install surfaces — pick the path that matches how your team works.",
+          steps: [
+            "Docker: pull xuxuclassmate/testcase-generator, set an AI provider key, run on port 3456, open the web UI to upload requirements.",
+            "npm: install @classmatexuxu/testcase-generator for CLI / library integration.",
+            "ClawHub / OpenClaw: install the AI Test Case Generator skill for agent workflows.",
+            "CI: reuse the Docker image so laptop and pipeline runs stay aligned.",
+          ],
+          channels: [
+            {
+              label: "Docker Hub",
+              href: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
+            },
+            {
+              label: "npm",
+              href: "https://www.npmjs.com/package/@classmatexuxu/testcase-generator",
+            },
+            {
+              label: "ClawHub",
+              href: "https://clawhub.ai/xuxuclassmate/ai-testcase-generator",
+            },
+            {
+              label: "GitHub",
+              href: "https://github.com/XuXuClassMate/testcase-generator",
+            },
+          ],
+        },
+        tryItNow: {
+          title: "Try it now",
+          description:
+            "Start with the interactive demo (sample PRD → structured cases → review personas), then run Docker for real multimodal upload.",
+          note:
+            "The browser demo uses curated sample output — no live LLM. For PDF / Word / image / video upload on your machine, use the Docker image.",
+          primary: {
+            label: "Open interactive demo",
+            href: "/en/demo/ai-testcase-generator.html",
+          },
+          secondary: [
+            {
+              label: "Docker Hub",
+              href: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
+            },
+            {
+              label: "GitHub",
+              href: "https://github.com/XuXuClassMate/testcase-generator",
+            },
+            {
+              label: "ClawHub skill",
+              href: "https://clawhub.ai/xuxuclassmate/ai-testcase-generator",
+            },
+          ],
+          command:
+            "docker pull xuxuclassmate/testcase-generator:latest\n# configure .env with an AI provider key, then:\ndocker run -d -p 3456:3456 --env-file .env xuxuclassmate/testcase-generator:latest\n# open http://localhost:3456 — upload requirements and generate cases",
+        },
+        proof: {
+          github: "https://github.com/XuXuClassMate/testcase-generator",
+          docker: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
+          demo: "/en/demo/ai-testcase-generator.html",
+          readme: "https://github.com/XuXuClassMate/testcase-generator",
+        },
         tradeoffs: [
           "Chose review personas over raw LLM dumps — quieter drafts, higher acceptance by QA leads.",
           "Shipped Docker + npm + ClawHub together so agents and humans share one product, not three demos.",
-          "Accepted slower first answers in exchange for exportable Excel / Markdown / XMind artifacts teams already use."
+          "Accepted slower first answers in exchange for exportable Excel / Markdown / XMind artifacts teams already use.",
         ],
         artifacts: [
           {
-            "title": "ClawHub skill page",
-            "description": "Install path agents actually use — downloads are live on the homepage.",
-            "href": "https://clawhub.ai/xuxuclassmate/ai-testcase-generator",
-            "linkLabel": "Open ClawHub"
+            title: "ClawHub skill page",
+            description:
+              "Install path agents actually use — downloads are live on the homepage.",
+            href: "https://clawhub.ai/xuxuclassmate/ai-testcase-generator",
+            linkLabel: "Open ClawHub",
           },
           {
-            "title": "Docker image",
-            "description": "Non-agent local runs with the same pipeline packaged for CI laptops.",
-            "href": "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
-            "linkLabel": "Docker Hub"
+            title: "Docker image",
+            description:
+              "Local web UI for uploading PDF / Word / image / video and generating cases.",
+            href: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
+            linkLabel: "Docker Hub",
           },
           {
-            "title": "Source repository",
-            "description": "Multimodal input handlers and review-loop wiring in the open.",
-            "href": "https://github.com/XuXuClassMate/testcase-generator",
-            "linkLabel": "GitHub"
-          }
+            title: "Source repository",
+            description:
+              "Multimodal input handlers and review-loop wiring in the open.",
+            href: "https://github.com/XuXuClassMate/testcase-generator",
+            linkLabel: "GitHub",
+          },
         ],
         outcomes: [
-          "Installable on ClawHub as AI Test Case Generator",
-          "Docker Hub and npm distribution for local runs",
-          "Exportable Excel / Markdown / XMind deliverables",
-        ],
-        metrics: [
-          { label: "ClawHub installs", value: "700+", metric: "clawhub:ai-testcase-generator" },
-          { label: "Packaging", value: "Docker · npm · skill" },
+          "Flagship installable AI testing product on this portfolio",
+          "Docker Hub and npm distribution for local upload + generate",
+          "ClawHub skill with live install metrics",
         ],
         links: [
           {
@@ -586,13 +744,21 @@ export const en: LocaleCopy = {
             label: "Docker Hub",
             href: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
           },
-          { label: "ClawHub", href: "https://clawhub.ai/xuxuclassmate/ai-testcase-generator" },
+          {
+            label: "ClawHub",
+            href: "https://clawhub.ai/xuxuclassmate/ai-testcase-generator",
+          },
+          {
+            label: "npm",
+            href: "https://www.npmjs.com/package/@classmatexuxu/testcase-generator",
+          },
         ],
         meta: {
-          title: "AI Test Case Generator Case Study | XuXuClassMate",
+          title:
+            "AI Test Case Generator — Flagship Case Study | XuXuClassMate",
           description:
-            "How XuXuClassMate shipped a multimodal AI test case generator with review loops, Docker/npm packaging, and ClawHub distribution.",
-          keywords: `${sharedKeywords}, testcase generator case study`,
+            "Flagship multimodal AI test case generator: PDF/Word/image/video → structured cases → human review → Docker, npm, and ClawHub installs.",
+          keywords: `${sharedKeywords}, AI Test Case Generator, multimodal testing, flagship case study, ClawHub`,
         },
       },
       {
@@ -603,28 +769,97 @@ export const en: LocaleCopy = {
           "An OpenClaw skill that agents can install for signals, sizing, and risk checks.",
         cover: "/images/cover-trading.jpg",
         coverAlt: "Trading Assistant Core",
+        status: "live",
+        overview:
+          "Installable OpenClaw / ClawHub trading skill that combines support/resistance analysis, multi-indicator signals, position sizing, and risk alerts — with Docker and CLI paths for non-agent users.",
         problem:
           "Trading workflows were stuck in notebooks and chat prompts — agents could not install a durable skill with clear risk guardrails.",
         solution:
           "Packaged support/resistance, multi-indicator signals, position sizing, and risk alerts as a ClawHub skill with Docker and pip / CLI entrypoints.",
+        architecture: [
+          {
+            title: "Decision loop",
+            layers: [
+              "Market inputs",
+              "Indicator / S-R engine",
+              "Signal synthesis",
+              "Position sizing",
+              "Risk alerts",
+              "Agent / CLI output",
+            ],
+          },
+          {
+            title: "Install surfaces",
+            layers: ["ClawHub skill", "Docker image", "pip / ta CLI"],
+          },
+        ],
+        features: [
+          "Support and resistance analysis",
+          "Multi-indicator trading signals",
+          "Position sizing helpers",
+          "Risk-first alerts and guardrails",
+          "ClawHub / OpenClaw skill install",
+          "Docker and CLI for human-facing runs",
+        ],
+        contribution: [
+          "Defined the skill contract: signals without risk controls are not shippable.",
+          "Implemented indicator / S-R logic and packaging for ClawHub, Docker, and CLI.",
+          "Published and maintained the installable skill with live download metrics.",
+        ],
+        techStack: [
+          "Python",
+          "OpenClaw",
+          "ClawHub",
+          "Docker",
+          "pip / CLI",
+          "Technical indicators",
+        ],
+        deployment: {
+          summary:
+            "Install as an agent skill or run locally without an agent runtime.",
+          steps: [
+            "ClawHub: install Trading Assistant Core for OpenClaw agents.",
+            "Docker: pull and run the published image for containerized use.",
+            "CLI: install via pip and use the ta entrypoint for local workflows.",
+          ],
+          channels: [
+            {
+              label: "ClawHub",
+              href: "https://clawhub.ai/xuxuclassmate/trading-assistant-core",
+            },
+            {
+              label: "GitHub",
+              href: "https://github.com/XuXuClassMate/trading-assistant",
+            },
+            {
+              label: "Docker Hub",
+              href: "https://hub.docker.com/r/xuxuclassmate/trading-assistant",
+            },
+          ],
+        },
+        proof: {
+          github: "https://github.com/XuXuClassMate/trading-assistant",
+          demo: "https://clawhub.ai/xuxuclassmate/trading-assistant-core",
+          docker: "https://hub.docker.com/r/xuxuclassmate/trading-assistant",
+        },
         tradeoffs: [
           "Risk sizing and alerts beat signal fireworks — a skill that only shouts entries is unsafe to install.",
           "Kept CLI / Docker paths so traders without an agent runtime can still run the same logic.",
-          "Published on ClawHub instead of notebook-only workflows so agents get a durable package."
+          "Published on ClawHub instead of notebook-only workflows so agents get a durable package.",
         ],
         artifacts: [
           {
-            "title": "ClawHub skill",
-            "description": "Installable OpenClaw skill with live download counts.",
-            "href": "https://clawhub.ai/xuxuclassmate/trading-assistant-core",
-            "linkLabel": "Open ClawHub"
+            title: "ClawHub skill",
+            description: "Installable OpenClaw skill with live download counts.",
+            href: "https://clawhub.ai/xuxuclassmate/trading-assistant-core",
+            linkLabel: "Open ClawHub",
           },
           {
-            "title": "GitHub + Docker",
-            "description": "Human-facing installs alongside the agent skill.",
-            "href": "https://github.com/XuXuClassMate/trading-assistant",
-            "linkLabel": "GitHub"
-          }
+            title: "GitHub + Docker",
+            description: "Human-facing installs alongside the agent skill.",
+            href: "https://github.com/XuXuClassMate/trading-assistant",
+            linkLabel: "GitHub",
+          },
         ],
         outcomes: [
           "Published as an installable OpenClaw / ClawHub skill",
@@ -632,7 +867,11 @@ export const en: LocaleCopy = {
           "Risk-first defaults instead of signal-only demos",
         ],
         metrics: [
-          { label: "ClawHub installs", value: "900+", metric: "clawhub:trading-assistant-core" },
+          {
+            label: "ClawHub installs",
+            value: "900+",
+            metric: "clawhub:trading-assistant-core",
+          },
           { label: "Surfaces", value: "Skill · Docker · CLI" },
         ],
         links: [
@@ -640,7 +879,10 @@ export const en: LocaleCopy = {
             label: "GitHub",
             href: "https://github.com/XuXuClassMate/trading-assistant",
           },
-          { label: "ClawHub", href: "https://clawhub.ai/xuxuclassmate/trading-assistant-core" },
+          {
+            label: "ClawHub",
+            href: "https://clawhub.ai/xuxuclassmate/trading-assistant-core",
+          },
         ],
         meta: {
           title: "Trading Assistant Core Case Study | XuXuClassMate",
@@ -657,28 +899,86 @@ export const en: LocaleCopy = {
           "Scheduled market intelligence briefings with multi-channel delivery on Cloudflare Workers.",
         cover: "/images/cover-globalpulse.jpg",
         coverAlt: "GlobalPulse",
+        status: "live",
+        overview:
+          "Self-hosted market intelligence product on Cloudflare Workers — Admin UI, KV config, cron schedules, market calendars, and Feishu / WeChat / Telegram delivery.",
         problem:
           "Teams needed reliable finance and hotspot briefings — not one-off scripts — with calendars, templates, and push channels they control.",
         solution:
           "Built a self-hosted Cloudflare Workers app with Admin UI, KV config, cron schedules, market calendars, and Feishu / WeChat / Telegram providers.",
+        architecture: [
+          {
+            title: "Runtime chain",
+            layers: [
+              "Admin UI",
+              "KV configuration",
+              "Cron scheduler",
+              "Market calendars / templates",
+              "Channel providers",
+              "Feishu / WeChat / Telegram",
+            ],
+          },
+        ],
+        features: [
+          "Password-protected Admin UI",
+          "Timezone-aware market calendars",
+          "Cron-driven scheduled briefings",
+          "Multi-channel push (Feishu / WeChat / Telegram)",
+          "Preview before send",
+          "Self-hosted Workers + KV control plane",
+        ],
+        contribution: [
+          "Owned product architecture from Admin UI through multi-channel providers.",
+          "Implemented Workers runtime, KV config, and cron delivery flows.",
+          "Shipped and operate the live deployment at pulse.xuxuclassmate.com.",
+        ],
+        techStack: [
+          "Cloudflare Workers",
+          "KV",
+          "Cron Triggers",
+          "TypeScript",
+          "Feishu / WeChat / Telegram APIs",
+        ],
+        deployment: {
+          summary:
+            "Deploy on Cloudflare Workers with KV bindings, then configure calendars and channels in Admin UI.",
+          steps: [
+            "Clone the GlobalPulse repository under InnoNestX.",
+            "Configure Workers + KV and deploy with Wrangler.",
+            "Open the Admin UI, set schedules and providers, then enable cron delivery.",
+            "Use the live instance at pulse.xuxuclassmate.com as a reference deployment.",
+          ],
+          channels: [
+            { label: "Live", href: "https://pulse.xuxuclassmate.com/" },
+            {
+              label: "GitHub",
+              href: "https://github.com/InnoNestX/GlobalPulse",
+            },
+          ],
+        },
+        proof: {
+          github: "https://github.com/InnoNestX/GlobalPulse",
+          demo: "https://pulse.xuxuclassmate.com/",
+        },
         tradeoffs: [
           "Self-hosted Workers + KV over a SaaS newsletter — teams keep calendars and credentials.",
           "Admin UI with password gates instead of pure cron scripts — operators can preview before send.",
-          "Multi-channel providers (Feishu / WeChat / Telegram) instead of email-only delivery."
+          "Multi-channel providers (Feishu / WeChat / Telegram) instead of email-only delivery.",
         ],
         artifacts: [
           {
-            "title": "Live product",
-            "description": "Running deployment for scheduled market intelligence briefings.",
-            "href": "https://pulse.xuxuclassmate.com/",
-            "linkLabel": "Open Pulse"
+            title: "Live product",
+            description:
+              "Running deployment for scheduled market intelligence briefings.",
+            href: "https://pulse.xuxuclassmate.com/",
+            linkLabel: "Open Pulse",
           },
           {
-            "title": "Source repository",
-            "description": "Workers app, providers, and admin flows in the open.",
-            "href": "https://github.com/InnoNestX/GlobalPulse",
-            "linkLabel": "GitHub"
-          }
+            title: "Source repository",
+            description: "Workers app, providers, and admin flows in the open.",
+            href: "https://github.com/InnoNestX/GlobalPulse",
+            linkLabel: "GitHub",
+          },
         ],
         outcomes: [
           "Password-protected Admin UI for schedule and provider settings",
@@ -709,28 +1009,78 @@ export const en: LocaleCopy = {
           "A unified REST gateway for Docker Hub stats, cards, and interactive docs.",
         cover: "/images/cover-docker-gateway.jpg",
         coverAlt: "Docker Hub API Gateway",
+        status: "live",
+        overview:
+          "Unified REST API gateway for Docker Hub — user stats, SVG cards, repo/tag lookup, OpenAPI docs, and interactive testing in English and Chinese.",
         problem:
           "Docker Hub data was fragmented — pull totals, repo details, and badges needed a single, documentable API surface for tools and READMEs.",
         solution:
           "Shipped a Hono-based gateway with user stats, SVG cards, repo/tag APIs, OpenAPI docs, bilingual UI, and live request testing.",
+        architecture: [
+          {
+            title: "API surface",
+            layers: [
+              "Client / README embeds",
+              "Gateway (Hono)",
+              "Docker Hub upstream",
+              "Stats · SVG · OpenAPI responses",
+            ],
+          },
+        ],
+        features: [
+          "User and repository stats APIs",
+          "Embeddable Docker stats SVG cards",
+          "Repo / tag lookup endpoints",
+          "Interactive OpenAPI documentation",
+          "Bilingual EN/ZH tester UI",
+          "Dogfooded by this site’s live metrics",
+        ],
+        contribution: [
+          "Designed the unified REST + SVG card contract for Hub data.",
+          "Implemented the Hono gateway, OpenAPI docs, and bilingual tester.",
+          "Wired production usage into this portfolio’s live metrics pipeline.",
+        ],
+        techStack: ["Hono", "TypeScript", "Vercel", "OpenAPI", "Docker Hub API"],
+        deployment: {
+          summary: "Deploy on Vercel and call the public REST / SVG endpoints.",
+          steps: [
+            "Open the live gateway for interactive docs and testing.",
+            "Call /api/user/stats or embed the SVG docker-stats card in READMEs.",
+            "Clone the InnoNestX repo to self-host or extend the gateway.",
+          ],
+          channels: [
+            {
+              label: "Live API",
+              href: "https://docker-hub-pull-counter.vercel.app",
+            },
+            {
+              label: "GitHub",
+              href: "https://github.com/InnoNestX/docker-hub-pull-counter",
+            },
+          ],
+        },
+        proof: {
+          github: "https://github.com/InnoNestX/docker-hub-pull-counter",
+          demo: "https://docker-hub-pull-counter.vercel.app",
+        },
         tradeoffs: [
           "Unified REST + SVG cards over scraping Hub HTML — stable for README embeds.",
           "OpenAPI + bilingual tester so callers can verify before wiring production.",
-          "Dogfoods its own /api/stats — this site’s homepage metrics call the same gateway."
+          "Dogfoods its own /api/stats — this site’s homepage metrics call the same gateway.",
         ],
         artifacts: [
           {
-            "title": "Live API + docs",
-            "description": "User stats, repo details, and interactive OpenAPI.",
-            "href": "https://docker-hub-pull-counter.vercel.app",
-            "linkLabel": "Open gateway"
+            title: "Live API + docs",
+            description: "User stats, repo details, and interactive OpenAPI.",
+            href: "https://docker-hub-pull-counter.vercel.app",
+            linkLabel: "Open gateway",
           },
           {
-            "title": "Embeddable stats card",
-            "description": "SVG card used in READMEs and on this site.",
-            "href": "https://docker-hub-pull-counter.vercel.app/api/docker-stats?username=xuxuclassmate",
-            "linkLabel": "View SVG"
-          }
+            title: "Embeddable stats card",
+            description: "SVG card used in READMEs and on this site.",
+            href: "https://docker-hub-pull-counter.vercel.app/api/docker-stats?username=xuxuclassmate",
+            linkLabel: "View SVG",
+          },
         ],
         outcomes: [
           "Public REST endpoints for user and repository stats",
@@ -766,28 +1116,80 @@ export const en: LocaleCopy = {
           "Reusable database images so QA environments boot in minutes, not days.",
         cover: "/images/cover-docker.jpg",
         coverAlt: "Test DB Docker Suite",
+        status: "live",
+        overview:
+          "Ready-to-run database images for QA — Dameng, Highgo, Kingbase, TiDB and more — with consistent tags, docs, and live Docker Hub pull proof.",
         problem:
           "Domestic and open-source databases were painful to stand up for QA — undocumented installs blocked automation and onboarding.",
         solution:
           "Published ready-to-run Dameng, Highgo, Kingbase, TiDB, and related images on Docker Hub with consistent tags and docs for test teams.",
+        architecture: [
+          {
+            title: "QA environment path",
+            layers: [
+              "Docker Hub images",
+              "Pull & run",
+              "Local / CI environment",
+              "Automation suites",
+              "Evidence (live pulls)",
+            ],
+          },
+        ],
+        features: [
+          "Dameng, Highgo, Kingbase, TiDB and related QA images",
+          "Predictable tags for CI stability",
+          "One service per image for diagnosable failures",
+          "Docs oriented to pull-and-run workflows",
+          "Live pull metrics on this portfolio",
+        ],
+        contribution: [
+          "Identified the QA pain of undocumented domestic DB installs.",
+          "Built, tagged, and published the reusable Docker image suite.",
+          "Maintained docs and live pull evidence for team adoption.",
+        ],
+        techStack: ["Docker", "Docker Hub", "Dameng", "Highgo", "Kingbase", "TiDB"],
+        deployment: {
+          summary: "Pull an image from Docker Hub and boot it in local or CI environments.",
+          steps: [
+            "Browse the xuxuclassmate Docker Hub namespace.",
+            "Pull the database image you need (e.g. Dameng / Highgo).",
+            "Run with documented ports and env vars for QA suites.",
+            "Optionally verify live pull totals via the Docker Hub API Gateway.",
+          ],
+          channels: [
+            {
+              label: "Docker Hub",
+              href: "https://hub.docker.com/u/xuxuclassmate",
+            },
+            {
+              label: "Live stats",
+              href: "https://docker-hub-pull-counter.vercel.app/api/user/stats?username=xuxuclassmate",
+            },
+          ],
+        },
+        proof: {
+          demo: "https://hub.docker.com/u/xuxuclassmate",
+          docker: "https://hub.docker.com/u/xuxuclassmate",
+        },
         tradeoffs: [
           "Boring, predictable tags over clever names — CI suites need stability first.",
           "One service per image so failures stay diagnosable in pull-and-run flows.",
-          "Published Dameng / Highgo early — pull volume validated that the database pain was real."
+          "Published Dameng / Highgo early — pull volume validated that the database pain was real.",
         ],
         artifacts: [
           {
-            "title": "Docker Hub namespace",
-            "description": "All QA-oriented images with live pull totals on the homepage.",
-            "href": "https://hub.docker.com/u/xuxuclassmate",
-            "linkLabel": "Browse images"
+            title: "Docker Hub namespace",
+            description:
+              "All QA-oriented images with live pull totals on the homepage.",
+            href: "https://hub.docker.com/u/xuxuclassmate",
+            linkLabel: "Browse images",
           },
           {
-            "title": "Live user stats API",
-            "description": "Aggregated pulls via the Docker Hub API Gateway.",
-            "href": "https://docker-hub-pull-counter.vercel.app/api/user/stats?username=xuxuclassmate",
-            "linkLabel": "JSON stats"
-          }
+            title: "Live user stats API",
+            description: "Aggregated pulls via the Docker Hub API Gateway.",
+            href: "https://docker-hub-pull-counter.vercel.app/api/user/stats?username=xuxuclassmate",
+            linkLabel: "JSON stats",
+          },
         ],
         outcomes: [
           "Dameng and Highgo images used widely by QA teams",
@@ -858,8 +1260,28 @@ export const en: LocaleCopy = {
         proof: {
           github: "https://github.com/XuXuClassMate/My_Test_JAProject",
           readme: "https://github.com/XuXuClassMate/My_Test_JAProject#readme",
+          demo: "https://github.com/XuXuClassMate/My_Test_JAProject",
         },
         status: "live",
+        deployment: {
+          summary: "Clone the Java practice suite and run Maven-based API tests locally or in CI.",
+          steps: [
+            "Clone https://github.com/XuXuClassMate/My_Test_JAProject",
+            "Configure environment and auth settings for the target API.",
+            "Run Maven tests and review Allure reports.",
+            "Optionally compare patterns with the Python / Locust practice repo.",
+          ],
+          channels: [
+            {
+              label: "GitHub",
+              href: "https://github.com/XuXuClassMate/My_Test_JAProject",
+            },
+            {
+              label: "Python practice",
+              href: "https://github.com/XuXuClassMate/My_Test_PyProject",
+            },
+          ],
+        },
         problem:
           "One-off scripts do not survive team handoffs — API suites need durable structure.",
         solution:
@@ -967,6 +1389,21 @@ export const en: LocaleCopy = {
           "GitHub repository status: upcoming",
         ],
         status: "upcoming",
+        deployment: {
+          summary:
+            "Repository is upcoming — architecture and case study are published first; clone/run steps will land with the public repo.",
+          steps: [
+            "Review the system and test chains on this case study page.",
+            "Use the architecture as the blueprint for Playwright + API + data validation.",
+            "Watch for the public TypeScript + Playwright repository release.",
+          ],
+          channels: [
+            {
+              label: "Playwright Lab",
+              href: "/en/playwright.html",
+            },
+          ],
+        },
         problem:
           "UI-only automation misses regressions in API, cache, and message paths.",
         solution:
@@ -1113,31 +1550,43 @@ export const en: LocaleCopy = {
     ],
   },
   notes: {
-    subtitle: "NOTES",
-    title: "Practical Notes",
+    subtitle: "ENGINEERING NOTES",
+    title: "Engineering Notes",
     description:
-      "Long-form field notes with live Docker / ClawHub numbers — database environments and installable agent skills.",
-    backLabel: "All notes",
+      "Technical articles for QA Engineers and SDETs — searchable SEO landing pages on AI Testing, Playwright, API Testing, Performance Testing, Docker, and more.",
+    backLabel: "All Engineering Notes",
     tocLabel: "On this page",
     relatedLabel: "Related",
+    filterAll: "All",
+    categoriesLabel: "Browse by topic",
     items: getNotes("en"),
-    footerDesc: "Installable quality engineering — written down",
+    footerDesc: "QA Engineer · SDET · AI Testing — written as Engineering Notes",
     social: [...homeSocial],
   },
-  innonestx: {
+  openSource: {
     subtitle: "OPEN SOURCE",
-    title: "InnoNestX",
+    title: "Open Source",
     description:
-      "My open-source organization for practical tools and product systems — learn together, ship together.",
+      "InnoNestX is the open-source organization under the XuXuClassMate personal brand — installable AI tools, QA tooling, and infrastructure you can run and fork.",
+    orgLabel: "Organization",
+    orgName: "InnoNestX",
+    brandTitle: "Personal brand → open-source org",
+    brandLead:
+      "XuXuClassMate is the personal brand. InnoNestX is the GitHub organization that ships open tools under it.",
+    brandPersonalLabel: "Personal Brand",
+    brandPersonalItems: ["QA / SDET", "AI Testing", "Engineering Notes"],
+    brandOrgLabel: "Open Source Org",
+    brandOrgItems: ["Open Source", "AI Tools", "QA Tools", "Infrastructure"],
     aboutTitle: "What InnoNestX is",
     about: [
-      "InnoNestX is the GitHub organization I founded to host open tools and product systems — not a separate company narrative on this site.",
-      "The bar is simple: something others can install, run, or fork. Demos without an install path do not belong here.",
-      "If you like quality engineering, agents, Cloudflare Workers, or Docker tooling, you are welcome to learn with us and contribute to projects that interest you.",
+      "InnoNestX hosts open tools and product systems that others can install, run, or fork — not a separate company narrative on this site.",
+      "The bar is simple: demos without an install path do not belong here.",
+      "If you care about quality engineering, agents, Cloudflare Workers, or Docker tooling, you are welcome to learn with us and contribute.",
     ],
-    projectsTitle: "Projects under InnoNestX",
-    projects: getOrgProjects("en"),
-    joinTitle: "Join us",
+    categoriesTitle: "Open-source focus areas",
+    categories: getOrgCategories("en"),
+    emptyCategory: "No public repos in this lane yet — suggestions welcome.",
+    joinTitle: "Join InnoNestX",
     joinIntro:
       "Looking for collaborators who want to learn by building — not by watching slides.",
     joinItems: [
@@ -1147,7 +1596,20 @@ export const en: LocaleCopy = {
     ],
     orgCtaLabel: "GitHub organization",
     orgCtaHref: "https://github.com/InnoNestX",
-    footerDesc: "Practical open-source tools — learn and build",
+    footerDesc: "InnoNestX — open-source arm of XuXuClassMate",
+    social: [...homeSocial],
+  },
+  now: {
+    subtitle: "NOW",
+    title: "Now",
+    description:
+      "A monthly snapshot of what I’m building, learning, and exploring as a QA Engineer / SDET focused on AI testing.",
+    updatedLabel: "Last updated",
+    updated: NOW_UPDATED.en,
+    updatedIso: NOW_UPDATED.iso,
+    cadence: "I refresh this page about once a month.",
+    sections: getNowSections("en"),
+    footerDesc: "What I’m working on now — updated monthly",
     social: [...homeSocial],
   },
   notFound: {

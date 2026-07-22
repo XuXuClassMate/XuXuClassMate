@@ -22,19 +22,19 @@ export function getAbout(locale: Locale): AboutCopy {
   return {
     meta: {
       title: isZh
-        ? "关于我 | QA / SDET / AI Testing Engineer | 旭旭同学"
-        : "About | QA Engineer & Test Automation Engineer | XuXuClassMate",
+        ? "关于我 | QA Engineer · SDET · AI Testing | 旭旭同学"
+        : "About | QA Engineer · SDET · AI Testing | XuXuClassMate",
       description: isZh
-        ? "QA / SDET，专注测试自动化、接口测试、性能测试与 AI 辅助测试。"
-        : "I'm a QA / Test Engineer focused on test automation, API testing, performance testing, and AI-assisted testing.",
+        ? "我是一名 QA Engineer / SDET，专注测试自动化、接口测试、性能测试、Playwright 与 AI Testing。"
+        : "I'm a QA Engineer / SDET focused on test automation, API testing, performance testing, Playwright, and AI testing.",
       keywords:
-        "QA Engineer, SDET, Test Automation Engineer, AI Testing Engineer, Playwright, About XuXuClassMate",
+        "QA Engineer, SDET, Test Automation Engineer, AI Testing, AI Test Automation, Playwright, API Testing, Performance Testing, About XuXuClassMate",
     },
     subtitle: isZh ? "关于我" : "ABOUT ME",
     title: isZh ? "旭旭同学" : "XuXuClassMate",
     intro: isZh
-      ? "我是一名 QA / Test Engineer，专注测试自动化、接口测试、性能测试与 AI 辅助测试。"
-      : "I'm a QA / Test Engineer focused on test automation, API testing, performance testing, and AI-assisted testing.",
+      ? "我是一名 QA Engineer / SDET，专注测试自动化、接口测试、性能测试与 AI Testing。"
+      : "I'm a QA Engineer / SDET focused on test automation, API testing, performance testing, and AI testing.",
     sections: [
       {
         title: isZh ? "我在做什么" : "What I Do",
@@ -43,16 +43,20 @@ export function getAbout(locale: Locale): AboutCopy {
           "API Testing",
           "Web UI Testing",
           "Performance Testing",
+          "Playwright",
           "Test Framework Development",
           "CI/CD",
-          "Docker",
-          "AI-assisted Testing",
+          "Docker Testing",
+          "Test Infrastructure",
+          "AI Testing",
+          "AI Test Case Generation",
         ],
       },
       {
         title: isZh ? "我在探索什么" : "What I'm Exploring",
         items: [
           "AI Testing",
+          "AI Test Automation",
           "LLM-based Test Generation",
           "AI Agent Testing",
           "MCP",
@@ -70,6 +74,7 @@ export function getAbout(locale: Locale): AboutCopy {
           "Dockerized test environments",
           "Performance testing systems",
           "AI-powered testing tools",
+          "AI Test Case Generation products",
         ],
       },
     ],

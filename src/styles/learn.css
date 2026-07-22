@@ -39,11 +39,23 @@
   background: var(--bg-soft);
 }
 
+.project-group--spaced {
+  margin-top: 4rem;
+}
+
+.project-group-title {
+  margin-bottom: 0;
+}
+
 .project-grid {
   margin-top: 48px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.25rem;
+}
+
+.project-group .project-grid {
+  margin-top: 1.5rem;
 }
 
 .project-card {

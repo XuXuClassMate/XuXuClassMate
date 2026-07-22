@@ -61,7 +61,19 @@
     <priority>0.90</priority>
   </url>
   <url>
-    <loc>https://www.xuxuclassmate.com/en/innonestx</loc>
+    <loc>https://www.xuxuclassmate.com/en/open-source</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/en/now</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/en/demo/ai-testcase-generator</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
@@ -121,7 +133,19 @@
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.xuxuclassmate.com/zh/innonestx</loc>
+    <loc>https://www.xuxuclassmate.com/zh/open-source</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/zh/now</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/zh/demo/ai-testcase-generator</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
@@ -206,6 +230,78 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/zh/work/docker-suite</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/en/blog/ai-testcase-generator-multimodal</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/zh/blog/ai-testcase-generator-multimodal</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/en/blog/playwright-e2e-framework</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/zh/blog/playwright-e2e-framework</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/en/blog/locust-api-performance-testing</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/zh/blog/locust-api-performance-testing</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/en/blog/dockerized-test-environment</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/zh/blog/dockerized-test-environment</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/en/blog/ai-assisted-test-case-generation</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/zh/blog/ai-assisted-test-case-generation</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/en/blog/ai-agent-software-testing</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/zh/blog/ai-agent-software-testing</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>

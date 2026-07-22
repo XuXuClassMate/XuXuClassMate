@@ -8,6 +8,7 @@ import {
 } from "../content/portfolio-home";
 import { getCopy, pageHref, type Locale } from "../lib/i18n";
 import { CONTACT_EMAIL } from "../lib/i18n";
+import { getMetrics, resolveMetric } from "../lib/metrics";
 
 type Props = {
   locale: Locale;
@@ -20,7 +21,9 @@ const home = getPortfolioHome(locale);
 const articles = getLatestArticles(locale);
 const workHref = pageHref(locale, "work");
 const blogHref = pageHref(locale, "blog");
-const orgHref = pageHref(locale, "innonestx");
+const orgHref = pageHref(locale, "open-source");
+const metrics = await getMetrics();
+const highlights = copy.home.highlights;
 ---
 
 <BaseLayout locale={locale} page="home" rootHome={rootHome}>
@@ -32,9 +35,8 @@ const orgHref = pageHref(locale, "innonestx");
         <div class="hero-content reveal">
           <p class="hero-brand">{copy.brand}</p>
           <h1 class="hero-title">{home.greeting}</h1>
-          <ul class="hero-roles">
-            {home.roles.map((role) => <li>{role}</li>)}
-          </ul>
+          <p class="hero-role-line">{home.roles.join(" · ")}</p>
+          <p class="hero-tagline">{home.tagline}</p>
           <p class="hero-desc">{home.description}</p>
           <div class="hero-actions">
             <a class="btn-primary" href={workHref}>{home.ctaWork}</a>
@@ -62,6 +64,77 @@ const orgHref = pageHref(locale, "innonestx");
             ))
           }
         </ul>
+      </div>
+    </section>
+
+    <section class="highlights home-section" id="by-the-numbers">
+      <div class="container">
+        <div class="section-head reveal-on-scroll">
+          <div>
+            <h2 class="section-title">{copy.home.highlightsTitle}</h2>
+            <p class="highlights-subtitle">{copy.home.highlightsSubtitle}</p>
+            <p class="highlights-proof">{copy.home.highlightsProof}</p>
+          </div>
+        </div>
+        <div class="highlights-grid">
+          {
+            highlights.map((item, index) => {
+              const value = resolveMetric(metrics, item.metric, item.value);
+              const cardClass = `highlight-card reveal-on-scroll reveal-delay-${(index % 4) + 1}`;
+              const valueAttrs = item.metric
+                ? {
+                    "data-metric": item.metric,
+                    "data-metric-fallback": item.value,
+                    "data-count-to": value,
+                  }
+                : { "data-count-to": value };
+              return (
+                <article class={cardClass}>
+                  <span class="highlight-value" {...valueAttrs}>
+                    {value}
+                  </span>
+                  <span class="highlight-label">{item.label}</span>
+                  {item.href && item.linkLabel ? (
+                    <a
+                      class="highlight-source"
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {item.linkLabel}
+                    </a>
+                  ) : null}
+                </article>
+              );
+            })
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="principles home-section" id="principles">
+      <div class="container">
+        <div class="section-head reveal-on-scroll">
+          <div>
+            <h2 class="section-title">{copy.home.principlesTitle}</h2>
+            <p class="principles-lead">{copy.home.principlesLead}</p>
+          </div>
+        </div>
+        <div class="principles-grid principles-grid--five">
+          {
+            copy.home.principles.map((item, index) => (
+              <article
+                class={`principle-card reveal-on-scroll reveal-delay-${(index % 5) + 1}`}
+              >
+                <span class="principle-index" aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </article>
+            ))
+          }
+        </div>
       </div>
     </section>
 
