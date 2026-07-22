@@ -46,6 +46,7 @@ export const zh: LocaleCopy = {
     more: "更多",
     innonestx: "开源",
     openSource: "开源",
+    playground: "体验台",
     now: "Now",
   },
   meta: {
@@ -115,6 +116,12 @@ export const zh: LocaleCopy = {
       description:
         "XuXuClassMate 个人品牌下的开源：InnoNestX 承载可安装的 AI 工具、QA 工具、开发者工具、基础设施与自动化。",
       keywords: `${sharedKeywords}, 开源, InnoNestX, AI Tools, QA Tools, Test Infrastructure`,
+    },
+    playground: {
+      title: "体验台 | 试用开源工具 | 旭旭同学",
+      description:
+        "在本站试用 XuXuClassMate 开源工具——交互演示、在线产品与安装路径，覆盖 AI Testing、Docker API 等。",
+      keywords: `${sharedKeywords}, 体验台, 开源演示, AI 用例生成, Docker Hub API, GlobalPulse`,
     },
     now: {
       title: "Now | 正在做 · 正在学 · 正在探索 | 旭旭同学",
@@ -1587,7 +1594,65 @@ export const zh: LocaleCopy = {
     ],
     orgCtaLabel: "GitHub 组织主页",
     orgCtaHref: "https://github.com/InnoNestX",
+    playgroundCtaLabel: "去体验台试用",
     footerDesc: "InnoNestX —— XuXuClassMate 的开源侧",
+    social: [
+      {
+        href: "https://github.com/XuXuClassMate",
+        label: "GitHub",
+        icon: "github",
+      },
+      {
+        href: "https://fgg6gzb6uk.feishu.cn/docx/LkwDdpLjnoIdGwxOH6zcRwEWnhd?from=from_copylink",
+        label: "Blog",
+        icon: "blog",
+      },
+      {
+        href: "#",
+        label: "微信",
+        icon: "wechat",
+        wechat: true,
+      },
+    ],
+  },
+  playground: {
+    subtitle: "体验台",
+    title: "体验台",
+    description:
+      "在本站试用 XuXuClassMate 品牌下的开源工具——站内演示、在线产品与清晰的安装路径。",
+    experiencesTitle: "可以怎么试",
+    modesTitle: "体验类型说明",
+    modes: [
+      {
+        id: "interactive",
+        label: "站内体验",
+        description: "在本站运行——演示或公开 API，无需安装。",
+      },
+      {
+        id: "live",
+        label: "在线产品",
+        description: "打开已部署的产品，在新标签页直接使用。",
+      },
+      {
+        id: "install",
+        label: "本机安装",
+        description: "在本机拉取或克隆——不是浏览器内运行时。",
+      },
+    ],
+    githubLabel: "GitHub",
+    tryTitle: "试用 Docker Hub API",
+    tryIntro:
+      "输入 Docker Hub 用户名，通过本站已在用的公开网关查询拉取统计。",
+    tryUsernameLabel: "Docker Hub 用户名",
+    tryButton: "查询统计",
+    tryLoading: "查询中…",
+    tryError: "无法加载该用户名的统计，请检查后重试。",
+    tryEmpty: "查询后可查看总拉取量与仓库数。",
+    tryResultPulls: "总拉取量",
+    tryResultRepos: "仓库数",
+    tryDefaultUsername: "xuxuclassmate",
+    openSourceLabel: "开源页面",
+    footerDesc: "体验台——先试用，再 fork",
     social: [
       {
         href: "https://github.com/XuXuClassMate",

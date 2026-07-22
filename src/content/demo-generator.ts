@@ -29,6 +29,7 @@ export type GeneratorDemoCopy = {
   realProductBody: string;
   dockerLabel: string;
   caseStudyLabel: string;
+  playgroundLabel: string;
   backLabel: string;
   emptyHint: string;
   fileReady: string;
@@ -74,6 +75,7 @@ const EN: GeneratorDemoCopy = {
     "Run the Docker image locally for PDF / Word / image / video → generate → export. This page is the demoable first step.",
   dockerLabel: "Open Docker Hub",
   caseStudyLabel: "Read case study",
+  playgroundLabel: "Back to Playground",
   backLabel: "Back to case study",
   emptyHint: "Load the sample PRD or attach a file name, then generate.",
   fileReady: "Attached (demo):",
@@ -164,6 +166,7 @@ const ZH: GeneratorDemoCopy = {
     "本机运行 Docker 镜像即可：PDF / Word / 图片 / 视频 → 生成 → 导出。本页是「先可演示」的一步。",
   dockerLabel: "打开 Docker Hub",
   caseStudyLabel: "阅读案例",
+  playgroundLabel: "返回体验台",
   backLabel: "返回案例页",
   emptyHint: "先载入示例 PRD 或附加文件名，再点击生成。",
   fileReady: "已附加（Demo）：",

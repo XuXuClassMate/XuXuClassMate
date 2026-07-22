@@ -66,6 +66,7 @@ export const en: LocaleCopy = {
     more: "More",
     innonestx: "Open Source",
     openSource: "Open Source",
+    playground: "Playground",
     now: "Now",
   },
   meta: {
@@ -135,6 +136,12 @@ export const en: LocaleCopy = {
       description:
         "Open Source under XuXuClassMate: InnoNestX hosts installable AI tools, QA tooling, developer tools, infrastructure, and automation.",
       keywords: `${sharedKeywords}, Open Source, InnoNestX, AI Tools, QA Tools, Test Infrastructure`,
+    },
+    playground: {
+      title: "Playground | Try Open-Source Tools | XuXuClassMate",
+      description:
+        "Try XuXuClassMate open-source tools on this site — interactive demos, live products, and install paths for AI testing, Docker APIs, and more.",
+      keywords: `${sharedKeywords}, Playground, Open Source demo, AI Test Case Generator, Docker Hub API, GlobalPulse`,
     },
     now: {
       title: "Now | What I’m Building & Learning | XuXuClassMate",
@@ -1599,7 +1606,48 @@ export const en: LocaleCopy = {
     ],
     orgCtaLabel: "GitHub organization",
     orgCtaHref: "https://github.com/InnoNestX",
+    playgroundCtaLabel: "Try on Playground",
     footerDesc: "InnoNestX — open-source arm of XuXuClassMate",
+    social: [...homeSocial],
+  },
+  playground: {
+    subtitle: "PLAYGROUND",
+    title: "Playground",
+    description:
+      "Try open-source tools from the XuXuClassMate brand on this site — interactive demos, live products, and clear install paths.",
+    experiencesTitle: "What you can try",
+    modesTitle: "How each experience works",
+    modes: [
+      {
+        id: "interactive",
+        label: "Interactive",
+        description: "Runs on this site — demo or public API, no install required.",
+      },
+      {
+        id: "live",
+        label: "Live",
+        description: "Opens a deployed product you can use in another tab.",
+      },
+      {
+        id: "install",
+        label: "Install",
+        description: "Pull or clone on your machine — not an in-browser runtime.",
+      },
+    ],
+    githubLabel: "GitHub",
+    tryTitle: "Try Docker Hub API",
+    tryIntro:
+      "Enter a Docker Hub username and fetch pull stats from the public gateway this portfolio already uses.",
+    tryUsernameLabel: "Docker Hub username",
+    tryButton: "Fetch stats",
+    tryLoading: "Fetching…",
+    tryError: "Could not load stats for that username. Check the name and try again.",
+    tryEmpty: "Run a lookup to see total pulls and repository count.",
+    tryResultPulls: "Total pulls",
+    tryResultRepos: "Repositories",
+    tryDefaultUsername: "xuxuclassmate",
+    openSourceLabel: "Open Source page",
+    footerDesc: "Playground — try before you fork",
     social: [...homeSocial],
   },
   now: {

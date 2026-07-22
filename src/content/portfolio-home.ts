@@ -31,6 +31,7 @@ export type PortfolioHome = {
   ossDescription: string;
   ossGithubLabel: string;
   ossOrgLabel: string;
+  ossPlaygroundLabel: string;
   connectGithub: string;
 };
 
@@ -159,6 +160,7 @@ export function getPortfolioHome(locale: Locale): PortfolioHome {
       : "InnoNestX under the XuXuClassMate personal brand — open AI tools, QA tools, and infrastructure.",
     ossGithubLabel: isZh ? "打开 GitHub" : "Open GitHub",
     ossOrgLabel: isZh ? "开源页面" : "Open Source page",
+    ossPlaygroundLabel: isZh ? "体验台" : "Playground",
     connectGithub: GITHUB,
   };
 }

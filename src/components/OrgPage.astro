@@ -2,13 +2,14 @@
 import Footer from "./Footer.astro";
 import PageHero from "./PageHero.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { CONTACT_EMAIL, getCopy, type Locale } from "../lib/i18n";
+import { CONTACT_EMAIL, getCopy, pageHref, type Locale } from "../lib/i18n";
 
 type Props = { locale: Locale };
 
 const { locale } = Astro.props;
 const copy = getCopy(locale);
 const page = copy.openSource;
+const playgroundHref = pageHref(locale, "playground");
 ---
 
 <BaseLayout locale={locale} page="open-source">
@@ -23,6 +24,10 @@ const page = copy.openSource;
           label: page.orgCtaLabel,
           primary: true,
           external: true,
+        },
+        {
+          href: playgroundHref,
+          label: page.playgroundCtaLabel,
         },
       ]}
     />
