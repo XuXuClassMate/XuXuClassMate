@@ -70,11 +70,11 @@ const SECTIONS: SectionDef[] = [
       {
         en: {
           title: "Test DB Docker Suite",
-          note: "Ready-to-run Dameng / Highgo / Kingbase / TiDB images for QA.",
+          note: "Ready-to-run Dameng / Highgo / Kingbase / TiDB images for developers, QA, ops, and DBAs.",
         },
         zh: {
           title: "测试库 Docker 套件",
-          note: "面向 QA 的达梦 / 瀚高 / 人大金仓 / TiDB 即用镜像。",
+          note: "达梦 / 瀚高 / 人大金仓 / TiDB 即用镜像——开发、测试、运维、DBA 都能用。",
         },
         href: "/work/docker-suite.html",
       },

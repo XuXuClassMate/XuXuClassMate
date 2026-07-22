@@ -180,7 +180,7 @@ export const PROJECTS: Record<ProjectId, ProjectDef> = {
     en: {
       title: "Test DB Docker Suite",
       description:
-        "Ready-to-run database images for QA environments — Dameng, Highgo, Kingbase, TiDB and more, ranked by live Docker Hub pulls.",
+        "Ready-to-run database images for developers, QA, ops, and DBAs — Dameng, Highgo, Kingbase, TiDB and more, ranked by live Docker Hub pulls.",
       tags: ["Docker", "Dameng", "Highgo"],
       linkLabel: "Docker Hub",
       imageAlt: "Test DB Docker Suite cover",
@@ -189,7 +189,7 @@ export const PROJECTS: Record<ProjectId, ProjectDef> = {
     zh: {
       title: "测试库 Docker 套件",
       description:
-        "面向 QA 环境的即用数据库镜像——达梦、瀚高、人大金仓、TiDB 等，见 Docker Hub 实时拉取量。",
+        "即用数据库镜像——达梦、瀚高、人大金仓、TiDB 等，开发 / 测试 / 运维 / DBA 都能用，见 Docker Hub 实时拉取量。",
       tags: ["Docker", "Dameng", "Highgo"],
       linkLabel: "Docker Hub",
       imageAlt: "测试库 Docker 套件封面",

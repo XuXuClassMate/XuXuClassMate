@@ -49,9 +49,9 @@ const featuredEn = [
   {
     title: "Test DB Docker Suite",
     description:
-      "Docker Testing infrastructure for QA — Dameng, Highgo, Kingbase, TiDB and more.",
+      "Docker database images for developers, QA, ops, and DBAs — Dameng, Highgo, Kingbase, TiDB and more.",
     href: "/en/work/docker-suite.html",
-    tags: ["Docker Testing", "Test Infrastructure", "QA"],
+    tags: ["Docker Testing", "Test Infrastructure", "DevOps"],
   },
 ];
 
@@ -66,9 +66,9 @@ const featuredZh = [
   {
     title: "测试库 Docker 套件",
     description:
-      "面向 QA 的 Docker Testing 基础设施——达梦、瀚高、人大金仓、TiDB 等。",
+      "即用数据库镜像——达梦、瀚高、人大金仓、TiDB 等，开发 / 测试 / 运维 / DBA 都能用。",
     href: "/zh/work/docker-suite.html",
-    tags: ["Docker Testing", "Test Infrastructure", "QA"],
+    tags: ["Docker Testing", "Test Infrastructure", "DevOps"],
   },
 ];
 
