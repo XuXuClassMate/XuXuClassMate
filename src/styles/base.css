@@ -255,6 +255,12 @@ body {
   gap: 4px;
 }
 
+.nav-utils {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
 .nav-item,
 .nav-more-toggle,
 .language-switch {

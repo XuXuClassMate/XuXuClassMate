@@ -213,11 +213,17 @@ test("desktop nav keeps primary links and a compact More menu", async ({
 }) => {
   await page.setViewportSize({ width: 1280, height: 800 });
   await page.goto("/");
-  await expect(page.getByRole("link", { name: "About" })).toBeVisible();
-  await expect(page.getByRole("link", { name: "Experience" })).toBeVisible();
-  await expect(page.getByRole("link", { name: "Projects" })).toBeVisible();
-  await expect(page.getByRole("link", { name: "AI Testing" })).toBeVisible();
-  await expect(page.getByRole("link", { name: "Notes" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "About", exact: true })).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Experience", exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Projects", exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "AI Testing", exact: true }),
+  ).toBeVisible();
+  await expect(page.getByRole("link", { name: "Notes", exact: true })).toBeVisible();
   await expect(page.getByRole("button", { name: /More/ })).toBeVisible();
   await expect(page.getByRole("link", { name: "EN" })).toBeVisible();
   await expect(page.locator("#themeToggle")).toBeVisible();
@@ -231,13 +237,12 @@ test("desktop nav keeps primary links and a compact More menu", async ({
   await expect(moreItems).toHaveText(["Open Source", "Life", "Contact"]);
 });
 
-test("mobile nav is hamburger-only with a vertical drawer", async ({
+test("mobile nav is hamburger-only with a compact drawer", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
   await expect(page.locator(".nav-links")).not.toHaveClass(/show/);
-  await expect(page.getByRole("button", { name: /More/ })).toBeHidden();
   await expect(page.locator("#mobileNavToggle")).toBeVisible();
   await expect(page.locator("#themeToggle")).toBeHidden();
   await page.locator("#mobileNavToggle").click();
@@ -248,18 +253,25 @@ test("mobile nav is hamburger-only with a vertical drawer", async ({
     "Projects",
     "AI Testing",
     "Notes",
-    "Open Source",
-    "Life",
-    "Contact",
-    "EN",
   ]) {
-    await expect(page.locator(".nav-links").getByText(label, { exact: true })).toBeVisible();
+    await expect(
+      page.locator(".nav-links").getByRole("link", { name: label }),
+    ).toBeVisible();
   }
+  await expect(page.getByRole("button", { name: /More/ })).toBeVisible();
+  await expect(
+    page.getByRole("menuitem", { name: "Open Source" }),
+  ).toBeHidden();
+  await page.getByRole("button", { name: /More/ }).click();
+  await expect(
+    page.getByRole("menuitem", { name: "Open Source" }),
+  ).toBeVisible();
+  await expect(page.getByRole("menuitem", { name: "Life" })).toBeVisible();
+  await expect(page.getByRole("menuitem", { name: "Contact" })).toBeVisible();
+  await expect(page.locator(".nav-links .language-switch")).toBeVisible();
   await expect(page.locator("#themeToggle")).toBeVisible();
   await expect(page.locator(".theme-toggle-label")).toHaveText("Theme");
   await expect(page.getByRole("link", { name: /^Home$/i })).toHaveCount(0);
-  await expect(page.locator(".nav-item--ai-testing")).toHaveCSS("order", "4");
-  await expect(page.locator(".nav-item--notes")).toHaveCSS("order", "5");
 });
 
 test("contact offers list is visible", async ({ page }) => {

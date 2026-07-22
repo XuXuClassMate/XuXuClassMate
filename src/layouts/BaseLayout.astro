@@ -240,7 +240,10 @@ const langSwitchHref = caseSlug
               >
                 {copy.nav.notes ?? copy.nav.blog}
               </a>
-              <div class="nav-more" data-nav-more>
+              <div
+                class:list={["nav-more", { "is-open": moreActive }]}
+                data-nav-more
+              >
                 <button
                   type="button"
                   class:list={[
@@ -248,7 +251,7 @@ const langSwitchHref = caseSlug
                     "nav-more-toggle",
                     { active: moreActive },
                   ]}
-                  aria-expanded="false"
+                  aria-expanded={moreActive ? "true" : "false"}
                   aria-haspopup="true"
                   aria-controls="navMoreMenu"
                   data-nav-more-toggle
@@ -296,39 +299,41 @@ const langSwitchHref = caseSlug
                   </a>
                 </div>
               </div>
-              <a
-                href={langSwitchHref}
-                class="language-switch"
-                aria-label={copy.languageSwitchHint}
-                title={copy.languageSwitchHint}
-              >
-                {copy.languageSwitch}
-              </a>
-              <button
-                type="button"
-                class="theme-toggle"
-                id="themeToggle"
-                aria-label={copy.themeToLight}
-                title={copy.themeToLight}
-                data-label-light={copy.themeToLight}
-                data-label-dark={copy.themeToDark}
-              >
-                <span
-                  class="theme-toggle-icon"
-                  data-theme-icon="moon"
-                  aria-hidden="true"
+              <div class="nav-utils">
+                <a
+                  href={langSwitchHref}
+                  class="language-switch"
+                  aria-label={copy.languageSwitchHint}
+                  title={copy.languageSwitchHint}
                 >
-                  <Icon name="moon" />
-                </span>
-                <span
-                  class="theme-toggle-icon is-hidden"
-                  data-theme-icon="sun"
-                  aria-hidden="true"
+                  {copy.languageSwitch}
+                </a>
+                <button
+                  type="button"
+                  class="theme-toggle"
+                  id="themeToggle"
+                  aria-label={copy.themeToLight}
+                  title={copy.themeToLight}
+                  data-label-light={copy.themeToLight}
+                  data-label-dark={copy.themeToDark}
                 >
-                  <Icon name="sun" />
-                </span>
-                <span class="theme-toggle-label">{copy.themeToggle}</span>
-              </button>
+                  <span
+                    class="theme-toggle-icon"
+                    data-theme-icon="moon"
+                    aria-hidden="true"
+                  >
+                    <Icon name="moon" />
+                  </span>
+                  <span
+                    class="theme-toggle-icon is-hidden"
+                    data-theme-icon="sun"
+                    aria-hidden="true"
+                  >
+                    <Icon name="sun" />
+                  </span>
+                  <span class="theme-toggle-label">{copy.themeToggle}</span>
+                </button>
+              </div>
             </div>
             <button
               id="mobileNavToggle"
