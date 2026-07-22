@@ -209,7 +209,7 @@ export const zh: LocaleCopy = {
       },
       {
         title: "Docker Hub",
-        description: "面向 QA 团队的可复用数据库与测试环境镜像。",
+        description: "可复用数据库镜像——开发、测试、运维、DBA 都能直接用。",
         href: "https://hub.docker.com/u/xuxuclassmate",
         linkLabel: "查看 Docker Hub",
         icon: "docker",
@@ -1092,37 +1092,37 @@ export const zh: LocaleCopy = {
         slug: "docker-suite",
         title: "测试库 Docker 套件",
         subtitle: "案例详解",
-        description: "让 QA 环境几分钟就绪，而不是几天。",
+        description: "让数据库环境几分钟就绪，而不是几天——开发、测试、运维、DBA 都能用。",
         cover: "/images/cover-docker.jpg",
         coverAlt: "测试库 Docker 套件",
         status: "live",
         overview:
-          "面向 QA 的即用数据库镜像——达梦、瀚高、人大金仓、TiDB 等，统一标签、文档与 Docker Hub 实时拉取证明。",
+          "即用数据库镜像——达梦、瀚高、人大金仓、TiDB 等，统一标签、文档与 Docker Hub 实时拉取证明；开发、测试、运维、DBA 都能直接拉起。",
         problem:
-          "国产与开源数据库对 QA 来说难拉起——缺少文档化安装会卡住自动化与新人上手。",
+          "国产与开源数据库难拉起——缺少文档化安装会卡住开发联调、测试自动化、运维交付与新人上手。",
         solution:
-          "在 Docker Hub 发布达梦、瀚高、人大金仓、TiDB 等即用镜像，统一标签与文档，服务测试团队。",
+          "在 Docker Hub 发布达梦、瀚高、人大金仓、TiDB 等即用镜像，统一标签与文档，服务各类技术角色。",
         architecture: [
           {
-            title: "QA 环境路径",
+            title: "环境路径",
             layers: [
               "Docker Hub 镜像",
               "Pull & Run",
               "本地 / CI 环境",
-              "自动化套件",
+              "开发 / 测试 / 运维工作流",
               "证据（实时拉取）",
             ],
           },
         ],
         features: [
-          "达梦、瀚高、人大金仓、TiDB 等 QA 镜像",
+          "达梦、瀚高、人大金仓、TiDB 等即用镜像",
           "可预期标签保障 CI 稳定",
           "一镜像一服务，失败更好定位",
           "面向 pull-and-run 工作流的文档",
           "本站展示实时拉取指标",
         ],
         contribution: [
-          "识别国产数据库缺少文档化安装带来的 QA 痛点。",
+          "识别国产数据库缺少文档化安装带来的跨角色痛点。",
           "构建、打标签并发布可复用 Docker 镜像套件。",
           "维护文档与实时拉取证据，推动团队采用。",
         ],
@@ -1132,7 +1132,7 @@ export const zh: LocaleCopy = {
           steps: [
             "浏览 xuxuclassmate Docker Hub 命名空间。",
             "拉取所需数据库镜像（如达梦 / 瀚高）。",
-            "按文档配置端口与环境变量，供 QA 套件使用。",
+            "按文档配置端口与环境变量，供本地或 CI 工作流使用。",
             "可选：通过 Docker Hub API Gateway 验证实时拉取总量。",
           ],
           channels: [
@@ -1170,7 +1170,7 @@ export const zh: LocaleCopy = {
           },
         ],
         outcomes: [
-          "达梦与瀚高镜像被大量 QA 团队使用",
+          "达梦与瀚高镜像被大量技术团队使用",
           "CI 可复用的 pull-and-run 流程",
           "成为 AI 工具演示下的可复用底座",
         ],
@@ -1189,7 +1189,7 @@ export const zh: LocaleCopy = {
         meta: {
           title: "测试库 Docker 套件案例 | 旭旭同学",
           description:
-            "旭旭同学如何交付达梦、瀚高等 Docker 数据库镜像，服务可复用 QA 环境。",
+            "旭旭同学如何交付达梦、瀚高等 Docker 数据库镜像，供开发、测试、运维、DBA 复用。",
           keywords: `${sharedKeywords}, Docker 测试库案例`,
         },
       },

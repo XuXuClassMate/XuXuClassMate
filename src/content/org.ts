@@ -56,11 +56,12 @@ const CATEGORY_META: Record<OssCategoryId, CategoryMeta> = {
     en: {
       title: "Testing",
       description:
-        "QA-facing tools that shorten setup time — test data environments and case generation.",
+        "Environment and quality tooling that cuts setup time — for developers, QA, ops, and DBAs.",
     },
     zh: {
       title: "Testing",
-      description: "面向 QA 的工具——缩短环境搭建与用例生成成本。",
+      description:
+        "缩短环境搭建成本的质量与基础设施工具——开发、测试、运维、DBA 都能用。",
     },
   },
   "Developer Tools": {
@@ -147,8 +148,8 @@ const ORG_PROJECTS: OrgProjectDef[] = [
     },
     status: { en: "Live", zh: "在线" },
     description: {
-      en: "Ready-to-run DB images for QA — Dameng, Highgo, Kingbase, TiDB and more.",
-      zh: "面向 QA 的即用数据库镜像——达梦、瀚高、人大金仓、TiDB 等。",
+      en: "Ready-to-run DB images — Dameng, Highgo, Kingbase, TiDB and more — for developers, QA, ops, and DBAs.",
+      zh: "即用数据库镜像——达梦、瀚高、人大金仓、TiDB 等，开发 / 测试 / 运维 / DBA 都能直接用。",
     },
   },
   {

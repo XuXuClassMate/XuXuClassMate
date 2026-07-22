@@ -235,7 +235,7 @@ export const en: LocaleCopy = {
       {
         title: "Docker Hub",
         description:
-          "Reusable database and test-environment images for QA teams.",
+          "Reusable database images for developers, QA, ops, and DBAs.",
         href: "https://hub.docker.com/u/xuxuclassmate",
         linkLabel: "View Docker Hub",
         icon: "docker",
@@ -1115,37 +1115,37 @@ export const en: LocaleCopy = {
         title: "Test DB Docker Suite",
         subtitle: "CASE STUDY",
         description:
-          "Reusable database images so QA environments boot in minutes, not days.",
+          "Reusable database images so environments boot in minutes, not days — for developers, QA, ops, and DBAs.",
         cover: "/images/cover-docker.jpg",
         coverAlt: "Test DB Docker Suite",
         status: "live",
         overview:
-          "Ready-to-run database images for QA — Dameng, Highgo, Kingbase, TiDB and more — with consistent tags, docs, and live Docker Hub pull proof.",
+          "Ready-to-run database images — Dameng, Highgo, Kingbase, TiDB and more — with consistent tags, docs, and live Docker Hub pull proof for developers, QA, ops, and DBAs.",
         problem:
-          "Domestic and open-source databases were painful to stand up for QA — undocumented installs blocked automation and onboarding.",
+          "Domestic and open-source databases were painful to stand up — undocumented installs blocked local development, automation, ops delivery, and onboarding.",
         solution:
-          "Published ready-to-run Dameng, Highgo, Kingbase, TiDB, and related images on Docker Hub with consistent tags and docs for test teams.",
+          "Published ready-to-run Dameng, Highgo, Kingbase, TiDB, and related images on Docker Hub with consistent tags and docs for every engineering role.",
         architecture: [
           {
-            title: "QA environment path",
+            title: "Environment path",
             layers: [
               "Docker Hub images",
               "Pull & run",
               "Local / CI environment",
-              "Automation suites",
+              "Dev / test / ops workflows",
               "Evidence (live pulls)",
             ],
           },
         ],
         features: [
-          "Dameng, Highgo, Kingbase, TiDB and related QA images",
+          "Dameng, Highgo, Kingbase, TiDB and related ready-to-run images",
           "Predictable tags for CI stability",
           "One service per image for diagnosable failures",
           "Docs oriented to pull-and-run workflows",
           "Live pull metrics on this portfolio",
         ],
         contribution: [
-          "Identified the QA pain of undocumented domestic DB installs.",
+          "Identified the cross-role pain of undocumented domestic DB installs.",
           "Built, tagged, and published the reusable Docker image suite.",
           "Maintained docs and live pull evidence for team adoption.",
         ],
@@ -1155,7 +1155,7 @@ export const en: LocaleCopy = {
           steps: [
             "Browse the xuxuclassmate Docker Hub namespace.",
             "Pull the database image you need (e.g. Dameng / Highgo).",
-            "Run with documented ports and env vars for QA suites.",
+            "Run with documented ports and env vars for local or CI workflows.",
             "Optionally verify live pull totals via the Docker Hub API Gateway.",
           ],
           channels: [
@@ -1182,7 +1182,7 @@ export const en: LocaleCopy = {
           {
             title: "Docker Hub namespace",
             description:
-              "All QA-oriented images with live pull totals on the homepage.",
+              "All ready-to-run images with live pull totals on the homepage.",
             href: "https://hub.docker.com/u/xuxuclassmate",
             linkLabel: "Browse images",
           },
@@ -1194,7 +1194,7 @@ export const en: LocaleCopy = {
           },
         ],
         outcomes: [
-          "Dameng and Highgo images used widely by QA teams",
+          "Dameng and Highgo images used widely across engineering teams",
           "Consistent pull-and-run workflow for CI",
           "A reusable foundation under AI tooling demos",
         ],
@@ -1213,7 +1213,7 @@ export const en: LocaleCopy = {
         meta: {
           title: "Test DB Docker Suite Case Study | XuXuClassMate",
           description:
-            "How XuXuClassMate shipped Dameng, Highgo, and related Docker DB images for reusable QA environments.",
+            "How XuXuClassMate shipped Dameng, Highgo, and related Docker DB images for developers, QA, ops, and DBAs.",
           keywords: `${sharedKeywords}, docker test db case study`,
         },
       },
