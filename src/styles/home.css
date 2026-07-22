@@ -566,22 +566,10 @@
   flex-shrink: 0;
 }
 
-.oss-actions,
-.connect-links {
+.oss-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-}
-
-.connect-links a {
-  font-weight: 700;
-  font-size: 1.1rem;
-  color: inherit;
-}
-
-.connect-email {
-  margin-top: 1rem;
-  color: var(--muted);
 }
 
 .arch-chain {
