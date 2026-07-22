@@ -53,9 +53,10 @@ test("case study page renders", async ({ page }) => {
   await expect(
     page.getByRole("heading", { name: "Inspectable proof" }),
   ).toBeVisible();
-  const back = page.getByRole("link", { name: /Back to all projects/i });
+  const back = page.getByRole("link", { name: /All projects/i });
   await expect(back.first()).toBeVisible();
   await expect(back.first()).toHaveClass(/back-nav/);
+  await expect(page.locator(".detail-topbar .back-nav")).toBeVisible();
 });
 
 test("notes index and article render", async ({ page }) => {
@@ -68,19 +69,20 @@ test("notes index and article render", async ({ page }) => {
   await expect(page.locator(".note-meta")).toHaveCount(0);
   await page
     .getByRole("link", {
-      name: /Domestic DB Docker for QA/i,
+      name: /Database Docker for QA/i,
     })
     .first()
     .click();
   await expect(page).toHaveURL(/\/en\/notes\/domestic-db-docker-qa\.html$/);
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Dameng");
+  await expect(page.locator(".detail-topbar .back-nav")).toBeVisible();
   await expect(page.locator(".note-toc")).toBeVisible();
   await expect(page.locator(".note-stats").first()).toBeVisible();
   await expect(page.locator('[data-metric="docker:total-pulls"]')).toBeVisible();
   await expect(page.locator(".note-byline")).toHaveCount(0);
-  await expect(page.getByRole("link", { name: /Back to all notes/i }).first()).toBeVisible();
+  await expect(page.getByRole("link", { name: /^All notes$/i }).first()).toBeVisible();
   await expect(
-    page.getByRole("link", { name: /Back to all notes/i }).first(),
+    page.getByRole("link", { name: /^All notes$/i }).first(),
   ).toHaveClass(/back-nav/);
 
   await page.goto("/en/notes/clawhub-skill-shipping.html");

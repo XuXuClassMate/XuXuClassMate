@@ -14,7 +14,7 @@ export const zh: LocaleCopy = {
   contactOffers: [
     "AI 测试工具 / ClawHub 技能定制",
     "测试团队管理顾问（初创 → 规模化）",
-    "国产库 / Docker 测试环境落地",
+    "数据库 / Docker 测试环境落地",
     "InnoNestX 开源与产品协作",
   ],
   copyEmail: "复制邮箱",
@@ -63,7 +63,7 @@ export const zh: LocaleCopy = {
     notes: {
       title: "笔记 | 旭旭同学",
       description:
-        "关于国产库 Docker 测试环境、ClawHub 技能发布与可安装质量工程的实操笔记。",
+        "关于数据库 Docker 测试环境、ClawHub 技能发布与可安装质量工程的实操笔记。",
       keywords: `${sharedKeywords}, 笔记, 达梦 Docker, ClawHub`,
     },
   },
@@ -89,7 +89,7 @@ export const zh: LocaleCopy = {
       {
         title: "环境要能复用",
         description:
-          "容器、国产库镜像与网关，让团队在 CI 和笔记本上启动同一套栈。",
+          "容器、数据库镜像与网关，让团队在 CI 和笔记本上启动同一套栈。",
       },
     ],
     highlightsTitle: "数据一览",
@@ -179,7 +179,7 @@ export const zh: LocaleCopy = {
       },
       {
         title: "笔记",
-        description: "国产库 Docker 与 ClawHub 技能发布实操",
+        description: "数据库 Docker 与 ClawHub 技能发布实操",
         href: "/zh/notes.html",
       },
     ],
@@ -455,7 +455,7 @@ export const zh: LocaleCopy = {
         ],
       },
     ],
-    caseBackLabel: "返回全部项目",
+    caseBackLabel: "全部项目",
     caseProblemTitle: "问题",
     caseSolutionTitle: "方案",
     caseTradeoffsTitle: "取舍",
@@ -701,7 +701,7 @@ export const zh: LocaleCopy = {
         tradeoffs: [
           "标签保持无聊可预期——CI 套件要的是稳定，不是花哨。",
           "尽量一镜像一服务，pull-and-run 失败更好定位。",
-          "早期发布达梦 / 瀚高——拉取量验证了国产库痛点真实存在。"
+          "早期发布达梦 / 瀚高——拉取量验证了数据库痛点真实存在。"
         ],
         artifacts: [
           {
@@ -913,8 +913,8 @@ export const zh: LocaleCopy = {
     subtitle: "笔记",
     title: "实操笔记",
     description:
-      "带实时 Docker / ClawHub 数据的长文——国产库测试环境与可安装 Agent 技能。",
-    backLabel: "返回全部笔记",
+      "带实时 Docker / ClawHub 数据的长文——数据库测试环境与可安装 Agent 技能。",
+    backLabel: "全部笔记",
     tocLabel: "本页目录",
     relatedLabel: "相关链接",
     items: getNotes("zh"),
