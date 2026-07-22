@@ -872,9 +872,9 @@ export const zh: LocaleCopy = {
       },
       {
         title: "音乐",
-        description: "深度工作与远离键盘周末的歌单。",
+        description: "民谣、钢琴小提琴曲，以及路上会跟着哼的流行。",
         icon: "乐",
-        items: ["电子", "古典钢琴", "爵士"],
+        items: ["民谣", "钢琴和小提琴曲", "流行音乐"],
       },
       {
         title: "运动",
