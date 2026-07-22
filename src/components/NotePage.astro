@@ -17,7 +17,7 @@ const copy = getCopy(locale);
 const page = copy.notes;
 const note = getNote(locale, slug);
 const metrics = await getMetrics();
-const notesHref = pageHref(locale, "notes");
+const notesHref = pageHref(locale, "blog");
 
 if (!note) {
   throw new Error(`Unknown note: ${slug}`);
@@ -28,7 +28,7 @@ const ctas = note.ctas ?? [];
 
 <BaseLayout
   locale={locale}
-  page="notes"
+  page="blog"
   noteSlug={slug}
   metaOverride={note.meta}
 >

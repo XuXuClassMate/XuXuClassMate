@@ -74,14 +74,99 @@ const coverDark =
 
     <section class="case-body">
       <div class="container case-grid">
-        <article class="case-block reveal-on-scroll">
-          <h2>{page.caseProblemTitle}</h2>
-          <p>{study.problem}</p>
-        </article>
-        <article class="case-block reveal-on-scroll">
-          <h2>{page.caseSolutionTitle}</h2>
-          <p>{study.solution}</p>
-        </article>
+        {
+          study.overview ? (
+            <article class="case-block reveal-on-scroll" id="overview">
+              <h2>{page.caseOverviewTitle}</h2>
+              <p>{study.overview}</p>
+            </article>
+          ) : (
+            <>
+              <article class="case-block reveal-on-scroll">
+                <h2>{page.caseProblemTitle}</h2>
+                <p>{study.problem}</p>
+              </article>
+              <article class="case-block reveal-on-scroll">
+                <h2>{page.caseSolutionTitle}</h2>
+                <p>{study.solution}</p>
+              </article>
+            </>
+          )
+        }
+        {
+          study.techStack && study.techStack.length > 0 ? (
+            <article class="case-block reveal-on-scroll" id="stack">
+              <h2>{page.caseStackTitle}</h2>
+              <ul class="stack-list stack-list--inline">
+                {study.techStack.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </article>
+          ) : null
+        }
+        {
+          study.architecture && study.architecture.length > 0 ? (
+            <article class="case-block reveal-on-scroll" id="architecture">
+              <h2>{page.caseArchitectureTitle}</h2>
+              {study.architecture.map((chain) => (
+                <div class="arch-block">
+                  <h3>{chain.title}</h3>
+                  <ol class="arch-chain">
+                    {chain.layers.map((layer) => (
+                      <li>{layer}</li>
+                    ))}
+                  </ol>
+                </div>
+              ))}
+            </article>
+          ) : null
+        }
+        {
+          study.features && study.features.length > 0 ? (
+            <article class="case-block reveal-on-scroll">
+              <h2>{page.caseFeaturesTitle}</h2>
+              <ul>
+                {study.features.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </article>
+          ) : null
+        }
+        {
+          study.contribution && study.contribution.length > 0 ? (
+            <article class="case-block reveal-on-scroll">
+              <h2>{page.caseContributionTitle}</h2>
+              <ul>
+                {study.contribution.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </article>
+          ) : null
+        }
+        {
+          study.results && study.results.length > 0 ? (
+            <article class="case-block reveal-on-scroll">
+              <h2>{page.caseResultsTitle}</h2>
+              <ul>
+                {study.results.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </article>
+          ) : (
+            <article class="case-block reveal-on-scroll">
+              <h2>{page.caseOutcomesTitle}</h2>
+              <ul>
+                {study.outcomes.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </article>
+          )
+        }
         {
           study.tradeoffs && study.tradeoffs.length > 0 ? (
             <article class="case-block reveal-on-scroll">
@@ -94,12 +179,6 @@ const coverDark =
             </article>
           ) : null
         }
-        <article class="case-block reveal-on-scroll">
-          <h2>{page.caseOutcomesTitle}</h2>
-          <ul>
-            {study.outcomes.map((item) => <li>{item}</li>)}
-          </ul>
-        </article>
         {
           study.artifacts && study.artifacts.length > 0 ? (
             <article class="case-block reveal-on-scroll">

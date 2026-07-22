@@ -1,15 +1,13 @@
 ---
-import Contact from "./Contact.astro";
 import Footer from "./Footer.astro";
-import Icon from "./Icon.astro";
-import PageHero from "./PageHero.astro";
-import ProjectCard from "./ProjectCard.astro";
 import WechatModal from "./WechatModal.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { getCopy } from "../lib/i18n";
-import { getMetrics, resolveMetric } from "../lib/metrics";
-import type { IconName } from "../content/types";
-import type { Locale } from "../lib/i18n";
+import {
+  getLatestArticles,
+  getPortfolioHome,
+} from "../content/portfolio-home";
+import { getCopy, pageHref, type Locale } from "../lib/i18n";
+import { CONTACT_EMAIL } from "../lib/i18n";
 
 type Props = {
   locale: Locale;
@@ -18,75 +16,66 @@ type Props = {
 
 const { locale, rootHome = false } = Astro.props;
 const copy = getCopy(locale);
-const { home } = copy;
-const metrics = await getMetrics();
+const home = getPortfolioHome(locale);
+const articles = getLatestArticles(locale);
+const workHref = pageHref(locale, "work");
+const blogHref = pageHref(locale, "blog");
+const orgHref = pageHref(locale, "innonestx");
 ---
 
 <BaseLayout locale={locale} page="home" rootHome={rootHome}>
   <main id="main-content">
-    <PageHero
-      home
-      brand={copy.brand}
-      subtitle={home.subtitle}
-      title={home.title}
-      description={home.description}
-      positioning={home.positioning}
-      typewriter
-      actions={[
-        {
-          href: home.links[1]?.href ?? "/en/work.html",
-          label: home.links[1]?.title ?? "Work",
-          primary: true,
-        },
-        {
-          href: home.links[0]?.href ?? "/en/learn.html",
-          label: home.links[0]?.title ?? "Learn",
-        },
-      ]}
-    />
-
-    <section class="highlights">
+    <section class="hero hero--home hero--signature">
+      <div class="hero-blob" aria-hidden="true"></div>
+      <div class="hero-atmosphere" aria-hidden="true"></div>
       <div class="container">
-        <h2 class="section-title reveal-on-scroll">{home.highlightsTitle}</h2>
-        <div class="highlights-grid">
-          {
-            home.highlights.map((item, index) => {
-              const value = resolveMetric(metrics, item.metric, item.value);
-              return (
-                <div
-                  class={`highlight-card reveal-on-scroll reveal-delay-${(index % 3) + 1}`}
-                >
-                  <span
-                    class="highlight-value"
-                    data-count-to={value}
-                    data-metric={item.metric}
-                    data-metric-fallback={item.value}
-                  >
-                    {value}
-                  </span>
-                  <span class="highlight-label">{item.label}</span>
-                </div>
-              );
-            })
-          }
+        <div class="hero-content reveal">
+          <p class="hero-brand">{copy.brand}</p>
+          <h1 class="hero-title">{home.greeting}</h1>
+          <ul class="hero-roles">
+            {home.roles.map((role) => <li>{role}</li>)}
+          </ul>
+          <p class="hero-desc">{home.description}</p>
+          <div class="hero-actions">
+            <a class="btn-primary" href={workHref}>{home.ctaWork}</a>
+            <a
+              class="btn-ghost"
+              href={home.connectGithub}
+              target="_blank"
+              rel="noopener noreferrer">{home.ctaGithub}</a
+            >
+            <a class="btn-ghost" href="#contact">{home.ctaContact}</a>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="values">
+    <section class="home-section what-i-do" id="what-i-do">
       <div class="container">
-        <h2 class="section-title reveal-on-scroll">{home.valuesTitle}</h2>
-        <div class="values-grid">
+        <h2 class="section-title reveal-on-scroll">{home.whatIDoTitle}</h2>
+        <ul class="capability-list reveal-on-scroll">
           {
-            home.values.map((item, index) => (
+            home.whatIDo.map((item) => (
+              <li>
+                <a href={item.href}>{item.title}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <section class="home-section key-achievements" id="achievements">
+      <div class="container">
+        <h2 class="section-title reveal-on-scroll">{home.achievementsTitle}</h2>
+        <div class="achievements-grid">
+          {
+            home.achievements.map((item, index) => (
               <div
-                class={`value-card reveal-on-scroll reveal-delay-${index + 1}`}
+                class={`achievement-card reveal-on-scroll reveal-delay-${(index % 4) + 1}`}
               >
-                <span class="value-index" aria-hidden="true">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
+                <span class="achievement-value">{item.value}</span>
+                <span class="achievement-label">{item.label}</span>
               </div>
             ))
           }
@@ -94,86 +83,38 @@ const metrics = await getMetrics();
       </div>
     </section>
 
-    <section class="home-featured">
+    <section class="home-section home-featured" id="featured">
       <div class="container">
         <div class="section-head reveal-on-scroll">
           <h2 class="section-title">{home.featuredTitle}</h2>
-          <a class="section-cta" href={home.links[1]?.href}>
+          <a class="section-cta" href={workHref}>
             {home.featuredCta}
             <span aria-hidden="true">→</span>
           </a>
         </div>
-        <div class="project-grid project-grid--home">
+        <div class="featured-list">
           {
             home.featured.map((item, index) => (
-              <ProjectCard item={item} index={index} />
-            ))
-          }
-        </div>
-      </div>
-    </section>
-
-    <section class="principles">
-      <div class="container">
-        <h2 class="section-title reveal-on-scroll">{home.principlesTitle}</h2>
-        <div class="principles-grid">
-          {
-            home.principles.map((item, index) => (
-              <div
-                class={`principle-card reveal-on-scroll reveal-delay-${index + 1}`}
-              >
-                <span class="principle-index" aria-hidden="true">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-    </section>
-
-    <section class="channels">
-      <div class="container">
-        <h2 class="section-title reveal-on-scroll">{home.channelsTitle}</h2>
-        <div class="channels-grid">
-          {
-            home.channels.map((item, index) => (
               <a
                 href={item.href}
-                class={`channel-card reveal-on-scroll reveal-delay-${index + 1}`}
-                target="_blank"
-                rel="noopener noreferrer"
+                class={`featured-row reveal-on-scroll reveal-delay-${(index % 3) + 1}`}
+                target={item.href.startsWith("http") ? "_blank" : undefined}
+                rel={
+                  item.href.startsWith("http")
+                    ? "noopener noreferrer"
+                    : undefined
+                }
               >
-                {item.icon ? (
-                  <Icon name={item.icon as IconName} class="channel-icon" />
-                ) : null}
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-                <span class="channel-cta">
-                  {item.linkLabel}
-                  <span aria-hidden="true">→</span>
-                </span>
-              </a>
-            ))
-          }
-        </div>
-      </div>
-    </section>
-
-    <section class="quick-links">
-      <div class="container">
-        <div class="links-grid">
-          {
-            home.links.map((item, index) => (
-              <a
-                href={item.href}
-                class={`link-card reveal-on-scroll reveal-delay-${index + 1}`}
-              >
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-                <span class="link-card-arrow" aria-hidden="true">
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                  <ul class="featured-tags">
+                    {item.tags.map((tag) => (
+                      <li>{tag}</li>
+                    ))}
+                  </ul>
+                </div>
+                <span class="featured-arrow" aria-hidden="true">
                   →
                 </span>
               </a>
@@ -182,20 +123,80 @@ const metrics = await getMetrics();
         </div>
       </div>
     </section>
+
+    <section class="home-section tech-stack" id="stack">
+      <div class="container">
+        <h2 class="section-title reveal-on-scroll">{home.stackTitle}</h2>
+        <ul class="stack-list reveal-on-scroll">
+          {home.stack.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </section>
+
+    <section class="home-section latest-articles" id="articles">
+      <div class="container">
+        <div class="section-head reveal-on-scroll">
+          <h2 class="section-title">{home.articlesTitle}</h2>
+          <a class="section-cta" href={blogHref}>
+            {home.articlesCta}
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+        <div class="article-list">
+          {
+            articles.map((item, index) => (
+              <a
+                href={item.href}
+                class={`article-row reveal-on-scroll reveal-delay-${(index % 3) + 1}`}
+              >
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="home-section oss-section" id="opensource">
+      <div class="container">
+        <h2 class="section-title reveal-on-scroll">{home.ossTitle}</h2>
+        <p class="section-lead reveal-on-scroll">{home.ossDescription}</p>
+        <div class="oss-actions reveal-on-scroll">
+          <a
+            class="btn-primary"
+            href={home.connectGithub}
+            target="_blank"
+            rel="noopener noreferrer">{home.ossGithubLabel}</a
+          >
+          <a class="btn-ghost" href={orgHref}>{home.ossOrgLabel}</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-section connect-section" id="contact">
+      <div class="container">
+        <h2 class="section-title reveal-on-scroll">{home.connectTitle}</h2>
+        <div class="connect-links reveal-on-scroll">
+          <a
+            href={home.connectGithub}
+            target="_blank"
+            rel="noopener noreferrer">GitHub</a
+          >
+          <a href={`mailto:${CONTACT_EMAIL}`}>Email</a>
+        </div>
+        <p class="connect-email reveal-on-scroll">
+          <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+        </p>
+      </div>
+    </section>
   </main>
 
-  <Contact
-    label={copy.contactLabel}
-    hint={copy.contactHint}
-    offers={copy.contactOffers}
-    copyLabel={copy.copyEmail}
-    copiedLabel={copy.copiedEmail}
-  />
   <Footer
     brand={copy.brand}
-    description={home.footerDesc}
+    description={copy.home.footerDesc}
     copyright={copy.copyright}
-    social={home.social}
+    social={copy.home.social}
   />
   <WechatModal alt={copy.wechatAlt} closeLabel={copy.closeModal} />
 </BaseLayout>

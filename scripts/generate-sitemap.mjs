@@ -5,32 +5,47 @@ import { join } from "node:path";
 const ORIGIN = "https://www.xuxuclassmate.com";
 const lastmod = new Date().toISOString().slice(0, 10);
 
-const pages = [
-  { path: "/", changefreq: "weekly", priority: "1.00" },
-  { path: "/en/", changefreq: "weekly", priority: "0.90" },
-  { path: "/en/life", changefreq: "monthly", priority: "0.80" },
-  { path: "/en/learn", changefreq: "monthly", priority: "0.80" },
-  { path: "/en/work", changefreq: "monthly", priority: "0.80" },
-  { path: "/en/notes", changefreq: "weekly", priority: "0.80" },
-  { path: "/en/innonestx", changefreq: "monthly", priority: "0.80" },
-  { path: "/zh/", changefreq: "weekly", priority: "0.90" },
-  { path: "/zh/life", changefreq: "monthly", priority: "0.80" },
-  { path: "/zh/learn", changefreq: "monthly", priority: "0.80" },
-  { path: "/zh/work", changefreq: "monthly", priority: "0.80" },
-  { path: "/zh/notes", changefreq: "weekly", priority: "0.80" },
-  { path: "/zh/innonestx", changefreq: "monthly", priority: "0.80" },
+const staticPages = [
+  "/",
+  "/en/",
+  "/en/about",
+  "/en/learn",
+  "/en/work",
+  "/en/blog",
+  "/en/ai-testing",
+  "/en/playwright",
+  "/en/infrastructure",
+  "/en/life",
+  "/en/innonestx",
+  "/zh/",
+  "/zh/about",
+  "/zh/learn",
+  "/zh/work",
+  "/zh/blog",
+  "/zh/ai-testing",
+  "/zh/playwright",
+  "/zh/infrastructure",
+  "/zh/life",
+  "/zh/innonestx",
 ];
 
+const pages = staticPages.map((path, index) => ({
+  path,
+  changefreq: path === "/" || path.endsWith("/") ? "weekly" : "monthly",
+  priority: index === 0 ? "1.00" : path.includes("/en/") ? "0.90" : "0.80",
+}));
+
 const cases = [
+  "fullstack-e2e",
+  "automation-framework",
   "testcase-generator",
   "trading-assistant",
   "globalpulse",
   "docker-hub-api-gateway",
   "docker-suite",
-  "automation-framework",
 ];
 
-const notes = ["domestic-db-docker-qa", "clawhub-skill-shipping"];
+const posts = ["domestic-db-docker-qa", "clawhub-skill-shipping"];
 
 for (const slug of cases) {
   pages.push({
@@ -41,20 +56,20 @@ for (const slug of cases) {
   pages.push({
     path: `/zh/work/${slug}`,
     changefreq: "monthly",
-    priority: "0.70",
+    priority: "0.65",
   });
 }
 
-for (const slug of notes) {
+for (const slug of posts) {
   pages.push({
-    path: `/en/notes/${slug}`,
+    path: `/en/blog/${slug}`,
     changefreq: "monthly",
     priority: "0.70",
   });
   pages.push({
-    path: `/zh/notes/${slug}`,
+    path: `/zh/blog/${slug}`,
     changefreq: "monthly",
-    priority: "0.70",
+    priority: "0.65",
   });
 }
 

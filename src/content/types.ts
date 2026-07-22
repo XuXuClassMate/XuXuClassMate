@@ -1,6 +1,17 @@
 export type Locale = "en" | "zh";
 
-export type PageId = "home" | "life" | "learn" | "work" | "notes" | "innonestx";
+export type PageId =
+  | "home"
+  | "life"
+  | "learn"
+  | "work"
+  | "notes"
+  | "blog"
+  | "innonestx"
+  | "about"
+  | "ai-testing"
+  | "playwright"
+  | "infrastructure";
 
 export type MetricId =
   | "clawhub:ai-testcase-generator"
@@ -36,7 +47,8 @@ export type CaseSlug =
   | "globalpulse"
   | "docker-hub-api-gateway"
   | "docker-suite"
-  | "automation-framework";
+  | "automation-framework"
+  | "fullstack-e2e";
 
 export type SocialLink = {
   href: string;
@@ -100,6 +112,20 @@ export type CaseArtifact = {
   linkLabel?: string;
 };
 
+export type CaseChain = {
+  title: string;
+  layers: string[];
+};
+
+export type ProjectProof = {
+  github?: string;
+  readme?: string;
+  demo?: string;
+  docker?: string;
+  ci?: string;
+  testReport?: string;
+};
+
 export type CaseStudy = {
   slug: CaseSlug;
   title: string;
@@ -109,6 +135,15 @@ export type CaseStudy = {
   /** Optional dark-theme cover; defaults to cover with `-dark` suffix. */
   coverDark?: string;
   coverAlt: string;
+  /** Engineering case overview (preferred over problem/solution when set). */
+  overview?: string;
+  techStack?: string[];
+  architecture?: CaseChain[];
+  features?: string[];
+  contribution?: string[];
+  results?: string[];
+  proof?: ProjectProof;
+  status?: "live" | "upcoming";
   problem: string;
   solution: string;
   /** Explicit product/engineering tradeoffs — why this path, not another. */
@@ -181,9 +216,17 @@ export type LocaleCopy = {
   menuLabel: string;
   skipToContent: string;
   nav: {
+    about: string;
+    experience: string;
+    projects: string;
+    blog: string;
+    aiTesting: string;
+    github: string;
     life: string;
-    learn: string;
-    work: string;
+    contact: string;
+    /** @deprecated kept for older links */
+    learn?: string;
+    work?: string;
     notes?: string;
     innonestx?: string;
   };
@@ -245,6 +288,12 @@ export type LocaleCopy = {
     caseArtifactsTitle: string;
     caseMetricsTitle: string;
     caseLinksTitle: string;
+    caseOverviewTitle: string;
+    caseStackTitle: string;
+    caseArchitectureTitle: string;
+    caseFeaturesTitle: string;
+    caseContributionTitle: string;
+    caseResultsTitle: string;
     cases: CaseStudy[];
     footerDesc: string;
     social: SocialLink[];

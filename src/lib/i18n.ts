@@ -39,7 +39,7 @@ export function caseHref(locale: Locale, slug: CaseSlug): string {
 }
 
 export function noteHref(locale: Locale, slug: NoteSlug): string {
-  return `/${locale}/notes/${slug}.html`;
+  return `/${locale}/blog/${slug}.html`;
 }
 
 export function languageHref(locale: Locale, page: PageId): string {
@@ -96,12 +96,16 @@ export function jsonLdGraph(
   const copy = getCopy(locale);
   const caseStudy = caseSlug ? getCase(locale, caseSlug) : undefined;
   const note = noteSlug ? getNote(locale, noteSlug) : undefined;
-  const meta = caseStudy?.meta ?? note?.meta ?? copy.meta[page];
+  const meta =
+    caseStudy?.meta ??
+    note?.meta ??
+    copy.meta[page] ??
+    copy.meta.home;
   const pageUrl = absoluteUrl(
     caseSlug
       ? `/${locale}/work/${caseSlug}`
       : noteSlug
-        ? `/${locale}/notes/${noteSlug}`
+        ? `/${locale}/blog/${noteSlug}`
         : canonicalPath(locale, page, rootHome),
   );
   const isZh = locale === "zh";
@@ -116,8 +120,8 @@ export function jsonLdGraph(
     url: SITE_ORIGIN,
     email: CONTACT_EMAIL,
     jobTitle: isZh
-      ? "质量工程师 / AI 测试工具作者"
-      : "QA Engineer / AI Testing Tool Builder",
+      ? "QA / SDET / AI Testing Engineer"
+      : "QA Engineer / SDET / AI Testing Engineer",
     description: meta.description,
     image: absoluteUrl("/images/og-default.jpg"),
     sameAs: [
@@ -129,28 +133,28 @@ export function jsonLdGraph(
     ],
     knowsAbout: isZh
       ? [
-          "软件测试",
-          "自动化测试",
-          "AI 测试",
-          "测试用例生成",
-          "接口测试",
-          "性能测试",
+          "QA Engineer",
+          "SDET",
+          "Test Automation",
+          "API Testing",
+          "Performance Testing",
           "Playwright",
-          "Docker 测试环境",
-          "OpenClaw",
-          "质量工程",
+          "AI Testing",
+          "Docker",
+          "CI/CD",
+          "Full-Stack E2E",
         ]
       : [
-          "Software testing",
-          "Test automation",
-          "AI testing",
-          "Test case generation",
-          "API testing",
-          "Performance testing",
+          "QA Engineer",
+          "SDET",
+          "Test Automation Engineer",
+          "API Automation Testing",
+          "Performance Testing",
           "Playwright",
-          "Docker test environments",
-          "OpenClaw",
-          "Quality engineering",
+          "AI Testing Engineer",
+          "Docker",
+          "CI/CD",
+          "Full-Stack E2E Testing",
         ],
   };
 
@@ -164,7 +168,12 @@ export function jsonLdGraph(
   };
 
   const webPage = {
-    "@type": note ? "Article" : "WebPage",
+    "@type":
+      page === "about"
+        ? "ProfilePage"
+        : note
+          ? "Article"
+          : "WebPage",
     "@id": `${pageUrl}#webpage`,
     url: pageUrl,
     name: meta.title,
@@ -178,11 +187,41 @@ export function jsonLdGraph(
           author: { "@id": `${SITE_ORIGIN}/#person` },
         }
       : {}),
+    ...(page === "about"
+      ? { mainEntity: { "@id": `${SITE_ORIGIN}/#person` } }
+      : {}),
   };
+
+  const graph: Record<string, unknown>[] = [person, website, webPage];
+
+  if (caseStudy) {
+    const github = caseStudy.proof?.github ?? caseStudy.links[0]?.href;
+    if (github && caseStudy.status !== "upcoming") {
+      graph.push({
+        "@type": "SoftwareSourceCode",
+        "@id": `${pageUrl}#code`,
+        name: caseStudy.title,
+        description: caseStudy.overview ?? caseStudy.description,
+        codeRepository: github,
+        programmingLanguage: caseStudy.techStack,
+        author: { "@id": `${SITE_ORIGIN}/#person` },
+        url: pageUrl,
+      });
+    } else {
+      graph.push({
+        "@type": "CreativeWork",
+        "@id": `${pageUrl}#work`,
+        name: caseStudy.title,
+        description: caseStudy.overview ?? caseStudy.description,
+        author: { "@id": `${SITE_ORIGIN}/#person` },
+        url: pageUrl,
+      });
+    }
+  }
 
   return {
     "@context": "https://schema.org",
-    "@graph": [person, website, webPage],
+    "@graph": graph,
   };
 }
 
