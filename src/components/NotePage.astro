@@ -1,0 +1,104 @@
+---
+import Contact from "./Contact.astro";
+import Footer from "./Footer.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCopy, getNote, pageHref, type Locale } from "../lib/i18n";
+import type { NoteSlug } from "../content/types";
+
+type Props = {
+  locale: Locale;
+  slug: NoteSlug;
+};
+
+const { locale, slug } = Astro.props;
+const copy = getCopy(locale);
+const page = copy.notes;
+const note = getNote(locale, slug);
+
+if (!note) {
+  throw new Error(`Unknown note: ${slug}`);
+}
+---
+
+<BaseLayout
+  locale={locale}
+  page="notes"
+  noteSlug={slug}
+  metaOverride={note.meta}
+>
+  <main id="main-content" class="note-page">
+    <section class="hero hero--case">
+      <div class="hero-atmosphere" aria-hidden="true"></div>
+      <div class="container hero-content reveal">
+        <a class="case-back" href={pageHref(locale, "notes")}>
+          ← {page.backLabel}
+        </a>
+        <span class="subtitle">{page.subtitle}</span>
+        <h1 class="hero-title">{note.title}</h1>
+        <p class="hero-desc">{note.description}</p>
+        <p class="note-byline">
+          <span>
+            {page.publishedLabel}
+            <time datetime={note.publishedAt}>{note.publishedAt}</time>
+          </span>
+          <span>
+            {note.readingMinutes} {page.readingLabel}
+          </span>
+        </p>
+      </div>
+    </section>
+
+    <section class="note-body">
+      <div class="container note-prose">
+        {
+          note.sections.map((section) => (
+            <article class="note-section reveal-on-scroll">
+              <h2>{section.heading}</h2>
+              {section.paragraphs.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+              {section.bullets && section.bullets.length > 0 ? (
+                <ul>
+                  {section.bullets.map((bullet) => (
+                    <li>{bullet}</li>
+                  ))}
+                </ul>
+              ) : null}
+            </article>
+          ))
+        }
+        {
+          note.cta ? (
+            <p class="note-cta reveal-on-scroll">
+              <a
+                class="btn-primary"
+                href={note.cta.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {note.cta.label}
+              </a>
+              <a class="btn-ghost" href={pageHref(locale, "notes")}>
+                {page.backLabel}
+              </a>
+            </p>
+          ) : null
+        }
+      </div>
+    </section>
+  </main>
+
+  <Contact
+    label={copy.contactLabel}
+    hint={copy.contactHint}
+    offers={copy.contactOffers}
+    copyLabel={copy.copyEmail}
+    copiedLabel={copy.copiedEmail}
+  />
+  <Footer
+    brand={copy.brand}
+    description={page.footerDesc}
+    copyright={copy.copyright}
+    social={page.social}
+  />
+</BaseLayout>

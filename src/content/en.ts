@@ -1,5 +1,6 @@
 import type { LocaleCopy } from "./types";
 import { getFeaturedProjects, getWorkProjects } from "./projects";
+import { getNotes } from "./notes";
 
 const sharedKeywords =
   "xuxuclassmate, XuXuClassMate, 旭旭同学, QA engineer, software testing, test automation, AI testing, quality engineering, OpenClaw, ClawHub, testcase generator, Playwright, API testing, Docker test environment";
@@ -29,7 +30,13 @@ export const en: LocaleCopy = {
   languageSwitch: "中文",
   contactLabel: "Contact：",
   contactHint:
-    "Open for collaboration on AI tools, agent skills, and quality engineering.",
+    "Open for collaboration — pick a lane and email me.",
+  contactOffers: [
+    "AI testing tool / ClawHub skill customization",
+    "QA team leadership advisory (startup → scale-up)",
+    "Domestic DB / Docker test-environment enablement",
+    "Open-source collaboration on InnoNestX systems",
+  ],
   copyEmail: "Copy email",
   copiedEmail: "Copied",
   backToTop: "Back to top",
@@ -45,14 +52,15 @@ export const en: LocaleCopy = {
     life: "Life",
     learn: "Learn",
     work: "Work",
+    notes: "Notes",
   },
   meta: {
     home: {
-      title: "XuXuClassMate | AI Testing Tools & Quality Engineering",
+      title: "XuXuClassMate | Installable Quality Engineering",
       description:
-        "XuXuClassMate (旭旭同学) — QA engineer building AI testing tools, OpenClaw agent skills, multimodal test case generation, and reusable Docker test environments.",
+        "XuXuClassMate turns quality engineering into installable products — AI testing tools, OpenClaw / ClawHub skills, and reusable Docker environments. Product systems ship under InnoNestX.",
       keywords: sharedKeywords,
-      ogTitle: "XuXuClassMate — AI Testing & Quality Engineering",
+      ogTitle: "XuXuClassMate — Installable Quality Engineering",
     },
     life: {
       title: "Life Journey | XuXuClassMate",
@@ -69,53 +77,61 @@ export const en: LocaleCopy = {
     work: {
       title: "Testing Projects & AI Tools Portfolio | XuXuClassMate",
       description:
-        "Portfolio of AI Test Case Generator, Trading Assistant, GlobalPulse, Docker Hub API Gateway, Dameng/Highgo Docker DB images, and automation frameworks — built for real QA teams.",
+        "Installable QA products: AI Test Case Generator, ClawHub skills, Docker DB images, plus InnoNestX systems like GlobalPulse and the Docker Hub API Gateway.",
       keywords: `${sharedKeywords}, test portfolio, GlobalPulse, Dameng Docker, Highgo Docker, ClawHub skills`,
+    },
+    notes: {
+      title: "Notes | XuXuClassMate",
+      description:
+        "Practical notes on domestic DB Docker setups, ClawHub skill shipping, and installable quality engineering.",
+      keywords: `${sharedKeywords}, notes, Dameng Docker, ClawHub`,
     },
   },
   home: {
-    subtitle: "AI × Quality // Systems",
-    title: "Build with AI. Ship with Quality.",
+    subtitle: "Installable quality engineering",
+    title: "Turn quality work into products teams can run.",
     description:
-      "I build OpenClaw agent skills, AI testing tools, and reusable environments — then use them to deliver software people can trust.",
+      "I ship AI testing tools, OpenClaw / ClawHub skills, and reusable environments — then prove them with live Docker, ClawHub, and API metrics.",
+    positioning:
+      "XuXuClassMate is the personal craft brand. InnoNestX is where product systems like GlobalPulse and the Docker Hub API Gateway ship.",
     valuesTitle: "How I Work",
     values: [
       {
-        title: "AI-Native Tooling",
+        title: "Installable > Demoable",
         description:
-          "Turn repetitive QA work into products: multimodal inputs, review loops, and exportable deliverables.",
+          "If it cannot run via Docker, CLI, or ClawHub, it is not finished — slides do not count as delivery.",
       },
       {
-        title: "Agent Skills",
+        title: "AI with review loops",
         description:
-          "Ship skills on ClawHub / OpenClaw that agents can install and run — not demos that only live in slides.",
+          "Multimodal generation is useful only when Test / Dev / Product judgment stays in the loop.",
       },
       {
-        title: "Quality Systems",
+        title: "Environments that reuse",
         description:
-          "Pair AI speed with solid automation, containers, and environments that teams can actually reuse.",
+          "Containers, domestic DB images, and gateways so teams can boot the same stack in CI and on laptops.",
       },
     ],
     highlightsTitle: "By the Numbers",
     highlights: [
       {
         value: "54k+",
-        label: "Docker Hub pulls across all images",
+        label: "Docker pulls — environments teams reuse",
         metric: "docker:total-pulls",
       },
       {
         value: "1.6k+",
-        label: "ClawHub skill downloads",
+        label: "ClawHub downloads — skills agents install",
         metric: "clawhub:total-downloads",
       },
       {
         value: "500+",
-        label: "Docker Hub API Gateway requests",
+        label: "API Gateway calls — READMEs & tools hitting live stats",
         metric: "api:gateway-calls",
       },
       {
         value: "12",
-        label: "Published Docker images",
+        label: "Docker images published for QA stacks",
         metric: "docker:repo-count",
       },
     ],
@@ -166,26 +182,33 @@ export const en: LocaleCopy = {
         linkLabel: "Visit ClawHub",
         icon: "robot",
       },
+      {
+        title: "GlobalPulse",
+        description:
+          "Live InnoNestX product — scheduled market intelligence briefings.",
+        href: "https://pulse.xuxuclassmate.com/",
+        linkLabel: "Open Pulse",
+        icon: "robot",
+      },
     ],
     links: [
       {
         title: "Learning Path",
-        description: "AI agents, multimodal QA, and the stack behind the tools",
+        description: "From QA craft to installable AI tools and product systems",
         href: "/en/learn.html",
       },
       {
         title: "Project Gallery",
-        description:
-          "Testcase Generator, Trading Assistant, GlobalPulse, Docker suites",
+        description: "Install paths: ClawHub · Docker · browser products",
         href: "/en/work.html",
       },
       {
-        title: "Life Journey",
-        description: "Travel, music, and the rest of the story",
-        href: "/en/life.html",
+        title: "Notes",
+        description: "Dameng Docker QA setups and ClawHub shipping notes",
+        href: "/en/notes.html",
       },
     ],
-    footerDesc: "Building AI tools with a quality-first mindset",
+    footerDesc: "Installable quality engineering — XuXuClassMate × InnoNestX",
     social: [...homeSocial],
   },
   learn: {
@@ -446,8 +469,10 @@ export const en: LocaleCopy = {
     caseBackLabel: "All projects",
     caseProblemTitle: "Problem",
     caseSolutionTitle: "Solution",
+    caseTradeoffsTitle: "Tradeoffs",
     caseOutcomesTitle: "What shipped",
-    caseMetricsTitle: "Proof",
+    caseArtifactsTitle: "Inspectable proof",
+    caseMetricsTitle: "Proof metrics",
     caseLinksTitle: "Links",
     cases: [
       {
@@ -462,6 +487,31 @@ export const en: LocaleCopy = {
           "QA teams spend hours turning PDFs, screenshots, and rough notes into structured cases — and AI drafts without review loops create noise, not coverage.",
         solution:
           "Built a multimodal pipeline (PDF, Word, images, video) with Test / Dev / Product review personas, then packaged it as Docker, npm, and an OpenClaw / ClawHub skill.",
+        tradeoffs: [
+          "Chose review personas over raw LLM dumps — quieter drafts, higher acceptance by QA leads.",
+          "Shipped Docker + npm + ClawHub together so agents and humans share one product, not three demos.",
+          "Accepted slower first answers in exchange for exportable Excel / Markdown / XMind artifacts teams already use."
+        ],
+        artifacts: [
+          {
+            "title": "ClawHub skill page",
+            "description": "Install path agents actually use — downloads are live on the homepage.",
+            "href": "https://clawhub.ai/xuxuclassmate/ai-testcase-generator",
+            "linkLabel": "Open ClawHub"
+          },
+          {
+            "title": "Docker image",
+            "description": "Non-agent local runs with the same pipeline packaged for CI laptops.",
+            "href": "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
+            "linkLabel": "Docker Hub"
+          },
+          {
+            "title": "Source repository",
+            "description": "Multimodal input handlers and review-loop wiring in the open.",
+            "href": "https://github.com/XuXuClassMate/testcase-generator",
+            "linkLabel": "GitHub"
+          }
+        ],
         outcomes: [
           "Installable on ClawHub as AI Test Case Generator",
           "Docker Hub and npm distribution for local runs",
@@ -501,6 +551,25 @@ export const en: LocaleCopy = {
           "Trading workflows were stuck in notebooks and chat prompts — agents could not install a durable skill with clear risk guardrails.",
         solution:
           "Packaged support/resistance, multi-indicator signals, position sizing, and risk alerts as a ClawHub skill with Docker and pip / CLI entrypoints.",
+        tradeoffs: [
+          "Risk sizing and alerts beat signal fireworks — a skill that only shouts entries is unsafe to install.",
+          "Kept CLI / Docker paths so traders without an agent runtime can still run the same logic.",
+          "Published on ClawHub instead of notebook-only workflows so agents get a durable package."
+        ],
+        artifacts: [
+          {
+            "title": "ClawHub skill",
+            "description": "Installable OpenClaw skill with live download counts.",
+            "href": "https://clawhub.ai/xuxuclassmate/trading-assistant-core",
+            "linkLabel": "Open ClawHub"
+          },
+          {
+            "title": "GitHub + Docker",
+            "description": "Human-facing installs alongside the agent skill.",
+            "href": "https://github.com/XuXuClassMate/trading-assistant",
+            "linkLabel": "GitHub"
+          }
+        ],
         outcomes: [
           "Published as an installable OpenClaw / ClawHub skill",
           "CLI and Docker paths for non-agent use",
@@ -536,6 +605,25 @@ export const en: LocaleCopy = {
           "Teams needed reliable finance and hotspot briefings — not one-off scripts — with calendars, templates, and push channels they control.",
         solution:
           "Built a self-hosted Cloudflare Workers app with Admin UI, KV config, cron schedules, market calendars, and Feishu / WeChat / Telegram providers.",
+        tradeoffs: [
+          "Self-hosted Workers + KV over a SaaS newsletter — teams keep calendars and credentials.",
+          "Admin UI with password gates instead of pure cron scripts — operators can preview before send.",
+          "Multi-channel providers (Feishu / WeChat / Telegram) instead of email-only delivery."
+        ],
+        artifacts: [
+          {
+            "title": "Live product",
+            "description": "Running deployment for scheduled market intelligence briefings.",
+            "href": "https://pulse.xuxuclassmate.com/",
+            "linkLabel": "Open Pulse"
+          },
+          {
+            "title": "InnoNestX source",
+            "description": "Workers app, providers, and admin flows in the open.",
+            "href": "https://github.com/InnoNestX/GlobalPulse",
+            "linkLabel": "GitHub"
+          }
+        ],
         outcomes: [
           "Password-protected Admin UI for schedule and provider settings",
           "Cron-driven delivery with timezone-aware market calendars",
@@ -569,6 +657,25 @@ export const en: LocaleCopy = {
           "Docker Hub data was fragmented — pull totals, repo details, and badges needed a single, documentable API surface for tools and READMEs.",
         solution:
           "Shipped a Hono-based gateway with user stats, SVG cards, repo/tag APIs, OpenAPI docs, bilingual UI, and live request testing.",
+        tradeoffs: [
+          "Unified REST + SVG cards over scraping Hub HTML — stable for README embeds.",
+          "OpenAPI + bilingual tester so callers can verify before wiring production.",
+          "Dogfoods its own /api/stats — this site’s homepage metrics call the same gateway."
+        ],
+        artifacts: [
+          {
+            "title": "Live API + docs",
+            "description": "User stats, repo details, and interactive OpenAPI.",
+            "href": "https://docker-hub-pull-counter.vercel.app",
+            "linkLabel": "Open gateway"
+          },
+          {
+            "title": "Embeddable stats card",
+            "description": "SVG card used in READMEs and on this site.",
+            "href": "https://docker-hub-pull-counter.vercel.app/api/docker-stats?username=xuxuclassmate",
+            "linkLabel": "View SVG"
+          }
+        ],
         outcomes: [
           "Public REST endpoints for user and repository stats",
           "Embeddable Docker stats SVG cards",
@@ -607,6 +714,25 @@ export const en: LocaleCopy = {
           "Domestic and open-source databases were painful to stand up for QA — undocumented installs blocked automation and onboarding.",
         solution:
           "Published ready-to-run Dameng, Highgo, Kingbase, TiDB, and related images on Docker Hub with consistent tags and docs for test teams.",
+        tradeoffs: [
+          "Boring, predictable tags over clever names — CI suites need stability first.",
+          "One service per image so failures stay diagnosable in pull-and-run flows.",
+          "Published Dameng / Highgo early — pull volume validated that domestic DB pain was real."
+        ],
+        artifacts: [
+          {
+            "title": "Docker Hub namespace",
+            "description": "All QA-oriented images with live pull totals on the homepage.",
+            "href": "https://hub.docker.com/u/xuxuclassmate",
+            "linkLabel": "Browse images"
+          },
+          {
+            "title": "Live user stats API",
+            "description": "Aggregated pulls via the Docker Hub API Gateway.",
+            "href": "https://docker-hub-pull-counter.vercel.app/api/user/stats?username=xuxuclassmate",
+            "linkLabel": "JSON stats"
+          }
+        ],
         outcomes: [
           "Dameng and Highgo images used widely by QA teams",
           "Consistent pull-and-run workflow for CI",
@@ -643,6 +769,25 @@ export const en: LocaleCopy = {
           "One-off scripts do not survive team handoffs — AI tools need a durable automation craft underneath them.",
         solution:
           "Built practice frameworks for API and UI automation (including Playwright) that emphasize reuse, clarity, and language flexibility.",
+        tradeoffs: [
+          "Language-flexible frameworks over a single-stack identity — delivery quality is the constraint.",
+          "Practice repos stay public so patterns can be copied without waiting for a course.",
+          "Locust + Playwright examples live beside API suites — performance is not an afterthought."
+        ],
+        artifacts: [
+          {
+            "title": "Java practice suite",
+            "description": "Reusable API / UI automation patterns.",
+            "href": "https://github.com/XuXuClassMate/My_Test_JAProject",
+            "linkLabel": "GitHub"
+          },
+          {
+            "title": "Python + Locust examples",
+            "description": "Performance, API, Selenium, and Appium practice in one repo.",
+            "href": "https://github.com/XuXuClassMate/My_Test_PyProject",
+            "linkLabel": "GitHub"
+          }
+        ],
         outcomes: [
           "Reusable suite structure for API / UI work",
           "Patterns that inform AI tool packaging",
@@ -784,6 +929,18 @@ export const en: LocaleCopy = {
         wechat: true,
       },
     ],
+  },
+  notes: {
+    subtitle: "NOTES",
+    title: "Practical Notes",
+    description:
+      "Searchable write-ups on domestic DB Docker setups and shipping installable ClawHub skills.",
+    backLabel: "All notes",
+    readingLabel: "min read",
+    publishedLabel: "Published",
+    items: getNotes("en"),
+    footerDesc: "Installable quality engineering — written down",
+    social: [...homeSocial],
   },
   notFound: {
     title: "Uh-oh! Page Missing",

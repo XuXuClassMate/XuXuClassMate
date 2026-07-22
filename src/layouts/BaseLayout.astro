@@ -8,9 +8,11 @@ import {
   hreflangLinks,
   jsonLdGraph,
   languageHref,
+  noteHref,
   pageHref,
   type CaseSlug,
   type Locale,
+  type NoteSlug,
   type PageId,
 } from "../lib/i18n";
 import "../styles/fonts.css";
@@ -23,6 +25,7 @@ type Props = {
   rootHome?: boolean;
   noindex?: boolean;
   caseSlug?: CaseSlug;
+  noteSlug?: NoteSlug;
   /** Absolute or site-relative Open Graph image path. */
   ogImagePath?: string;
   metaOverride?: {
@@ -39,6 +42,7 @@ const {
   rootHome = false,
   noindex = false,
   caseSlug,
+  noteSlug,
   ogImagePath,
   metaOverride,
 } = Astro.props;
@@ -49,7 +53,9 @@ const meta =
 const canonical = absoluteUrl(
   caseSlug
     ? `/${locale}/work/${caseSlug}`
-    : canonicalPath(locale, page, rootHome),
+    : noteSlug
+      ? `/${locale}/notes/${noteSlug}`
+      : canonicalPath(locale, page, rootHome),
 );
 const alternates = caseSlug
   ? [
@@ -57,17 +63,25 @@ const alternates = caseSlug
       { hreflang: "zh", href: absoluteUrl(`/zh/work/${caseSlug}`) },
       { hreflang: "x-default", href: absoluteUrl(`/en/work/${caseSlug}`) },
     ]
-  : hreflangLinks(locale, page, rootHome);
+  : noteSlug
+    ? [
+        { hreflang: "en", href: absoluteUrl(`/en/notes/${noteSlug}`) },
+        { hreflang: "zh", href: absoluteUrl(`/zh/notes/${noteSlug}`) },
+        { hreflang: "x-default", href: absoluteUrl(`/en/notes/${noteSlug}`) },
+      ]
+    : hreflangLinks(locale, page, rootHome);
 const homeHref = locale === "zh" ? pageHref("zh", "home") : "/";
 const active = page === "home" ? undefined : page;
 const ogTitle = meta.ogTitle ?? meta.title;
 const ogImage = absoluteUrl(ogImagePath ?? "/images/og-default.jpg");
 const structuredData = noindex
   ? null
-  : jsonLdGraph(locale, page, rootHome, caseSlug);
+  : jsonLdGraph(locale, page, rootHome, caseSlug, noteSlug);
 const langSwitchHref = caseSlug
   ? caseHref(locale === "en" ? "zh" : "en", caseSlug)
-  : languageHref(locale, page);
+  : noteSlug
+    ? noteHref(locale === "en" ? "zh" : "en", noteSlug)
+    : languageHref(locale, page);
 ---
 
 <!doctype html>
@@ -218,6 +232,16 @@ const langSwitchHref = caseSlug
               >
                 {copy.nav.work}
               </a>
+              {
+                copy.nav.notes ? (
+                  <a
+                    href={pageHref(locale, "notes")}
+                    class:list={["nav-item", { active: active === "notes" }]}
+                  >
+                    {copy.nav.notes}
+                  </a>
+                ) : null
+              }
               <a href={langSwitchHref} class="language-switch">
                 {copy.languageSwitch}
               </a>

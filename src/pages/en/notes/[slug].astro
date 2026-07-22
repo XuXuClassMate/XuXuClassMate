@@ -1,0 +1,13 @@
+---
+import NotePage from "../../../components/NotePage.astro";
+import { NOTE_SLUGS } from "../../../content/notes";
+import type { NoteSlug } from "../../../lib/i18n";
+
+export function getStaticPaths() {
+  return NOTE_SLUGS.map((slug) => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+---
+
+<NotePage locale="en" slug={slug as NoteSlug} />

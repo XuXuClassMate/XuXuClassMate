@@ -1,9 +1,11 @@
+import { getNote as getNoteFromContent } from "../content/notes";
 import { en } from "../content/en";
 import { zh } from "../content/zh";
 import type {
   CaseSlug,
   Locale,
   LocaleCopy,
+  NoteSlug,
   PageId,
 } from "../content/types";
 
@@ -20,6 +22,10 @@ export function getCase(locale: Locale, slug: CaseSlug) {
   return getCopy(locale).work.cases.find((entry) => entry.slug === slug);
 }
 
+export function getNote(locale: Locale, slug: NoteSlug | string) {
+  return getNoteFromContent(locale, slug);
+}
+
 /** Public path for a page. Root `/` is the English home (same as legacy). */
 export function pageHref(locale: Locale, page: PageId): string {
   if (page === "home") {
@@ -30,6 +36,10 @@ export function pageHref(locale: Locale, page: PageId): string {
 
 export function caseHref(locale: Locale, slug: CaseSlug): string {
   return `/${locale}/work/${slug}.html`;
+}
+
+export function noteHref(locale: Locale, slug: NoteSlug): string {
+  return `/${locale}/notes/${slug}.html`;
 }
 
 export function languageHref(locale: Locale, page: PageId): string {
@@ -81,14 +91,18 @@ export function jsonLdGraph(
   page: PageId,
   rootHome = false,
   caseSlug?: CaseSlug,
+  noteSlug?: NoteSlug,
 ) {
   const copy = getCopy(locale);
   const caseStudy = caseSlug ? getCase(locale, caseSlug) : undefined;
-  const meta = caseStudy?.meta ?? copy.meta[page];
+  const note = noteSlug ? getNote(locale, noteSlug) : undefined;
+  const meta = caseStudy?.meta ?? note?.meta ?? copy.meta[page];
   const pageUrl = absoluteUrl(
     caseSlug
       ? `/${locale}/work/${caseSlug}`
-      : canonicalPath(locale, page, rootHome),
+      : noteSlug
+        ? `/${locale}/notes/${noteSlug}`
+        : canonicalPath(locale, page, rootHome),
   );
   const isZh = locale === "zh";
 
@@ -150,7 +164,7 @@ export function jsonLdGraph(
   };
 
   const webPage = {
-    "@type": "WebPage",
+    "@type": note ? "Article" : "WebPage",
     "@id": `${pageUrl}#webpage`,
     url: pageUrl,
     name: meta.title,
@@ -158,6 +172,13 @@ export function jsonLdGraph(
     isPartOf: { "@id": `${SITE_ORIGIN}/#website` },
     about: { "@id": `${SITE_ORIGIN}/#person` },
     inLanguage: locale,
+    ...(note
+      ? {
+          datePublished: note.publishedAt,
+          headline: note.title,
+          author: { "@id": `${SITE_ORIGIN}/#person` },
+        }
+      : {}),
   };
 
   return {
@@ -166,4 +187,4 @@ export function jsonLdGraph(
   };
 }
 
-export type { CaseSlug, Locale, PageId, LocaleCopy };
+export type { CaseSlug, Locale, NoteSlug, PageId, LocaleCopy };

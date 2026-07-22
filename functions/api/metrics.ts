@@ -27,6 +27,7 @@ const FALLBACKS: Omit<MetricsPayload, "updatedAt"> = {
 
 const GATEWAY_ORIGIN = "https://docker-hub-pull-counter.vercel.app";
 const CACHE_TTL_SECONDS = 600;
+const LAST_GOOD_URL = "https://metrics.internal/last-good";
 
 async function readDownloads(slug: string): Promise<number | null> {
   const response = await fetch(`https://clawhub.ai/api/v1/skills/${slug}`, {
@@ -78,7 +79,12 @@ async function readGatewayCalls(): Promise<number | null> {
   return typeof data.totalCalls === "number" ? data.totalCalls : null;
 }
 
-async function buildPayload(): Promise<MetricsPayload> {
+type BuildResult = {
+  payload: MetricsPayload;
+  liveHits: number;
+};
+
+async function buildPayload(): Promise<BuildResult> {
   const [testcase, trading, dameng, highgo, kingbase, tidb, userStats, apiCalls] =
     await Promise.all([
       readDownloads("ai-testcase-generator"),
@@ -91,34 +97,52 @@ async function buildPayload(): Promise<MetricsPayload> {
       readGatewayCalls(),
     ]);
 
+  const liveHits = [
+    testcase,
+    trading,
+    dameng,
+    highgo,
+    kingbase,
+    tidb,
+    userStats.pulls,
+    userStats.repos,
+    apiCalls,
+  ].filter((value) => value != null).length;
+
   const testcaseValue = testcase ?? FALLBACKS["clawhub:ai-testcase-generator"];
   const tradingValue = trading ?? FALLBACKS["clawhub:trading-assistant-core"];
 
   return {
-    "clawhub:ai-testcase-generator": testcaseValue,
-    "clawhub:trading-assistant-core": tradingValue,
-    "clawhub:total-downloads":
-      (testcase ?? FALLBACKS["clawhub:ai-testcase-generator"]) +
-      (trading ?? FALLBACKS["clawhub:trading-assistant-core"]),
-    "docker:dameng": dameng ?? FALLBACKS["docker:dameng"],
-    "docker:highgo": highgo ?? FALLBACKS["docker:highgo"],
-    "docker:kingbase": kingbase ?? FALLBACKS["docker:kingbase"],
-    "docker:tidb": tidb ?? FALLBACKS["docker:tidb"],
-    "docker:total-pulls":
-      userStats.pulls ?? FALLBACKS["docker:total-pulls"],
-    "docker:repo-count":
-      userStats.repos ?? FALLBACKS["docker:repo-count"],
-    "api:gateway-calls": apiCalls ?? FALLBACKS["api:gateway-calls"],
-    updatedAt: new Date().toISOString(),
+    liveHits,
+    payload: {
+      "clawhub:ai-testcase-generator": testcaseValue,
+      "clawhub:trading-assistant-core": tradingValue,
+      "clawhub:total-downloads": testcaseValue + tradingValue,
+      "docker:dameng": dameng ?? FALLBACKS["docker:dameng"],
+      "docker:highgo": highgo ?? FALLBACKS["docker:highgo"],
+      "docker:kingbase": kingbase ?? FALLBACKS["docker:kingbase"],
+      "docker:tidb": tidb ?? FALLBACKS["docker:tidb"],
+      "docker:total-pulls":
+        userStats.pulls ?? FALLBACKS["docker:total-pulls"],
+      "docker:repo-count":
+        userStats.repos ?? FALLBACKS["docker:repo-count"],
+      "api:gateway-calls": apiCalls ?? FALLBACKS["api:gateway-calls"],
+      updatedAt: new Date().toISOString(),
+    },
   };
 }
 
-function jsonResponse(payload: MetricsPayload, hit: boolean): Response {
+function jsonResponse(
+  payload: MetricsPayload,
+  hit: boolean,
+  stale = false,
+): Response {
   return Response.json(payload, {
     headers: {
       "Cache-Control": `public, s-maxage=${CACHE_TTL_SECONDS}, max-age=60`,
       "Access-Control-Allow-Origin": "*",
       "X-Metrics-Cache": hit ? "HIT" : "MISS",
+      "X-Metrics-Stale": stale ? "1" : "0",
     },
   });
 }
@@ -128,30 +152,82 @@ type PagesContext = {
   waitUntil: (promise: Promise<unknown>) => void;
 };
 
+function getCache(): Cache | null {
+  try {
+    const cacheStorage = caches as CacheStorage & { default?: Cache };
+    return cacheStorage.default ?? null;
+  } catch {
+    return null;
+  }
+}
+
 export async function onRequestGet(context: PagesContext): Promise<Response> {
   const cacheKey = new Request(new URL(context.request.url).toString(), {
     method: "GET",
   });
+  const lastGoodKey = new Request(LAST_GOOD_URL, { method: "GET" });
+  const cache = getCache();
 
   try {
-    const cacheStorage = caches as CacheStorage & { default: Cache };
-    const cache = cacheStorage.default;
-    const cached = await cache.match(cacheKey);
-    if (cached) {
-      const headers = new Headers(cached.headers);
-      headers.set("X-Metrics-Cache", "HIT");
-      return new Response(cached.body, {
-        status: cached.status,
-        headers,
-      });
+    if (cache) {
+      const cached = await cache.match(cacheKey);
+      if (cached) {
+        const headers = new Headers(cached.headers);
+        headers.set("X-Metrics-Cache", "HIT");
+        return new Response(cached.body, {
+          status: cached.status,
+          headers,
+        });
+      }
     }
 
-    const payload = await buildPayload();
-    const response = jsonResponse(payload, false);
-    context.waitUntil(cache.put(cacheKey, response.clone()));
+    const { payload, liveHits } = await buildPayload();
+
+    if (liveHits === 0 && cache) {
+      const lastGood = await cache.match(lastGoodKey);
+      if (lastGood) {
+        const headers = new Headers(lastGood.headers);
+        headers.set("X-Metrics-Cache", "MISS");
+        headers.set("X-Metrics-Stale", "1");
+        return new Response(lastGood.body, {
+          status: lastGood.status,
+          headers,
+        });
+      }
+    }
+
+    const response = jsonResponse(payload, false, liveHits === 0);
+    if (cache) {
+      context.waitUntil(
+        Promise.all([
+          cache.put(cacheKey, response.clone()),
+          liveHits > 0
+            ? cache.put(lastGoodKey, response.clone())
+            : Promise.resolve(),
+        ]),
+      );
+    }
     return response;
   } catch {
-    const payload = await buildPayload();
-    return jsonResponse(payload, false);
+    if (cache) {
+      const lastGood = await cache.match(lastGoodKey);
+      if (lastGood) {
+        const headers = new Headers(lastGood.headers);
+        headers.set("X-Metrics-Cache", "MISS");
+        headers.set("X-Metrics-Stale", "1");
+        return new Response(lastGood.body, {
+          status: lastGood.status,
+          headers,
+        });
+      }
+    }
+    const { payload } = await buildPayload().catch(() => ({
+      payload: {
+        ...FALLBACKS,
+        updatedAt: new Date().toISOString(),
+      } satisfies MetricsPayload,
+      liveHits: 0,
+    }));
+    return jsonResponse(payload, false, true);
   }
 }

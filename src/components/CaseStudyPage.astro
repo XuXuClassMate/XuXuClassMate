@@ -78,12 +78,49 @@ const coverDark =
           <h2>{page.caseSolutionTitle}</h2>
           <p>{study.solution}</p>
         </article>
+        {
+          study.tradeoffs && study.tradeoffs.length > 0 ? (
+            <article class="case-block reveal-on-scroll">
+              <h2>{page.caseTradeoffsTitle}</h2>
+              <ul>
+                {study.tradeoffs.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </article>
+          ) : null
+        }
         <article class="case-block reveal-on-scroll">
           <h2>{page.caseOutcomesTitle}</h2>
           <ul>
             {study.outcomes.map((item) => <li>{item}</li>)}
           </ul>
         </article>
+        {
+          study.artifacts && study.artifacts.length > 0 ? (
+            <article class="case-block reveal-on-scroll">
+              <h2>{page.caseArtifactsTitle}</h2>
+              <div class="case-artifacts">
+                {study.artifacts.map((artifact) => (
+                  <div class="case-artifact">
+                    <h3>{artifact.title}</h3>
+                    <p>{artifact.description}</p>
+                    {artifact.href ? (
+                      <a
+                        href={artifact.href}
+                        class="project-link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {artifact.linkLabel ?? artifact.href}
+                      </a>
+                    ) : null}
+                  </div>
+                ))}
+              </div>
+            </article>
+          ) : null
+        }
         <article class="case-block reveal-on-scroll">
           <h2>{page.caseMetricsTitle}</h2>
           <div class="case-metrics">
@@ -109,6 +146,26 @@ const coverDark =
               })
             }
           </div>
+          {
+            slug === "docker-suite" || slug === "docker-hub-api-gateway" ? (
+              <p class="case-stats-embed">
+                <a
+                  href="https://hub.docker.com/u/xuxuclassmate"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src="https://docker-hub-pull-counter.vercel.app/api/docker-stats?username=xuxuclassmate"
+                    alt="xuxuclassmate Docker Hub live stats"
+                    width="480"
+                    height="120"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </a>
+              </p>
+            ) : null
+          }
         </article>
         <article class="case-block reveal-on-scroll">
           <h2>{page.caseLinksTitle}</h2>
@@ -134,6 +191,7 @@ const coverDark =
   <Contact
     label={copy.contactLabel}
     hint={copy.contactHint}
+    offers={copy.contactOffers}
     copyLabel={copy.copyEmail}
     copiedLabel={copy.copiedEmail}
   />

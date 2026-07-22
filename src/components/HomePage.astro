@@ -30,6 +30,7 @@ const metrics = await getMetrics();
       subtitle={home.subtitle}
       title={home.title}
       description={home.description}
+      positioning={home.positioning}
       typewriter
       actions={[
         {
@@ -186,6 +187,7 @@ const metrics = await getMetrics();
   <Contact
     label={copy.contactLabel}
     hint={copy.contactHint}
+    offers={copy.contactOffers}
     copyLabel={copy.copyEmail}
     copiedLabel={copy.copiedEmail}
   />

@@ -4,9 +4,11 @@ import {
   canonicalPath,
   caseHref,
   getCase,
+  getNote,
   hreflangLinks,
   jsonLdGraph,
   languageHref,
+  noteHref,
   pageHref,
 } from "./i18n";
 
@@ -16,6 +18,7 @@ describe("i18n paths", () => {
     expect(pageHref("zh", "home")).toBe("/zh/index.html");
     expect(pageHref("en", "learn")).toBe("/en/learn.html");
     expect(pageHref("zh", "work")).toBe("/zh/work.html");
+    expect(pageHref("en", "notes")).toBe("/en/notes.html");
   });
 
   it("maps case study routes", () => {
@@ -23,6 +26,15 @@ describe("i18n paths", () => {
       "/en/work/testcase-generator.html",
     );
     expect(caseHref("zh", "docker-suite")).toBe("/zh/work/docker-suite.html");
+  });
+
+  it("maps note routes", () => {
+    expect(noteHref("en", "domestic-db-docker-qa")).toBe(
+      "/en/notes/domestic-db-docker-qa.html",
+    );
+    expect(noteHref("zh", "clawhub-skill-shipping")).toBe(
+      "/zh/notes/clawhub-skill-shipping.html",
+    );
   });
 
   it("switches language the same way as the legacy site", () => {
@@ -77,6 +89,16 @@ describe("i18n paths", () => {
     expect(getCase("en", "globalpulse")?.slug).toBe("globalpulse");
     expect(getCase("zh", "docker-hub-api-gateway")?.title).toBe(
       "Docker Hub API Gateway",
+    );
+    expect(getCase("en", "testcase-generator")?.tradeoffs?.length).toBeGreaterThan(
+      0,
+    );
+  });
+
+  it("resolves notes in both locales", () => {
+    expect(getNote("en", "domestic-db-docker-qa")?.title).toContain("Dameng");
+    expect(getNote("zh", "clawhub-skill-shipping")?.slug).toBe(
+      "clawhub-skill-shipping",
     );
   });
 });

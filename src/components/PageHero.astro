@@ -3,6 +3,7 @@ type Props = {
   subtitle: string;
   title: string;
   description: string;
+  positioning?: string;
   home?: boolean;
   brand?: string;
   actions?: { href: string; label: string; primary?: boolean }[];
@@ -13,6 +14,7 @@ const {
   subtitle,
   title,
   description,
+  positioning,
   home = false,
   brand,
   actions = [],
@@ -34,6 +36,7 @@ const {
       </p>
       <h1 class="hero-title">{title}</h1>
       <p class="hero-desc">{description}</p>
+      {positioning ? <p class="hero-positioning">{positioning}</p> : null}
       {
         actions.length > 0 ? (
           <div class="hero-actions">
