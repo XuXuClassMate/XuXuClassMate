@@ -6,7 +6,12 @@ type Props = {
   positioning?: string;
   home?: boolean;
   brand?: string;
-  actions?: { href: string; label: string; primary?: boolean }[];
+  actions?: {
+    href: string;
+    label: string;
+    primary?: boolean;
+    external?: boolean;
+  }[];
   typewriter?: boolean;
 };
 
@@ -44,6 +49,8 @@ const {
               <a
                 class={action.primary ? "btn-primary" : "btn-ghost"}
                 href={action.href}
+                target={action.external ? "_blank" : undefined}
+                rel={action.external ? "noopener noreferrer" : undefined}
               >
                 {action.label}
               </a>
