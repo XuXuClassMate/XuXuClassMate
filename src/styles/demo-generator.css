@@ -232,18 +232,43 @@
   border-top: 1px solid var(--line);
 }
 
-.demo-output-block.is-hidden {
+.demo-output-block.is-hidden,
+.demo-results-panel.is-hidden {
   display: none;
+}
+
+.demo-results-panel {
+  margin-top: 1.25rem;
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface-ghost);
+}
+
+.demo-results-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  margin-bottom: 0.9rem;
 }
 
 .demo-results-title,
 .demo-output-block h3 {
-  margin: 0 0 0.75rem;
-  font-size: 1.05rem;
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.demo-results-count {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
 }
 
 .demo-results {
   display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.85rem;
 }
 
@@ -305,7 +330,8 @@
   line-height: 1.55;
 }
 
-.demo-review-note {
+.demo-review-note,
+.demo-export-hint {
   margin: 0 0 0.7rem;
   color: var(--muted);
   line-height: 1.6;
@@ -323,29 +349,51 @@
 }
 
 .demo-personas li,
-.demo-export-list li {
-  padding: 0.35rem 0.7rem;
+.demo-export-btn {
+  padding: 0.4rem 0.75rem;
   border: 1px solid var(--line);
   border-radius: 999px;
   font-size: 0.85rem;
   color: var(--muted);
+  background: transparent;
   transition:
     border-color 0.2s ease,
     color 0.2s ease,
     background 0.2s ease;
 }
 
+.demo-export-btn {
+  cursor: pointer;
+  font: inherit;
+}
+
+.demo-export-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.demo-export-btn:not(:disabled):hover {
+  border-color: rgba(92, 225, 255, 0.55);
+  color: var(--accent-cyan);
+}
+
 .demo-personas li.is-active,
-.demo-export-list li.is-active {
+.demo-export-btn.is-active {
   border-color: rgba(92, 225, 255, 0.55);
   color: var(--accent-cyan);
   background: color-mix(in srgb, var(--accent-cyan) 10%, transparent);
 }
 
 .demo-personas li.is-done,
-.demo-export-list li.is-done {
+.demo-export-btn.is-done {
   border-color: rgba(92, 225, 255, 0.35);
   color: var(--text);
+}
+
+.demo-export-status {
+  margin: 0.75rem 0 0;
+  font-size: 0.9rem;
+  color: var(--accent-cyan);
 }
 
 .demo-real {
@@ -385,13 +433,15 @@
 }
 
 @media (max-width: 980px) {
-  .demo-pipeline {
+  .demo-pipeline,
+  .demo-results {
     grid-template-columns: 1fr 1fr;
   }
 }
 
 @media (max-width: 560px) {
-  .demo-pipeline {
+  .demo-pipeline,
+  .demo-results {
     grid-template-columns: 1fr;
   }
 }

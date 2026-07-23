@@ -101,9 +101,14 @@ test("generator interactive demo runs sample flow", async ({ page }) => {
   await expect(
     page.getByRole("heading", { name: "Request OTP with a valid email" }),
   ).toBeVisible();
+  await expect(page.locator("#demo-results")).toBeVisible();
   await expect(page.getByText("Pipeline complete")).toBeVisible({
     timeout: 15000,
   });
+  const downloadPromise = page.waitForEvent("download");
+  await page.getByRole("button", { name: "Markdown" }).click();
+  const download = await downloadPromise;
+  expect(download.suggestedFilename()).toBe("demo-test-cases.md");
 });
 
 test("non-flagship case study uses same template", async ({ page }) => {

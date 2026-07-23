@@ -34,7 +34,10 @@ export type GeneratorDemoCopy = {
   reviewLabel: string;
   reviewNote: string;
   exportLabel: string;
-  exportItems: string[];
+  exportHint: string;
+  exportDownloaded: string;
+  exportItems: Array<{ id: string; label: string }>;
+  resultsCountLabel: string;
   personas: string[];
   realProductTitle: string;
   realProductBody: string;
@@ -53,7 +56,7 @@ export type GeneratorDemoPayload = {
   samplePrd: string;
   cases: DemoCase[];
   stages: DemoStage[];
-  exportItems: string[];
+  exportItems: Array<{ id: string; label: string }>;
   labels: {
     generating: string;
     generate: string;
@@ -63,6 +66,8 @@ export type GeneratorDemoPayload = {
     expected: string;
     activityIdle: string;
     reviewNote: string;
+    resultsCountLabel: string;
+    exportDownloaded: string;
   };
 };
 
@@ -85,10 +90,18 @@ const EN: GeneratorDemoCopy = {
   activityLabel: "Live stage output",
   activityIdle: "Load a sample PRD, then generate to watch each pipeline stage run.",
   resultsLabel: "Structured test cases",
+  resultsCountLabel: "Sample cases in this demo: {n}",
   reviewLabel: "Human review",
   reviewNote: "Test / Dev / Product each check coverage, feasibility, and wording before export.",
   exportLabel: "Automation / integration handoff",
-  exportItems: ["Excel", "Markdown", "XMind", "Automation suite"],
+  exportHint: "Click a format to download a demo sample from the generated cases.",
+  exportDownloaded: "Downloaded {format} (demo sample)",
+  exportItems: [
+    { id: "excel", label: "Excel" },
+    { id: "markdown", label: "Markdown" },
+    { id: "xmind", label: "XMind" },
+    { id: "automation", label: "Automation suite" },
+  ],
   personas: ["Test", "Dev", "Product"],
   realProductTitle: "Want the real multimodal upload?",
   realProductBody:
@@ -216,10 +229,18 @@ const ZH: GeneratorDemoCopy = {
   activityLabel: "阶段实时输出",
   activityIdle: "先载入示例 PRD，再点击生成，观看每个阶段如何推进。",
   resultsLabel: "结构化测试用例",
+  resultsCountLabel: "本 Demo 展示示例用例：{n} 条",
   reviewLabel: "人工评审",
   reviewNote: "测试 / 开发 / 产品分别检查覆盖、可落地性与表述，再进入导出。",
   exportLabel: "自动化 / 集成交接",
-  exportItems: ["Excel", "Markdown", "XMind", "自动化套件"],
+  exportHint: "点击格式即可下载基于当前用例的 Demo 样例文件。",
+  exportDownloaded: "已下载 {format}（Demo 样例）",
+  exportItems: [
+    { id: "excel", label: "Excel" },
+    { id: "markdown", label: "Markdown" },
+    { id: "xmind", label: "XMind" },
+    { id: "automation", label: "自动化套件" },
+  ],
   personas: ["测试", "开发", "产品"],
   realProductTitle: "需要真实的多模态上传？",
   realProductBody:
@@ -333,6 +354,8 @@ export function getGeneratorDemoPayload(locale: Locale): GeneratorDemoPayload {
       expected: locale === "zh" ? "预期结果" : "Expected",
       activityIdle: demo.activityIdle,
       reviewNote: demo.reviewNote,
+      resultsCountLabel: demo.resultsCountLabel,
+      exportDownloaded: demo.exportDownloaded,
     },
   };
 }
