@@ -31,7 +31,7 @@ export const en: LocaleCopy = {
   author: "XuXuClassMate",
   languageSwitch: "EN",
   languageSwitchHint: "Switch to Chinese",
-  contactLabel: "Contact：",
+  contactLabel: "Contact:",
   contactHint:
     "Open for collaboration — pick a lane and email me.",
   contactOffers: [
