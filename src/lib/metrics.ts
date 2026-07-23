@@ -100,8 +100,21 @@ function clawhubDownloads(payload: unknown): number | null {
 
 function dockerPulls(payload: unknown): number | null {
   if (!payload || typeof payload !== "object") return null;
-  const pulls = (payload as { pull_count?: unknown }).pull_count;
-  return typeof pulls === "number" && Number.isFinite(pulls) ? pulls : null;
+  const root = payload as {
+    pull_count?: unknown;
+    pullCount?: unknown;
+    data?: { pull_count?: unknown; pullCount?: unknown };
+  };
+  const candidates = [
+    root.pull_count,
+    root.pullCount,
+    root.data?.pull_count,
+    root.data?.pullCount,
+  ];
+  for (const pulls of candidates) {
+    if (typeof pulls === "number" && Number.isFinite(pulls)) return pulls;
+  }
+  return null;
 }
 
 function npmRangeTotal(payload: unknown): number | null {
@@ -123,6 +136,10 @@ function utcToday(): string {
   return new Date().toISOString().slice(0, 10);
 }
 
+function gatewayRepoDetailsUrl(repo: string): string {
+  return `${GATEWAY_ORIGIN}/api/repo/details?namespace=xuxuclassmate&repo=${encodeURIComponent(repo)}`;
+}
+
 export async function fetchLiveMetrics(): Promise<Partial<MetricsMap>> {
   const pairJobs: Promise<readonly [MetricId, number] | ReadonlyArray<readonly [MetricId, number]>>[] = [
     ...(Object.keys(CLAWHUB_SKILLS) as (keyof typeof CLAWHUB_SKILLS)[]).map(
@@ -136,9 +153,7 @@ export async function fetchLiveMetrics(): Promise<Partial<MetricsMap>> {
         }),
     ),
     ...DOCKER_REPOS.map((repo) =>
-      fetchJson(
-        `https://hub.docker.com/v2/repositories/xuxuclassmate/${repo}/`,
-      ).then((json) => {
+      fetchJson(gatewayRepoDetailsUrl(repo)).then((json) => {
         const value = dockerPulls(json);
         if (value == null) throw new Error("missing pulls");
         return [`docker:${repo}` as MetricId, value] as const;

@@ -645,7 +645,7 @@ export const en: LocaleCopy = {
             label: "Docker pulls",
             value: "899",
             metric: "docker:testcase-generator",
-            href: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
+            href: "https://docker-hub-pull-counter.vercel.app/api/repo/details?namespace=xuxuclassmate&repo=testcase-generator",
           },
           {
             label: "npm downloads",
@@ -662,7 +662,7 @@ export const en: LocaleCopy = {
         ],
         deployment: {
           summary:
-            "Distribution centers on Docker, npm, and OpenClaw (local source is also supported). Metrics below refresh live for those three channels.",
+            "Distribution centers on Docker, npm, and OpenClaw (local source is also supported). Docker pulls are collected live via the Docker Hub API Gateway.",
           steps: [
             "Docker: docker pull xuxuclassmate/testcase-generator:latest, set AI_PROVIDER + API key, map 3456, open http://localhost:3456.",
             "npm: npm install -g @classmatexuxu/testcase-generator, then testcase-generator --standalone.",

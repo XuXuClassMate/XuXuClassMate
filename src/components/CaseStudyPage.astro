@@ -282,8 +282,8 @@ const sectionNumbers = (() => {
             {
               slug === "testcase-generator"
                 ? isZh
-                  ? "Docker 拉取 · npm 下载 · OpenClaw / ClawHub 安装——经 /api/metrics 实时刷新。"
-                  : "Docker pulls · npm downloads · OpenClaw / ClawHub installs — refreshed live via /api/metrics."
+                  ? "Docker 拉取经 Docker Hub API Gateway 实时采集；npm 与 OpenClaw / ClawHub 同步刷新。"
+                  : "Docker pulls refresh live via the Docker Hub API Gateway; npm and OpenClaw / ClawHub stay in sync."
                 : page.caseMetricsLead
             }
           </p>
@@ -326,7 +326,28 @@ const sectionNumbers = (() => {
             }
           </div>
           {
-            slug === "docker-suite" || slug === "docker-hub-api-gateway" ? (
+            slug === "testcase-generator" ? (
+              <p class="case-stats-embed">
+                <a
+                  href="https://docker-hub-pull-counter.vercel.app/api/repo/details?namespace=xuxuclassmate&repo=testcase-generator"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src="https://docker-hub-pull-counter.vercel.app/api/docker-stats?username=xuxuclassmate&repo=testcase-generator"
+                    alt={
+                      isZh
+                        ? "testcase-generator Docker 拉取实时卡片"
+                        : "testcase-generator Docker pulls live card"
+                    }
+                    width="420"
+                    height="180"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </a>
+              </p>
+            ) : slug === "docker-suite" || slug === "docker-hub-api-gateway" ? (
               <p class="case-stats-embed">
                 <a
                   href="https://hub.docker.com/u/xuxuclassmate"
