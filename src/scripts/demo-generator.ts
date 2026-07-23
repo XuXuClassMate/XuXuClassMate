@@ -96,6 +96,20 @@ export function initGeneratorDemo(root: HTMLElement): void {
     return;
   }
 
+  const inputEl = input;
+  const sampleBtnEl = sampleBtn;
+  const fileInputEl = fileInput;
+  const fileLabelEl = fileLabel;
+  const generateBtnEl = generateBtn;
+  const resetBtnEl = resetBtn;
+  const pipelineEl = pipeline;
+  const activityDetailEl = activityDetail;
+  const activityLogEl = activityLog;
+  const resultsBlockEl = resultsBlock;
+  const resultsEl = results;
+  const reviewEl = review;
+  const exportBlockEl = exportBlock;
+
   let payload: DemoPayload | null = null;
   try {
     payload = JSON.parse(dataNode.textContent || "null") as DemoPayload;
@@ -106,7 +120,7 @@ export function initGeneratorDemo(root: HTMLElement): void {
 
   const { samplePrd, cases, stages, labels } = payload;
   const stageNodes = [
-    ...pipeline.querySelectorAll<HTMLElement>("[data-stage]"),
+    ...pipelineEl.querySelectorAll<HTMLElement>("[data-stage]"),
   ];
   let runToken = 0;
 
@@ -129,72 +143,72 @@ export function initGeneratorDemo(root: HTMLElement): void {
   }
 
   function setIdleActivity(): void {
-    activityDetail.textContent = labels.activityIdle;
-    activityLog.innerHTML = `<li class="is-idle">${labels.activityIdle}</li>`;
+    activityDetailEl.textContent = labels.activityIdle;
+    activityLogEl.innerHTML = `<li class="is-idle">${labels.activityIdle}</li>`;
   }
 
   function resetOutput(): void {
     clearStages();
     resetPersonas();
     resetExports();
-    resultsBlock.classList.add("is-hidden");
-    review.classList.add("is-hidden");
-    exportBlock.classList.add("is-hidden");
-    results.innerHTML = "";
+    resultsBlockEl.classList.add("is-hidden");
+    reviewEl.classList.add("is-hidden");
+    exportBlockEl.classList.add("is-hidden");
+    resultsEl.innerHTML = "";
     setIdleActivity();
   }
 
   function appendLog(message: string, tone: "active" | "done" = "active"): void {
-    const idle = activityLog.querySelector(".is-idle");
+    const idle = activityLogEl.querySelector(".is-idle");
     idle?.remove();
     const item = document.createElement("li");
     item.className = tone === "done" ? "is-done" : "is-active";
     item.textContent = message;
-    activityLog.appendChild(item);
-    activityLog.scrollTop = activityLog.scrollHeight;
+    activityLogEl.appendChild(item);
+    activityLogEl.scrollTop = activityLogEl.scrollHeight;
   }
 
-  sampleBtn.addEventListener("click", () => {
-    input.value = samplePrd;
-    fileLabel.textContent = labels.uploadHint;
-    fileInput.value = "";
+  sampleBtnEl.addEventListener("click", () => {
+    inputEl.value = samplePrd;
+    fileLabelEl.textContent = labels.uploadHint;
+    fileInputEl.value = "";
   });
 
-  fileInput.addEventListener("change", () => {
-    const file = fileInput.files?.[0];
+  fileInputEl.addEventListener("change", () => {
+    const file = fileInputEl.files?.[0];
     if (!file) return;
-    fileLabel.textContent = `${labels.fileReady} ${file.name}`;
-    if (!input.value.trim()) {
-      input.value = samplePrd;
+    fileLabelEl.textContent = `${labels.fileReady} ${file.name}`;
+    if (!inputEl.value.trim()) {
+      inputEl.value = samplePrd;
     }
   });
 
-  resetBtn.addEventListener("click", () => {
+  resetBtnEl.addEventListener("click", () => {
     runToken += 1;
-    input.value = "";
-    fileInput.value = "";
-    fileLabel.textContent = labels.uploadHint;
-    generateBtn.disabled = false;
-    generateBtn.textContent = labels.generate;
+    inputEl.value = "";
+    fileInputEl.value = "";
+    fileLabelEl.textContent = labels.uploadHint;
+    generateBtnEl.disabled = false;
+    generateBtnEl.textContent = labels.generate;
     root.classList.remove("is-running");
     resetOutput();
   });
 
-  generateBtn.addEventListener("click", async () => {
-    if (!input.value.trim() && !fileInput.files?.length) {
-      input.focus();
+  generateBtnEl.addEventListener("click", async () => {
+    if (!inputEl.value.trim() && !fileInputEl.files?.length) {
+      inputEl.focus();
       return;
     }
-    if (!input.value.trim()) {
-      input.value = samplePrd;
+    if (!inputEl.value.trim()) {
+      inputEl.value = samplePrd;
     }
 
     const token = ++runToken;
-    generateBtn.disabled = true;
-    generateBtn.textContent = labels.generating;
+    generateBtnEl.disabled = true;
+    generateBtnEl.textContent = labels.generating;
     root.classList.add("is-running");
     resetOutput();
-    activityLog.innerHTML = "";
+    activityLogEl.innerHTML = "";
 
     for (let index = 0; index < stages.length; index += 1) {
       if (token !== runToken) return;
@@ -204,7 +218,7 @@ export function initGeneratorDemo(root: HTMLElement): void {
       if (!stage || !stageNode) continue;
 
       stageNode.classList.add("is-active");
-      activityDetail.textContent = stage.detail;
+      activityDetailEl.textContent = stage.detail;
       appendLog(`${String(index + 1).padStart(2, "0")} · ${stage.title}`);
 
       for (const line of stage.logs) {
@@ -214,11 +228,11 @@ export function initGeneratorDemo(root: HTMLElement): void {
       }
 
       if (index === 1) {
-        resultsBlock.classList.remove("is-hidden");
+        resultsBlockEl.classList.remove("is-hidden");
         for (const item of cases) {
           if (token !== runToken) return;
-          results.insertAdjacentHTML("beforeend", renderCase(item, labels));
-          const card = results.lastElementChild;
+          resultsEl.insertAdjacentHTML("beforeend", renderCase(item, labels));
+          const card = resultsEl.lastElementChild;
           if (card instanceof HTMLElement) {
             requestAnimationFrame(() => {
               card.classList.add("is-visible");
@@ -229,7 +243,7 @@ export function initGeneratorDemo(root: HTMLElement): void {
       }
 
       if (index === 2) {
-        review.classList.remove("is-hidden");
+        reviewEl.classList.remove("is-hidden");
         for (const persona of personas) {
           if (token !== runToken) return;
           persona.classList.add("is-active");
@@ -240,7 +254,7 @@ export function initGeneratorDemo(root: HTMLElement): void {
       }
 
       if (index === 3) {
-        exportBlock.classList.remove("is-hidden");
+        exportBlockEl.classList.remove("is-hidden");
         for (const item of exportItems) {
           if (token !== runToken) return;
           item.classList.add("is-active");
@@ -259,7 +273,7 @@ export function initGeneratorDemo(root: HTMLElement): void {
 
     if (token !== runToken) return;
     root.classList.remove("is-running");
-    generateBtn.disabled = false;
-    generateBtn.textContent = labels.generate;
+    generateBtnEl.disabled = false;
+    generateBtnEl.textContent = labels.generate;
   });
 }
