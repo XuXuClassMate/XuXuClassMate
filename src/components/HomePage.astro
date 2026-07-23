@@ -201,9 +201,23 @@ const highlights = copy.home.highlights;
     <section class="home-section tech-stack" id="stack">
       <div class="container">
         <h2 class="section-title reveal-on-scroll">{home.stackTitle}</h2>
-        <ul class="stack-list reveal-on-scroll">
-          {home.stack.map((item) => <li>{item}</li>)}
-        </ul>
+        <p class="section-lead reveal-on-scroll">{home.stackLead}</p>
+        <div class="stack-matrix">
+          {
+            home.stack.map((group, index) => (
+              <article
+                class={`stack-group reveal-on-scroll reveal-delay-${(index % 3) + 1}`}
+              >
+                <h3 class="stack-group-title">{group.title}</h3>
+                <ul class="stack-list stack-list--inline">
+                  {group.items.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              </article>
+            ))
+          }
+        </div>
       </div>
     </section>
 

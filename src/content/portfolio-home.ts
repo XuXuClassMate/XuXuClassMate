@@ -24,7 +24,8 @@ export type PortfolioHome = {
     tags: string[];
   }[];
   stackTitle: string;
-  stack: string[];
+  stackLead: string;
+  stack: { title: string; items: string[] }[];
   articlesTitle: string;
   articlesCta: string;
   ossTitle: string;
@@ -136,22 +137,54 @@ export function getPortfolioHome(locale: Locale): PortfolioHome {
     featuredCta: isZh ? "查看全部项目" : "View all projects",
     featured: isZh ? featuredZh : featuredEn,
     stackTitle: isZh ? "技术栈" : "Technical Stack",
-    stack: [
-      "Playwright",
-      "API Testing",
-      "Performance Testing",
-      "AI Testing",
-      "Java",
-      "Python",
-      "TypeScript",
-      "Pytest",
-      "JUnit",
-      "RestAssured",
-      "Locust",
-      "Docker Testing",
-      "Test Infrastructure",
-      "CI/CD",
-    ],
+    stackLead: isZh
+      ? "质量是一个系统——按工具链分组，方便快速抓住能力边界。"
+      : "Quality is a system — skills grouped by toolchain so the shape of delivery is clear in seconds.",
+    stack: isZh
+      ? [
+          {
+            title: "UI 自动化",
+            items: ["Playwright", "TypeScript"],
+          },
+          {
+            title: "接口测试",
+            items: ["Java", "JUnit", "RestAssured", "Python", "Pytest"],
+          },
+          {
+            title: "性能测试",
+            items: ["Locust"],
+          },
+          {
+            title: "AI Testing",
+            items: ["AI Test Case Generation", "OpenClaw / ClawHub"],
+          },
+          {
+            title: "基础设施",
+            items: ["Docker Testing", "Test Infrastructure", "CI/CD"],
+          },
+        ]
+      : [
+          {
+            title: "UI Automation",
+            items: ["Playwright", "TypeScript"],
+          },
+          {
+            title: "API Testing",
+            items: ["Java", "JUnit", "RestAssured", "Python", "Pytest"],
+          },
+          {
+            title: "Performance Testing",
+            items: ["Locust"],
+          },
+          {
+            title: "AI Testing",
+            items: ["AI Test Case Generation", "OpenClaw / ClawHub"],
+          },
+          {
+            title: "Infrastructure",
+            items: ["Docker Testing", "Test Infrastructure", "CI/CD"],
+          },
+        ],
     articlesTitle: isZh ? "最新工程笔记" : "Latest Engineering Notes",
     articlesCta: isZh ? "查看全部" : "View all",
     ossTitle: isZh ? "GitHub / 开源" : "GitHub / Open Source",
