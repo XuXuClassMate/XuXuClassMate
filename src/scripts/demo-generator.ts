@@ -6,9 +6,17 @@ type DemoCase = {
   priority: string;
 };
 
+type DemoStage = {
+  title: string;
+  detail: string;
+  logs: string[];
+};
+
 type DemoPayload = {
   samplePrd: string;
   cases: DemoCase[];
+  stages: DemoStage[];
+  exportItems: string[];
   labels: {
     generating: string;
     generate: string;
@@ -16,6 +24,8 @@ type DemoPayload = {
     uploadHint: string;
     steps: string;
     expected: string;
+    activityIdle: string;
+    reviewNote: string;
   };
 };
 
@@ -25,29 +35,24 @@ function sleep(ms: number): Promise<void> {
   });
 }
 
-function renderCases(
-  container: HTMLElement,
-  cases: DemoCase[],
+function renderCase(
+  item: DemoCase,
   labels: DemoPayload["labels"],
-): void {
-  container.innerHTML = cases
-    .map(
-      (item) => `
-      <article class="demo-case">
-        <div class="demo-case-head">
-          <span class="demo-case-id">${item.id}</span>
-          <span class="demo-case-priority">${item.priority}</span>
-        </div>
-        <h3>${item.title}</h3>
-        <p class="demo-case-label">${labels.steps}</p>
-        <ol>
-          ${item.steps.map((step) => `<li>${step}</li>`).join("")}
-        </ol>
-        <p class="demo-case-label">${labels.expected}</p>
-        <p class="demo-case-expected">${item.expected}</p>
-      </article>`,
-    )
-    .join("");
+): string {
+  return `
+    <article class="demo-case is-entering">
+      <div class="demo-case-head">
+        <span class="demo-case-id">${item.id}</span>
+        <span class="demo-case-priority">${item.priority}</span>
+      </div>
+      <h4>${item.title}</h4>
+      <p class="demo-case-label">${labels.steps}</p>
+      <ol>
+        ${item.steps.map((step) => `<li>${step}</li>`).join("")}
+      </ol>
+      <p class="demo-case-label">${labels.expected}</p>
+      <p class="demo-case-expected">${item.expected}</p>
+    </article>`;
 }
 
 export function initGeneratorDemo(root: HTMLElement): void {
@@ -58,9 +63,18 @@ export function initGeneratorDemo(root: HTMLElement): void {
   const generateBtn = root.querySelector<HTMLButtonElement>("[data-demo-generate]");
   const resetBtn = root.querySelector<HTMLButtonElement>("[data-demo-reset]");
   const pipeline = root.querySelector<HTMLElement>("[data-demo-pipeline]");
+  const activityDetail = root.querySelector<HTMLElement>(
+    "[data-demo-activity-detail]",
+  );
+  const activityLog = root.querySelector<HTMLElement>("[data-demo-activity-log]");
+  const resultsBlock = root.querySelector<HTMLElement>(
+    "[data-demo-results-block]",
+  );
   const results = root.querySelector<HTMLElement>("[data-demo-results]");
-  const empty = root.querySelector<HTMLElement>("[data-demo-empty]");
   const review = root.querySelector<HTMLElement>("[data-demo-review]");
+  const personas = root.querySelectorAll<HTMLElement>("[data-persona]");
+  const exportBlock = root.querySelector<HTMLElement>("[data-demo-export]");
+  const exportItems = root.querySelectorAll<HTMLElement>("[data-export-item]");
   const dataNode = document.getElementById("demo-generator-data");
 
   if (
@@ -71,24 +85,16 @@ export function initGeneratorDemo(root: HTMLElement): void {
     !generateBtn ||
     !resetBtn ||
     !pipeline ||
+    !activityDetail ||
+    !activityLog ||
+    !resultsBlock ||
     !results ||
-    !empty ||
     !review ||
+    !exportBlock ||
     !dataNode
   ) {
     return;
   }
-
-  const inputEl = input;
-  const sampleBtnEl = sampleBtn;
-  const fileInputEl = fileInput;
-  const fileLabelEl = fileLabel;
-  const generateBtnEl = generateBtn;
-  const resetBtnEl = resetBtn;
-  const pipelineEl = pipeline;
-  const resultsEl = results;
-  const emptyEl = empty;
-  const reviewEl = review;
 
   let payload: DemoPayload | null = null;
   try {
@@ -98,10 +104,11 @@ export function initGeneratorDemo(root: HTMLElement): void {
   }
   if (!payload) return;
 
-  const { samplePrd, cases, labels } = payload;
+  const { samplePrd, cases, stages, labels } = payload;
   const stageNodes = [
-    ...pipelineEl.querySelectorAll<HTMLElement>("[data-stage]"),
+    ...pipeline.querySelectorAll<HTMLElement>("[data-stage]"),
   ];
+  let runToken = 0;
 
   function clearStages(): void {
     for (const node of stageNodes) {
@@ -109,65 +116,150 @@ export function initGeneratorDemo(root: HTMLElement): void {
     }
   }
 
-  function resetOutput(): void {
-    clearStages();
-    resultsEl.classList.add("is-hidden");
-    reviewEl.classList.add("is-hidden");
-    emptyEl.classList.remove("is-hidden");
-    resultsEl.innerHTML = "";
+  function resetPersonas(): void {
+    for (const node of personas) {
+      node.classList.remove("is-active", "is-done");
+    }
   }
 
-  sampleBtnEl.addEventListener("click", () => {
-    inputEl.value = samplePrd;
-    fileLabelEl.textContent = labels.uploadHint;
-    fileInputEl.value = "";
+  function resetExports(): void {
+    for (const node of exportItems) {
+      node.classList.remove("is-active", "is-done");
+    }
+  }
+
+  function setIdleActivity(): void {
+    activityDetail.textContent = labels.activityIdle;
+    activityLog.innerHTML = `<li class="is-idle">${labels.activityIdle}</li>`;
+  }
+
+  function resetOutput(): void {
+    clearStages();
+    resetPersonas();
+    resetExports();
+    resultsBlock.classList.add("is-hidden");
+    review.classList.add("is-hidden");
+    exportBlock.classList.add("is-hidden");
+    results.innerHTML = "";
+    setIdleActivity();
+  }
+
+  function appendLog(message: string, tone: "active" | "done" = "active"): void {
+    const idle = activityLog.querySelector(".is-idle");
+    idle?.remove();
+    const item = document.createElement("li");
+    item.className = tone === "done" ? "is-done" : "is-active";
+    item.textContent = message;
+    activityLog.appendChild(item);
+    activityLog.scrollTop = activityLog.scrollHeight;
+  }
+
+  sampleBtn.addEventListener("click", () => {
+    input.value = samplePrd;
+    fileLabel.textContent = labels.uploadHint;
+    fileInput.value = "";
   });
 
-  fileInputEl.addEventListener("change", () => {
-    const file = fileInputEl.files?.[0];
+  fileInput.addEventListener("change", () => {
+    const file = fileInput.files?.[0];
     if (!file) return;
-    fileLabelEl.textContent = `${labels.fileReady} ${file.name}`;
-    if (!inputEl.value.trim()) {
-      inputEl.value = samplePrd;
+    fileLabel.textContent = `${labels.fileReady} ${file.name}`;
+    if (!input.value.trim()) {
+      input.value = samplePrd;
     }
   });
 
-  resetBtnEl.addEventListener("click", () => {
-    inputEl.value = "";
-    fileInputEl.value = "";
-    fileLabelEl.textContent = labels.uploadHint;
-    generateBtnEl.disabled = false;
-    generateBtnEl.textContent = labels.generate;
+  resetBtn.addEventListener("click", () => {
+    runToken += 1;
+    input.value = "";
+    fileInput.value = "";
+    fileLabel.textContent = labels.uploadHint;
+    generateBtn.disabled = false;
+    generateBtn.textContent = labels.generate;
+    root.classList.remove("is-running");
     resetOutput();
   });
 
-  generateBtnEl.addEventListener("click", async () => {
-    if (!inputEl.value.trim() && !fileInputEl.files?.length) {
-      inputEl.focus();
+  generateBtn.addEventListener("click", async () => {
+    if (!input.value.trim() && !fileInput.files?.length) {
+      input.focus();
       return;
     }
-    if (!inputEl.value.trim()) {
-      inputEl.value = samplePrd;
+    if (!input.value.trim()) {
+      input.value = samplePrd;
     }
 
-    generateBtnEl.disabled = true;
-    generateBtnEl.textContent = labels.generating;
+    const token = ++runToken;
+    generateBtn.disabled = true;
+    generateBtn.textContent = labels.generating;
+    root.classList.add("is-running");
     resetOutput();
-    emptyEl.classList.add("is-hidden");
+    activityLog.innerHTML = "";
 
-    for (let index = 0; index < stageNodes.length; index += 1) {
-      const current = stageNodes[index];
-      if (!current) continue;
-      current.classList.add("is-active");
-      await sleep(420);
-      current.classList.remove("is-active");
-      current.classList.add("is-done");
+    for (let index = 0; index < stages.length; index += 1) {
+      if (token !== runToken) return;
+
+      const stage = stages[index];
+      const stageNode = stageNodes[index];
+      if (!stage || !stageNode) continue;
+
+      stageNode.classList.add("is-active");
+      activityDetail.textContent = stage.detail;
+      appendLog(`${String(index + 1).padStart(2, "0")} · ${stage.title}`);
+
+      for (const line of stage.logs) {
+        if (token !== runToken) return;
+        await sleep(380);
+        appendLog(line);
+      }
+
+      if (index === 1) {
+        resultsBlock.classList.remove("is-hidden");
+        for (const item of cases) {
+          if (token !== runToken) return;
+          results.insertAdjacentHTML("beforeend", renderCase(item, labels));
+          const card = results.lastElementChild;
+          if (card instanceof HTMLElement) {
+            requestAnimationFrame(() => {
+              card.classList.add("is-visible");
+            });
+          }
+          await sleep(320);
+        }
+      }
+
+      if (index === 2) {
+        review.classList.remove("is-hidden");
+        for (const persona of personas) {
+          if (token !== runToken) return;
+          persona.classList.add("is-active");
+          await sleep(280);
+          persona.classList.remove("is-active");
+          persona.classList.add("is-done");
+        }
+      }
+
+      if (index === 3) {
+        exportBlock.classList.remove("is-hidden");
+        for (const item of exportItems) {
+          if (token !== runToken) return;
+          item.classList.add("is-active");
+          await sleep(220);
+          item.classList.remove("is-active");
+          item.classList.add("is-done");
+        }
+      }
+
+      await sleep(220);
+      if (token !== runToken) return;
+      stageNode.classList.remove("is-active");
+      stageNode.classList.add("is-done");
+      appendLog(`✓ ${stage.title}`, "done");
     }
 
-    renderCases(resultsEl, cases, labels);
-    resultsEl.classList.remove("is-hidden");
-    reviewEl.classList.remove("is-hidden");
-    generateBtnEl.disabled = false;
-    generateBtnEl.textContent = labels.generate;
+    if (token !== runToken) return;
+    root.classList.remove("is-running");
+    generateBtn.disabled = false;
+    generateBtn.textContent = labels.generate;
   });
 }

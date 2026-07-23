@@ -52,44 +52,9 @@ const dockerHref =
     </section>
 
     <section class="demo-workspace" id="demo-workspace">
-      <div class="container demo-layout">
-        <div class="demo-panel">
-          <div class="demo-panel-head">
-            <h2>{demo.inputLabel}</h2>
-            <div class="demo-panel-actions">
-              <button type="button" class="btn-ghost" data-demo-sample>
-                {demo.sampleLabel}
-              </button>
-              <label class="btn-ghost demo-upload">
-                {demo.uploadLabel}
-                <input
-                  type="file"
-                  accept=".pdf,.doc,.docx,.png,.jpg,.jpeg,.webp,.mp4,.mov,.txt,.md"
-                  data-demo-file
-                  hidden
-                />
-              </label>
-            </div>
-          </div>
-          <p class="demo-upload-hint" data-demo-file-label>{demo.uploadHint}</p>
-          <textarea
-            class="demo-input"
-            data-demo-input
-            rows="12"
-            placeholder={demo.emptyHint}
-          ></textarea>
-          <div class="demo-run-actions">
-            <button type="button" class="btn-primary" data-demo-generate>
-              {demo.generateLabel}
-            </button>
-            <button type="button" class="btn-ghost" data-demo-reset>
-              {demo.resetLabel}
-            </button>
-          </div>
-        </div>
-
-        <div class="demo-panel">
-          <h2>{demo.pipelineLabel}</h2>
+      <div class="container">
+        <div class="demo-pipeline-wrap reveal-on-scroll">
+          <h2 class="demo-section-label">{demo.pipelineLabel}</h2>
           <ol class="demo-pipeline" data-demo-pipeline>
             {
               demo.stages.map((stage, index) => (
@@ -97,21 +62,88 @@ const dockerHref =
                   <span class="demo-stage-index">
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  <span>{stage}</span>
+                  <div class="demo-stage-copy">
+                    <span class="demo-stage-title">{stage.title}</span>
+                    <span class="demo-stage-detail">{stage.detail}</span>
+                  </div>
                 </li>
               ))
             }
           </ol>
+        </div>
 
-          <h2 class="demo-results-title">{demo.resultsLabel}</h2>
-          <p class="demo-empty" data-demo-empty>{demo.emptyHint}</p>
-          <div class="demo-results is-hidden" data-demo-results></div>
+        <div class="demo-layout">
+          <div class="demo-panel demo-panel--input">
+            <div class="demo-panel-head">
+              <h2>{demo.inputLabel}</h2>
+              <div class="demo-panel-actions">
+                <button type="button" class="btn-ghost" data-demo-sample>
+                  {demo.sampleLabel}
+                </button>
+                <label class="btn-ghost demo-upload">
+                  {demo.uploadLabel}
+                  <input
+                    type="file"
+                    accept=".pdf,.doc,.docx,.png,.jpg,.jpeg,.webp,.mp4,.mov,.txt,.md"
+                    data-demo-file
+                    hidden
+                  />
+                </label>
+              </div>
+            </div>
+            <p class="demo-upload-hint" data-demo-file-label>{demo.uploadHint}</p>
+            <textarea
+              class="demo-input"
+              data-demo-input
+              rows="14"
+              placeholder={demo.emptyHint}
+            ></textarea>
+            <div class="demo-run-actions">
+              <button type="button" class="btn-primary" data-demo-generate>
+                {demo.generateLabel}
+              </button>
+              <button type="button" class="btn-ghost" data-demo-reset>
+                {demo.resetLabel}
+              </button>
+            </div>
+          </div>
 
-          <div class="demo-review is-hidden" data-demo-review>
-            <h3>{demo.reviewLabel}</h3>
-            <ul class="demo-personas">
-              {demo.personas.map((persona) => <li>{persona}</li>)}
+          <div class="demo-panel demo-panel--output">
+            <h2>{demo.activityLabel}</h2>
+            <p class="demo-activity-detail" data-demo-activity-detail>
+              {demo.activityIdle}
+            </p>
+            <ul class="demo-activity-log" data-demo-activity-log>
+              <li class="is-idle">{demo.activityIdle}</li>
             </ul>
+
+            <div class="demo-output-block is-hidden" data-demo-results-block>
+              <h3 class="demo-results-title">{demo.resultsLabel}</h3>
+              <div class="demo-results" data-demo-results></div>
+            </div>
+
+            <div class="demo-output-block is-hidden" data-demo-review>
+              <h3>{demo.reviewLabel}</h3>
+              <p class="demo-review-note">{demo.reviewNote}</p>
+              <ul class="demo-personas" data-demo-personas>
+                {
+                  demo.personas.map((persona) => (
+                    <li data-persona={persona}>{persona}</li>
+                  ))
+                }
+              </ul>
+            </div>
+
+            <div class="demo-output-block is-hidden" data-demo-export>
+              <h3>{demo.exportLabel}</h3>
+              <ul class="demo-export-list" data-demo-export-list>
+                {
+                  demo.exportItems.map((item) => (
+                    <li data-export-item={item}>{item}</li>
+                  ))
+                }
+              </ul>
+            </div>
           </div>
         </div>
       </div>

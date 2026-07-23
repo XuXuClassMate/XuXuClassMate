@@ -8,6 +8,12 @@ export type DemoCase = {
   priority: string;
 };
 
+export type DemoStage = {
+  title: string;
+  detail: string;
+  logs: string[];
+};
+
 export type GeneratorDemoCopy = {
   subtitle: string;
   title: string;
@@ -22,8 +28,13 @@ export type GeneratorDemoCopy = {
   generatingLabel: string;
   resetLabel: string;
   pipelineLabel: string;
+  activityLabel: string;
+  activityIdle: string;
   resultsLabel: string;
   reviewLabel: string;
+  reviewNote: string;
+  exportLabel: string;
+  exportItems: string[];
   personas: string[];
   realProductTitle: string;
   realProductBody: string;
@@ -33,7 +44,7 @@ export type GeneratorDemoCopy = {
   backLabel: string;
   emptyHint: string;
   fileReady: string;
-  stages: string[];
+  stages: DemoStage[];
   samplePrd: string;
   cases: DemoCase[];
 };
@@ -41,6 +52,8 @@ export type GeneratorDemoCopy = {
 export type GeneratorDemoPayload = {
   samplePrd: string;
   cases: DemoCase[];
+  stages: DemoStage[];
+  exportItems: string[];
   labels: {
     generating: string;
     generate: string;
@@ -48,6 +61,8 @@ export type GeneratorDemoPayload = {
     uploadHint: string;
     steps: string;
     expected: string;
+    activityIdle: string;
+    reviewNote: string;
   };
 };
 
@@ -64,11 +79,16 @@ const EN: GeneratorDemoCopy = {
   uploadLabel: "Choose a file",
   uploadHint: "PDF / Word / image / video accepted as filename only in this demo.",
   generateLabel: "Generate cases",
-  generatingLabel: "Generating…",
+  generatingLabel: "Running pipeline…",
   resetLabel: "Reset",
   pipelineLabel: "Pipeline",
+  activityLabel: "Live stage output",
+  activityIdle: "Load a sample PRD, then generate to watch each pipeline stage run.",
   resultsLabel: "Structured test cases",
-  reviewLabel: "Human review personas",
+  reviewLabel: "Human review",
+  reviewNote: "Test / Dev / Product each check coverage, feasibility, and wording before export.",
+  exportLabel: "Automation / integration handoff",
+  exportItems: ["Excel", "Markdown", "XMind", "Automation suite"],
   personas: ["Test", "Dev", "Product"],
   realProductTitle: "Want the real multimodal upload?",
   realProductBody:
@@ -80,10 +100,45 @@ const EN: GeneratorDemoCopy = {
   emptyHint: "Load the sample PRD or attach a file name, then generate.",
   fileReady: "Attached (demo):",
   stages: [
-    "Multimodal AI",
-    "Structured Test Cases",
-    "Human Review",
-    "Automation / Integration",
+    {
+      title: "Multimodal AI",
+      detail: "Parse the requirement and extract acceptance criteria.",
+      logs: [
+        "Reading requirement text…",
+        "Detected feature: Email OTP Login",
+        "Extracted 5 acceptance criteria",
+        "Flagged risk points: expiry · lockout · redirect",
+      ],
+    },
+    {
+      title: "Structured Test Cases",
+      detail: "Draft reviewable cases with steps, expected results, and priority.",
+      logs: [
+        "Mapping criteria → candidate scenarios…",
+        "Drafting TC-01 … TC-04",
+        "Normalizing priority tags (P0 / P1)",
+        "Structured case set ready for review",
+      ],
+    },
+    {
+      title: "Human Review",
+      detail: "Route cases through Test / Dev / Product review personas.",
+      logs: [
+        "Test: coverage check on lockout & expiry paths",
+        "Dev: feasibility check on OTP + redirect flow",
+        "Product: wording / acceptance alignment",
+        "Review loop complete — ready to export",
+      ],
+    },
+    {
+      title: "Automation / Integration",
+      detail: "Prepare export formats for humans and downstream automation.",
+      logs: [
+        "Packaging Excel / Markdown / XMind exports…",
+        "Attaching handoff notes for automation suites",
+        "Pipeline complete",
+      ],
+    },
   ],
   samplePrd: `Feature: Email OTP Login
 
@@ -155,11 +210,16 @@ const ZH: GeneratorDemoCopy = {
   uploadLabel: "选择文件",
   uploadHint: "本 Demo 仅记录 PDF / Word / 图片 / 视频的文件名。",
   generateLabel: "生成用例",
-  generatingLabel: "生成中…",
+  generatingLabel: "流水线运行中…",
   resetLabel: "重置",
   pipelineLabel: "流水线",
+  activityLabel: "阶段实时输出",
+  activityIdle: "先载入示例 PRD，再点击生成，观看每个阶段如何推进。",
   resultsLabel: "结构化测试用例",
-  reviewLabel: "人工评审角色",
+  reviewLabel: "人工评审",
+  reviewNote: "测试 / 开发 / 产品分别检查覆盖、可落地性与表述，再进入导出。",
+  exportLabel: "自动化 / 集成交接",
+  exportItems: ["Excel", "Markdown", "XMind", "自动化套件"],
   personas: ["测试", "开发", "产品"],
   realProductTitle: "需要真实的多模态上传？",
   realProductBody:
@@ -171,10 +231,45 @@ const ZH: GeneratorDemoCopy = {
   emptyHint: "先载入示例 PRD 或附加文件名，再点击生成。",
   fileReady: "已附加（Demo）：",
   stages: [
-    "Multimodal AI",
-    "Structured Test Cases",
-    "Human Review",
-    "Automation / Integration",
+    {
+      title: "多模态 AI 解析",
+      detail: "解析需求文本，抽取验收标准与风险点。",
+      logs: [
+        "正在读取需求文本…",
+        "识别功能：邮箱 OTP 登录",
+        "抽取验收标准 5 条",
+        "标记风险点：过期 · 锁定 · 跳转",
+      ],
+    },
+    {
+      title: "结构化测试用例",
+      detail: "生成可评审用例：步骤、预期结果与优先级。",
+      logs: [
+        "将验收标准映射为候选场景…",
+        "起草 TC-01 … TC-04",
+        "统一优先级标签（P0 / P1）",
+        "结构化用例集已就绪，进入评审",
+      ],
+    },
+    {
+      title: "人工评审",
+      detail: "按测试 / 开发 / 产品角色走评审闭环。",
+      logs: [
+        "测试：检查锁定与过期路径覆盖",
+        "开发：核对 OTP 与跳转流程可落地性",
+        "产品：对齐表述与验收标准",
+        "评审完成 — 可进入导出",
+      ],
+    },
+    {
+      title: "自动化 / 集成",
+      detail: "准备导出格式，交接给人与下游自动化。",
+      logs: [
+        "打包 Excel / Markdown / XMind 导出…",
+        "附加自动化套件交接说明",
+        "流水线完成",
+      ],
+    },
   ],
   samplePrd: `功能：邮箱 OTP 登录
 
@@ -227,6 +322,8 @@ export function getGeneratorDemoPayload(locale: Locale): GeneratorDemoPayload {
   return {
     samplePrd: demo.samplePrd,
     cases: demo.cases,
+    stages: demo.stages,
+    exportItems: demo.exportItems,
     labels: {
       generating: demo.generatingLabel,
       generate: demo.generateLabel,
@@ -234,6 +331,8 @@ export function getGeneratorDemoPayload(locale: Locale): GeneratorDemoPayload {
       uploadHint: demo.uploadHint,
       steps: locale === "zh" ? "步骤" : "Steps",
       expected: locale === "zh" ? "预期结果" : "Expected",
+      activityIdle: demo.activityIdle,
+      reviewNote: demo.reviewNote,
     },
   };
 }
