@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   absoluteUrl,
+  alternateLocalePath,
   canonicalPath,
   caseHref,
   getCase,
@@ -48,6 +49,27 @@ describe("i18n paths", () => {
     expect(languageHref("zh", "home")).toBe("/");
     expect(languageHref("en", "life")).toBe("/zh/life.html");
     expect(languageHref("zh", "learn")).toBe("/en/learn.html");
+  });
+
+  it("keeps nested paths when swapping locale from the URL", () => {
+    expect(alternateLocalePath("/en/demo/ai-testcase-generator")).toBe(
+      "/zh/demo/ai-testcase-generator",
+    );
+    expect(alternateLocalePath("/zh/demo/ai-testcase-generator.html")).toBe(
+      "/en/demo/ai-testcase-generator.html",
+    );
+    expect(alternateLocalePath("/en/work/testcase-generator.html")).toBe(
+      "/zh/work/testcase-generator.html",
+    );
+    expect(alternateLocalePath("/zh/blog/clawhub-skill-shipping")).toBe(
+      "/en/blog/clawhub-skill-shipping",
+    );
+    expect(alternateLocalePath("/")).toBe("/zh/index.html");
+    expect(alternateLocalePath("/zh/index.html")).toBe("/");
+    expect(alternateLocalePath("/zh.html")).toBe("/");
+    expect(alternateLocalePath("/en.html")).toBe("/zh/index.html");
+    expect(alternateLocalePath("/en/")).toBe("/zh/index.html");
+    expect(alternateLocalePath("/en/learn.html")).toBe("/zh/learn.html");
   });
 
   it("builds canonicals for root and locale homes", () => {

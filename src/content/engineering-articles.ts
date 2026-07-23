@@ -117,7 +117,7 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
           heading: "Why multimodal AI testing matters for QA Engineers",
           body: [
             "Most requirement artifacts are not clean Markdown. They arrive as PDFs, Word specs, screenshots, and short videos. As a QA Engineer and SDET, I needed AI Testing that starts from those real inputs — not from a demo prompt box.",
-            "This article explains how I shaped AI Test Case Generation into an installable product with a human review loop, instead of a one-off LLM notebook.",
+            "This article explains how I shaped AI Test Case Generation into an installable product with a three-persona review loop (Test · Dev · Product Manager), instead of a one-off LLM notebook.",
           ],
         },
         {
@@ -125,18 +125,17 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
           heading: "The product pipeline",
           body: ["The generator follows a fixed chain:"],
           bullets: [
-            "PDF / Word / Image / Video intake",
-            "Multimodal AI generation",
-            "Structured scenarios and test cases",
-            "Human review (Test · Dev · Product)",
-            "Export + automation / integration",
+            "PDF / Word / TXT / Image / Video intake",
+            "AI case generation",
+            "Three-persona review loop (Test · Dev · Product Manager)",
+            "Excel / Markdown / XMind export",
           ],
         },
         {
           id: "shipping",
           heading: "Shipping as installable AI Test Automation",
           body: [
-            "AI Testing only counts when teams can install it. The same pipeline ships via Docker web UI, npm, and ClawHub / OpenClaw — so agents and humans share one delivery path.",
+            "AI Testing only counts when teams can install it. Official run modes: Docker, local source, npm global install, and OpenClaw plugin.",
             "Read the full flagship case study for architecture, My Role, metrics, and Try it now commands.",
           ],
         },
@@ -145,7 +144,7 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
         title:
           "How I Built an AI Test Case Generator with Multimodal Inputs | XuXuClassMate",
         description:
-          "QA Engineer / SDET guide to multimodal AI test case generation: PDF/Word/image/video → structured cases → human review → Docker, npm, ClawHub.",
+          "QA Engineer / SDET guide to multimodal AI test case generation: PDF/Word/TXT/image/video → three-persona review → Excel/Markdown/XMind. Docker, source, npm, OpenClaw.",
         keywords: `${keywordsCore}, AI Test Case Generation, multimodal testing`,
       },
     },
@@ -159,7 +158,7 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
           heading: "为什么多模态 AI Testing 对 QA 重要",
           body: [
             "真实需求很少是干净 Markdown，更多是 PDF、Word、截图和短视频。作为 QA Engineer / SDET，我需要 AI Testing 从这些真实输入起步，而不是演示用的提示词框。",
-            "本文说明我如何把 AI 用例生成做成可安装产品，并保留人工评审闭环，而不是一次性 LLM 笔记本。",
+            "本文说明我如何把 AI 用例生成做成可安装产品，并内置测试经理 · 开发经理 · 产品经理三角色评审闭环，而不是一次性 LLM 笔记本。",
           ],
         },
         {
@@ -167,18 +166,17 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
           heading: "产品流水线",
           body: ["生成器固定走这条链："],
           bullets: [
-            "PDF / Word / Image / Video 接入",
-            "Multimodal AI 生成",
-            "结构化场景与用例",
-            "人工评审（测试 · 开发 · 产品）",
-            "导出 + 自动化 / 集成",
+            "PDF / Word / TXT / Image / Video 接入",
+            "AI 用例生成",
+            "三角色评审闭环（测试经理 · 开发经理 · 产品经理）",
+            "Excel / Markdown / XMind 导出",
           ],
         },
         {
           id: "shipping",
           heading: "按可安装 AI Test Automation 交付",
           body: [
-            "AI Testing 只有在团队装得上时才算数。同一流水线通过 Docker Web UI、npm 与 ClawHub / OpenClaw 分发。",
+            "AI Testing 只有在团队装得上时才算数。官方运行方式：Docker、本地源码、npm 全局安装与 OpenClaw 插件。",
             "完整架构、我的角色、指标与 Try it now 见旗舰案例页。",
           ],
         },
@@ -186,7 +184,7 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
       meta: {
         title: "我如何用多模态输入打造 AI 测试用例生成器 | 旭旭同学",
         description:
-          "QA Engineer / SDET 多模态 AI 用例生成指南：PDF/Word/图片/视频 → 结构化用例 → 人工评审 → Docker、npm、ClawHub。",
+          "QA Engineer / SDET 多模态 AI 用例生成指南：PDF/Word/TXT/图片/视频 → 三角色评审 → Excel/Markdown/XMind。Docker、源码、npm、OpenClaw。",
         keywords: `${keywordsCore}, AI 用例生成, 多模态测试`,
       },
     },
@@ -746,7 +744,7 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
       meta: {
         title: "AI Agent for Software Testing | XuXuClassMate",
         description:
-          "QA Engineer / SDET view on AI agents for software testing — installable OpenClaw skills, evidence metrics, and human review loops.",
+          "QA Engineer / SDET view on AI agents for software testing — installable OpenClaw skills, evidence metrics, and three-persona review loops.",
         keywords: `${keywordsCore}, AI Agent for Software Testing, OpenClaw, ClawHub`,
       },
     },
@@ -774,7 +772,7 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
       meta: {
         title: "面向软件测试的 AI Agent | 旭旭同学",
         description:
-          "QA Engineer / SDET 视角的软件测试 AI Agent——可安装 OpenClaw 技能、证据指标与人工评审闭环。",
+          "QA Engineer / SDET 视角的软件测试 AI Agent——可安装 OpenClaw 技能、证据指标与三角色评审闭环。",
         keywords: `${keywordsCore}, 软件测试 AI Agent, OpenClaw, ClawHub`,
       },
     },

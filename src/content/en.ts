@@ -209,9 +209,9 @@ export const en: LocaleCopy = {
           "Docker, CLI, or ClawHub — if teams cannot install and run it, slides do not count as delivery.",
       },
       {
-        title: "AI with Human Review",
+        title: "AI with Persona Review",
         description:
-          "Multimodal generation is useful only when Test / Dev / Product judgment stays in the loop.",
+          "Multimodal generation ships with a scored Test / Dev / Product Manager review loop — not raw LLM dumps.",
       },
       {
         title: "Reusable Environments",
@@ -342,7 +342,7 @@ export const en: LocaleCopy = {
       {
         title: "AI Test Case Generator",
         description:
-          "My open-source tool: shift testing left with multi-modal AI — PRDs, images, or video walk-throughs in; production-grade, reviewable cases out. Deploy via Docker, npm, or ClawHub.",
+          "Open-source AI test case generation for PRDs and multimodal QA inputs — three-persona review loop; Excel / Markdown / XMind export. Runs via Docker, local source, npm, or OpenClaw.",
         href: "https://github.com/XuXuClassMate/testcase-generator",
         linkLabel: "View on GitHub",
       },
@@ -576,68 +576,68 @@ export const en: LocaleCopy = {
         title: "AI Test Case Generator",
         subtitle: "FLAGSHIP CASE STUDY",
         description:
-          "Shift testing left with multi-modal AI. Feed the engine any PRD, image, or video walk-through, and receive production-grade, reviewable test cases instantly. Deployable via Docker, npm, or ClawHub. Streamline your sprint planning with human-in-the-loop automated QA drafting.",
+          "AI-powered test case generation: ingest PDF · Word · TXT · images · video, run a Test Manager · Dev Manager · Product Manager review loop, and export Excel, Markdown, and XMind. Runs via Docker, local source, npm global install, or OpenClaw plugin.",
         cover: "/images/cover-testcase.jpg",
         coverAlt: "AI Test Case Generator",
         flagship: true,
         status: "live",
         overview:
-          "Shift testing left with multi-modal AI. Feed the engine any PRD, image, or video walk-through, and receive production-grade, reviewable test cases instantly. Deployable via Docker, npm, or ClawHub. Streamline your sprint planning with human-in-the-loop automated QA drafting.",
+          "testcase-generator turns requirement documents and multimodal inputs into structured QA artifacts. After generation it always runs a three-persona review loop (Test Manager · Dev Manager · Product Manager), scoring coverage / logic integrity / executability / clarity / security (100 points; default threshold 90; max 5 rounds). Official docs: https://innonestx.github.io/testcase-generator/",
         problem:
-          "QA teams burn hours turning PDFs, Word specs, screenshots, and even short videos into structured test cases. Spreadsheet copy-paste is slow; raw LLM dumps without review create noise, not coverage. Teams needed one pipeline that accepts real requirement artifacts and ships cases humans will actually accept.",
+          "Real requirements arrive as PDFs, Word specs, screenshots, and short videos. Hand-building scenarios and boundary cases is slow; raw LLM dumps lack coverage, executability, and security perspective — so QA teams cannot adopt them as-is.",
         solution:
-          "I built an installable multimodal generator: ingest PDF / Word / image / video, run Multimodal AI to produce structured scenarios and cases, then apply a Test / Dev / Product human review loop before export and automation handoff. The same product ships as Docker web UI, npm package, and OpenClaw / ClawHub skill — so agents and humans share one delivery path.",
+          "I built an installable multimodal generator: parse PDF / Word / TXT / image / video → AI-generate structured cases → assign Test Manager · Dev Manager · Product Manager personas (multi-model config; cycles reviewer-capable models when fewer than three) → iterate with the scoring algorithm until threshold or max rounds → export Excel / Markdown / XMind. The same product supports four run modes: Docker, local source, npm global install, and OpenClaw plugin.",
         pipeline: {
-          inputs: ["PDF", "Word", "Image", "Video"],
+          inputs: ["PDF", "Word", "TXT", "Image", "Video"],
           stages: [
-            "Multimodal AI",
-            "Structured Test Cases",
-            "Human Review",
-            "Automation / Integration",
+            "Multimodal parse",
+            "AI case generation",
+            "Three-persona review loop",
+            "Excel / Markdown / XMind export",
           ],
         },
         architecture: [
           {
             title: "Product pipeline",
             layers: [
-              "Multimodal inputs (PDF · Word · Image · Video)",
-              "Multimodal AI generation",
-              "Structured test cases & scenarios",
-              "Human review (Test · Dev · Product)",
-              "Export + automation / integration",
+              "Multimodal inputs (PDF · Word · TXT · Image · Video)",
+              "AI generation (configurable generator / reviewer / both)",
+              "Structured scenarios and cases",
+              "Three-persona review: Test · Dev · Product Manager",
+              "Scoring loop (threshold 90 · max 5 rounds) → export",
             ],
           },
           {
-            title: "Distribution",
+            title: "Supported run modes",
             layers: [
-              "Docker web UI (local upload)",
-              "npm package",
-              "OpenClaw / ClawHub skill",
-              "CI / laptop runs",
+              "Docker / Docker Compose (port 3456 web UI)",
+              "Local source run (npm run build && npm run start)",
+              "npm global install (testcase-generator --standalone)",
+              "OpenClaw plugin (/testgen and generate_test_cases tool)",
             ],
           },
         ],
         features: [
-          "Multimodal intake: PDF, Word, TXT, images, and video",
-          "Structured scenarios, cases, boundary and negative coverage",
-          "Three-persona review loop: Test Manager · Dev Manager · Product Manager",
-          "Export to Excel, Markdown, and XMind",
-          "English and Chinese generation",
-          "Install paths: Docker, npm, and ClawHub / OpenClaw",
+          "Multimodal intake: PDF, Word, TXT, images, and video (optional ffmpeg for frames)",
+          "Three-persona review: Test Manager (coverage/executability) · Dev Manager (feasibility/security) · Product Manager (business/journey)",
+          "Scoring dimensions: Coverage 30 · Logic 20 · Executability 20 · Clarity 15 · Security 15",
+          "Multi-vendor model slots: Anthropic, OpenAI, DeepSeek, Qwen, Gemini, or custom OpenAI-compatible endpoints",
+          "Export to Excel, Markdown, and XMind; English and Chinese generation",
+          "Four install surfaces: Docker, local source, npm, OpenClaw plugin",
         ],
         contribution: [
           "Owned product direction: installable quality tool, not a one-off demo notebook.",
-          "Designed the multimodal → structured cases → human review → export pipeline.",
-          "Implemented packaging for Docker web UI, npm, and ClawHub skill distribution.",
-          "Wired review thresholds and export formats QA teams already use day to day.",
+          "Designed the multimodal parse → AI generation → scored three-persona review → export pipeline.",
+          "Shipped four run paths: Docker, local source, npm global, and OpenClaw plugin.",
+          "Wired review thresholds, max rounds, and QA-native export formats into the default runnable config.",
         ],
         techStack: [
           "TypeScript",
-          "Multimodal LLMs",
+          "Express (Standalone Web)",
+          "Anthropic / OpenAI-compatible LLMs",
           "Docker",
           "npm",
-          "OpenClaw",
-          "ClawHub",
+          "OpenClaw Plugin",
           "Excel / Markdown / XMind export",
         ],
         metrics: [
@@ -646,20 +646,24 @@ export const en: LocaleCopy = {
             value: "700+",
             metric: "clawhub:ai-testcase-generator",
           },
-          { label: "Input modes", value: "PDF · Word · Image · Video" },
-          { label: "Packaging", value: "Docker · npm · skill" },
+          { label: "Input modes", value: "PDF · Word · TXT · Image · Video" },
+          { label: "Run modes", value: "Docker · source · npm · OpenClaw" },
           { label: "Exports", value: "Excel · Markdown · XMind" },
         ],
         deployment: {
           summary:
-            "One product, three install surfaces — pick the path that matches how your team works.",
+            "Officially only four run modes are supported — Docker, local source, npm global install, and OpenClaw plugin. See the docs.",
           steps: [
-            "Docker: pull xuxuclassmate/testcase-generator, set an AI provider key, run on port 3456, open the web UI to upload requirements.",
-            "npm: install @classmatexuxu/testcase-generator for CLI / library integration.",
-            "ClawHub / OpenClaw: install the AI Test Case Generator skill for agent workflows.",
-            "CI: reuse the Docker image so laptop and pipeline runs stay aligned.",
+            "Docker: docker pull xuxuclassmate/testcase-generator:latest, set AI_PROVIDER + API key, map 3456, open http://localhost:3456.",
+            "Local source: clone → npm install → configure .env → npm run build && npm run start.",
+            "npm: npm install -g @classmatexuxu/testcase-generator, then testcase-generator --standalone.",
+            "OpenClaw: openclaw plugins install -l /path/to/testcase-generator, configure models[] in config.yaml, use /testgen.",
           ],
           channels: [
+            {
+              label: "Official docs",
+              href: "https://innonestx.github.io/testcase-generator/",
+            },
             {
               label: "Docker Hub",
               href: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
@@ -667,10 +671,6 @@ export const en: LocaleCopy = {
             {
               label: "npm",
               href: "https://www.npmjs.com/package/@classmatexuxu/testcase-generator",
-            },
-            {
-              label: "ClawHub",
-              href: "https://clawhub.ai/xuxuclassmate/ai-testcase-generator",
             },
             {
               label: "GitHub",
@@ -681,14 +681,18 @@ export const en: LocaleCopy = {
         tryItNow: {
           title: "Try it now",
           description:
-            "Start with the interactive demo (sample PRD → structured cases → review personas), then run Docker for real multimodal upload.",
+            "Start with the interactive demo (sample PRD → structured cases → three-persona review), then follow the official docs for real multimodal upload via Docker.",
           note:
-            "The browser demo uses curated sample output — no live LLM. For PDF / Word / image / video upload on your machine, use the Docker image.",
+            "The browser demo uses curated sample output — no live LLM. For PDF / Word / image / video upload on your machine, use Docker or local source per the official docs.",
           primary: {
             label: "Open interactive demo",
             href: "/en/demo/ai-testcase-generator.html",
           },
           secondary: [
+            {
+              label: "Official docs",
+              href: "https://innonestx.github.io/testcase-generator/",
+            },
             {
               label: "Docker Hub",
               href: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
@@ -697,32 +701,28 @@ export const en: LocaleCopy = {
               label: "GitHub",
               href: "https://github.com/XuXuClassMate/testcase-generator",
             },
-            {
-              label: "ClawHub skill",
-              href: "https://clawhub.ai/xuxuclassmate/ai-testcase-generator",
-            },
           ],
           command:
-            "docker pull xuxuclassmate/testcase-generator:latest\n# configure .env with an AI provider key, then:\ndocker run -d -p 3456:3456 --env-file .env xuxuclassmate/testcase-generator:latest\n# open http://localhost:3456 — upload requirements and generate cases",
+            "docker pull xuxuclassmate/testcase-generator:latest\n# configure .env (AI_PROVIDER + API key), then:\ndocker run -d --name testcase-generator -p 3456:3456 \\\n  -e AI_PROVIDER=anthropic -e ANTHROPIC_API_KEY=sk-ant-... \\\n  -e LANGUAGE=en -e ENABLE_REVIEW=true -e REVIEW_THRESHOLD=90 \\\n  xuxuclassmate/testcase-generator:latest\n# open http://localhost:3456",
         },
         proof: {
           github: "https://github.com/XuXuClassMate/testcase-generator",
           docker: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
           demo: "/en/demo/ai-testcase-generator.html",
-          readme: "https://github.com/XuXuClassMate/testcase-generator",
+          readme: "https://innonestx.github.io/testcase-generator/",
         },
         tradeoffs: [
-          "Chose review personas over raw LLM dumps — quieter drafts, higher acceptance by QA leads.",
-          "Shipped Docker + npm + ClawHub together so agents and humans share one product, not three demos.",
-          "Accepted slower first answers in exchange for exportable Excel / Markdown / XMind artifacts teams already use.",
+          "Chose a scored three-persona AI review loop over raw LLM dumps — coverage, executability, and security are first-class defaults.",
+          "Shipped Docker + source + npm + OpenClaw together so humans and agents share one product.",
+          "Accepted multi-round review latency in exchange for Excel / Markdown / XMind artifacts QA teams already use.",
         ],
         artifacts: [
           {
-            title: "ClawHub skill page",
+            title: "Official docs",
             description:
-              "Install path agents actually use — downloads are live on the homepage.",
-            href: "https://clawhub.ai/xuxuclassmate/ai-testcase-generator",
-            linkLabel: "Open ClawHub",
+              "Authoritative model config, three-persona review, scoring algorithm, and four install modes.",
+            href: "https://innonestx.github.io/testcase-generator/",
+            linkLabel: "Open docs",
           },
           {
             title: "Docker image",
@@ -734,17 +734,21 @@ export const en: LocaleCopy = {
           {
             title: "Source repository",
             description:
-              "Multimodal input handlers and review-loop wiring in the open.",
+              "Multimodal parsers, generator, and three-persona review loop in the open.",
             href: "https://github.com/XuXuClassMate/testcase-generator",
             linkLabel: "GitHub",
           },
         ],
         outcomes: [
           "Flagship installable AI testing product on this portfolio",
-          "Docker Hub and npm distribution for local upload + generate",
-          "ClawHub skill with live install metrics",
+          "Four official run modes: Docker · source · npm · OpenClaw",
+          "Three-persona review + score threshold in the default runnable config",
         ],
         links: [
+          {
+            label: "Official docs",
+            href: "https://innonestx.github.io/testcase-generator/",
+          },
           {
             label: "GitHub",
             href: "https://github.com/XuXuClassMate/testcase-generator",
@@ -752,10 +756,6 @@ export const en: LocaleCopy = {
           {
             label: "Docker Hub",
             href: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
-          },
-          {
-            label: "ClawHub",
-            href: "https://clawhub.ai/xuxuclassmate/ai-testcase-generator",
           },
           {
             label: "npm",
@@ -766,8 +766,8 @@ export const en: LocaleCopy = {
           title:
             "AI Test Case Generator — Flagship Case Study | XuXuClassMate",
           description:
-            "Shift testing left with multi-modal AI — PRDs, images, or video walk-throughs in; production-grade reviewable cases out. Deploy via Docker, npm, or ClawHub.",
-          keywords: `${sharedKeywords}, AI Test Case Generator, multimodal testing, flagship case study, ClawHub`,
+            "AI test case generation: PDF/Word/TXT/image/video → three-persona review loop → Excel/Markdown/XMind. Runs via Docker, source, npm, or OpenClaw.",
+          keywords: `${sharedKeywords}, AI Test Case Generator, multimodal testing, flagship case study, OpenClaw`,
         },
       },
       {

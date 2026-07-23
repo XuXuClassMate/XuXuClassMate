@@ -61,8 +61,8 @@ export function getAiTestingLab(locale: Locale): AiLabCopy {
         ? "需求来自 PDF / 截图 / 草稿时，手工整理场景与边界用例成本高，且难以复用。"
         : "When requirements arrive as PDFs, screenshots, or rough notes, turning them into scenarios and boundary cases is slow and hard to reuse.",
       approach: isZh
-        ? "多模态输入 → LLM 生成 → Test / Dev / Product 评审人格 → 可导出产物（Excel / Markdown / XMind），并打包为 Docker / npm / ClawHub。"
-        : "Multimodal input → LLM draft → Test / Dev / Product review personas → exportable artifacts (Excel / Markdown / XMind), packaged as Docker / npm / ClawHub.",
+        ? "多模态输入 → AI 生成 → 测试经理 / 开发经理 / 产品经理三角色评分评审 → 导出 Excel / Markdown / XMind；支持 Docker / 本地源码 / npm / OpenClaw。"
+        : "Multimodal input → AI generation → scored Test / Dev / Product Manager review loop → export Excel / Markdown / XMind; runs via Docker / local source / npm / OpenClaw.",
       input: "Requirement",
       outputs: [
         "Test Scenarios",
@@ -103,7 +103,7 @@ export function getAiTestingLab(locale: Locale): AiLabCopy {
           : "Start from OpenAPI / contracts, let the LLM draft executable cases, then feed an existing API automation framework.",
         pipeline: ["OpenAPI", "LLM", "Test Cases", "API Automation"],
         outcome: isZh
-          ? "目标产物：可回归的接口套件草稿 + 人工评审后的稳定用例。"
+          ? "目标产物：可回归的接口套件草稿 + 经评审后的稳定用例。"
           : "Target artifact: reviewable API suite drafts that harden into stable regression cases.",
       },
       {

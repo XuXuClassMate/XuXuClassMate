@@ -2,13 +2,11 @@
 import Icon from "../components/Icon.astro";
 import {
   absoluteUrl,
+  alternateLocalePath,
   canonicalPath,
-  caseHref,
   getCopy,
   hreflangLinks,
   jsonLdGraph,
-  languageHref,
-  noteHref,
   pageHref,
   type CaseSlug,
   type Locale,
@@ -82,11 +80,7 @@ const ogImage = absoluteUrl(ogImagePath ?? "/images/og-default.jpg");
 const structuredData = noindex
   ? null
   : jsonLdGraph(locale, page, rootHome, caseSlug, noteSlug);
-const langSwitchHref = caseSlug
-  ? caseHref(locale === "en" ? "zh" : "en", caseSlug)
-  : noteSlug
-    ? noteHref(locale === "en" ? "zh" : "en", noteSlug)
-    : languageHref(locale, page);
+const langSwitchHref = alternateLocalePath(Astro.url.pathname);
 ---
 
 <!doctype html>

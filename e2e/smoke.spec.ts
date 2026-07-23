@@ -82,7 +82,12 @@ test("unified case study template renders", async ({ page }) => {
   await expect(
     page.getByRole("link", { name: "Open interactive demo" }),
   ).toHaveAttribute("href", "/en/demo/ai-testcase-generator.html");
-  await expect(page.locator(".pipeline-inputs")).toContainText("PDF");
+  await expect(
+    page.getByRole("link", { name: "Official docs" }).first(),
+  ).toHaveAttribute("href", "https://innonestx.github.io/testcase-generator/");
+  await expect(page.locator(".pipeline-stages")).toContainText(
+    "Three-persona review loop",
+  );
   const back = page.getByRole("link", { name: /All projects/i });
   await expect(back.first()).toBeVisible();
 });
@@ -91,6 +96,16 @@ test("generator interactive demo runs sample flow", async ({ page }) => {
   await page.goto("/en/demo/ai-testcase-generator.html");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "AI Test Case Generator",
+  );
+  await expect(page.locator(".nav-links .language-switch")).toHaveAttribute(
+    "href",
+    "/zh/demo/ai-testcase-generator.html",
+  );
+  await expect(page.locator(".footer-desc")).not.toHaveText(
+    /Shift testing left with multi-modal AI — a browser demo/,
+  );
+  await expect(page.locator(".hero-desc")).toContainText(
+    "Shift testing left with multi-modal AI",
   );
   await expect(
     page.getByText("Multimodal AI", { exact: true }),
