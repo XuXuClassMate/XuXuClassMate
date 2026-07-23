@@ -342,7 +342,7 @@ export const en: LocaleCopy = {
       {
         title: "AI Test Case Generator",
         description:
-          "My open-source tool: turn PRDs, screenshots, and multimodal inputs into Excel / Markdown / XMind with a three-persona review loop.",
+          "My open-source tool: shift testing left with multi-modal AI — PRDs, images, or video walk-throughs in; production-grade, reviewable cases out. Deploy via Docker, npm, or ClawHub.",
         href: "https://github.com/XuXuClassMate/testcase-generator",
         linkLabel: "View on GitHub",
       },
@@ -576,13 +576,13 @@ export const en: LocaleCopy = {
         title: "AI Test Case Generator",
         subtitle: "FLAGSHIP CASE STUDY",
         description:
-          "Flagship product: multimodal requirements in → reviewable, exportable test cases out — installable via Docker, npm, and ClawHub.",
+          "Shift testing left with multi-modal AI. Feed the engine any PRD, image, or video walk-through, and receive production-grade, reviewable test cases instantly. Deployable via Docker, npm, or ClawHub. Streamline your sprint planning with human-in-the-loop automated QA drafting.",
         cover: "/images/cover-testcase.jpg",
         coverAlt: "AI Test Case Generator",
         flagship: true,
         status: "live",
         overview:
-          "Flagship multimodal AI product that turns PDFs, Word docs, images, and video into reviewable, exportable test cases — with a human review loop and install paths via Docker, npm, and ClawHub.",
+          "Shift testing left with multi-modal AI. Feed the engine any PRD, image, or video walk-through, and receive production-grade, reviewable test cases instantly. Deployable via Docker, npm, or ClawHub. Streamline your sprint planning with human-in-the-loop automated QA drafting.",
         problem:
           "QA teams burn hours turning PDFs, Word specs, screenshots, and even short videos into structured test cases. Spreadsheet copy-paste is slow; raw LLM dumps without review create noise, not coverage. Teams needed one pipeline that accepts real requirement artifacts and ships cases humans will actually accept.",
         solution:
@@ -766,7 +766,7 @@ export const en: LocaleCopy = {
           title:
             "AI Test Case Generator — Flagship Case Study | XuXuClassMate",
           description:
-            "Flagship multimodal AI test case generator: PDF/Word/image/video → structured cases → human review → Docker, npm, and ClawHub installs.",
+            "Shift testing left with multi-modal AI — PRDs, images, or video walk-throughs in; production-grade reviewable cases out. Deploy via Docker, npm, or ClawHub.",
           keywords: `${sharedKeywords}, AI Test Case Generator, multimodal testing, flagship case study, ClawHub`,
         },
       },

@@ -331,7 +331,7 @@ export const zh: LocaleCopy = {
       {
         title: "AI 测试用例生成器",
         description:
-          "开源工具：把 PRD、截图等多模态输入变成 Excel / Markdown / XMind，并带三角色评审闭环。",
+          "开源工具：用多模态 AI 把测试左移——PRD、图片或视频演示进入，可评审的生产级用例产出。支持 Docker、npm 或 ClawHub 部署。",
         href: "https://github.com/XuXuClassMate/testcase-generator",
         linkLabel: "查看 GitHub",
       },
@@ -564,13 +564,13 @@ export const zh: LocaleCopy = {
         title: "AI 测试用例生成器",
         subtitle: "旗舰案例",
         description:
-          "旗舰产品：多模态需求进入 → 可评审、可导出的测试用例产出——支持 Docker、npm 与 ClawHub 安装。",
+          "用多模态 AI 把测试左移。把 PRD、图片或视频演示喂给引擎，即可即时得到可评审的生产级测试用例。可通过 Docker、npm 或 ClawHub 部署，用人在回路的自动化 QA 起草加速迭代规划。",
         cover: "/images/cover-testcase.jpg",
         coverAlt: "AI 测试用例生成器",
         flagship: true,
         status: "live",
         overview:
-          "旗舰多模态 AI 产品：将 PDF、Word、图片与视频转化为可评审、可导出的测试用例——含人工评审闭环，并支持 Docker、npm 与 ClawHub 安装。",
+          "用多模态 AI 把测试左移。把 PRD、图片或视频演示喂给引擎，即可即时得到可评审的生产级测试用例。可通过 Docker、npm 或 ClawHub 部署，用人在回路的自动化 QA 起草加速迭代规划。",
         problem:
           "QA 团队要把 PDF、Word、截图甚至短视频整理成结构化用例，成本很高。表格复制粘贴太慢；没有评审闭环的 LLM 草稿只会增加噪音。团队需要一条能吃进真实需求产物、并交付人类愿意接受的用例流水线。",
         solution:
@@ -749,7 +749,7 @@ export const zh: LocaleCopy = {
         meta: {
           title: "AI 测试用例生成器 — 旗舰案例 | 旭旭同学",
           description:
-            "旗舰多模态 AI 用例生成器：PDF/Word/图片/视频 → 结构化用例 → 人工评审 → Docker、npm 与 ClawHub 安装。",
+            "用多模态 AI 把测试左移——PRD / 图片 / 视频进入，可评审的生产级用例产出。支持 Docker、npm 或 ClawHub 部署。",
           keywords: `${sharedKeywords}, AI 测试用例生成器, 多模态测试, 旗舰案例, ClawHub`,
         },
       },

@@ -73,7 +73,7 @@ export const PROJECTS: Record<ProjectId, ProjectDef> = {
     en: {
       title: "AI Test Case Generator",
       description:
-        "Multimodal QA inputs (PDF, Word, images, video) → structured cases with Test / Dev / Product review loops. Ships as Docker, npm, and OpenClaw plugin; published on ClawHub as AI Test Case Generator.",
+        "Shift testing left with multi-modal AI. Feed the engine any PRD, image, or video walk-through, and receive production-grade, reviewable test cases instantly. Deployable via Docker, npm, or ClawHub. Streamline your sprint planning with human-in-the-loop automated QA drafting.",
       tags: ["TypeScript", "Multimodal AI", "ClawHub"],
       linkLabel: "GitHub",
       ctaLabel: "Docker Hub",
@@ -83,7 +83,7 @@ export const PROJECTS: Record<ProjectId, ProjectDef> = {
     zh: {
       title: "AI 测试用例生成器",
       description:
-        "多模态 QA 输入（PDF、Word、图片、视频）→ 结构化用例，含测试/开发/产品三角色评审。支持 Docker、npm、OpenClaw 插件，并在 ClawHub 发布为 AI Test Case Generator。",
+        "用多模态 AI 把测试左移。把 PRD、图片或视频演示喂给引擎，即可即时得到可评审的生产级测试用例。可通过 Docker、npm 或 ClawHub 部署，用人在回路的自动化 QA 起草加速迭代规划。",
       tags: ["TypeScript", "多模态 AI", "ClawHub"],
       linkLabel: "GitHub",
       ctaLabel: "Docker Hub",

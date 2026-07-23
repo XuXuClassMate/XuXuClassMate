@@ -48,11 +48,11 @@ const SECTIONS: SectionDef[] = [
       {
         en: {
           title: "AI Test Case Generator",
-          note: "Multimodal inputs → structured cases with review loops.",
+          note: "Shift testing left with multi-modal AI — PRD / image / video in, reviewable cases out.",
         },
         zh: {
           title: "AI 测试用例生成器",
-          note: "多模态输入 → 结构化用例与评审闭环。",
+          note: "用多模态 AI 把测试左移——PRD / 图片 / 视频进入，可评审用例产出。",
         },
         href: "/work/testcase-generator.html",
       },

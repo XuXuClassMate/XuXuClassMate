@@ -75,7 +75,7 @@ const EN: GeneratorDemoCopy = {
   subtitle: "INTERACTIVE DEMO",
   title: "AI Test Case Generator",
   description:
-    "A browser demo of the flagship loop: requirement in → structured cases out → multi-role / multi-model review. Sample output only — not a live LLM.",
+    "Shift testing left with multi-modal AI — a browser demo of the product loop. Sample output only; not a live LLM. Deploy the real product via Docker, npm, or ClawHub.",
   badge: "Demo",
   badgeNote:
     "No files leave your browser. Generation is simulated with curated sample cases so you can feel the product flow in seconds.",
@@ -106,7 +106,7 @@ const EN: GeneratorDemoCopy = {
   personas: ["QA Agent", "Dev Agent", "Product Agent", "Model ensemble"],
   realProductTitle: "Want the real multimodal upload?",
   realProductBody:
-    "Run the Docker image locally for PDF / Word / image / video → generate → export. This page is the demoable first step.",
+    "Shift testing left for real: run the Docker image locally for PDF / Word / image / video → generate → export. This page is the demoable first step.",
   dockerLabel: "Open Docker Hub",
   caseStudyLabel: "Read case study",
   playgroundLabel: "Back to Playground",
@@ -216,7 +216,7 @@ const ZH: GeneratorDemoCopy = {
   subtitle: "交互演示",
   title: "AI 测试用例生成器",
   description:
-    "旗舰产品闭环的浏览器 Demo：需求进入 → 结构化用例 → 多角色 / 多模型评审。输出为示例用例，不是实时 LLM。",
+    "用多模态 AI 把测试左移——浏览器 Demo。输出为示例用例，不是实时 LLM。真实产品可通过 Docker、npm 或 ClawHub 部署。",
   badge: "Demo",
   badgeNote:
     "文件不会离开浏览器。生成为模拟过程，用精选示例用例，让你在几秒内感受产品流程。",
@@ -247,7 +247,7 @@ const ZH: GeneratorDemoCopy = {
   personas: ["QA Agent", "Dev Agent", "Product Agent", "多模型交叉"],
   realProductTitle: "需要真实的多模态上传？",
   realProductBody:
-    "本机运行 Docker 镜像即可：PDF / Word / 图片 / 视频 → 生成 → 导出。本页是「先可演示」的一步。",
+    "真正把测试左移：本机运行 Docker 镜像即可 PDF / Word / 图片 / 视频 → 生成 → 导出。本页是「先可演示」的一步。",
   dockerLabel: "打开 Docker Hub",
   caseStudyLabel: "阅读案例",
   playgroundLabel: "返回体验台",

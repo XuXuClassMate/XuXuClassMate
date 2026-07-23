@@ -42,7 +42,7 @@ const featuredEn = [
   {
     title: "AI Test Case Generator",
     description:
-      "Flagship AI Testing product: multimodal QA inputs → structured cases with review loops. Install via Docker, npm, or ClawHub.",
+      "Shift testing left with multi-modal AI. Feed the engine any PRD, image, or video walk-through, and receive production-grade, reviewable test cases instantly. Deployable via Docker, npm, or ClawHub. Streamline your sprint planning with human-in-the-loop automated QA drafting.",
     href: "/en/work/testcase-generator.html",
     tags: ["Flagship", "AI Testing", "AI Test Case Generation"],
   },
@@ -59,7 +59,7 @@ const featuredZh = [
   {
     title: "AI 测试用例生成器",
     description:
-      "旗舰 AI Testing 产品：多模态 QA 输入 → 结构化用例与评审闭环。可通过 Docker、npm 或 ClawHub 安装。",
+      "用多模态 AI 把测试左移。把 PRD、图片或视频演示喂给引擎，即可即时得到可评审的生产级测试用例。可通过 Docker、npm 或 ClawHub 部署，用人在回路的自动化 QA 起草加速迭代规划。",
     href: "/zh/work/testcase-generator.html",
     tags: ["旗舰", "AI Testing", "AI Test Case Generation"],
   },
