@@ -473,16 +473,41 @@
   color: var(--primary);
 }
 
+.stack-matrix {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr));
+  gap: 1rem;
+  margin-top: 0.35rem;
+}
+
+.stack-group {
+  padding: 1.1rem 1.05rem 1.15rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface-ghost);
+}
+
+.stack-group-title {
+  margin: 0 0 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
 .stack-list--inline {
-  gap: 0.5rem;
+  gap: 0.45rem;
 }
 
 .stack-list--inline li {
   min-width: 0;
   border: 1px solid color-mix(in srgb, var(--ink) 16%, transparent);
   border-radius: 999px;
-  padding: 0.35rem 0.85rem;
-  font-size: 0.9rem;
+  padding: 0.32rem 0.75rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--muted);
+  background: var(--surface-ghost-soft);
 }
 
 .achievements-grid {
