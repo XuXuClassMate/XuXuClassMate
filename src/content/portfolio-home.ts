@@ -42,7 +42,7 @@ const featuredEn = [
   {
     title: "AI Test Case Generator",
     description:
-      "Shift testing left with multi-modal AI. Feed the engine any PRD, image, or video walk-through, and receive production-grade, reviewable test cases instantly. Deployable via Docker, npm, or ClawHub. Streamline your sprint planning with human-in-the-loop automated QA drafting.",
+      "AI-powered test case generation for PRDs and multimodal QA inputs — PDF / Word / TXT / image / video in; three-persona review loop; Excel / Markdown / XMind out. Runs via Docker, local source, npm, or OpenClaw plugin.",
     href: "/en/work/testcase-generator.html",
     tags: ["Flagship", "AI Testing", "AI Test Case Generation"],
   },
@@ -59,7 +59,7 @@ const featuredZh = [
   {
     title: "AI 测试用例生成器",
     description:
-      "用多模态 AI 把测试左移。把 PRD、图片或视频演示喂给引擎，即可即时得到可评审的生产级测试用例。可通过 Docker、npm 或 ClawHub 部署，用人在回路的自动化 QA 起草加速迭代规划。",
+      "面向 PRD 与多模态 QA 输入的 AI 用例生成——接入 PDF / Word / TXT / 图片 / 视频，经三角色评审闭环，导出 Excel / Markdown / XMind。支持 Docker、本地源码、npm 与 OpenClaw 插件。",
     href: "/zh/work/testcase-generator.html",
     tags: ["旗舰", "AI Testing", "AI Test Case Generation"],
   },
@@ -156,7 +156,7 @@ export function getPortfolioHome(locale: Locale): PortfolioHome {
           },
           {
             title: "AI Testing",
-            items: ["AI Test Case Generation", "OpenClaw / ClawHub"],
+            items: ["AI Test Case Generation", "OpenClaw / ClawHub", "Claude Code"],
           },
           {
             title: "基础设施",
@@ -178,7 +178,7 @@ export function getPortfolioHome(locale: Locale): PortfolioHome {
           },
           {
             title: "AI Testing",
-            items: ["AI Test Case Generation", "OpenClaw / ClawHub"],
+            items: ["AI Test Case Generation", "OpenClaw / ClawHub", "Claude Code"],
           },
           {
             title: "Infrastructure",

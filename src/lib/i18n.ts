@@ -50,6 +50,39 @@ export function languageHref(locale: Locale, page: PageId): string {
   return pageHref(twin, page);
 }
 
+/**
+ * Same-page language twin from the current URL path (`/en/...` ↔ `/zh/...`).
+ * Prefers root `/` for the English home instead of `/en/` or `/en/index.html`.
+ */
+export function alternateLocalePath(pathname: string): string {
+  const path =
+    pathname.length > 1 && pathname.endsWith("/")
+      ? pathname.slice(0, -1)
+      : pathname;
+
+  if (path === "/" || path === "/index.html") {
+    return "/zh/index.html";
+  }
+
+  // Astro `build.format: "file"` emits `/en.html` / `/zh.html` before rename.
+  if (path === "/en.html" || path === "/en" || path === "/en/index.html") {
+    return "/zh/index.html";
+  }
+  if (path === "/zh.html" || path === "/zh" || path === "/zh/index.html") {
+    return "/";
+  }
+
+  const match = path.match(/^\/(en|zh)(\/.*)$/);
+  if (!match) {
+    return `/zh${path.startsWith("/") ? path : `/${path}`}`;
+  }
+
+  const from = match[1] as Locale;
+  const rest = match[2];
+  const to: Locale = from === "en" ? "zh" : "en";
+  return `/${to}${rest}`;
+}
+
 export function canonicalPath(locale: Locale, page: PageId, rootHome = false): string {
   if (page === "home") {
     if (rootHome) return "/";

@@ -51,10 +51,32 @@ const tryPrimaryExternal = Boolean(
 );
 
 const overviewText = study.overview ?? study.description;
+const showOverview = overviewText !== study.description;
 const roleItems =
   study.contribution && study.contribution.length > 0
     ? study.contribution
     : null;
+
+const sectionNumbers = (() => {
+  let n = 0;
+  const next = () => {
+    n += 1;
+    return n;
+  };
+  return {
+    overview: showOverview ? next() : 0,
+    problem: next(),
+    solution: next(),
+    architecture: study.architecture?.length ? next() : 0,
+    features: study.features?.length ? next() : 0,
+    role: next(),
+    stack: study.techStack?.length ? next() : 0,
+    metrics: next(),
+    deployment: next(),
+    github: next(),
+    liveDemo: next(),
+  };
+})();
 ---
 
 <BaseLayout
@@ -164,19 +186,23 @@ const roleItems =
 
     <section class="case-body">
       <div class="container case-grid">
-        <article class="case-block reveal-on-scroll" id="overview">
-          <h2>{heading(1, page.caseOverviewTitle)}</h2>
-          <p>{overviewText}</p>
-        </article>
+        {
+          showOverview ? (
+            <article class="case-block reveal-on-scroll" id="overview">
+              <h2>{heading(sectionNumbers.overview, page.caseOverviewTitle)}</h2>
+              <p>{overviewText}</p>
+            </article>
+          ) : null
+        }
 
         <article class="case-block reveal-on-scroll" id="problem">
-          <h2>{heading(2, page.caseProblemTitle)}</h2>
+          <h2>{heading(sectionNumbers.problem, page.caseProblemTitle)}</h2>
           <p class="case-section-lead">{page.caseProblemLead}</p>
           <p>{study.problem}</p>
         </article>
 
         <article class="case-block reveal-on-scroll" id="solution">
-          <h2>{heading(3, page.caseSolutionTitle)}</h2>
+          <h2>{heading(sectionNumbers.solution, page.caseSolutionTitle)}</h2>
           <p class="case-section-lead">{page.caseSolutionLead}</p>
           <p>{study.solution}</p>
         </article>
@@ -184,7 +210,9 @@ const roleItems =
         {
           study.architecture && study.architecture.length > 0 ? (
             <article class="case-block reveal-on-scroll" id="architecture">
-              <h2>{heading(4, page.caseArchitectureTitle)}</h2>
+              <h2>
+                {heading(sectionNumbers.architecture, page.caseArchitectureTitle)}
+              </h2>
               <p class="case-section-lead">{page.caseArchitectureLead}</p>
               {study.architecture.map((chain) => (
                 <div class="arch-block">
@@ -203,7 +231,7 @@ const roleItems =
         {
           study.features && study.features.length > 0 ? (
             <article class="case-block reveal-on-scroll" id="features">
-              <h2>{heading(5, page.caseFeaturesTitle)}</h2>
+              <h2>{heading(sectionNumbers.features, page.caseFeaturesTitle)}</h2>
               <p class="case-section-lead">{page.caseFeaturesLead}</p>
               <ul>
                 {study.features.map((item) => (
@@ -215,7 +243,7 @@ const roleItems =
         }
 
         <article class="case-block reveal-on-scroll" id="role">
-          <h2>{heading(6, page.caseRoleTitle)}</h2>
+          <h2>{heading(sectionNumbers.role, page.caseRoleTitle)}</h2>
           <p class="case-section-lead">{page.caseRoleLead}</p>
           {
             roleItems ? (
@@ -237,7 +265,7 @@ const roleItems =
         {
           study.techStack && study.techStack.length > 0 ? (
             <article class="case-block reveal-on-scroll" id="stack">
-              <h2>{heading(7, page.caseStackTitle)}</h2>
+              <h2>{heading(sectionNumbers.stack, page.caseStackTitle)}</h2>
               <p class="case-section-lead">{page.caseStackLead}</p>
               <ul class="stack-list stack-list--inline">
                 {study.techStack.map((item) => (
@@ -249,7 +277,7 @@ const roleItems =
         }
 
         <article class="case-block reveal-on-scroll" id="metrics">
-          <h2>{heading(8, page.caseMetricsTitle)}</h2>
+          <h2>{heading(sectionNumbers.metrics, page.caseMetricsTitle)}</h2>
           <p class="case-section-lead">{page.caseMetricsLead}</p>
           <div class="case-metrics">
             {
@@ -301,7 +329,7 @@ const roleItems =
         </article>
 
         <article class="case-block reveal-on-scroll" id="deployment">
-          <h2>{heading(9, page.caseDeploymentTitle)}</h2>
+          <h2>{heading(sectionNumbers.deployment, page.caseDeploymentTitle)}</h2>
           <p class="case-section-lead">{page.caseDeploymentLead}</p>
           {
             study.deployment ? (
@@ -336,7 +364,7 @@ const roleItems =
         </article>
 
         <article class="case-block reveal-on-scroll" id="github">
-          <h2>{heading(10, page.caseGithubTitle)}</h2>
+          <h2>{heading(sectionNumbers.github, page.caseGithubTitle)}</h2>
           {
             githubHref ? (
               <div class="project-links">
@@ -364,7 +392,7 @@ const roleItems =
         </article>
 
         <article class="case-block reveal-on-scroll" id="live-demo">
-          <h2>{heading(11, page.caseLiveDemoTitle)}</h2>
+          <h2>{heading(sectionNumbers.liveDemo, page.caseLiveDemoTitle)}</h2>
           {
             liveDemoHref ? (
               <div class="project-links">
