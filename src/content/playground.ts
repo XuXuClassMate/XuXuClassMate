@@ -48,8 +48,8 @@ const EXPERIENCES: ExperienceDef[] = [
       zh: "/zh/demo/ai-testcase-generator.html",
     },
     description: {
-      en: "Sample PRD → structured cases and review personas in the browser. Curated output — no live LLM.",
-      zh: "示例 PRD → 结构化用例与评审角色。浏览器内演示，输出为精选样例，不调用真实 LLM。",
+      en: "Shift testing left with multi-modal AI. Feed a sample PRD in the browser — curated demo output, not a live LLM.",
+      zh: "用多模态 AI 把测试左移。浏览器内喂入示例 PRD——精选演示输出，不调用真实 LLM。",
     },
     ctaLabel: {
       en: "Open interactive demo",

@@ -114,8 +114,8 @@ const ORG_PROJECTS: OrgProjectDef[] = [
     },
     status: { en: "Open source", zh: "开源" },
     description: {
-      en: "Multimodal test-case generation with review loops — Docker / npm / ClawHub skill.",
-      zh: "多模态用例生成与评审闭环——Docker / npm / ClawHub 技能。",
+      en: "Shift testing left with multi-modal AI. Feed PRDs, images, or video walk-throughs — get production-grade, reviewable cases. Deploy via Docker, npm, or ClawHub.",
+      zh: "用多模态 AI 把测试左移。输入 PRD、图片或视频演示，即时得到可评审的生产级用例。支持 Docker、npm 或 ClawHub 部署。",
     },
   },
   {
