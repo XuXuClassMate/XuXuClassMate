@@ -92,12 +92,18 @@ test("generator interactive demo runs sample flow", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "AI Test Case Generator",
   );
+  await expect(
+    page.getByText("Multimodal AI", { exact: true }),
+  ).toBeVisible();
   await page.getByRole("button", { name: "Load sample PRD" }).click();
   await page.getByRole("button", { name: "Generate cases" }).click();
-  await expect(page.getByText("TC-01")).toBeVisible({ timeout: 5000 });
+  await expect(page.getByText("TC-01")).toBeVisible({ timeout: 15000 });
   await expect(
     page.getByRole("heading", { name: "Request OTP with a valid email" }),
   ).toBeVisible();
+  await expect(page.getByText("Pipeline complete")).toBeVisible({
+    timeout: 15000,
+  });
 });
 
 test("non-flagship case study uses same template", async ({ page }) => {
