@@ -1,4 +1,4 @@
-const GATEWAY_ORIGIN = "https://docker-hub-pull-counter.vercel.app";
+import { dockerUserStatsUrl } from "../lib/docker-gateway";
 
 type DockerI18n = {
   loading: string;
@@ -119,9 +119,7 @@ export function initPlaygroundDocker(root: HTMLElement): void {
     empty.hidden = true;
 
     try {
-      const response = await fetch(
-        `${GATEWAY_ORIGIN}/api/user/stats?username=${encodeURIComponent(username)}`,
-      );
+      const response = await fetch(dockerUserStatsUrl(username));
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}`);
       }

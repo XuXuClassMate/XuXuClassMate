@@ -1216,15 +1216,35 @@ export const en: LocaleCopy = {
           "A reusable foundation under AI tooling demos",
         ],
         metrics: [
-          { label: "Dameng pulls", value: "30k+", metric: "docker:dameng" },
-          { label: "Highgo pulls", value: "17k+", metric: "docker:highgo" },
-          { label: "Kingbase pulls", value: "1.6k+", metric: "docker:kingbase" },
-          { label: "TiDB pulls", value: "900+", metric: "docker:tidb" },
+          {
+            label: "Dameng pulls",
+            value: "30k+",
+            metric: "docker:dameng",
+            href: "https://docker-hub-pull-counter.vercel.app/api/repo/details?namespace=xuxuclassmate&repo=dameng",
+          },
+          {
+            label: "Highgo pulls",
+            value: "17k+",
+            metric: "docker:highgo",
+            href: "https://docker-hub-pull-counter.vercel.app/api/repo/details?namespace=xuxuclassmate&repo=highgo",
+          },
+          {
+            label: "Kingbase pulls",
+            value: "1.6k+",
+            metric: "docker:kingbase",
+            href: "https://docker-hub-pull-counter.vercel.app/api/repo/details?namespace=xuxuclassmate&repo=kingbase",
+          },
+          {
+            label: "TiDB pulls",
+            value: "900+",
+            metric: "docker:tidb",
+            href: "https://docker-hub-pull-counter.vercel.app/api/repo/details?namespace=xuxuclassmate&repo=tidb",
+          },
         ],
         links: [
           {
-            label: "Docker Hub",
-            href: "https://hub.docker.com/u/xuxuclassmate",
+            label: "Docker Hub API Gateway",
+            href: "https://docker-hub-pull-counter.vercel.app/api/user/stats?username=xuxuclassmate",
           },
         ],
         meta: {

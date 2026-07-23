@@ -1193,15 +1193,35 @@ export const zh: LocaleCopy = {
           "成为 AI 工具演示下的可复用底座",
         ],
         metrics: [
-          { label: "达梦拉取", value: "30k+", metric: "docker:dameng" },
-          { label: "瀚高拉取", value: "17k+", metric: "docker:highgo" },
-          { label: "人大金仓拉取", value: "1.6k+", metric: "docker:kingbase" },
-          { label: "TiDB 拉取", value: "900+", metric: "docker:tidb" },
+          {
+            label: "达梦拉取",
+            value: "30k+",
+            metric: "docker:dameng",
+            href: "https://docker-hub-pull-counter.vercel.app/api/repo/details?namespace=xuxuclassmate&repo=dameng",
+          },
+          {
+            label: "瀚高拉取",
+            value: "17k+",
+            metric: "docker:highgo",
+            href: "https://docker-hub-pull-counter.vercel.app/api/repo/details?namespace=xuxuclassmate&repo=highgo",
+          },
+          {
+            label: "人大金仓拉取",
+            value: "1.6k+",
+            metric: "docker:kingbase",
+            href: "https://docker-hub-pull-counter.vercel.app/api/repo/details?namespace=xuxuclassmate&repo=kingbase",
+          },
+          {
+            label: "TiDB 拉取",
+            value: "900+",
+            metric: "docker:tidb",
+            href: "https://docker-hub-pull-counter.vercel.app/api/repo/details?namespace=xuxuclassmate&repo=tidb",
+          },
         ],
         links: [
           {
-            label: "Docker Hub",
-            href: "https://hub.docker.com/u/xuxuclassmate",
+            label: "Docker Hub API Gateway",
+            href: "https://docker-hub-pull-counter.vercel.app/api/user/stats?username=xuxuclassmate",
           },
         ],
         meta: {

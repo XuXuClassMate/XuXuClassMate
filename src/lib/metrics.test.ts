@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { formatMetric, resolveMetric, METRIC_FALLBACKS } from "./metrics";
+import { parseTopReposPulls, parseUserStats } from "./docker-gateway";
 
 describe("formatMetric", () => {
   it("keeps small counts exact", () => {
@@ -24,5 +25,28 @@ describe("resolveMetric", () => {
 
   it("falls back to static value without metric id", () => {
     expect(resolveMetric(METRIC_FALLBACKS, undefined, "42")).toBe("42");
+  });
+});
+
+describe("docker gateway parsers", () => {
+  it("reads pullCount from top-repos payload", () => {
+    expect(
+      parseTopReposPulls({
+        repositories: [
+          { name: "dameng", pullCount: 29951 },
+          { name: "testcase-generator", pullCount: 902 },
+          { name: "other", pullCount: 1 },
+        ],
+      }),
+    ).toEqual({
+      dameng: 29951,
+      "testcase-generator": 902,
+    });
+  });
+
+  it("reads user stats totals", () => {
+    expect(
+      parseUserStats({ totalPulls: 55097, repositoryCount: 12 }),
+    ).toEqual({ totalPulls: 55097, repositoryCount: 12 });
   });
 });
