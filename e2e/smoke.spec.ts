@@ -97,6 +97,11 @@ test("unified case study template renders", async ({ page }) => {
   await expect(
     page.locator('[data-metric="clawhub:ai-testcase-generator"]'),
   ).toBeVisible();
+  await expect(
+    page.locator(
+      'img[src*="docker-hub-pull-counter.vercel.app/api/docker-stats"][src*="testcase-generator"]',
+    ),
+  ).toBeVisible();
   const back = page.getByRole("link", { name: /All projects/i });
   await expect(back.first()).toBeVisible();
 });

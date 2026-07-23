@@ -51,12 +51,25 @@ async function readDownloads(slug: string): Promise<number | null> {
 
 async function readPulls(repo: string): Promise<number | null> {
   const response = await fetch(
-    `https://hub.docker.com/v2/repositories/xuxuclassmate/${repo}/`,
+    `${GATEWAY_ORIGIN}/api/repo/details?namespace=xuxuclassmate&repo=${encodeURIComponent(repo)}`,
     { headers: { Accept: "application/json" } },
   );
   if (!response.ok) return null;
-  const data = (await response.json()) as { pull_count?: number };
-  return typeof data.pull_count === "number" ? data.pull_count : null;
+  const data = (await response.json()) as {
+    pull_count?: number;
+    pullCount?: number;
+    data?: { pull_count?: number; pullCount?: number };
+  };
+  const candidates = [
+    data.pull_count,
+    data.pullCount,
+    data.data?.pull_count,
+    data.data?.pullCount,
+  ];
+  for (const value of candidates) {
+    if (typeof value === "number" && Number.isFinite(value)) return value;
+  }
+  return null;
 }
 
 async function readNpmDownloads(

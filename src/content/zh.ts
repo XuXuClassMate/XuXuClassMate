@@ -633,7 +633,7 @@ export const zh: LocaleCopy = {
             label: "Docker 拉取",
             value: "899",
             metric: "docker:testcase-generator",
-            href: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
+            href: "https://docker-hub-pull-counter.vercel.app/api/repo/details?namespace=xuxuclassmate&repo=testcase-generator",
           },
           {
             label: "npm 下载",
@@ -650,7 +650,7 @@ export const zh: LocaleCopy = {
         ],
         deployment: {
           summary:
-            "分发面以 Docker、npm 与 OpenClaw 为主（另支持本地源码运行）。下方指标按这三条路径实时刷新。",
+            "分发面以 Docker、npm 与 OpenClaw 为主（另支持本地源码运行）。Docker 拉取量由 Docker Hub API Gateway 实时采集。",
           steps: [
             "Docker：docker pull xuxuclassmate/testcase-generator:latest，配置 AI_PROVIDER 与 API Key，映射 3456，打开 http://localhost:3456。",
             "npm：npm install -g @classmatexuxu/testcase-generator，然后 testcase-generator --standalone。",
