@@ -117,11 +117,6 @@ const dockerHref =
               <li class="is-idle">{demo.activityIdle}</li>
             </ul>
 
-            <div class="demo-output-block is-hidden" data-demo-results-block>
-              <h3 class="demo-results-title">{demo.resultsLabel}</h3>
-              <div class="demo-results" data-demo-results></div>
-            </div>
-
             <div class="demo-output-block is-hidden" data-demo-review>
               <h3>{demo.reviewLabel}</h3>
               <p class="demo-review-note">{demo.reviewNote}</p>
@@ -136,15 +131,38 @@ const dockerHref =
 
             <div class="demo-output-block is-hidden" data-demo-export>
               <h3>{demo.exportLabel}</h3>
-              <ul class="demo-export-list" data-demo-export-list>
+              <p class="demo-export-hint">{demo.exportHint}</p>
+              <div class="demo-export-list" data-demo-export-list>
                 {
                   demo.exportItems.map((item) => (
-                    <li data-export-item={item}>{item}</li>
+                    <button
+                      type="button"
+                      class="demo-export-btn"
+                      data-export-item
+                      data-export-id={item.id}
+                      data-export-label={item.label}
+                      disabled
+                    >
+                      {item.label}
+                    </button>
                   ))
                 }
-              </ul>
+              </div>
+              <p class="demo-export-status" data-demo-export-status hidden></p>
             </div>
           </div>
+        </div>
+
+        <div
+          class="demo-results-panel is-hidden"
+          id="demo-results"
+          data-demo-results-block
+        >
+          <div class="demo-results-head">
+            <h2 class="demo-results-title">{demo.resultsLabel}</h2>
+            <p class="demo-results-count" data-demo-results-count></p>
+          </div>
+          <div class="demo-results" data-demo-results></div>
         </div>
       </div>
     </section>
