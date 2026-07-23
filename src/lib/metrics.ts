@@ -1,3 +1,12 @@
+import {
+  DOCKER_METRIC_REPOS,
+  dockerGatewayCallsUrl,
+  dockerTopReposUrl,
+  dockerUserStatsUrl,
+  parseTopReposPulls,
+  parseUserStats,
+} from "./docker-gateway";
+
 export type MetricId =
   | "clawhub:ai-testcase-generator"
   | "clawhub:trading-assistant-core"
@@ -23,13 +32,8 @@ export const CLAWHUB_SKILLS = {
   },
 } as const;
 
-export const DOCKER_REPOS = [
-  "dameng",
-  "highgo",
-  "kingbase",
-  "tidb",
-  "testcase-generator",
-] as const;
+/** @deprecated Prefer DOCKER_METRIC_REPOS from ./docker-gateway. */
+export const DOCKER_REPOS = DOCKER_METRIC_REPOS;
 
 export const NPM_PACKAGES = {
   "testcase-generator": {
@@ -39,8 +43,6 @@ export const NPM_PACKAGES = {
     url: "https://www.npmjs.com/package/@classmatexuxu/testcase-generator",
   },
 } as const;
-
-const GATEWAY_ORIGIN = "https://docker-hub-pull-counter.vercel.app";
 
 /** Fallback values used when live APIs are unavailable. */
 export const METRIC_FALLBACKS: Record<MetricId, number> = {
@@ -98,25 +100,6 @@ function clawhubDownloads(payload: unknown): number | null {
     : null;
 }
 
-function dockerPulls(payload: unknown): number | null {
-  if (!payload || typeof payload !== "object") return null;
-  const root = payload as {
-    pull_count?: unknown;
-    pullCount?: unknown;
-    data?: { pull_count?: unknown; pullCount?: unknown };
-  };
-  const candidates = [
-    root.pull_count,
-    root.pullCount,
-    root.data?.pull_count,
-    root.data?.pullCount,
-  ];
-  for (const pulls of candidates) {
-    if (typeof pulls === "number" && Number.isFinite(pulls)) return pulls;
-  }
-  return null;
-}
-
 function npmRangeTotal(payload: unknown): number | null {
   if (!payload || typeof payload !== "object") return null;
   const downloads = (payload as { downloads?: unknown }).downloads;
@@ -136,12 +119,11 @@ function utcToday(): string {
   return new Date().toISOString().slice(0, 10);
 }
 
-function gatewayRepoDetailsUrl(repo: string): string {
-  return `${GATEWAY_ORIGIN}/api/repo/details?namespace=xuxuclassmate&repo=${encodeURIComponent(repo)}`;
-}
-
 export async function fetchLiveMetrics(): Promise<Partial<MetricsMap>> {
-  const pairJobs: Promise<readonly [MetricId, number] | ReadonlyArray<readonly [MetricId, number]>>[] = [
+  const pairJobs: Promise<
+    | readonly [MetricId, number]
+    | ReadonlyArray<readonly [MetricId, number]>
+  >[] = [
     ...(Object.keys(CLAWHUB_SKILLS) as (keyof typeof CLAWHUB_SKILLS)[]).map(
       (key) =>
         fetchJson(
@@ -152,13 +134,29 @@ export async function fetchLiveMetrics(): Promise<Partial<MetricsMap>> {
           return [`clawhub:${key}` as MetricId, value] as const;
         }),
     ),
-    ...DOCKER_REPOS.map((repo) =>
-      fetchJson(gatewayRepoDetailsUrl(repo)).then((json) => {
-        const value = dockerPulls(json);
-        if (value == null) throw new Error("missing pulls");
-        return [`docker:${repo}` as MetricId, value] as const;
-      }),
-    ),
+    // All Docker pull counts come from docker-hub-pull-counter.vercel.app only.
+    Promise.all([
+      fetchJson(dockerTopReposUrl()),
+      fetchJson(dockerUserStatsUrl()),
+    ]).then(([topRepos, userStatsRaw]) => {
+      const repos = parseTopReposPulls(topRepos);
+      const userStats = parseUserStats(userStatsRaw);
+      const pairs: Array<readonly [MetricId, number]> = [];
+      for (const repo of DOCKER_METRIC_REPOS) {
+        const pulls = repos[repo];
+        if (pulls != null) {
+          pairs.push([`docker:${repo}` as MetricId, pulls]);
+        }
+      }
+      if (userStats.totalPulls != null) {
+        pairs.push(["docker:total-pulls", userStats.totalPulls]);
+      }
+      if (userStats.repositoryCount != null) {
+        pairs.push(["docker:repo-count", userStats.repositoryCount]);
+      }
+      if (pairs.length === 0) throw new Error("missing docker gateway data");
+      return pairs;
+    }),
     ...(Object.keys(NPM_PACKAGES) as (keyof typeof NPM_PACKAGES)[]).map(
       async (key) => {
         const pkg = NPM_PACKAGES[key];
@@ -171,32 +169,7 @@ export async function fetchLiveMetrics(): Promise<Partial<MetricsMap>> {
         return [`npm:${key}` as MetricId, value] as const;
       },
     ),
-    fetchJson(
-      `${GATEWAY_ORIGIN}/api/user/stats?username=xuxuclassmate`,
-    ).then((json) => {
-      if (!json || typeof json !== "object") throw new Error("bad user stats");
-      const data = json as {
-        totalPulls?: unknown;
-        repositoryCount?: unknown;
-      };
-      if (
-        typeof data.totalPulls !== "number" ||
-        !Number.isFinite(data.totalPulls)
-      ) {
-        throw new Error("missing totalPulls");
-      }
-      const pairs: Array<readonly [MetricId, number]> = [
-        ["docker:total-pulls", data.totalPulls],
-      ];
-      if (
-        typeof data.repositoryCount === "number" &&
-        Number.isFinite(data.repositoryCount)
-      ) {
-        pairs.push(["docker:repo-count", data.repositoryCount]);
-      }
-      return pairs;
-    }),
-    fetchJson(`${GATEWAY_ORIGIN}/api/stats`).then((json) => {
+    fetchJson(dockerGatewayCallsUrl()).then((json) => {
       if (!json || typeof json !== "object") throw new Error("bad api stats");
       const total = (json as { totalCalls?: unknown }).totalCalls;
       if (typeof total !== "number" || !Number.isFinite(total)) {

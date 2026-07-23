@@ -132,7 +132,7 @@ const NOTES: NoteDef[] = [
               label: "Total pulls (namespace)",
               value: "54k+",
               metric: "docker:total-pulls",
-              href: "https://hub.docker.com/u/xuxuclassmate",
+              href: "https://docker-hub-pull-counter.vercel.app/api/user/stats?username=xuxuclassmate",
             },
             {
               label: "Published QA images",
@@ -143,23 +143,25 @@ const NOTES: NoteDef[] = [
               label: "Dameng pulls",
               value: "29k+",
               metric: "docker:dameng",
-              href: "https://hub.docker.com/r/xuxuclassmate/dameng",
+              href: "https://docker-hub-pull-counter.vercel.app/api/repo/details?namespace=xuxuclassmate&repo=dameng",
             },
             {
               label: "Highgo pulls",
               value: "16k+",
               metric: "docker:highgo",
-              href: "https://hub.docker.com/r/xuxuclassmate/highgo",
+              href: "https://docker-hub-pull-counter.vercel.app/api/repo/details?namespace=xuxuclassmate&repo=highgo",
             },
             {
               label: "Kingbase pulls",
               value: "1.6k+",
               metric: "docker:kingbase",
+              href: "https://docker-hub-pull-counter.vercel.app/api/repo/details?namespace=xuxuclassmate&repo=kingbase",
             },
             {
               label: "TiDB pulls",
               value: "900+",
               metric: "docker:tidb",
+              href: "https://docker-hub-pull-counter.vercel.app/api/repo/details?namespace=xuxuclassmate&repo=tidb",
             },
           ],
           links: [
@@ -300,7 +302,7 @@ docker run -d --name qa-dameng \\
               label: "命名空间总拉取",
               value: "54k+",
               metric: "docker:total-pulls",
-              href: "https://hub.docker.com/u/xuxuclassmate",
+              href: "https://docker-hub-pull-counter.vercel.app/api/user/stats?username=xuxuclassmate",
             },
             {
               label: "已发布 QA 镜像",
@@ -311,23 +313,25 @@ docker run -d --name qa-dameng \\
               label: "达梦拉取",
               value: "29k+",
               metric: "docker:dameng",
-              href: "https://hub.docker.com/r/xuxuclassmate/dameng",
+              href: "https://docker-hub-pull-counter.vercel.app/api/repo/details?namespace=xuxuclassmate&repo=dameng",
             },
             {
               label: "瀚高拉取",
               value: "16k+",
               metric: "docker:highgo",
-              href: "https://hub.docker.com/r/xuxuclassmate/highgo",
+              href: "https://docker-hub-pull-counter.vercel.app/api/repo/details?namespace=xuxuclassmate&repo=highgo",
             },
             {
               label: "人大金仓拉取",
               value: "1.6k+",
               metric: "docker:kingbase",
+              href: "https://docker-hub-pull-counter.vercel.app/api/repo/details?namespace=xuxuclassmate&repo=kingbase",
             },
             {
               label: "TiDB 拉取",
               value: "900+",
               metric: "docker:tidb",
+              href: "https://docker-hub-pull-counter.vercel.app/api/repo/details?namespace=xuxuclassmate&repo=tidb",
             },
           ],
           links: [

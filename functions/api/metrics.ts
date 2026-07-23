@@ -1,3 +1,14 @@
+import {
+  DOCKER_GATEWAY_ORIGIN,
+  DOCKER_METRIC_REPOS,
+  dockerGatewayCallsUrl,
+  dockerTopReposUrl,
+  dockerUserStatsUrl,
+  parseTopReposPulls,
+  parseUserStats,
+  type DockerMetricRepo,
+} from "../lib/docker-gateway";
+
 type MetricsPayload = {
   "clawhub:ai-testcase-generator": number;
   "clawhub:trading-assistant-core": number;
@@ -29,7 +40,6 @@ const FALLBACKS: Omit<MetricsPayload, "updatedAt"> = {
   "api:gateway-calls": 501,
 };
 
-const GATEWAY_ORIGIN = "https://docker-hub-pull-counter.vercel.app";
 const CACHE_TTL_SECONDS = 600;
 const LAST_GOOD_URL = "https://metrics.internal/last-good";
 const NPM_TESTCASE = {
@@ -49,27 +59,29 @@ async function readDownloads(slug: string): Promise<number | null> {
   return typeof value === "number" ? value : null;
 }
 
-async function readPulls(repo: string): Promise<number | null> {
-  const response = await fetch(
-    `${GATEWAY_ORIGIN}/api/repo/details?namespace=xuxuclassmate&repo=${encodeURIComponent(repo)}`,
-    { headers: { Accept: "application/json" } },
-  );
-  if (!response.ok) return null;
-  const data = (await response.json()) as {
-    pull_count?: number;
-    pullCount?: number;
-    data?: { pull_count?: number; pullCount?: number };
+async function readDockerMetrics(): Promise<{
+  repos: Partial<Record<DockerMetricRepo, number>>;
+  totalPulls: number | null;
+  repositoryCount: number | null;
+}> {
+  const [topReposResponse, userStatsResponse] = await Promise.all([
+    fetch(dockerTopReposUrl(), { headers: { Accept: "application/json" } }),
+    fetch(dockerUserStatsUrl(), { headers: { Accept: "application/json" } }),
+  ]);
+
+  const repos =
+    topReposResponse.ok
+      ? parseTopReposPulls(await topReposResponse.json())
+      : {};
+  const userStats = userStatsResponse.ok
+    ? parseUserStats(await userStatsResponse.json())
+    : { totalPulls: null, repositoryCount: null };
+
+  return {
+    repos,
+    totalPulls: userStats.totalPulls,
+    repositoryCount: userStats.repositoryCount,
   };
-  const candidates = [
-    data.pull_count,
-    data.pullCount,
-    data.data?.pull_count,
-    data.data?.pullCount,
-  ];
-  for (const value of candidates) {
-    if (typeof value === "number" && Number.isFinite(value)) return value;
-  }
-  return null;
 }
 
 async function readNpmDownloads(
@@ -94,27 +106,8 @@ async function readNpmDownloads(
   }, 0);
 }
 
-async function readGatewayUserStats(): Promise<{
-  pulls: number | null;
-  repos: number | null;
-}> {
-  const response = await fetch(
-    `${GATEWAY_ORIGIN}/api/user/stats?username=xuxuclassmate`,
-    { headers: { Accept: "application/json" } },
-  );
-  if (!response.ok) return { pulls: null, repos: null };
-  const data = (await response.json()) as {
-    totalPulls?: number;
-    repositoryCount?: number;
-  };
-  return {
-    pulls: typeof data.totalPulls === "number" ? data.totalPulls : null,
-    repos: typeof data.repositoryCount === "number" ? data.repositoryCount : null,
-  };
-}
-
 async function readGatewayCalls(): Promise<number | null> {
-  const response = await fetch(`${GATEWAY_ORIGIN}/api/stats`, {
+  const response = await fetch(dockerGatewayCallsUrl(), {
     headers: { Accept: "application/json" },
   });
   if (!response.ok) return null;
@@ -128,41 +121,21 @@ type BuildResult = {
 };
 
 async function buildPayload(): Promise<BuildResult> {
-  const [
-    testcase,
-    trading,
-    dameng,
-    highgo,
-    kingbase,
-    tidb,
-    testcaseDocker,
-    testcaseNpm,
-    userStats,
-    apiCalls,
-  ] = await Promise.all([
+  const [testcase, trading, docker, testcaseNpm, apiCalls] = await Promise.all([
     readDownloads("ai-testcase-generator"),
     readDownloads("trading-assistant-core"),
-    readPulls("dameng"),
-    readPulls("highgo"),
-    readPulls("kingbase"),
-    readPulls("tidb"),
-    readPulls("testcase-generator"),
+    readDockerMetrics(),
     readNpmDownloads(NPM_TESTCASE.name, NPM_TESTCASE.since),
-    readGatewayUserStats(),
     readGatewayCalls(),
   ]);
 
   const liveHits = [
     testcase,
     trading,
-    dameng,
-    highgo,
-    kingbase,
-    tidb,
-    testcaseDocker,
+    ...DOCKER_METRIC_REPOS.map((repo) => docker.repos[repo]),
+    docker.totalPulls,
+    docker.repositoryCount,
     testcaseNpm,
-    userStats.pulls,
-    userStats.repos,
     apiCalls,
   ].filter((value) => value != null).length;
 
@@ -175,16 +148,18 @@ async function buildPayload(): Promise<BuildResult> {
       "clawhub:ai-testcase-generator": testcaseValue,
       "clawhub:trading-assistant-core": tradingValue,
       "clawhub:total-downloads": testcaseValue + tradingValue,
-      "docker:dameng": dameng ?? FALLBACKS["docker:dameng"],
-      "docker:highgo": highgo ?? FALLBACKS["docker:highgo"],
-      "docker:kingbase": kingbase ?? FALLBACKS["docker:kingbase"],
-      "docker:tidb": tidb ?? FALLBACKS["docker:tidb"],
+      "docker:dameng": docker.repos.dameng ?? FALLBACKS["docker:dameng"],
+      "docker:highgo": docker.repos.highgo ?? FALLBACKS["docker:highgo"],
+      "docker:kingbase":
+        docker.repos.kingbase ?? FALLBACKS["docker:kingbase"],
+      "docker:tidb": docker.repos.tidb ?? FALLBACKS["docker:tidb"],
       "docker:testcase-generator":
-        testcaseDocker ?? FALLBACKS["docker:testcase-generator"],
+        docker.repos["testcase-generator"] ??
+        FALLBACKS["docker:testcase-generator"],
       "docker:total-pulls":
-        userStats.pulls ?? FALLBACKS["docker:total-pulls"],
+        docker.totalPulls ?? FALLBACKS["docker:total-pulls"],
       "docker:repo-count":
-        userStats.repos ?? FALLBACKS["docker:repo-count"],
+        docker.repositoryCount ?? FALLBACKS["docker:repo-count"],
       "npm:testcase-generator":
         testcaseNpm ?? FALLBACKS["npm:testcase-generator"],
       "api:gateway-calls": apiCalls ?? FALLBACKS["api:gateway-calls"],
@@ -204,6 +179,7 @@ function jsonResponse(
       "Access-Control-Allow-Origin": "*",
       "X-Metrics-Cache": hit ? "HIT" : "MISS",
       "X-Metrics-Stale": stale ? "1" : "0",
+      "X-Docker-Gateway": DOCKER_GATEWAY_ORIGIN,
     },
   });
 }
