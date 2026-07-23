@@ -630,22 +630,32 @@ export const zh: LocaleCopy = {
         ],
         metrics: [
           {
-            label: "ClawHub 安装",
+            label: "Docker 拉取",
+            value: "899",
+            metric: "docker:testcase-generator",
+            href: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
+          },
+          {
+            label: "npm 下载",
+            value: "139",
+            metric: "npm:testcase-generator",
+            href: "https://www.npmjs.com/package/@classmatexuxu/testcase-generator",
+          },
+          {
+            label: "OpenClaw / ClawHub 安装",
             value: "700+",
             metric: "clawhub:ai-testcase-generator",
+            href: "https://clawhub.ai/xuxuclassmate/ai-testcase-generator",
           },
-          { label: "输入形态", value: "PDF · Word · TXT · Image · Video" },
-          { label: "运行方式", value: "Docker · 源码 · npm · OpenClaw" },
-          { label: "导出格式", value: "Excel · Markdown · XMind" },
         ],
         deployment: {
           summary:
-            "官方仅支持四种运行方式——Docker、本地源码、npm 全局安装、OpenClaw 插件。详见官方文档。",
+            "分发面以 Docker、npm 与 OpenClaw 为主（另支持本地源码运行）。下方指标按这三条路径实时刷新。",
           steps: [
             "Docker：docker pull xuxuclassmate/testcase-generator:latest，配置 AI_PROVIDER 与 API Key，映射 3456，打开 http://localhost:3456。",
-            "本地源码：clone 仓库 → npm install → 配置 .env → npm run build && npm run start。",
             "npm：npm install -g @classmatexuxu/testcase-generator，然后 testcase-generator --standalone。",
             "OpenClaw：openclaw plugins install -l /path/to/testcase-generator，在 config.yaml 配置 models[] 后使用 /testgen。",
+            "本地源码（无下载计数）：clone 仓库 → npm install → 配置 .env → npm run build && npm run start。",
           ],
           channels: [
             {
@@ -661,8 +671,8 @@ export const zh: LocaleCopy = {
               href: "https://www.npmjs.com/package/@classmatexuxu/testcase-generator",
             },
             {
-              label: "GitHub",
-              href: "https://github.com/XuXuClassMate/testcase-generator",
+              label: "ClawHub / OpenClaw",
+              href: "https://clawhub.ai/xuxuclassmate/ai-testcase-generator",
             },
           ],
         },

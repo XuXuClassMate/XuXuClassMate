@@ -24,8 +24,10 @@ export type MetricId =
   | "docker:highgo"
   | "docker:kingbase"
   | "docker:tidb"
+  | "docker:testcase-generator"
   | "docker:total-pulls"
   | "docker:repo-count"
+  | "npm:testcase-generator"
   | "api:gateway-calls";
 
 export type IconName =
@@ -182,7 +184,7 @@ export type CaseStudy = {
   outcomes: string[];
   /** Concrete, inspectable proof (repos, live demos, exports). */
   artifacts?: CaseArtifact[];
-  metrics: { label: string; value: string; metric?: MetricId }[];
+  metrics: { label: string; value: string; metric?: MetricId; href?: string }[];
   deployment?: CaseDeployment;
   tryItNow?: CaseTryItNow;
   links: { label: string; href: string }[];

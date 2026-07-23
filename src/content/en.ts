@@ -642,22 +642,32 @@ export const en: LocaleCopy = {
         ],
         metrics: [
           {
-            label: "ClawHub installs",
+            label: "Docker pulls",
+            value: "899",
+            metric: "docker:testcase-generator",
+            href: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
+          },
+          {
+            label: "npm downloads",
+            value: "139",
+            metric: "npm:testcase-generator",
+            href: "https://www.npmjs.com/package/@classmatexuxu/testcase-generator",
+          },
+          {
+            label: "OpenClaw / ClawHub installs",
             value: "700+",
             metric: "clawhub:ai-testcase-generator",
+            href: "https://clawhub.ai/xuxuclassmate/ai-testcase-generator",
           },
-          { label: "Input modes", value: "PDF · Word · TXT · Image · Video" },
-          { label: "Run modes", value: "Docker · source · npm · OpenClaw" },
-          { label: "Exports", value: "Excel · Markdown · XMind" },
         ],
         deployment: {
           summary:
-            "Officially only four run modes are supported — Docker, local source, npm global install, and OpenClaw plugin. See the docs.",
+            "Distribution centers on Docker, npm, and OpenClaw (local source is also supported). Metrics below refresh live for those three channels.",
           steps: [
             "Docker: docker pull xuxuclassmate/testcase-generator:latest, set AI_PROVIDER + API key, map 3456, open http://localhost:3456.",
-            "Local source: clone → npm install → configure .env → npm run build && npm run start.",
             "npm: npm install -g @classmatexuxu/testcase-generator, then testcase-generator --standalone.",
             "OpenClaw: openclaw plugins install -l /path/to/testcase-generator, configure models[] in config.yaml, use /testgen.",
+            "Local source (no download counter): clone → npm install → configure .env → npm run build && npm run start.",
           ],
           channels: [
             {
@@ -673,8 +683,8 @@ export const en: LocaleCopy = {
               href: "https://www.npmjs.com/package/@classmatexuxu/testcase-generator",
             },
             {
-              label: "GitHub",
-              href: "https://github.com/XuXuClassMate/testcase-generator",
+              label: "ClawHub / OpenClaw",
+              href: "https://clawhub.ai/xuxuclassmate/ai-testcase-generator",
             },
           ],
         },

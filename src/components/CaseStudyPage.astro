@@ -278,7 +278,15 @@ const sectionNumbers = (() => {
 
         <article class="case-block reveal-on-scroll" id="metrics">
           <h2>{heading(sectionNumbers.metrics, page.caseMetricsTitle)}</h2>
-          <p class="case-section-lead">{page.caseMetricsLead}</p>
+          <p class="case-section-lead">
+            {
+              slug === "testcase-generator"
+                ? isZh
+                  ? "Docker 拉取 · npm 下载 · OpenClaw / ClawHub 安装——经 /api/metrics 实时刷新。"
+                  : "Docker pulls · npm downloads · OpenClaw / ClawHub installs — refreshed live via /api/metrics."
+                : page.caseMetricsLead
+            }
+          </p>
           <div class="case-metrics">
             {
               study.metrics.map((metric) => {
@@ -300,7 +308,18 @@ const sectionNumbers = (() => {
                     >
                       {value}
                     </span>
-                    <span class="case-metric-label">{metric.label}</span>
+                    {metric.href ? (
+                      <a
+                        class="case-metric-label case-metric-label--link"
+                        href={metric.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {metric.label}
+                      </a>
+                    ) : (
+                      <span class="case-metric-label">{metric.label}</span>
+                    )}
                   </div>
                 );
               })

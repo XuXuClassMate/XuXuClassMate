@@ -6,28 +6,36 @@ type MetricsPayload = {
   "docker:highgo": number;
   "docker:kingbase": number;
   "docker:tidb": number;
+  "docker:testcase-generator": number;
   "docker:total-pulls": number;
   "docker:repo-count": number;
+  "npm:testcase-generator": number;
   "api:gateway-calls": number;
   updatedAt: string;
 };
 
 const FALLBACKS: Omit<MetricsPayload, "updatedAt"> = {
-  "clawhub:ai-testcase-generator": 703,
+  "clawhub:ai-testcase-generator": 709,
   "clawhub:trading-assistant-core": 908,
-  "clawhub:total-downloads": 1611,
+  "clawhub:total-downloads": 1617,
   "docker:dameng": 29795,
   "docker:highgo": 16873,
   "docker:kingbase": 1613,
   "docker:tidb": 943,
+  "docker:testcase-generator": 899,
   "docker:total-pulls": 53935,
   "docker:repo-count": 12,
+  "npm:testcase-generator": 139,
   "api:gateway-calls": 501,
 };
 
 const GATEWAY_ORIGIN = "https://docker-hub-pull-counter.vercel.app";
 const CACHE_TTL_SECONDS = 600;
 const LAST_GOOD_URL = "https://metrics.internal/last-good";
+const NPM_TESTCASE = {
+  name: "@classmatexuxu/testcase-generator",
+  since: "2026-04-02",
+} as const;
 
 async function readDownloads(slug: string): Promise<number | null> {
   const response = await fetch(`https://clawhub.ai/api/v1/skills/${slug}`, {
@@ -49,6 +57,28 @@ async function readPulls(repo: string): Promise<number | null> {
   if (!response.ok) return null;
   const data = (await response.json()) as { pull_count?: number };
   return typeof data.pull_count === "number" ? data.pull_count : null;
+}
+
+async function readNpmDownloads(
+  name: string,
+  since: string,
+): Promise<number | null> {
+  const end = new Date().toISOString().slice(0, 10);
+  const response = await fetch(
+    `https://api.npmjs.org/downloads/range/${since}:${end}/${encodeURIComponent(name)}`,
+    { headers: { Accept: "application/json" } },
+  );
+  if (!response.ok) return null;
+  const data = (await response.json()) as {
+    downloads?: Array<{ downloads?: number }>;
+  };
+  if (!Array.isArray(data.downloads)) return null;
+  return data.downloads.reduce((sum, day) => {
+    const count = day.downloads;
+    return typeof count === "number" && Number.isFinite(count)
+      ? sum + count
+      : sum;
+  }, 0);
 }
 
 async function readGatewayUserStats(): Promise<{
@@ -85,17 +115,29 @@ type BuildResult = {
 };
 
 async function buildPayload(): Promise<BuildResult> {
-  const [testcase, trading, dameng, highgo, kingbase, tidb, userStats, apiCalls] =
-    await Promise.all([
-      readDownloads("ai-testcase-generator"),
-      readDownloads("trading-assistant-core"),
-      readPulls("dameng"),
-      readPulls("highgo"),
-      readPulls("kingbase"),
-      readPulls("tidb"),
-      readGatewayUserStats(),
-      readGatewayCalls(),
-    ]);
+  const [
+    testcase,
+    trading,
+    dameng,
+    highgo,
+    kingbase,
+    tidb,
+    testcaseDocker,
+    testcaseNpm,
+    userStats,
+    apiCalls,
+  ] = await Promise.all([
+    readDownloads("ai-testcase-generator"),
+    readDownloads("trading-assistant-core"),
+    readPulls("dameng"),
+    readPulls("highgo"),
+    readPulls("kingbase"),
+    readPulls("tidb"),
+    readPulls("testcase-generator"),
+    readNpmDownloads(NPM_TESTCASE.name, NPM_TESTCASE.since),
+    readGatewayUserStats(),
+    readGatewayCalls(),
+  ]);
 
   const liveHits = [
     testcase,
@@ -104,6 +146,8 @@ async function buildPayload(): Promise<BuildResult> {
     highgo,
     kingbase,
     tidb,
+    testcaseDocker,
+    testcaseNpm,
     userStats.pulls,
     userStats.repos,
     apiCalls,
@@ -122,10 +166,14 @@ async function buildPayload(): Promise<BuildResult> {
       "docker:highgo": highgo ?? FALLBACKS["docker:highgo"],
       "docker:kingbase": kingbase ?? FALLBACKS["docker:kingbase"],
       "docker:tidb": tidb ?? FALLBACKS["docker:tidb"],
+      "docker:testcase-generator":
+        testcaseDocker ?? FALLBACKS["docker:testcase-generator"],
       "docker:total-pulls":
         userStats.pulls ?? FALLBACKS["docker:total-pulls"],
       "docker:repo-count":
         userStats.repos ?? FALLBACKS["docker:repo-count"],
+      "npm:testcase-generator":
+        testcaseNpm ?? FALLBACKS["npm:testcase-generator"],
       "api:gateway-calls": apiCalls ?? FALLBACKS["api:gateway-calls"],
       updatedAt: new Date().toISOString(),
     },
