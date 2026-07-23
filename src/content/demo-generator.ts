@@ -75,7 +75,7 @@ const EN: GeneratorDemoCopy = {
   subtitle: "INTERACTIVE DEMO",
   title: "AI Test Case Generator",
   description:
-    "A browser demo of the flagship loop: requirement in → structured cases out → human review. Sample output only — not a live LLM.",
+    "A browser demo of the flagship loop: requirement in → structured cases out → multi-role / multi-model review. Sample output only — not a live LLM.",
   badge: "Demo",
   badgeNote:
     "No files leave your browser. Generation is simulated with curated sample cases so you can feel the product flow in seconds.",
@@ -91,8 +91,9 @@ const EN: GeneratorDemoCopy = {
   activityIdle: "Load a sample PRD, then generate to watch each pipeline stage run.",
   resultsLabel: "Structured test cases",
   resultsCountLabel: "Sample cases in this demo: {n}",
-  reviewLabel: "Human review",
-  reviewNote: "Test / Dev / Product each check coverage, feasibility, and wording before export.",
+  reviewLabel: "Multi-role / multi-model review",
+  reviewNote:
+    "QA / Dev / Product role agents and multiple models cross-check coverage, feasibility, and wording before export.",
   exportLabel: "Automation / integration handoff",
   exportHint: "Click a format to download a demo sample from the generated cases.",
   exportDownloaded: "Downloaded {format} (demo sample)",
@@ -102,7 +103,7 @@ const EN: GeneratorDemoCopy = {
     { id: "xmind", label: "XMind" },
     { id: "automation", label: "Automation suite" },
   ],
-  personas: ["Test", "Dev", "Product"],
+  personas: ["QA Agent", "Dev Agent", "Product Agent", "Model ensemble"],
   realProductTitle: "Want the real multimodal upload?",
   realProductBody:
     "Run the Docker image locally for PDF / Word / image / video → generate → export. This page is the demoable first step.",
@@ -134,18 +135,19 @@ const EN: GeneratorDemoCopy = {
       ],
     },
     {
-      title: "Human Review",
-      detail: "Route cases through Test / Dev / Product review personas.",
+      title: "Multi-role / multi-model review",
+      detail:
+        "Run QA / Dev / Product role agents plus a multi-model cross-check.",
       logs: [
-        "Test: coverage check on lockout & expiry paths",
-        "Dev: feasibility check on OTP + redirect flow",
-        "Product: wording / acceptance alignment",
-        "Review loop complete — ready to export",
+        "QA role agent: coverage on lockout & expiry paths",
+        "Dev role agent: feasibility of OTP + redirect flow",
+        "Product role agent: acceptance wording alignment",
+        "Multi-model ensemble cross-check complete — ready to export",
       ],
     },
     {
       title: "Automation / Integration",
-      detail: "Prepare export formats for humans and downstream automation.",
+      detail: "Prepare export formats for downstream automation and tooling.",
       logs: [
         "Packaging Excel / Markdown / XMind exports…",
         "Attaching handoff notes for automation suites",
@@ -214,7 +216,7 @@ const ZH: GeneratorDemoCopy = {
   subtitle: "交互演示",
   title: "AI 测试用例生成器",
   description:
-    "旗舰产品闭环的浏览器 Demo：需求进入 → 结构化用例 → 人工评审。输出为示例用例，不是实时 LLM。",
+    "旗舰产品闭环的浏览器 Demo：需求进入 → 结构化用例 → 多角色 / 多模型评审。输出为示例用例，不是实时 LLM。",
   badge: "Demo",
   badgeNote:
     "文件不会离开浏览器。生成为模拟过程，用精选示例用例，让你在几秒内感受产品流程。",
@@ -230,8 +232,9 @@ const ZH: GeneratorDemoCopy = {
   activityIdle: "先载入示例 PRD，再点击生成，观看每个阶段如何推进。",
   resultsLabel: "结构化测试用例",
   resultsCountLabel: "本 Demo 展示示例用例：{n} 条",
-  reviewLabel: "人工评审",
-  reviewNote: "测试 / 开发 / 产品分别检查覆盖、可落地性与表述，再进入导出。",
+  reviewLabel: "多角色 / 多模型评审",
+  reviewNote:
+    "QA / Dev / Product 角色 Agent 与多模型交叉检查覆盖、可落地性与表述，再进入导出。",
   exportLabel: "自动化 / 集成交接",
   exportHint: "点击格式即可下载基于当前用例的 Demo 样例文件。",
   exportDownloaded: "已下载 {format}（Demo 样例）",
@@ -241,7 +244,7 @@ const ZH: GeneratorDemoCopy = {
     { id: "xmind", label: "XMind" },
     { id: "automation", label: "自动化套件" },
   ],
-  personas: ["测试", "开发", "产品"],
+  personas: ["QA Agent", "Dev Agent", "Product Agent", "多模型交叉"],
   realProductTitle: "需要真实的多模态上传？",
   realProductBody:
     "本机运行 Docker 镜像即可：PDF / Word / 图片 / 视频 → 生成 → 导出。本页是「先可演示」的一步。",
@@ -273,18 +276,18 @@ const ZH: GeneratorDemoCopy = {
       ],
     },
     {
-      title: "人工评审",
-      detail: "按测试 / 开发 / 产品角色走评审闭环。",
+      title: "多角色 / 多模型评审",
+      detail: "由 QA / Dev / Product 角色 Agent 与多模型交叉评审。",
       logs: [
-        "测试：检查锁定与过期路径覆盖",
-        "开发：核对 OTP 与跳转流程可落地性",
-        "产品：对齐表述与验收标准",
-        "评审完成 — 可进入导出",
+        "QA 角色 Agent：检查锁定与过期路径覆盖",
+        "Dev 角色 Agent：核对 OTP 与跳转可落地性",
+        "Product 角色 Agent：对齐验收表述",
+        "多模型交叉复核完成 — 可进入导出",
       ],
     },
     {
       title: "自动化 / 集成",
-      detail: "准备导出格式，交接给人与下游自动化。",
+      detail: "准备导出格式，交接给下游自动化与工具链。",
       logs: [
         "打包 Excel / Markdown / XMind 导出…",
         "附加自动化套件交接说明",
