@@ -360,8 +360,10 @@ type MetricId =
   | "docker:highgo"
   | "docker:kingbase"
   | "docker:tidb"
+  | "docker:testcase-generator"
   | "docker:total-pulls"
   | "docker:repo-count"
+  | "npm:testcase-generator"
   | "api:gateway-calls";
 
 function formatMetric(value: number): string {
@@ -391,8 +393,10 @@ async function fetchMetricsBundle(): Promise<Partial<Record<MetricId, number>>> 
       "docker:highgo",
       "docker:kingbase",
       "docker:tidb",
+      "docker:testcase-generator",
       "docker:total-pulls",
       "docker:repo-count",
+      "npm:testcase-generator",
       "api:gateway-calls",
     ] as const) {
       const value = data[key];

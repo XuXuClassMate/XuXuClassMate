@@ -423,6 +423,15 @@ html[data-theme="light"] .back-nav--prominent {
   font-size: 0.85rem;
 }
 
+a.case-metric-label--link {
+  color: var(--accent-cyan);
+  text-decoration: none;
+}
+
+a.case-metric-label--link:hover {
+  text-decoration: underline;
+}
+
 .case-stats-embed {
   margin: 1rem 0 0;
 }

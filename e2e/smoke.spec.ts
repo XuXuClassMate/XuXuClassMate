@@ -88,6 +88,15 @@ test("unified case study template renders", async ({ page }) => {
   await expect(page.locator(".pipeline-stages")).toContainText(
     "Three-persona review loop",
   );
+  await expect(
+    page.locator('[data-metric="docker:testcase-generator"]'),
+  ).toBeVisible();
+  await expect(
+    page.locator('[data-metric="npm:testcase-generator"]'),
+  ).toBeVisible();
+  await expect(
+    page.locator('[data-metric="clawhub:ai-testcase-generator"]'),
+  ).toBeVisible();
   const back = page.getByRole("link", { name: /All projects/i });
   await expect(back.first()).toBeVisible();
 });
@@ -379,8 +388,10 @@ test("home live metrics hydrate from api payload", async ({ page }) => {
         "docker:highgo": 17000,
         "docker:kingbase": 2000,
         "docker:tidb": 1000,
+        "docker:testcase-generator": 950,
         "docker:total-pulls": 60000,
         "docker:repo-count": 12,
+        "npm:testcase-generator": 160,
         "api:gateway-calls": 800,
         updatedAt: new Date().toISOString(),
       }),

@@ -6,8 +6,10 @@ export type MetricId =
   | "docker:highgo"
   | "docker:kingbase"
   | "docker:tidb"
+  | "docker:testcase-generator"
   | "docker:total-pulls"
   | "docker:repo-count"
+  | "npm:testcase-generator"
   | "api:gateway-calls";
 
 export const CLAWHUB_SKILLS = {
@@ -21,21 +23,38 @@ export const CLAWHUB_SKILLS = {
   },
 } as const;
 
-export const DOCKER_REPOS = ["dameng", "highgo", "kingbase", "tidb"] as const;
+export const DOCKER_REPOS = [
+  "dameng",
+  "highgo",
+  "kingbase",
+  "tidb",
+  "testcase-generator",
+] as const;
+
+export const NPM_PACKAGES = {
+  "testcase-generator": {
+    name: "@classmatexuxu/testcase-generator",
+    /** First publish day on npm (UTC). */
+    since: "2026-04-02",
+    url: "https://www.npmjs.com/package/@classmatexuxu/testcase-generator",
+  },
+} as const;
 
 const GATEWAY_ORIGIN = "https://docker-hub-pull-counter.vercel.app";
 
 /** Fallback values used when live APIs are unavailable. */
 export const METRIC_FALLBACKS: Record<MetricId, number> = {
-  "clawhub:ai-testcase-generator": 703,
+  "clawhub:ai-testcase-generator": 709,
   "clawhub:trading-assistant-core": 908,
-  "clawhub:total-downloads": 1611,
+  "clawhub:total-downloads": 1617,
   "docker:dameng": 29795,
   "docker:highgo": 16873,
   "docker:kingbase": 1613,
   "docker:tidb": 943,
+  "docker:testcase-generator": 899,
   "docker:total-pulls": 53935,
   "docker:repo-count": 12,
+  "npm:testcase-generator": 139,
   "api:gateway-calls": 501,
 };
 
@@ -85,6 +104,25 @@ function dockerPulls(payload: unknown): number | null {
   return typeof pulls === "number" && Number.isFinite(pulls) ? pulls : null;
 }
 
+function npmRangeTotal(payload: unknown): number | null {
+  if (!payload || typeof payload !== "object") return null;
+  const downloads = (payload as { downloads?: unknown }).downloads;
+  if (!Array.isArray(downloads)) return null;
+  let total = 0;
+  for (const day of downloads) {
+    if (!day || typeof day !== "object") continue;
+    const count = (day as { downloads?: unknown }).downloads;
+    if (typeof count === "number" && Number.isFinite(count)) {
+      total += count;
+    }
+  }
+  return total;
+}
+
+function utcToday(): string {
+  return new Date().toISOString().slice(0, 10);
+}
+
 export async function fetchLiveMetrics(): Promise<Partial<MetricsMap>> {
   const pairJobs: Promise<readonly [MetricId, number] | ReadonlyArray<readonly [MetricId, number]>>[] = [
     ...(Object.keys(CLAWHUB_SKILLS) as (keyof typeof CLAWHUB_SKILLS)[]).map(
@@ -105,6 +143,18 @@ export async function fetchLiveMetrics(): Promise<Partial<MetricsMap>> {
         if (value == null) throw new Error("missing pulls");
         return [`docker:${repo}` as MetricId, value] as const;
       }),
+    ),
+    ...(Object.keys(NPM_PACKAGES) as (keyof typeof NPM_PACKAGES)[]).map(
+      async (key) => {
+        const pkg = NPM_PACKAGES[key];
+        const end = utcToday();
+        const json = await fetchJson(
+          `https://api.npmjs.org/downloads/range/${pkg.since}:${end}/${encodeURIComponent(pkg.name)}`,
+        );
+        const value = npmRangeTotal(json);
+        if (value == null) throw new Error("missing npm downloads");
+        return [`npm:${key}` as MetricId, value] as const;
+      },
     ),
     fetchJson(
       `${GATEWAY_ORIGIN}/api/user/stats?username=xuxuclassmate`,
