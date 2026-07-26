@@ -289,6 +289,7 @@
   letter-spacing: -0.03em;
   color: var(--primary);
   line-height: 1.1;
+  margin-bottom: 0.45rem;
 }
 
 .highlight-label {
@@ -570,6 +571,14 @@
 .featured-row:last-child,
 .article-row:last-child {
   border-bottom: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
+}
+
+.featured-pitch {
+  margin: 0 0 0.55rem !important;
+  color: var(--primary) !important;
+  font-weight: 700;
+  font-size: 1.02rem;
+  text-wrap: pretty;
 }
 
 .featured-row h3,

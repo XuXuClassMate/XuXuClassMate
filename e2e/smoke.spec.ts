@@ -21,15 +21,23 @@ test("home renders and language switch works", async ({ page }) => {
   );
   await expect(page.getByRole("link", { name: "View Projects" })).toBeVisible();
   await expect(
-    page.getByRole("link", { name: "Explore AI Testing" }),
-  ).toBeVisible();
+    page.getByRole("link", { name: "Try AI Test Case Generator" }),
+  ).toHaveAttribute("href", "/en/demo/ai-testcase-generator.html");
+  await expect(
+    page.locator(".hero-actions .btn-text"),
+  ).toContainText("GitHub");
   await expect(page.getByRole("heading", { name: "By the Numbers" })).toBeVisible();
   await expect(page.getByText("Live Public Metrics · Updated Daily")).toBeVisible();
-  await expect(page.getByText("Last updated")).toBeVisible();
-  await expect(page.getByText("July 2026")).toBeVisible();
+  await expect(page.getByText("Last updated").first()).toBeVisible();
+  await expect(page.getByText("July 2026").first()).toBeVisible();
   await expect(page.getByRole("link", { name: /View Docker Hub/i }).first()).toBeVisible();
   await expect(page.getByRole("link", { name: /View ClawHub/i }).first()).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Quality Engineering" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Featured Projects" })).toBeVisible();
+  await expect(
+    page.getByText("From requirements to reviewable test cases."),
+  ).toBeVisible();
+  await expect(page.getByRole("heading", { name: "AI with Human Review" })).toBeVisible();
+  await expect(page.getByText("500+").first()).toBeVisible();
   await expect(
     page.getByText("Built with Astro · Deployed on Cloudflare Pages"),
   ).toBeVisible();
@@ -536,6 +544,9 @@ test("H5 layout fits common phone widths without horizontal overflow", async ({
       if (path === "/" || path.includes("demo")) {
         expect(metrics.stacked, `CTA stack ${path} @ ${phone.width}`).toBe(true);
         expect(metrics.fullWidth, `CTA width ${path} @ ${phone.width}`).toBe(true);
+      }
+      if (path === "/") {
+        await expect(page.locator(".hero-actions .btn-text")).toBeVisible();
       }
     }
   }

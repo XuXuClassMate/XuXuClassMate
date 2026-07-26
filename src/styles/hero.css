@@ -226,6 +226,25 @@
   transform: translateY(-2px);
 }
 
+.btn-text {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  min-height: 48px;
+  padding: 0 0.35rem;
+  color: var(--muted);
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-text:hover {
+  color: var(--primary);
+  transform: translateY(-1px);
+}
+
 /* Inner page heroes — theme-aware (light stays fully light) */
 .hero:not(.hero--home) {
   min-height: auto;

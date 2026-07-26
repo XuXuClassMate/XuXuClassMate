@@ -13,12 +13,12 @@ export const zh: LocaleCopy = {
   languageSwitch: "中文",
   languageSwitchHint: "切换到 English",
   contactLabel: "联系我：",
-  contactHint: "欢迎合作——先选方向，再发邮件。",
+  contactHint: "欢迎合作、咨询与工程机会——选一个方向联系我。",
   contactOffers: [
-    "AI 测试工具 / ClawHub 技能定制",
-    "测试团队管理顾问（初创 → 规模化）",
-    "数据库 / Docker 测试环境落地",
-    "加入 InnoNestX 开源项目 / 一起学习、一起做",
+    "AI Testing 工具 / ClawHub 技能定制",
+    "QA / SDET 咨询与团队顾问",
+    "测试基础设施 / Docker 环境落地",
+    "InnoNestX 开源协作",
   ],
   copyEmail: "复制邮箱",
   copiedEmail: "已复制",
@@ -164,7 +164,7 @@ export const zh: LocaleCopy = {
       },
       {
         value: "500+",
-        label: "Gateway 请求 · 实时",
+        label: "API 请求 · 实时",
         metric: "api:gateway-calls",
         href: "https://docker-hub-pull-counter.vercel.app",
         linkLabel: "查看 API Gateway →",
@@ -177,7 +177,7 @@ export const zh: LocaleCopy = {
         linkLabel: "查看 Docker Hub →",
       },
     ],
-    featuredTitle: "质量工程",
+    featuredTitle: "精选项目",
     featuredCta: "查看全部项目",
     featured: getFeaturedProjects("zh"),
     principlesTitle: "工程原则",
@@ -189,9 +189,9 @@ export const zh: LocaleCopy = {
           "Docker、CLI 或 ClawHub——团队装不上、跑不起来，幻灯片就不算交付。",
       },
       {
-        title: "AI with Persona Review",
+        title: "AI with Human Review",
         description:
-          "多模态生成默认走测试经理 · 开发经理 · 产品经理三角色评分闭环，而不是裸 LLM 倾倒。",
+          "AI 加速用例生成，但每条产出都经过测试 / 开发 / 产品经理结构化评审闭环——不是裸 LLM 输出。",
       },
       {
         title: "Reusable Environments",

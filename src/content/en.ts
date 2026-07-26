@@ -33,12 +33,12 @@ export const en: LocaleCopy = {
   languageSwitchHint: "Switch to Chinese",
   contactLabel: "Contact:",
   contactHint:
-    "Open for collaboration — pick a lane and email me.",
+    "Open for collaboration, consulting, and engineering opportunities.",
   contactOffers: [
-    "AI testing tool / ClawHub skill customization",
-    "QA team leadership advisory (startup → scale-up)",
-    "Database / Docker test-environment enablement",
-    "Join InnoNestX open-source projects — learn and build together",
+    "AI Testing tools / ClawHub skill customization",
+    "QA / SDET consulting and team advisory",
+    "Test infrastructure / Docker environment enablement",
+    "Open-source collaboration with InnoNestX",
   ],
   copyEmail: "Copy email",
   copiedEmail: "Copied",
@@ -184,7 +184,7 @@ export const en: LocaleCopy = {
       },
       {
         value: "500+",
-        label: "Gateway Calls · Live",
+        label: "API Requests · Live",
         metric: "api:gateway-calls",
         href: "https://docker-hub-pull-counter.vercel.app",
         linkLabel: "View API Gateway →",
@@ -197,7 +197,7 @@ export const en: LocaleCopy = {
         linkLabel: "View Docker Hub →",
       },
     ],
-    featuredTitle: "Quality Engineering",
+    featuredTitle: "Featured Projects",
     featuredCta: "View all projects",
     featured: getFeaturedProjects("en"),
     principlesTitle: "Engineering Principles",
@@ -210,9 +210,9 @@ export const en: LocaleCopy = {
           "Docker, CLI, or ClawHub — if teams cannot install and run it, slides do not count as delivery.",
       },
       {
-        title: "AI with Persona Review",
+        title: "AI with Human Review",
         description:
-          "Multimodal generation ships with a scored Test / Dev / Product Manager review loop — not raw LLM dumps.",
+          "AI accelerates test case generation, but every output goes through a structured Test / Developer / Product Manager review loop — not raw LLM output.",
       },
       {
         title: "Reusable Environments",

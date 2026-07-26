@@ -308,6 +308,13 @@ object {
     max-width: none;
   }
 
+  .hero--home .hero-actions .btn-text {
+    width: auto;
+    align-self: flex-start;
+    min-height: 2.5rem;
+    padding-left: 0.15rem;
+  }
+
   .project-grid,
   .project-grid--home,
   .channels-grid,

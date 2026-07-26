@@ -20,7 +20,6 @@ const copy = getCopy(locale);
 const home = getPortfolioHome(locale);
 const articles = getLatestArticles(locale);
 const workHref = pageHref(locale, "work");
-const aiTestingHref = pageHref(locale, "ai-testing");
 const blogHref = pageHref(locale, "blog");
 const orgHref = pageHref(locale, "open-source");
 const playgroundHref = pageHref(locale, "playground");
@@ -42,7 +41,16 @@ const highlights = copy.home.highlights;
           <p class="hero-desc">{home.description}</p>
           <div class="hero-actions">
             <a class="btn-primary" href={workHref}>{home.ctaWork}</a>
-            <a class="btn-ghost" href={aiTestingHref}>{home.ctaAiTesting}</a>
+            <a class="btn-ghost" href={home.ctaDemoHref}>{home.ctaDemo}</a>
+            <a
+              class="btn-text"
+              href={home.connectGithub}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {home.ctaGithub}
+              <span aria-hidden="true">↗</span>
+            </a>
           </div>
         </div>
       </div>
@@ -180,6 +188,7 @@ const highlights = copy.home.highlights;
               >
                 <div>
                   <h3>{item.title}</h3>
+                  {item.pitch ? <p class="featured-pitch">{item.pitch}</p> : null}
                   <p>{item.description}</p>
                   <ul class="featured-tags">
                     {item.tags.map((tag) => (
@@ -276,6 +285,8 @@ const highlights = copy.home.highlights;
     copyright={copy.copyright}
     social={copy.home.social}
     builtWith={home.builtWith}
+    lastUpdatedLabel={home.lastUpdatedLabel}
+    lastUpdated={home.lastUpdated}
   />
   <WechatModal alt={copy.wechatAlt} closeLabel={copy.closeModal} />
 </BaseLayout>
