@@ -84,9 +84,13 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
     ctas: {
       en: [
         {
-          label: "Open case study",
+          label: "Open flagship case study",
           href: "/en/work/testcase-generator.html",
           primary: true,
+        },
+        {
+          label: "Try interactive demo",
+          href: "/en/demo/ai-testcase-generator.html",
         },
         {
           label: "GitHub",
@@ -96,9 +100,13 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
       ],
       zh: [
         {
-          label: "打开案例页",
+          label: "打开旗舰案例",
           href: "/zh/work/testcase-generator.html",
           primary: true,
+        },
+        {
+          label: "试用交互 Demo",
+          href: "/zh/demo/ai-testcase-generator.html",
         },
         {
           label: "GitHub",
@@ -110,14 +118,14 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
     en: {
       title: "How I Built an AI Test Case Generator with Multimodal Inputs",
       description:
-        "A QA Engineer / SDET walkthrough of multimodal AI test case generation — PDF, Word, image, and video in; reviewable cases out.",
+        "A QA Engineer / SDET walkthrough of multimodal AI test case generation — PDF, Word, image, and video in; human review; reviewable cases out.",
       sections: sectionsEn([
         {
           id: "why",
           heading: "Why multimodal AI testing matters for QA Engineers",
           body: [
             "Most requirement artifacts are not clean Markdown. They arrive as PDFs, Word specs, screenshots, and short videos. As a QA Engineer and SDET, I needed AI Testing that starts from those real inputs — not from a demo prompt box.",
-            "This article explains how I shaped AI Test Case Generation into an installable product with a three-persona review loop (Test · Dev · Product Manager), instead of a one-off LLM notebook.",
+            "This article explains how I shaped AI Test Case Generation into an installable product with AI with Human Review — a three-persona review loop (Test · Dev · Product Manager) — instead of a one-off LLM notebook.",
           ],
         },
         {
@@ -151,14 +159,14 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
     zh: {
       title: "我如何用多模态输入打造 AI 测试用例生成器",
       description:
-        "QA Engineer / SDET 视角的多模态 AI 用例生成：PDF、Word、图片、视频进入，可评审用例产出。",
+        "QA Engineer / SDET 视角的多模态 AI 用例生成：PDF、Word、图片、视频进入；人工评审；可评审用例产出。",
       sections: sectionsZh([
         {
           id: "why",
           heading: "为什么多模态 AI Testing 对 QA 重要",
           body: [
             "真实需求很少是干净 Markdown，更多是 PDF、Word、截图和短视频。作为 QA Engineer / SDET，我需要 AI Testing 从这些真实输入起步，而不是演示用的提示词框。",
-            "本文说明我如何把 AI 用例生成做成可安装产品，并内置测试经理 · 开发经理 · 产品经理三角色评审闭环，而不是一次性 LLM 笔记本。",
+            "本文说明我如何把 AI 用例生成做成可安装产品，并坚持 AI with Human Review——内置测试经理 · 开发经理 · 产品经理三角色评审闭环，而不是一次性 LLM 笔记本。",
           ],
         },
         {
@@ -585,12 +593,20 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
     related: {
       en: [
         {
+          label: "Flagship case study",
+          href: "/en/work/testcase-generator.html",
+        },
+        {
           label: "Multimodal generator article",
           href: "/en/blog/ai-testcase-generator-multimodal.html",
         },
         { label: "AI Testing Lab", href: "/en/ai-testing.html" },
       ],
       zh: [
+        {
+          label: "旗舰案例",
+          href: "/zh/work/testcase-generator.html",
+        },
         {
           label: "多模态生成器文章",
           href: "/zh/blog/ai-testcase-generator-multimodal.html",
@@ -601,29 +617,37 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
     ctas: {
       en: [
         {
-          label: "Open AI Testing Lab",
-          href: "/en/ai-testing.html",
+          label: "Open flagship case study",
+          href: "/en/work/testcase-generator.html",
           primary: true,
+        },
+        {
+          label: "Try interactive demo",
+          href: "/en/demo/ai-testcase-generator.html",
         },
       ],
       zh: [
         {
-          label: "打开 AI Testing Lab",
-          href: "/zh/ai-testing.html",
+          label: "打开旗舰案例",
+          href: "/zh/work/testcase-generator.html",
           primary: true,
+        },
+        {
+          label: "试用交互 Demo",
+          href: "/zh/demo/ai-testcase-generator.html",
         },
       ],
     },
     en: {
       title: "AI-Assisted Test Case Generation",
       description:
-        "What AI-assisted test case generation means for QA Engineers — review loops, export formats, and why drafts without judgment create noise.",
+        "What AI-assisted test case generation means for QA Engineers — human review loops, export formats, and why drafts without judgment create noise.",
       sections: sectionsEn([
         {
           id: "definition",
           heading: "AI assistance is not autopilot",
           body: [
-            "AI-Assisted Test Case Generation should accelerate drafting for QA Engineers, not replace SDET judgment. Without Test / Dev / Product review, LLM dumps become review debt.",
+            "AI-Assisted Test Case Generation should accelerate drafting for QA Engineers, not replace SDET judgment. Without Test / Developer / Product Manager review, LLM dumps become review debt.",
             "Useful outputs are structured scenarios, boundary cases, negative paths, and exports teams already use — Excel, Markdown, XMind.",
           ],
         },
@@ -631,27 +655,27 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
           id: "practice",
           heading: "How I practice it",
           body: [
-            "My installable generator encodes that loop. Read the multimodal build article and the flagship case study for architecture and live install metrics.",
+            "My installable generator encodes that human review loop. Read the flagship case study for architecture and live Docker / npm / ClawHub metrics, or the multimodal build article for the engineering walkthrough.",
           ],
         },
       ]),
       meta: {
         title: "AI-Assisted Test Case Generation | XuXuClassMate",
         description:
-          "QA Engineer / SDET perspective on AI-assisted test case generation — review loops, structured outputs, and installable AI Testing tools.",
-        keywords: `${keywordsCore}, AI-Assisted Test Case Generation, AI Testing`,
+          "QA Engineer / SDET perspective on AI-assisted test case generation — human review loops, structured outputs, and installable AI Testing tools.",
+        keywords: `${keywordsCore}, AI-Assisted Test Case Generation, AI Testing, human review`,
       },
     },
     zh: {
       title: "AI 辅助测试用例生成",
       description:
-        "对 QA Engineer 来说，AI 辅助用例生成意味着什么——评审闭环、导出格式，以及没有判断力的草稿为何只是噪音。",
+        "对 QA Engineer 来说，AI 辅助用例生成意味着什么——人工评审闭环、导出格式，以及没有判断力的草稿为何只是噪音。",
       sections: sectionsZh([
         {
           id: "definition",
           heading: "AI 辅助不是自动驾驶",
           body: [
-            "AI 辅助用例生成应加速 QA Engineer 的草稿，而不是取代 SDET 判断。没有测试/开发/产品评审，LLM 倾倒只会变成评审债务。",
+            "AI 辅助用例生成应加速 QA Engineer 的草稿，而不是取代 SDET 判断。没有测试/开发/产品经理评审，LLM 倾倒只会变成评审债务。",
             "有用输出是结构化场景、边界与反向路径，以及团队已在用的导出格式——Excel、Markdown、XMind。",
           ],
         },
@@ -659,15 +683,15 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
           id: "practice",
           heading: "我怎么实践",
           body: [
-            "可安装生成器把这条闭环写进产品。架构与实时安装数据见多模态构建文章与旗舰案例。",
+            "可安装生成器把人工评审闭环写进产品。架构与 Docker / npm / ClawHub 实时数据见旗舰案例；工程拆解见多模态构建文章。",
           ],
         },
       ]),
       meta: {
         title: "AI 辅助测试用例生成 | 旭旭同学",
         description:
-          "QA Engineer / SDET 视角的 AI 辅助用例生成——评审闭环、结构化产物与可安装 AI Testing 工具。",
-        keywords: `${keywordsCore}, AI 辅助用例生成, AI Testing`,
+          "QA Engineer / SDET 视角的 AI 辅助用例生成——人工评审闭环、结构化产物与可安装 AI Testing 工具。",
+        keywords: `${keywordsCore}, AI 辅助用例生成, AI Testing, 人工评审`,
       },
     },
   },

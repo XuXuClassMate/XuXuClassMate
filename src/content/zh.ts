@@ -332,9 +332,9 @@ export const zh: LocaleCopy = {
       {
         title: "AI 测试用例生成器",
         description:
-          "开源工具：面向 PRD 与多模态 QA 输入的 AI 用例生成——三角色评审闭环，导出 Excel / Markdown / XMind。支持 Docker、本地源码、npm 与 OpenClaw。",
-        href: "https://github.com/XuXuClassMate/testcase-generator",
-        linkLabel: "查看 GitHub",
+          "旗舰可安装 AI Testing 产品——从需求到可评审用例，带人工评审闭环。从案例页或在线 Demo 开始。",
+        href: "/zh/work/testcase-generator.html",
+        linkLabel: "打开旗舰案例",
       },
       {
         title: "Trading Assistant Core",
@@ -424,6 +424,15 @@ export const zh: LocaleCopy = {
           "框架设计、CI/CD 质量门禁，以及可复用套件——而不是绑死单一语言的一次性脚本。",
         result:
           "团队获得更清晰的发布就绪信号，调优路径上响应时间改善约 20–35%。",
+      },
+      {
+        title: "把 AI 用例草稿做成可安装产品",
+        challenge:
+          "LLM 生成的用例在演示里很炫，但 QA 用不起来——缺覆盖、缺可执行性，也没有可安装路径。",
+        approach:
+          "产品化多模态接入、结构化人工评审闭环（测试 / 开发 / 产品经理），并交付 Docker、npm、OpenClaw 与本地源码四条运行路径。",
+        result:
+          "把 AI 测试用例生成器做成旗舰可安装产品，并用 Docker / npm / ClawHub 实时数据证明——不是笔记本演示。",
       },
     ],
     focusTitle: "当前学习重点",
@@ -598,17 +607,17 @@ export const zh: LocaleCopy = {
         title: "AI 测试用例生成器",
         subtitle: "旗舰案例",
         description:
-          "AI 驱动的测试用例生成：接入 PDF · Word · TXT · 图片 · 视频，经测试经理 · 开发经理 · 产品经理三角色评审闭环，导出 Excel、Markdown、XMind。支持 Docker、本地源码、npm 全局安装与 OpenClaw 插件。",
+          "从需求到可评审用例——接入 PDF · Word · TXT · 图片 · 视频，经 AI 生成与测试 / 开发 / 产品经理人工评审闭环，导出 Excel · Markdown · XMind。支持 Docker、npm、OpenClaw 与本地源码。",
         cover: "/images/cover-testcase.jpg",
         coverAlt: "AI 测试用例生成器",
         flagship: true,
         status: "live",
         overview:
-          "testcase-generator 把需求文档与多模态输入转为结构化 QA 产物。生成后固定走三角色评审（测试经理 · 开发经理 · 产品经理），按覆盖率 / 逻辑完整性 / 可执行性 / 清晰度 / 安全性打分（满分 100，默认阈值 90，最多 5 轮）。官方文档：https://innonestx.github.io/testcase-generator/",
+          "这是本站旗舰「可安装的质量工程」产品：把真实需求产物变成可评审的 QA 交付物。生成后固定走人工评审闭环（测试经理 · 开发经理 · 产品经理），按覆盖率 / 逻辑 / 可执行性 / 清晰度 / 安全性打分（满分 100，默认阈值 90，最多 5 轮）。官方文档：https://innonestx.github.io/testcase-generator/",
         problem:
           "真实需求常以 PDF、Word、截图甚至短视频出现。手工整理场景与边界用例成本高；裸 LLM 倾倒缺少覆盖、可执行性与安全视角，难以被 QA 团队直接采用。",
         solution:
-          "做成可安装的多模态生成器：解析 PDF / Word / TXT / 图片 / 视频 → AI 生成结构化用例 → 自动分配测试经理 · 开发经理 · 产品经理三角色评审（可配置多模型，不足 3 个评审模型时循环复用）→ 按评分算法迭代，直至达阈值或轮次上限 → 导出 Excel / Markdown / XMind。同一产品支持 Docker、本地源码、npm 全局安装与 OpenClaw 插件四种运行方式。",
+          "做成可安装的多模态生成器：解析 PDF / Word / TXT / 图片 / 视频 → AI 生成结构化用例 → 结构化人工评审闭环（测试 / 开发 / 产品经理；可配置多模型）→ 按评分算法迭代，直至达阈值或轮次上限 → 导出 Excel / Markdown / XMind。同一产品支持 Docker、本地源码、npm 全局安装与 OpenClaw 插件四种运行方式。",
         pipeline: {
           inputs: ["PDF", "Word", "TXT", "Image", "Video"],
           stages: [
@@ -625,7 +634,7 @@ export const zh: LocaleCopy = {
               "多模态输入（PDF · Word · TXT · Image · Video）",
               "AI 生成（可配置 generator / reviewer / both）",
               "结构化测试场景与用例",
-              "三角色评审：测试经理 · 开发经理 · 产品经理",
+              "人工评审：测试经理 · 开发经理 · 产品经理",
               "评分算法（阈值默认 90 · 最多 5 轮）→ 导出",
             ],
           },
@@ -641,7 +650,7 @@ export const zh: LocaleCopy = {
         ],
         features: [
           "多模态接入：PDF、Word、TXT、图片与视频（视频可选 ffmpeg 抽帧）",
-          "三角色评审：测试经理（覆盖/可执行）· 开发经理（可行性/安全）· 产品经理（业务/旅程）",
+          "人工评审闭环：测试经理（覆盖/可执行）· 开发经理（可行性/安全）· 产品经理（业务/旅程）",
           "评分维度：覆盖 30 · 逻辑 20 · 可执行 20 · 清晰 15 · 安全 15",
           "多厂商模型槽位：Anthropic、OpenAI、DeepSeek、Qwen、Gemini 等，或自定义 OpenAI 兼容端点",
           "导出 Excel、Markdown、XMind；中英文生成",
@@ -649,7 +658,7 @@ export const zh: LocaleCopy = {
         ],
         contribution: [
           "主导产品方向：可安装的质量工具，而不是一次性演示笔记本。",
-          "设计「多模态解析 → AI 生成 → 三角色评分评审 → 导出」流水线。",
+          "设计「多模态解析 → AI 生成 → 评分人工评审 → 导出」流水线。",
           "完成 Docker、npm、本地源码与 OpenClaw 插件四条运行路径。",
           "把评审阈值、轮次上限与 QA 日常导出格式写进默认可运行配置。",
         ],
@@ -713,9 +722,9 @@ export const zh: LocaleCopy = {
         tryItNow: {
           title: "立即体验",
           description:
-            "先走交互 Demo（示例 PRD → 结构化用例 → 三角色评审），再用 Docker 按官方文档做真实多模态上传。",
+            "探索 → 试用 → 验证：先走交互 Demo（示例 PRD → 结构化用例 → 人工评审），再按官方文档安装做真实多模态上传。",
           note:
-            "浏览器 Demo 使用精选示例输出——不是实时 LLM。本机上传 PDF / Word / 图片 / 视频请按官方文档用 Docker 或本地源码运行。",
+            "浏览器 Demo 使用精选示例输出——不是实时 LLM。本机上传 PDF / Word / 图片 / 视频请按官方文档用 Docker、npm 或本地源码运行。",
           primary: {
             label: "打开交互 Demo",
             href: "/zh/demo/ai-testcase-generator.html",
@@ -730,12 +739,20 @@ export const zh: LocaleCopy = {
               href: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
             },
             {
+              label: "npm",
+              href: "https://www.npmjs.com/package/@classmatexuxu/testcase-generator",
+            },
+            {
+              label: "ClawHub",
+              href: "https://clawhub.ai/xuxuclassmate/ai-testcase-generator",
+            },
+            {
               label: "GitHub",
               href: "https://github.com/XuXuClassMate/testcase-generator",
             },
           ],
           command:
-            "docker pull xuxuclassmate/testcase-generator:latest\n# 配置 .env（AI_PROVIDER + API Key），然后：\ndocker run -d --name testcase-generator -p 3456:3456 \\\n  -e AI_PROVIDER=anthropic -e ANTHROPIC_API_KEY=sk-ant-... \\\n  -e LANGUAGE=zh -e ENABLE_REVIEW=true -e REVIEW_THRESHOLD=90 \\\n  xuxuclassmate/testcase-generator:latest\n# 打开 http://localhost:3456",
+            "docker pull xuxuclassmate/testcase-generator:latest\n# 配置 .env（AI_PROVIDER + API Key），然后：\ndocker run -d --name testcase-generator -p 3456:3456 \\\n  -e AI_PROVIDER=anthropic -e ANTHROPIC_API_KEY=sk-ant-... \\\n  -e LANGUAGE=zh -e ENABLE_REVIEW=true -e REVIEW_THRESHOLD=90 \\\n  xuxuclassmate/testcase-generator:latest\n# 打开 http://localhost:3456\n\n# 或 npm：\n# npm install -g @classmatexuxu/testcase-generator\n# testcase-generator --standalone",
         },
         proof: {
           github: "https://github.com/XuXuClassMate/testcase-generator",
@@ -744,14 +761,20 @@ export const zh: LocaleCopy = {
           readme: "https://innonestx.github.io/testcase-generator/",
         },
         tradeoffs: [
-          "用三角色 AI 评审 + 评分阈值代替裸 LLM 倾倒——覆盖、可执行性与安全视角写进默认闭环。",
-          "Docker + 源码 + npm + OpenClaw 四条路径一起交付，人和 Agent 共用同一产品。",
+          "用结构化人工评审闭环（测试 / 开发 / 产品经理）+ 评分阈值代替裸 LLM 倾倒——覆盖、可执行性与安全视角写进默认配置。",
+          "Docker + 源码 + npm + OpenClaw 四条路径一起交付，人和 Agent 共用同一产品（Installable > Demoable）。",
           "接受多轮评审带来的首答时延，换取 Excel / Markdown / XMind 等 QA 日常可落地产物。",
         ],
         artifacts: [
           {
+            title: "交互 Demo",
+            description: "浏览器走通：示例 PRD → 用例 → 人工评审——无需实时 LLM。",
+            href: "/zh/demo/ai-testcase-generator.html",
+            linkLabel: "打开 Demo",
+          },
+          {
             title: "官方文档",
-            description: "模型配置、三角色评审、评分算法与四种安装方式的权威说明。",
+            description: "模型配置、人工评审闭环、评分算法与四种安装方式。",
             href: "https://innonestx.github.io/testcase-generator/",
             linkLabel: "打开文档",
           },
@@ -762,18 +785,23 @@ export const zh: LocaleCopy = {
             linkLabel: "Docker Hub",
           },
           {
-            title: "源码仓库",
-            description: "多模态解析、生成器与三角色评审闭环开源可查。",
-            href: "https://github.com/XuXuClassMate/testcase-generator",
-            linkLabel: "GitHub",
+            title: "工程笔记",
+            description: "如何把多模态 AI 用例生成做成可安装产品。",
+            href: "/zh/blog/ai-testcase-generator-multimodal.html",
+            linkLabel: "阅读笔记",
           },
         ],
         outcomes: [
           "本站旗舰可安装 AI 测试产品",
           "官方四种运行方式：Docker · 源码 · npm · OpenClaw",
-          "三角色评审 + 评分阈值写入默认可运行配置",
+          "人工评审 + 评分阈值写入默认可运行配置",
+          "Docker 拉取、npm 下载与 ClawHub 安装量可实时验证",
         ],
         links: [
+          {
+            label: "交互 Demo",
+            href: "/zh/demo/ai-testcase-generator.html",
+          },
           {
             label: "官方文档",
             href: "https://innonestx.github.io/testcase-generator/",
@@ -790,12 +818,24 @@ export const zh: LocaleCopy = {
             label: "npm",
             href: "https://www.npmjs.com/package/@classmatexuxu/testcase-generator",
           },
+          {
+            label: "ClawHub",
+            href: "https://clawhub.ai/xuxuclassmate/ai-testcase-generator",
+          },
+          {
+            label: "工程笔记：多模态构建",
+            href: "/zh/blog/ai-testcase-generator-multimodal.html",
+          },
+          {
+            label: "工程笔记：AI 辅助用例生成",
+            href: "/zh/blog/ai-assisted-test-case-generation.html",
+          },
         ],
         meta: {
           title: "AI 测试用例生成器 — 旗舰案例 | 旭旭同学",
           description:
-            "AI 测试用例生成：PDF/Word/TXT/图片/视频 → 三角色评审闭环 → Excel/Markdown/XMind。支持 Docker、源码、npm 与 OpenClaw。",
-          keywords: `${sharedKeywords}, AI 测试用例生成器, 多模态测试, 旗舰案例, OpenClaw`,
+            "从需求到可评审用例：PDF/Word/图片/视频 → AI 生成 → 人工评审 → Excel/Markdown/XMind。支持 Docker、npm、OpenClaw。",
+          keywords: `${sharedKeywords}, AI 测试用例生成器, 多模态测试, 旗舰案例, OpenClaw, 人工评审`,
         },
       },
       {
