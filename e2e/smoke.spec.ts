@@ -28,8 +28,7 @@ test("home renders and language switch works", async ({ page }) => {
   ).toContainText("GitHub");
   await expect(page.getByRole("heading", { name: "By the Numbers" })).toBeVisible();
   await expect(page.getByText("Live Public Metrics · Updated Daily")).toBeVisible();
-  await expect(page.getByText("Last updated").first()).toBeVisible();
-  await expect(page.getByText("July 2026").first()).toBeVisible();
+  await expect(page.locator(".highlights .home-updated")).toHaveCount(0);
   await expect(page.getByRole("link", { name: /View Docker Hub/i }).first()).toBeVisible();
   await expect(page.getByRole("link", { name: /View ClawHub/i }).first()).toBeVisible();
   await expect(page.getByRole("heading", { name: "Featured Projects" })).toBeVisible();
@@ -38,9 +37,8 @@ test("home renders and language switch works", async ({ page }) => {
   ).toBeVisible();
   await expect(page.getByRole("heading", { name: "AI with Human Review" })).toBeVisible();
   await expect(page.getByText("500+").first()).toBeVisible();
-  await expect(
-    page.getByText("Built with Astro · Deployed on Cloudflare Pages"),
-  ).toBeVisible();
+  await expect(page.getByText("Built with Astro")).toHaveCount(0);
+  await expect(page.getByText("Cloudflare Pages")).toHaveCount(0);
   await page.getByRole("link", { name: "Switch to Chinese" }).click();
   await expect(page).toHaveURL(/\/zh\/index\.html$/);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(

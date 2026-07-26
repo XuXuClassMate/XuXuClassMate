@@ -38,7 +38,6 @@ export type PortfolioHome = {
   connectGithub: string;
   lastUpdatedLabel: string;
   lastUpdated: string;
-  builtWith: string;
 };
 
 const GITHUB = "https://github.com/XuXuClassMate";
@@ -227,9 +226,6 @@ export function getPortfolioHome(locale: Locale): PortfolioHome {
     connectGithub: GITHUB,
     lastUpdatedLabel: isZh ? "最近更新" : "Last updated",
     lastUpdated: isZh ? "2026 年 7 月" : "July 2026",
-    builtWith: isZh
-      ? "基于 Astro 构建 · 部署于 Cloudflare Pages"
-      : "Built with Astro · Deployed on Cloudflare Pages",
   };
 }
 
