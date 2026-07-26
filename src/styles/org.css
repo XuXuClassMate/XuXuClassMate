@@ -51,13 +51,16 @@
 @media (max-width: 560px) {
   .org-page .hero-actions {
     width: 100%;
-    max-width: 20rem;
+    max-width: none;
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .org-page .hero-actions .btn-primary,
   .org-page .hero-actions .btn-ghost,
   .org-join-panel .btn-primary {
     width: 100%;
+    min-width: 0;
   }
 
   .org-join-actions {

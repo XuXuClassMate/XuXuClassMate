@@ -248,13 +248,16 @@
 @media (max-width: 560px) {
   .playground-page .hero-actions {
     width: 100%;
-    max-width: 20rem;
+    max-width: none;
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .playground-page .hero-actions .btn-primary,
   .playground-page .hero-actions .btn-ghost,
   .playground-try-row .btn-primary {
     width: 100%;
+    min-width: 0;
   }
 
   .playground-try-result {

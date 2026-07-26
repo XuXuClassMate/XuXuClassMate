@@ -293,8 +293,8 @@
 
 .back-to-top {
   position: fixed;
-  right: 20px;
-  bottom: 24px;
+  right: max(16px, env(safe-area-inset-right, 0px));
+  bottom: max(20px, env(safe-area-inset-bottom, 0px));
   z-index: 900;
   width: 44px;
   height: 44px;

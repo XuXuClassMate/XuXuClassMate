@@ -43,7 +43,7 @@ html[data-theme="dark"] {
   --hero-grid-a: rgba(61, 125, 255, 0.08);
   --hero-grid-b: rgba(92, 225, 255, 0.06);
   --home-hero-base: var(--bg-soft);
-  --mobile-nav-bg: rgba(7, 11, 20, 0.96);
+  --mobile-nav-bg: #070b14;
   --btn-ghost-bg: rgba(15, 23, 40, 0.55);
   --back-top-bg: rgba(15, 23, 40, 0.94);
   --on-primary: #ffffff;
@@ -103,7 +103,7 @@ html[data-theme="light"] {
   --hero-grid-b: rgba(47, 107, 255, 0.08);
   --home-hero-base: #e8f0ff;
   --hero-edge: rgba(47, 107, 255, 0.16);
-  --mobile-nav-bg: rgba(255, 255, 255, 0.96);
+  --mobile-nav-bg: #ffffff;
   --btn-ghost-bg: rgba(255, 255, 255, 0.8);
   --back-top-bg: rgba(255, 255, 255, 0.94);
   --on-primary: #ffffff;
@@ -134,12 +134,19 @@ html[data-theme="light"] {
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
   font-family: var(--font-body);
   color: var(--ink);
   line-height: 1.6;
+  min-width: 0;
+  overflow-x: hidden;
+  overflow-x: clip;
   background:
     linear-gradient(180deg, var(--body-wash-a), var(--body-wash-b)),
     repeating-linear-gradient(
@@ -161,6 +168,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* iOS Chrome/Safari: fixed backgrounds break scroll/paint; keep scroll attachment. */
+@supports (-webkit-touch-callout: none) {
+  body {
+    background-attachment: scroll;
+  }
 }
 
 .container {
@@ -200,6 +214,7 @@ body {
   left: 0;
   right: 0;
   z-index: 1000;
+  padding-top: env(safe-area-inset-top, 0px);
   background: var(--header-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -225,6 +240,7 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
+  min-width: 0;
   text-decoration: none;
   color: var(--ink);
 }
@@ -240,6 +256,9 @@ body {
   font-weight: 800;
   letter-spacing: -0.02em;
   color: var(--ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .nav-end {
