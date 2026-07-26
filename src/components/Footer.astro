@@ -7,18 +7,9 @@ type Props = {
   description: string;
   copyright: string;
   social: SocialLink[];
-  lastUpdatedLabel?: string;
-  lastUpdated?: string;
 };
 
-const {
-  brand,
-  description,
-  copyright,
-  social,
-  lastUpdatedLabel,
-  lastUpdated,
-} = Astro.props;
+const { brand, description, copyright, social } = Astro.props;
 ---
 
 <footer class="footer">
@@ -27,14 +18,6 @@ const {
       <div class="footer-left">
         <span class="logo-text">{brand}</span>
         <p class="footer-desc">{description}</p>
-        {
-          lastUpdatedLabel && lastUpdated ? (
-            <p class="footer-updated">
-              <span>{lastUpdatedLabel}</span>
-              <time datetime="2026-07">{lastUpdated}</time>
-            </p>
-          ) : null
-        }
       </div>
       <div class="social-links">
         {
