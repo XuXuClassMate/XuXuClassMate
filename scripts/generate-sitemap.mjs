@@ -35,27 +35,55 @@ const staticPages = [
   "/zh/demo/ai-testcase-generator",
 ];
 
-/** Higher priority for flagship / conversion surfaces. */
+/** Higher priority for flagship / conversion surfaces (EN + ZH). */
 const priorityOverrides = {
   "/en/work/testcase-generator": "0.95",
-  "/zh/work/testcase-generator": "0.90",
+  "/zh/work/testcase-generator": "0.95",
   "/en/demo/ai-testcase-generator": "0.92",
-  "/zh/demo/ai-testcase-generator": "0.88",
-  "/en/blog/ai-testcase-generator-multimodal": "0.80",
-  "/zh/blog/ai-testcase-generator-multimodal": "0.75",
-  "/en/blog/ai-assisted-test-case-generation": "0.80",
-  "/zh/blog/ai-assisted-test-case-generation": "0.75",
+  "/zh/demo/ai-testcase-generator": "0.92",
+  "/en/blog/ai-testcase-generator-multimodal": "0.85",
+  "/zh/blog/ai-testcase-generator-multimodal": "0.85",
+  "/en/blog/ai-assisted-test-case-generation": "0.85",
+  "/zh/blog/ai-assisted-test-case-generation": "0.85",
   "/en/learn": "0.90",
-  "/zh/learn": "0.85",
+  "/zh/learn": "0.90",
+  "/en/ai-testing": "0.90",
+  "/zh/ai-testing": "0.90",
+  "/en/playground": "0.85",
+  "/zh/playground": "0.85",
 };
 
-const pages = staticPages.map((path, index) => ({
-  path,
-  changefreq: path === "/" || path.endsWith("/") ? "weekly" : "monthly",
-  priority:
-    priorityOverrides[path] ??
-    (index === 0 ? "1.00" : path.includes("/en/") ? "0.90" : "0.80"),
-}));
+const weeklyPaths = new Set([
+  "/",
+  "/en/",
+  "/zh/",
+  "/en/work/testcase-generator",
+  "/zh/work/testcase-generator",
+  "/en/demo/ai-testcase-generator",
+  "/zh/demo/ai-testcase-generator",
+  "/en/learn",
+  "/zh/learn",
+  "/en/ai-testing",
+  "/zh/ai-testing",
+]);
+
+/** GSC URL Inspection priority list (EN + ZH). */
+const indexPriorityPaths = [
+  "/en/work/testcase-generator",
+  "/zh/work/testcase-generator",
+  "/en/demo/ai-testcase-generator",
+  "/zh/demo/ai-testcase-generator",
+  "/en/learn",
+  "/zh/learn",
+  "/en/ai-testing",
+  "/zh/ai-testing",
+  "/en/blog/ai-testcase-generator-multimodal",
+  "/zh/blog/ai-testcase-generator-multimodal",
+  "/en/blog/ai-assisted-test-case-generation",
+  "/zh/blog/ai-assisted-test-case-generation",
+  "/en/playground",
+  "/zh/playground",
+];
 
 const cases = [
   "fullstack-e2e",
@@ -78,53 +106,109 @@ const posts = [
   "clawhub-skill-shipping",
 ];
 
+function defaultPriority(path) {
+  if (path === "/") return "1.00";
+  if (path.startsWith("/en/")) return "0.90";
+  if (path.startsWith("/zh/")) return "0.80";
+  return "0.80";
+}
+
+function alternatePath(path) {
+  if (path === "/") return "/zh/";
+  if (path === "/en/") return "/zh/";
+  if (path === "/zh/") return "/en/";
+  if (path.startsWith("/en/")) return `/zh/${path.slice(4)}`;
+  if (path.startsWith("/zh/")) return `/en/${path.slice(4)}`;
+  return null;
+}
+
+function xDefaultPath(path) {
+  if (path === "/" || path === "/en/" || path === "/zh/") return "/";
+  if (path.startsWith("/zh/")) return `/en/${path.slice(4)}`;
+  return path;
+}
+
+const pages = staticPages.map((path) => ({
+  path,
+  changefreq: weeklyPaths.has(path) ? "weekly" : "monthly",
+  priority: priorityOverrides[path] ?? defaultPriority(path),
+}));
+
 for (const slug of cases) {
-  const enPath = `/en/work/${slug}`;
-  const zhPath = `/zh/work/${slug}`;
-  pages.push({
-    path: enPath,
-    changefreq: "monthly",
-    priority: priorityOverrides[enPath] ?? "0.70",
-  });
-  pages.push({
-    path: zhPath,
-    changefreq: "monthly",
-    priority: priorityOverrides[zhPath] ?? "0.65",
-  });
+  for (const locale of ["en", "zh"]) {
+    const path = `/${locale}/work/${slug}`;
+    pages.push({
+      path,
+      changefreq: weeklyPaths.has(path) ? "weekly" : "monthly",
+      priority: priorityOverrides[path] ?? (locale === "en" ? "0.70" : "0.65"),
+    });
+  }
 }
 
 for (const slug of posts) {
-  const enPath = `/en/blog/${slug}`;
-  const zhPath = `/zh/blog/${slug}`;
-  pages.push({
-    path: enPath,
-    changefreq: "monthly",
-    priority: priorityOverrides[enPath] ?? "0.70",
-  });
-  pages.push({
-    path: zhPath,
-    changefreq: "monthly",
-    priority: priorityOverrides[zhPath] ?? "0.65",
-  });
+  for (const locale of ["en", "zh"]) {
+    const path = `/${locale}/blog/${slug}`;
+    pages.push({
+      path,
+      changefreq: "monthly",
+      priority: priorityOverrides[path] ?? (locale === "en" ? "0.70" : "0.65"),
+    });
+  }
 }
 
+pages.sort((a, b) => Number(b.priority) - Number(a.priority));
+
 const body = pages
-  .map(
-    (page) => `  <url>
+  .map((page) => {
+    const alt = alternatePath(page.path);
+    const xDefault = xDefaultPath(page.path);
+    const enHref =
+      page.path === "/" || page.path.startsWith("/en/")
+        ? page.path
+        : alt;
+    const zhHref =
+      page.path.startsWith("/zh/")
+        ? page.path
+        : alt;
+    const hreflang =
+      enHref && zhHref
+        ? `    <xhtml:link rel="alternate" hreflang="en" href="${ORIGIN}${enHref}" />
+    <xhtml:link rel="alternate" hreflang="zh" href="${ORIGIN}${zhHref}" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="${ORIGIN}${xDefault}" />`
+        : "";
+
+    return `  <url>
     <loc>${ORIGIN}${page.path}</loc>
     <lastmod>${lastmod}</lastmod>
     <changefreq>${page.changefreq}</changefreq>
     <priority>${page.priority}</priority>
-  </url>`,
-  )
+${hreflang}
+  </url>`;
+  })
   .join("\n");
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${body}
 </urlset>
 `;
 
 const out = join(process.cwd(), "public", "sitemap.xml");
 writeFileSync(out, xml);
+
+const priorityOut = join(process.cwd(), "scripts", "seo-priority-urls.txt");
+writeFileSync(
+  priorityOut,
+  [
+    "# Priority URLs for Google Search Console → URL Inspection → Request indexing",
+    "# Resubmit sitemap: https://www.xuxuclassmate.com/sitemap.xml",
+    "",
+    ...indexPriorityPaths.map((path) => `${ORIGIN}${path}`),
+    "",
+  ].join("\n"),
+);
+
 console.log(`Wrote ${out} (${pages.length} urls)`);
+console.log(`Wrote ${priorityOut} (${indexPriorityPaths.length} priority urls)`);
