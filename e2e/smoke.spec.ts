@@ -466,7 +466,9 @@ test("life page shows four hobbies and blog in both locales", async ({ page }) =
 test("learn page covers management and Locust", async ({ page }) => {
   await page.goto("/en/learn.html");
   await expect(page.getByRole("heading", { name: "Test Management" })).toBeVisible();
-  await expect(page.getByText("Locust performance & load testing")).toBeVisible();
+  await expect(
+    page.getByText("Locust and Go load frameworks + Locust WebUI"),
+  ).toBeVisible();
   await expect(page.getByRole("heading", { name: "Key Challenges" })).toBeVisible();
   await expect(
     page.getByRole("heading", { name: "Database bottlenecks under concurrency" }),

@@ -323,7 +323,7 @@ export const en: LocaleCopy = {
         items: [
           "Playwright / Selenium UI automation",
           "API automation (language-agnostic)",
-          "Locust performance & load testing",
+          "Locust and Go load frameworks + Locust WebUI",
           "Framework design & reusable suites",
         ],
       },
@@ -369,6 +369,13 @@ export const en: LocaleCopy = {
         linkLabel: "View on GitHub",
       },
       {
+        title: "Go Load Practice",
+        description:
+          "Go load frameworks as workers behind Locust WebUI — scale concurrency in Go, keep the Locust operator UX.",
+        href: "https://github.com/XuXuClassMate/My_Test_GoProject",
+        linkLabel: "View on GitHub",
+      },
+      {
         title: "ClawHub",
         description:
           "Discover and install OpenClaw agent skills — including tools I publish for QA and trading workflows.",
@@ -391,7 +398,7 @@ export const en: LocaleCopy = {
       {
         title: "Automation & Performance at Scale",
         description:
-          "Grew from scripts to frameworks — Playwright, Locust, and reusable environments, no longer tied to one language.",
+          "Grew from scripts to frameworks — Playwright, Locust / Go load workers (Locust WebUI), and reusable environments, no longer tied to one language.",
       },
       {
         title: "AI-Native Tooling",
@@ -414,7 +421,7 @@ export const en: LocaleCopy = {
         challenge:
           "High-concurrency account and fund flows hit database saturation — latency spiked before the app layer looked unhealthy.",
         approach:
-          "Locust load profiles, SQL / index review with engineering, and reproducible Docker DB environments for shared diagnosis.",
+          "Locust / Go load profiles (Locust WebUI), SQL / index review with engineering, and reproducible Docker DB environments for shared diagnosis.",
         result:
           "Stabilized critical paths under 500+ QPS pressure and shortened the feedback loop between QA and backend.",
       },
@@ -453,7 +460,7 @@ export const en: LocaleCopy = {
     focusItems: [
       "Publishing and iterating OpenClaw / ClawHub skills",
       "Multimodal requirement → structured test artifacts",
-      "Locust and automation craft behind AI tools",
+      "Locust / Go load craft behind AI tools",
       "Product systems on Workers and APIs",
     ],
     footerDesc: "Learning in public — AI tools with quality roots",
@@ -559,15 +566,19 @@ export const en: LocaleCopy = {
       {
         title: "Performance Testing",
         items: [
-          "Locust load & stress testing",
+          "Locust (Python) load & stress testing",
+          "Go load frameworks + Locust WebUI (distributed workers)",
           "API / scenario performance scripts",
           "Monitoring, analysis, and tuning",
-          "Concurrency design",
         ],
         evidence: [
           {
             label: "Locust examples",
             href: "https://github.com/XuXuClassMate/My_Test_PyProject/tree/main/Performance_Test",
+          },
+          {
+            label: "Go practice repo",
+            href: "https://github.com/XuXuClassMate/My_Test_GoProject",
           },
         ],
       },
