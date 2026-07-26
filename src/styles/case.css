@@ -80,7 +80,7 @@ html[data-theme="light"] .project-card:hover .project-cover .theme-cover--dark {
 
 .skills-grid--evidence {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
   gap: 1rem;
 }
 
@@ -397,7 +397,7 @@ html[data-theme="light"] .back-nav--prominent {
 
 .case-metrics {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr));
   gap: 0.75rem;
 }
 

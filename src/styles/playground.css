@@ -245,7 +245,7 @@
   }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 768px) {
   .playground-page .hero-actions {
     width: 100%;
     max-width: none;
@@ -260,7 +260,8 @@
     min-width: 0;
   }
 
-  .playground-try-result {
+  .playground-try-result,
+  .playground-modes-grid {
     grid-template-columns: 1fr;
   }
 }
