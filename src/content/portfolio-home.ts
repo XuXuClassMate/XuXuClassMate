@@ -165,7 +165,7 @@ export function getPortfolioHome(locale: Locale): PortfolioHome {
           },
           {
             title: "性能测试",
-            items: ["Locust"],
+            items: ["Locust", "Go 压测框架", "Locust WebUI"],
           },
           {
             title: "AI Testing",
@@ -195,7 +195,7 @@ export function getPortfolioHome(locale: Locale): PortfolioHome {
           },
           {
             title: "Performance Testing",
-            items: ["Locust"],
+            items: ["Locust", "Go Framework", "Locust WebUI"],
           },
           {
             title: "AI Testing",

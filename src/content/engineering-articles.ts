@@ -323,18 +323,22 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
     slug: "locust-api-performance-testing",
     category: "Performance Testing",
     tags: {
-      en: ["Performance Testing", "Locust", "API Testing", "Python"],
-      zh: ["性能测试", "Locust", "接口测试", "Python"],
+      en: ["Performance Testing", "Locust", "Go", "API Testing"],
+      zh: ["性能测试", "Locust", "Go", "接口测试"],
     },
     proof: {
-      en: "Practice suite on GitHub · Locust examples included",
-      zh: "GitHub 练习仓 · 含 Locust 示例",
+      en: "Python Locust suite · Go workers + Locust WebUI",
+      zh: "Python Locust 示例 · Go Worker + Locust WebUI",
     },
     related: {
       en: [
         {
           label: "Python practice repo",
           href: "https://github.com/XuXuClassMate/My_Test_PyProject",
+        },
+        {
+          label: "Go practice repo",
+          href: "https://github.com/XuXuClassMate/My_Test_GoProject",
         },
         {
           label: "Java API automation case",
@@ -345,6 +349,10 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
         {
           label: "Python 练习仓",
           href: "https://github.com/XuXuClassMate/My_Test_PyProject",
+        },
+        {
+          label: "Go 练习仓",
+          href: "https://github.com/XuXuClassMate/My_Test_GoProject",
         },
         {
           label: "Java 接口自动化案例",
@@ -360,6 +368,11 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
           primary: true,
           external: true,
         },
+        {
+          label: "Open Go practice repo",
+          href: "https://github.com/XuXuClassMate/My_Test_GoProject",
+          external: true,
+        },
       ],
       zh: [
         {
@@ -368,12 +381,17 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
           primary: true,
           external: true,
         },
+        {
+          label: "打开 Go 练习仓",
+          href: "https://github.com/XuXuClassMate/My_Test_GoProject",
+          external: true,
+        },
       ],
     },
     en: {
-      title: "Performance Testing an API with Locust",
+      title: "API Performance Testing with Locust and Go",
       description:
-        "A practical Performance Testing note for QA Engineers: Locust-based API load testing, bottlenecks, and what to measure beyond green charts.",
+        "A practical Performance Testing note for QA Engineers: Locust for Python scripts, Go load frameworks behind Locust WebUI for heavier concurrency, and what to measure beyond green charts.",
       sections: sectionsEn([
         {
           id: "goal",
@@ -384,10 +402,18 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
           ],
         },
         {
+          id: "go-locust",
+          heading: "Go workers + Locust WebUI",
+          body: [
+            "When concurrency needs to climb, I do not stay on Python alone. A Go load framework drives the workers while Locust still owns the master WebUI — same charts, hatch rate, and distributed control, with Go handling the heavy request path.",
+            "That split keeps the familiar Locust operator experience, and lets me choose the worker language by pressure and ecosystem — Python for fast scripting, Go when throughput and resource efficiency matter more.",
+          ],
+        },
+        {
           id: "practice",
           heading: "Where the practice lives",
           body: [
-            "My public Python project includes Locust, API, Selenium, and Appium examples. Use it as a starting point for API Performance Testing patterns — then wire the same checks into CI when the suite matures.",
+            "My public Python project includes Locust, API, Selenium, and Appium examples. The Go practice repo is where I keep language-side load and tooling experiments that plug into the same Locust WebUI workflow.",
           ],
         },
         {
@@ -403,16 +429,16 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
         },
       ]),
       meta: {
-        title: "Performance Testing an API with Locust | XuXuClassMate",
+        title: "API Performance Testing with Locust and Go | XuXuClassMate",
         description:
-          "QA Engineer guide to API Performance Testing with Locust — latency, error budgets, bottlenecks, and practice repos.",
-        keywords: `${keywordsCore}, Locust, API Performance Testing, load testing`,
+          "QA Engineer guide to API Performance Testing — Locust, Go load frameworks + Locust WebUI, latency, error budgets, and practice repos.",
+        keywords: `${keywordsCore}, Locust, Go, API Performance Testing, load testing, Locust WebUI`,
       },
     },
     zh: {
-      title: "用 Locust 做 API 性能测试",
+      title: "用 Locust 与 Go 做 API 性能测试",
       description:
-        "面向 QA Engineer 的性能测试笔记：基于 Locust 的接口压测、瓶颈判断，以及绿灯图表之外该看什么。",
+        "面向 QA Engineer 的性能测试笔记：Python Locust 脚本、Go 压测框架 + Locust WebUI 扛更高并发，以及绿灯图表之外该看什么。",
       sections: sectionsZh([
         {
           id: "goal",
@@ -423,10 +449,18 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
           ],
         },
         {
+          id: "go-locust",
+          heading: "Go Worker + Locust WebUI",
+          body: [
+            "并发要往上顶时，我不只靠 Python。Go 压测框架跑 Worker，Locust 继续当 Master 与 WebUI——图表、孵化速率、分布式调度还是同一套，重请求路径交给 Go。",
+            "这样既能保留熟悉的 Locust 操作体验，又能按压力与生态选 Worker 语言：脚本快用 Python，吞吐与资源效率更关键时用 Go。",
+          ],
+        },
+        {
           id: "practice",
           heading: "练习放在哪里",
           body: [
-            "公开的 Python 项目包含 Locust、接口、Selenium 与 Appium 示例。可先当 API 性能测试模式起点，再在套件成熟后接入 CI。",
+            "公开的 Python 项目包含 Locust、接口、Selenium 与 Appium 示例。Go 练习仓则放语言侧压测与工具实验，并接到同一套 Locust WebUI 工作流。",
           ],
         },
         {
@@ -442,10 +476,10 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
         },
       ]),
       meta: {
-        title: "用 Locust 做 API 性能测试 | 旭旭同学",
+        title: "用 Locust 与 Go 做 API 性能测试 | 旭旭同学",
         description:
-          "QA Engineer 的 Locust API 性能测试指南——延迟、错误预算、瓶颈与练习仓库。",
-        keywords: `${keywordsCore}, Locust, 接口性能测试, 压测`,
+          "QA Engineer 的 API 性能测试指南——Locust、Go 压测框架 + Locust WebUI、延迟、错误预算与练习仓库。",
+        keywords: `${keywordsCore}, Locust, Go, 接口性能测试, 压测, Locust WebUI`,
       },
     },
   },

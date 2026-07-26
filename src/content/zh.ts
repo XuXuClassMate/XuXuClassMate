@@ -312,7 +312,7 @@ export const zh: LocaleCopy = {
         items: [
           "Playwright / Selenium UI 自动化",
           "接口自动化（不绑死语言）",
-          "Locust 性能与负载测试",
+          "Locust 与 Go 压测框架 + Locust WebUI",
           "框架设计与可复用套件",
         ],
       },
@@ -358,6 +358,13 @@ export const zh: LocaleCopy = {
         linkLabel: "查看 GitHub",
       },
       {
+        title: "Go 压测实践",
+        description:
+          "Go 压测框架作为 Worker，对接 Locust WebUI——更高并发时用 Go，操作体验仍是 Locust。",
+        href: "https://github.com/XuXuClassMate/My_Test_GoProject",
+        linkLabel: "查看 GitHub",
+      },
+      {
         title: "ClawHub",
         description:
           "发现并安装 OpenClaw Agent 技能——包括我发布的 QA 与交易相关工具。",
@@ -380,7 +387,7 @@ export const zh: LocaleCopy = {
       {
         title: "自动化与性能规模化",
         description:
-          "从脚本走向框架：Playwright、Locust 与可复用环境，不再被某一种语言绑住。",
+          "从脚本走向框架：Playwright、Locust / Go 压测（Locust WebUI）与可复用环境，不再被某一种语言绑住。",
       },
       {
         title: "AI 原生工具",
@@ -403,7 +410,7 @@ export const zh: LocaleCopy = {
         challenge:
           "账号与资金链路在高并发下先打穿数据库——应用层看起来还健康，延迟已经飙升。",
         approach:
-          "Locust 压测画像、与研发一起做 SQL / 索引复盘，并用可复现的 Docker 数据库环境对齐诊断。",
+          "Locust / Go 压测画像（Locust WebUI）、与研发一起做 SQL / 索引复盘，并用可复现的 Docker 数据库环境对齐诊断。",
         result:
           "在 500+ QPS 压力下稳住关键路径，缩短 QA 与后端之间的反馈闭环。",
       },
@@ -441,7 +448,7 @@ export const zh: LocaleCopy = {
     focusItems: [
       "发布并迭代 OpenClaw / ClawHub 技能",
       "多模态需求到结构化测试产物",
-      "Locust 与自动化手艺支撑 AI 工具",
+      "Locust / Go 压测与自动化手艺支撑 AI 工具",
       "产品系统（Workers / API）",
     ],
     footerDesc: "公开学习——带着质量根基做 AI 工具",
@@ -547,15 +554,19 @@ export const zh: LocaleCopy = {
       {
         title: "性能测试",
         items: [
-          "Locust 压测与负载测试",
+          "Locust（Python）压测与负载测试",
+          "Go 压测框架 + Locust WebUI（分布式 Worker）",
           "接口 / 场景性能脚本",
           "性能监控、分析与调优",
-          "并发测试设计",
         ],
         evidence: [
           {
             label: "Locust 示例",
             href: "https://github.com/XuXuClassMate/My_Test_PyProject/tree/main/Performance_Test",
+          },
+          {
+            label: "Go 练习仓",
+            href: "https://github.com/XuXuClassMate/My_Test_GoProject",
           },
         ],
       },

@@ -73,6 +73,7 @@ export function getAbout(locale: Locale): AboutCopy {
           "Java API testing frameworks",
           "Dockerized test environments",
           "Performance testing systems",
+          "Go load frameworks + Locust WebUI",
           "AI-powered testing tools",
           "AI Test Case Generation products",
         ],
