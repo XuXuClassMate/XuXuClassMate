@@ -20,12 +20,18 @@
   font-size: 14px;
 }
 
-.footer-built {
+.footer-built,
+.footer-updated {
   margin-top: 10px;
   color: var(--muted);
   font-family: var(--font-mono);
   font-size: 0.78rem;
   letter-spacing: 0.02em;
+}
+
+.footer-updated time {
+  color: var(--ink);
+  font-weight: 600;
 }
 
 .social-links {

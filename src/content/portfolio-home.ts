@@ -9,7 +9,9 @@ export type PortfolioHome = {
   tagline: string;
   description: string;
   ctaWork: string;
-  ctaAiTesting: string;
+  ctaDemo: string;
+  ctaDemoHref: string;
+  ctaGithub: string;
   whatIDoTitle: string;
   whatIDo: HomeLink[];
   achievementsTitle: string;
@@ -18,6 +20,7 @@ export type PortfolioHome = {
   featuredCta: string;
   featured: {
     title: string;
+    pitch?: string;
     description: string;
     href: string;
     tags: string[];
@@ -43,10 +46,11 @@ const GITHUB = "https://github.com/XuXuClassMate";
 const featuredEn = [
   {
     title: "AI Test Case Generator",
+    pitch: "From requirements to reviewable test cases.",
     description:
-      "AI-powered test case generation for PRDs and multimodal QA inputs — PDF / Word / TXT / image / video in; three-persona review loop; Excel / Markdown / XMind out. Runs via Docker, local source, npm, or OpenClaw plugin.",
+      "PDF / Word / TXT / Image / Video → AI → Test Cases → Human Review → Excel / Markdown / XMind. Runs via Docker, local source, npm, or OpenClaw plugin.",
     href: "/en/work/testcase-generator.html",
-    tags: ["Flagship", "AI Testing", "AI Test Case Generation"],
+    tags: ["Flagship", "AI Testing", "Live Demo"],
   },
   {
     title: "Test DB Docker Suite",
@@ -60,10 +64,11 @@ const featuredEn = [
 const featuredZh = [
   {
     title: "AI 测试用例生成器",
+    pitch: "从需求到可评审的测试用例。",
     description:
-      "面向 PRD 与多模态 QA 输入的 AI 用例生成——接入 PDF / Word / TXT / 图片 / 视频，经三角色评审闭环，导出 Excel / Markdown / XMind。支持 Docker、本地源码、npm 与 OpenClaw 插件。",
+      "PDF / Word / TXT / 图片 / 视频 → AI → 用例 → 人工评审 → Excel / Markdown / XMind。支持 Docker、本地源码、npm 与 OpenClaw 插件。",
     href: "/zh/work/testcase-generator.html",
-    tags: ["旗舰", "AI Testing", "AI Test Case Generation"],
+    tags: ["旗舰", "AI Testing", "在线 Demo"],
   },
   {
     title: "测试库 Docker 套件",
@@ -85,7 +90,11 @@ export function getPortfolioHome(locale: Locale): PortfolioHome {
       ? "我构建可依赖的测试自动化、AI 驱动的测试工具，以及团队能安装、能运行、能集成的可复用质量基础设施。"
       : "I build reliable test automation, AI-powered testing tools, and reusable quality infrastructure that teams can install, run, and integrate.",
     ctaWork: isZh ? "查看项目" : "View Projects",
-    ctaAiTesting: isZh ? "探索 AI Testing" : "Explore AI Testing",
+    ctaDemo: isZh ? "试用 AI 用例生成器" : "Try AI Test Case Generator",
+    ctaDemoHref: isZh
+      ? "/zh/demo/ai-testcase-generator.html"
+      : "/en/demo/ai-testcase-generator.html",
+    ctaGithub: "GitHub",
     whatIDoTitle: isZh ? "能力方向" : "What I Do",
     whatIDo: [
       {
@@ -109,14 +118,14 @@ export function getPortfolioHome(locale: Locale): PortfolioHome {
         href: isZh ? "/zh/ai-testing.html" : "/en/ai-testing.html",
       },
       {
-        title: "Test Infrastructure",
-        href: isZh ? "/zh/infrastructure.html" : "/en/infrastructure.html",
-      },
-      {
         title: "E2E Testing",
         href: isZh
           ? "/zh/work/fullstack-e2e.html"
           : "/en/work/fullstack-e2e.html",
+      },
+      {
+        title: "Test Infrastructure",
+        href: isZh ? "/zh/infrastructure.html" : "/en/infrastructure.html",
       },
     ],
     achievementsTitle: isZh ? "关键成果" : "Key Achievements",
@@ -138,48 +147,72 @@ export function getPortfolioHome(locale: Locale): PortfolioHome {
         label: isZh ? "响应时间改善" : "Response Time Improvement",
       },
     ],
-    featuredTitle: isZh ? "质量工程" : "Quality Engineering",
+    featuredTitle: isZh ? "精选项目" : "Featured Projects",
     featuredCta: isZh ? "查看全部项目" : "View all projects",
     featured: isZh ? featuredZh : featuredEn,
     stackTitle: isZh ? "技术栈" : "Technical Stack",
     stackLead: isZh
-      ? "能力是方向，技术栈是实现方式——按语言、测试与基础设施分组。"
-      : "Capabilities are the lane; the stack is how delivery happens — languages, testing, and infrastructure.",
+      ? "能力是方向，技术栈是实现方式——按测试域、数据与基础设施分组。"
+      : "Capabilities are the lane; the stack is how delivery happens — testing domains, data, and infrastructure.",
     stack: isZh
       ? [
           {
-            title: "语言",
-            items: ["Java", "Python", "TypeScript"],
+            title: "UI 自动化",
+            items: ["Playwright", "TypeScript"],
           },
           {
-            title: "测试",
-            items: ["Playwright", "Pytest", "JUnit", "RestAssured", "Locust"],
+            title: "接口测试",
+            items: ["Java", "JUnit", "RestAssured", "Python", "Pytest"],
+          },
+          {
+            title: "性能测试",
+            items: ["Locust"],
+          },
+          {
+            title: "AI Testing",
+            items: [
+              "AI Test Case Generation",
+              "OpenClaw / ClawHub",
+              "Claude Code",
+            ],
+          },
+          {
+            title: "数据与消息",
+            items: ["MySQL", "Oracle", "Redis", "MQ"],
           },
           {
             title: "基础设施",
-            items: ["Docker", "CI/CD", "Linux"],
-          },
-          {
-            title: "数据与中间件",
-            items: ["MySQL", "Oracle", "Redis", "MQ"],
+            items: ["Docker", "CI/CD"],
           },
         ]
       : [
           {
-            title: "Languages",
-            items: ["Java", "Python", "TypeScript"],
+            title: "UI Automation",
+            items: ["Playwright", "TypeScript"],
           },
           {
-            title: "Testing",
-            items: ["Playwright", "Pytest", "JUnit", "RestAssured", "Locust"],
+            title: "API Testing",
+            items: ["Java", "JUnit", "RestAssured", "Python", "Pytest"],
+          },
+          {
+            title: "Performance Testing",
+            items: ["Locust"],
+          },
+          {
+            title: "AI Testing",
+            items: [
+              "AI Test Case Generation",
+              "OpenClaw / ClawHub",
+              "Claude Code",
+            ],
+          },
+          {
+            title: "Data & Messaging",
+            items: ["MySQL", "Oracle", "Redis", "MQ"],
           },
           {
             title: "Infrastructure",
-            items: ["Docker", "CI/CD", "Linux"],
-          },
-          {
-            title: "Data",
-            items: ["MySQL", "Oracle", "Redis", "MQ"],
+            items: ["Docker", "CI/CD"],
           },
         ],
     articlesTitle: isZh ? "最新工程笔记" : "Latest Engineering Notes",
