@@ -42,6 +42,7 @@ export const zh: LocaleCopy = {
     contact: "联系",
     learn: "经历",
     work: "项目",
+    workMenu: "工作",
     notes: "笔记",
     more: "更多",
     innonestx: "开源",
@@ -144,33 +145,33 @@ export const zh: LocaleCopy = {
     positioning:
       "QA Engineer + SDET + AI Testing——团队可运行的可安装质量工程。",
     highlightsTitle: "数据一览",
-    highlightsSubtitle: "公开实时指标 · 自动更新",
+    highlightsSubtitle: "公开实时指标 · 每日更新",
     highlightsProof: "能验证，才算展示。",
     highlights: [
       {
         value: "54k+",
-        label: "Docker 拉取",
+        label: "Docker 拉取 · 累计",
         metric: "docker:total-pulls",
         href: "https://hub.docker.com/u/xuxuclassmate",
         linkLabel: "查看 Docker Hub →",
       },
       {
         value: "1.6k+",
-        label: "ClawHub 下载",
+        label: "ClawHub 下载 · 累计",
         metric: "clawhub:total-downloads",
         href: "https://clawhub.ai/xuxuclassmate",
         linkLabel: "查看 ClawHub →",
       },
       {
         value: "500+",
-        label: "API Gateway 请求",
+        label: "Gateway 请求 · 实时",
         metric: "api:gateway-calls",
         href: "https://docker-hub-pull-counter.vercel.app",
         linkLabel: "查看 API Gateway →",
       },
       {
         value: "12",
-        label: "Docker 镜像",
+        label: "Docker 镜像 · 公开",
         metric: "docker:repo-count",
         href: "https://hub.docker.com/u/xuxuclassmate",
         linkLabel: "查看 Docker Hub →",
@@ -390,6 +391,39 @@ export const zh: LocaleCopy = {
         title: "OpenClaw 技能与产品系统",
         description:
           "在 ClawHub 打包技能，并推进 GlobalPulse、Docker Hub API Gateway 等可运行系统。",
+      },
+    ],
+    storiesTitle: "关键挑战",
+    storiesChallengeLabel: "挑战",
+    storiesApproachLabel: "怎么解决",
+    storiesResultLabel: "结果",
+    stories: [
+      {
+        title: "高并发下的数据库瓶颈",
+        challenge:
+          "账号与资金链路在高并发下先打穿数据库——应用层看起来还健康，延迟已经飙升。",
+        approach:
+          "Locust 压测画像、与研发一起做 SQL / 索引复盘，并用可复现的 Docker 数据库环境对齐诊断。",
+        result:
+          "在 500+ QPS 压力下稳住关键路径，缩短 QA 与后端之间的反馈闭环。",
+      },
+      {
+        title: "复杂账号 / 资金 / 风控流程",
+        challenge:
+          "端到端路径跨越账号、资金与风控系统——只靠 UI 点击无法证明发布就绪。",
+        approach:
+          "分层 Playwright + 接口自动化、共享 fixtures，以及环境对齐，让回归覆盖真实业务链。",
+        result:
+          "优先链路自动化覆盖率超过 80%，回归周期大约缩短 40%。",
+      },
+      {
+        title: "团队规模下的回归效率",
+        challenge:
+          "人工回归跟不上字节、国企、初创等不同交付节奏下的发版频率。",
+        approach:
+          "框架设计、CI/CD 质量门禁，以及可复用套件——而不是绑死单一语言的一次性脚本。",
+        result:
+          "团队获得更清晰的发布就绪信号，调优路径上响应时间改善约 20–35%。",
       },
     ],
     focusTitle: "当前学习重点",

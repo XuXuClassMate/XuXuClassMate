@@ -20,6 +20,7 @@ const copy = getCopy(locale);
 const home = getPortfolioHome(locale);
 const articles = getLatestArticles(locale);
 const workHref = pageHref(locale, "work");
+const aiTestingHref = pageHref(locale, "ai-testing");
 const blogHref = pageHref(locale, "blog");
 const orgHref = pageHref(locale, "open-source");
 const playgroundHref = pageHref(locale, "playground");
@@ -41,13 +42,7 @@ const highlights = copy.home.highlights;
           <p class="hero-desc">{home.description}</p>
           <div class="hero-actions">
             <a class="btn-primary" href={workHref}>{home.ctaWork}</a>
-            <a
-              class="btn-ghost"
-              href={home.connectGithub}
-              target="_blank"
-              rel="noopener noreferrer">{home.ctaGithub}</a
-            >
-            <a class="btn-ghost" href="#contact">{home.ctaContact}</a>
+            <a class="btn-ghost" href={aiTestingHref}>{home.ctaAiTesting}</a>
           </div>
         </div>
       </div>
@@ -75,6 +70,10 @@ const highlights = copy.home.highlights;
             <h2 class="section-title">{copy.home.highlightsTitle}</h2>
             <p class="highlights-subtitle">{copy.home.highlightsSubtitle}</p>
             <p class="highlights-proof">{copy.home.highlightsProof}</p>
+            <p class="home-updated">
+              <span>{home.lastUpdatedLabel}</span>
+              <time datetime="2026-07">{home.lastUpdated}</time>
+            </p>
           </div>
         </div>
         <div class="highlights-grid">
@@ -276,6 +275,7 @@ const highlights = copy.home.highlights;
     description={copy.home.footerDesc}
     copyright={copy.copyright}
     social={copy.home.social}
+    builtWith={home.builtWith}
   />
   <WechatModal alt={copy.wechatAlt} closeLabel={copy.closeModal} />
 </BaseLayout>

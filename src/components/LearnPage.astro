@@ -43,6 +43,37 @@ const page = copy.learn;
       </div>
     </section>
 
+    <section class="experience-stories">
+      <div class="container">
+        <h2 class="section-title reveal-on-scroll">{page.storiesTitle}</h2>
+        <div class="stories-grid">
+          {
+            page.stories.map((item, index) => (
+              <article
+                class={`story-card reveal-on-scroll reveal-delay-${(index % 3) + 1}`}
+              >
+                <h3>{item.title}</h3>
+                <dl class="story-flow">
+                  <div>
+                    <dt>{page.storiesChallengeLabel}</dt>
+                    <dd>{item.challenge}</dd>
+                  </div>
+                  <div>
+                    <dt>{page.storiesApproachLabel}</dt>
+                    <dd>{item.approach}</dd>
+                  </div>
+                  <div>
+                    <dt>{page.storiesResultLabel}</dt>
+                    <dd>{item.result}</dd>
+                  </div>
+                </dl>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
     <section class="skills">
       <div class="container">
         <h2 class="section-title reveal-on-scroll">{page.stackTitle}</h2>

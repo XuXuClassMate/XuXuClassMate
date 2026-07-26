@@ -310,7 +310,6 @@ object {
 
   .project-grid,
   .project-grid--home,
-  .highlights-grid,
   .channels-grid,
   .principles-grid,
   .approach-grid,
@@ -331,9 +330,16 @@ object {
   .demo-results,
   .playground-grid,
   .playground-modes-grid,
-  .playground-try-result {
+  .playground-try-result,
+  .stories-grid {
     grid-template-columns: 1fr;
     gap: 24px;
+  }
+
+  /* Metrics stay scannable as a 2×2 on phones */
+  .highlights-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
   }
 
   .track-head,

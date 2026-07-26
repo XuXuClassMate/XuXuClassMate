@@ -281,6 +281,8 @@ export type LocaleCopy = {
     github: string;
     life: string;
     contact: string;
+    /** Top-level Work dropdown label (Experience + Open Source). */
+    workMenu?: string;
     /** @deprecated kept for older links */
     learn?: string;
     work?: string;
@@ -325,6 +327,16 @@ export type LocaleCopy = {
     resources: Card[];
     timelineTitle: string;
     timeline: Card[];
+    storiesTitle: string;
+    storiesChallengeLabel: string;
+    storiesApproachLabel: string;
+    storiesResultLabel: string;
+    stories: Array<{
+      title: string;
+      challenge: string;
+      approach: string;
+      result: string;
+    }>;
     focusTitle: string;
     focusHeading: string;
     focusIntro: string;
