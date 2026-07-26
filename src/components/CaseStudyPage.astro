@@ -75,8 +75,16 @@ const sectionNumbers = (() => {
     deployment: next(),
     github: next(),
     liveDemo: next(),
+    tradeoffs: study.tradeoffs?.length ? next() : 0,
+    outcomes: study.outcomes?.length ? next() : 0,
+    artifacts: study.artifacts?.length ? next() : 0,
+    links: study.links?.length ? next() : 0,
   };
 })();
+
+const relatedNoteLinks = study.links.filter((link) =>
+  /blog|note|article|笔记|文章|case study|案例/i.test(link.label),
+);
 ---
 
 <BaseLayout
@@ -459,6 +467,99 @@ const sectionNumbers = (() => {
             )
           }
         </article>
+
+        {
+          study.tradeoffs && study.tradeoffs.length > 0 ? (
+            <article class="case-block reveal-on-scroll" id="tradeoffs">
+              <h2>
+                {heading(sectionNumbers.tradeoffs, page.caseTradeoffsTitle)}
+              </h2>
+              <ul>
+                {study.tradeoffs.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </article>
+          ) : null
+        }
+
+        {
+          study.outcomes && study.outcomes.length > 0 ? (
+            <article class="case-block reveal-on-scroll" id="outcomes">
+              <h2>
+                {heading(sectionNumbers.outcomes, page.caseOutcomesTitle)}
+              </h2>
+              <ul>
+                {study.outcomes.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </article>
+          ) : null
+        }
+
+        {
+          study.artifacts && study.artifacts.length > 0 ? (
+            <article class="case-block reveal-on-scroll" id="artifacts">
+              <h2>
+                {heading(sectionNumbers.artifacts, page.caseArtifactsTitle)}
+              </h2>
+              <div class="case-artifacts">
+                {study.artifacts.map((item) => (
+                  <article class="case-artifact">
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                    {item.href ? (
+                      <a
+                        class="project-link"
+                        href={item.href}
+                        target={item.href.startsWith("http") ? "_blank" : undefined}
+                        rel={
+                          item.href.startsWith("http")
+                            ? "noopener noreferrer"
+                            : undefined
+                        }
+                      >
+                        {item.linkLabel ?? (isZh ? "打开" : "Open")}
+                      </a>
+                    ) : null}
+                  </article>
+                ))}
+              </div>
+            </article>
+          ) : null
+        }
+
+        {
+          study.links && study.links.length > 0 ? (
+            <article class="case-block reveal-on-scroll" id="links">
+              <h2>{heading(sectionNumbers.links, page.caseLinksTitle)}</h2>
+              {relatedNoteLinks.length > 0 ? (
+                <p class="case-section-lead">
+                  {isZh
+                    ? "安装入口、证据与延伸阅读。"
+                    : "Install paths, proof, and deeper reading."}
+                </p>
+              ) : null}
+              <div class="project-links">
+                {study.links.map((link) => (
+                  <a
+                    href={link.href}
+                    class="project-link"
+                    target={link.href.startsWith("http") ? "_blank" : undefined}
+                    rel={
+                      link.href.startsWith("http")
+                        ? "noopener noreferrer"
+                        : undefined
+                    }
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            </article>
+          ) : null
+        }
 
         {
           study.tryItNow ? (

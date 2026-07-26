@@ -108,6 +108,15 @@ test("unified case study template renders", async ({ page }) => {
   await expect(page.locator(".pipeline-stages")).toContainText(
     "Three-persona review loop",
   );
+  await expect(page.getByRole("heading", { name: /Tradeoffs/i })).toBeVisible();
+  await expect(page.getByRole("heading", { name: /What shipped/i })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: /Inspectable proof/i }),
+  ).toBeVisible();
+  await expect(page.getByRole("heading", { name: /Links/i })).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Engineering note: multimodal build" }),
+  ).toHaveAttribute("href", "/en/blog/ai-testcase-generator-multimodal.html");
   await expect(
     page.locator('[data-metric="docker:testcase-generator"]'),
   ).toBeVisible();
@@ -464,7 +473,18 @@ test("learn page covers management and Locust", async ({ page }) => {
   await expect(
     page.getByRole("heading", { name: "Database bottlenecks under concurrency" }),
   ).toBeVisible();
+  await expect(
+    page.getByRole("heading", {
+      name: "Turning AI test drafts into installable products",
+    }),
+  ).toBeVisible();
   await expect(page.getByText("How I Solved It").first()).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Open flagship case study" }),
+  ).toHaveAttribute("href", "/en/work/testcase-generator.html");
+  await expect(
+    page.getByRole("link", { name: "Flagship case study", exact: true }),
+  ).toHaveAttribute("href", "/en/work/testcase-generator.html");
   await expect(page.getByRole("heading", { name: "GlobalPulse" })).toBeVisible();
   await expect(
     page.getByRole("link", { name: "Open live site" }),

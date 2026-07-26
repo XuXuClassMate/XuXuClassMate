@@ -110,8 +110,12 @@ const page = copy.learn;
                 <a
                   href={item.href}
                   class="read-more"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  target={item.href?.startsWith("http") ? "_blank" : undefined}
+                  rel={
+                    item.href?.startsWith("http")
+                      ? "noopener noreferrer"
+                      : undefined
+                  }
                 >
                   {item.linkLabel}
                 </a>
@@ -144,13 +148,30 @@ const page = copy.learn;
           <p>
             {
               locale === "zh"
-                ? "看可安装项目证据，或读数据库 Docker / ClawHub 发布笔记。"
-                : "See installable project proof, or read notes on database Docker and ClawHub shipping."
+                ? "从旗舰 AI 用例生成器开始验证可安装能力，或继续读工程笔记。"
+                : "Start with the flagship AI Test Case Generator, or keep reading Engineering Notes."
             }
           </p>
           <div class="hero-actions">
-            <a class="btn-primary" href={locale === "zh" ? "/zh/work.html" : "/en/work.html"}>
-              {locale === "zh" ? "项目展示" : "Project Gallery"}
+            <a
+              class="btn-primary"
+              href={
+                locale === "zh"
+                  ? "/zh/work/testcase-generator.html"
+                  : "/en/work/testcase-generator.html"
+              }
+            >
+              {locale === "zh" ? "旗舰案例" : "Flagship case study"}
+            </a>
+            <a
+              class="btn-ghost"
+              href={
+                locale === "zh"
+                  ? "/zh/demo/ai-testcase-generator.html"
+                  : "/en/demo/ai-testcase-generator.html"
+              }
+            >
+              {locale === "zh" ? "试用 Demo" : "Try demo"}
             </a>
             <a class="btn-ghost" href={locale === "zh" ? "/zh/blog.html" : "/en/blog.html"}>
               {locale === "zh" ? "工程笔记" : "Engineering Notes"}
