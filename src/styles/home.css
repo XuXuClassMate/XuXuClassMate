@@ -12,7 +12,7 @@
 .hobby-grid,
 .blog-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
   gap: 20px;
 }
 
@@ -475,7 +475,7 @@
 
 .stack-matrix {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15.5rem), 1fr));
   gap: 1rem;
   margin-top: 0.35rem;
 }
@@ -512,7 +512,7 @@
 
 .achievements-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
   gap: 1.25rem;
 }
 
@@ -623,7 +623,7 @@
 
 .track-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
   gap: 1.25rem;
 }
 
@@ -661,6 +661,7 @@
   letter-spacing: 0.04em;
   color: var(--muted);
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .track-status--live {
@@ -698,7 +699,7 @@
 
 .ai-live-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
   gap: 1.25rem;
   margin-bottom: 1.5rem;
 }

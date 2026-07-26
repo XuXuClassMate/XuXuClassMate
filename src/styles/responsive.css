@@ -1,3 +1,19 @@
+/* Universal H5 / phone adaptation — imported last so these rules win. */
+
+img,
+video,
+svg,
+canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+iframe,
+embed,
+object {
+  max-width: 100%;
+}
+
 @media (max-width: 1200px) {
   .container {
     padding: 0 32px;
@@ -31,8 +47,11 @@
   }
 }
 
+/* Phones + narrow tablets (portrait): SE ~320 → Pro Max ~430, Android ~360–412 */
 @media (max-width: 768px) {
   .container {
+    width: 100%;
+    max-width: 100%;
     padding-left: max(16px, env(safe-area-inset-left, 0px));
     padding-right: max(16px, env(safe-area-inset-right, 0px));
   }
@@ -215,11 +234,13 @@
   .hero-title {
     font-size: clamp(1.85rem, 8.5vw, 2.4rem);
     max-width: none;
+    overflow-wrap: anywhere;
   }
 
   .hero-desc,
   .hero-positioning {
     font-size: 0.98rem;
+    overflow-wrap: break-word;
   }
 
   .hero-role-line {
@@ -241,7 +262,10 @@
     padding: calc(120px + env(safe-area-inset-top, 0px)) 0 64px;
   }
 
-  .hero-actions {
+  .hero-actions,
+  .demo-run-actions,
+  .playground-try-row,
+  .org-join-actions {
     width: 100%;
     flex-direction: column;
     align-items: stretch;
@@ -267,39 +291,21 @@
   .btn-primary,
   .btn-ghost,
   .hero:not(.hero--home) .btn-primary,
-  .hero:not(.hero--home) .btn-ghost {
+  .hero:not(.hero--home) .btn-ghost,
+  .demo-generator-page .hero-actions .btn-primary,
+  .demo-generator-page .hero-actions .btn-ghost,
+  .playground-page .hero-actions .btn-primary,
+  .playground-page .hero-actions .btn-ghost,
+  .org-page .hero-actions .btn-primary,
+  .org-page .hero-actions .btn-ghost,
+  .demo-run-actions .btn-primary,
+  .demo-run-actions .btn-ghost,
+  .playground-try-row .btn-primary,
+  .org-join-panel .btn-primary {
     flex: none;
     width: 100%;
     min-width: 0;
     max-width: none;
-  }
-
-  .values-grid,
-  .links-grid,
-  .notes-grid,
-  .project-grid,
-  .skills-grid,
-  .gallery-grid,
-  .hobby-grid,
-  .blog-grid,
-  .skill-category,
-  .track-grid,
-  .highlights-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .footer-content {
-    flex-direction: column;
-    gap: 32px;
-    text-align: center;
-  }
-
-  .footer-left {
-    margin: 0 auto;
-  }
-
-  .social-links {
-    justify-content: center;
   }
 
   .project-grid,
@@ -314,14 +320,50 @@
   .hobby-grid,
   .blog-grid,
   .notes-grid,
-  .links-grid {
+  .links-grid,
+  .skill-category,
+  .track-grid,
+  .stack-matrix,
+  .achievements-grid,
+  .ai-live-grid,
+  .skills-grid--evidence,
+  .demo-pipeline,
+  .demo-results,
+  .playground-grid,
+  .playground-modes-grid,
+  .playground-try-result {
     grid-template-columns: 1fr;
     gap: 24px;
+  }
+
+  .track-head,
+  .ai-live-head,
+  .skill-header {
+    flex-wrap: wrap;
+  }
+
+  .track-status {
+    white-space: normal;
   }
 
   .section-head {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    gap: 32px;
+    text-align: center;
+  }
+
+  .footer-left {
+    margin: 0 auto;
+  }
+
+  .social-links {
+    justify-content: center;
+    flex-wrap: wrap;
   }
 
   .home-featured,
@@ -338,7 +380,8 @@
   .blog,
   .learning-path,
   .quick-links,
-  .highlights {
+  .highlights,
+  .home-section {
     padding: 64px 0;
   }
 
@@ -347,16 +390,58 @@
     height: 50px;
     font-size: 20px;
   }
+
+  .project-filters,
+  .filter-btn {
+    max-width: 100%;
+  }
+
+  .filter-btn {
+    min-height: 2.5rem;
+  }
+
+  .case-try-command,
+  .note-code pre,
+  pre,
+  code {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  table {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 }
 
+/* Compact phones (iPhone SE / small Android) */
 @media (max-width: 480px) {
   .container {
-    padding-left: max(16px, env(safe-area-inset-left, 0px));
-    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-left: max(14px, env(safe-area-inset-left, 0px));
+    padding-right: max(14px, env(safe-area-inset-right, 0px));
+  }
+
+  .logo-text {
+    max-width: min(10.5rem, 48vw);
+    font-size: 0.95rem;
   }
 
   .hero-title {
-    font-size: 1.85rem;
+    font-size: clamp(1.65rem, 8vw, 1.85rem);
+  }
+
+  .hero-brand {
+    font-size: clamp(1.3rem, 6vw, 1.55rem);
+  }
+
+  .hero-desc,
+  .hero-positioning,
+  .hero-role-line {
+    font-size: 0.95rem;
   }
 
   .section-title {
@@ -394,5 +479,82 @@
   .quick-links,
   .highlights {
     padding: 52px 0;
+  }
+
+  .nav-links .nav-item,
+  .nav-links .nav-more-toggle {
+    min-height: 2.75rem;
+    font-size: 1.02rem;
+  }
+}
+
+/* Very narrow phones */
+@media (max-width: 360px) {
+  .logo-text {
+    max-width: min(8.5rem, 42vw);
+  }
+
+  .hero-title {
+    font-size: 1.55rem;
+  }
+
+  .hero-actions .btn-primary,
+  .hero-actions .btn-ghost {
+    min-height: 46px;
+    font-size: 0.92rem;
+  }
+
+  .achievements-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Phone landscape: tighten vertical padding; keep the ≤768 H5 nav/CTAs */
+@media (max-width: 768px) and (max-height: 480px) and (orientation: landscape) {
+  .hero {
+    padding: calc(88px + env(safe-area-inset-top, 0px)) 0 40px;
+  }
+
+  .hero:not(.hero--home) {
+    padding: calc(96px + env(safe-area-inset-top, 0px)) 0 40px;
+  }
+
+  .hero-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .hero-actions .btn-primary,
+  .hero-actions .btn-ghost {
+    width: auto;
+    flex: 1 1 10rem;
+    min-width: min(100%, 10rem);
+  }
+
+  .home-section,
+  .highlights,
+  .principles,
+  .featured-projects,
+  .skills,
+  .blog {
+    padding: 40px 0;
+  }
+}
+
+/* Touch devices: avoid sticky hover states */
+@media (hover: none) and (pointer: coarse) {
+  .btn-primary:hover,
+  .btn-ghost:hover,
+  .link-card:hover,
+  .project-card:hover,
+  .skill-item:hover,
+  .note-card:hover,
+  .value-card:hover {
+    transform: none;
+  }
+
+  .btn-primary:active,
+  .btn-ghost:active {
+    transform: scale(0.98);
   }
 }

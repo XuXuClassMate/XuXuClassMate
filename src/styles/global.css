@@ -7,10 +7,11 @@
 @import "./learn.css";
 @import "./life.css";
 @import "./modal.css";
-@import "./responsive.css";
 @import "./case.css";
 @import "./notes.css";
 @import "./org.css";
 @import "./now.css";
 @import "./demo-generator.css";
 @import "./playground.css";
+/* Keep last so phone/H5 overrides win over page styles. */
+@import "./responsive.css";

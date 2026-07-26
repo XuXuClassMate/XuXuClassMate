@@ -48,7 +48,7 @@
   font-size: 0.95rem;
 }
 
-@media (max-width: 560px) {
+@media (max-width: 768px) {
   .org-page .hero-actions {
     width: 100%;
     max-width: none;

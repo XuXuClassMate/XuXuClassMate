@@ -467,6 +467,51 @@ test("mobile nav toggles", async ({ page }) => {
   await expect(links).not.toHaveClass(/show/);
 });
 
+test("H5 layout fits common phone widths without horizontal overflow", async ({
+  page,
+}) => {
+  const phones = [
+    { width: 320, height: 568 }, // iPhone SE
+    { width: 360, height: 800 }, // common Android
+    { width: 390, height: 844 }, // iPhone 12/13/14
+    { width: 414, height: 896 }, // iPhone 11 / XR
+    { width: 430, height: 932 }, // iPhone 15 Pro Max
+  ];
+  const paths = ["/", "/zh/", "/en/demo/ai-testcase-generator.html", "/en/work.html"];
+
+  for (const phone of phones) {
+    await page.setViewportSize(phone);
+    for (const path of paths) {
+      await page.goto(path);
+      await expect(page.locator("#mobileNavToggle")).toBeVisible();
+      const metrics = await page.evaluate(() => {
+        const doc = document.documentElement;
+        const actions = document.querySelector(".hero-actions");
+        const buttons = actions
+          ? [...actions.querySelectorAll(".btn-primary, .btn-ghost")].map((el) => {
+              const r = el.getBoundingClientRect();
+              return { top: r.top, width: r.width };
+            })
+          : [];
+        return {
+          overflow: Math.max(doc.scrollWidth, document.body.scrollWidth) - doc.clientWidth,
+          stacked:
+            buttons.length < 2 ||
+            Math.abs(buttons[0].top - buttons[1].top) > 8,
+          fullWidth:
+            buttons.length === 0 ||
+            buttons.every((b) => b.width >= doc.clientWidth * 0.7),
+        };
+      });
+      expect(metrics.overflow, `${path} @ ${phone.width}`).toBeLessThanOrEqual(1);
+      if (path === "/" || path.includes("demo")) {
+        expect(metrics.stacked, `CTA stack ${path} @ ${phone.width}`).toBe(true);
+        expect(metrics.fullWidth, `CTA width ${path} @ ${phone.width}`).toBe(true);
+      }
+    }
+  }
+});
+
 test("build ships redirects and headers", async () => {
   const dist = join(process.cwd(), "dist");
   const redirects = join(dist, "_redirects");
