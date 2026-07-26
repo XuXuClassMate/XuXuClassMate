@@ -70,10 +70,13 @@ const alternates = caseSlug
     : hreflangLinks(locale, page, rootHome);
 const homeHref = locale === "zh" ? pageHref("zh", "home") : "/";
 const active = page === "home" ? undefined : page;
-const moreActive =
-  active === "life" ||
+const workActive =
+  active === "learn" ||
   active === "open-source" ||
-  active === "innonestx" ||
+  active === "innonestx";
+const moreActive =
+  active === "now" ||
+  active === "life" ||
   active === "playground";
 const ogTitle = meta.ogTitle ?? meta.title;
 const ogImage = absoluteUrl(ogImagePath ?? "/images/og-default.jpg");
@@ -200,16 +203,58 @@ const langSwitchHref = alternateLocalePath(Astro.url.pathname);
               >
                 {copy.nav.about}
               </a>
-              <a
-                href={pageHref(locale, "learn")}
-                class:list={[
-                  "nav-item",
-                  "nav-item--experience",
-                  { active: active === "learn" },
-                ]}
+              <div
+                class:list={["nav-more", { "is-open": workActive }]}
+                data-nav-more
               >
-                {copy.nav.experience}
-              </a>
+                <button
+                  type="button"
+                  class:list={[
+                    "nav-item",
+                    "nav-more-toggle",
+                    { active: workActive },
+                  ]}
+                  aria-expanded={workActive ? "true" : "false"}
+                  aria-haspopup="true"
+                  aria-controls="navWorkMenu"
+                  data-nav-more-toggle
+                >
+                  {copy.nav.workMenu ?? "Work"}
+                  <span class="nav-more-caret" aria-hidden="true">▾</span>
+                </button>
+                <div
+                  class="nav-more-menu"
+                  id="navWorkMenu"
+                  role="menu"
+                  data-nav-more-menu
+                >
+                  <a
+                    href={pageHref(locale, "learn")}
+                    class:list={[
+                      "nav-item",
+                      "nav-item--experience",
+                      { active: active === "learn" },
+                    ]}
+                    role="menuitem"
+                  >
+                    {copy.nav.experience}
+                  </a>
+                  <a
+                    href={pageHref(locale, "open-source")}
+                    class:list={[
+                      "nav-item",
+                      "nav-item--open-source",
+                      {
+                        active:
+                          active === "open-source" || active === "innonestx",
+                      },
+                    ]}
+                    role="menuitem"
+                  >
+                    {copy.nav.openSource ?? copy.nav.innonestx}
+                  </a>
+                </div>
+              </div>
               <a
                 href={pageHref(locale, "work")}
                 class:list={[
@@ -266,29 +311,15 @@ const langSwitchHref = alternateLocalePath(Astro.url.pathname);
                   data-nav-more-menu
                 >
                   <a
-                    href={pageHref(locale, "open-source")}
+                    href={pageHref(locale, "now")}
                     class:list={[
                       "nav-item",
-                      "nav-item--open-source",
-                      {
-                        active:
-                          active === "open-source" || active === "innonestx",
-                      },
+                      "nav-item--now",
+                      { active: active === "now" },
                     ]}
                     role="menuitem"
                   >
-                    {copy.nav.openSource ?? copy.nav.innonestx}
-                  </a>
-                  <a
-                    href={pageHref(locale, "playground")}
-                    class:list={[
-                      "nav-item",
-                      "nav-item--playground",
-                      { active: active === "playground" },
-                    ]}
-                    role="menuitem"
-                  >
-                    {copy.nav.playground}
+                    {copy.nav.now}
                   </a>
                   <a
                     href={pageHref(locale, "life")}
@@ -300,6 +331,17 @@ const langSwitchHref = alternateLocalePath(Astro.url.pathname);
                     role="menuitem"
                   >
                     {copy.nav.life}
+                  </a>
+                  <a
+                    href={pageHref(locale, "playground")}
+                    class:list={[
+                      "nav-item",
+                      "nav-item--playground",
+                      { active: active === "playground" },
+                    ]}
+                    role="menuitem"
+                  >
+                    {copy.nav.playground}
                   </a>
                   <a
                     href="#contact"

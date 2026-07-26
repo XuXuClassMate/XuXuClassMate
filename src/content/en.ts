@@ -62,6 +62,7 @@ export const en: LocaleCopy = {
     contact: "Contact",
     learn: "Experience",
     work: "Projects",
+    workMenu: "Work",
     notes: "Notes",
     more: "More",
     innonestx: "Open Source",
@@ -164,33 +165,33 @@ export const en: LocaleCopy = {
     positioning:
       "QA Engineer + SDET + AI Testing — installable quality engineering teams can run.",
     highlightsTitle: "By the Numbers",
-    highlightsSubtitle: "Live Public Metrics · Updated Automatically",
+    highlightsSubtitle: "Live Public Metrics · Updated Daily",
     highlightsProof: "Prove, don't just show.",
     highlights: [
       {
         value: "54k+",
-        label: "Docker Pulls",
+        label: "Docker Pulls · All Time",
         metric: "docker:total-pulls",
         href: "https://hub.docker.com/u/xuxuclassmate",
         linkLabel: "View Docker Hub →",
       },
       {
         value: "1.6k+",
-        label: "ClawHub Downloads",
+        label: "ClawHub Downloads · All Time",
         metric: "clawhub:total-downloads",
         href: "https://clawhub.ai/xuxuclassmate",
         linkLabel: "View ClawHub →",
       },
       {
         value: "500+",
-        label: "API Gateway Calls",
+        label: "Gateway Calls · Live",
         metric: "api:gateway-calls",
         href: "https://docker-hub-pull-counter.vercel.app",
         linkLabel: "View API Gateway →",
       },
       {
         value: "12",
-        label: "Docker Images",
+        label: "Docker Images · Public",
         metric: "docker:repo-count",
         href: "https://hub.docker.com/u/xuxuclassmate",
         linkLabel: "View Docker Hub →",
@@ -401,6 +402,39 @@ export const en: LocaleCopy = {
         title: "OpenClaw Skills & Product Systems",
         description:
           "Packaging ClawHub skills and shipping systems like GlobalPulse and the Docker Hub API Gateway so workflows run beyond demos.",
+      },
+    ],
+    storiesTitle: "Key Challenges",
+    storiesChallengeLabel: "Challenge",
+    storiesApproachLabel: "How I Solved It",
+    storiesResultLabel: "Result",
+    stories: [
+      {
+        title: "Database bottlenecks under concurrency",
+        challenge:
+          "High-concurrency account and fund flows hit database saturation — latency spiked before the app layer looked unhealthy.",
+        approach:
+          "Locust load profiles, SQL / index review with engineering, and reproducible Docker DB environments for shared diagnosis.",
+        result:
+          "Stabilized critical paths under 500+ QPS pressure and shortened the feedback loop between QA and backend.",
+      },
+      {
+        title: "Complex account / fund / risk workflows",
+        challenge:
+          "End-to-end paths crossed account, fund, and risk-control systems — UI clicks alone could not prove release readiness.",
+        approach:
+          "Layered Playwright + API automation, shared fixtures, and environment parity so regression covered the real business chain.",
+        result:
+          "Raised automation coverage above 80% on priority flows and cut regression cycle time by about 40%.",
+      },
+      {
+        title: "Regression efficiency at team scale",
+        challenge:
+          "Manual regression could not keep up with release cadence across ByteDance, SOE, and startup delivery models.",
+        approach:
+          "Framework design, CI/CD quality gates, and reusable suites instead of one-off scripts tied to a single language.",
+        result:
+          "Teams shipped with clearer release readiness signals and 20–35% better response-time outcomes on tuned paths.",
       },
     ],
     focusTitle: "Current Learning Focus",

@@ -9,8 +9,7 @@ export type PortfolioHome = {
   tagline: string;
   description: string;
   ctaWork: string;
-  ctaGithub: string;
-  ctaContact: string;
+  ctaAiTesting: string;
   whatIDoTitle: string;
   whatIDo: HomeLink[];
   achievementsTitle: string;
@@ -34,6 +33,9 @@ export type PortfolioHome = {
   ossOrgLabel: string;
   ossPlaygroundLabel: string;
   connectGithub: string;
+  lastUpdatedLabel: string;
+  lastUpdated: string;
+  builtWith: string;
 };
 
 const GITHUB = "https://github.com/XuXuClassMate";
@@ -80,12 +82,11 @@ export function getPortfolioHome(locale: Locale): PortfolioHome {
     roles: ["QA Engineer", "SDET", "AI Testing"],
     tagline: isZh ? "可安装的质量工程" : "Installable Quality Engineering",
     description: isZh
-      ? "我是 QA Engineer / SDET，专注测试自动化、AI Testing、接口测试与性能测试；并构建 Playwright、Docker Testing 与 AI 用例生成工具。"
-      : "I'm a QA Engineer / SDET focused on test automation, AI testing, API testing, and performance testing — building Playwright suites, Docker testing infrastructure, and AI test case generation.",
+      ? "我构建可依赖的测试自动化、AI 驱动的测试工具，以及团队能安装、能运行、能集成的可复用质量基础设施。"
+      : "I build reliable test automation, AI-powered testing tools, and reusable quality infrastructure that teams can install, run, and integrate.",
     ctaWork: isZh ? "查看项目" : "View Projects",
-    ctaGithub: "GitHub",
-    ctaContact: isZh ? "联系我" : "Contact Me",
-    whatIDoTitle: isZh ? "我在做什么" : "What I Do",
+    ctaAiTesting: isZh ? "探索 AI Testing" : "Explore AI Testing",
+    whatIDoTitle: isZh ? "能力方向" : "What I Do",
     whatIDo: [
       {
         title: "Test Automation",
@@ -99,19 +100,23 @@ export function getPortfolioHome(locale: Locale): PortfolioHome {
       },
       {
         title: "Performance Testing",
-        href: isZh ? "/zh/blog.html" : "/en/blog.html",
+        href: isZh
+          ? "/zh/blog/locust-api-performance-testing.html"
+          : "/en/blog/locust-api-performance-testing.html",
       },
       {
         title: "AI Testing",
         href: isZh ? "/zh/ai-testing.html" : "/en/ai-testing.html",
       },
       {
-        title: "Playwright",
-        href: isZh ? "/zh/playwright.html" : "/en/playwright.html",
-      },
-      {
         title: "Test Infrastructure",
         href: isZh ? "/zh/infrastructure.html" : "/en/infrastructure.html",
+      },
+      {
+        title: "E2E Testing",
+        href: isZh
+          ? "/zh/work/fullstack-e2e.html"
+          : "/en/work/fullstack-e2e.html",
       },
     ],
     achievementsTitle: isZh ? "关键成果" : "Key Achievements",
@@ -121,7 +126,7 @@ export function getPortfolioHome(locale: Locale): PortfolioHome {
         label: isZh ? "测试自动化覆盖率" : "Test Automation Coverage",
       },
       {
-        value: isZh ? "5万+" : "50k+",
+        value: "500+",
         label: isZh ? "性能测试 QPS" : "Performance Testing QPS",
       },
       {
@@ -138,51 +143,43 @@ export function getPortfolioHome(locale: Locale): PortfolioHome {
     featured: isZh ? featuredZh : featuredEn,
     stackTitle: isZh ? "技术栈" : "Technical Stack",
     stackLead: isZh
-      ? "质量是一个系统——按工具链分组，方便快速抓住能力边界。"
-      : "Quality is a system — skills grouped by toolchain so the shape of delivery is clear in seconds.",
+      ? "能力是方向，技术栈是实现方式——按语言、测试与基础设施分组。"
+      : "Capabilities are the lane; the stack is how delivery happens — languages, testing, and infrastructure.",
     stack: isZh
       ? [
           {
-            title: "UI 自动化",
-            items: ["Playwright", "TypeScript"],
+            title: "语言",
+            items: ["Java", "Python", "TypeScript"],
           },
           {
-            title: "接口测试",
-            items: ["Java", "JUnit", "RestAssured", "Python", "Pytest"],
-          },
-          {
-            title: "性能测试",
-            items: ["Locust"],
-          },
-          {
-            title: "AI Testing",
-            items: ["AI Test Case Generation", "OpenClaw / ClawHub", "Claude Code"],
+            title: "测试",
+            items: ["Playwright", "Pytest", "JUnit", "RestAssured", "Locust"],
           },
           {
             title: "基础设施",
-            items: ["Docker Testing", "Test Infrastructure", "CI/CD"],
+            items: ["Docker", "CI/CD", "Linux"],
+          },
+          {
+            title: "数据与中间件",
+            items: ["MySQL", "Oracle", "Redis", "MQ"],
           },
         ]
       : [
           {
-            title: "UI Automation",
-            items: ["Playwright", "TypeScript"],
+            title: "Languages",
+            items: ["Java", "Python", "TypeScript"],
           },
           {
-            title: "API Testing",
-            items: ["Java", "JUnit", "RestAssured", "Python", "Pytest"],
-          },
-          {
-            title: "Performance Testing",
-            items: ["Locust"],
-          },
-          {
-            title: "AI Testing",
-            items: ["AI Test Case Generation", "OpenClaw / ClawHub", "Claude Code"],
+            title: "Testing",
+            items: ["Playwright", "Pytest", "JUnit", "RestAssured", "Locust"],
           },
           {
             title: "Infrastructure",
-            items: ["Docker Testing", "Test Infrastructure", "CI/CD"],
+            items: ["Docker", "CI/CD", "Linux"],
+          },
+          {
+            title: "Data",
+            items: ["MySQL", "Oracle", "Redis", "MQ"],
           },
         ],
     articlesTitle: isZh ? "最新工程笔记" : "Latest Engineering Notes",
@@ -195,6 +192,11 @@ export function getPortfolioHome(locale: Locale): PortfolioHome {
     ossOrgLabel: isZh ? "开源页面" : "Open Source page",
     ossPlaygroundLabel: isZh ? "体验台" : "Playground",
     connectGithub: GITHUB,
+    lastUpdatedLabel: isZh ? "最近更新" : "Last updated",
+    lastUpdated: isZh ? "2026 年 7 月" : "July 2026",
+    builtWith: isZh
+      ? "基于 Astro 构建 · 部署于 Cloudflare Pages"
+      : "Built with Astro · Deployed on Cloudflare Pages",
   };
 }
 
