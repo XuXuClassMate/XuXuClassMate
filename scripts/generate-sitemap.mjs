@@ -18,6 +18,7 @@ const staticPages = [
   "/en/life",
   "/en/open-source",
   "/en/now",
+  "/en/playground",
   "/en/demo/ai-testcase-generator",
   "/zh/",
   "/zh/about",
@@ -30,13 +31,30 @@ const staticPages = [
   "/zh/life",
   "/zh/open-source",
   "/zh/now",
+  "/zh/playground",
   "/zh/demo/ai-testcase-generator",
 ];
+
+/** Higher priority for flagship / conversion surfaces. */
+const priorityOverrides = {
+  "/en/work/testcase-generator": "0.95",
+  "/zh/work/testcase-generator": "0.90",
+  "/en/demo/ai-testcase-generator": "0.92",
+  "/zh/demo/ai-testcase-generator": "0.88",
+  "/en/blog/ai-testcase-generator-multimodal": "0.80",
+  "/zh/blog/ai-testcase-generator-multimodal": "0.75",
+  "/en/blog/ai-assisted-test-case-generation": "0.80",
+  "/zh/blog/ai-assisted-test-case-generation": "0.75",
+  "/en/learn": "0.90",
+  "/zh/learn": "0.85",
+};
 
 const pages = staticPages.map((path, index) => ({
   path,
   changefreq: path === "/" || path.endsWith("/") ? "weekly" : "monthly",
-  priority: index === 0 ? "1.00" : path.includes("/en/") ? "0.90" : "0.80",
+  priority:
+    priorityOverrides[path] ??
+    (index === 0 ? "1.00" : path.includes("/en/") ? "0.90" : "0.80"),
 }));
 
 const cases = [
@@ -61,28 +79,32 @@ const posts = [
 ];
 
 for (const slug of cases) {
+  const enPath = `/en/work/${slug}`;
+  const zhPath = `/zh/work/${slug}`;
   pages.push({
-    path: `/en/work/${slug}`,
+    path: enPath,
     changefreq: "monthly",
-    priority: "0.70",
+    priority: priorityOverrides[enPath] ?? "0.70",
   });
   pages.push({
-    path: `/zh/work/${slug}`,
+    path: zhPath,
     changefreq: "monthly",
-    priority: "0.65",
+    priority: priorityOverrides[zhPath] ?? "0.65",
   });
 }
 
 for (const slug of posts) {
+  const enPath = `/en/blog/${slug}`;
+  const zhPath = `/zh/blog/${slug}`;
   pages.push({
-    path: `/en/blog/${slug}`,
+    path: enPath,
     changefreq: "monthly",
-    priority: "0.70",
+    priority: priorityOverrides[enPath] ?? "0.70",
   });
   pages.push({
-    path: `/zh/blog/${slug}`,
+    path: zhPath,
     changefreq: "monthly",
-    priority: "0.65",
+    priority: priorityOverrides[zhPath] ?? "0.65",
   });
 }
 
