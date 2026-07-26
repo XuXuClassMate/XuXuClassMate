@@ -73,10 +73,16 @@
     <priority>0.90</priority>
   </url>
   <url>
-    <loc>https://www.xuxuclassmate.com/en/demo/ai-testcase-generator</loc>
+    <loc>https://www.xuxuclassmate.com/en/playground</loc>
     <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/en/demo/ai-testcase-generator</loc>
+    <lastmod>2026-07-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.92</priority>
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/zh/</loc>
@@ -94,7 +100,7 @@
     <loc>https://www.xuxuclassmate.com/zh/learn</loc>
     <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/zh/work</loc>
@@ -145,10 +151,16 @@
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.xuxuclassmate.com/zh/demo/ai-testcase-generator</loc>
+    <loc>https://www.xuxuclassmate.com/zh/playground</loc>
     <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/zh/demo/ai-testcase-generator</loc>
+    <lastmod>2026-07-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.88</priority>
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/work/fullstack-e2e</loc>
@@ -178,13 +190,13 @@
     <loc>https://www.xuxuclassmate.com/en/work/testcase-generator</loc>
     <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.70</priority>
+    <priority>0.95</priority>
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/zh/work/testcase-generator</loc>
     <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.65</priority>
+    <priority>0.90</priority>
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/work/trading-assistant</loc>
@@ -238,13 +250,13 @@
     <loc>https://www.xuxuclassmate.com/en/blog/ai-testcase-generator-multimodal</loc>
     <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.70</priority>
+    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/zh/blog/ai-testcase-generator-multimodal</loc>
     <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.65</priority>
+    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/blog/playwright-e2e-framework</loc>
@@ -286,13 +298,13 @@
     <loc>https://www.xuxuclassmate.com/en/blog/ai-assisted-test-case-generation</loc>
     <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.70</priority>
+    <priority>0.80</priority>
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/zh/blog/ai-assisted-test-case-generation</loc>
     <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.65</priority>
+    <priority>0.75</priority>
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/blog/ai-agent-software-testing</loc>
