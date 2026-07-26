@@ -36,8 +36,6 @@ export type PortfolioHome = {
   ossOrgLabel: string;
   ossPlaygroundLabel: string;
   connectGithub: string;
-  lastUpdatedLabel: string;
-  lastUpdated: string;
 };
 
 const GITHUB = "https://github.com/XuXuClassMate";
@@ -224,8 +222,6 @@ export function getPortfolioHome(locale: Locale): PortfolioHome {
     ossOrgLabel: isZh ? "开源页面" : "Open Source page",
     ossPlaygroundLabel: isZh ? "体验台" : "Playground",
     connectGithub: GITHUB,
-    lastUpdatedLabel: isZh ? "最近更新" : "Last updated",
-    lastUpdated: isZh ? "2026 年 7 月" : "July 2026",
   };
 }
 
