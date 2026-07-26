@@ -32,13 +32,26 @@
 }
 
 @media (max-width: 768px) {
+  .container {
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+
   .mobile-nav-toggle {
     display: block;
     z-index: 1001;
+    flex-shrink: 0;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .nav-end {
     gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .logo-text {
+    font-size: 1rem;
+    max-width: min(12.5rem, 52vw);
   }
 
   /* Closed drawer: header is logo + hamburger only (theme lives in the menu). */
@@ -47,17 +60,23 @@
     position: fixed;
     top: 0;
     left: 0;
+    right: 0;
+    bottom: 0;
     width: 100%;
-    height: 100vh;
-    max-width: 100vw;
+    height: 100%;
+    height: 100dvh;
+    max-width: 100%;
     overflow-x: hidden;
     overflow-y: auto;
     overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
     background-color: var(--mobile-nav-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--line);
-    padding: 5rem 1.35rem 2.5rem;
+    padding:
+      calc(5rem + env(safe-area-inset-top, 0px))
+      max(1.25rem, env(safe-area-inset-right, 0px))
+      max(2.5rem, env(safe-area-inset-bottom, 0px))
+      max(1.25rem, env(safe-area-inset-left, 0px));
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
@@ -188,21 +207,45 @@
     height: 1.05rem;
   }
 
-  .hero-title {
-    font-size: clamp(2rem, 9vw, 2.6rem);
+  .hero-brand {
+    font-size: clamp(1.45rem, 6.5vw, 1.9rem);
+    margin-bottom: 14px;
   }
 
-  .hero-desc {
-    font-size: 16px;
+  .hero-title {
+    font-size: clamp(1.85rem, 8.5vw, 2.4rem);
+    max-width: none;
+  }
+
+  .hero-desc,
+  .hero-positioning {
+    font-size: 0.98rem;
+  }
+
+  .hero-role-line {
+    font-size: 0.98rem;
+    text-wrap: pretty;
+  }
+
+  .hero-tagline {
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
   }
 
   .hero {
-    min-height: auto;
-    padding: 120px 0 72px;
+    min-height: unset;
+    padding: calc(104px + env(safe-area-inset-top, 0px)) 0 64px;
+  }
+
+  .hero:not(.hero--home) {
+    padding: calc(120px + env(safe-area-inset-top, 0px)) 0 64px;
   }
 
   .hero-actions {
     width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
   }
 
   .btn-primary {
@@ -213,9 +256,36 @@
     display: none;
   }
 
+  .hero-blob {
+    width: min(420px, 120vw);
+    height: min(420px, 120vw);
+    right: -28%;
+    top: 0;
+    opacity: 0.85;
+  }
+
   .btn-primary,
-  .btn-ghost {
-    flex: 1;
+  .btn-ghost,
+  .hero:not(.hero--home) .btn-primary,
+  .hero:not(.hero--home) .btn-ghost {
+    flex: none;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+  }
+
+  .values-grid,
+  .links-grid,
+  .notes-grid,
+  .project-grid,
+  .skills-grid,
+  .gallery-grid,
+  .hobby-grid,
+  .blog-grid,
+  .skill-category,
+  .track-grid,
+  .highlights-grid {
+    grid-template-columns: 1fr;
   }
 
   .footer-content {
@@ -281,21 +351,22 @@
 
 @media (max-width: 480px) {
   .container {
-    padding: 0 20px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
   }
 
   .hero-title {
-    font-size: 2rem;
+    font-size: 1.85rem;
   }
 
   .section-title {
-    font-size: 1.6rem;
-    margin-bottom: 28px;
+    font-size: 1.5rem;
+    margin-bottom: 24px;
   }
 
   .project-content,
   .skill-item {
-    padding: 20px;
+    padding: 18px;
   }
 
   .gallery-caption {
@@ -304,5 +375,24 @@
 
   .gallery-caption h3 {
     font-size: 18px;
+  }
+
+  .home-section,
+  .home-featured,
+  .channels,
+  .principles,
+  .approach,
+  .timeline-section,
+  .values,
+  .featured-projects,
+  .skills,
+  .life-gallery,
+  .hobbies,
+  .current-learning,
+  .blog,
+  .learning-path,
+  .quick-links,
+  .highlights {
+    padding: 52px 0;
   }
 }

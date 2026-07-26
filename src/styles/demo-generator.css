@@ -444,4 +444,19 @@
   .demo-results {
     grid-template-columns: 1fr;
   }
+
+  .demo-generator-page .hero-actions {
+    width: 100%;
+    max-width: none;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .demo-generator-page .hero-actions .btn-primary,
+  .demo-generator-page .hero-actions .btn-ghost,
+  .demo-run-actions .btn-primary,
+  .demo-run-actions .btn-ghost {
+    width: 100%;
+    min-width: 0;
+  }
 }
