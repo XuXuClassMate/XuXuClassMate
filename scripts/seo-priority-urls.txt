@@ -1,0 +1,17 @@
+# Priority URLs for Google Search Console → URL Inspection → Request indexing
+# Resubmit sitemap: https://www.xuxuclassmate.com/sitemap.xml
+
+https://www.xuxuclassmate.com/en/work/testcase-generator
+https://www.xuxuclassmate.com/zh/work/testcase-generator
+https://www.xuxuclassmate.com/en/demo/ai-testcase-generator
+https://www.xuxuclassmate.com/zh/demo/ai-testcase-generator
+https://www.xuxuclassmate.com/en/learn
+https://www.xuxuclassmate.com/zh/learn
+https://www.xuxuclassmate.com/en/ai-testing
+https://www.xuxuclassmate.com/zh/ai-testing
+https://www.xuxuclassmate.com/en/blog/ai-testcase-generator-multimodal
+https://www.xuxuclassmate.com/zh/blog/ai-testcase-generator-multimodal
+https://www.xuxuclassmate.com/en/blog/ai-assisted-test-case-generation
+https://www.xuxuclassmate.com/zh/blog/ai-assisted-test-case-generation
+https://www.xuxuclassmate.com/en/playground
+https://www.xuxuclassmate.com/zh/playground
