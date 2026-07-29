@@ -7,7 +7,6 @@ const lastmod = new Date().toISOString().slice(0, 10);
 
 const staticPages = [
   "/",
-  "/en/",
   "/en/about",
   "/en/learn",
   "/en/work",
@@ -55,7 +54,6 @@ const priorityOverrides = {
 
 const weeklyPaths = new Set([
   "/",
-  "/en/",
   "/zh/",
   "/en/work/testcase-generator",
   "/zh/work/testcase-generator",
@@ -115,15 +113,14 @@ function defaultPriority(path) {
 
 function alternatePath(path) {
   if (path === "/") return "/zh/";
-  if (path === "/en/") return "/zh/";
-  if (path === "/zh/") return "/en/";
+  if (path === "/zh/") return "/";
   if (path.startsWith("/en/")) return `/zh/${path.slice(4)}`;
   if (path.startsWith("/zh/")) return `/en/${path.slice(4)}`;
   return null;
 }
 
 function xDefaultPath(path) {
-  if (path === "/" || path === "/en/" || path === "/zh/") return "/";
+  if (path === "/" || path === "/zh/") return "/";
   if (path.startsWith("/zh/")) return `/en/${path.slice(4)}`;
   return path;
 }
@@ -165,11 +162,13 @@ const body = pages
     const enHref =
       page.path === "/" || page.path.startsWith("/en/")
         ? page.path
-        : alt;
+        : page.path === "/zh/"
+          ? "/"
+          : alt;
     const zhHref =
-      page.path.startsWith("/zh/")
-        ? page.path
-        : alt;
+      page.path === "/" || page.path.startsWith("/en/")
+        ? alt
+        : page.path;
     const hreflang =
       enHref && zhHref
         ? `    <xhtml:link rel="alternate" hreflang="en" href="${ORIGIN}${enHref}" />

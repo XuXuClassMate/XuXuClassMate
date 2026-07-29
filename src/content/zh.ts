@@ -242,22 +242,22 @@ export const zh: LocaleCopy = {
       {
         title: "学习路径",
         description: "从测试手艺到可安装 AI 工具与产品系统",
-        href: "/zh/learn.html",
+        href: "/zh/learn",
       },
       {
         title: "项目展示",
         description: "安装路径：ClawHub · Docker · 在线产品",
-        href: "/zh/work.html",
+        href: "/zh/work",
       },
       {
         title: "工程笔记",
         description: "QA / SDET 实战笔记 — Playwright、AI Testing、Docker 与交付手记",
-        href: "/zh/blog.html",
+        href: "/zh/blog",
       },
       {
         title: "开源",
         description: "InnoNestX —— 个人品牌下的 AI / QA 工具与基础设施",
-        href: "/zh/open-source.html",
+        href: "/zh/open-source",
       },
     ],
     footerDesc: "QA Engineer · SDET · AI Testing — 可安装的质量工程",
@@ -333,7 +333,7 @@ export const zh: LocaleCopy = {
         title: "AI 测试用例生成器",
         description:
           "旗舰可安装 AI Testing 产品——从需求到可评审用例，带人工评审闭环。从案例页或在线 Demo 开始。",
-        href: "/zh/work/testcase-generator.html",
+        href: "/zh/work/testcase-generator",
         linkLabel: "打开旗舰案例",
       },
       {
@@ -738,7 +738,7 @@ export const zh: LocaleCopy = {
             "浏览器 Demo 使用精选示例输出——不是实时 LLM。本机上传 PDF / Word / 图片 / 视频请按官方文档用 Docker、npm 或本地源码运行。",
           primary: {
             label: "打开交互 Demo",
-            href: "/zh/demo/ai-testcase-generator.html",
+            href: "/zh/demo/ai-testcase-generator",
           },
           secondary: [
             {
@@ -768,7 +768,7 @@ export const zh: LocaleCopy = {
         proof: {
           github: "https://github.com/XuXuClassMate/testcase-generator",
           docker: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
-          demo: "/zh/demo/ai-testcase-generator.html",
+          demo: "/zh/demo/ai-testcase-generator",
           readme: "https://innonestx.github.io/testcase-generator/",
         },
         tradeoffs: [
@@ -780,7 +780,7 @@ export const zh: LocaleCopy = {
           {
             title: "交互 Demo",
             description: "浏览器走通：示例 PRD → 用例 → 人工评审——无需实时 LLM。",
-            href: "/zh/demo/ai-testcase-generator.html",
+            href: "/zh/demo/ai-testcase-generator",
             linkLabel: "打开 Demo",
           },
           {
@@ -798,7 +798,7 @@ export const zh: LocaleCopy = {
           {
             title: "工程笔记",
             description: "如何把多模态 AI 用例生成做成可安装产品。",
-            href: "/zh/blog/ai-testcase-generator-multimodal.html",
+            href: "/zh/blog/ai-testcase-generator-multimodal",
             linkLabel: "阅读笔记",
           },
         ],
@@ -811,7 +811,7 @@ export const zh: LocaleCopy = {
         links: [
           {
             label: "交互 Demo",
-            href: "/zh/demo/ai-testcase-generator.html",
+            href: "/zh/demo/ai-testcase-generator",
           },
           {
             label: "官方文档",
@@ -835,11 +835,11 @@ export const zh: LocaleCopy = {
           },
           {
             label: "工程笔记：多模态构建",
-            href: "/zh/blog/ai-testcase-generator-multimodal.html",
+            href: "/zh/blog/ai-testcase-generator-multimodal",
           },
           {
             label: "工程笔记：AI 辅助用例生成",
-            href: "/zh/blog/ai-assisted-test-case-generation.html",
+            href: "/zh/blog/ai-assisted-test-case-generation",
           },
         ],
         meta: {
@@ -1500,7 +1500,7 @@ export const zh: LocaleCopy = {
           channels: [
             {
               label: "Playwright Lab",
-              href: "/zh/playwright.html",
+              href: "/zh/playwright",
             },
           ],
         },

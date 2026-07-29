@@ -54,7 +54,7 @@ const SECTIONS: SectionDef[] = [
           title: "AI 测试用例生成器",
           note: "用多模态 AI 把测试左移——PRD / 图片 / 视频进入，可评审用例产出。",
         },
-        href: "/work/testcase-generator.html",
+        href: "/work/testcase-generator",
       },
       {
         en: {
@@ -76,7 +76,7 @@ const SECTIONS: SectionDef[] = [
           title: "测试库 Docker 套件",
           note: "达梦 / 瀚高 / 人大金仓 / TiDB 即用镜像——开发、测试、运维、DBA 都能用。",
         },
-        href: "/work/docker-suite.html",
+        href: "/work/docker-suite",
       },
     ],
   },
@@ -117,7 +117,7 @@ const SECTIONS: SectionDef[] = [
           title: "Playwright",
           note: "更深的 Fixtures、并行与 CI 模式。",
         },
-        href: "/playwright.html",
+        href: "/playwright",
       },
       {
         en: {
@@ -168,7 +168,7 @@ const SECTIONS: SectionDef[] = [
           title: "Cloud-native Test Infrastructure",
           note: "临时环境与可移植的 QA 栈。",
         },
-        href: "/infrastructure.html",
+        href: "/infrastructure",
       },
     ],
   },

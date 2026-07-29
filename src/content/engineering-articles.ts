@@ -72,25 +72,25 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
       en: [
         {
           label: "Flagship case study",
-          href: "/en/work/testcase-generator.html",
+          href: "/en/work/testcase-generator",
         },
-        { label: "AI Testing Lab", href: "/en/ai-testing.html" },
+        { label: "AI Testing Lab", href: "/en/ai-testing" },
       ],
       zh: [
-        { label: "旗舰案例", href: "/zh/work/testcase-generator.html" },
-        { label: "AI Testing Lab", href: "/zh/ai-testing.html" },
+        { label: "旗舰案例", href: "/zh/work/testcase-generator" },
+        { label: "AI Testing Lab", href: "/zh/ai-testing" },
       ],
     },
     ctas: {
       en: [
         {
           label: "Open flagship case study",
-          href: "/en/work/testcase-generator.html",
+          href: "/en/work/testcase-generator",
           primary: true,
         },
         {
           label: "Try interactive demo",
-          href: "/en/demo/ai-testcase-generator.html",
+          href: "/en/demo/ai-testcase-generator",
         },
         {
           label: "GitHub",
@@ -101,12 +101,12 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
       zh: [
         {
           label: "打开旗舰案例",
-          href: "/zh/work/testcase-generator.html",
+          href: "/zh/work/testcase-generator",
           primary: true,
         },
         {
           label: "试用交互 Demo",
-          href: "/zh/demo/ai-testcase-generator.html",
+          href: "/zh/demo/ai-testcase-generator",
         },
         {
           label: "GitHub",
@@ -210,30 +210,30 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
     },
     related: {
       en: [
-        { label: "Full-Stack E2E case", href: "/en/work/fullstack-e2e.html" },
-        { label: "Playwright Lab", href: "/en/playwright.html" },
+        { label: "Full-Stack E2E case", href: "/en/work/fullstack-e2e" },
+        { label: "Playwright Lab", href: "/en/playwright" },
       ],
       zh: [
-        { label: "全链路 E2E 案例", href: "/zh/work/fullstack-e2e.html" },
-        { label: "Playwright Lab", href: "/zh/playwright.html" },
+        { label: "全链路 E2E 案例", href: "/zh/work/fullstack-e2e" },
+        { label: "Playwright Lab", href: "/zh/playwright" },
       ],
     },
     ctas: {
       en: [
         {
           label: "Open E2E case study",
-          href: "/en/work/fullstack-e2e.html",
+          href: "/en/work/fullstack-e2e",
           primary: true,
         },
-        { label: "Playwright Lab", href: "/en/playwright.html" },
+        { label: "Playwright Lab", href: "/en/playwright" },
       ],
       zh: [
         {
           label: "打开 E2E 案例",
-          href: "/zh/work/fullstack-e2e.html",
+          href: "/zh/work/fullstack-e2e",
           primary: true,
         },
-        { label: "Playwright Lab", href: "/zh/playwright.html" },
+        { label: "Playwright Lab", href: "/zh/playwright" },
       ],
     },
     en: {
@@ -342,7 +342,7 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
         },
         {
           label: "Java API automation case",
-          href: "/en/work/automation-framework.html",
+          href: "/en/work/automation-framework",
         },
       ],
       zh: [
@@ -356,7 +356,7 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
         },
         {
           label: "Java 接口自动化案例",
-          href: "/zh/work/automation-framework.html",
+          href: "/zh/work/automation-framework",
         },
       ],
     },
@@ -498,18 +498,18 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
       en: [
         {
           label: "Dameng / Highgo Docker guide",
-          href: "/en/blog/domestic-db-docker-qa.html",
+          href: "/en/blog/domestic-db-docker-qa",
         },
-        { label: "Docker Suite case", href: "/en/work/docker-suite.html" },
-        { label: "Test Infrastructure", href: "/en/infrastructure.html" },
+        { label: "Docker Suite case", href: "/en/work/docker-suite" },
+        { label: "Test Infrastructure", href: "/en/infrastructure" },
       ],
       zh: [
         {
           label: "达梦 / 瀚高 Docker 指南",
-          href: "/zh/blog/domestic-db-docker-qa.html",
+          href: "/zh/blog/domestic-db-docker-qa",
         },
-        { label: "Docker 套件案例", href: "/zh/work/docker-suite.html" },
-        { label: "Test Infrastructure", href: "/zh/infrastructure.html" },
+        { label: "Docker 套件案例", href: "/zh/work/docker-suite" },
+        { label: "Test Infrastructure", href: "/zh/infrastructure" },
       ],
     },
     ctas: {
@@ -522,7 +522,7 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
         },
         {
           label: "Read Dameng / Highgo guide",
-          href: "/en/blog/domestic-db-docker-qa.html",
+          href: "/en/blog/domestic-db-docker-qa",
         },
       ],
       zh: [
@@ -534,7 +534,7 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
         },
         {
           label: "阅读达梦 / 瀚高指南",
-          href: "/zh/blog/domestic-db-docker-qa.html",
+          href: "/zh/blog/domestic-db-docker-qa",
         },
       ],
     },
@@ -628,47 +628,47 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
       en: [
         {
           label: "Flagship case study",
-          href: "/en/work/testcase-generator.html",
+          href: "/en/work/testcase-generator",
         },
         {
           label: "Multimodal generator article",
-          href: "/en/blog/ai-testcase-generator-multimodal.html",
+          href: "/en/blog/ai-testcase-generator-multimodal",
         },
-        { label: "AI Testing Lab", href: "/en/ai-testing.html" },
+        { label: "AI Testing Lab", href: "/en/ai-testing" },
       ],
       zh: [
         {
           label: "旗舰案例",
-          href: "/zh/work/testcase-generator.html",
+          href: "/zh/work/testcase-generator",
         },
         {
           label: "多模态生成器文章",
-          href: "/zh/blog/ai-testcase-generator-multimodal.html",
+          href: "/zh/blog/ai-testcase-generator-multimodal",
         },
-        { label: "AI Testing Lab", href: "/zh/ai-testing.html" },
+        { label: "AI Testing Lab", href: "/zh/ai-testing" },
       ],
     },
     ctas: {
       en: [
         {
           label: "Open flagship case study",
-          href: "/en/work/testcase-generator.html",
+          href: "/en/work/testcase-generator",
           primary: true,
         },
         {
           label: "Try interactive demo",
-          href: "/en/demo/ai-testcase-generator.html",
+          href: "/en/demo/ai-testcase-generator",
         },
       ],
       zh: [
         {
           label: "打开旗舰案例",
-          href: "/zh/work/testcase-generator.html",
+          href: "/zh/work/testcase-generator",
           primary: true,
         },
         {
           label: "试用交互 Demo",
-          href: "/zh/demo/ai-testcase-generator.html",
+          href: "/zh/demo/ai-testcase-generator",
         },
       ],
     },
@@ -738,17 +738,17 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
     },
     related: {
       en: [
-        { label: "AI Testing Lab", href: "/en/ai-testing.html" },
+        { label: "AI Testing Lab", href: "/en/ai-testing" },
         {
           label: "Shipping ClawHub skills",
-          href: "/en/blog/clawhub-skill-shipping.html",
+          href: "/en/blog/clawhub-skill-shipping",
         },
       ],
       zh: [
-        { label: "AI Testing Lab", href: "/zh/ai-testing.html" },
+        { label: "AI Testing Lab", href: "/zh/ai-testing" },
         {
           label: "发布 ClawHub 技能",
-          href: "/zh/blog/clawhub-skill-shipping.html",
+          href: "/zh/blog/clawhub-skill-shipping",
         },
       ],
     },
@@ -756,7 +756,7 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
       en: [
         {
           label: "Explore AI Testing Lab",
-          href: "/en/ai-testing.html",
+          href: "/en/ai-testing",
           primary: true,
         },
         {
@@ -768,7 +768,7 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
       zh: [
         {
           label: "探索 AI Testing Lab",
-          href: "/zh/ai-testing.html",
+          href: "/zh/ai-testing",
           primary: true,
         },
         {

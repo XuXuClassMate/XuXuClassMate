@@ -81,8 +81,8 @@ export function getPlaywrightLab(locale: Locale): LabPage {
         : "A full-chain automation framework covering frontend, API, database, Redis and message queue validation. Repository coming soon.",
       status: isZh ? "即将上线" : "Coming soon",
       href: isZh
-        ? "/zh/work/fullstack-e2e.html"
-        : "/en/work/fullstack-e2e.html",
+        ? "/zh/work/fullstack-e2e"
+        : "/en/work/fullstack-e2e",
       linkLabel: isZh ? "查看案例" : "View case study",
     },
   };
@@ -142,8 +142,8 @@ export function getInfrastructureLab(locale: Locale): LabPage {
           ? "可拉取的 QA 数据库与环境镜像。"
           : "Pullable QA database and environment images.",
         href: isZh
-          ? "/zh/work/docker-suite.html"
-          : "/en/work/docker-suite.html",
+          ? "/zh/work/docker-suite"
+          : "/en/work/docker-suite",
       },
       {
         title: "Docker Hub API Gateway",
@@ -151,8 +151,8 @@ export function getInfrastructureLab(locale: Locale): LabPage {
           ? "README 与工具使用的实时统计网关。"
           : "Live stats gateway used by READMEs and tools.",
         href: isZh
-          ? "/zh/work/docker-hub-api-gateway.html"
-          : "/en/work/docker-hub-api-gateway.html",
+          ? "/zh/work/docker-hub-api-gateway"
+          : "/en/work/docker-hub-api-gateway",
       },
       {
         title: "GlobalPulse",
@@ -160,8 +160,8 @@ export function getInfrastructureLab(locale: Locale): LabPage {
           ? "Workers + KV 上的自托管情报产品。"
           : "Self-hosted briefings on Workers + KV.",
         href: isZh
-          ? "/zh/work/globalpulse.html"
-          : "/en/work/globalpulse.html",
+          ? "/zh/work/globalpulse"
+          : "/en/work/globalpulse",
       },
     ],
   };

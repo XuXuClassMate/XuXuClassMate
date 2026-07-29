@@ -22,7 +22,7 @@ test("home renders and language switch works", async ({ page }) => {
   await expect(page.getByRole("link", { name: "View Projects" })).toBeVisible();
   await expect(
     page.getByRole("link", { name: "Try AI Test Case Generator" }),
-  ).toHaveAttribute("href", "/en/demo/ai-testcase-generator.html");
+  ).toHaveAttribute("href", "/en/demo/ai-testcase-generator");
   await expect(
     page.locator(".hero-actions .btn-text"),
   ).toContainText("GitHub");
@@ -40,7 +40,7 @@ test("home renders and language switch works", async ({ page }) => {
   await expect(page.getByText("Built with Astro")).toHaveCount(0);
   await expect(page.getByText("Cloudflare Pages")).toHaveCount(0);
   await page.getByRole("link", { name: "Switch to Chinese" }).click();
-  await expect(page).toHaveURL(/\/zh\/index\.html$/);
+  await expect(page).toHaveURL(/\/zh\/?$/);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "你好，我是旭旭。",
   );
@@ -56,7 +56,7 @@ test("wechat modal opens and closes", async ({ page }) => {
 });
 
 test("projects page shows categorized sections", async ({ page }) => {
-  await page.goto("/en/work.html");
+  await page.goto("/en/work");
   await expect(
     page.getByRole("heading", { name: "Quality Engineering" }),
   ).toBeVisible();
@@ -82,7 +82,7 @@ test("projects page shows categorized sections", async ({ page }) => {
 });
 
 test("unified case study template renders", async ({ page }) => {
-  await page.goto("/en/work/testcase-generator.html");
+  await page.goto("/en/work/testcase-generator");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "AI Test Case Generator",
   );
@@ -99,7 +99,7 @@ test("unified case study template renders", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Try it now" })).toBeVisible();
   await expect(
     page.getByRole("link", { name: "Open interactive demo" }),
-  ).toHaveAttribute("href", "/en/demo/ai-testcase-generator.html");
+  ).toHaveAttribute("href", "/en/demo/ai-testcase-generator");
   await expect(
     page.getByRole("link", { name: "Official docs" }).first(),
   ).toHaveAttribute("href", "https://innonestx.github.io/testcase-generator/");
@@ -114,7 +114,7 @@ test("unified case study template renders", async ({ page }) => {
   await expect(page.getByRole("heading", { name: /Links/i })).toBeVisible();
   await expect(
     page.getByRole("link", { name: "Engineering note: multimodal build" }),
-  ).toHaveAttribute("href", "/en/blog/ai-testcase-generator-multimodal.html");
+  ).toHaveAttribute("href", "/en/blog/ai-testcase-generator-multimodal");
   await expect(
     page.locator('[data-metric="docker:testcase-generator"]'),
   ).toBeVisible();
@@ -134,13 +134,13 @@ test("unified case study template renders", async ({ page }) => {
 });
 
 test("generator interactive demo runs sample flow", async ({ page }) => {
-  await page.goto("/en/demo/ai-testcase-generator.html");
+  await page.goto("/en/demo/ai-testcase-generator");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "AI Test Case Generator",
   );
   await expect(page.locator(".nav-links .language-switch")).toHaveAttribute(
     "href",
-    "/zh/demo/ai-testcase-generator.html",
+    "/zh/demo/ai-testcase-generator",
   );
   await expect(page.locator(".footer-desc")).not.toHaveText(
     /Shift testing left with multi-modal AI — a browser demo/,
@@ -168,7 +168,7 @@ test("generator interactive demo runs sample flow", async ({ page }) => {
 });
 
 test("non-flagship case study uses same template", async ({ page }) => {
-  await page.goto("/en/work/globalpulse.html");
+  await page.goto("/en/work/globalpulse");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("GlobalPulse");
   await expect(
     page.getByRole("heading", { name: "01. Project Overview" }),
@@ -182,7 +182,7 @@ test("non-flagship case study uses same template", async ({ page }) => {
 });
 
 test("engineering notes index and article render", async ({ page }) => {
-  await page.goto("/en/blog.html");
+  await page.goto("/en/blog");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "Engineering Notes",
   );
@@ -202,7 +202,7 @@ test("engineering notes index and article render", async ({ page }) => {
     .first()
     .click();
   await expect(page).toHaveURL(
-    /\/en\/blog\/ai-testcase-generator-multimodal\.html$/,
+    /\/en\/blog\/ai-testcase-generator-multimodal\/?$/,
   );
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
     "AI Test Case Generator",
@@ -212,13 +212,13 @@ test("engineering notes index and article render", async ({ page }) => {
     page.getByRole("link", { name: /^All Engineering Notes$/i }).first(),
   ).toBeVisible();
 
-  await page.goto("/en/blog/domestic-db-docker-qa.html");
+  await page.goto("/en/blog/domestic-db-docker-qa");
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Dameng");
   await expect(page.locator(".note-toc")).toBeVisible();
   await expect(page.locator(".note-stats").first()).toBeVisible();
   await expect(page.locator('[data-metric="docker:total-pulls"]')).toBeVisible();
 
-  await page.goto("/en/blog/clawhub-skill-shipping.html");
+  await page.goto("/en/blog/clawhub-skill-shipping");
   await expect(page.getByRole("heading", { level: 1 })).toContainText("ClawHub");
   await expect(
     page.locator('[data-metric="clawhub:total-downloads"]'),
@@ -233,7 +233,7 @@ test("engineering notes index and article render", async ({ page }) => {
 });
 
 test("now page shows building learning exploring", async ({ page }) => {
-  await page.goto("/en/now.html");
+  await page.goto("/en/now");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Now");
   await expect(page.getByRole("heading", { name: "Building" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Learning" })).toBeVisible();
@@ -250,7 +250,7 @@ test("now page shows building learning exploring", async ({ page }) => {
 });
 
 test("open source page introduces InnoNestX", async ({ page }) => {
-  await page.goto("/en/open-source.html");
+  await page.goto("/en/open-source");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "Open Source",
   );
@@ -275,7 +275,7 @@ test("open source page introduces InnoNestX", async ({ page }) => {
   ).toHaveAttribute("href", "https://github.com/InnoNestX");
   await expect(
     page.getByRole("link", { name: "Try on Playground" }),
-  ).toHaveAttribute("href", "/en/playground.html");
+  ).toHaveAttribute("href", "/en/playground");
   await expect(page.getByRole("button", { name: /Work/ })).toHaveClass(
     /active/,
   );
@@ -331,7 +331,7 @@ test("desktop nav keeps primary links and Work/More menus", async ({
 });
 
 test("playground page lists tryable experiences", async ({ page }) => {
-  await page.goto("/en/playground.html");
+  await page.goto("/en/playground");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Playground");
   await expect(
     page.getByRole("heading", { name: "AI Test Case Generator" }),
@@ -345,7 +345,7 @@ test("playground page lists tryable experiences", async ({ page }) => {
   ).toBeVisible();
   await expect(
     page.getByRole("link", { name: "Open interactive demo" }),
-  ).toHaveAttribute("href", "/en/demo/ai-testcase-generator.html");
+  ).toHaveAttribute("href", "/en/demo/ai-testcase-generator");
   await expect(page.locator("#try-docker-hub-api")).toBeVisible();
   await expect(page.locator("#navMoreMenu").locator("..")).toHaveClass(/is-open/);
   await expect(
@@ -397,7 +397,7 @@ test("contact offers list is visible", async ({ page }) => {
 });
 
 test("new case studies render with project OG covers", async ({ page }) => {
-  await page.goto("/en/work/globalpulse.html");
+  await page.goto("/en/work/globalpulse");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("GlobalPulse");
   const og = page.locator('meta[property="og:image"]');
   await expect(og).toHaveAttribute(
@@ -405,14 +405,14 @@ test("new case studies render with project OG covers", async ({ page }) => {
     "https://www.xuxuclassmate.com/images/cover-globalpulse.jpg",
   );
 
-  await page.goto("/zh/work/docker-hub-api-gateway.html");
+  await page.goto("/zh/work/docker-hub-api-gateway");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "Docker Hub API Gateway",
   );
 });
 
 test("docker suite proof shows top pull metrics", async ({ page }) => {
-  await page.goto("/zh/work/docker-suite.html");
+  await page.goto("/zh/work/docker-suite");
   await expect(page.locator('[data-metric="docker:dameng"]')).toBeVisible();
   await expect(page.locator('[data-metric="docker:highgo"]')).toBeVisible();
   await expect(page.locator('[data-metric="docker:kingbase"]')).toBeVisible();
@@ -452,19 +452,19 @@ test("home live metrics hydrate from api payload", async ({ page }) => {
 });
 
 test("life page shows four hobbies and blog in both locales", async ({ page }) => {
-  await page.goto("/en/life.html");
+  await page.goto("/en/life");
   const enHobbies = page.locator(".hobby-card h3");
   await expect(enHobbies).toHaveText(["Reading", "Gaming", "Music", "Sports"]);
   await expect(page.locator(".blog .section-title")).toHaveText("Life Notes");
 
-  await page.goto("/zh/life.html");
+  await page.goto("/zh/life");
   const zhHobbies = page.locator(".hobby-card h3");
   await expect(zhHobbies).toHaveText(["阅读", "游戏", "音乐", "运动"]);
   await expect(page.locator(".blog .section-title")).toHaveText("生活博客");
 });
 
 test("learn page covers management and Locust", async ({ page }) => {
-  await page.goto("/en/learn.html");
+  await page.goto("/en/learn");
   await expect(page.getByRole("heading", { name: "Test Management" })).toBeVisible();
   await expect(
     page.getByText("Locust and Go load frameworks + Locust WebUI"),
@@ -481,10 +481,10 @@ test("learn page covers management and Locust", async ({ page }) => {
   await expect(page.getByText("How I Solved It").first()).toBeVisible();
   await expect(
     page.getByRole("link", { name: "Open flagship case study" }),
-  ).toHaveAttribute("href", "/en/work/testcase-generator.html");
+  ).toHaveAttribute("href", "/en/work/testcase-generator");
   await expect(
     page.getByRole("link", { name: "Flagship case study", exact: true }),
-  ).toHaveAttribute("href", "/en/work/testcase-generator.html");
+  ).toHaveAttribute("href", "/en/work/testcase-generator");
   await expect(page.getByRole("heading", { name: "GlobalPulse" })).toBeVisible();
   await expect(
     page.getByRole("link", { name: "Open live site" }),
@@ -512,7 +512,7 @@ test("theme toggles between dark and light", async ({ page }) => {
 
 test("mobile nav toggles", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/en/learn.html");
+  await page.goto("/en/learn");
   const toggle = page.locator("#mobileNavToggle");
   const links = page.locator("#navLinks");
   await expect(links).not.toHaveClass(/show/);
@@ -534,7 +534,7 @@ test("H5 layout fits common phone widths without horizontal overflow", async ({
     { width: 414, height: 896 }, // iPhone 11 / XR
     { width: 430, height: 932 }, // iPhone 15 Pro Max
   ];
-  const paths = ["/", "/zh/", "/en/demo/ai-testcase-generator.html", "/en/work.html"];
+  const paths = ["/", "/zh/", "/en/demo/ai-testcase-generator", "/en/work"];
 
   for (const phone of phones) {
     await page.setViewportSize(phone);
@@ -580,6 +580,7 @@ test("build ships redirects and headers", async () => {
   expect(existsSync(headers)).toBe(true);
   const redirectBody = readFileSync(redirects, "utf8");
   expect(redirectBody).toContain("/en/work.html /en/work 301");
+  expect(redirectBody).toContain("/en/ / 301");
   expect(readFileSync(headers, "utf8")).toContain("Content-Security-Policy");
 });
 

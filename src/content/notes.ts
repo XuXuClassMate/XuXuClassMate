@@ -54,10 +54,10 @@ const NOTES: NoteDef[] = [
     },
     related: {
       en: [
-        { label: "Case study: Docker Suite", href: "/en/work/docker-suite.html" },
+        { label: "Case study: Docker Suite", href: "/en/work/docker-suite" },
         {
           label: "Case study: Docker Hub API Gateway",
-          href: "/en/work/docker-hub-api-gateway.html",
+          href: "/en/work/docker-hub-api-gateway",
         },
         {
           label: "Live user stats JSON",
@@ -65,10 +65,10 @@ const NOTES: NoteDef[] = [
         },
       ],
       zh: [
-        { label: "案例：Docker 测试库套件", href: "/zh/work/docker-suite.html" },
+        { label: "案例：Docker 测试库套件", href: "/zh/work/docker-suite" },
         {
           label: "案例：Docker Hub API Gateway",
-          href: "/zh/work/docker-hub-api-gateway.html",
+          href: "/zh/work/docker-hub-api-gateway",
         },
         {
           label: "实时用户统计 JSON",
@@ -86,7 +86,7 @@ const NOTES: NoteDef[] = [
         },
         {
           label: "Open Docker Suite case",
-          href: "/en/work/docker-suite.html",
+          href: "/en/work/docker-suite",
         },
       ],
       zh: [
@@ -98,7 +98,7 @@ const NOTES: NoteDef[] = [
         },
         {
           label: "查看 Docker 套件案例",
-          href: "/zh/work/docker-suite.html",
+          href: "/zh/work/docker-suite",
         },
       ],
     },
@@ -243,11 +243,11 @@ docker run -d --name qa-dameng \\
           links: [
             {
               label: "Docker Suite case study",
-              href: "/en/work/docker-suite.html",
+              href: "/en/work/docker-suite",
             },
             {
               label: "Docker Hub API Gateway case study",
-              href: "/en/work/docker-hub-api-gateway.html",
+              href: "/en/work/docker-hub-api-gateway",
             },
           ],
         },
@@ -413,11 +413,11 @@ docker run -d --name qa-dameng \\
           links: [
             {
               label: "Docker 套件案例",
-              href: "/zh/work/docker-suite.html",
+              href: "/zh/work/docker-suite",
             },
             {
               label: "Docker Hub API Gateway 案例",
-              href: "/zh/work/docker-hub-api-gateway.html",
+              href: "/zh/work/docker-hub-api-gateway",
             },
           ],
         },
@@ -456,11 +456,11 @@ docker run -d --name qa-dameng \\
       en: [
         {
           label: "Case study: AI Test Case Generator",
-          href: "/en/work/testcase-generator.html",
+          href: "/en/work/testcase-generator",
         },
         {
           label: "Case study: Trading Assistant Core",
-          href: "/en/work/trading-assistant.html",
+          href: "/en/work/trading-assistant",
         },
         {
           label: "ClawHub profile",
@@ -470,11 +470,11 @@ docker run -d --name qa-dameng \\
       zh: [
         {
           label: "案例：AI 用例生成器",
-          href: "/zh/work/testcase-generator.html",
+          href: "/zh/work/testcase-generator",
         },
         {
           label: "案例：Trading Assistant Core",
-          href: "/zh/work/trading-assistant.html",
+          href: "/zh/work/trading-assistant",
         },
         {
           label: "ClawHub 主页",
@@ -600,7 +600,7 @@ docker run -d --name qa-dameng \\
             },
             {
               label: "Case study",
-              href: "/en/work/testcase-generator.html",
+              href: "/en/work/testcase-generator",
             },
           ],
         },
@@ -624,7 +624,7 @@ docker run -d --name qa-dameng \\
             },
             {
               label: "Case study",
-              href: "/en/work/trading-assistant.html",
+              href: "/en/work/trading-assistant",
             },
           ],
         },
@@ -772,7 +772,7 @@ Live metric      ClawHub downloads       ClawHub downloads
             },
             {
               label: "案例页",
-              href: "/zh/work/testcase-generator.html",
+              href: "/zh/work/testcase-generator",
             },
           ],
         },
@@ -796,7 +796,7 @@ Live metric      ClawHub downloads       ClawHub downloads
             },
             {
               label: "案例页",
-              href: "/zh/work/trading-assistant.html",
+              href: "/zh/work/trading-assistant",
             },
           ],
         },

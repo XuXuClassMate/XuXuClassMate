@@ -269,22 +269,22 @@ export const en: LocaleCopy = {
       {
         title: "Learning Path",
         description: "From QA craft to installable AI tools and product systems",
-        href: "/en/learn.html",
+        href: "/en/learn",
       },
       {
         title: "Project Gallery",
         description: "Install paths: ClawHub · Docker · browser products",
-        href: "/en/work.html",
+        href: "/en/work",
       },
       {
         title: "Engineering Notes",
         description: "QA / SDET field guides — Playwright, AI Testing, Docker, and shipping notes",
-        href: "/en/blog.html",
+        href: "/en/blog",
       },
       {
         title: "Open Source",
         description: "InnoNestX — AI tools, QA tools, and infrastructure under the personal brand",
-        href: "/en/open-source.html",
+        href: "/en/open-source",
       },
     ],
     footerDesc: "QA Engineer · SDET · AI Testing — Installable Quality Engineering",
@@ -344,7 +344,7 @@ export const en: LocaleCopy = {
         title: "AI Test Case Generator",
         description:
           "Flagship installable AI testing product — from requirements to reviewable cases with a human review loop. Start with the case study or live demo.",
-        href: "/en/work/testcase-generator.html",
+        href: "/en/work/testcase-generator",
         linkLabel: "Open flagship case study",
       },
       {
@@ -750,7 +750,7 @@ export const en: LocaleCopy = {
             "The browser demo uses curated sample output — no live LLM. For PDF / Word / image / video upload on your machine, use Docker, npm, or local source per the official docs.",
           primary: {
             label: "Open interactive demo",
-            href: "/en/demo/ai-testcase-generator.html",
+            href: "/en/demo/ai-testcase-generator",
           },
           secondary: [
             {
@@ -780,7 +780,7 @@ export const en: LocaleCopy = {
         proof: {
           github: "https://github.com/XuXuClassMate/testcase-generator",
           docker: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
-          demo: "/en/demo/ai-testcase-generator.html",
+          demo: "/en/demo/ai-testcase-generator",
           readme: "https://innonestx.github.io/testcase-generator/",
         },
         tradeoffs: [
@@ -793,7 +793,7 @@ export const en: LocaleCopy = {
             title: "Interactive demo",
             description:
               "Browser walkthrough of sample PRD → cases → human review — no live LLM required.",
-            href: "/en/demo/ai-testcase-generator.html",
+            href: "/en/demo/ai-testcase-generator",
             linkLabel: "Open demo",
           },
           {
@@ -814,7 +814,7 @@ export const en: LocaleCopy = {
             title: "Engineering note",
             description:
               "How I built multimodal AI test case generation as an installable product.",
-            href: "/en/blog/ai-testcase-generator-multimodal.html",
+            href: "/en/blog/ai-testcase-generator-multimodal",
             linkLabel: "Read note",
           },
         ],
@@ -827,7 +827,7 @@ export const en: LocaleCopy = {
         links: [
           {
             label: "Interactive demo",
-            href: "/en/demo/ai-testcase-generator.html",
+            href: "/en/demo/ai-testcase-generator",
           },
           {
             label: "Official docs",
@@ -851,11 +851,11 @@ export const en: LocaleCopy = {
           },
           {
             label: "Engineering note: multimodal build",
-            href: "/en/blog/ai-testcase-generator-multimodal.html",
+            href: "/en/blog/ai-testcase-generator-multimodal",
           },
           {
             label: "Engineering note: AI-assisted generation",
-            href: "/en/blog/ai-assisted-test-case-generation.html",
+            href: "/en/blog/ai-assisted-test-case-generation",
           },
         ],
         meta: {
@@ -1525,7 +1525,7 @@ export const en: LocaleCopy = {
           channels: [
             {
               label: "Playwright Lab",
-              href: "/en/playwright.html",
+              href: "/en/playwright",
             },
           ],
         },

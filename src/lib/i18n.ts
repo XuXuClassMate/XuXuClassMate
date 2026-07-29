@@ -26,27 +26,50 @@ export function getNote(locale: Locale, slug: NoteSlug | string) {
   return getNoteFromContent(locale, slug);
 }
 
+/** Strip a trailing `.html` so public links match canonical (non-redirect) URLs. */
+function cleanPath(path: string): string {
+  if (
+    path === "/zh/index.html" ||
+    path === "/zh.html" ||
+    path === "/zh/" ||
+    path === "/zh"
+  ) {
+    return "/zh/";
+  }
+  if (
+    path === "/en/index.html" ||
+    path === "/en.html" ||
+    path === "/en/" ||
+    path === "/en" ||
+    path === "/index.html"
+  ) {
+    return "/";
+  }
+  if (path.endsWith(".html")) return path.slice(0, -5);
+  return path;
+}
+
 /** Public path for a page. Root `/` is the English home (same as legacy). */
 export function pageHref(locale: Locale, page: PageId): string {
   if (page === "home") {
-    return locale === "zh" ? "/zh/index.html" : "/";
+    return locale === "zh" ? "/zh/" : "/";
   }
-  return `/${locale}/${page}.html`;
+  // Legacy aliases → current canonical routes (avoid hop via .html redirects).
+  if (page === "notes") return `/${locale}/blog`;
+  if (page === "innonestx") return `/${locale}/open-source`;
+  return `/${locale}/${page}`;
 }
 
 export function caseHref(locale: Locale, slug: CaseSlug): string {
-  return `/${locale}/work/${slug}.html`;
+  return `/${locale}/work/${slug}`;
 }
 
 export function noteHref(locale: Locale, slug: NoteSlug): string {
-  return `/${locale}/blog/${slug}.html`;
+  return `/${locale}/blog/${slug}`;
 }
 
 export function languageHref(locale: Locale, page: PageId): string {
   const twin: Locale = locale === "en" ? "zh" : "en";
-  if (page === "home" && twin === "en") {
-    return "/";
-  }
   return pageHref(twin, page);
 }
 
@@ -55,21 +78,14 @@ export function languageHref(locale: Locale, page: PageId): string {
  * Prefers root `/` for the English home instead of `/en/` or `/en/index.html`.
  */
 export function alternateLocalePath(pathname: string): string {
-  const path =
+  const trimmed =
     pathname.length > 1 && pathname.endsWith("/")
       ? pathname.slice(0, -1)
       : pathname;
+  const path = cleanPath(trimmed);
 
-  if (path === "/" || path === "/index.html") {
-    return "/zh/index.html";
-  }
-
-  // Astro `build.format: "file"` emits `/en.html` / `/zh.html` before rename.
-  if (path === "/en.html" || path === "/en" || path === "/en/index.html") {
-    return "/zh/index.html";
-  }
-  if (path === "/zh.html" || path === "/zh" || path === "/zh/index.html") {
-    return "/";
+  if (path === "/" || path === "/zh/") {
+    return path === "/" ? "/zh/" : "/";
   }
 
   const match = path.match(/^\/(en|zh)(\/.*)$/);
@@ -78,16 +94,21 @@ export function alternateLocalePath(pathname: string): string {
   }
 
   const from = match[1] as Locale;
-  const rest = match[2];
+  const rest = cleanPath(match[2]);
   const to: Locale = from === "en" ? "zh" : "en";
-  return `/${to}${rest}`;
+  if (rest === "/" || rest === "" || rest === "/zh/") {
+    return to === "en" ? "/" : "/zh/";
+  }
+  return `/${to}${rest.startsWith("/") ? rest : `/${rest}`}`;
 }
 
-export function canonicalPath(locale: Locale, page: PageId, rootHome = false): string {
+export function canonicalPath(locale: Locale, page: PageId, _rootHome = false): string {
   if (page === "home") {
-    if (rootHome) return "/";
-    return locale === "zh" ? "/zh/" : "/en/";
+    // English home always canonicalizes to `/` (avoid `/` vs `/en/` duplicate).
+    return locale === "zh" ? "/zh/" : "/";
   }
+  if (page === "notes") return `/${locale}/blog`;
+  if (page === "innonestx") return `/${locale}/open-source`;
   return `/${locale}/${page}`;
 }
 
@@ -99,18 +120,20 @@ export function absoluteUrl(path: string): string {
 export function hreflangLinks(
   _locale: Locale,
   page: PageId,
-  rootHome = false,
+  _rootHome = false,
 ): { hreflang: string; href: string }[] {
-  if (page === "home" && rootHome) {
+  if (page === "home") {
     return [
-      { hreflang: "en", href: absoluteUrl("/en/") },
+      { hreflang: "en", href: absoluteUrl("/") },
       { hreflang: "zh", href: absoluteUrl("/zh/") },
       { hreflang: "x-default", href: absoluteUrl("/") },
     ];
   }
 
-  const enPath = page === "home" ? "/en/" : `/en/${page}`;
-  const zhPath = page === "home" ? "/zh/" : `/zh/${page}`;
+  const resolved =
+    page === "notes" ? "blog" : page === "innonestx" ? "open-source" : page;
+  const enPath = `/en/${resolved}`;
+  const zhPath = `/zh/${resolved}`;
 
   return [
     { hreflang: "en", href: absoluteUrl(enPath) },
