@@ -80,8 +80,8 @@ export function getAbout(locale: Locale): AboutCopy {
       },
     ],
     ctaWork: isZh ? "查看项目" : "View projects",
-    ctaWorkHref: isZh ? "/zh/work.html" : "/en/work.html",
+    ctaWorkHref: isZh ? "/zh/work" : "/en/work",
     ctaLab: isZh ? "AI Testing Lab" : "AI Testing Lab",
-    ctaLabHref: isZh ? "/zh/ai-testing.html" : "/en/ai-testing.html",
+    ctaLabHref: isZh ? "/zh/ai-testing" : "/en/ai-testing",
   };
 }

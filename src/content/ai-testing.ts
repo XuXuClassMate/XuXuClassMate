@@ -78,8 +78,8 @@ export function getAiTestingLab(locale: Locale): AiLabCopy {
         "Export / install",
       ],
       href: isZh
-        ? "/zh/work/testcase-generator.html"
-        : "/en/work/testcase-generator.html",
+        ? "/zh/work/testcase-generator"
+        : "/en/work/testcase-generator",
       linkLabel: isZh ? "查看工程案例" : "View engineering case study",
       proof: isZh
         ? ["GitHub 开源", "Docker 镜像", "ClawHub 可安装技能", "案例页含实时安装量"]

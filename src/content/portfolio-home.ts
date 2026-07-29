@@ -46,14 +46,14 @@ const featuredEn = [
     pitch: "From requirements to reviewable test cases.",
     description:
       "PDF / Word / TXT / Image / Video → AI → Test Cases → Human Review → Excel / Markdown / XMind. Runs via Docker, local source, npm, or OpenClaw plugin.",
-    href: "/en/work/testcase-generator.html",
+    href: "/en/work/testcase-generator",
     tags: ["Flagship", "AI Testing", "Live Demo"],
   },
   {
     title: "Test DB Docker Suite",
     description:
       "Docker database images for developers, QA, ops, and DBAs — Dameng, Highgo, Kingbase, TiDB and more.",
-    href: "/en/work/docker-suite.html",
+    href: "/en/work/docker-suite",
     tags: ["Docker Testing", "Test Infrastructure", "DevOps"],
   },
 ];
@@ -64,14 +64,14 @@ const featuredZh = [
     pitch: "从需求到可评审的测试用例。",
     description:
       "PDF / Word / TXT / 图片 / 视频 → AI → 用例 → 人工评审 → Excel / Markdown / XMind。支持 Docker、本地源码、npm 与 OpenClaw 插件。",
-    href: "/zh/work/testcase-generator.html",
+    href: "/zh/work/testcase-generator",
     tags: ["旗舰", "AI Testing", "在线 Demo"],
   },
   {
     title: "测试库 Docker 套件",
     description:
       "即用数据库镜像——达梦、瀚高、人大金仓、TiDB 等，开发 / 测试 / 运维 / DBA 都能用。",
-    href: "/zh/work/docker-suite.html",
+    href: "/zh/work/docker-suite",
     tags: ["Docker Testing", "Test Infrastructure", "DevOps"],
   },
 ];
@@ -89,40 +89,40 @@ export function getPortfolioHome(locale: Locale): PortfolioHome {
     ctaWork: isZh ? "查看项目" : "View Projects",
     ctaDemo: isZh ? "试用 AI 用例生成器" : "Try AI Test Case Generator",
     ctaDemoHref: isZh
-      ? "/zh/demo/ai-testcase-generator.html"
-      : "/en/demo/ai-testcase-generator.html",
+      ? "/zh/demo/ai-testcase-generator"
+      : "/en/demo/ai-testcase-generator",
     ctaGithub: "GitHub",
     whatIDoTitle: isZh ? "能力方向" : "What I Do",
     whatIDo: [
       {
         title: "Test Automation",
-        href: isZh ? "/zh/playwright.html" : "/en/playwright.html",
+        href: isZh ? "/zh/playwright" : "/en/playwright",
       },
       {
         title: "API Testing",
         href: isZh
-          ? "/zh/work/automation-framework.html"
-          : "/en/work/automation-framework.html",
+          ? "/zh/work/automation-framework"
+          : "/en/work/automation-framework",
       },
       {
         title: "Performance Testing",
         href: isZh
-          ? "/zh/blog/locust-api-performance-testing.html"
-          : "/en/blog/locust-api-performance-testing.html",
+          ? "/zh/blog/locust-api-performance-testing"
+          : "/en/blog/locust-api-performance-testing",
       },
       {
         title: "AI Testing",
-        href: isZh ? "/zh/ai-testing.html" : "/en/ai-testing.html",
+        href: isZh ? "/zh/ai-testing" : "/en/ai-testing",
       },
       {
         title: "E2E Testing",
         href: isZh
-          ? "/zh/work/fullstack-e2e.html"
-          : "/en/work/fullstack-e2e.html",
+          ? "/zh/work/fullstack-e2e"
+          : "/en/work/fullstack-e2e",
       },
       {
         title: "Test Infrastructure",
-        href: isZh ? "/zh/infrastructure.html" : "/en/infrastructure.html",
+        href: isZh ? "/zh/infrastructure" : "/en/infrastructure",
       },
     ],
     achievementsTitle: isZh ? "关键成果" : "Key Achievements",
@@ -231,8 +231,8 @@ export function getLatestArticles(locale: Locale) {
     description: note.description,
     href:
       locale === "zh"
-        ? `/zh/blog/${note.slug}.html`
-        : `/en/blog/${note.slug}.html`,
+        ? `/zh/blog/${note.slug}`
+        : `/en/blog/${note.slug}`,
     tags: note.tags,
   }));
 }

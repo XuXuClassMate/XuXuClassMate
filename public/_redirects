@@ -1,6 +1,8 @@
 /index.html / 301
-/en /en/ 301
-/en/index.html /en/ 301
+# English home is `/` — force-collapse /en aliases (static en/index.html would otherwise win)
+/en / 301!
+/en/ / 301!
+/en/index.html / 301!
 /zh /zh/ 301
 /zh/index.html /zh/ 301
 /life.html /en/life 301
@@ -79,6 +81,6 @@
 /zh/work/docker-hub-api-gateway.html /zh/work/docker-hub-api-gateway 301
 /zh/work/docker-suite.html /zh/work/docker-suite 301
 /zh/work/automation-framework.html /zh/work/automation-framework 301
-/en.html /en/ 301
+/en.html / 301
 /zh.html /zh/ 301
 /favicon.ico /images/logo.svg 200

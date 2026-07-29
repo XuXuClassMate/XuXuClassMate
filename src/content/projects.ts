@@ -265,7 +265,7 @@ function toCard(locale: Locale, id: ProjectId): Card {
     image: project.image,
     imageAlt: copy.imageAlt,
     slug: project.id,
-    caseHref: `/${locale}/work/${project.id}.html`,
+    caseHref: `/${locale}/work/${project.id}`,
     caseLabel: copy.caseLabel,
   };
 }

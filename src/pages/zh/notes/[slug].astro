@@ -5,5 +5,5 @@ export function getStaticPaths() {
   return NOTE_SLUGS.map((slug) => ({ params: { slug } }));
 }
 
-return Astro.redirect(`/zh/blog/${Astro.params.slug}.html`, 301);
+return Astro.redirect(`/zh/blog/${Astro.params.slug}`, 301);
 ---

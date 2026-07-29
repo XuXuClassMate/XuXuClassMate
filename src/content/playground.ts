@@ -44,8 +44,8 @@ const EXPERIENCES: ExperienceDef[] = [
     title: "AI Test Case Generator",
     githubHref: "https://github.com/InnoNestX/testcase-generator",
     ctaHref: {
-      en: "/en/demo/ai-testcase-generator.html",
-      zh: "/zh/demo/ai-testcase-generator.html",
+      en: "/en/demo/ai-testcase-generator",
+      zh: "/zh/demo/ai-testcase-generator",
     },
     description: {
       en: "Shift testing left with multi-modal AI. Feed a sample PRD in the browser — curated demo output, not a live LLM.",

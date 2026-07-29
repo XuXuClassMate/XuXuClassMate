@@ -16,39 +16,39 @@ import {
 describe("i18n paths", () => {
   it("maps home and section routes", () => {
     expect(pageHref("en", "home")).toBe("/");
-    expect(pageHref("zh", "home")).toBe("/zh/index.html");
-    expect(pageHref("en", "learn")).toBe("/en/learn.html");
-    expect(pageHref("zh", "work")).toBe("/zh/work.html");
-    expect(pageHref("en", "notes")).toBe("/en/notes.html");
-    expect(pageHref("en", "blog")).toBe("/en/blog.html");
-    expect(pageHref("en", "about")).toBe("/en/about.html");
-    expect(pageHref("en", "innonestx")).toBe("/en/innonestx.html");
-    expect(pageHref("en", "open-source")).toBe("/en/open-source.html");
-    expect(pageHref("en", "playground")).toBe("/en/playground.html");
-    expect(pageHref("en", "now")).toBe("/en/now.html");
+    expect(pageHref("zh", "home")).toBe("/zh/");
+    expect(pageHref("en", "learn")).toBe("/en/learn");
+    expect(pageHref("zh", "work")).toBe("/zh/work");
+    expect(pageHref("en", "notes")).toBe("/en/blog");
+    expect(pageHref("en", "blog")).toBe("/en/blog");
+    expect(pageHref("en", "about")).toBe("/en/about");
+    expect(pageHref("en", "innonestx")).toBe("/en/open-source");
+    expect(pageHref("en", "open-source")).toBe("/en/open-source");
+    expect(pageHref("en", "playground")).toBe("/en/playground");
+    expect(pageHref("en", "now")).toBe("/en/now");
   });
 
   it("maps case study routes", () => {
     expect(caseHref("en", "testcase-generator")).toBe(
-      "/en/work/testcase-generator.html",
+      "/en/work/testcase-generator",
     );
-    expect(caseHref("zh", "docker-suite")).toBe("/zh/work/docker-suite.html");
+    expect(caseHref("zh", "docker-suite")).toBe("/zh/work/docker-suite");
   });
 
   it("maps note routes", () => {
     expect(noteHref("en", "domestic-db-docker-qa")).toBe(
-      "/en/blog/domestic-db-docker-qa.html",
+      "/en/blog/domestic-db-docker-qa",
     );
     expect(noteHref("zh", "clawhub-skill-shipping")).toBe(
-      "/zh/blog/clawhub-skill-shipping.html",
+      "/zh/blog/clawhub-skill-shipping",
     );
   });
 
   it("switches language the same way as the legacy site", () => {
-    expect(languageHref("en", "home")).toBe("/zh/index.html");
+    expect(languageHref("en", "home")).toBe("/zh/");
     expect(languageHref("zh", "home")).toBe("/");
-    expect(languageHref("en", "life")).toBe("/zh/life.html");
-    expect(languageHref("zh", "learn")).toBe("/en/learn.html");
+    expect(languageHref("en", "life")).toBe("/zh/life");
+    expect(languageHref("zh", "learn")).toBe("/en/learn");
   });
 
   it("keeps nested paths when swapping locale from the URL", () => {
@@ -56,25 +56,25 @@ describe("i18n paths", () => {
       "/zh/demo/ai-testcase-generator",
     );
     expect(alternateLocalePath("/zh/demo/ai-testcase-generator.html")).toBe(
-      "/en/demo/ai-testcase-generator.html",
+      "/en/demo/ai-testcase-generator",
     );
     expect(alternateLocalePath("/en/work/testcase-generator.html")).toBe(
-      "/zh/work/testcase-generator.html",
+      "/zh/work/testcase-generator",
     );
     expect(alternateLocalePath("/zh/blog/clawhub-skill-shipping")).toBe(
       "/en/blog/clawhub-skill-shipping",
     );
-    expect(alternateLocalePath("/")).toBe("/zh/index.html");
-    expect(alternateLocalePath("/zh/index.html")).toBe("/");
+    expect(alternateLocalePath("/")).toBe("/zh/");
+    expect(alternateLocalePath("/zh/")).toBe("/");
     expect(alternateLocalePath("/zh.html")).toBe("/");
-    expect(alternateLocalePath("/en.html")).toBe("/zh/index.html");
-    expect(alternateLocalePath("/en/")).toBe("/zh/index.html");
-    expect(alternateLocalePath("/en/learn.html")).toBe("/zh/learn.html");
+    expect(alternateLocalePath("/en.html")).toBe("/zh/");
+    expect(alternateLocalePath("/en/")).toBe("/zh/");
+    expect(alternateLocalePath("/en/learn.html")).toBe("/zh/learn");
   });
 
   it("builds canonicals for root and locale homes", () => {
     expect(canonicalPath("en", "home", true)).toBe("/");
-    expect(canonicalPath("en", "home", false)).toBe("/en/");
+    expect(canonicalPath("en", "home", false)).toBe("/");
     expect(canonicalPath("zh", "home")).toBe("/zh/");
     expect(canonicalPath("en", "learn")).toBe("/en/learn");
     expect(absoluteUrl("/en/life")).toBe(
@@ -85,7 +85,7 @@ describe("i18n paths", () => {
   it("builds hreflang alternates", () => {
     const root = hreflangLinks("en", "home", true);
     expect(root).toEqual([
-      { hreflang: "en", href: "https://www.xuxuclassmate.com/en/" },
+      { hreflang: "en", href: "https://www.xuxuclassmate.com/" },
       { hreflang: "zh", href: "https://www.xuxuclassmate.com/zh/" },
       { hreflang: "x-default", href: "https://www.xuxuclassmate.com/" },
     ]);
