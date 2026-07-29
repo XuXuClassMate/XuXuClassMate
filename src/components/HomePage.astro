@@ -12,10 +12,9 @@ import { getMetrics, resolveMetric } from "../lib/metrics";
 
 type Props = {
   locale: Locale;
-  rootHome?: boolean;
 };
 
-const { locale, rootHome = false } = Astro.props;
+const { locale } = Astro.props;
 const copy = getCopy(locale);
 const home = getPortfolioHome(locale);
 const articles = getLatestArticles(locale);
@@ -27,7 +26,7 @@ const metrics = await getMetrics();
 const highlights = copy.home.highlights;
 ---
 
-<BaseLayout locale={locale} page="home" rootHome={rootHome}>
+<BaseLayout locale={locale} page="home">
   <main id="main-content">
     <section class="hero hero--home hero--signature">
       <div class="hero-blob" aria-hidden="true"></div>

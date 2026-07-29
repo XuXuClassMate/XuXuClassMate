@@ -102,7 +102,7 @@ export function alternateLocalePath(pathname: string): string {
   return `/${to}${rest.startsWith("/") ? rest : `/${rest}`}`;
 }
 
-export function canonicalPath(locale: Locale, page: PageId, _rootHome = false): string {
+export function canonicalPath(locale: Locale, page: PageId): string {
   if (page === "home") {
     // English home always canonicalizes to `/` (avoid `/` vs `/en/` duplicate).
     return locale === "zh" ? "/zh/" : "/";
@@ -118,9 +118,7 @@ export function absoluteUrl(path: string): string {
 }
 
 export function hreflangLinks(
-  _locale: Locale,
   page: PageId,
-  _rootHome = false,
 ): { hreflang: string; href: string }[] {
   if (page === "home") {
     return [
@@ -145,7 +143,6 @@ export function hreflangLinks(
 export function jsonLdGraph(
   locale: Locale,
   page: PageId,
-  rootHome = false,
   caseSlug?: CaseSlug,
   noteSlug?: NoteSlug,
 ) {
@@ -162,7 +159,7 @@ export function jsonLdGraph(
       ? `/${locale}/work/${caseSlug}`
       : noteSlug
         ? `/${locale}/blog/${noteSlug}`
-        : canonicalPath(locale, page, rootHome),
+        : canonicalPath(locale, page),
   );
   const isZh = locale === "zh";
 

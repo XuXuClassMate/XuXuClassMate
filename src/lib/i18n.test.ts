@@ -73,8 +73,7 @@ describe("i18n paths", () => {
   });
 
   it("builds canonicals for root and locale homes", () => {
-    expect(canonicalPath("en", "home", true)).toBe("/");
-    expect(canonicalPath("en", "home", false)).toBe("/");
+    expect(canonicalPath("en", "home")).toBe("/");
     expect(canonicalPath("zh", "home")).toBe("/zh/");
     expect(canonicalPath("en", "learn")).toBe("/en/learn");
     expect(absoluteUrl("/en/life")).toBe(
@@ -83,21 +82,21 @@ describe("i18n paths", () => {
   });
 
   it("builds hreflang alternates", () => {
-    const root = hreflangLinks("en", "home", true);
+    const root = hreflangLinks("home");
     expect(root).toEqual([
       { hreflang: "en", href: "https://www.xuxuclassmate.com/" },
       { hreflang: "zh", href: "https://www.xuxuclassmate.com/zh/" },
       { hreflang: "x-default", href: "https://www.xuxuclassmate.com/" },
     ]);
 
-    const work = hreflangLinks("zh", "work");
+    const work = hreflangLinks("work");
     expect(work.find((l) => l.hreflang === "en")?.href).toBe(
       "https://www.xuxuclassmate.com/en/work",
     );
   });
 
   it("builds JSON-LD graph with person and webpage", () => {
-    const graph = jsonLdGraph("en", "home", true);
+    const graph = jsonLdGraph("en", "home");
     expect(graph["@context"]).toBe("https://schema.org");
     expect(graph["@graph"].length).toBeGreaterThanOrEqual(3);
     expect(graph["@graph"][0]).toMatchObject({ "@type": "Person" });
@@ -108,7 +107,7 @@ describe("i18n paths", () => {
   });
 
   it("adds SoftwareSourceCode for case studies with repos", () => {
-    const graph = jsonLdGraph("en", "work", false, "automation-framework");
+    const graph = jsonLdGraph("en", "work", "automation-framework");
     expect(
       graph["@graph"].some((node) => node["@type"] === "SoftwareSourceCode"),
     ).toBe(true);
