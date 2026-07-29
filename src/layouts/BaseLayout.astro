@@ -19,8 +19,6 @@ import "../styles/global.css";
 type Props = {
   locale: Locale;
   page: PageId;
-  /** Root `/` English home (legacy URL). */
-  rootHome?: boolean;
   noindex?: boolean;
   caseSlug?: CaseSlug;
   noteSlug?: NoteSlug;
@@ -37,7 +35,6 @@ type Props = {
 const {
   locale,
   page,
-  rootHome = false,
   noindex = false,
   caseSlug,
   noteSlug,
@@ -53,7 +50,7 @@ const canonical = absoluteUrl(
     ? `/${locale}/work/${caseSlug}`
     : noteSlug
       ? `/${locale}/blog/${noteSlug}`
-      : canonicalPath(locale, page, rootHome),
+      : canonicalPath(locale, page),
 );
 const alternates = caseSlug
   ? [
@@ -67,7 +64,7 @@ const alternates = caseSlug
         { hreflang: "zh", href: absoluteUrl(`/zh/blog/${noteSlug}`) },
         { hreflang: "x-default", href: absoluteUrl(`/en/blog/${noteSlug}`) },
       ]
-    : hreflangLinks(locale, page, rootHome);
+    : hreflangLinks(page);
 const homeHref = locale === "zh" ? pageHref("zh", "home") : "/";
 const active = page === "home" ? undefined : page;
 const workActive =
@@ -82,7 +79,7 @@ const ogTitle = meta.ogTitle ?? meta.title;
 const ogImage = absoluteUrl(ogImagePath ?? "/images/og-default.jpg");
 const structuredData = noindex
   ? null
-  : jsonLdGraph(locale, page, rootHome, caseSlug, noteSlug);
+  : jsonLdGraph(locale, page, caseSlug, noteSlug);
 const langSwitchHref = alternateLocalePath(Astro.url.pathname);
 ---
 
