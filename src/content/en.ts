@@ -351,7 +351,7 @@ export const en: LocaleCopy = {
         title: "Trading Assistant Core",
         description:
           "OpenClaw / ClawHub skill for technical analysis, signals, position sizing, and risk checks — also available via Docker and pip.",
-        href: "https://github.com/XuXuClassMate/trading-assistant",
+        href: "https://github.com/InnoNestX/trading-assistant",
         linkLabel: "View on GitHub",
       },
       {
@@ -522,7 +522,7 @@ export const en: LocaleCopy = {
           { label: "ClawHub", href: "https://clawhub.ai/xuxuclassmate" },
           {
             label: "Testcase Generator",
-            href: "https://github.com/XuXuClassMate/testcase-generator",
+            href: "https://github.com/InnoNestX/testcase-generator",
           },
         ],
       },
@@ -771,14 +771,14 @@ export const en: LocaleCopy = {
             },
             {
               label: "GitHub",
-              href: "https://github.com/XuXuClassMate/testcase-generator",
+              href: "https://github.com/InnoNestX/testcase-generator",
             },
           ],
           command:
             "docker pull xuxuclassmate/testcase-generator:latest\n# configure .env (AI_PROVIDER + API key), then:\ndocker run -d --name testcase-generator -p 3456:3456 \\\n  -e AI_PROVIDER=anthropic -e ANTHROPIC_API_KEY=sk-ant-... \\\n  -e LANGUAGE=en -e ENABLE_REVIEW=true -e REVIEW_THRESHOLD=90 \\\n  xuxuclassmate/testcase-generator:latest\n# open http://localhost:3456\n\n# or npm:\n# npm install -g @classmatexuxu/testcase-generator\n# testcase-generator --standalone",
         },
         proof: {
-          github: "https://github.com/XuXuClassMate/testcase-generator",
+          github: "https://github.com/InnoNestX/testcase-generator",
           docker: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
           demo: "/en/demo/ai-testcase-generator",
           readme: "https://innonestx.github.io/testcase-generator/",
@@ -835,7 +835,7 @@ export const en: LocaleCopy = {
           },
           {
             label: "GitHub",
-            href: "https://github.com/XuXuClassMate/testcase-generator",
+            href: "https://github.com/InnoNestX/testcase-generator",
           },
           {
             label: "Docker Hub",
@@ -934,7 +934,7 @@ export const en: LocaleCopy = {
             },
             {
               label: "GitHub",
-              href: "https://github.com/XuXuClassMate/trading-assistant",
+              href: "https://github.com/InnoNestX/trading-assistant",
             },
             {
               label: "Docker Hub",
@@ -943,7 +943,7 @@ export const en: LocaleCopy = {
           ],
         },
         proof: {
-          github: "https://github.com/XuXuClassMate/trading-assistant",
+          github: "https://github.com/InnoNestX/trading-assistant",
           demo: "https://clawhub.ai/xuxuclassmate/trading-assistant-core",
           docker: "https://hub.docker.com/r/xuxuclassmate/trading-assistant",
         },
@@ -962,7 +962,7 @@ export const en: LocaleCopy = {
           {
             title: "GitHub + Docker",
             description: "Human-facing installs alongside the agent skill.",
-            href: "https://github.com/XuXuClassMate/trading-assistant",
+            href: "https://github.com/InnoNestX/trading-assistant",
             linkLabel: "GitHub",
           },
         ],
@@ -982,7 +982,7 @@ export const en: LocaleCopy = {
         links: [
           {
             label: "GitHub",
-            href: "https://github.com/XuXuClassMate/trading-assistant",
+            href: "https://github.com/InnoNestX/trading-assistant",
           },
           {
             label: "ClawHub",

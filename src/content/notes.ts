@@ -592,7 +592,7 @@ docker run -d --name qa-dameng \\
           links: [
             {
               label: "GitHub repository",
-              href: "https://github.com/XuXuClassMate/testcase-generator",
+              href: "https://github.com/InnoNestX/testcase-generator",
             },
             {
               label: "Docker image",
@@ -620,7 +620,7 @@ docker run -d --name qa-dameng \\
           links: [
             {
               label: "GitHub repository",
-              href: "https://github.com/XuXuClassMate/trading-assistant",
+              href: "https://github.com/InnoNestX/trading-assistant",
             },
             {
               label: "Case study",
@@ -764,7 +764,7 @@ Live metric      ClawHub downloads       ClawHub downloads
           links: [
             {
               label: "GitHub 仓库",
-              href: "https://github.com/XuXuClassMate/testcase-generator",
+              href: "https://github.com/InnoNestX/testcase-generator",
             },
             {
               label: "Docker 镜像",
@@ -792,7 +792,7 @@ Live metric      ClawHub downloads       ClawHub downloads
           links: [
             {
               label: "GitHub 仓库",
-              href: "https://github.com/XuXuClassMate/trading-assistant",
+              href: "https://github.com/InnoNestX/trading-assistant",
             },
             {
               label: "案例页",

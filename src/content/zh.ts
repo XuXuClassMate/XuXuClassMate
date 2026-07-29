@@ -340,7 +340,7 @@ export const zh: LocaleCopy = {
         title: "Trading Assistant Core",
         description:
           "OpenClaw / ClawHub 技能：技术分析、信号、仓位与风控；也支持 Docker 与 pip 安装。",
-        href: "https://github.com/XuXuClassMate/trading-assistant",
+        href: "https://github.com/InnoNestX/trading-assistant",
         linkLabel: "查看 GitHub",
       },
       {
@@ -510,7 +510,7 @@ export const zh: LocaleCopy = {
           { label: "ClawHub", href: "https://clawhub.ai/xuxuclassmate" },
           {
             label: "用例生成器",
-            href: "https://github.com/XuXuClassMate/testcase-generator",
+            href: "https://github.com/InnoNestX/testcase-generator",
           },
         ],
       },
@@ -759,14 +759,14 @@ export const zh: LocaleCopy = {
             },
             {
               label: "GitHub",
-              href: "https://github.com/XuXuClassMate/testcase-generator",
+              href: "https://github.com/InnoNestX/testcase-generator",
             },
           ],
           command:
             "docker pull xuxuclassmate/testcase-generator:latest\n# 配置 .env（AI_PROVIDER + API Key），然后：\ndocker run -d --name testcase-generator -p 3456:3456 \\\n  -e AI_PROVIDER=anthropic -e ANTHROPIC_API_KEY=sk-ant-... \\\n  -e LANGUAGE=zh -e ENABLE_REVIEW=true -e REVIEW_THRESHOLD=90 \\\n  xuxuclassmate/testcase-generator:latest\n# 打开 http://localhost:3456\n\n# 或 npm：\n# npm install -g @classmatexuxu/testcase-generator\n# testcase-generator --standalone",
         },
         proof: {
-          github: "https://github.com/XuXuClassMate/testcase-generator",
+          github: "https://github.com/InnoNestX/testcase-generator",
           docker: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
           demo: "/zh/demo/ai-testcase-generator",
           readme: "https://innonestx.github.io/testcase-generator/",
@@ -819,7 +819,7 @@ export const zh: LocaleCopy = {
           },
           {
             label: "GitHub",
-            href: "https://github.com/XuXuClassMate/testcase-generator",
+            href: "https://github.com/InnoNestX/testcase-generator",
           },
           {
             label: "Docker Hub",
@@ -915,7 +915,7 @@ export const zh: LocaleCopy = {
             },
             {
               label: "GitHub",
-              href: "https://github.com/XuXuClassMate/trading-assistant",
+              href: "https://github.com/InnoNestX/trading-assistant",
             },
             {
               label: "Docker Hub",
@@ -924,7 +924,7 @@ export const zh: LocaleCopy = {
           ],
         },
         proof: {
-          github: "https://github.com/XuXuClassMate/trading-assistant",
+          github: "https://github.com/InnoNestX/trading-assistant",
           demo: "https://clawhub.ai/xuxuclassmate/trading-assistant-core",
           docker: "https://hub.docker.com/r/xuxuclassmate/trading-assistant",
         },
@@ -943,7 +943,7 @@ export const zh: LocaleCopy = {
           {
             title: "GitHub + Docker",
             description: "面向人的安装路径与 Agent 技能并行。",
-            href: "https://github.com/XuXuClassMate/trading-assistant",
+            href: "https://github.com/InnoNestX/trading-assistant",
             linkLabel: "GitHub",
           },
         ],
@@ -963,7 +963,7 @@ export const zh: LocaleCopy = {
         links: [
           {
             label: "GitHub",
-            href: "https://github.com/XuXuClassMate/trading-assistant",
+            href: "https://github.com/InnoNestX/trading-assistant",
           },
           {
             label: "ClawHub",

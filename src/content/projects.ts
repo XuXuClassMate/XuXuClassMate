@@ -67,7 +67,7 @@ export const PROJECTS: Record<ProjectId, ProjectDef> = {
   "testcase-generator": {
     id: "testcase-generator",
     group: "quality",
-    href: "https://github.com/XuXuClassMate/testcase-generator",
+    href: "https://github.com/InnoNestX/testcase-generator",
     ctaHref: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
     image: "/images/cover-testcase.jpg",
     en: {
@@ -94,7 +94,7 @@ export const PROJECTS: Record<ProjectId, ProjectDef> = {
   "trading-assistant": {
     id: "trading-assistant",
     group: "agent",
-    href: "https://github.com/XuXuClassMate/trading-assistant",
+    href: "https://github.com/InnoNestX/trading-assistant",
     ctaHref: "https://clawhub.ai/xuxuclassmate/trading-assistant-core",
     image: "/images/cover-trading.jpg",
     en: {

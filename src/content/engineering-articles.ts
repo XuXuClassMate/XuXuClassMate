@@ -94,7 +94,7 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
         },
         {
           label: "GitHub",
-          href: "https://github.com/XuXuClassMate/testcase-generator",
+          href: "https://github.com/InnoNestX/testcase-generator",
           external: true,
         },
       ],
@@ -110,7 +110,7 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
         },
         {
           label: "GitHub",
-          href: "https://github.com/XuXuClassMate/testcase-generator",
+          href: "https://github.com/InnoNestX/testcase-generator",
           external: true,
         },
       ],
