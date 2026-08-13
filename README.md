@@ -41,7 +41,7 @@
 
   <br/>
 
-  <!-- ⭐ 核心亮点 -->
+  <!-- Docker Hub stats card -->
   <img height="190em" src="https://docker-hub-pull-counter.vercel.app/api/docker-stats?username=xuxuclassmate"/>
 
   <br/>
@@ -49,33 +49,6 @@
   <sub>🐳 Powered by my own Docker Hub Analytics API</sub>
 
 </div>
-
----
-
-### 🧩 Featured Project
-
-#### 🐳 Docker Hub Pull Counter
-- 🔗 https://docker-hub-pull-counter.vercel.app  
-- 📊 Aggregates **pulls, repositories, and stars**  
-- ⚡ Provides **REST API + GitHub README SVG cards**  
-- 🚀 Optimized with **cache strategy (memory + scheduled updates)**  
-
----
-
-### 📊 System Design Highlights
-
-- Designed API with caching layer (memory + DB fallback)
-- Reduced external API calls and improved performance
-- Built reusable SVG rendering system for stats visualization
-
----
-
-### 🛠 Tech Stack
-
-- **Testing**: Automation Testing · API Testing · Performance Testing  
-- **Backend**: Node.js · TypeScript  
-- **DevOps**: Docker · Kubernetes  
-- **Engineering**: REST API Design · System Optimization  
 
 ---
 
