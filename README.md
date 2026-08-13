@@ -1,12 +1,11 @@
 <div align="center" width="100%">
 
-  <img src="https://github.com/XuXuClassMate/XuXuClassMate/blob/master/img/tester.gif" width="550" />
+  <img src="img/tester.gif" width="550" />
 
   #### Hi, I’m XuXuClassMate 👋
   #### 🧪 Software Test Engineer | ⚡ Automation | 🚀 Builder
 
   #### Welcome to my personal page!  
-  #### Also known in Chinese as **旭旭同学**  
   #### Passionate about testing, automation, and building useful tools
 
 </div>
@@ -26,7 +25,7 @@
 - 🌍 You can find me across platforms as `xuxuclassmate`  
 - 📬 Feel free to reach out!
 
-📝 See my [**Personal Blog**](https://fgg6gzb6uk.feishu.cn/docx/LkwDdpLjnoIdGwxOH6zcRwEWnhd)
+📝 See my [**Personal Site**](https://www.xuxuclassmate.com)
 
 <br />
 
