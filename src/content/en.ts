@@ -14,15 +14,14 @@ const homeSocial = [
     icon: "github",
   },
   {
-    href: "https://fgg6gzb6uk.feishu.cn/docx/LkwDdpLjnoIdGwxOH6zcRwEWnhd?from=from_copylink",
-    label: "Blog",
-    icon: "blog",
+    href: "https://medium.com/@xuxuclassmate",
+    label: "Medium",
+    icon: "medium",
   },
   {
-    href: "#",
-    label: "WeChat",
-    icon: "wechat",
-    wechat: true,
+    href: "https://hub.docker.com/u/xuxuclassmate",
+    label: "Docker Hub",
+    icon: "docker",
   },
 ] as const;
 
@@ -47,8 +46,6 @@ export const en: LocaleCopy = {
   themeToLight: "Switch to light theme",
   themeToDark: "Switch to dark theme",
   copyright: "© 2020-2026 XuXuClassMate",
-  wechatAlt: "WeChat QR Code",
-  closeModal: "Close",
   menuLabel: "Menu",
   skipToContent: "Skip to content",
   nav: {
@@ -1006,11 +1003,11 @@ export const en: LocaleCopy = {
         coverAlt: "GlobalPulse",
         status: "live",
         overview:
-          "Self-hosted market intelligence product on Cloudflare Workers — Admin UI, KV config, cron schedules, market calendars, and Feishu / WeChat / Telegram delivery.",
+          "Self-hosted market intelligence product on Cloudflare Workers — Admin UI, KV config, cron schedules, market calendars, and Telegram / webhooks delivery.",
         problem:
           "Teams needed reliable finance and hotspot briefings — not one-off scripts — with calendars, templates, and push channels they control.",
         solution:
-          "Built a self-hosted Cloudflare Workers app with Admin UI, KV config, cron schedules, market calendars, and Feishu / WeChat / Telegram providers.",
+          "Built a self-hosted Cloudflare Workers app with Admin UI, KV config, cron schedules, market calendars, and Telegram / webhooks providers.",
         architecture: [
           {
             title: "Runtime chain",
@@ -1020,7 +1017,7 @@ export const en: LocaleCopy = {
               "Cron scheduler",
               "Market calendars / templates",
               "Channel providers",
-              "Feishu / WeChat / Telegram",
+              "Telegram / webhooks",
             ],
           },
         ],
@@ -1028,7 +1025,7 @@ export const en: LocaleCopy = {
           "Password-protected Admin UI",
           "Timezone-aware market calendars",
           "Cron-driven scheduled briefings",
-          "Multi-channel push (Feishu / WeChat / Telegram)",
+          "Multi-channel push (Telegram / webhooks)",
           "Preview before send",
           "Self-hosted Workers + KV control plane",
         ],
@@ -1042,7 +1039,7 @@ export const en: LocaleCopy = {
           "KV",
           "Cron Triggers",
           "TypeScript",
-          "Feishu / WeChat / Telegram APIs",
+          "Telegram / webhooks APIs",
         ],
         deployment: {
           summary:
@@ -1068,7 +1065,7 @@ export const en: LocaleCopy = {
         tradeoffs: [
           "Self-hosted Workers + KV over a SaaS newsletter — teams keep calendars and credentials.",
           "Admin UI with password gates instead of pure cron scripts — operators can preview before send.",
-          "Multi-channel providers (Feishu / WeChat / Telegram) instead of email-only delivery.",
+          "Multi-channel providers (Telegram / webhooks) instead of email-only delivery.",
         ],
         artifacts: [
           {
@@ -1092,7 +1089,7 @@ export const en: LocaleCopy = {
         ],
         metrics: [
           { label: "Runtime", value: "Cloudflare Workers" },
-          { label: "Channels", value: "Feishu · WeChat · Telegram" },
+          { label: "Channels", value: "Telegram · webhooks" },
         ],
         links: [
           { label: "GitHub", href: "https://github.com/InnoNestX/GlobalPulse" },
@@ -1563,14 +1560,14 @@ export const en: LocaleCopy = {
         icon: "github",
       },
       {
+        href: "https://medium.com/@xuxuclassmate",
+        label: "Medium",
+        icon: "medium",
+      },
+      {
         href: "https://hub.docker.com/u/xuxuclassmate",
         label: "Docker Hub",
         icon: "docker",
-      },
-      {
-        href: "https://blog.csdn.net/XuXuClassMate",
-        label: "CSDN",
-        icon: "blogger",
       },
     ],
   },
@@ -1581,23 +1578,20 @@ export const en: LocaleCopy = {
     galleryTitle: "Life Moments",
     gallery: [
       {
-        title: "Travel Vlogs",
+        title: "Travel",
         description: "Exploring nature's beauty through my lens",
-        href: "https://www.tiktok.com/@xuxuclassmate",
-        image: "/images/douyin-cover.jpg",
-        imageAlt: "Travel Vlogs",
+        image: "/images/plan.webp",
+        imageAlt: "Travel",
       },
       {
         title: "Music Time",
         description: "My favorite playlist for coding and relaxing",
-        href: "https://music.163.com/#/playlist?id=368129876",
         image: "/images/music.webp",
         imageAlt: "Music Time",
       },
       {
         title: "Movie Time",
         description: "Enjoying the magical world of Miyazaki films",
-        href: "https://www.iqiyi.com/playlist1921084202.html?vfrm=psbdl",
         image: "/images/movie.webp",
         imageAlt: "Movie Time - Miyazaki Films",
       },
@@ -1633,44 +1627,22 @@ export const en: LocaleCopy = {
         items: ["Hiking", "Climbing", "Badminton"],
       },
     ],
-    blogTitle: "Life Notes",
-    blog: [
-      {
-        title: "Annual Plan",
-        description:
-          "A new year, a fresh start — sharing yearly goals and focus areas.",
-        image: "/images/plan.webp",
-        imageAlt: "Annual plan cover",
-        href: "https://fgg6gzb6uk.feishu.cn/base/H07ebpIM1aBTuGsYtaacHK9NnBb?table=tblwIKtfaCQWbaKW",
-        linkLabel: "Read more",
-      },
-      {
-        title: "Progress Tracker",
-        description:
-          "Tracking execution against the annual plan and sharing the growth trail.",
-        image: "/images/summary.webp",
-        imageAlt: "Progress tracker cover",
-        href: "https://fgg6gzb6uk.feishu.cn/base/H07ebpIM1aBTuGsYtaacHK9NnBb?table=blkcP1vbErcMDacd",
-        linkLabel: "Read more",
-      },
-    ],
     footerDesc: "A personal space for learning and sharing",
     social: [
       {
-        href: "https://www.tiktok.com/@xuxuclassmate",
-        label: "TikTok",
-        icon: "tiktok",
+        href: "https://github.com/XuXuClassMate",
+        label: "GitHub",
+        icon: "github",
       },
       {
-        href: "https://www.instagram.com/xuxuclassmate",
-        label: "Instagram",
-        icon: "instagram",
+        href: "https://medium.com/@xuxuclassmate",
+        label: "Medium",
+        icon: "medium",
       },
       {
-        href: "#",
-        label: "WeChat",
-        icon: "wechat",
-        wechat: true,
+        href: "https://hub.docker.com/u/xuxuclassmate",
+        label: "Docker Hub",
+        icon: "docker",
       },
     ],
   },

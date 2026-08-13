@@ -100,7 +100,7 @@ const posts = [
   "dockerized-test-environment",
   "ai-assisted-test-case-generation",
   "ai-agent-software-testing",
-  "domestic-db-docker-qa",
+  "enterprise-db-docker-qa",
   "clawhub-skill-shipping",
 ];
 

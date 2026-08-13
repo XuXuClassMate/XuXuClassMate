@@ -18,9 +18,9 @@
 /zh/notes /zh/blog 301
 /en/notes.html /en/blog 301
 /zh/notes.html /zh/blog 301
-/en/notes/domestic-db-docker-qa /en/blog/domestic-db-docker-qa 301
+/en/notes/enterprise-db-docker-qa /en/blog/enterprise-db-docker-qa 301
 /en/notes/clawhub-skill-shipping /en/blog/clawhub-skill-shipping 301
-/zh/notes/domestic-db-docker-qa /zh/blog/domestic-db-docker-qa 301
+/zh/notes/enterprise-db-docker-qa /zh/blog/enterprise-db-docker-qa 301
 /zh/notes/clawhub-skill-shipping /zh/blog/clawhub-skill-shipping 301
 /en/work/fullstack-e2e.html /en/work/fullstack-e2e 301
 /zh/work/fullstack-e2e.html /zh/work/fullstack-e2e 301
@@ -40,7 +40,7 @@
 /en/blog/dockerized-test-environment.html /en/blog/dockerized-test-environment 301
 /en/blog/ai-assisted-test-case-generation.html /en/blog/ai-assisted-test-case-generation 301
 /en/blog/ai-agent-software-testing.html /en/blog/ai-agent-software-testing 301
-/en/blog/domestic-db-docker-qa.html /en/blog/domestic-db-docker-qa 301
+/en/blog/enterprise-db-docker-qa.html /en/blog/enterprise-db-docker-qa 301
 /en/blog/clawhub-skill-shipping.html /en/blog/clawhub-skill-shipping 301
 /zh/blog/ai-testcase-generator-multimodal.html /zh/blog/ai-testcase-generator-multimodal 301
 /zh/blog/playwright-e2e-framework.html /zh/blog/playwright-e2e-framework 301
@@ -48,7 +48,7 @@
 /zh/blog/dockerized-test-environment.html /zh/blog/dockerized-test-environment 301
 /zh/blog/ai-assisted-test-case-generation.html /zh/blog/ai-assisted-test-case-generation 301
 /zh/blog/ai-agent-software-testing.html /zh/blog/ai-agent-software-testing 301
-/zh/blog/domestic-db-docker-qa.html /zh/blog/domestic-db-docker-qa 301
+/zh/blog/enterprise-db-docker-qa.html /zh/blog/enterprise-db-docker-qa 301
 /zh/blog/clawhub-skill-shipping.html /zh/blog/clawhub-skill-shipping 301
 /en/experience /en/learn 301
 /zh/experience /zh/learn 301
@@ -64,9 +64,9 @@
 /zh/playground.html /zh/playground 301
 /en/demo/ai-testcase-generator.html /en/demo/ai-testcase-generator 301
 /zh/demo/ai-testcase-generator.html /zh/demo/ai-testcase-generator 301
-/en/notes/domestic-db-docker-qa.html /en/blog/domestic-db-docker-qa 301
+/en/notes/enterprise-db-docker-qa.html /en/blog/enterprise-db-docker-qa 301
 /en/notes/clawhub-skill-shipping.html /en/blog/clawhub-skill-shipping 301
-/zh/notes/domestic-db-docker-qa.html /zh/blog/domestic-db-docker-qa 301
+/zh/notes/enterprise-db-docker-qa.html /zh/blog/enterprise-db-docker-qa 301
 /zh/notes/clawhub-skill-shipping.html /zh/blog/clawhub-skill-shipping 301
 
 /en/work/testcase-generator.html /en/work/testcase-generator 301
@@ -84,3 +84,11 @@
 /en.html / 301
 /zh.html /zh/ 301
 /favicon.ico /images/logo.svg 200
+/en/blog/domestic-db-docker-qa /en/blog/enterprise-db-docker-qa 301
+/zh/blog/domestic-db-docker-qa /zh/blog/enterprise-db-docker-qa 301
+/en/blog/domestic-db-docker-qa.html /en/blog/enterprise-db-docker-qa 301
+/zh/blog/domestic-db-docker-qa.html /zh/blog/enterprise-db-docker-qa 301
+/en/notes/domestic-db-docker-qa /en/blog/enterprise-db-docker-qa 301
+/zh/notes/domestic-db-docker-qa /zh/blog/enterprise-db-docker-qa 301
+/en/notes/domestic-db-docker-qa.html /en/blog/enterprise-db-docker-qa 301
+/zh/notes/domestic-db-docker-qa.html /zh/blog/enterprise-db-docker-qa 301

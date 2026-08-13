@@ -1,6 +1,6 @@
 # XuXuClassMate
 
-Bilingual personal site for **XuXuClassMate / 旭旭同学** — QA engineer building AI testing tools, OpenClaw agent skills, and reusable Docker test environments.
+Bilingual personal site for **XuXuClassMate** — QA engineer building AI testing tools, OpenClaw agent skills, and reusable Docker test environments.
 
 - Site: https://www.xuxuclassmate.com
 - Pulse: https://pulse.xuxuclassmate.com/

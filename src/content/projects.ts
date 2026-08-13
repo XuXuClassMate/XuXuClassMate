@@ -127,7 +127,7 @@ export const PROJECTS: Record<ProjectId, ProjectDef> = {
     en: {
       title: "GlobalPulse",
       description:
-        "Self-hosted market intelligence and scheduled finance/global hotspot briefings on Cloudflare Workers — Admin UI, cron delivery, and Feishu / WeChat / Telegram push.",
+        "Self-hosted market intelligence and scheduled finance/global hotspot briefings on Cloudflare Workers — Admin UI, cron delivery, and Telegram / webhooks push.",
       tags: ["Cloudflare", "Workers", "Briefings"],
       linkLabel: "GitHub",
       ctaLabel: "Live",
@@ -137,7 +137,7 @@ export const PROJECTS: Record<ProjectId, ProjectDef> = {
     zh: {
       title: "GlobalPulse",
       description:
-        "自托管的市场情报与定时财经/全球热点简报（Cloudflare Workers）— Admin UI、Cron 投递，以及飞书 / 微信 / Telegram 推送。",
+        "自托管的市场情报与定时财经/全球热点简报（Cloudflare Workers）— Admin UI、Cron 投递，以及Telegram / webhook 推送。",
       tags: ["Cloudflare", "Workers", "简报"],
       linkLabel: "GitHub",
       ctaLabel: "在线体验",

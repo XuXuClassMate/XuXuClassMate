@@ -33,13 +33,10 @@ export type MetricId =
 export type IconName =
   | "github"
   | "docker"
-  | "wechat"
   | "blog"
   | "robot"
   | "medium"
   | "blogger"
-  | "tiktok"
-  | "instagram"
   | "moon"
   | "sun"
   | "ghost"
@@ -59,7 +56,6 @@ export type SocialLink = {
   href: string;
   label: string;
   icon: IconName;
-  wechat?: boolean;
 };
 
 export type Card = {
@@ -192,7 +188,7 @@ export type CaseStudy = {
 };
 
 export type NoteSlug =
-  | "domestic-db-docker-qa"
+  | "enterprise-db-docker-qa"
   | "clawhub-skill-shipping"
   | "ai-testcase-generator-multimodal"
   | "playwright-e2e-framework"
@@ -268,8 +264,6 @@ export type LocaleCopy = {
   themeToLight: string;
   themeToDark: string;
   copyright: string;
-  wechatAlt: string;
-  closeModal: string;
   menuLabel: string;
   skipToContent: string;
   nav: {
@@ -393,8 +387,6 @@ export type LocaleCopy = {
     gallery: Card[];
     hobbiesTitle: string;
     hobbies: Card[];
-    blogTitle?: string;
-    blog?: Card[];
     footerDesc: string;
     social: SocialLink[];
   };

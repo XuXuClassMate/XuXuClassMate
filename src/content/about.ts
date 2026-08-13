@@ -22,7 +22,7 @@ export function getAbout(locale: Locale): AboutCopy {
   return {
     meta: {
       title: isZh
-        ? "关于我 | QA Engineer · SDET · AI Testing | 旭旭同学"
+        ? "关于我 | QA Engineer · SDET · AI Testing | XuXuClassMate"
         : "About | QA Engineer · SDET · AI Testing | XuXuClassMate",
       description: isZh
         ? "我是一名 QA Engineer / SDET，专注测试自动化、接口测试、性能测试、Playwright 与 AI Testing。"
@@ -31,7 +31,7 @@ export function getAbout(locale: Locale): AboutCopy {
         "QA Engineer, SDET, Test Automation Engineer, AI Testing, AI Test Automation, Playwright, API Testing, Performance Testing, About XuXuClassMate",
     },
     subtitle: isZh ? "关于我" : "ABOUT ME",
-    title: isZh ? "旭旭同学" : "XuXuClassMate",
+    title: "XuXuClassMate",
     intro: isZh
       ? "我是一名 QA Engineer / SDET，专注测试自动化、接口测试、性能测试与 AI Testing。"
       : "I'm a QA Engineer / SDET focused on test automation, API testing, performance testing, and AI testing.",

@@ -2,7 +2,6 @@
 import Contact from "./Contact.astro";
 import Footer from "./Footer.astro";
 import PageHero from "./PageHero.astro";
-import WechatModal from "./WechatModal.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCopy, type Locale } from "../lib/i18n";
 
@@ -14,7 +13,6 @@ const page = copy.life;
 ---
 
 <BaseLayout locale={locale} page="life">
-  <WechatModal alt={copy.wechatAlt} closeLabel={copy.closeModal} />
 
   <main id="main-content">
     <PageHero
@@ -32,21 +30,34 @@ const page = copy.life;
               <div
                 class={`gallery-item reveal-on-scroll reveal-delay-${(index % 3) + 1}`}
               >
-                <a
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="video-cover"
-                >
-                  <img
-                    src={item.image}
-                    alt={item.imageAlt ?? item.title}
-                    width="1200"
-                    height="800"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </a>
+                {item.href ? (
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="video-cover"
+                  >
+                    <img
+                      src={item.image}
+                      alt={item.imageAlt ?? item.title}
+                      width="1200"
+                      height="800"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </a>
+                ) : (
+                  <div class="video-cover">
+                    <img
+                      src={item.image}
+                      alt={item.imageAlt ?? item.title}
+                      width="1200"
+                      height="800"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                )}
                 <div class="gallery-caption">
                   <h3>{item.title}</h3>
                   <p>{item.description}</p>
@@ -94,45 +105,6 @@ const page = copy.life;
       </div>
     </section>
 
-    {
-      page.blogTitle && page.blog ? (
-        <section class="blog">
-          <div class="container">
-            <h2 class="section-title reveal-on-scroll">{page.blogTitle}</h2>
-            <div class="blog-grid">
-              {page.blog.map((item, index) => (
-                <article
-                  class={`blog-card reveal-on-scroll reveal-delay-${(index % 3) + 1}`}
-                >
-                  <div class="blog-image">
-                    <img
-                      src={item.image}
-                      alt={item.imageAlt ?? item.title}
-                      width="1200"
-                      height="800"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
-                  <div class="blog-content">
-                    <h3>{item.title}</h3>
-                    <p>{item.description}</p>
-                    <a
-                      href={item.href}
-                      class="read-more"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {item.linkLabel}
-                    </a>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-      ) : null
-    }
   </main>
 
   <Contact

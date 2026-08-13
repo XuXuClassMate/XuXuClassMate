@@ -93,79 +93,6 @@ function initNavMore(): void {
   });
 }
 
-function initWechatModal(): void {
-  const modal = document.getElementById("wechatModal");
-  const openBtn = document.getElementById("footerWechatBtn");
-  const closeBtn = document.getElementById("closeModal");
-  if (
-    !(modal instanceof HTMLElement) ||
-    !(openBtn instanceof HTMLElement) ||
-    !(closeBtn instanceof HTMLElement)
-  ) {
-    return;
-  }
-
-  const panel = modal.querySelector<HTMLElement>(".modal-content");
-  let lastFocus: HTMLElement | null = null;
-
-  const getFocusable = () =>
-    [
-      ...modal.querySelectorAll<HTMLElement>(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
-      ),
-    ].filter((el) => !el.hasAttribute("disabled") && el.offsetParent !== null);
-
-  const open = () => {
-    lastFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    modal.classList.add("show");
-    modal.hidden = false;
-    modal.setAttribute("aria-hidden", "false");
-    (panel ?? closeBtn).focus();
-  };
-
-  const close = () => {
-    modal.classList.remove("show");
-    modal.hidden = true;
-    modal.setAttribute("aria-hidden", "true");
-    lastFocus?.focus();
-  };
-
-  openBtn.addEventListener("click", (event) => {
-    event.preventDefault();
-    open();
-  });
-
-  closeBtn.addEventListener("click", () => {
-    close();
-  });
-
-  modal.addEventListener("click", (event) => {
-    if (event.target === modal) {
-      close();
-    }
-  });
-
-  document.addEventListener("keydown", (event) => {
-    if (!modal.classList.contains("show")) return;
-    if (event.key === "Escape") {
-      close();
-      return;
-    }
-    if (event.key !== "Tab") return;
-    const focusable = getFocusable();
-    if (focusable.length === 0) return;
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
-    if (event.shiftKey && document.activeElement === first) {
-      event.preventDefault();
-      last.focus();
-    } else if (!event.shiftKey && document.activeElement === last) {
-      event.preventDefault();
-      first.focus();
-    }
-  });
-}
-
 function initHeaderScroll(): void {
   const header = document.getElementById("siteHeader");
   if (!(header instanceof HTMLElement)) return;
@@ -535,7 +462,6 @@ function initThemeToggle(): void {
 document.addEventListener("DOMContentLoaded", () => {
   initMobileNav();
   initNavMore();
-  initWechatModal();
   initHeaderScroll();
   initScrollReveal();
   initProjectFilters();

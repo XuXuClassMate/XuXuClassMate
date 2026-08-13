@@ -21,19 +21,12 @@ const { brand, description, copyright, social } = Astro.props;
       </div>
       <div class="social-links">
         {
-          social.map((item) =>
-            item.wechat ? (
-              <a href="#" class="wechat-link" id="footerWechatBtn">
-                <Icon name={item.icon} />
-                <span>{item.label}</span>
-              </a>
-            ) : (
-              <a href={item.href} target="_blank" rel="noopener noreferrer">
-                <Icon name={item.icon} />
-                <span>{item.label}</span>
-              </a>
-            ),
-          )
+          social.map((item) => (
+            <a href={item.href} target="_blank" rel="noopener noreferrer">
+              <Icon name={item.icon} />
+              <span>{item.label}</span>
+            </a>
+          ))
         }
       </div>
     </div>

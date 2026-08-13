@@ -190,7 +190,7 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
         },
       ]),
       meta: {
-        title: "我如何用多模态输入打造 AI 测试用例生成器 | 旭旭同学",
+        title: "我如何用多模态输入打造 AI 测试用例生成器 | XuXuClassMate",
         description:
           "QA Engineer / SDET 多模态 AI 用例生成指南：PDF/Word/TXT/图片/视频 → 三角色评审 → Excel/Markdown/XMind。Docker、源码、npm、OpenClaw。",
         keywords: `${keywordsCore}, AI 用例生成, 多模态测试`,
@@ -312,7 +312,7 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
         },
       ]),
       meta: {
-        title: "打造 Playwright E2E 测试框架 | 旭旭同学",
+        title: "打造 Playwright E2E 测试框架 | XuXuClassMate",
         description:
           "QA Engineer / SDET 打造 Playwright E2E 框架：覆盖 UI、API、数据库、Redis 与 MQ 校验。",
         keywords: `${keywordsCore}, Playwright E2E, 全链路 E2E, 测试自动化`,
@@ -476,7 +476,7 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
         },
       ]),
       meta: {
-        title: "用 Locust 与 Go 做 API 性能测试 | 旭旭同学",
+        title: "用 Locust 与 Go 做 API 性能测试 | XuXuClassMate",
         description:
           "QA Engineer 的 API 性能测试指南——Locust、Go 压测框架 + Locust WebUI、延迟、错误预算与练习仓库。",
         keywords: `${keywordsCore}, Locust, Go, 接口性能测试, 压测, Locust WebUI`,
@@ -498,7 +498,7 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
       en: [
         {
           label: "Dameng / Highgo Docker guide",
-          href: "/en/blog/domestic-db-docker-qa",
+          href: "/en/blog/enterprise-db-docker-qa",
         },
         { label: "Docker Suite case", href: "/en/work/docker-suite" },
         { label: "Test Infrastructure", href: "/en/infrastructure" },
@@ -506,7 +506,7 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
       zh: [
         {
           label: "达梦 / 瀚高 Docker 指南",
-          href: "/zh/blog/domestic-db-docker-qa",
+          href: "/zh/blog/enterprise-db-docker-qa",
         },
         { label: "Docker 套件案例", href: "/zh/work/docker-suite" },
         { label: "Test Infrastructure", href: "/zh/infrastructure" },
@@ -522,7 +522,7 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
         },
         {
           label: "Read Dameng / Highgo guide",
-          href: "/en/blog/domestic-db-docker-qa",
+          href: "/en/blog/enterprise-db-docker-qa",
         },
       ],
       zh: [
@@ -534,7 +534,7 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
         },
         {
           label: "阅读达梦 / 瀚高指南",
-          href: "/zh/blog/domestic-db-docker-qa",
+          href: "/zh/blog/enterprise-db-docker-qa",
         },
       ],
     },
@@ -610,7 +610,7 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
         },
       ]),
       meta: {
-        title: "打造容器化测试环境 | 旭旭同学",
+        title: "打造容器化测试环境 | XuXuClassMate",
         description:
           "QA Engineer 的 Docker Testing / Test Infrastructure 指南——可复用数据库镜像、CI 环境与实时拉取证据。",
         keywords: `${keywordsCore}, Docker Testing, 容器化测试环境`,
@@ -722,7 +722,7 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
         },
       ]),
       meta: {
-        title: "AI 辅助测试用例生成 | 旭旭同学",
+        title: "AI 辅助测试用例生成 | XuXuClassMate",
         description:
           "QA Engineer / SDET 视角的 AI 辅助用例生成——人工评审闭环、结构化产物与可安装 AI Testing 工具。",
         keywords: `${keywordsCore}, AI 辅助用例生成, AI Testing, 人工评审`,
@@ -828,7 +828,7 @@ export const ENGINEERING_ARTICLES: LandingDef[] = [
         },
       ]),
       meta: {
-        title: "面向软件测试的 AI Agent | 旭旭同学",
+        title: "面向软件测试的 AI Agent | XuXuClassMate",
         description:
           "QA Engineer / SDET 视角的软件测试 AI Agent——可安装 OpenClaw 技能、证据指标与三角色评审闭环。",
         keywords: `${keywordsCore}, 软件测试 AI Agent, OpenClaw, ClawHub`,

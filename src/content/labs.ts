@@ -42,7 +42,7 @@ export function getPlaywrightLab(locale: Locale): LabPage {
   return {
     meta: {
       title: isZh
-        ? "Playwright Testing Lab | Playwright QA | 旭旭同学"
+        ? "Playwright Testing Lab | Playwright QA | XuXuClassMate"
         : "Playwright Testing Lab | Playwright QA Engineer | XuXuClassMate",
       description: isZh
         ? "Playwright + TypeScript 全链路自动化实验室：POM、API、Mock、并行、多浏览器、CI/CD、Docker。"
@@ -93,7 +93,7 @@ export function getInfrastructureLab(locale: Locale): LabPage {
   return {
     meta: {
       title: isZh
-        ? "Test Infrastructure | Docker · CI/CD · Cloudflare | 旭旭同学"
+        ? "Test Infrastructure | Docker · CI/CD · Cloudflare | XuXuClassMate"
         : "Test Infrastructure | Docker, CI/CD, Cloudflare | XuXuClassMate",
       description: isZh
         ? "Docker、Compose、Linux、CI/CD、GitHub Actions、Cloudflare Workers / Tunnel，以及容器化测试环境。"

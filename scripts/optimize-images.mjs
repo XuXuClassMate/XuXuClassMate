@@ -8,12 +8,9 @@ import sharp from "sharp";
 
 const DIR = join(process.cwd(), "public", "images");
 const TARGETS = new Set([
-  "douyin-cover.jpg",
   "movie.jpg",
   "plan.jpg",
-  "summary.jpg",
   "music.jpg",
-  "wechat.jpg",
 ]);
 
 async function optimize(file) {
