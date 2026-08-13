@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [XuXuClassMate, main, master]
+    branches: [XuXuClassMate]
   pull_request:
   workflow_dispatch:
 
