@@ -161,20 +161,15 @@ export function jsonLdGraph(
         ? `/${locale}/blog/${noteSlug}`
         : canonicalPath(locale, page),
   );
-  const isZh = locale === "zh";
 
   const person = {
     "@type": "Person",
     "@id": `${SITE_ORIGIN}/#person`,
-    name: isZh ? "旭旭同学" : "XuXuClassMate",
-    alternateName: isZh
-      ? ["XuXuClassMate", "xuxuclassmate"]
-      : ["旭旭同学", "xuxuclassmate"],
+    name: "XuXuClassMate",
+    alternateName: ["xuxuclassmate"],
     url: SITE_ORIGIN,
     email: CONTACT_EMAIL,
-    jobTitle: isZh
-      ? "QA Engineer / SDET / AI Testing"
-      : "QA Engineer / SDET / AI Testing",
+    jobTitle: "QA Engineer / SDET / AI Testing",
     description: meta.description,
     image: absoluteUrl("/images/og-default.jpg"),
     sameAs: [
@@ -182,7 +177,6 @@ export function jsonLdGraph(
       "https://hub.docker.com/u/xuxuclassmate",
       "https://clawhub.ai/xuxuclassmate",
       "https://medium.com/@xuxuclassmate",
-      "https://blog.csdn.net/XuXuClassMate",
     ],
     knowsAbout: [
       "QA Engineer",
@@ -205,7 +199,7 @@ export function jsonLdGraph(
   const website = {
     "@type": "WebSite",
     "@id": `${SITE_ORIGIN}/#website`,
-    name: isZh ? "旭旭同学" : "XuXuClassMate",
+    name: "XuXuClassMate",
     url: SITE_ORIGIN,
     inLanguage: ["en", "zh"],
     publisher: { "@id": `${SITE_ORIGIN}/#person` },

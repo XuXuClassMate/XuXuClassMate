@@ -43,10 +43,6 @@
   color: var(--accent-cyan);
 }
 
-.social-links .wechat-link:hover {
-  color: #07c160;
-}
-
 .social-links a:hover .icon {
   transform: scale(1.1);
   transition: transform 0.3s ease;

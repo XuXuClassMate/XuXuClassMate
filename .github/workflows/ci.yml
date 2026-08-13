@@ -31,7 +31,7 @@ jobs:
           grep -q "Content-Security-Policy" dist/_headers
           test -f functions/api/metrics.ts
           test -f dist/en/notes.html
-          test -f dist/zh/notes/domestic-db-docker-qa.html
+          test -f dist/zh/notes/enterprise-db-docker-qa.html
           test -f dist/en/innonestx.html
           test -f dist/zh/innonestx.html
       - run: npm run check:links

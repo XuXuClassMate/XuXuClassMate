@@ -2,7 +2,6 @@
 import Contact from "../../components/Contact.astro";
 import Footer from "../../components/Footer.astro";
 import Icon from "../../components/Icon.astro";
-import WechatModal from "../../components/WechatModal.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCopy } from "../../lib/i18n";
 
@@ -39,5 +38,4 @@ const page = copy.notFound;
     copyright={copy.copyright}
     social={page.social}
   />
-  <WechatModal alt={copy.wechatAlt} closeLabel={copy.closeModal} />
 </BaseLayout>

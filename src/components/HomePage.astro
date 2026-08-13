@@ -1,7 +1,6 @@
 ---
 import Contact from "./Contact.astro";
 import Footer from "./Footer.astro";
-import WechatModal from "./WechatModal.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import {
   getLatestArticles,
@@ -280,5 +279,4 @@ const highlights = copy.home.highlights;
     copyright={copy.copyright}
     social={copy.home.social}
   />
-  <WechatModal alt={copy.wechatAlt} closeLabel={copy.closeModal} />
 </BaseLayout>

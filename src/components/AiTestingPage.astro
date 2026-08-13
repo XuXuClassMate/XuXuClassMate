@@ -2,7 +2,6 @@
 import Contact from "./Contact.astro";
 import Footer from "./Footer.astro";
 import PageHero from "./PageHero.astro";
-import WechatModal from "./WechatModal.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getAiTestingLab } from "../content/ai-testing";
 import { getCopy, type Locale } from "../lib/i18n";
@@ -138,5 +137,4 @@ const lab = getAiTestingLab(locale);
     copyright={copy.copyright}
     social={copy.home.social}
   />
-  <WechatModal alt={copy.wechatAlt} closeLabel={copy.closeModal} />
 </BaseLayout>

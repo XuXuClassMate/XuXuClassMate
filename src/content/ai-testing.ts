@@ -37,7 +37,7 @@ export function getAiTestingLab(locale: Locale): AiLabCopy {
   return {
     meta: {
       title: isZh
-        ? "AI Testing Lab | AI Testing Engineer | 旭旭同学"
+        ? "AI Testing Lab | AI Testing Engineer | XuXuClassMate"
         : "AI Testing Lab | AI Testing Engineer | XuXuClassMate",
       description: isZh
         ? "把 LLM 接入测试工程：用例生成、接口测试、缺陷分析与测试 Agent——可安装、可评审、可落地。"

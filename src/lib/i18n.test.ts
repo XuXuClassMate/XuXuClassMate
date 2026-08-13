@@ -36,8 +36,8 @@ describe("i18n paths", () => {
   });
 
   it("maps note routes", () => {
-    expect(noteHref("en", "domestic-db-docker-qa")).toBe(
-      "/en/blog/domestic-db-docker-qa",
+    expect(noteHref("en", "enterprise-db-docker-qa")).toBe(
+      "/en/blog/enterprise-db-docker-qa",
     );
     expect(noteHref("zh", "clawhub-skill-shipping")).toBe(
       "/zh/blog/clawhub-skill-shipping",
@@ -130,14 +130,14 @@ describe("i18n paths", () => {
   });
 
   it("resolves notes in both locales", () => {
-    expect(getNote("en", "domestic-db-docker-qa")?.title).toContain("Dameng");
+    expect(getNote("en", "enterprise-db-docker-qa")?.title).toContain("Dameng");
     expect(getNote("zh", "clawhub-skill-shipping")?.slug).toBe(
       "clawhub-skill-shipping",
     );
     expect(
       getNote("en", "clawhub-skill-shipping")?.sections.length,
     ).toBeGreaterThan(5);
-    expect(getNote("en", "domestic-db-docker-qa")?.proof).toContain("54k+");
+    expect(getNote("en", "enterprise-db-docker-qa")?.proof).toContain("54k+");
     expect(getNote("en", "ai-testcase-generator-multimodal")?.category).toBe(
       "AI Testing",
     );

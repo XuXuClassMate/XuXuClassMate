@@ -5,11 +5,11 @@ import { getOrgCategories } from "./org";
 import { getNowSections, NOW_UPDATED } from "./now";
 
 const sharedKeywords =
-  "旭旭同学, xuxuclassmate, XuXuClassMate, QA Engineer, SDET, Test Automation Engineer, AI Testing, AI Test Automation, Playwright, API Testing, Performance Testing, Docker Testing, Test Infrastructure, AI Test Case Generation, 软件测试, 自动化测试, AI测试, 接口测试, 性能测试";
+  "XuXuClassMate, xuxuclassmate, QA Engineer, SDET, Test Automation Engineer, AI Testing, AI Test Automation, Playwright, API Testing, Performance Testing, Docker Testing, Test Infrastructure, AI Test Case Generation, 软件测试, 自动化测试, AI测试, 接口测试, 性能测试";
 
 export const zh: LocaleCopy = {
-  brand: "旭旭同学",
-  author: "旭旭同学",
+  brand: "XuXuClassMate",
+  author: "XuXuClassMate",
   languageSwitch: "中文",
   languageSwitchHint: "切换到 English",
   contactLabel: "联系我：",
@@ -26,9 +26,7 @@ export const zh: LocaleCopy = {
   themeToggle: "主题",
   themeToLight: "切换到浅色主题",
   themeToDark: "切换到深色主题",
-  copyright: "© 2020-2026 旭旭同学",
-  wechatAlt: "微信二维码",
-  closeModal: "关闭",
+  copyright: "© 2020-2026 XuXuClassMate",
   menuLabel: "菜单",
   skipToContent: "跳到主要内容",
   nav: {
@@ -52,86 +50,86 @@ export const zh: LocaleCopy = {
   },
   meta: {
     home: {
-      title: "旭旭同学 | QA Engineer · SDET · AI Testing",
+      title: "XuXuClassMate | QA Engineer · SDET · AI Testing",
       description:
         "QA Engineer / SDET，专注测试自动化、AI Testing、接口测试、性能测试、Playwright、Docker Testing 与 AI 用例生成。",
       keywords: sharedKeywords,
-      ogTitle: "旭旭同学 | QA Engineer · SDET · AI Testing",
+      ogTitle: "XuXuClassMate | QA Engineer · SDET · AI Testing",
     },
     about: {
-      title: "关于我 | QA Engineer · SDET · AI Testing | 旭旭同学",
+      title: "关于我 | QA Engineer · SDET · AI Testing | XuXuClassMate",
       description:
         "QA Engineer / SDET，专注测试自动化、接口测试、性能测试、Playwright 与 AI Testing。",
       keywords: `${sharedKeywords}, About, SDET`,
     },
     "ai-testing": {
-      title: "AI Testing Lab | AI 测试自动化与用例生成 | 旭旭同学",
+      title: "AI Testing Lab | AI 测试自动化与用例生成 | XuXuClassMate",
       description:
         "AI Testing Lab：AI 用例生成、AI 测试自动化、LLM 接口测试、缺陷分析与 Testing Agent。",
       keywords: `${sharedKeywords}, AI Testing Lab, AI Test Case Generation`,
     },
     playwright: {
-      title: "Playwright Testing Lab | Test Automation | 旭旭同学",
+      title: "Playwright Testing Lab | Test Automation | XuXuClassMate",
       description:
         "面向 QA Engineer / SDET 的 Playwright 测试自动化实验室：UI、API、Fixtures、并行与 CI/CD。",
       keywords: `${sharedKeywords}, Playwright Testing Lab`,
     },
     infrastructure: {
-      title: "Test Infrastructure | Docker Testing | 旭旭同学",
+      title: "Test Infrastructure | Docker Testing | XuXuClassMate",
       description:
         "Test Infrastructure：Docker Testing 环境、CI/CD、GitHub Actions 与容器化 QA 栈。",
       keywords: `${sharedKeywords}, Docker Testing, Test Infrastructure`,
     },
     blog: {
-      title: "工程笔记 | QA Engineer & SDET 实战笔记 | 旭旭同学",
+      title: "工程笔记 | QA Engineer & SDET 实战笔记 | XuXuClassMate",
       description:
         "Engineering Notes：QA Engineering、AI Testing、Playwright、接口测试、性能测试、Docker、Cloudflare、OpenClaw、DevOps。",
       keywords: `${sharedKeywords}, 工程笔记, QA 实战笔记`,
     },
     life: {
-      title: "生活点滴 | 旭旭同学",
+      title: "生活点滴 | XuXuClassMate",
       description:
-        "旅行、音乐与键盘之外的日常 — QA Engineer / SDET 旭旭同学的生活侧写。",
+        "旅行、音乐与键盘之外的日常 — QA Engineer / SDET XuXuClassMate的生活侧写。",
       keywords: `${sharedKeywords}, 旅行, 爱好`,
     },
     learn: {
-      title: "经历 | QA Engineer 到 SDET & AI Testing | 旭旭同学",
+      title: "经历 | QA Engineer 到 SDET & AI Testing | XuXuClassMate",
       description:
         "从 QA 工程与测试管理，到 Playwright、性能测试、AI Testing 与 Test Infrastructure 的经历路径。",
       keywords: `${sharedKeywords}, 经历, SDET, Test Automation Engineer`,
     },
     work: {
-      title: "项目 | QA Engineer & SDET Portfolio | 旭旭同学",
+      title: "项目 | QA Engineer & SDET Portfolio | XuXuClassMate",
       description:
         "SDET Portfolio：AI 用例生成、Playwright E2E、接口自动化、Docker Testing 与 Test Infrastructure 项目。",
       keywords: `${sharedKeywords}, SDET Portfolio, 测试自动化项目`,
     },
     notes: {
-      title: "工程笔记 | QA / SDET 实战笔记 | 旭旭同学",
+      title: "工程笔记 | QA / SDET 实战笔记 | XuXuClassMate",
       description:
         "可检索的工程笔记：QA Engineering、AI Testing、Playwright、接口测试、性能测试、Docker、Cloudflare、OpenClaw、DevOps。",
       keywords: `${sharedKeywords}, 工程笔记, QA 实战笔记, Docker Testing`,
     },
     "open-source": {
-      title: "开源 | InnoNestX · AI Tools · QA Tools | 旭旭同学",
+      title: "开源 | InnoNestX · AI Tools · QA Tools | XuXuClassMate",
       description:
         "XuXuClassMate 个人品牌下的开源：InnoNestX 承载可安装的 AI 工具、QA 工具、开发者工具、基础设施与自动化。",
       keywords: `${sharedKeywords}, 开源, InnoNestX, AI Tools, QA Tools, Test Infrastructure`,
     },
     playground: {
-      title: "体验台 | 试用开源工具 | 旭旭同学",
+      title: "体验台 | 试用开源工具 | XuXuClassMate",
       description:
         "在本站试用 XuXuClassMate 开源工具——交互演示、在线产品与安装路径，覆盖 AI Testing、Docker API 等。",
       keywords: `${sharedKeywords}, 体验台, 开源演示, AI 用例生成, Docker Hub API, GlobalPulse`,
     },
     now: {
-      title: "Now | 正在做 · 正在学 · 正在探索 | 旭旭同学",
+      title: "Now | 正在做 · 正在学 · 正在探索 | XuXuClassMate",
       description:
-        "旭旭同学当前在做、在学、在探索的事——AI 用例生成器、OpenClaw QA Skills、Playwright、MCP 等。每月更新。",
+        "XuXuClassMate当前在做、在学、在探索的事——AI 用例生成器、OpenClaw QA Skills、Playwright、MCP 等。每月更新。",
       keywords: `${sharedKeywords}, Now, AI 用例生成, OpenClaw, Playwright, MCP, LLM Evaluation`,
     },
     innonestx: {
-      title: "开源 | InnoNestX · AI Tools · QA Tools | 旭旭同学",
+      title: "开源 | InnoNestX · AI Tools · QA Tools | XuXuClassMate",
       description:
         "XuXuClassMate 个人品牌下的开源：InnoNestX 承载可安装的 AI 工具、QA 工具、开发者工具、基础设施与自动化。",
       keywords: `${sharedKeywords}, 开源, InnoNestX, AI Tools, QA Tools, Test Infrastructure`,
@@ -268,15 +266,14 @@ export const zh: LocaleCopy = {
         icon: "github",
       },
       {
-        href: "https://fgg6gzb6uk.feishu.cn/docx/LkwDdpLjnoIdGwxOH6zcRwEWnhd?from=from_copylink",
-        label: "博客",
-        icon: "blog",
+        href: "https://medium.com/@xuxuclassmate",
+        label: "Medium",
+        icon: "medium",
       },
       {
-        href: "#",
-        label: "微信",
-        icon: "wechat",
-        wechat: true,
+        href: "https://hub.docker.com/u/xuxuclassmate",
+        label: "Docker Hub",
+        icon: "docker",
       },
     ],
   },
@@ -843,7 +840,7 @@ export const zh: LocaleCopy = {
           },
         ],
         meta: {
-          title: "AI 测试用例生成器 — 旗舰案例 | 旭旭同学",
+          title: "AI 测试用例生成器 — 旗舰案例 | XuXuClassMate",
           description:
             "从需求到可评审用例：PDF/Word/图片/视频 → AI 生成 → 人工评审 → Excel/Markdown/XMind。支持 Docker、npm、OpenClaw。",
           keywords: `${sharedKeywords}, AI 测试用例生成器, 多模态测试, 旗舰案例, OpenClaw, 人工评审`,
@@ -971,9 +968,9 @@ export const zh: LocaleCopy = {
           },
         ],
         meta: {
-          title: "Trading Assistant Core 案例 | 旭旭同学",
+          title: "Trading Assistant Core 案例 | XuXuClassMate",
           description:
-            "旭旭同学如何把 Trading Assistant Core 打包为 OpenClaw / ClawHub 技能，并支持 Docker 与 CLI 安装。",
+            "XuXuClassMate如何把 Trading Assistant Core 打包为 OpenClaw / ClawHub 技能，并支持 Docker 与 CLI 安装。",
           keywords: `${sharedKeywords}, 交易助手案例`,
         },
       },
@@ -986,11 +983,11 @@ export const zh: LocaleCopy = {
         coverAlt: "GlobalPulse",
         status: "live",
         overview:
-          "自托管 Cloudflare Workers 市场情报产品——Admin UI、KV 配置、Cron 调度、市场日历，以及飞书 / 微信 / Telegram 推送。",
+          "自托管 Cloudflare Workers 市场情报产品——Admin UI、KV 配置、Cron 调度、市场日历，以及Telegram / webhook 推送。",
         problem:
           "团队需要稳定的财经与热点简报，而不是一次性脚本——还要日历、模板和可自控的推送通道。",
         solution:
-          "打造自托管 Cloudflare Workers 应用：Admin UI、KV 配置、Cron 调度、市场日历，以及飞书 / 微信 / Telegram 提供商。",
+          "打造自托管 Cloudflare Workers 应用：Admin UI、KV 配置、Cron 调度、市场日历，以及Telegram / webhook 提供商。",
         architecture: [
           {
             title: "运行时链路",
@@ -1000,7 +997,7 @@ export const zh: LocaleCopy = {
               "Cron 调度器",
               "市场日历 / 模板",
               "通道提供商",
-              "飞书 / 微信 / Telegram",
+              "Telegram / webhook",
             ],
           },
         ],
@@ -1008,7 +1005,7 @@ export const zh: LocaleCopy = {
           "密码保护的 Admin UI",
           "时区感知的市场日历",
           "Cron 驱动的定时简报",
-          "多通道推送（飞书 / 微信 / Telegram）",
+          "多通道推送（Telegram / webhook）",
           "发送前预览",
           "自托管 Workers + KV 控制面",
         ],
@@ -1022,7 +1019,7 @@ export const zh: LocaleCopy = {
           "KV",
           "Cron Triggers",
           "TypeScript",
-          "Feishu / WeChat / Telegram APIs",
+          "Telegram / webhook APIs",
         ],
         deployment: {
           summary:
@@ -1048,7 +1045,7 @@ export const zh: LocaleCopy = {
         tradeoffs: [
           "自托管 Workers + KV，而不是纯 SaaS 简报——日历与凭据留在团队手里。",
           "带密码的 Admin UI，而不是纯 Cron 脚本——发送前可预览。",
-          "飞书 / 微信 / Telegram 多通道，而不是只做邮件。",
+          "Telegram / webhook 多通道，而不是只做邮件。",
         ],
         artifacts: [
           {
@@ -1071,7 +1068,7 @@ export const zh: LocaleCopy = {
         ],
         metrics: [
           { label: "运行时", value: "Cloudflare Workers" },
-          { label: "通道", value: "飞书 · 微信 · Telegram" },
+          { label: "通道", value: "Telegram · webhook" },
         ],
         links: [
           { label: "GitHub", href: "https://github.com/InnoNestX/GlobalPulse" },
@@ -1079,9 +1076,9 @@ export const zh: LocaleCopy = {
           { label: "InnoNestX", href: "https://github.com/InnoNestX" },
         ],
         meta: {
-          title: "GlobalPulse 案例 | 旭旭同学",
+          title: "GlobalPulse 案例 | XuXuClassMate",
           description:
-            "旭旭同学如何打造 GlobalPulse — 运行在 Cloudflare Workers 上的定时财经与全球热点简报。",
+            "XuXuClassMate如何打造 GlobalPulse — 运行在 Cloudflare Workers 上的定时财经与全球热点简报。",
           keywords: `${sharedKeywords}, GlobalPulse, 财经简报`,
         },
       },
@@ -1185,9 +1182,9 @@ export const zh: LocaleCopy = {
           },
         ],
         meta: {
-          title: "Docker Hub API Gateway 案例 | 旭旭同学",
+          title: "Docker Hub API Gateway 案例 | XuXuClassMate",
           description:
-            "旭旭同学如何交付统一的 Docker Hub REST API 网关，含交互文档与 SVG 统计卡片。",
+            "XuXuClassMate如何交付统一的 Docker Hub REST API 网关，含交互文档与 SVG 统计卡片。",
           keywords: `${sharedKeywords}, Docker Hub API 网关`,
         },
       },
@@ -1310,9 +1307,9 @@ export const zh: LocaleCopy = {
           },
         ],
         meta: {
-          title: "测试库 Docker 套件案例 | 旭旭同学",
+          title: "测试库 Docker 套件案例 | XuXuClassMate",
           description:
-            "旭旭同学如何交付达梦、瀚高等 Docker 数据库镜像，供开发、测试、运维、DBA 复用。",
+            "XuXuClassMate如何交付达梦、瀚高等 Docker 数据库镜像，供开发、测试、运维、DBA 复用。",
           keywords: `${sharedKeywords}, Docker 测试库案例`,
         },
       },
@@ -1421,7 +1418,7 @@ export const zh: LocaleCopy = {
           },
         ],
         meta: {
-          title: "Java 接口自动化框架 | 旭旭同学",
+          title: "Java 接口自动化框架 | XuXuClassMate",
           description:
             "基于 Java、JUnit、RestAssured、Maven 与 Allure 的可扩展接口自动化框架。",
           keywords: `${sharedKeywords}, Java 接口自动化, RestAssured, JUnit`,
@@ -1522,7 +1519,7 @@ export const zh: LocaleCopy = {
         ],
         links: [],
         meta: {
-          title: "全链路 E2E 测试框架 | 旭旭同学",
+          title: "全链路 E2E 测试框架 | XuXuClassMate",
           description:
             "覆盖前端、API、MySQL、Redis 与消息队列的 Playwright 全链路自动化。",
           keywords: `${sharedKeywords}, 全链路 E2E, Playwright E2E, End-to-End Testing`,
@@ -1537,14 +1534,14 @@ export const zh: LocaleCopy = {
         icon: "github",
       },
       {
+        href: "https://medium.com/@xuxuclassmate",
+        label: "Medium",
+        icon: "medium",
+      },
+      {
         href: "https://hub.docker.com/u/xuxuclassmate",
         label: "Docker Hub",
         icon: "docker",
-      },
-      {
-        href: "https://blog.csdn.net/XuXuClassMate",
-        label: "CSDN",
-        icon: "blogger",
       },
     ],
   },
@@ -1555,26 +1552,20 @@ export const zh: LocaleCopy = {
     galleryTitle: "生活瞬间",
     gallery: [
       {
-        title: "旅行视频",
+        title: "旅行",
         description: "用镜头记录大自然的美",
-        href: "https://www.douyin.com/user/MS4wLjABAAAAXN8bo7p6CIUTCXg20Hthe1Jf3p44NRF9Xue4ms2NurE",
-        image: "/images/douyin-cover.jpg",
-        imageAlt: "旅行视频封面 - 溪流自然风光",
-        ctaHref:
-          "https://www.douyin.com/user/MS4wLjABAAAAXN8bo7p6CIUTCXg20Hthe1Jf3p44NRF9Xue4ms2NurE",
-        ctaLabel: "在抖音观看",
+        image: "/images/plan.webp",
+        imageAlt: "旅行",
       },
       {
         title: "轻听时光",
         description: "分享温暖治愈的音乐集",
-        href: "https://music.163.com/#/playlist?id=368129876",
         image: "/images/music.webp",
         imageAlt: "音乐时光",
       },
       {
         title: "电影时光",
         description: "沉浸在宫崎骏的动画世界",
-        href: "https://www.iqiyi.com/playlist1921084202.html?vfrm=psbdl",
         image: "/images/movie.webp",
         imageAlt: "电影时光 - 宫崎骏动画",
       },
@@ -1606,42 +1597,22 @@ export const zh: LocaleCopy = {
         items: ["徒步", "爬山", "羽毛球"],
       },
     ],
-    blogTitle: "生活博客",
-    blog: [
-      {
-        title: "年度计划",
-        description: "新的一年，新的开始，分享我的年度计划和目标",
-        image: "/images/plan.webp",
-        imageAlt: "年度计划配图",
-        href: "https://fgg6gzb6uk.feishu.cn/base/H07ebpIM1aBTuGsYtaacHK9NnBb?table=tblwIKtfaCQWbaKW",
-        linkLabel: "阅读全文",
-      },
-      {
-        title: "推进情况",
-        description: "记录和追踪年度计划的执行进展，分享成长历程",
-        image: "/images/summary.webp",
-        imageAlt: "推进情况配图",
-        href: "https://fgg6gzb6uk.feishu.cn/base/H07ebpIM1aBTuGsYtaacHK9NnBb?table=blkcP1vbErcMDacd",
-        linkLabel: "阅读全文",
-      },
-    ],
     footerDesc: "记录生活，分享快乐",
     social: [
       {
-        href: "https://www.douyin.com/user/MS4wLjABAAAAXN8bo7p6CIUTCXg20Hthe1Jf3p44NRF9Xue4ms2NurE",
-        label: "抖音",
-        icon: "tiktok",
+        href: "https://github.com/XuXuClassMate",
+        label: "GitHub",
+        icon: "github",
       },
       {
-        href: "https://www.instagram.com/xuxuclassmate",
-        label: "Instagram",
-        icon: "instagram",
+        href: "https://medium.com/@xuxuclassmate",
+        label: "Medium",
+        icon: "medium",
       },
       {
-        href: "#",
-        label: "微信",
-        icon: "wechat",
-        wechat: true,
+        href: "https://hub.docker.com/u/xuxuclassmate",
+        label: "Docker Hub",
+        icon: "docker",
       },
     ],
   },
@@ -1664,15 +1635,14 @@ export const zh: LocaleCopy = {
         icon: "github",
       },
       {
-        href: "https://fgg6gzb6uk.feishu.cn/docx/LkwDdpLjnoIdGwxOH6zcRwEWnhd?from=from_copylink",
-        label: "Blog",
-        icon: "blog",
+        href: "https://medium.com/@xuxuclassmate",
+        label: "Medium",
+        icon: "medium",
       },
       {
-        href: "#",
-        label: "微信",
-        icon: "wechat",
-        wechat: true,
+        href: "https://hub.docker.com/u/xuxuclassmate",
+        label: "Docker Hub",
+        icon: "docker",
       },
     ],
   },
@@ -1680,12 +1650,12 @@ export const zh: LocaleCopy = {
     subtitle: "开源",
     title: "开源",
     description:
-      "InnoNestX 是旭旭同学个人品牌下的开源组织——可安装的 AI 工具、QA 工具与基础设施，欢迎 fork 与共建。",
+      "InnoNestX 是XuXuClassMate个人品牌下的开源组织——可安装的 AI 工具、QA 工具与基础设施，欢迎 fork 与共建。",
     orgLabel: "组织",
     orgName: "InnoNestX",
     brandTitle: "个人品牌与开源组织的关系",
     brandLead:
-      "旭旭同学是个人品牌；InnoNestX 是其下的 GitHub 开源组织，用来交付可安装工具。",
+      "XuXuClassMate是个人品牌；InnoNestX 是其下的 GitHub 开源组织，用来交付可安装工具。",
     brandConnector: "下设",
     brandPersonalLabel: "个人品牌",
     brandPersonalItems: ["QA / SDET", "AI Testing", "工程笔记"],
@@ -1719,15 +1689,14 @@ export const zh: LocaleCopy = {
         icon: "github",
       },
       {
-        href: "https://fgg6gzb6uk.feishu.cn/docx/LkwDdpLjnoIdGwxOH6zcRwEWnhd?from=from_copylink",
-        label: "Blog",
-        icon: "blog",
+        href: "https://medium.com/@xuxuclassmate",
+        label: "Medium",
+        icon: "medium",
       },
       {
-        href: "#",
-        label: "微信",
-        icon: "wechat",
-        wechat: true,
+        href: "https://hub.docker.com/u/xuxuclassmate",
+        label: "Docker Hub",
+        icon: "docker",
       },
     ],
   },
@@ -1776,15 +1745,14 @@ export const zh: LocaleCopy = {
         icon: "github",
       },
       {
-        href: "https://fgg6gzb6uk.feishu.cn/docx/LkwDdpLjnoIdGwxOH6zcRwEWnhd?from=from_copylink",
-        label: "Blog",
-        icon: "blog",
+        href: "https://medium.com/@xuxuclassmate",
+        label: "Medium",
+        icon: "medium",
       },
       {
-        href: "#",
-        label: "微信",
-        icon: "wechat",
-        wechat: true,
+        href: "https://hub.docker.com/u/xuxuclassmate",
+        label: "Docker Hub",
+        icon: "docker",
       },
     ],
   },
@@ -1806,15 +1774,14 @@ export const zh: LocaleCopy = {
         icon: "github",
       },
       {
-        href: "https://fgg6gzb6uk.feishu.cn/docx/LkwDdpLjnoIdGwxOH6zcRwEWnhd?from=from_copylink",
-        label: "Blog",
-        icon: "blog",
+        href: "https://medium.com/@xuxuclassmate",
+        label: "Medium",
+        icon: "medium",
       },
       {
-        href: "#",
-        label: "微信",
-        icon: "wechat",
-        wechat: true,
+        href: "https://hub.docker.com/u/xuxuclassmate",
+        label: "Docker Hub",
+        icon: "docker",
       },
     ],
   },
@@ -1830,15 +1797,14 @@ export const zh: LocaleCopy = {
         icon: "github",
       },
       {
-        href: "https://fgg6gzb6uk.feishu.cn/docx/LkwDdpLjnoIdGwxOH6zcRwEWnhd?from=from_copylink",
-        label: "Blog",
-        icon: "blog",
+        href: "https://medium.com/@xuxuclassmate",
+        label: "Medium",
+        icon: "medium",
       },
       {
-        href: "#",
-        label: "WeChat",
-        icon: "wechat",
-        wechat: true,
+        href: "https://hub.docker.com/u/xuxuclassmate",
+        label: "Docker Hub",
+        icon: "docker",
       },
     ],
   },

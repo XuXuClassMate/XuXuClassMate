@@ -15,8 +15,7 @@
 .case-cover-image,
 .gallery-item img,
 .video-cover img,
-.blog-image img,
-.modal-content img {
+.blog-image img {
   background: var(--surface);
 }
 

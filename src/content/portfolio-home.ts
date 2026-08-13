@@ -80,7 +80,7 @@ export function getPortfolioHome(locale: Locale): PortfolioHome {
   const isZh = locale === "zh";
 
   return {
-    greeting: isZh ? "你好，我是旭旭。" : "Hi, I'm XuXu.",
+    greeting: isZh ? "你好，我是 XuXu。" : "Hi, I'm XuXu.",
     roles: ["QA Engineer", "SDET", "AI Testing"],
     tagline: isZh ? "可安装的质量工程" : "Installable Quality Engineering",
     description: isZh

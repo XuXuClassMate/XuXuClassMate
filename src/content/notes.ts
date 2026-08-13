@@ -37,7 +37,7 @@ type NoteDef = {
 
 const NOTES: NoteDef[] = [
   {
-    slug: "domestic-db-docker-qa",
+    slug: "enterprise-db-docker-qa",
     category: "Docker",
     tags: {
       en: ["Docker", "Docker Testing", "Test Infrastructure", "Dameng", "Highgo"],
@@ -281,7 +281,7 @@ docker run -d --name qa-dameng \\
           id: "why",
           heading: "真正的问题不是「达梦能不能装」",
           paragraphs: [
-            "在政企与合规栈里，达梦 / 瀚高 / 人大金仓经常是硬性要求。QA 很少死在「库很神秘」上——死在通往可用实例的路径全靠口口相传：裸机安装包、缺依赖、一次性虚拟机快照，以及「等 DBA 有空」。",
+            "在企业与合规栈里，专用数据库经常是硬性要求。QA 很少死在「库很神秘」上——死在通往可用实例的路径全靠口口相传：裸机安装包、缺依赖、一次性虚拟机快照，以及「等 DBA 有空」。",
             "这税在第一条断言跑起来之前就已经交了。新人环境要一天；CI 在数据库启动阶段就抖；自动化作者把账号密码写进脚本，因为没人留下可复用的约定。如果 Postgres 能 pull → run → connect，这些数据库对测试也应该是同一套体感。",
             "这篇不是 DBA 手册。我优化的是 QA 契约：可预期的标签、尽量一容器一服务、凭据走环境变量、全量回归前先做连通性冒烟。",
           ],
@@ -434,10 +434,10 @@ docker run -d --name qa-dameng \\
         },
       ],
       meta: {
-        title: "达梦 / 瀚高 Docker 测试环境 | 旭旭同学",
+        title: "达梦 / 瀚高 Docker 测试环境 | XuXuClassMate",
         description:
           "面向 QA 与 CI 的达梦、瀚高、人大金仓、TiDB 可复用 Docker 实践——含实时拉取指标与失败模式清单。",
-        keywords: "达梦 Docker, 瀚高 Docker, 人大金仓, 测试环境, 数据库 Docker, 旭旭同学",
+        keywords: "达梦 Docker, 瀚高 Docker, 人大金仓, 测试环境, 数据库 Docker, XuXuClassMate",
       },
     },
   },
@@ -857,10 +857,10 @@ CLI / pip/npm     npm 路径                pip / CLI 路径
         },
       ],
       meta: {
-        title: "发布 OpenClaw / ClawHub 技能 | 旭旭同学",
+        title: "发布 OpenClaw / ClawHub 技能 | XuXuClassMate",
         description:
-          "旭旭同学如何以实时下载证据、Docker/CLI 回退路径和硬发布门禁交付可安装 ClawHub 技能——而不是幻灯片演示。",
-        keywords: "ClawHub, OpenClaw 技能, 用例生成器, 交易助手, 技能打包, 旭旭同学",
+          "XuXuClassMate如何以实时下载证据、Docker/CLI 回退路径和硬发布门禁交付可安装 ClawHub 技能——而不是幻灯片演示。",
+        keywords: "ClawHub, OpenClaw 技能, 用例生成器, 交易助手, 技能打包, XuXuClassMate",
       },
     },
   },

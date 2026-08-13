@@ -42,17 +42,18 @@ test("home renders and language switch works", async ({ page }) => {
   await page.getByRole("link", { name: "Switch to Chinese" }).click();
   await expect(page).toHaveURL(/\/zh\/?$/);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "你好，我是旭旭。",
+    "你好，我是 XuXu。",
   );
   await expect(page.locator(".hero-tagline")).toHaveText("可安装的质量工程");
 });
 
-test("wechat modal opens and closes", async ({ page }) => {
+test("footer exposes professional profiles only", async ({ page }) => {
   await page.goto("/");
-  await page.locator("#footerWechatBtn").click();
-  await expect(page.locator("#wechatModal")).toHaveClass(/show/);
-  await page.locator("#closeModal").click();
-  await expect(page.locator("#wechatModal")).not.toHaveClass(/show/);
+  const footer = page.getByRole("contentinfo");
+  await expect(footer.getByRole("link", { name: "GitHub" })).toBeVisible();
+  await expect(footer.getByRole("link", { name: "Medium" })).toBeVisible();
+  await expect(footer.getByRole("link", { name: "Docker Hub" })).toBeVisible();
+  await expect(footer.getByRole("link")).toHaveCount(3);
 });
 
 test("projects page shows categorized sections", async ({ page }) => {
@@ -212,7 +213,7 @@ test("engineering notes index and article render", async ({ page }) => {
     page.getByRole("link", { name: /^All Engineering Notes$/i }).first(),
   ).toBeVisible();
 
-  await page.goto("/en/blog/domestic-db-docker-qa");
+  await page.goto("/en/blog/enterprise-db-docker-qa");
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Dameng");
   await expect(page.locator(".note-toc")).toBeVisible();
   await expect(page.locator(".note-stats").first()).toBeVisible();
@@ -451,16 +452,16 @@ test("home live metrics hydrate from api payload", async ({ page }) => {
   await expect(apiCalls).toHaveText("800", { timeout: 5000 });
 });
 
-test("life page shows four hobbies and blog in both locales", async ({ page }) => {
+test("life page shows four hobbies in both locales", async ({ page }) => {
   await page.goto("/en/life");
   const enHobbies = page.locator(".hobby-card h3");
   await expect(enHobbies).toHaveText(["Reading", "Gaming", "Music", "Sports"]);
-  await expect(page.locator(".blog .section-title")).toHaveText("Life Notes");
+  await expect(page.locator(".gallery-item a")).toHaveCount(0);
 
   await page.goto("/zh/life");
   const zhHobbies = page.locator(".hobby-card h3");
   await expect(zhHobbies).toHaveText(["阅读", "游戏", "音乐", "运动"]);
-  await expect(page.locator(".blog .section-title")).toHaveText("生活博客");
+  await expect(page.locator(".gallery-item a")).toHaveCount(0);
 });
 
 test("learn page covers management and Locust", async ({ page }) => {
