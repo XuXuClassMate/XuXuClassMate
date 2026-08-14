@@ -3,7 +3,10 @@ import { writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 const ORIGIN = "https://www.xuxuclassmate.com";
-const lastmod = new Date().toISOString().slice(0, 10);
+// Calendar date in site TZ (UTC+4) so lastmod matches the operator's day.
+const lastmod = new Intl.DateTimeFormat("en-CA", {
+  timeZone: "Asia/Dubai",
+}).format(new Date());
 
 const staticPages = [
   "/",

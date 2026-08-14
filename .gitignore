@@ -11,4 +11,6 @@ pnpm-debug.log*
 .idea/
 test-results/
 playwright-report/
+.playwright-mcp/
+landing-desktop.png
 .wrangler/
