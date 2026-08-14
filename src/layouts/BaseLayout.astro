@@ -73,7 +73,6 @@ const workActive =
   active === "innonestx";
 const moreActive =
   active === "now" ||
-  active === "life" ||
   active === "playground";
 const ogTitle = meta.ogTitle ?? meta.title;
 const ogImage = absoluteUrl(ogImagePath ?? "/images/og-default.jpg");
@@ -317,17 +316,6 @@ const langSwitchHref = alternateLocalePath(Astro.url.pathname);
                     role="menuitem"
                   >
                     {copy.nav.now}
-                  </a>
-                  <a
-                    href={pageHref(locale, "life")}
-                    class:list={[
-                      "nav-item",
-                      "nav-item--life",
-                      { active: active === "life" },
-                    ]}
-                    role="menuitem"
-                  >
-                    {copy.nav.life}
                   </a>
                   <a
                     href={pageHref(locale, "playground")}

@@ -320,12 +320,10 @@ test("desktop nav keeps primary links and Work/More menus", async ({
 
   await page.getByRole("button", { name: /More/ }).click();
   await expect(page.getByRole("menuitem", { name: "Now" })).toBeVisible();
-  await expect(page.getByRole("menuitem", { name: "Life" })).toBeVisible();
   await expect(page.getByRole("menuitem", { name: "Playground" })).toBeVisible();
   await expect(page.getByRole("menuitem", { name: "Contact" })).toBeVisible();
   await expect(page.locator("#navMoreMenu .nav-item")).toHaveText([
     "Now",
-    "Life",
     "Playground",
     "Contact",
   ]);
@@ -383,7 +381,6 @@ test("mobile nav is hamburger-only with a compact drawer", async ({
   ).toBeVisible();
   await page.getByRole("button", { name: /More/ }).click();
   await expect(page.getByRole("menuitem", { name: "Now" })).toBeVisible();
-  await expect(page.getByRole("menuitem", { name: "Life" })).toBeVisible();
   await expect(page.getByRole("menuitem", { name: "Playground" })).toBeVisible();
   await expect(page.getByRole("menuitem", { name: "Contact" })).toBeVisible();
   await expect(page.locator(".nav-links .language-switch")).toBeVisible();
@@ -450,18 +447,6 @@ test("home live metrics hydrate from api payload", async ({ page }) => {
   await expect(dockerTotal).toHaveText("60k+", { timeout: 5000 });
   await expect(clawhubTotal).toHaveText("2.7k+", { timeout: 5000 });
   await expect(apiCalls).toHaveText("800", { timeout: 5000 });
-});
-
-test("life page shows four hobbies in both locales", async ({ page }) => {
-  await page.goto("/en/life");
-  const enHobbies = page.locator(".hobby-card h3");
-  await expect(enHobbies).toHaveText(["Reading", "Gaming", "Music", "Sports"]);
-  await expect(page.locator(".gallery-item a")).toHaveCount(0);
-
-  await page.goto("/zh/life");
-  const zhHobbies = page.locator(".hobby-card h3");
-  await expect(zhHobbies).toHaveText(["阅读", "游戏", "音乐", "运动"]);
-  await expect(page.locator(".gallery-item a")).toHaveCount(0);
 });
 
 test("learn page covers management and Locust", async ({ page }) => {
