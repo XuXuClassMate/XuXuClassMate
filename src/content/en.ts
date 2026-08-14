@@ -55,7 +55,6 @@ export const en: LocaleCopy = {
     blog: "Notes",
     aiTesting: "AI Testing",
     github: "GitHub",
-    life: "Life",
     contact: "Contact",
     learn: "Experience",
     work: "Projects",
@@ -104,12 +103,6 @@ export const en: LocaleCopy = {
       description:
         "Engineering Notes on QA Engineering, AI Testing, Playwright, API Testing, Performance Testing, Docker, Cloudflare, OpenClaw, and DevOps.",
       keywords: `${sharedKeywords}, Engineering Notes, QA field guides, Test Automation`,
-    },
-    life: {
-      title: "Life Journey | XuXuClassMate",
-      description:
-        "Travel, music, and life outside the keyboard — the personal side of XuXuClassMate, QA Engineer and SDET.",
-      keywords: `${sharedKeywords}, travel, hobbies`,
     },
     learn: {
       title: "Experience | QA Engineer to SDET & AI Testing | XuXuClassMate",
@@ -1553,81 +1546,6 @@ export const en: LocaleCopy = {
       },
     ],
     footerDesc: "AI tools you can install — quality you can trust",
-    social: [
-      {
-        href: "https://github.com/XuXuClassMate",
-        label: "GitHub",
-        icon: "github",
-      },
-      {
-        href: "https://medium.com/@xuxuclassmate",
-        label: "Medium",
-        icon: "medium",
-      },
-      {
-        href: "https://hub.docker.com/u/xuxuclassmate",
-        label: "Docker Hub",
-        icon: "docker",
-      },
-    ],
-  },
-  life: {
-    subtitle: "LIFE & HOBBIES",
-    title: "Life Journey",
-    description: "Sharing my life experiences and interests beyond coding",
-    galleryTitle: "Life Moments",
-    gallery: [
-      {
-        title: "Travel",
-        description: "Exploring nature's beauty through my lens",
-        image: "/images/plan.webp",
-        imageAlt: "Travel",
-      },
-      {
-        title: "Music Time",
-        description: "My favorite playlist for coding and relaxing",
-        image: "/images/music.webp",
-        imageAlt: "Music Time",
-      },
-      {
-        title: "Movie Time",
-        description: "Enjoying the magical world of Miyazaki films",
-        image: "/images/movie.webp",
-        imageAlt: "Movie Time - Miyazaki Films",
-      },
-    ],
-    hobbiesTitle: "My Hobbies",
-    hobbies: [
-      {
-        title: "Reading",
-        description:
-          "Technical books and literature across craft, systems, and fiction.",
-        icon: "Read",
-        items: ["Technical books", "Science fiction", "History"],
-      },
-      {
-        title: "Gaming",
-        description:
-          "Strategy and RPG sessions that keep systems thinking sharp.",
-        icon: "Play",
-        items: ["Strategy", "RPG", "Indie"],
-      },
-      {
-        title: "Music",
-        description:
-          "Folk songs, piano and violin pieces, and pop I still hum on the road.",
-        icon: "Tune",
-        items: ["Folk", "Piano & violin", "Pop"],
-      },
-      {
-        title: "Sports",
-        description:
-          "Steady movement that keeps rhythm alive off the screen.",
-        icon: "Move",
-        items: ["Hiking", "Climbing", "Badminton"],
-      },
-    ],
-    footerDesc: "A personal space for learning and sharing",
     social: [
       {
         href: "https://github.com/XuXuClassMate",

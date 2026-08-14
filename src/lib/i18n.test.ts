@@ -47,7 +47,7 @@ describe("i18n paths", () => {
   it("switches language the same way as the legacy site", () => {
     expect(languageHref("en", "home")).toBe("/zh/");
     expect(languageHref("zh", "home")).toBe("/");
-    expect(languageHref("en", "life")).toBe("/zh/life");
+    expect(languageHref("en", "learn")).toBe("/zh/learn");
     expect(languageHref("zh", "learn")).toBe("/en/learn");
   });
 
@@ -76,8 +76,8 @@ describe("i18n paths", () => {
     expect(canonicalPath("en", "home")).toBe("/");
     expect(canonicalPath("zh", "home")).toBe("/zh/");
     expect(canonicalPath("en", "learn")).toBe("/en/learn");
-    expect(absoluteUrl("/en/life")).toBe(
-      "https://www.xuxuclassmate.com/en/life",
+    expect(absoluteUrl("/en/learn")).toBe(
+      "https://www.xuxuclassmate.com/en/learn",
     );
   });
 

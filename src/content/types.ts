@@ -2,7 +2,6 @@ export type Locale = "en" | "zh";
 
 export type PageId =
   | "home"
-  | "life"
   | "learn"
   | "work"
   | "notes"
@@ -273,7 +272,6 @@ export type LocaleCopy = {
     blog: string;
     aiTesting: string;
     github: string;
-    life: string;
     contact: string;
     /** Top-level Work dropdown label (Experience + Open Source). */
     workMenu?: string;
@@ -376,17 +374,6 @@ export type LocaleCopy = {
     caseGithubTitle: string;
     caseLiveDemoTitle: string;
     cases: CaseStudy[];
-    footerDesc: string;
-    social: SocialLink[];
-  };
-  life: {
-    subtitle: string;
-    title: string;
-    description: string;
-    galleryTitle: string;
-    gallery: Card[];
-    hobbiesTitle: string;
-    hobbies: Card[];
     footerDesc: string;
     social: SocialLink[];
   };

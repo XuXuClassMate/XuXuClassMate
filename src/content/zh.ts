@@ -36,7 +36,6 @@ export const zh: LocaleCopy = {
     blog: "笔记",
     aiTesting: "AI 测试",
     github: "GitHub",
-    life: "生活",
     contact: "联系",
     learn: "经历",
     work: "项目",
@@ -85,12 +84,6 @@ export const zh: LocaleCopy = {
       description:
         "Engineering Notes：QA Engineering、AI Testing、Playwright、接口测试、性能测试、Docker、Cloudflare、OpenClaw、DevOps。",
       keywords: `${sharedKeywords}, 工程笔记, QA 实战笔记`,
-    },
-    life: {
-      title: "生活点滴 | XuXuClassMate",
-      description:
-        "旅行、音乐与键盘之外的日常 — QA Engineer / SDET XuXuClassMate的生活侧写。",
-      keywords: `${sharedKeywords}, 旅行, 爱好`,
     },
     learn: {
       title: "经历 | QA Engineer 到 SDET & AI Testing | XuXuClassMate",
@@ -1527,77 +1520,6 @@ export const zh: LocaleCopy = {
       },
     ],
     footerDesc: "能安装的 AI 工具，信得过的质量",
-    social: [
-      {
-        href: "https://github.com/XuXuClassMate",
-        label: "GitHub",
-        icon: "github",
-      },
-      {
-        href: "https://medium.com/@xuxuclassmate",
-        label: "Medium",
-        icon: "medium",
-      },
-      {
-        href: "https://hub.docker.com/u/xuxuclassmate",
-        label: "Docker Hub",
-        icon: "docker",
-      },
-    ],
-  },
-  life: {
-    subtitle: "生活与爱好",
-    title: "生活历程",
-    description: "分享编程之外的生活点滴和兴趣爱好",
-    galleryTitle: "生活瞬间",
-    gallery: [
-      {
-        title: "旅行",
-        description: "用镜头记录大自然的美",
-        image: "/images/plan.webp",
-        imageAlt: "旅行",
-      },
-      {
-        title: "轻听时光",
-        description: "分享温暖治愈的音乐集",
-        image: "/images/music.webp",
-        imageAlt: "音乐时光",
-      },
-      {
-        title: "电影时光",
-        description: "沉浸在宫崎骏的动画世界",
-        image: "/images/movie.webp",
-        imageAlt: "电影时光 - 宫崎骏动画",
-      },
-    ],
-    hobbiesTitle: "我的爱好",
-    hobbies: [
-      {
-        title: "阅读",
-        description: "技术书与文学并读，保持对系统与故事的好奇。",
-        icon: "读",
-        items: ["技术书籍", "科幻小说", "历史"],
-      },
-      {
-        title: "游戏",
-        description: "策略与 RPG，保持对系统与节奏的敏感。",
-        icon: "玩",
-        items: ["策略", "RPG", "独立游戏"],
-      },
-      {
-        title: "音乐",
-        description: "民谣、钢琴小提琴曲，以及路上会跟着哼的流行。",
-        icon: "乐",
-        items: ["民谣", "钢琴和小提琴曲", "流行音乐"],
-      },
-      {
-        title: "运动",
-        description: "规律运动，把屏幕外的节奏也练出来。",
-        icon: "行",
-        items: ["徒步", "爬山", "羽毛球"],
-      },
-    ],
-    footerDesc: "记录生活，分享快乐",
     social: [
       {
         href: "https://github.com/XuXuClassMate",
