@@ -4,7 +4,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.xuxuclassmate.com/</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.00</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/" />
@@ -13,7 +13,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/work/testcase-generator</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work/testcase-generator" />
@@ -22,7 +22,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/zh/work/testcase-generator</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work/testcase-generator" />
@@ -31,7 +31,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/demo/ai-testcase-generator</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.92</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/demo/ai-testcase-generator" />
@@ -40,7 +40,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/zh/demo/ai-testcase-generator</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.92</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/demo/ai-testcase-generator" />
@@ -49,7 +49,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/about</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/about" />
@@ -58,7 +58,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/learn</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/learn" />
@@ -67,7 +67,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/work</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work" />
@@ -76,7 +76,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/blog</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog" />
@@ -85,7 +85,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/ai-testing</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/ai-testing" />
@@ -94,7 +94,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/playwright</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/playwright" />
@@ -103,7 +103,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/infrastructure</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/infrastructure" />
@@ -112,7 +112,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/open-source</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/open-source" />
@@ -121,7 +121,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/now</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/now" />
@@ -130,7 +130,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/zh/learn</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/learn" />
@@ -139,7 +139,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/zh/ai-testing</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/ai-testing" />
@@ -148,7 +148,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/playground</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/playground" />
@@ -157,7 +157,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/zh/playground</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/playground" />
@@ -166,7 +166,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/blog/ai-testcase-generator-multimodal</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/ai-testcase-generator-multimodal" />
@@ -175,7 +175,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/zh/blog/ai-testcase-generator-multimodal</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/ai-testcase-generator-multimodal" />
@@ -184,7 +184,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/blog/ai-assisted-test-case-generation</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/ai-assisted-test-case-generation" />
@@ -193,7 +193,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/zh/blog/ai-assisted-test-case-generation</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/ai-assisted-test-case-generation" />
@@ -202,7 +202,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/zh/</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/" />
@@ -211,7 +211,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/zh/about</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/about" />
@@ -220,7 +220,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/zh/work</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work" />
@@ -229,7 +229,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/zh/blog</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog" />
@@ -238,7 +238,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/zh/playwright</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/playwright" />
@@ -247,7 +247,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/zh/infrastructure</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/infrastructure" />
@@ -256,7 +256,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/zh/open-source</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/open-source" />
@@ -265,7 +265,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/zh/now</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/now" />
@@ -274,7 +274,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/work/fullstack-e2e</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work/fullstack-e2e" />
@@ -283,7 +283,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/work/automation-framework</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work/automation-framework" />
@@ -292,7 +292,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/work/trading-assistant</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work/trading-assistant" />
@@ -301,7 +301,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/work/globalpulse</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work/globalpulse" />
@@ -310,7 +310,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/work/docker-hub-api-gateway</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work/docker-hub-api-gateway" />
@@ -319,7 +319,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/work/docker-suite</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work/docker-suite" />
@@ -328,7 +328,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/blog/playwright-e2e-framework</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/playwright-e2e-framework" />
@@ -337,7 +337,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/blog/locust-api-performance-testing</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/locust-api-performance-testing" />
@@ -346,7 +346,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/blog/dockerized-test-environment</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/dockerized-test-environment" />
@@ -355,7 +355,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/blog/ai-agent-software-testing</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/ai-agent-software-testing" />
@@ -364,7 +364,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/blog/enterprise-db-docker-qa</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/enterprise-db-docker-qa" />
@@ -373,7 +373,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/blog/clawhub-skill-shipping</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/clawhub-skill-shipping" />
@@ -382,7 +382,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/zh/work/fullstack-e2e</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work/fullstack-e2e" />
@@ -391,7 +391,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/zh/work/automation-framework</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work/automation-framework" />
@@ -400,7 +400,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/zh/work/trading-assistant</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work/trading-assistant" />
@@ -409,7 +409,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/zh/work/globalpulse</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work/globalpulse" />
@@ -418,7 +418,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/zh/work/docker-hub-api-gateway</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work/docker-hub-api-gateway" />
@@ -427,7 +427,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/zh/work/docker-suite</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work/docker-suite" />
@@ -436,7 +436,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/zh/blog/playwright-e2e-framework</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/playwright-e2e-framework" />
@@ -445,7 +445,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/zh/blog/locust-api-performance-testing</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/locust-api-performance-testing" />
@@ -454,7 +454,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/zh/blog/dockerized-test-environment</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/dockerized-test-environment" />
@@ -463,7 +463,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/zh/blog/ai-agent-software-testing</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/ai-agent-software-testing" />
@@ -472,7 +472,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/zh/blog/enterprise-db-docker-qa</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/enterprise-db-docker-qa" />
@@ -481,7 +481,7 @@
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/zh/blog/clawhub-skill-shipping</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/clawhub-skill-shipping" />
