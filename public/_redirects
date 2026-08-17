@@ -94,3 +94,11 @@
 /zh/notes/domestic-db-docker-qa /zh/blog/enterprise-db-docker-qa 301
 /en/notes/domestic-db-docker-qa.html /en/blog/enterprise-db-docker-qa 301
 /zh/notes/domestic-db-docker-qa.html /zh/blog/enterprise-db-docker-qa 301
+
+# Junk / legacy probe URLs discovered by Google Search Console
+/index2 / 301
+/index3 / 301
+/index2.html / 301
+/index3.html / 301
+/s / 301
+/s/ / 301
