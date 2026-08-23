@@ -570,6 +570,17 @@ test("build ships redirects and headers", async () => {
   expect(readFileSync(headers, "utf8")).toContain("Content-Security-Policy");
 });
 
+test("english locale home aliases redirect to root", async ({ page }) => {
+  for (const path of ["/en/", "/en/index.html"]) {
+    const response = await page.goto(path, { waitUntil: "domcontentloaded" });
+    expect(response?.status(), `${path} should not 404`).toBeLessThan(400);
+    await expect(page).toHaveURL(/\/$/);
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+      "Hi, I'm XuXu.",
+    );
+  }
+});
+
 test("legacy work html path still serves content", async ({ page }) => {
   await page.goto("/en/work.html");
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Tools");
