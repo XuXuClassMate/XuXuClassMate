@@ -1,5 +1,4 @@
 ---
-import HomePage from "../../components/HomePage.astro";
+// English home canonicalizes to `/` (see public/_redirects and i18n canonicalPath).
+return Astro.redirect("/", 301);
 ---
-
-<HomePage locale="en" />

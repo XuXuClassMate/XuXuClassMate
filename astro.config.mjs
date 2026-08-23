@@ -3,7 +3,7 @@ import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { defineConfig } from "astro/config";
 
-/** Astro file format emits en.html; legacy URLs need en/index.html. */
+/** Astro file format emits en.html / zh.html; legacy URLs need locale/index.html. */
 function localeIndexPages() {
   return {
     name: "locale-index-pages",
