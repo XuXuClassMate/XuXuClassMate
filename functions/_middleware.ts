@@ -1,6 +1,11 @@
+type MiddlewareContext = {
+  request: Request;
+  next: () => Promise<Response>;
+};
+
 const EN_HOME_ALIASES = new Set(["/en", "/en/", "/en/index.html"]);
 
-export const onRequest: PagesFunction = async (context) => {
+export async function onRequest(context: MiddlewareContext): Promise<Response> {
   const { pathname } = new URL(context.request.url);
 
   if (EN_HOME_ALIASES.has(pathname)) {
@@ -9,4 +14,4 @@ export const onRequest: PagesFunction = async (context) => {
   }
 
   return context.next();
-};
+}
