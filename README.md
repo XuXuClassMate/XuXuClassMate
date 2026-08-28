@@ -28,7 +28,7 @@ npm run images       # compress large JPEGs + emit WebP (if targets set)
 npm run deploy       # build + wrangler pages deploy
 ```
 
-Live metrics (ClawHub downloads / Docker Hub pulls) are embedded at build time, then refreshed on page load via `GET /api/metrics` (browser `max-age=60`, edge `s-maxage=600`, with last-good stale fallback).
+Live metrics (ClawHub downloads / Docker Hub pulls) are embedded at build time, then refreshed on page load via `GET /api/metrics` (browser `max-age=60`, edge `s-maxage=600`, with last-good stale fallback). ClawHub **total** downloads sum every public skill under `xuxuclassmate` (new publishes are included automatically).
 
 ## Project layout
 

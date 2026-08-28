@@ -449,8 +449,8 @@ docker run -d --name qa-dameng \\
       zh: ["OpenClaw", "ClawHub", "AI Testing", "DevOps"],
     },
     proof: {
-      en: "Live proof: 1.6k+ ClawHub downloads · Test Case Generator 700+ · Trading Assistant 900+",
-      zh: "实时证据：ClawHub 总下载 1.6k+ · 用例生成器 700+ · Trading Assistant 900+",
+      en: "Live proof: 7.3k+ ClawHub downloads across all skills · Test Case Generator 800+ · Trading Assistant 1k+",
+      zh: "实时证据：名下全部 ClawHub 技能合计 7.3k+ 下载 · 用例生成器 800+ · Trading Assistant 1k+",
     },
     related: {
       en: [
@@ -543,24 +543,24 @@ docker run -d --name qa-dameng \\
           heading: "Download proof (refreshed on the homepage)",
           paragraphs: [
             "ClawHub downloads are the metric I trust more than repository stars. Stars are optional social proof. Installs mean an agent runtime or a curious human pulled the package.",
-            "Trading Assistant Core currently leads on installs; Test Case Generator follows close behind. Together they clear 1.6k+ downloads on the profile — numbers this site refreshes live via /api/metrics.",
+            "Trading Assistant Core and the AI Test Case Generator remain flagship installs, but the homepage total now sums every skill under the profile — currently 7.3k+ downloads, refreshed live via /api/metrics.",
           ],
           stats: [
             {
               label: "ClawHub total downloads",
-              value: "1.6k+",
+              value: "7.3k+",
               metric: "clawhub:total-downloads",
               href: "https://clawhub.ai/xuxuclassmate",
             },
             {
               label: "AI Test Case Generator",
-              value: "700+",
+              value: "800+",
               metric: "clawhub:ai-testcase-generator",
               href: "https://clawhub.ai/xuxuclassmate/ai-testcase-generator",
             },
             {
               label: "Trading Assistant Core",
-              value: "900+",
+              value: "1k+",
               metric: "clawhub:trading-assistant-core",
               href: "https://clawhub.ai/xuxuclassmate/trading-assistant-core",
             },
@@ -715,24 +715,24 @@ Live metric      ClawHub downloads       ClawHub downloads
           heading: "下载证据（首页实时刷新）",
           paragraphs: [
             "ClawHub 下载量比仓库 star 更可信。Star 是可选的社交证明；下载意味着 Agent 运行时或好奇的人真的拉了包。",
-            "目前 Trading Assistant Core 安装领先，用例生成器紧随其后。两者合计超过 1.6k+ 下载——本站经 /api/metrics 实时刷新。",
+            "目前 Trading Assistant Core 与用例生成器仍是旗舰安装项，但首页总数已改为统计名下全部技能——当前 7.3k+ 下载，经 /api/metrics 从完整 owner 目录实时刷新。",
           ],
           stats: [
             {
               label: "ClawHub 总下载",
-              value: "1.6k+",
+              value: "7.3k+",
               metric: "clawhub:total-downloads",
               href: "https://clawhub.ai/xuxuclassmate",
             },
             {
               label: "AI 用例生成器",
-              value: "700+",
+              value: "800+",
               metric: "clawhub:ai-testcase-generator",
               href: "https://clawhub.ai/xuxuclassmate/ai-testcase-generator",
             },
             {
               label: "Trading Assistant Core",
-              value: "900+",
+              value: "1k+",
               metric: "clawhub:trading-assistant-core",
               href: "https://clawhub.ai/xuxuclassmate/trading-assistant-core",
             },

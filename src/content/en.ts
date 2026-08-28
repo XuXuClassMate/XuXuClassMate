@@ -166,7 +166,7 @@ export const en: LocaleCopy = {
         linkLabel: "View Docker Hub →",
       },
       {
-        value: "1.6k+",
+        value: "7.3k+",
         label: "ClawHub Downloads · All Time",
         metric: "clawhub:total-downloads",
         href: "https://clawhub.ai/xuxuclassmate",
@@ -984,6 +984,146 @@ export const en: LocaleCopy = {
           description:
             "How XuXuClassMate packaged Trading Assistant Core as an OpenClaw / ClawHub skill with Docker and CLI installs.",
           keywords: `${sharedKeywords}, trading assistant case study`,
+        },
+      },
+      {
+        slug: "custom-mail",
+        title: "Custom Mail",
+        subtitle: "CASE STUDY",
+        description:
+          "Private outbound mail console on Cloudflare Workers — Rust runtime, brandable UI, pluggable ESP.",
+        cover: "/images/cover-custom-mail.jpg",
+        coverAlt: "Custom Mail",
+        status: "live",
+        overview:
+          "Self-hosted web mail workspace written in Rust (workers-rs): session login, Markdown compose with email-safe preview, attachments, send history in KV, and drop-in ESP / theme / layout plugins — without running a mail server.",
+        problem:
+          "Teams needed a private compose UI they could brand and host on their own Cloudflare account — not another shared SaaS mailbox, and not a VPS mail stack to babysit.",
+        solution:
+          "Shipped Custom Mail as a Workers + KV product with JSON-driven branding, pluggable providers (Brevo, Resend, SendGrid, …), Docker / GHCR images, docs, and a ClawHub skill for agent installs.",
+        architecture: [
+          {
+            title: "Runtime chain",
+            layers: [
+              "Session login",
+              "Compose + Markdown preview",
+              "Attachments",
+              "ESP provider plugins",
+              "KV send history",
+              "Workers + static assets",
+            ],
+          },
+        ],
+        features: [
+          "Password-protected compose console on Cloudflare Workers",
+          "CommonMark + GFM body with email-safe HTML preview",
+          "Attachments (multi-file caps) and last-N send history in KV",
+          "Brandable config: name, domain, colors, logo, footer, copy",
+          "Pluggable ESP / theme / layout / logo catalogs",
+          "Docker Hub + GHCR images and ClawHub skill install path",
+        ],
+        contribution: [
+          "Owned product architecture from Workers runtime through ESP plugins.",
+          "Implemented Rust/wasm mail console, Markdown preview, and KV history.",
+          "Published Docker / GHCR images, docs site, and ClawHub packaging.",
+        ],
+        techStack: [
+          "Rust (workers-rs)",
+          "Cloudflare Workers",
+          "KV",
+          "Brevo / Resend / SendGrid",
+          "Docker",
+          "OpenClaw / ClawHub",
+        ],
+        deployment: {
+          summary:
+            "Deploy on Cloudflare Workers with secrets + KV, or run locally via Docker / wrangler; configure branding and ESP in config/mail.json.",
+          steps: [
+            "Clone InnoNestX/Custom-Mail and copy .dev.vars.example.",
+            "Set ADMIN_PASSWORD and provider API key, then npm run dev or docker run.",
+            "Point wrangler routes + mail.json host at your domain and deploy.",
+            "Optional: clawhub install custom-mail for the OpenClaw skill path.",
+          ],
+          channels: [
+            { label: "Live", href: "https://mail.xuxuclassmate.com" },
+            { label: "Docs", href: "https://innonestx.github.io/Custom-Mail/" },
+            {
+              label: "GitHub",
+              href: "https://github.com/InnoNestX/Custom-Mail",
+            },
+            {
+              label: "Docker Hub",
+              href: "https://hub.docker.com/r/xuxuclassmate/custom-mail",
+            },
+            {
+              label: "ClawHub",
+              href: "https://clawhub.ai/xuxuclassmate/custom-mail",
+            },
+          ],
+        },
+        proof: {
+          github: "https://github.com/InnoNestX/Custom-Mail",
+          demo: "https://mail.xuxuclassmate.com",
+        },
+        tradeoffs: [
+          "Self-hosted Workers + KV over a SaaS webmail — credentials and branding stay on your account.",
+          "Outbound compose console instead of full IMAP inbox — focused on send workflows teams actually run.",
+          "Pluggable ESP adapters instead of one locked provider — swap Brevo / Resend / SendGrid via config.",
+        ],
+        artifacts: [
+          {
+            title: "Live product",
+            description: "Reference deployment of the private mail console.",
+            href: "https://mail.xuxuclassmate.com",
+            linkLabel: "Open Custom Mail",
+          },
+          {
+            title: "Documentation",
+            description: "EN/ZH docs for config, Docker, deploy, and OpenClaw.",
+            href: "https://innonestx.github.io/Custom-Mail/",
+            linkLabel: "Open docs",
+          },
+          {
+            title: "Source repository",
+            description: "Rust Workers app, plugins, and CI in the open.",
+            href: "https://github.com/InnoNestX/Custom-Mail",
+            linkLabel: "GitHub",
+          },
+        ],
+        outcomes: [
+          "Private compose UI with session login on Cloudflare Workers",
+          "Markdown preview + attachments + KV send history",
+          "Install surfaces: Workers deploy, Docker / GHCR, and ClawHub",
+        ],
+        metrics: [
+          {
+            label: "ClawHub installs",
+            value: "90+",
+            metric: "clawhub:custom-mail",
+          },
+          { label: "Runtime", value: "Workers · Rust" },
+          { label: "Surfaces", value: "Live · Docker · ClawHub" },
+        ],
+        links: [
+          {
+            label: "GitHub",
+            href: "https://github.com/InnoNestX/Custom-Mail",
+          },
+          { label: "Live", href: "https://mail.xuxuclassmate.com" },
+          {
+            label: "Docs",
+            href: "https://innonestx.github.io/Custom-Mail/",
+          },
+          {
+            label: "ClawHub",
+            href: "https://clawhub.ai/xuxuclassmate/custom-mail",
+          },
+        ],
+        meta: {
+          title: "Custom Mail Case Study | XuXuClassMate",
+          description:
+            "How XuXuClassMate shipped Custom Mail — a private Cloudflare Workers mail console with Docker and ClawHub installs.",
+          keywords: `${sharedKeywords}, Custom Mail, Cloudflare Workers, webmail`,
         },
       },
       {

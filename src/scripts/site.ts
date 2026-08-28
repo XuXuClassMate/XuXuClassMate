@@ -282,6 +282,7 @@ function initHighlightCountUp(): void {
 type MetricId =
   | "clawhub:ai-testcase-generator"
   | "clawhub:trading-assistant-core"
+  | "clawhub:custom-mail"
   | "clawhub:total-downloads"
   | "docker:dameng"
   | "docker:highgo"
@@ -315,6 +316,7 @@ async function fetchMetricsBundle(): Promise<Partial<Record<MetricId, number>>> 
     for (const key of [
       "clawhub:ai-testcase-generator",
       "clawhub:trading-assistant-core",
+      "clawhub:custom-mail",
       "clawhub:total-downloads",
       "docker:dameng",
       "docker:highgo",
