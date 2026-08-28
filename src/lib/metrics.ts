@@ -1,4 +1,11 @@
 import {
+  CLAWHUB_FEATURED_SKILLS,
+  CLAWHUB_OWNER_HANDLE,
+  CLAWHUB_SITE_ORIGIN,
+  fetchOwnerClawhubMetrics,
+  fetchSkillDownloads,
+} from "./clawhub";
+import {
   DOCKER_METRIC_REPOS,
   dockerGatewayCallsUrl,
   dockerTopReposUrl,
@@ -10,6 +17,7 @@ import {
 export type MetricId =
   | "clawhub:ai-testcase-generator"
   | "clawhub:trading-assistant-core"
+  | "clawhub:custom-mail"
   | "clawhub:total-downloads"
   | "docker:dameng"
   | "docker:highgo"
@@ -21,16 +29,8 @@ export type MetricId =
   | "npm:testcase-generator"
   | "api:gateway-calls";
 
-export const CLAWHUB_SKILLS = {
-  "ai-testcase-generator": {
-    slug: "ai-testcase-generator",
-    url: "https://clawhub.ai/xuxuclassmate/ai-testcase-generator",
-  },
-  "trading-assistant-core": {
-    slug: "trading-assistant-core",
-    url: "https://clawhub.ai/xuxuclassmate/trading-assistant-core",
-  },
-} as const;
+/** @deprecated Prefer CLAWHUB_FEATURED_SKILLS from ./clawhub. */
+export const CLAWHUB_SKILLS = CLAWHUB_FEATURED_SKILLS;
 
 /** @deprecated Prefer DOCKER_METRIC_REPOS from ./docker-gateway. */
 export const DOCKER_REPOS = DOCKER_METRIC_REPOS;
@@ -46,9 +46,10 @@ export const NPM_PACKAGES = {
 
 /** Fallback values used when live APIs are unavailable. */
 export const METRIC_FALLBACKS: Record<MetricId, number> = {
-  "clawhub:ai-testcase-generator": 709,
-  "clawhub:trading-assistant-core": 908,
-  "clawhub:total-downloads": 1617,
+  "clawhub:ai-testcase-generator": 868,
+  "clawhub:trading-assistant-core": 1098,
+  "clawhub:custom-mail": 95,
+  "clawhub:total-downloads": 7301,
   "docker:dameng": 29795,
   "docker:highgo": 16873,
   "docker:kingbase": 1613,
@@ -90,16 +91,6 @@ async function fetchJson(url: string, timeoutMs = 8000): Promise<unknown> {
   }
 }
 
-function clawhubDownloads(payload: unknown): number | null {
-  if (!payload || typeof payload !== "object") return null;
-  const skill = (payload as { skill?: { stats?: { downloads?: unknown } } })
-    .skill;
-  const downloads = skill?.stats?.downloads;
-  return typeof downloads === "number" && Number.isFinite(downloads)
-    ? downloads
-    : null;
-}
-
 function npmRangeTotal(payload: unknown): number | null {
   if (!payload || typeof payload !== "object") return null;
   const downloads = (payload as { downloads?: unknown }).downloads;
@@ -124,16 +115,22 @@ export async function fetchLiveMetrics(): Promise<Partial<MetricsMap>> {
     | readonly [MetricId, number]
     | ReadonlyArray<readonly [MetricId, number]>
   >[] = [
-    ...(Object.keys(CLAWHUB_SKILLS) as (keyof typeof CLAWHUB_SKILLS)[]).map(
-      (key) =>
-        fetchJson(
-          `https://clawhub.ai/api/v1/skills/${CLAWHUB_SKILLS[key].slug}`,
-        ).then((json) => {
-          const value = clawhubDownloads(json);
-          if (value == null) throw new Error("missing downloads");
-          return [`clawhub:${key}` as MetricId, value] as const;
-        }),
-    ),
+    fetchOwnerClawhubMetrics(CLAWHUB_OWNER_HANDLE).then((owner) => {
+      const pairs: Array<readonly [MetricId, number]> = [];
+      if (owner.totalDownloads != null) {
+        pairs.push(["clawhub:total-downloads", owner.totalDownloads]);
+      }
+      for (const slug of Object.keys(CLAWHUB_FEATURED_SKILLS) as Array<
+        keyof typeof CLAWHUB_FEATURED_SKILLS
+      >) {
+        const value = owner.bySlug[slug];
+        if (value != null) {
+          pairs.push([`clawhub:${slug}` as MetricId, value]);
+        }
+      }
+      if (pairs.length === 0) throw new Error("missing clawhub owner metrics");
+      return pairs;
+    }),
     // All Docker pull counts come from docker-hub-pull-counter.vercel.app only.
     Promise.all([
       fetchJson(dockerTopReposUrl()),
@@ -192,6 +189,30 @@ export async function fetchLiveMetrics(): Promise<Partial<MetricsMap>> {
       }
     }
   }
+
+  // If owner catalog failed but featured skill APIs still work, fill gaps.
+  if (live["clawhub:total-downloads"] == null) {
+    const featured = await Promise.all(
+      (Object.keys(CLAWHUB_FEATURED_SKILLS) as Array<keyof typeof CLAWHUB_FEATURED_SKILLS>).map(
+        async (slug) => {
+          const existing = live[`clawhub:${slug}` as MetricId];
+          if (existing != null) return existing;
+          return fetchSkillDownloads(slug);
+        },
+      ),
+    );
+    const known = featured.filter((n): n is number => n != null);
+    if (known.length > 0) {
+      for (const [index, slug] of (
+        Object.keys(CLAWHUB_FEATURED_SKILLS) as Array<keyof typeof CLAWHUB_FEATURED_SKILLS>
+      ).entries()) {
+        const value = featured[index];
+        if (value != null) live[`clawhub:${slug}` as MetricId] = value;
+      }
+      live["clawhub:total-downloads"] = known.reduce((sum, n) => sum + n, 0);
+    }
+  }
+
   return live;
 }
 
@@ -202,9 +223,12 @@ export async function getMetrics(): Promise<MetricsMap> {
     metricsPromise = fetchLiveMetrics()
       .then((live) => {
         const merged = { ...METRIC_FALLBACKS, ...live };
-        merged["clawhub:total-downloads"] =
-          merged["clawhub:ai-testcase-generator"] +
-          merged["clawhub:trading-assistant-core"];
+        // Prefer live owner-wide total; never re-sum only featured skills over it.
+        if (live["clawhub:total-downloads"] == null) {
+          merged["clawhub:total-downloads"] =
+            merged["clawhub:ai-testcase-generator"] +
+            merged["clawhub:trading-assistant-core"];
+        }
         return merged;
       })
       .catch(() => ({ ...METRIC_FALLBACKS }));
@@ -220,3 +244,5 @@ export function resolveMetric(
   if (!metricId) return fallbackValue;
   return formatMetric(metrics[metricId] ?? METRIC_FALLBACKS[metricId]);
 }
+
+export { CLAWHUB_OWNER_HANDLE, CLAWHUB_SITE_ORIGIN };

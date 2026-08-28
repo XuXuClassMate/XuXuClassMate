@@ -189,6 +189,24 @@ const ORG_PROJECTS: OrgProjectDef[] = [
     },
   },
   {
+    title: "Custom Mail",
+    href: "https://github.com/InnoNestX/Custom-Mail",
+    category: "Infrastructure",
+    org: "InnoNestX",
+    ctaHref: "https://mail.xuxuclassmate.com",
+    ctaLabel: { en: "Open live site", zh: "打开在线站点" },
+    linkLabel: { en: "GitHub", zh: "GitHub" },
+    tags: {
+      en: ["Cloudflare Workers", "Rust", "Email"],
+      zh: ["Cloudflare Workers", "Rust", "邮件"],
+    },
+    status: { en: "Live", zh: "在线" },
+    description: {
+      en: "Private outbound mail workspace on Workers — Markdown compose, attachments, history, pluggable ESP.",
+      zh: "Workers 上的私有发信工作台——Markdown 撰写、附件、历史记录、可插拔 ESP。",
+    },
+  },
+  {
     title: "Java API Automation",
     href: "https://github.com/XuXuClassMate/My_Test_JAProject",
     category: "Automation",

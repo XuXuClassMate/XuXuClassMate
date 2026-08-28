@@ -89,6 +89,7 @@ const cases = [
   "automation-framework",
   "testcase-generator",
   "trading-assistant",
+  "custom-mail",
   "globalpulse",
   "docker-hub-api-gateway",
   "docker-suite",

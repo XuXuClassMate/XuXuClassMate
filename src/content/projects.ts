@@ -60,6 +60,7 @@ const PROJECT_ORDER: ProjectId[] = [
   "automation-framework",
   "docker-hub-api-gateway",
   "globalpulse",
+  "custom-mail",
   "trading-assistant",
 ];
 
@@ -142,6 +143,33 @@ export const PROJECTS: Record<ProjectId, ProjectDef> = {
       linkLabel: "GitHub",
       ctaLabel: "在线体验",
       imageAlt: "GlobalPulse 封面",
+      caseLabel: "案例详解",
+    },
+  },
+  "custom-mail": {
+    id: "custom-mail",
+    group: "infra",
+    href: "https://github.com/InnoNestX/Custom-Mail",
+    ctaHref: "https://mail.xuxuclassmate.com",
+    image: "/images/cover-custom-mail.jpg",
+    en: {
+      title: "Custom Mail",
+      description:
+        "Private web mail console on Cloudflare Workers (Rust) — compose, Markdown preview, attachments, send history. Brandable config, pluggable ESP (Brevo / Resend / …), Docker and ClawHub installs.",
+      tags: ["Cloudflare", "Workers", "Rust"],
+      linkLabel: "GitHub",
+      ctaLabel: "Live",
+      imageAlt: "Custom Mail cover",
+      caseLabel: "Case study",
+    },
+    zh: {
+      title: "Custom Mail",
+      description:
+        "跑在 Cloudflare Workers 上的私有发信控制台（Rust）——撰写、Markdown 预览、附件、发送记录。可品牌化配置，可插拔 ESP（Brevo / Resend / …），支持 Docker 与 ClawHub 安装。",
+      tags: ["Cloudflare", "Workers", "Rust"],
+      linkLabel: "GitHub",
+      ctaLabel: "在线体验",
+      imageAlt: "Custom Mail 封面",
       caseLabel: "案例详解",
     },
   },

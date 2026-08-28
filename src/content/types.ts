@@ -18,6 +18,7 @@ export type PageId =
 export type MetricId =
   | "clawhub:ai-testcase-generator"
   | "clawhub:trading-assistant-core"
+  | "clawhub:custom-mail"
   | "clawhub:total-downloads"
   | "docker:dameng"
   | "docker:highgo"
@@ -45,6 +46,7 @@ export type IconName =
 export type CaseSlug =
   | "testcase-generator"
   | "trading-assistant"
+  | "custom-mail"
   | "globalpulse"
   | "docker-hub-api-gateway"
   | "docker-suite"

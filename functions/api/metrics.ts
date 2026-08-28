@@ -1,4 +1,10 @@
 import {
+  CLAWHUB_FEATURED_SKILLS,
+  CLAWHUB_OWNER_HANDLE,
+  fetchOwnerClawhubMetrics,
+  fetchSkillDownloads,
+} from "../lib/clawhub";
+import {
   DOCKER_GATEWAY_ORIGIN,
   DOCKER_METRIC_REPOS,
   dockerGatewayCallsUrl,
@@ -12,6 +18,7 @@ import {
 type MetricsPayload = {
   "clawhub:ai-testcase-generator": number;
   "clawhub:trading-assistant-core": number;
+  "clawhub:custom-mail": number;
   "clawhub:total-downloads": number;
   "docker:dameng": number;
   "docker:highgo": number;
@@ -26,9 +33,10 @@ type MetricsPayload = {
 };
 
 const FALLBACKS: Omit<MetricsPayload, "updatedAt"> = {
-  "clawhub:ai-testcase-generator": 709,
-  "clawhub:trading-assistant-core": 908,
-  "clawhub:total-downloads": 1617,
+  "clawhub:ai-testcase-generator": 868,
+  "clawhub:trading-assistant-core": 1098,
+  "clawhub:custom-mail": 95,
+  "clawhub:total-downloads": 7301,
   "docker:dameng": 29795,
   "docker:highgo": 16873,
   "docker:kingbase": 1613,
@@ -46,18 +54,6 @@ const NPM_TESTCASE = {
   name: "@classmatexuxu/testcase-generator",
   since: "2026-04-02",
 } as const;
-
-async function readDownloads(slug: string): Promise<number | null> {
-  const response = await fetch(`https://clawhub.ai/api/v1/skills/${slug}`, {
-    headers: { Accept: "application/json" },
-  });
-  if (!response.ok) return null;
-  const data = (await response.json()) as {
-    skill?: { stats?: { downloads?: number } };
-  };
-  const value = data.skill?.stats?.downloads;
-  return typeof value === "number" ? value : null;
-}
 
 async function readDockerMetrics(): Promise<{
   repos: Partial<Record<DockerMetricRepo, number>>;
@@ -121,17 +117,47 @@ type BuildResult = {
 };
 
 async function buildPayload(): Promise<BuildResult> {
-  const [testcase, trading, docker, testcaseNpm, apiCalls] = await Promise.all([
-    readDownloads("ai-testcase-generator"),
-    readDownloads("trading-assistant-core"),
+  const [clawhub, docker, testcaseNpm, apiCalls] = await Promise.all([
+    fetchOwnerClawhubMetrics(CLAWHUB_OWNER_HANDLE),
     readDockerMetrics(),
     readNpmDownloads(NPM_TESTCASE.name, NPM_TESTCASE.since),
     readGatewayCalls(),
   ]);
 
+  const featuredSlugs = Object.keys(CLAWHUB_FEATURED_SKILLS) as Array<
+    keyof typeof CLAWHUB_FEATURED_SKILLS
+  >;
+  const featuredEntries = await Promise.all(
+    featuredSlugs.map(async (slug) => {
+      const fromCatalog = clawhub.bySlug[slug];
+      if (fromCatalog != null) return [slug, fromCatalog] as const;
+      const live = await fetchSkillDownloads(slug);
+      return [slug, live] as const;
+    }),
+  );
+  const featuredBySlug = Object.fromEntries(featuredEntries) as Record<
+    (typeof featuredSlugs)[number],
+    number | null
+  >;
+  const featuredValues = featuredSlugs.map((slug) => featuredBySlug[slug]);
+
+  const testcaseValue =
+    featuredBySlug["ai-testcase-generator"] ??
+    FALLBACKS["clawhub:ai-testcase-generator"];
+  const tradingValue =
+    featuredBySlug["trading-assistant-core"] ??
+    FALLBACKS["clawhub:trading-assistant-core"];
+  const customMailValue =
+    featuredBySlug["custom-mail"] ?? FALLBACKS["clawhub:custom-mail"];
+  const totalDownloads =
+    clawhub.totalDownloads ??
+    (featuredValues.every((v) => v != null)
+      ? featuredValues.reduce((sum, n) => sum + (n ?? 0), 0)
+      : FALLBACKS["clawhub:total-downloads"]);
+
   const liveHits = [
-    testcase,
-    trading,
+    clawhub.totalDownloads,
+    ...featuredValues,
     ...DOCKER_METRIC_REPOS.map((repo) => docker.repos[repo]),
     docker.totalPulls,
     docker.repositoryCount,
@@ -139,15 +165,13 @@ async function buildPayload(): Promise<BuildResult> {
     apiCalls,
   ].filter((value) => value != null).length;
 
-  const testcaseValue = testcase ?? FALLBACKS["clawhub:ai-testcase-generator"];
-  const tradingValue = trading ?? FALLBACKS["clawhub:trading-assistant-core"];
-
   return {
     liveHits,
     payload: {
       "clawhub:ai-testcase-generator": testcaseValue,
       "clawhub:trading-assistant-core": tradingValue,
-      "clawhub:total-downloads": testcaseValue + tradingValue,
+      "clawhub:custom-mail": customMailValue,
+      "clawhub:total-downloads": totalDownloads,
       "docker:dameng": docker.repos.dameng ?? FALLBACKS["docker:dameng"],
       "docker:highgo": docker.repos.highgo ?? FALLBACKS["docker:highgo"],
       "docker:kingbase":

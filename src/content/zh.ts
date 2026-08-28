@@ -147,7 +147,7 @@ export const zh: LocaleCopy = {
         linkLabel: "查看 Docker Hub →",
       },
       {
-        value: "1.6k+",
+        value: "7.3k+",
         label: "ClawHub 下载 · 累计",
         metric: "clawhub:total-downloads",
         href: "https://clawhub.ai/xuxuclassmate",
@@ -965,6 +965,146 @@ export const zh: LocaleCopy = {
           description:
             "XuXuClassMate如何把 Trading Assistant Core 打包为 OpenClaw / ClawHub 技能，并支持 Docker 与 CLI 安装。",
           keywords: `${sharedKeywords}, 交易助手案例`,
+        },
+      },
+      {
+        slug: "custom-mail",
+        title: "Custom Mail",
+        subtitle: "案例详解",
+        description:
+          "Cloudflare Workers 上的私有发信控制台——Rust 运行时、可品牌化 UI、可插拔 ESP。",
+        cover: "/images/cover-custom-mail.jpg",
+        coverAlt: "Custom Mail",
+        status: "live",
+        overview:
+          "用 Rust（workers-rs）实现的自托管网页发信工作台：会话登录、Markdown 撰写与邮件安全预览、附件、KV 发送记录，以及可丢入的 ESP / 主题 / 布局插件——不必自建邮件服务器。",
+        problem:
+          "团队需要可品牌化、跑在自己 Cloudflare 账号上的私有撰写界面——不是共享 SaaS 邮箱，也不是要运维一整套 VPS 邮件栈。",
+        solution:
+          "把 Custom Mail 做成 Workers + KV 产品：JSON 驱动品牌、可插拔提供商（Brevo、Resend、SendGrid …）、Docker / GHCR 镜像、文档站，以及可供 Agent 安装的 ClawHub 技能。",
+        architecture: [
+          {
+            title: "运行时链路",
+            layers: [
+              "会话登录",
+              "撰写 + Markdown 预览",
+              "附件",
+              "ESP 提供商插件",
+              "KV 发送历史",
+              "Workers + 静态资源",
+            ],
+          },
+        ],
+        features: [
+          "Cloudflare Workers 上带密码保护的撰写控制台",
+          "CommonMark + GFM 正文与邮件安全 HTML 预览",
+          "多附件上限与 KV 中最近 N 条发送记录",
+          "可品牌化配置：名称、域名、配色、Logo、页脚与文案",
+          "可插拔 ESP / 主题 / 布局 / Logo 目录",
+          "Docker Hub + GHCR 镜像与 ClawHub 技能安装路径",
+        ],
+        contribution: [
+          "从 Workers 运行时到 ESP 插件，主导产品架构。",
+          "实现 Rust/wasm 邮件控制台、Markdown 预览与 KV 历史。",
+          "发布 Docker / GHCR 镜像、文档站与 ClawHub 打包。",
+        ],
+        techStack: [
+          "Rust (workers-rs)",
+          "Cloudflare Workers",
+          "KV",
+          "Brevo / Resend / SendGrid",
+          "Docker",
+          "OpenClaw / ClawHub",
+        ],
+        deployment: {
+          summary:
+            "在 Cloudflare Workers 上绑定密钥与 KV 部署，或用 Docker / wrangler 本地运行；在 config/mail.json 配置品牌与 ESP。",
+          steps: [
+            "克隆 InnoNestX/Custom-Mail，并复制 .dev.vars.example。",
+            "设置 ADMIN_PASSWORD 与提供商 API Key，然后 npm run dev 或 docker run。",
+            "将 wrangler 路由与 mail.json 的 host 指向你的域名并部署。",
+            "可选：clawhub install custom-mail，走 OpenClaw 技能路径。",
+          ],
+          channels: [
+            { label: "在线体验", href: "https://mail.xuxuclassmate.com" },
+            { label: "文档", href: "https://innonestx.github.io/Custom-Mail/zh/" },
+            {
+              label: "GitHub",
+              href: "https://github.com/InnoNestX/Custom-Mail",
+            },
+            {
+              label: "Docker Hub",
+              href: "https://hub.docker.com/r/xuxuclassmate/custom-mail",
+            },
+            {
+              label: "ClawHub",
+              href: "https://clawhub.ai/xuxuclassmate/custom-mail",
+            },
+          ],
+        },
+        proof: {
+          github: "https://github.com/InnoNestX/Custom-Mail",
+          demo: "https://mail.xuxuclassmate.com",
+        },
+        tradeoffs: [
+          "自托管 Workers + KV，而不是 SaaS 网页邮箱——凭据与品牌留在你的账号。",
+          "专注出站撰写控制台，而不是完整 IMAP 收件箱——对齐团队真实发信流程。",
+          "可插拔 ESP，而不是锁死单一提供商——通过配置切换 Brevo / Resend / SendGrid。",
+        ],
+        artifacts: [
+          {
+            title: "在线产品",
+            description: "私有邮件控制台的参考部署。",
+            href: "https://mail.xuxuclassmate.com",
+            linkLabel: "打开 Custom Mail",
+          },
+          {
+            title: "文档",
+            description: "中英文档：配置、Docker、部署与 OpenClaw。",
+            href: "https://innonestx.github.io/Custom-Mail/zh/",
+            linkLabel: "打开文档",
+          },
+          {
+            title: "源码仓库",
+            description: "Rust Workers 应用、插件与 CI 开源可查。",
+            href: "https://github.com/InnoNestX/Custom-Mail",
+            linkLabel: "GitHub",
+          },
+        ],
+        outcomes: [
+          "Cloudflare Workers 上带会话登录的私有撰写 UI",
+          "Markdown 预览 + 附件 + KV 发送历史",
+          "安装面：Workers 部署、Docker / GHCR、ClawHub",
+        ],
+        metrics: [
+          {
+            label: "ClawHub 安装",
+            value: "90+",
+            metric: "clawhub:custom-mail",
+          },
+          { label: "运行时", value: "Workers · Rust" },
+          { label: "使用面", value: "在线 · Docker · ClawHub" },
+        ],
+        links: [
+          {
+            label: "GitHub",
+            href: "https://github.com/InnoNestX/Custom-Mail",
+          },
+          { label: "在线体验", href: "https://mail.xuxuclassmate.com" },
+          {
+            label: "文档",
+            href: "https://innonestx.github.io/Custom-Mail/zh/",
+          },
+          {
+            label: "ClawHub",
+            href: "https://clawhub.ai/xuxuclassmate/custom-mail",
+          },
+        ],
+        meta: {
+          title: "Custom Mail 案例 | XuXuClassMate",
+          description:
+            "XuXuClassMate如何交付 Custom Mail——带 Docker 与 ClawHub 安装路径的 Cloudflare Workers 私有发信控制台。",
+          keywords: `${sharedKeywords}, Custom Mail, Cloudflare Workers, 邮件`,
         },
       },
       {
