@@ -222,6 +222,12 @@ function parseCountTarget(raw: string): { end: number; suffix: string } | null {
 }
 
 function animateCount(node: HTMLElement, display: string): void {
+  if (node.dataset.countPlayed === "1") {
+    node.textContent = display;
+    return;
+  }
+  node.dataset.countPlayed = "1";
+
   const target = parseCountTarget(display);
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (!target || reduceMotion) {
@@ -250,8 +256,8 @@ function animateCount(node: HTMLElement, display: string): void {
   requestAnimationFrame(tick);
 }
 
-function initHighlightCountUp(): void {
-  const nodes = document.querySelectorAll<HTMLElement>("[data-count-to]");
+/** Play count-up once when the node enters the viewport. */
+function observeCountUp(nodes: HTMLElement[]): void {
   if (nodes.length === 0) return;
 
   const run = (node: HTMLElement) => {
@@ -277,6 +283,14 @@ function initHighlightCountUp(): void {
   for (const node of nodes) {
     observer.observe(node);
   }
+}
+
+function initHighlightCountUp(): void {
+  // Metric-backed highlights wait for live fetch so the count plays once to the final value.
+  const nodes = [
+    ...document.querySelectorAll<HTMLElement>("[data-count-to]"),
+  ].filter((node) => !node.dataset.metric);
+  observeCountUp(nodes);
 }
 
 type MetricId =
@@ -345,22 +359,27 @@ function initLiveMetrics(): void {
   ].filter((node) => Boolean(node.dataset.metric));
   if (nodes.length === 0) return;
 
-  void fetchMetricsBundle().then((live) => {
-    if (Object.keys(live).length === 0) return;
+  const highlightNodes = nodes.filter((node) =>
+    node.classList.contains("highlight-value"),
+  );
 
-    for (const node of nodes) {
-      const id = node.dataset.metric as MetricId;
-      const raw = live[id];
-      if (raw == null) continue;
-      const display = formatMetric(raw);
-      node.dataset.countTo = display;
-      if (node.classList.contains("highlight-value")) {
-        animateCount(node, display);
-      } else {
-        node.textContent = display;
+  void fetchMetricsBundle()
+    .then((live) => {
+      for (const node of nodes) {
+        const id = node.dataset.metric as MetricId;
+        const raw = live[id];
+        if (raw == null) continue;
+        const display = formatMetric(raw);
+        node.dataset.countTo = display;
+        if (!node.classList.contains("highlight-value")) {
+          node.textContent = display;
+        }
       }
-    }
-  });
+    })
+    .finally(() => {
+      // One count-up to whatever value we have (live or build-time fallback).
+      observeCountUp(highlightNodes);
+    });
 }
 
 function initBackToTop(): void {
