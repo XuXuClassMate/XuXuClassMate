@@ -222,6 +222,15 @@ function getCache(): Cache | null {
   }
 }
 
+/** HEAD must not 404 — crawlers probe with HEAD before GET. */
+export async function onRequestHead(context: PagesContext): Promise<Response> {
+  const response = await onRequestGet(context);
+  return new Response(null, {
+    status: response.status,
+    headers: response.headers,
+  });
+}
+
 export async function onRequestGet(context: PagesContext): Promise<Response> {
   const cacheKey = new Request(new URL(context.request.url).toString(), {
     method: "GET",

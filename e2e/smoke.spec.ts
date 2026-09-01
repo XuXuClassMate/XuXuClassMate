@@ -566,6 +566,9 @@ test("build ships redirects and headers", async () => {
   expect(existsSync(headers)).toBe(true);
   const redirectBody = readFileSync(redirects, "utf8");
   expect(redirectBody).toContain("/en/work.html /en/work 301");
+  expect(redirectBody).toContain("/en/work/custom-mail.html /en/work/custom-mail 301");
+  expect(redirectBody).toContain("/index3 / 301");
+  expect(redirectBody).toContain("/s / 301");
   expect(redirectBody).toContain("/en/ / 301");
   expect(readFileSync(headers, "utf8")).toContain("Content-Security-Policy");
 });
