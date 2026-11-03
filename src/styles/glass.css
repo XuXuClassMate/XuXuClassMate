@@ -9,7 +9,7 @@
   --liquid-tint: 0.45;
   --liquid-blur: calc(18px + var(--liquid-tint) * 22px);
   --liquid-saturate: calc(140% + var(--liquid-tint) * 60%);
-  --liquid-radius: 22px;
+  --liquid-radius: 26px;
   --liquid-radius-capsule: 980px;
   --liquid-ease: cubic-bezier(0.32, 0.72, 0, 1);
   --liquid-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -33,7 +33,7 @@ html[data-theme="dark"] {
   --liquid-sheen: rgba(255, 255, 255, calc(0.18 + (1 - var(--liquid-tint)) * 0.22));
   --content-surface: #1c1c1e;
   --content-surface-raised: #2c2c2e;
-  --content-border: rgba(255, 255, 255, 0.08);
+  --content-border: rgba(84, 84, 88, 0.65);
 }
 
 html[data-theme="light"] {
@@ -53,8 +53,8 @@ html[data-theme="light"] {
   --liquid-rim: rgba(255, 255, 255, calc(0.55 + (1 - var(--liquid-tint)) * 0.3));
   --liquid-sheen: rgba(255, 255, 255, calc(0.45 + (1 - var(--liquid-tint)) * 0.35));
   --content-surface: #ffffff;
-  --content-surface-raised: #fbfbfd;
-  --content-border: rgba(0, 0, 0, 0.06);
+  --content-surface-raised: #f2f2f7;
+  --content-border: rgba(60, 60, 67, 0.12);
 }
 
 /* Shared liquid glass recipe (functional layer) */
@@ -559,4 +559,29 @@ html[data-theme="light"] {
   .glass-tint.is-open .glass-tint-panel {
     animation: none;
   }
+}
+
+/* Text styles from the iOS and iPadOS 27 UI Kit */
+.value-card h3,
+.link-card h3,
+.note-card h3,
+.skill-card h3,
+.channel-card h3,
+.principle-card h3,
+.approach-card h3,
+.featured-row h3,
+.article-row h3,
+.timeline-body h3 {
+  font-family: var(--font-body);
+  font-size: var(--type-headline);
+  font-weight: 600;
+  line-height: 22px;
+  letter-spacing: var(--track-headline);
+}
+
+.highlight-value,
+.achievement-value {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: var(--track-large-title);
 }
