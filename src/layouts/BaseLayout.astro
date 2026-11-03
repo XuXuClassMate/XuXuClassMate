@@ -13,7 +13,6 @@ import {
   type NoteSlug,
   type PageId,
 } from "../lib/i18n";
-import "../styles/fonts.css";
 import "../styles/global.css";
 
 type Props = {
@@ -155,20 +154,6 @@ const langSwitchHref = alternateLocalePath(Astro.url.pathname);
     <link rel="shortcut icon" href="/images/logo.svg" />
     <link rel="icon" type="image/svg+xml" href="/images/logo.svg" />
     <link rel="apple-touch-icon" href="/images/logo.svg" />
-    <link
-      rel="preload"
-      href="/fonts/outfit-latin-700-normal.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href="/fonts/outfit-latin-400-normal.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
     {
       structuredData ? (
         <script
