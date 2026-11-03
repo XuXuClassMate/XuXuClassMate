@@ -487,13 +487,13 @@ test("copy email button updates label", async ({ page, context }) => {
 
 test("theme toggles between dark and light", async ({ page }) => {
   await page.goto("/");
-  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
-  await page.locator("#themeToggle").click();
   await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+  await page.locator("#themeToggle").click();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
   await page.reload();
-  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
-  await page.locator("#themeToggle").click();
   await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+  await page.locator("#themeToggle").click();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
 });
 
 test("mobile nav toggles", async ({ page }) => {
