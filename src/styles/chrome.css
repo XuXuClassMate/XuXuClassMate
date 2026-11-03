@@ -1,6 +1,6 @@
 .footer {
   background: var(--bg-soft);
-  border-top: 1px solid var(--line);
+  border-top: 0.5px solid var(--content-border, var(--line));
   padding: 56px 0 28px;
 }
 
@@ -30,7 +30,12 @@
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  transition: color 0.3s ease;
+  padding: 0.35rem 0.7rem;
+  border-radius: 980px;
+  transition:
+    color 0.3s var(--ease-ui, ease),
+    background 0.3s var(--ease-ui, ease),
+    transform 0.3s var(--liquid-spring, ease);
 }
 
 .social-links a .icon {
@@ -40,17 +45,19 @@
 }
 
 .social-links a:hover {
-  color: var(--accent-cyan);
+  color: var(--primary);
+  background: var(--primary-soft);
+  transform: scale(1.03);
 }
 
 .social-links a:hover .icon {
-  transform: scale(1.1);
-  transition: transform 0.3s ease;
+  transform: scale(1.05);
+  transition: transform 0.3s var(--liquid-spring, ease);
 }
 
 .footer-bottom {
   padding-top: 32px;
-  border-top: 1px solid var(--line);
+  border-top: 0.5px solid var(--content-border, var(--line));
   text-align: center;
 }
 

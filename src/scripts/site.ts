@@ -431,6 +431,7 @@ function initTypewriter(): void {
 type Theme = "dark" | "light";
 
 const THEME_KEY = "xuxu-theme";
+const LIQUID_TINT_KEY = "xuxu-liquid-tint";
 
 function readTheme(): Theme {
   const attr = document.documentElement.getAttribute("data-theme");
@@ -441,7 +442,7 @@ function readTheme(): Theme {
   } catch {
     // ignore
   }
-  return "dark";
+  return "light";
 }
 
 function applyTheme(theme: Theme): void {
@@ -466,6 +467,11 @@ function applyTheme(theme: Theme): void {
   sun?.classList.toggle("is-hidden", theme !== "light");
   button.setAttribute("aria-label", nextLabel);
   button.setAttribute("title", nextLabel);
+
+  const meta = document.querySelector('meta[name="theme-color"]:not([media])');
+  if (meta) {
+    meta.setAttribute("content", theme === "dark" ? "#000000" : "#f5f5f7");
+  }
 }
 
 function initThemeToggle(): void {
@@ -480,6 +486,115 @@ function initThemeToggle(): void {
   });
 }
 
+function clampTint(value: number): number {
+  if (!Number.isFinite(value)) return 0.45;
+  return Math.min(1, Math.max(0, value));
+}
+
+function applyLiquidTint(value: number): void {
+  const tint = clampTint(value);
+  document.documentElement.style.setProperty("--liquid-tint", String(tint));
+  try {
+    localStorage.setItem(LIQUID_TINT_KEY, String(tint));
+  } catch {
+    // ignore
+  }
+
+  const slider = document.querySelector<HTMLInputElement>("[data-glass-tint-slider]");
+  if (slider) {
+    slider.value = String(Math.round(tint * 100));
+    slider.setAttribute("aria-valuenow", slider.value);
+  }
+}
+
+function readLiquidTint(): number {
+  try {
+    const stored = localStorage.getItem(LIQUID_TINT_KEY);
+    if (stored != null) return clampTint(Number(stored));
+  } catch {
+    // ignore
+  }
+  const css = getComputedStyle(document.documentElement)
+    .getPropertyValue("--liquid-tint")
+    .trim();
+  return clampTint(css ? Number(css) : 0.45);
+}
+
+function initGlassTint(): void {
+  applyLiquidTint(readLiquidTint());
+
+  const root = document.querySelector<HTMLElement>("[data-glass-tint]");
+  const toggle = document.querySelector<HTMLButtonElement>("[data-glass-tint-toggle]");
+  const slider = document.querySelector<HTMLInputElement>("[data-glass-tint-slider]");
+  if (!root || !toggle || !slider) return;
+
+  const setOpen = (open: boolean) => {
+    root.classList.toggle("is-open", open);
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+  };
+
+  toggle.addEventListener("click", (event) => {
+    event.stopPropagation();
+    setOpen(!root.classList.contains("is-open"));
+  });
+
+  slider.addEventListener("input", () => {
+    applyLiquidTint(Number(slider.value) / 100);
+  });
+
+  document.addEventListener("click", (event) => {
+    const target = event.target;
+    if (!(target instanceof Node)) return;
+    if (!root.contains(target)) setOpen(false);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") setOpen(false);
+  });
+}
+
+/** iOS-style interactive glass: press scale + specular follow. */
+function initLiquidInteractions(): void {
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const targets = [
+    ...document.querySelectorAll<HTMLElement>(
+      ".btn-ghost, .btn-primary, .theme-toggle, .filter-btn, .copy-email-btn, .back-to-top, .glass-tint-toggle, .language-switch",
+    ),
+  ];
+
+  for (const node of targets) {
+    const press = () => node.classList.add("is-pressed");
+    const release = () => {
+      window.setTimeout(() => node.classList.remove("is-pressed"), 180);
+    };
+    node.addEventListener("pointerdown", press);
+    node.addEventListener("pointerup", release);
+    node.addEventListener("pointerleave", release);
+    node.addEventListener("pointercancel", release);
+  }
+
+  if (reduceMotion) return;
+
+  const specularHosts = [
+    ...document.querySelectorAll<HTMLElement>(
+      ".header, .btn-ghost, .theme-toggle, .nav-more-menu, .back-to-top, .filter-btn, .glass-tint-panel",
+    ),
+  ];
+
+  const onMove = (event: PointerEvent) => {
+    for (const host of specularHosts) {
+      const rect = host.getBoundingClientRect();
+      if (rect.width < 2 || rect.height < 2) continue;
+      const x = ((event.clientX - rect.left) / rect.width) * 100;
+      const y = ((event.clientY - rect.top) / rect.height) * 100;
+      host.style.setProperty("--liquid-spot-x", `${String(Math.min(100, Math.max(0, x)))}%`);
+      host.style.setProperty("--liquid-spot-y", `${String(Math.min(100, Math.max(0, y)))}%`);
+    }
+  };
+
+  window.addEventListener("pointermove", onMove, { passive: true });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initMobileNav();
   initNavMore();
@@ -492,4 +607,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initBackToTop();
   initTypewriter();
   initThemeToggle();
+  initGlassTint();
+  initLiquidInteractions();
 });

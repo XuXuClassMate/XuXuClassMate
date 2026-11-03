@@ -565,26 +565,40 @@ test("build ships redirects and headers", async () => {
   expect(existsSync(redirects)).toBe(true);
   expect(existsSync(headers)).toBe(true);
   const redirectBody = readFileSync(redirects, "utf8");
-  expect(redirectBody).toContain("/en/work.html /en/work 301");
-  expect(redirectBody).toContain("/en/work/custom-mail.html /en/work/custom-mail 301");
-  expect(redirectBody).toContain("/index3 / 301");
-  expect(redirectBody).toContain("/s / 301");
-  expect(redirectBody).toContain("/en/ / 301");
+  expect(redirectBody).toContain("/*.html /:splat 200");
+  expect(redirectBody).toContain(
+    "/en/blog/domestic-db-docker-qa /en/blog/enterprise-db-docker-qa 200",
+  );
+  expect(redirectBody).toContain("/en /en/ 301");
   expect(readFileSync(headers, "utf8")).toContain("Content-Security-Policy");
 });
 
-test("english locale home aliases redirect to root", async ({ page }) => {
+test("english locale home aliases serve content with root canonical", async ({
+  page,
+}) => {
   for (const path of ["/en/", "/en/index.html"]) {
     const response = await page.goto(path, { waitUntil: "domcontentloaded" });
-    expect(response?.status(), `${path} should not 404`).toBeLessThan(400);
-    await expect(page).toHaveURL(/\/$/);
+    expect(response?.status(), path).toBe(200);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+      "href",
+      "https://www.xuxuclassmate.com/",
+    );
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(
       "Hi, I'm XuXu.",
     );
   }
 });
 
-test("legacy work html path still serves content", async ({ page }) => {
-  await page.goto("/en/work.html");
+test("legacy work html path serves content with pretty canonical", async ({
+  page,
+}) => {
+  const response = await page.goto("/en/work.html", {
+    waitUntil: "domcontentloaded",
+  });
+  expect(response?.status()).toBe(200);
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+    "href",
+    "https://www.xuxuclassmate.com/en/work",
+  );
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Tools");
 });
