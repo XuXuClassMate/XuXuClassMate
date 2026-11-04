@@ -32,43 +32,17 @@ const qps = home.achievements[1];
 const impactNote = isZh
   ? "Docker 与 ClawHub 是公开累计，每日更新。覆盖率和 QPS 来自过往交付，不是实时计数。"
   : "Docker and ClawHub totals are public and updated daily. Coverage and QPS are from past delivery work, not live counters.";
-const shots = [
-  {
-    src: "/images/product-generator-input.jpg",
-    title: isZh ? "需求进入" : "Requirements in",
-    alt: isZh
-      ? "交互 Demo 中已载入的需求文本"
-      : "Requirement text loaded in the interactive demo",
-  },
-  {
-    src: "/images/product-generator-cases.jpg",
-    title: isZh ? "生成用例" : "Generated cases",
-    alt: isZh
-      ? "交互 Demo 生成的结构化测试用例"
-      : "Structured test cases from the interactive demo",
-  },
-  {
-    src: "/images/product-generator-export.jpg",
-    title: isZh ? "导出" : "Export",
-    alt: isZh
-      ? "交互 Demo 的 Excel、Markdown 和 XMind 导出"
-      : "Excel, Markdown, and XMind export in the interactive demo",
-  },
-];
 ---
 
 <BaseLayout locale={locale} page="home">
   <main id="main-content" class="apple-home">
-    <section class="hero hero--home">
-      <div class="hero-copy">
+    <section class="tile tile--hero hero hero--home">
+      <div class="tile-copy hero-copy">
         <p class="hero-role-line">{home.heroKicker}</p>
         <h1 class="hero-title">{home.greeting}</h1>
         <p class="hero-desc">{home.description}</p>
         <div class="hero-actions">
-          <a class="btn-primary" href="#featured">
-            {home.ctaWork}
-            <span aria-hidden="true">›</span>
-          </a>
+          <a class="btn-primary" href="#featured">{home.ctaWork}</a>
           <a
             class="btn-ghost"
             href={home.connectGithub}
@@ -76,9 +50,11 @@ const shots = [
             rel="noopener noreferrer"
           >
             {home.ctaGithub}
-            <span aria-hidden="true">›</span>
           </a>
         </div>
+        <p class="tile-extra">
+          <a href={home.ctaDemoHref}>{home.ctaDemo}</a>
+        </p>
       </div>
       <figure class="hero-visual">
         <picture>
@@ -95,30 +71,24 @@ const shots = [
             height="420"
           />
         </picture>
-        <figcaption>
-          <a href={home.ctaDemoHref}>
-            {home.ctaDemo}
-            <span aria-hidden="true">›</span>
-          </a>
-        </figcaption>
       </figure>
     </section>
 
-    <section class="home-band" id="featured">
-      <div class="band-copy">
-        <h2>{home.featuredTitle}</h2>
-        {flagship?.pitch ? <p class="band-lead">{flagship.pitch}</p> : null}
+    <section class="tile tile--soft" id="featured">
+      <div class="tile-copy">
+        <h2 class="tile-kicker">{home.featuredTitle}</h2>
+        {flagship?.pitch ? <p class="tile-statement">{flagship.pitch}</p> : null}
       </div>
-      <div class="shot-row">
-        {
-          shots.map((shot) => (
-            <figure>
-              <img src={shot.src} alt={shot.alt} width="800" height="520" />
-              <figcaption>{shot.title}</figcaption>
-            </figure>
-          ))
-        }
-      </div>
+      <figure class="tile-product">
+        <img
+          src="/images/product-generator-input.jpg"
+          alt={isZh
+            ? "交互 Demo 中已载入的需求"
+            : "A requirement loaded in the interactive demo"}
+          width="900"
+          height="640"
+        />
+      </figure>
       {
         flagship && (
           <p class="band-links">
@@ -131,11 +101,11 @@ const shots = [
       }
     </section>
 
-    <section class="home-band home-band--paper" id="by-the-numbers">
-      <div class="band-copy">
+    <section class="tile tile--paper" id="by-the-numbers">
+      <div class="tile-copy">
         <h2>{copy.home.highlightsTitle}</h2>
-        <p class="band-note">{impactNote}</p>
         <p class="highlights-subtitle">{copy.home.highlightsSubtitle}</p>
+        <p class="band-note">{impactNote}</p>
       </div>
       <div class="impact-row">
         {
@@ -191,7 +161,7 @@ const shots = [
       </div>
     </section>
 
-    <section class="home-band" id="selected">
+    <section class="tile tile--ink" id="selected">
       {
         moreFeatured.map((item) => (
           <a class="selected-row" href={item.href}>
@@ -208,8 +178,8 @@ const shots = [
       }
     </section>
 
-    <section class="home-band home-band--quiet" id="opensource">
-      <div class="band-copy">
+    <section class="closer" id="opensource">
+      <div class="tile-copy">
         <h2>{home.ossTitle}</h2>
         <p class="band-lead">{home.ossDescription}</p>
         <p class="band-links">
@@ -225,8 +195,8 @@ const shots = [
       </div>
     </section>
 
-    <section class="home-band" id="articles">
-      <div class="band-copy band-copy--row">
+    <section class="closer closer--notes" id="articles">
+      <div class="tile-copy band-copy--row">
         <h2>{home.articlesTitle}</h2>
         <a href={blogHref}>
           {home.articlesCta}

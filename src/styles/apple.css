@@ -1747,3 +1747,256 @@ html[data-theme="dark"] .note-rows a {
     transition: none;
   }
 }
+
+.apple-home {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #f5f5f7;
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 0;
+  padding: 72px 22px 64px;
+  text-align: center;
+  background: #f5f5f7;
+  color: #1d1d1f;
+}
+
+.tile--hero {
+  min-height: calc(100vh - 44px);
+  justify-content: flex-start;
+  padding-bottom: 0;
+}
+
+.tile--hero,
+.tile--paper {
+  background: #fbfbfd;
+}
+
+.tile--ink {
+  background: #000;
+  color: #f5f5f7;
+  padding: 88px 22px;
+}
+
+.tile-copy {
+  width: min(980px, 100%);
+  margin: 0 auto;
+}
+
+.tile .hero-title,
+.tile-statement,
+.tile--ink .selected-row h2,
+.tile--paper > .tile-copy h2 {
+  font-size: 56px;
+  font-weight: 600;
+  letter-spacing: -0.28px;
+  line-height: 1.07;
+}
+
+.tile-kicker,
+.hero-role-line {
+  margin: 0 0 6px;
+  color: #6e6e73;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.tile--ink .tile-kicker,
+.tile--hero .hero-role-line {
+  color: #86868b;
+}
+
+.tile-statement {
+  margin: 8px auto 0;
+  max-width: 16em;
+}
+
+.tile .hero-desc,
+.tile--ink .selected-row p,
+.band-note {
+  margin: 8px auto 0;
+  max-width: 34rem;
+  color: #86868b;
+  font-size: 21px;
+  font-weight: 400;
+  line-height: 1.19;
+  letter-spacing: 0.011em;
+}
+
+.tile--ink .selected-row p {
+  color: #a1a1a6;
+}
+
+.apple-home .hero--home .hero-actions {
+  justify-content: center;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.apple-home .hero--home .btn-primary,
+html.lg-svg .apple-home .hero--home .btn-primary {
+  width: auto;
+  min-height: 44px;
+  padding: 11px 22px;
+  border: 0;
+  border-radius: 980px;
+  background: #0071e3;
+  color: #fff;
+  font-size: 17px;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.apple-home .hero--home .btn-ghost,
+html.lg-svg .apple-home .hero--home .btn-ghost {
+  width: auto;
+  min-height: 44px;
+  padding: 10px 21px;
+  border: 1px solid #0071e3;
+  border-radius: 980px;
+  background: transparent;
+  color: #0071e3;
+  font-size: 17px;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.apple-home .hero--home .btn-primary:hover,
+html.lg-svg .apple-home .hero--home .btn-primary:hover {
+  background: #0077ed;
+  color: #fff;
+  text-decoration: none;
+}
+
+.apple-home .hero--home .btn-ghost:hover,
+html.lg-svg .apple-home .hero--home .btn-ghost:hover {
+  background: transparent;
+  color: #0077ed;
+  border-color: #0077ed;
+  text-decoration: none;
+}
+
+.tile-extra {
+  margin: 14px 0 0;
+}
+
+.tile-extra a,
+.tile .band-links a,
+.tile--ink .selected-link {
+  color: #0066cc;
+  font-size: 21px;
+  text-decoration: none;
+}
+
+.tile--ink .selected-link {
+  color: #2997ff;
+}
+
+.hero-visual {
+  width: min(1040px, 100%);
+  margin: 36px auto 0;
+}
+
+.hero-visual img {
+  border-radius: 12px 12px 0 0;
+}
+
+.tile-product {
+  width: min(720px, 100%);
+  margin: 28px auto 48px;
+}
+
+.tile-product img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+  background: #fff;
+}
+
+.tile--ink .selected-row {
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  min-height: 0;
+  text-align: center;
+}
+
+html[data-theme="dark"] .apple-home {
+  background: #000;
+}
+
+.tile--ink .selected-row h2,
+.tile--ink .selected-row p {
+  text-align: center;
+  margin-right: auto;
+  margin-left: auto;
+  color: #f5f5f7;
+}
+
+.tile--ink .selected-row p {
+  color: #a1a1a6;
+}
+
+.closer {
+  padding: 72px 22px;
+  background: #fff;
+  text-align: center;
+}
+
+.closer--notes {
+  background: #f5f5f7;
+}
+
+html[data-theme="dark"] .tile,
+html[data-theme="dark"] .tile--hero,
+html[data-theme="dark"] .tile--paper,
+html[data-theme="dark"] .closer,
+html[data-theme="dark"] .closer--notes {
+  background: #000;
+  color: #f5f5f7;
+}
+
+html[data-theme="dark"] .tile--soft {
+  background: #1d1d1f;
+}
+
+@media (max-width: 768px) {
+  .tile {
+    min-height: 0;
+    padding: 36px 16px 28px;
+  }
+
+  .tile .hero-title,
+  .tile-statement,
+  .tile--ink .selected-row h2,
+  .tile--paper > .tile-copy h2 {
+    font-size: 32px;
+    letter-spacing: 0.004em;
+  }
+
+  .apple-home .hero--home .hero-actions {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .apple-home .hero--home .btn-primary,
+  .apple-home .hero--home .btn-ghost,
+  html.lg-svg .apple-home .hero--home .btn-primary,
+  html.lg-svg .apple-home .hero--home .btn-ghost {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-visual img,
+  .shot-row img {
+    border-radius: 16px;
+    max-height: none;
+  }
+}
