@@ -1,6 +1,26 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
+
+async function expectMenuBelowHeader(page: Page, menuSelector: string): Promise<void> {
+  const menu = page.locator(menuSelector);
+  await expect(menu).toBeVisible();
+  const hit = await menu.evaluate((el) => {
+    const rect = el.getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+    const target = document.elementFromPoint(x, y);
+    const header = document.getElementById("siteHeader")?.getBoundingClientRect();
+    return {
+      hitMenu: Boolean(target && el.contains(target)),
+      extendsBelowHeader: header ? rect.bottom > header.bottom + 12 : false,
+      height: rect.height,
+    };
+  });
+  expect(hit.height).toBeGreaterThan(40);
+  expect(hit.extendsBelowHeader).toBe(true);
+  expect(hit.hitMenu).toBe(true);
+}
 
 test("home renders and language switch works", async ({ page }) => {
   await page.goto("/");
@@ -307,6 +327,7 @@ test("desktop nav keeps primary links and Work/More menus", async ({
   await expect(page.locator("#themeToggle")).toBeVisible();
 
   await page.getByRole("button", { name: /Work/ }).click();
+  await expectMenuBelowHeader(page, "#navWorkMenu");
   await expect(
     page.getByRole("menuitem", { name: "Experience" }),
   ).toBeVisible();
@@ -317,8 +338,11 @@ test("desktop nav keeps primary links and Work/More menus", async ({
     "Experience",
     "Open Source",
   ]);
+  await page.getByRole("menuitem", { name: "Experience" }).click({ trial: true });
 
   await page.getByRole("button", { name: /More/ }).click();
+  await expect(page.locator("#navWorkMenu")).toBeHidden();
+  await expectMenuBelowHeader(page, "#navMoreMenu");
   await expect(page.getByRole("menuitem", { name: "Now" })).toBeVisible();
   await expect(page.getByRole("menuitem", { name: "Playground" })).toBeVisible();
   await expect(page.getByRole("menuitem", { name: "Contact" })).toBeVisible();
@@ -327,6 +351,14 @@ test("desktop nav keeps primary links and Work/More menus", async ({
     "Playground",
     "Contact",
   ]);
+  await page.getByRole("menuitem", { name: "Now" }).click({ trial: true });
+
+  await page.locator("#glassTintToggle").click();
+  const tintPanel = page.locator("#glassTintPanel");
+  await expect(tintPanel).toBeVisible();
+  await expect(page.locator("#glassTintSlider")).toBeVisible();
+  await page.locator("#glassTintSlider").fill("80");
+  await expect(page.locator("html")).toHaveAttribute("style", /--liquid-tint:\s*0\.8/);
 });
 
 test("playground page lists tryable experiences", async ({ page }) => {
@@ -362,6 +394,9 @@ test("mobile nav is hamburger-only with a compact drawer", async ({
   await expect(page.locator("#themeToggle")).toBeHidden();
   await page.locator("#mobileNavToggle").click();
   await expect(page.locator(".nav-links")).toHaveClass(/show/);
+  const drawer = await page.locator(".nav-links").boundingBox();
+  expect(drawer).not.toBeNull();
+  expect(drawer!.height).toBeGreaterThan(700);
   for (const label of ["About", "Projects", "AI Testing", "Notes"]) {
     await expect(
       page.locator(".nav-links").getByRole("link", { name: label }),
@@ -568,6 +603,9 @@ test("build ships redirects and headers", async () => {
   expect(redirectBody).toContain("/*.html /:splat 200");
   expect(redirectBody).toContain(
     "/en/blog/domestic-db-docker-qa /en/blog/enterprise-db-docker-qa 200",
+  );
+  expect(redirectBody.indexOf("/en/blog/domestic-db-docker-qa.html")).toBeLessThan(
+    redirectBody.indexOf("/*.html /:splat 200"),
   );
   expect(redirectBody).toContain("/en /en/ 301");
   expect(readFileSync(headers, "utf8")).toContain("Content-Security-Policy");
