@@ -18,6 +18,7 @@ export type PortfolioHome = {
   achievements: { value: string; label: string }[];
   featuredTitle: string;
   featuredCta: string;
+  featuredMore: string;
   servicesTitle: string;
   servicesLead: string;
   services: {
@@ -156,6 +157,7 @@ export function getPortfolioHome(locale: Locale): PortfolioHome {
     ],
     featuredTitle: isZh ? "精选项目" : "Featured Projects",
     featuredCta: isZh ? "查看全部项目" : "View all projects",
+    featuredMore: isZh ? "进一步了解" : "Learn more",
     featured: isZh ? featuredZh : featuredEn,
     servicesTitle: isZh ? "在线服务" : "Services",
     servicesLead: isZh ? "三台正在运行的服务。" : "Three services, already running.",
