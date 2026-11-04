@@ -16,268 +16,232 @@ type Props = {
 const { locale } = Astro.props;
 const copy = getCopy(locale);
 const home = getPortfolioHome(locale);
-const articles = getLatestArticles(locale);
-const workHref = pageHref(locale, "work");
+const articles = getLatestArticles(locale).slice(0, 2);
 const blogHref = pageHref(locale, "blog");
 const orgHref = pageHref(locale, "open-source");
-const playgroundHref = pageHref(locale, "playground");
 const metrics = await getMetrics();
 const highlights = copy.home.highlights;
 const [flagship, ...moreFeatured] = home.featured;
 const isZh = locale === "zh";
-const adoptionTitle = isZh ? "产品采用" : "Product Adoption";
-const resultsTitle = isZh ? "工程结果" : "Engineering Results";
-const resultsNote = isZh
-  ? "来自过往交付，不是实时计数。"
-  : "From past delivery work, not a live counter.";
+const pulls = highlights.find((item) => item.metric === "docker:total-pulls");
+const clawhub = highlights.find(
+  (item) => item.metric === "clawhub:total-downloads",
+);
+const coverage = home.achievements[0];
+const qps = home.achievements[1];
+const impactNote = isZh
+  ? "Docker 与 ClawHub 是公开累计，每日更新。覆盖率和 QPS 来自过往交付，不是实时计数。"
+  : "Docker and ClawHub totals are public and updated daily. Coverage and QPS are from past delivery work, not live counters.";
+const shots = [
+  {
+    src: "/images/product-generator-input.jpg",
+    title: isZh ? "需求进入" : "Requirements in",
+    alt: isZh
+      ? "交互 Demo 中已载入的需求文本"
+      : "Requirement text loaded in the interactive demo",
+  },
+  {
+    src: "/images/product-generator-cases.jpg",
+    title: isZh ? "生成用例" : "Generated cases",
+    alt: isZh
+      ? "交互 Demo 生成的结构化测试用例"
+      : "Structured test cases from the interactive demo",
+  },
+  {
+    src: "/images/product-generator-export.jpg",
+    title: isZh ? "导出" : "Export",
+    alt: isZh
+      ? "交互 Demo 的 Excel、Markdown 和 XMind 导出"
+      : "Excel, Markdown, and XMind export in the interactive demo",
+  },
+];
 ---
 
 <BaseLayout locale={locale} page="home">
   <main id="main-content" class="apple-home">
     <section class="hero hero--home">
-      <div class="hero-split">
-        <div class="hero-content">
-          <p class="hero-role-line">{home.heroKicker}</p>
-          <h1 class="hero-title">{home.greeting}</h1>
-          <p class="hero-desc">{home.description}</p>
-          <div class="hero-actions">
-            <a class="btn-primary" href="#featured">
-              {home.ctaWork}
-              <span aria-hidden="true">›</span>
-            </a>
-            <a
-              class="btn-ghost"
-              href={home.connectGithub}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {home.ctaGithub}
-              <span aria-hidden="true">›</span>
-            </a>
-          </div>
+      <div class="hero-copy">
+        <p class="hero-role-line">{home.heroKicker}</p>
+        <h1 class="hero-title">{home.greeting}</h1>
+        <p class="hero-desc">{home.description}</p>
+        <div class="hero-actions">
+          <a class="btn-primary" href="#featured">
+            {home.ctaWork}
+            <span aria-hidden="true">›</span>
+          </a>
+          <a
+            class="btn-ghost"
+            href={home.connectGithub}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {home.ctaGithub}
+            <span aria-hidden="true">›</span>
+          </a>
         </div>
+      </div>
+      <figure class="hero-visual">
+        <picture>
+          <source
+            media="(max-width: 768px)"
+            srcset="/images/product-generator-case-phone.jpg"
+          />
+          <img
+            src="/images/product-generator-cases.jpg"
+            alt={isZh
+              ? "AI 测试用例生成器交互 Demo 的用例结果"
+              : "Test cases from the AI Test Case Generator interactive demo"}
+            width="1200"
+            height="420"
+          />
+        </picture>
+        <figcaption>
+          <a href={home.ctaDemoHref}>
+            {home.ctaDemo}
+            <span aria-hidden="true">›</span>
+          </a>
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="home-band" id="featured">
+      <div class="band-copy">
+        <h2>{home.featuredTitle}</h2>
+        {flagship?.pitch ? <p class="band-lead">{flagship.pitch}</p> : null}
+      </div>
+      <div class="shot-row">
         {
-          flagship && (
-            <div class="hero-product">
-              <a class="hero-product-main" href={flagship.href}>
-                <span class="product-kicker">{flagship.title}</span>
-                {flagship.pitch ? (
-                  <span class="hero-product-line">{flagship.pitch}</span>
-                ) : null}
-                {
-                  flagship.flow ? (
-                    <ol class="hero-flow">
-                      {flagship.flow.map((step) => (
-                        <li>{step}</li>
-                      ))}
-                    </ol>
-                  ) : null
-                }
+          shots.map((shot) => (
+            <figure>
+              <img src={shot.src} alt={shot.alt} width="800" height="520" />
+              <figcaption>{shot.title}</figcaption>
+            </figure>
+          ))
+        }
+      </div>
+      {
+        flagship && (
+          <p class="band-links">
+            <a href={flagship.href}>
+              {home.featuredMore}
+              <span aria-hidden="true">›</span>
+            </a>
+          </p>
+        )
+      }
+    </section>
+
+    <section class="home-band home-band--paper" id="by-the-numbers">
+      <div class="band-copy">
+        <h2>{copy.home.highlightsTitle}</h2>
+        <p class="band-note">{impactNote}</p>
+        <p class="highlights-subtitle">{copy.home.highlightsSubtitle}</p>
+      </div>
+      <div class="impact-row">
+        {
+          pulls && (
+            <article>
+              <span
+                class="impact-value"
+                data-metric={pulls.metric}
+                data-metric-fallback={pulls.value}
+              >
+                {resolveMetric(metrics, pulls.metric, pulls.value)}
+              </span>
+              <span class="impact-label">{pulls.label}</span>
+              <a href={pulls.href} target="_blank" rel="noopener noreferrer">
+                {pulls.linkLabel}
               </a>
-              <a class="product-link" href={home.ctaDemoHref}>
-                {home.ctaDemo}
-                <span aria-hidden="true">›</span>
+            </article>
+          )
+        }
+        {
+          clawhub && (
+            <article>
+              <span
+                class="impact-value"
+                data-metric={clawhub.metric}
+                data-metric-fallback={clawhub.value}
+              >
+                {resolveMetric(metrics, clawhub.metric, clawhub.value)}
+              </span>
+              <span class="impact-label">{clawhub.label}</span>
+              <a href={clawhub.href} target="_blank" rel="noopener noreferrer">
+                {clawhub.linkLabel}
               </a>
-            </div>
+            </article>
+          )
+        }
+        {
+          coverage && (
+            <article>
+              <span class="impact-value">{coverage.value}</span>
+              <span class="impact-label">{coverage.label}</span>
+            </article>
+          )
+        }
+        {
+          qps && (
+            <article>
+              <span class="impact-value">{qps.value}</span>
+              <span class="impact-label">{qps.label}</span>
+            </article>
           )
         }
       </div>
     </section>
 
-    <section class="home-section home-featured" id="featured">
-      {
-        flagship && (
-          <a class="product-stage product-stage--ink" href={flagship.href}>
-            <h2 class="product-kicker">{home.featuredTitle}</h2>
-            <h3 class="product-name">{flagship.title}</h3>
-            {flagship.pitch ? <p class="product-line">{flagship.pitch}</p> : null}
-            <p class="product-copy">{flagship.description}</p>
-            {
-              flagship.flow ? (
-                <ol class="product-flow">
-                  {flagship.flow.map((step) => (
-                    <li>{step}</li>
-                  ))}
-                </ol>
-              ) : null
-            }
-            <span class="product-link">
-              {home.featuredMore}
-              <span aria-hidden="true">›</span>
-            </span>
-          </a>
-        )
-      }
-    </section>
-
-    <section class="highlights home-section impact" id="by-the-numbers">
-      <div class="container">
-        <h2 class="section-title">{copy.home.highlightsTitle}</h2>
-        <div class="impact-board">
-          <div>
-            <h3 class="impact-group">{adoptionTitle}</h3>
-            <p class="highlights-subtitle">{copy.home.highlightsSubtitle}</p>
-            <div class="highlights-grid">
-              {
-                highlights.map((item) => {
-                  const value = resolveMetric(metrics, item.metric, item.value);
-                  const valueAttrs = item.metric
-                    ? {
-                        "data-metric": item.metric,
-                        "data-metric-fallback": item.value,
-                        "data-count-to": value,
-                      }
-                    : { "data-count-to": value };
-                  return (
-                    <article class="highlight-card">
-                      <span class="highlight-value" {...valueAttrs}>
-                        {value}
-                      </span>
-                      <span class="highlight-label">{item.label}</span>
-                      {item.href && item.linkLabel ? (
-                        <a
-                          class="highlight-source"
-                          href={item.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {item.linkLabel}
-                        </a>
-                      ) : null}
-                    </article>
-                  );
-                })
-              }
-            </div>
-          </div>
-          <div id="achievements">
-            <h3 class="impact-group">{resultsTitle}</h3>
-            <p class="highlights-subtitle">{resultsNote}</p>
-            <div class="achievements-grid">
-              {
-                home.achievements.map((item) => (
-                  <div class="achievement-card">
-                    <span class="achievement-value">{item.value}</span>
-                    <span class="achievement-label">{item.label}</span>
-                  </div>
-                ))
-              }
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="principles home-section" id="principles">
-      <div class="container">
-        <h2 class="section-title">{copy.home.principlesTitle}</h2>
-        <div class="principle-list">
-          {
-            copy.home.principles.map((item) => (
-              <article class="principle-card">
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-              </article>
-            ))
-          }
-        </div>
-      </div>
-    </section>
-
-    <section class="home-section home-selected" id="selected">
+    <section class="home-band" id="selected">
       {
         moreFeatured.map((item) => (
-          <a class="product-stage product-stage--paper" href={item.href}>
-            <h3 class="product-name">{item.title}</h3>
-            {item.pitch ? <p class="product-line">{item.pitch}</p> : null}
-            <p class="product-copy">{item.description}</p>
-            <span class="product-link">
+          <a class="selected-row" href={item.href}>
+            <span>
+              <h2>{item.title}</h2>
+              <p>{item.description}</p>
+            </span>
+            <span class="selected-link">
               {home.featuredMore}
               <span aria-hidden="true">›</span>
             </span>
           </a>
         ))
       }
-      <div class="product-grid">
+    </section>
+
+    <section class="home-band home-band--quiet" id="opensource">
+      <div class="band-copy">
+        <h2>{home.ossTitle}</h2>
+        <p class="band-lead">{home.ossDescription}</p>
+        <p class="band-links">
+          <a href={home.connectGithub} target="_blank" rel="noopener noreferrer">
+            {home.ossGithubLabel}
+            <span aria-hidden="true">›</span>
+          </a>
+          <a href={orgHref}>
+            {home.ossOrgLabel}
+            <span aria-hidden="true">›</span>
+          </a>
+        </p>
+      </div>
+    </section>
+
+    <section class="home-band" id="articles">
+      <div class="band-copy band-copy--row">
+        <h2>{home.articlesTitle}</h2>
+        <a href={blogHref}>
+          {home.articlesCta}
+          <span aria-hidden="true">›</span>
+        </a>
+      </div>
+      <div class="note-rows">
         {
-          home.services.map((item) => (
-            <a
-              class={`product-cell product-cell--${item.id}`}
-              href={item.href}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span class="product-kicker">{item.host}</span>
-              <span class="product-name">{item.title}</span>
-              <span class="product-copy">{item.detail}</span>
-              <span class="product-link">
-                {item.action}
-                <span aria-hidden="true">›</span>
-              </span>
+          articles.map((item) => (
+            <a href={item.href}>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
             </a>
           ))
         }
-      </div>
-      <p class="stage-more">
-        <a href={workHref}>
-          {home.featuredCta}
-          <span aria-hidden="true">›</span>
-        </a>
-      </p>
-    </section>
-
-    <section class="home-section capabilities" id="capabilities">
-      <div class="container">
-        <h2 class="section-title">{home.capabilitiesTitle}</h2>
-        <div class="capability-board">
-          {
-            home.capabilities.map((item) => (
-              <a href={item.href}>
-                <h3>{item.title}</h3>
-                <p>{item.detail}</p>
-              </a>
-            ))
-          }
-        </div>
-      </div>
-    </section>
-
-    <section class="home-section latest-articles" id="articles">
-      <div class="container">
-        <div class="section-head">
-          <h2 class="section-title">{home.articlesTitle}</h2>
-          <a class="section-cta" href={blogHref}>
-            {home.articlesCta}
-            <span aria-hidden="true">›</span>
-          </a>
-        </div>
-        <div class="article-list">
-          {
-            articles.map((item) => (
-              <a href={item.href} class="article-row">
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-              </a>
-            ))
-          }
-        </div>
-      </div>
-    </section>
-
-    <section class="home-section oss-section" id="opensource">
-      <div class="container">
-        <h2 class="section-title">{home.ossTitle}</h2>
-        <p class="section-lead">{home.ossDescription}</p>
-        <div class="oss-actions">
-          <a
-            class="btn-primary"
-            href={home.connectGithub}
-            target="_blank"
-            rel="noopener noreferrer">{home.ossGithubLabel}</a
-          >
-          <a class="btn-ghost" href={orgHref}>{home.ossOrgLabel}</a>
-          <a class="btn-ghost" href={playgroundHref}>{home.ossPlaygroundLabel}</a>
-        </div>
       </div>
     </section>
   </main>

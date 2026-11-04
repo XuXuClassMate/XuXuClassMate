@@ -28,10 +28,12 @@ test("home renders and language switch works", async ({ page }) => {
     "Engineering Quality. Accelerated by AI.",
   );
   await expect(page.locator(".hero-role-line")).toHaveText(
-    "AI · Quality Engineering",
+    "AI-powered Quality Engineering",
   );
   await expect(page.locator(".hero-desc")).toContainText("AI testing tools");
-  await expect(page.locator(".hero-desc")).toContainText("automation systems");
+  await expect(page.locator(".hero-desc")).toContainText(
+    "reusable engineering infrastructure",
+  );
   await expect(page.getByRole("link", { name: "Explore Products" })).toHaveAttribute(
     "href",
     "#featured",
@@ -45,10 +47,13 @@ test("home renders and language switch works", async ({ page }) => {
   await expect(
     page.getByRole("heading", { name: "Engineering Impact" }),
   ).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Product Adoption" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Product Adoption" })).toHaveCount(0);
+  await expect(page.getByRole("heading", { name: "What I Do" })).toHaveCount(0);
   await expect(
-    page.getByRole("heading", { name: "Engineering Results" }),
-  ).toBeVisible();
+    page.getByRole("heading", { name: "Engineering Principles" }),
+  ).toHaveCount(0);
+  await expect(page.getByRole("heading", { name: "Technical Stack" })).toHaveCount(0);
+  await expect(page.locator(".product-cell")).toHaveCount(0);
   await expect(page.getByText("Live Public Metrics · Updated Daily")).toBeVisible();
   await expect(page.locator(".highlights .home-updated")).toHaveCount(0);
   await expect(page.getByRole("link", { name: /View Docker Hub/i }).first()).toBeVisible();
@@ -57,10 +62,8 @@ test("home renders and language switch works", async ({ page }) => {
   await expect(
     page.getByText("From requirements to reviewable test cases.").first(),
   ).toBeVisible();
-  await expect(
-    page.getByRole("heading", { name: "AI with Human Judgment" }),
-  ).toBeVisible();
   await expect(page.getByText("500+").first()).toBeVisible();
+  await expect(page.getByText("80%+").first()).toBeVisible();
   await expect(page.getByText("Built with Astro")).toHaveCount(0);
   await expect(page.getByText("Cloudflare Pages")).toHaveCount(0);
   await page.getByRole("link", { name: "Switch to Chinese" }).click();
@@ -503,11 +506,10 @@ test("home live metrics hydrate from api payload", async ({ page }) => {
   await page.goto("/");
   const dockerTotal = page.locator('[data-metric="docker:total-pulls"]');
   const clawhubTotal = page.locator('[data-metric="clawhub:total-downloads"]');
-  const apiCalls = page.locator('[data-metric="api:gateway-calls"]');
   await dockerTotal.scrollIntoViewIfNeeded();
   await expect(dockerTotal).toHaveText("60k+", { timeout: 5000 });
   await expect(clawhubTotal).toHaveText("2.7k+", { timeout: 5000 });
-  await expect(apiCalls).toHaveText("800", { timeout: 5000 });
+  await expect(page.locator('[data-metric="api:gateway-calls"]')).toHaveCount(0);
 });
 
 test("learn page covers management and Locust", async ({ page }) => {

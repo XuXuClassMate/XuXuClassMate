@@ -48,6 +48,22 @@ const home = getPortfolioHome(locale);
 
     <section class="home-section">
       <div class="container">
+        <h2 class="section-title">{copy.home.principlesTitle}</h2>
+        <div class="principle-list">
+          {
+            copy.home.principles.map((item) => (
+              <article>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="home-section">
+      <div class="container">
         <h2 class="section-title">{home.stackTitle}</h2>
         <p class="section-lead">{home.stackLead}</p>
         <dl class="spec-table">

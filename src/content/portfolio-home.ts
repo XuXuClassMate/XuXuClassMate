@@ -105,12 +105,12 @@ export function getPortfolioHome(locale: Locale): PortfolioHome {
     greeting: isZh
       ? "工程品质。由 AI 加速。"
       : "Engineering Quality. Accelerated by AI.",
-    heroKicker: isZh ? "AI · 质量工程" : "AI · Quality Engineering",
+    heroKicker: isZh ? "AI 驱动的质量工程" : "AI-powered Quality Engineering",
     roles: ["QA Engineer", "SDET", "AI Testing"],
     tagline: isZh ? "可安装的质量工程" : "Installable Quality Engineering",
     description: isZh
-      ? "构建可落地的 AI 测试工具、自动化系统和基础设施，把复杂的工程流程变成可靠的产品。"
-      : "Building practical AI testing tools, automation systems, and infrastructure that turn complex engineering workflows into reliable products.",
+      ? "构建可落地的 AI 测试工具、自动化系统和可复用的工程基础设施。"
+      : "Building practical AI testing tools, automation systems, and reusable engineering infrastructure.",
     ctaWork: isZh ? "探索产品" : "Explore Products",
     ctaDemo: isZh ? "试用 AI 用例生成器" : "Try AI Test Case Generator",
     ctaDemoHref: isZh
