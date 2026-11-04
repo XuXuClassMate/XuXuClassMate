@@ -20,7 +20,14 @@ export type PortfolioHome = {
   featuredCta: string;
   servicesTitle: string;
   servicesLead: string;
-  services: { title: string; detail: string; host: string; href: string }[];
+  services: {
+    id: "nas" | "pulse" | "mail";
+    title: string;
+    detail: string;
+    host: string;
+    href: string;
+    action: string;
+  }[];
   featured: {
     title: string;
     pitch?: string;
@@ -150,34 +157,32 @@ export function getPortfolioHome(locale: Locale): PortfolioHome {
     featuredTitle: isZh ? "精选项目" : "Featured Projects",
     featuredCta: isZh ? "查看全部项目" : "View all projects",
     featured: isZh ? featuredZh : featuredEn,
-    servicesTitle: isZh ? "正在运行" : "Running now",
-    servicesLead: isZh
-      ? "这三台在线服务挂在自己的域名上，从这里直接打开。"
-      : "Three live services on their own domains. Open them from here.",
+    servicesTitle: isZh ? "在线服务" : "Services",
+    servicesLead: isZh ? "三台正在运行的服务。" : "Three services, already running.",
     services: [
       {
+        id: "nas",
         title: "NAS",
         host: "nas.xuxuclassmate.com",
         href: "https://nas.xuxuclassmate.com",
-        detail: isZh
-          ? "自托管 NAS 的登录入口。"
-          : "Sign-in for the self-hosted NAS.",
+        action: isZh ? "打开" : "Open",
+        detail: isZh ? "自托管存储的登录入口。" : "Sign in to the self-hosted NAS.",
       },
       {
+        id: "pulse",
         title: "GlobalPulse",
         host: "pulse.xuxuclassmate.com",
         href: "https://pulse.xuxuclassmate.com/",
-        detail: isZh
-          ? "市场情报与定时简报。控制台就在域名首页。"
-          : "Market briefings. The console is the site home.",
+        action: isZh ? "打开" : "Open",
+        detail: isZh ? "简报与控制台，就在首页。" : "Briefings and the console, on the homepage.",
       },
       {
-        title: "Custom Mail",
+        id: "mail",
+        title: "Mail",
         host: "mail.xuxuclassmate.com",
         href: "https://mail.xuxuclassmate.com",
-        detail: isZh
-          ? "私有发信工作台：撰写、附件和发送记录。"
-          : "Private outbound mail: compose, attachments, and history.",
+        action: isZh ? "打开" : "Open",
+        detail: isZh ? "撰写、附件、发送记录。" : "Compose, attachments, and history.",
       },
     ],
     stackTitle: isZh ? "技术栈" : "Technical Stack",
