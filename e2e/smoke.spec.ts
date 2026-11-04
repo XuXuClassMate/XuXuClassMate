@@ -384,19 +384,23 @@ test("playground page lists tryable experiences", async ({ page }) => {
   ).toHaveText("Playground");
 });
 
-test("mobile nav is hamburger-only with a compact drawer", async ({
+test("mobile nav is a bottom sheet above the tab bar", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
   await expect(page.locator(".nav-links")).not.toHaveClass(/show/);
-  await expect(page.locator("#mobileNavToggle")).toBeVisible();
+  await expect(page.locator(".tabbar")).toBeVisible();
+  await expect(page.locator("#mobileNavToggle")).toBeHidden();
   await expect(page.locator("#themeToggle")).toBeHidden();
-  await page.locator("#mobileNavToggle").click();
+  await page.locator("#tabMore").click();
   await expect(page.locator(".nav-links")).toHaveClass(/show/);
   const drawer = await page.locator(".nav-links").boundingBox();
+  const tabbar = await page.locator(".tabbar").boundingBox();
   expect(drawer).not.toBeNull();
-  expect(drawer!.height).toBeGreaterThan(700);
+  expect(tabbar).not.toBeNull();
+  expect(drawer!.height).toBeGreaterThan(400);
+  expect(drawer!.y + drawer!.height).toBeLessThanOrEqual(tabbar!.y + 1);
   for (const label of ["About", "Projects", "AI Testing", "Notes"]) {
     await expect(
       page.locator(".nav-links").getByRole("link", { name: label }),
@@ -421,7 +425,8 @@ test("mobile nav is hamburger-only with a compact drawer", async ({
   await expect(page.locator(".nav-links .language-switch")).toBeVisible();
   await expect(page.locator("#themeToggle")).toBeVisible();
   await expect(page.locator(".theme-toggle-label")).toHaveText("Theme");
-  await expect(page.getByRole("link", { name: /^Home$/i })).toHaveCount(0);
+  await expect(page.locator(".nav-links").getByRole("link", { name: /^Home$/i })).toHaveCount(0);
+  await expect(page.locator(".tabbar").getByRole("link", { name: /^Home$/i })).toBeVisible();
 });
 
 test("contact offers list is visible", async ({ page }) => {
@@ -534,7 +539,7 @@ test("theme toggles between dark and light", async ({ page }) => {
 test("mobile nav toggles", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/en/learn");
-  const toggle = page.locator("#mobileNavToggle");
+  const toggle = page.locator("#tabMore");
   const links = page.locator("#navLinks");
   await expect(links).not.toHaveClass(/show/);
   await expect(toggle).toHaveAttribute("aria-expanded", "false");
@@ -561,7 +566,7 @@ test("H5 layout fits common phone widths without horizontal overflow", async ({
     await page.setViewportSize(phone);
     for (const path of paths) {
       await page.goto(path);
-      await expect(page.locator("#mobileNavToggle")).toBeVisible();
+      await expect(page.locator(".tabbar")).toBeVisible();
       const metrics = await page.evaluate(() => {
         const doc = document.documentElement;
         const actions = document.querySelector(".hero-actions");

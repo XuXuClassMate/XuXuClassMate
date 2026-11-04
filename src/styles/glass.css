@@ -7,51 +7,15 @@
 
 :root {
   --liquid-tint: 0.45;
-  --liquid-blur: calc(18px + var(--liquid-tint) * 22px);
-  --liquid-saturate: calc(140% + var(--liquid-tint) * 60%);
-  --liquid-radius: 26px;
-  --liquid-radius-capsule: 980px;
-  --liquid-ease: cubic-bezier(0.32, 0.72, 0, 1);
-  --liquid-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 html[data-theme="dark"] {
-  --liquid-fill: color-mix(
-    in srgb,
-    rgba(40, 40, 42, calc(0.28 + var(--liquid-tint) * 0.52)) 100%,
-    transparent
-  );
-  --liquid-fill-strong: color-mix(
-    in srgb,
-    rgba(36, 36, 38, calc(0.4 + var(--liquid-tint) * 0.48)) 100%,
-    transparent
-  );
-  --liquid-specular: rgba(255, 255, 255, calc(0.42 + (1 - var(--liquid-tint)) * 0.28));
-  --liquid-specular-soft: rgba(255, 255, 255, calc(0.12 + (1 - var(--liquid-tint)) * 0.12));
-  --liquid-edge: rgba(0, 0, 0, calc(0.35 + var(--liquid-tint) * 0.25));
-  --liquid-rim: rgba(255, 255, 255, calc(0.22 + (1 - var(--liquid-tint)) * 0.28));
-  --liquid-sheen: rgba(255, 255, 255, calc(0.18 + (1 - var(--liquid-tint)) * 0.22));
   --content-surface: #1c1c1e;
   --content-surface-raised: #2c2c2e;
   --content-border: rgba(84, 84, 88, 0.65);
 }
 
 html[data-theme="light"] {
-  --liquid-fill: color-mix(
-    in srgb,
-    rgba(255, 255, 255, calc(0.28 + var(--liquid-tint) * 0.55)) 100%,
-    transparent
-  );
-  --liquid-fill-strong: color-mix(
-    in srgb,
-    rgba(255, 255, 255, calc(0.42 + var(--liquid-tint) * 0.48)) 100%,
-    transparent
-  );
-  --liquid-specular: rgba(255, 255, 255, calc(0.7 + (1 - var(--liquid-tint)) * 0.25));
-  --liquid-specular-soft: rgba(255, 255, 255, calc(0.35 + (1 - var(--liquid-tint)) * 0.25));
-  --liquid-edge: rgba(0, 0, 0, calc(0.12 + var(--liquid-tint) * 0.14));
-  --liquid-rim: rgba(255, 255, 255, calc(0.55 + (1 - var(--liquid-tint)) * 0.3));
-  --liquid-sheen: rgba(255, 255, 255, calc(0.45 + (1 - var(--liquid-tint)) * 0.35));
   --content-surface: #ffffff;
   --content-surface-raised: #f2f2f7;
   --content-border: rgba(60, 60, 67, 0.12);
@@ -68,16 +32,18 @@ html[data-theme="light"] {
 .back-to-top,
 .subtitle,
 .glass-tint-panel,
-.hero-atmosphere::after {
-  background: var(--liquid-fill);
+.hero-atmosphere::after,
+.mobile-tabbar {
+  background: var(--lg-fill, var(--liquid-fill));
   backdrop-filter: saturate(var(--liquid-saturate)) blur(var(--liquid-blur));
   -webkit-backdrop-filter: saturate(var(--liquid-saturate)) blur(var(--liquid-blur));
-  border: 0.5px solid var(--liquid-rim);
+  border: 0.5px solid var(--lg-rim, var(--liquid-rim));
   box-shadow:
     inset 0 1px 0 var(--liquid-specular),
-    inset 0 -0.5px 0 rgba(0, 0, 0, 0.18),
-    0 0 0 0.5px var(--liquid-edge),
-    0 10px 28px rgba(0, 0, 0, 0.12);
+    inset 0 40px 10px -40px var(--lg-inner, #282828),
+    inset 0 -40px 10px -40px var(--lg-inner, #282828),
+    0 0 0 0.5px var(--lg-rim, var(--liquid-edge)),
+    var(--lg-shadow, 0 8px 48px rgba(0, 0, 0, 0.12));
   isolation: isolate;
 }
 
@@ -104,6 +70,13 @@ html[data-theme="light"] {
   z-index: 0;
 }
 
+.lg-filters {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
 .header {
   position: fixed;
   overflow: visible;
@@ -123,8 +96,14 @@ html[data-theme="light"] {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  border-width: 0 0 0.5px;
-  border-radius: 0;
+  border-width: 0.5px;
+  border-radius: inherit;
+  box-shadow:
+    inset 0 1px 0 var(--liquid-specular),
+    inset 0 40px 10px -40px var(--lg-inner, #282828),
+    inset 0 -40px 10px -40px var(--lg-inner, #282828),
+    0 0 0 0.5px var(--lg-rim, var(--liquid-rim)),
+    var(--lg-shadow, 0 8px 48px rgba(0, 0, 0, 0.12));
 }
 
 .header > .container {
@@ -132,13 +111,58 @@ html[data-theme="light"] {
   z-index: 2;
 }
 
+/* Material roles. Fills come from materials.css; refraction is opt-in below. */
+.header::after {
+  background: var(--lg-fill);
+  backdrop-filter: saturate(180%) blur(var(--lg-blur-regular));
+  -webkit-backdrop-filter: saturate(180%) blur(var(--lg-blur-regular));
+}
+
 .header.is-scrolled::after {
-  background: var(--liquid-fill-strong);
+  background: var(--lg-fill-strong);
+  backdrop-filter: saturate(180%) blur(calc(var(--lg-blur-regular) + 4px));
+  -webkit-backdrop-filter: saturate(180%) blur(calc(var(--lg-blur-regular) + 4px));
   box-shadow:
     inset 0 1px 0 var(--liquid-specular),
     inset 0 -0.5px 0 rgba(0, 0, 0, 0.2),
-    0 0 0 0.5px var(--liquid-edge),
-    0 8px 24px rgba(0, 0, 0, 0.14);
+    0 0 0 0.5px var(--lg-rim, var(--liquid-edge)),
+    var(--lg-shadow-elevated, 0 12px 40px rgba(0, 0, 0, 0.16));
+}
+
+.btn-ghost,
+.theme-toggle,
+.language-switch,
+.glass-tint-toggle {
+  background: color-mix(in srgb, var(--lg-fill) 55%, transparent);
+  backdrop-filter: saturate(160%) blur(var(--lg-blur-clear));
+  -webkit-backdrop-filter: saturate(160%) blur(var(--lg-blur-clear));
+}
+
+.nav-more-menu,
+.glass-tint-panel,
+.back-to-top,
+.mobile-tabbar {
+  background: var(--lg-fill-strong);
+  backdrop-filter: saturate(180%) blur(calc(var(--lg-blur-regular) + 2px));
+  -webkit-backdrop-filter: saturate(180%) blur(calc(var(--lg-blur-regular) + 2px));
+  box-shadow:
+    inset 0 1px 0 var(--liquid-specular),
+    inset 0 40px 10px -40px var(--lg-inner, #282828),
+    0 0 0 0.5px var(--lg-rim, var(--liquid-edge)),
+    var(--lg-shadow-elevated, 0 12px 40px rgba(0, 0, 0, 0.16));
+}
+
+/* Chromium only. Safari and Firefox ignore url() filters and would drop the blur. */
+html.lg-svg .header::after,
+html.lg-svg .nav-more-menu,
+html.lg-svg .glass-tint-panel,
+html.lg-svg .btn-ghost,
+html.lg-svg .theme-toggle,
+html.lg-svg .back-to-top,
+html.lg-svg .mobile-tabbar,
+html.lg-svg .glass-tint-toggle {
+  backdrop-filter: saturate(180%) blur(var(--lg-blur-regular)) url(#lg-refract);
+  -webkit-backdrop-filter: saturate(180%) blur(var(--lg-blur-regular)) url(#lg-refract);
 }
 
 .nav-more,
@@ -219,7 +243,7 @@ html[data-theme="light"] {
 .filter-btn:hover,
 .copy-email-btn:hover,
 .back-to-top:hover {
-  transform: scale(1.04);
+  transform: scale(1.02);
 }
 
 .liquid-interactive:active,
@@ -232,7 +256,7 @@ html[data-theme="light"] {
 .language-switch:active,
 .back-to-top:active,
 .liquid-interactive.is-pressed {
-  transform: scale(0.94);
+  transform: scale(0.97);
 }
 
 .btn-primary {
@@ -244,7 +268,7 @@ html[data-theme="light"] {
 }
 
 .btn-primary:hover {
-  transform: scale(1.04);
+  transform: scale(1.02);
 }
 
 .filter-btn.is-active,
@@ -312,9 +336,10 @@ html[data-theme="light"] {
 .project-card:hover,
 .skill-item:hover,
 .timeline-item:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.12);
-  border-color: color-mix(in srgb, var(--primary) 22%, var(--content-border));
+  transform: none;
+  box-shadow: none;
+  border-color: var(--content-border);
+  background: var(--content-surface-raised);
 }
 
 .link-card:hover {
@@ -336,9 +361,9 @@ html[data-theme="light"] {
 
 .featured-row:hover,
 .article-row:hover {
-  background: var(--content-surface);
-  transform: translateY(-3px);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+  background: var(--content-surface-raised);
+  transform: none;
+  box-shadow: none;
 }
 
 .stack-list--inline li {

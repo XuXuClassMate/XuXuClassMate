@@ -1,0 +1,198 @@
+/**
+ * iOS 27 Liquid Glass materials.
+ *
+ * Numbers follow the measured kit transcription in
+ * seunghan91/ios27-design-system (MIT), packages/tokens/src/materials.json,
+ * kit 27.0.2. Apple does not publish a numeric spec for the material;
+ * these are the kit's fills, rim, and the fitted backdrop blur
+ * (regular ≈ 6px, clear ≈ 1.6px), not a claim of native compositing.
+ *
+ * --liquid-tint is the existing site slider: 0 = ultra clear, 1 = fully tinted.
+ * The design-system transparency slider runs the other way; the scale
+ * factors below are the same curve (opacityScale = 1.6 − 1.1·t,
+ * blurScale = 0.5 + 0.8·t) with t = 1 − tint.
+ *
+ * Web limit: CSS cannot reproduce the system lens. Where the browser
+ * accepts backdrop-filter: url(#lg-refract), a low-scale SVG displacement
+ * adds edge refraction. Everywhere else the material is blur, saturate,
+ * a light rim, and the two inner edge shadows from the kit.
+ */
+
+:root {
+  --lg-opacity-scale: calc(0.5 + var(--liquid-tint, 0.45) * 1.1);
+  --lg-blur-scale: calc(1.3 - var(--liquid-tint, 0.45) * 0.8);
+  --lg-blur-regular: calc(6px * var(--lg-blur-scale));
+  --lg-blur-clear: calc(1.6px * var(--lg-blur-scale));
+  --lg-saturate: 1.8;
+  --lg-radius-large: 34px;
+  --lg-radius-clear: 23px;
+  --lg-radius-small: 100px;
+  --lg-radius-content: 22px;
+  --lg-space-1: 4px;
+  --lg-space-2: 8px;
+  --lg-space-3: 12px;
+  --lg-space-4: 16px;
+  --lg-space-5: 20px;
+  --lg-space-6: 24px;
+  --lg-ease: cubic-bezier(0.32, 0.72, 0, 1);
+  --lg-ease-ui: cubic-bezier(0.4, 0, 0.2, 1);
+  --liquid-blur: var(--lg-blur-regular);
+  --liquid-saturate: calc(var(--lg-saturate) * 100%);
+  --liquid-radius: var(--lg-radius-large);
+  --liquid-radius-capsule: 980px;
+  --liquid-ease: var(--lg-ease);
+  --liquid-spring: var(--lg-ease);
+}
+
+html[data-theme="light"] {
+  --lg-fill: color-mix(in srgb, #ffffff calc((33.3 + var(--liquid-tint, 0.45) * 66.7) * 1%), transparent);
+  --lg-fill-strong: color-mix(in srgb, #ffffff calc((55 + var(--liquid-tint, 0.45) * 45) * 1%), transparent);
+  --lg-rim: #dbdbdb;
+  --lg-rim-small: #ebebeb;
+  --lg-inner: #282828;
+  --lg-shadow: 0 8px 48px rgba(0, 0, 0, 0.12);
+  --lg-shadow-elevated: 0 12px 48px rgba(0, 0, 0, 0.18);
+  --separator: rgba(60, 60, 67, 0.18);
+  --color-label: #000000;
+  --color-secondary-label: rgba(60, 60, 67, 0.6);
+  --color-tertiary-label: rgba(60, 60, 67, 0.3);
+  --color-bg: #f2f2f7;
+  --color-bg-elevated: #ffffff;
+  --color-fill: rgba(120, 120, 128, 0.2);
+  --color-accent: #007aff;
+  --color-success: #34c759;
+  --color-warning: #ff9f0a;
+  --color-error: #ff3b30;
+  --liquid-fill: var(--lg-fill);
+  --liquid-fill-strong: var(--lg-fill-strong);
+  --liquid-specular: rgba(255, 255, 255, 0.72);
+  --liquid-specular-soft: rgba(255, 255, 255, 0.35);
+  --liquid-edge: var(--lg-rim);
+  --liquid-rim: var(--lg-rim);
+  --liquid-sheen: rgba(255, 255, 255, 0.55);
+  --content-surface: var(--color-bg-elevated);
+  --content-surface-raised: #f2f2f7;
+  --content-border: var(--separator);
+}
+
+html[data-theme="dark"] {
+  --lg-fill: color-mix(in srgb, #1a1a1a calc((33.3 + var(--liquid-tint, 0.45) * 66.7) * 1%), transparent);
+  --lg-fill-strong: color-mix(in srgb, #000000 calc((48 + var(--liquid-tint, 0.45) * 40) * 1%), transparent);
+  --lg-rim: #a6a6a6;
+  --lg-rim-small: #e6e6e6;
+  --lg-inner: #1a1a1a;
+  --lg-shadow: 0 8px 48px rgba(0, 0, 0, 0.45);
+  --lg-shadow-elevated: 0 16px 48px rgba(0, 0, 0, 0.55);
+  --separator: rgba(84, 84, 88, 0.65);
+  --color-label: #ffffff;
+  --color-secondary-label: rgba(235, 235, 245, 0.6);
+  --color-tertiary-label: rgba(235, 235, 245, 0.3);
+  --color-bg: #000000;
+  --color-bg-elevated: #1c1c1e;
+  --color-fill: rgba(120, 120, 128, 0.36);
+  --color-accent: #0a84ff;
+  --color-success: #30d158;
+  --color-warning: #ffd60a;
+  --color-error: #ff453a;
+  --liquid-fill: var(--lg-fill);
+  --liquid-fill-strong: var(--lg-fill-strong);
+  --liquid-specular: rgba(255, 255, 255, 0.22);
+  --liquid-specular-soft: rgba(255, 255, 255, 0.08);
+  --liquid-edge: var(--lg-rim);
+  --liquid-rim: rgba(166, 166, 166, 0.45);
+  --liquid-sheen: rgba(255, 255, 255, 0.16);
+  --content-surface: #1c1c1e;
+  --content-surface-raised: #2c2c2e;
+  --content-border: var(--separator);
+}
+
+/* Five materials. Parameters are local so they stay distinct from the slider. */
+.glass-ultra-clear,
+.glass-regular,
+.glass-tinted,
+.glass-fully-tinted,
+.glass-elevated {
+  position: relative;
+  isolation: isolate;
+  background: var(--m-fill);
+  backdrop-filter: saturate(180%) blur(var(--m-blur));
+  -webkit-backdrop-filter: saturate(180%) blur(var(--m-blur));
+  border-radius: var(--m-radius);
+  box-shadow: var(--m-shadow);
+}
+
+.glass-ultra-clear {
+  --m-fill: color-mix(in srgb, var(--lg-fill) 45%, transparent);
+  --m-blur: var(--lg-blur-clear);
+  --m-radius: var(--lg-radius-clear);
+  --m-shadow:
+    inset 0 1px 0 var(--liquid-specular),
+    inset 0 40px 10px -40px var(--lg-inner),
+    inset 0 -40px 10px -40px var(--lg-inner),
+    0 0 0 0.5px var(--lg-rim),
+    0 8px 15px rgba(0, 0, 0, 0.04);
+}
+
+.glass-regular {
+  --m-fill: var(--lg-fill);
+  --m-blur: var(--lg-blur-regular);
+  --m-radius: var(--lg-radius-large);
+  --m-shadow:
+    inset 0 1px 0 var(--liquid-specular),
+    inset 0 40px 10px -40px var(--lg-inner),
+    inset 0 -40px 10px -40px var(--lg-inner),
+    0 0 0 0.5px var(--lg-rim),
+    var(--lg-shadow);
+}
+
+.glass-tinted {
+  --m-fill: color-mix(in srgb, var(--lg-fill-strong) 88%, var(--color-accent) 12%);
+  --m-blur: calc(var(--lg-blur-regular) * 0.75);
+  --m-radius: var(--lg-radius-large);
+  --m-shadow:
+    inset 0 1px 0 var(--liquid-specular),
+    0 0 0 0.5px var(--lg-rim),
+    var(--lg-shadow);
+}
+
+.glass-fully-tinted {
+  --m-fill: var(--content-surface);
+  --m-blur: 0px;
+  --m-radius: var(--lg-radius-content);
+  --m-shadow: 0 0 0 0.5px var(--separator);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.glass-elevated {
+  --m-fill: var(--lg-fill-strong);
+  --m-blur: calc(var(--lg-blur-regular) + 2px);
+  --m-radius: 26px;
+  --m-shadow:
+    inset 0 1px 0 var(--liquid-specular),
+    inset 0 40px 10px -40px var(--lg-inner),
+    0 0 0 0.5px var(--lg-rim),
+    var(--lg-shadow-elevated);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass-ultra-clear,
+  .glass-regular,
+  .glass-tinted,
+  .glass-elevated {
+    --m-fill: var(--content-surface);
+    --m-blur: 0px;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glass-ultra-clear,
+  .glass-regular,
+  .glass-tinted,
+  .glass-fully-tinted,
+  .glass-elevated {
+    transition: none;
+  }
+}
