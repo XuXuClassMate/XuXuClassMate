@@ -286,6 +286,9 @@ export type LocaleCopy = {
     openSource?: string;
     playground?: string;
     now?: string;
+    pulse?: string;
+    mail?: string;
+    nas?: string;
   };
   meta: Record<PageId, PageMeta>;
   home: {

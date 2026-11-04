@@ -123,13 +123,17 @@ export function getInfrastructureLab(locale: Locale): LabPage {
     cloudLive: isZh
       ? [
           "Cloudflare Pages（本站）",
-          "Cloudflare Workers + KV（GlobalPulse）",
+          "pulse.xuxuclassmate.com（GlobalPulse 控制台）",
+          "mail.xuxuclassmate.com（Custom Mail）",
+          "nas.xuxuclassmate.com（自托管 NAS）",
           "Docker / Compose 测试库套件",
           "API Gateway / Tunnel 模式",
         ]
       : [
           "Cloudflare Pages (this site)",
-          "Cloudflare Workers + KV (GlobalPulse)",
+          "pulse.xuxuclassmate.com (GlobalPulse console)",
+          "mail.xuxuclassmate.com (Custom Mail)",
+          "nas.xuxuclassmate.com (self-hosted NAS)",
           "Docker / Compose QA image suite",
           "API Gateway / Tunnel patterns",
         ],

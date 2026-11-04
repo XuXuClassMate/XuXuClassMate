@@ -46,6 +46,9 @@ export const zh: LocaleCopy = {
     openSource: "开源",
     playground: "体验台",
     now: "Now",
+    pulse: "GlobalPulse",
+    mail: "邮件",
+    nas: "NAS",
   },
   meta: {
     home: {

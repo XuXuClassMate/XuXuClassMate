@@ -65,6 +65,9 @@ export const en: LocaleCopy = {
     openSource: "Open Source",
     playground: "Playground",
     now: "Now",
+    pulse: "GlobalPulse",
+    mail: "Mail",
+    nas: "NAS",
   },
   meta: {
     home: {
