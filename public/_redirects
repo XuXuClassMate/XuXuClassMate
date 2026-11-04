@@ -4,8 +4,9 @@
 /favicon.ico /images/logo.svg 200
 
 # Cloudflare Pages otherwise 308s `*.html` → extensionless. A 200 rewrite keeps
-# the .html URL as HTTP 200 so Search Console stops reporting "page with redirect".
-# Canonical tags on the destination pages already point at the pretty URL.
+# the .html URL as HTTP 200. Middleware then marks the alias noindex and drops
+# its cross-URL canonical, so Search Console can clear both "redirect" and
+# "alternate page with proper canonical". The pretty URL keeps its canonical.
 /index.html / 200
 /zh/index.html /zh/ 200
 /en/index.html /en/ 200
@@ -13,6 +14,12 @@
 /zh.html /zh/ 200
 /learn.html /en/learn 200
 /work.html /en/work 200
+# Renamed articles must be rewritten before the generic `.html` splat,
+# otherwise `/*.html` serves a path that has no file and returns 404.
+/en/blog/domestic-db-docker-qa.html /en/blog/enterprise-db-docker-qa 200
+/zh/blog/domestic-db-docker-qa.html /zh/blog/enterprise-db-docker-qa 200
+/en/notes/domestic-db-docker-qa.html /en/blog/enterprise-db-docker-qa 200
+/zh/notes/domestic-db-docker-qa.html /zh/blog/enterprise-db-docker-qa 200
 /*.html /:splat 200
 
 # Renamed routes without a static file
