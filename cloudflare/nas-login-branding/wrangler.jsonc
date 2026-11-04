@@ -1,0 +1,23 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "xuxu-nas-login-branding",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-09-01",
+  "routes": [
+    {
+      "pattern": "nas.xuxuclassmate.com/home",
+      "zone_name": "xuxuclassmate.com"
+    },
+    {
+      "pattern": "nas.xuxuclassmate.com/home/",
+      "zone_name": "xuxuclassmate.com"
+    },
+    {
+      "pattern": "nas.xuxuclassmate.com/home/login*",
+      "zone_name": "xuxuclassmate.com"
+    }
+  ],
+  "observability": {
+    "enabled": true
+  }
+}
