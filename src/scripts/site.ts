@@ -6,6 +6,9 @@ function setMobileNavOpen(
   toggle.classList.toggle("active", open);
   links.classList.toggle("show", open);
   toggle.setAttribute("aria-expanded", open ? "true" : "false");
+  document.getElementById("tabMore")?.setAttribute("aria-expanded", open ? "true" : "false");
+  document.getElementById("navScrim")?.classList.toggle("is-visible", open);
+  document.body.classList.toggle("nav-sheet-open", open);
   if (open) {
     const firstLink = links.querySelector<HTMLElement>("a");
     firstLink?.focus();
@@ -19,10 +22,12 @@ function initMobileNav(): void {
     return;
   }
 
-  toggle.addEventListener("click", () => {
-    const open = !links.classList.contains("show");
-    setMobileNavOpen(toggle, links, open);
-  });
+  const openSheet = (): void => {
+    setMobileNavOpen(toggle, links, !links.classList.contains("show"));
+  };
+
+  toggle.addEventListener("click", openSheet);
+  document.getElementById("tabMore")?.addEventListener("click", openSheet);
 
   for (const link of links.querySelectorAll("a")) {
     link.addEventListener("click", () => {
@@ -35,6 +40,7 @@ function initMobileNav(): void {
     if (!(target instanceof Node)) return;
     const themeBtn = document.getElementById("themeToggle");
     if (themeBtn?.contains(target)) return;
+    if (document.querySelector(".tabbar")?.contains(target)) return;
     if (!toggle.contains(target) && !links.contains(target)) {
       setMobileNavOpen(toggle, links, false);
     }
@@ -595,7 +601,59 @@ function initLiquidInteractions(): void {
   window.addEventListener("pointermove", onMove, { passive: true });
 }
 
+/** Rounded-rect rim displacement. Neutral gray (128) is no bend. */
+function buildLensMap(): string {
+  const w = 256;
+  const h = 160;
+  const canvas = document.createElement("canvas");
+  canvas.width = w;
+  canvas.height = h;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return "";
+  const image = ctx.createImageData(w, h);
+  const data = image.data;
+  for (let y = 0; y < h; y += 1) {
+    for (let x = 0; x < w; x += 1) {
+      const u = (x + 0.5) / w;
+      const v = (y + 0.5) / h;
+      const ex = Math.min(u, 1 - u);
+      const ey = Math.min(v, 1 - v);
+      const edge = Math.min(ex, ey);
+      const band = Math.max(0, 1 - edge / 0.16);
+      const mag = band ** 1.35 * 78;
+      const sx = u < 0.5 ? -1 : 1;
+      const sy = v < 0.5 ? -1 : 1;
+      const rx = 128 + sx * mag * (ex <= ey ? 1 : 0.25);
+      const ry = 128 + sy * mag * (ey < ex ? 1 : 0.25);
+      const i = (y * w + x) * 4;
+      data[i] = Math.max(0, Math.min(255, rx));
+      data[i + 1] = Math.max(0, Math.min(255, ry));
+      data[i + 2] = 128;
+      data[i + 3] = 255;
+    }
+  }
+  ctx.putImageData(image, 0, 0);
+  return canvas.toDataURL("image/png");
+}
+
+function initLiquidOptics(): void {
+  const reduce = window.matchMedia("(prefers-reduced-transparency: reduce)").matches;
+  const ua = navigator.userAgent;
+  const iOS =
+    /iP(hone|ad|od)/.test(ua) ||
+    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  const chromium = !iOS && /Chrome|Chromium|Edg\//.test(ua);
+  const map = document.getElementById("lg-lens-map");
+  if (reduce || !chromium || !(map instanceof SVGElement)) return;
+  const href = buildLensMap();
+  if (!href) return;
+  map.setAttribute("href", href);
+  map.setAttribute("xlink:href", href);
+  document.documentElement.classList.add("lg-svg");
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  initLiquidOptics();
   initMobileNav();
   initNavMore();
   initHeaderScroll();

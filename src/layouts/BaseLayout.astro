@@ -165,6 +165,13 @@ const langSwitchHref = alternateLocalePath(Astro.url.pathname);
     }
   </head>
   <body>
+    <svg class="lg-filters" width="0" height="0" aria-hidden="true" focusable="false">
+      <filter id="lg-refract" x="-12%" y="-12%" width="124%" height="124%" color-interpolation-filters="sRGB">
+        <feImage id="lg-lens-map" result="map" preserveAspectRatio="none" href=""></feImage>
+        <feDisplacementMap in="SourceGraphic" in2="map" scale="14" xChannelSelector="R" yChannelSelector="G" result="bent"></feDisplacementMap>
+        <feGaussianBlur in="bent" stdDeviation="0.3"></feGaussianBlur>
+      </filter>
+    </svg>
     <a class="skip-link" href="#main-content">{copy.skipToContent}</a>
     <header class="header" id="siteHeader">
       <div class="container">
@@ -210,7 +217,7 @@ const langSwitchHref = alternateLocalePath(Astro.url.pathname);
                   <span class="nav-more-caret" aria-hidden="true">▾</span>
                 </button>
                 <div
-                  class="nav-more-menu"
+                  class="nav-more-menu lg-elevated"
                   id="navWorkMenu"
                   role="menu"
                   data-nav-more-menu
@@ -292,7 +299,7 @@ const langSwitchHref = alternateLocalePath(Astro.url.pathname);
                   <span class="nav-more-caret" aria-hidden="true">▾</span>
                 </button>
                 <div
-                  class="nav-more-menu"
+                  class="nav-more-menu lg-elevated"
                   id="navMoreMenu"
                   role="menu"
                   data-nav-more-menu
@@ -364,7 +371,7 @@ const langSwitchHref = alternateLocalePath(Astro.url.pathname);
                     </svg>
                   </button>
                   <div
-                    class="glass-tint-panel"
+                    class="glass-tint-panel lg-elevated"
                     id="glassTintPanel"
                     role="group"
                     aria-label={locale === "zh" ? "Liquid Glass 透明度" : "Liquid Glass tint"}
@@ -435,9 +442,32 @@ const langSwitchHref = alternateLocalePath(Astro.url.pathname);
 
     <slot />
 
+    <button class="nav-scrim" id="navScrim" type="button" tabindex="-1" aria-hidden="true"></button>
+    <nav class="tabbar lg-regular" aria-label={locale === "zh" ? "主要页面" : "Primary"}>
+      <a class:list={["tabbar-item", { "is-active": page === "home" }]} href={homeHref}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5Z"></path></svg>
+        <span>{locale === "zh" ? "首页" : "Home"}</span>
+      </a>
+      <a class:list={["tabbar-item", { "is-active": page === "work" }]} href={pageHref(locale, "work")}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.5"></rect><rect x="13" y="4" width="7" height="7" rx="1.5"></rect><rect x="4" y="13" width="7" height="7" rx="1.5"></rect><rect x="13" y="13" width="7" height="7" rx="1.5"></rect></svg>
+        <span>{copy.nav.projects}</span>
+      </a>
+      <a class:list={["tabbar-item", { "is-active": page === "blog" || page === "notes" }]} href={pageHref(locale, "blog")}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M7 3.5h8.5L19 7v13.5a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-16a1 1 0 0 1 1-1Z"></path><path d="M15 3.5V7h4M8.5 12h7M8.5 16h5"></path></svg>
+        <span>{copy.nav.notes}</span>
+      </a>
+      <a class:list={["tabbar-item", { "is-active": page === "about" }]} href={pageHref(locale, "about")}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="8" r="3.2"></circle><path d="M5.5 19.5c1.2-2.8 3.4-4 6.5-4s5.3 1.2 6.5 4"></path></svg>
+        <span>{copy.nav.about}</span>
+      </a>
+      <button class="tabbar-item" id="tabMore" type="button" aria-controls="navLinks" aria-expanded="false" aria-label={copy.menuLabel}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="6" cy="12" r="1.2" fill="currentColor"></circle><circle cx="12" cy="12" r="1.2" fill="currentColor"></circle><circle cx="18" cy="12" r="1.2" fill="currentColor"></circle></svg>
+        <span>{copy.menuLabel}</span>
+      </button>
+    </nav>
     <button
       type="button"
-      class="back-to-top"
+      class="back-to-top lg-regular"
       id="backToTop"
       aria-label={copy.backToTop}
       title={copy.backToTop}
