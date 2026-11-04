@@ -24,28 +24,29 @@ const playgroundHref = pageHref(locale, "playground");
 const metrics = await getMetrics();
 const highlights = copy.home.highlights;
 const [flagship, ...moreFeatured] = home.featured;
+const isZh = locale === "zh";
+const adoptionTitle = isZh ? "产品采用" : "Product Adoption";
+const resultsTitle = isZh ? "工程结果" : "Engineering Results";
+const resultsNote = isZh
+  ? "来自过往交付，不是实时计数。"
+  : "From past delivery work, not a live counter.";
 ---
 
 <BaseLayout locale={locale} page="home">
   <main id="main-content" class="apple-home">
     <section class="hero hero--home">
-      <div class="container">
+      <div class="hero-split">
         <div class="hero-content">
-          <p class="hero-role-line">{home.roles.join(" · ")}</p>
+          <p class="hero-role-line">{home.heroKicker}</p>
           <h1 class="hero-title">{home.greeting}</h1>
-          <p class="hero-tagline">{home.tagline}</p>
           <p class="hero-desc">{home.description}</p>
           <div class="hero-actions">
-            <a class="btn-primary" href={workHref}>
+            <a class="btn-primary" href="#featured">
               {home.ctaWork}
               <span aria-hidden="true">›</span>
             </a>
-            <a class="btn-ghost" href={home.ctaDemoHref}>
-              {home.ctaDemo}
-              <span aria-hidden="true">›</span>
-            </a>
             <a
-              class="btn-text"
+              class="btn-ghost"
               href={home.connectGithub}
               target="_blank"
               rel="noopener noreferrer"
@@ -55,27 +56,51 @@ const [flagship, ...moreFeatured] = home.featured;
             </a>
           </div>
         </div>
+        {
+          flagship && (
+            <div class="hero-product">
+              <a class="hero-product-main" href={flagship.href}>
+                <span class="product-kicker">{flagship.title}</span>
+                {flagship.pitch ? (
+                  <span class="hero-product-line">{flagship.pitch}</span>
+                ) : null}
+                {
+                  flagship.flow ? (
+                    <ol class="hero-flow">
+                      {flagship.flow.map((step) => (
+                        <li>{step}</li>
+                      ))}
+                    </ol>
+                  ) : null
+                }
+              </a>
+              <a class="product-link" href={home.ctaDemoHref}>
+                {home.ctaDemo}
+                <span aria-hidden="true">›</span>
+              </a>
+            </div>
+          )
+        }
       </div>
     </section>
 
     <section class="home-section home-featured" id="featured">
       {
         flagship && (
-          <a
-            class="product-stage product-stage--ink"
-            href={flagship.href}
-            target={flagship.href.startsWith("http") ? "_blank" : undefined}
-            rel={flagship.href.startsWith("http") ? "noopener noreferrer" : undefined}
-          >
+          <a class="product-stage product-stage--ink" href={flagship.href}>
             <h2 class="product-kicker">{home.featuredTitle}</h2>
             <h3 class="product-name">{flagship.title}</h3>
             {flagship.pitch ? <p class="product-line">{flagship.pitch}</p> : null}
             <p class="product-copy">{flagship.description}</p>
-            <ul class="featured-tags">
-              {flagship.tags.map((tag) => (
-                <li>{tag}</li>
-              ))}
-            </ul>
+            {
+              flagship.flow ? (
+                <ol class="product-flow">
+                  {flagship.flow.map((step) => (
+                    <li>{step}</li>
+                  ))}
+                </ol>
+              ) : null
+            }
             <span class="product-link">
               {home.featuredMore}
               <span aria-hidden="true">›</span>
@@ -83,22 +108,89 @@ const [flagship, ...moreFeatured] = home.featured;
           </a>
         )
       }
+    </section>
+
+    <section class="highlights home-section impact" id="by-the-numbers">
+      <div class="container">
+        <h2 class="section-title">{copy.home.highlightsTitle}</h2>
+        <div class="impact-board">
+          <div>
+            <h3 class="impact-group">{adoptionTitle}</h3>
+            <p class="highlights-subtitle">{copy.home.highlightsSubtitle}</p>
+            <div class="highlights-grid">
+              {
+                highlights.map((item) => {
+                  const value = resolveMetric(metrics, item.metric, item.value);
+                  const valueAttrs = item.metric
+                    ? {
+                        "data-metric": item.metric,
+                        "data-metric-fallback": item.value,
+                        "data-count-to": value,
+                      }
+                    : { "data-count-to": value };
+                  return (
+                    <article class="highlight-card">
+                      <span class="highlight-value" {...valueAttrs}>
+                        {value}
+                      </span>
+                      <span class="highlight-label">{item.label}</span>
+                      {item.href && item.linkLabel ? (
+                        <a
+                          class="highlight-source"
+                          href={item.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {item.linkLabel}
+                        </a>
+                      ) : null}
+                    </article>
+                  );
+                })
+              }
+            </div>
+          </div>
+          <div id="achievements">
+            <h3 class="impact-group">{resultsTitle}</h3>
+            <p class="highlights-subtitle">{resultsNote}</p>
+            <div class="achievements-grid">
+              {
+                home.achievements.map((item) => (
+                  <div class="achievement-card">
+                    <span class="achievement-value">{item.value}</span>
+                    <span class="achievement-label">{item.label}</span>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="principles home-section" id="principles">
+      <div class="container">
+        <h2 class="section-title">{copy.home.principlesTitle}</h2>
+        <div class="principle-list">
+          {
+            copy.home.principles.map((item) => (
+              <article class="principle-card">
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="home-section home-selected" id="selected">
       {
         moreFeatured.map((item) => (
-          <a
-            class="product-stage product-stage--paper"
-            href={item.href}
-            target={item.href.startsWith("http") ? "_blank" : undefined}
-            rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-          >
+          <a class="product-stage product-stage--paper" href={item.href}>
             <h3 class="product-name">{item.title}</h3>
             {item.pitch ? <p class="product-line">{item.pitch}</p> : null}
             <p class="product-copy">{item.description}</p>
-            <ul class="featured-tags">
-              {item.tags.map((tag) => (
-                <li>{tag}</li>
-              ))}
-            </ul>
             <span class="product-link">
               {home.featuredMore}
               <span aria-hidden="true">›</span>
@@ -106,15 +198,6 @@ const [flagship, ...moreFeatured] = home.featured;
           </a>
         ))
       }
-      <p class="stage-more">
-        <a href={workHref}>
-          {home.featuredCta}
-          <span aria-hidden="true">›</span>
-        </a>
-      </p>
-    </section>
-
-    <section class="home-section home-services" id="services">
       <div class="product-grid">
         {
           home.services.map((item) => (
@@ -135,90 +218,27 @@ const [flagship, ...moreFeatured] = home.featured;
           ))
         }
       </div>
+      <p class="stage-more">
+        <a href={workHref}>
+          {home.featuredCta}
+          <span aria-hidden="true">›</span>
+        </a>
+      </p>
     </section>
 
-    <section class="highlights home-section" id="by-the-numbers">
+    <section class="home-section capabilities" id="capabilities">
       <div class="container">
-        <h2 class="section-title">{copy.home.highlightsTitle}</h2>
-        <p class="highlights-subtitle">{copy.home.highlightsSubtitle}</p>
-        <p class="highlights-proof">{copy.home.highlightsProof}</p>
-        <div class="highlights-grid">
+        <h2 class="section-title">{home.capabilitiesTitle}</h2>
+        <div class="capability-board">
           {
-            highlights.map((item) => {
-              const value = resolveMetric(metrics, item.metric, item.value);
-              const valueAttrs = item.metric
-                ? {
-                    "data-metric": item.metric,
-                    "data-metric-fallback": item.value,
-                    "data-count-to": value,
-                  }
-                : { "data-count-to": value };
-              return (
-                <article class="highlight-card">
-                  <span class="highlight-value" {...valueAttrs}>
-                    {value}
-                  </span>
-                  <span class="highlight-label">{item.label}</span>
-                  {item.href && item.linkLabel ? (
-                    <a
-                      class="highlight-source"
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {item.linkLabel}
-                    </a>
-                  ) : null}
-                </article>
-              );
-            })
-          }
-        </div>
-        <h2 class="spec-label" id="achievements">{home.achievementsTitle}</h2>
-        <div class="achievements-grid">
-          {
-            home.achievements.map((item) => (
-              <div class="achievement-card">
-                <span class="achievement-value">{item.value}</span>
-                <span class="achievement-label">{item.label}</span>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-    </section>
-
-    <section class="principles home-section" id="principles">
-      <div class="container">
-        <h2 class="section-title">{copy.home.principlesTitle}</h2>
-        <p class="principles-lead">{copy.home.principlesLead}</p>
-        <div class="principle-list">
-          {
-            copy.home.principles.map((item) => (
-              <article class="principle-card">
+            home.capabilities.map((item) => (
+              <a href={item.href}>
                 <h3>{item.title}</h3>
-                <p>{item.description}</p>
-              </article>
+                <p>{item.detail}</p>
+              </a>
             ))
           }
         </div>
-      </div>
-    </section>
-
-    <section class="home-section tech-stack" id="stack">
-      <div class="container">
-        <h2 class="section-title">{home.stackTitle}</h2>
-        <p class="section-lead">{home.stackLead}</p>
-        <dl class="spec-table">
-          {
-            home.stack.map((group) => (
-              <div>
-                <dt>{group.title}</dt>
-                <dd>{group.items.join(" · ")}</dd>
-              </div>
-            ))
-          }
-        </dl>
       </div>
     </section>
 
@@ -258,21 +278,6 @@ const [flagship, ...moreFeatured] = home.featured;
           <a class="btn-ghost" href={orgHref}>{home.ossOrgLabel}</a>
           <a class="btn-ghost" href={playgroundHref}>{home.ossPlaygroundLabel}</a>
         </div>
-      </div>
-    </section>
-
-    <section class="home-section what-i-do" id="what-i-do">
-      <div class="container">
-        <h2 class="section-title">{home.whatIDoTitle}</h2>
-        <ul class="capability-list">
-          {
-            home.whatIDo.map((item) => (
-              <li>
-                <a href={item.href}>{item.title}</a>
-              </li>
-            ))
-          }
-        </ul>
       </div>
     </section>
   </main>

@@ -135,7 +135,6 @@ const EXPERIENCES: ExperienceDef[] = [
     id: "docker-suite",
     mode: "install",
     title: "Test DB Docker Suite",
-    githubHref: "https://hub.docker.com/u/xuxuclassmate",
     ctaExternal: true,
     ctaHref: {
       en: "https://hub.docker.com/u/xuxuclassmate",

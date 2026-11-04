@@ -157,7 +157,7 @@ export const en: LocaleCopy = {
       "QA Engineer and SDET focused on test automation, AI testing, API testing, and performance testing — plus Playwright, Docker testing, and AI test case generation.",
     positioning:
       "QA Engineer + SDET + AI Testing — installable quality engineering teams can run.",
-    highlightsTitle: "By the Numbers",
+    highlightsTitle: "Engineering Impact",
     highlightsSubtitle: "Live Public Metrics · Updated Daily",
     highlightsProof: "Prove, don't just show.",
     highlights: [
@@ -198,29 +198,19 @@ export const en: LocaleCopy = {
       "If it cannot be installed, run, or integrated, it is not finished.",
     principles: [
       {
-        title: "Installable > Demoable",
+        title: "Built to Run",
         description:
-          "Docker, CLI, or ClawHub — if teams cannot install and run it, slides do not count as delivery.",
+          "If a team cannot install and run it, it is not finished.",
       },
       {
-        title: "AI with Human Review",
+        title: "AI with Human Judgment",
         description:
-          "AI accelerates test case generation, but every output goes through a structured Test / Developer / Product Manager review loop — not raw LLM output.",
+          "AI drafts the cases. Test, developer, and product review decide what ships.",
       },
       {
-        title: "Reusable Environments",
+        title: "Engineering That Scales",
         description:
-          "Containers, database images, and gateways so CI and laptops boot the same stack.",
-      },
-      {
-        title: "Quality Is a System",
-        description:
-          "Automation, infrastructure, and review loops compound — quality is not a one-off checklist.",
-      },
-      {
-        title: "Judgment Still Leads",
-        description:
-          "AI accelerates drafting; QA craft decides what is good enough to ship.",
+          "Environments and quality systems are built to be reused.",
       },
     ],
     channelsTitle: "Find Me On",
