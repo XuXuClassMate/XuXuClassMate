@@ -76,6 +76,24 @@ const EXPERIENCES: ExperienceDef[] = [
     },
   },
   {
+    id: "nas",
+    mode: "live",
+    title: "NAS",
+    ctaExternal: true,
+    ctaHref: {
+      en: "https://nas.xuxuclassmate.com",
+      zh: "https://nas.xuxuclassmate.com",
+    },
+    description: {
+      en: "Sign-in for the self-hosted NAS at nas.xuxuclassmate.com.",
+      zh: "nas.xuxuclassmate.com 上的自托管 NAS 登录入口。",
+    },
+    ctaLabel: {
+      en: "Open NAS",
+      zh: "打开 NAS",
+    },
+  },
+  {
     id: "globalpulse",
     mode: "live",
     title: "GlobalPulse",
@@ -86,12 +104,31 @@ const EXPERIENCES: ExperienceDef[] = [
       zh: "https://pulse.xuxuclassmate.com/",
     },
     description: {
-      en: "Self-hosted market intelligence and scheduled briefings on Cloudflare Workers.",
-      zh: "自托管市场情报与定时简报——基于 Cloudflare Workers 的在线产品。",
+      en: "Market briefings on Cloudflare Workers. The console lives at pulse.xuxuclassmate.com.",
+      zh: "基于 Cloudflare Workers 的市场简报。控制台在 pulse.xuxuclassmate.com 首页。",
     },
     ctaLabel: {
       en: "Open live site",
       zh: "打开在线站点",
+    },
+  },
+  {
+    id: "custom-mail",
+    mode: "live",
+    title: "Custom Mail",
+    githubHref: "https://github.com/InnoNestX/Custom-Mail",
+    ctaExternal: true,
+    ctaHref: {
+      en: "https://mail.xuxuclassmate.com",
+      zh: "https://mail.xuxuclassmate.com",
+    },
+    description: {
+      en: "Private outbound mail on mail.xuxuclassmate.com — compose, attachments, and history.",
+      zh: "mail.xuxuclassmate.com 上的私有发信：撰写、附件和发送记录。",
+    },
+    ctaLabel: {
+      en: "Open Mail",
+      zh: "打开邮件",
     },
   },
   {

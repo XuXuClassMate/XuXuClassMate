@@ -349,6 +349,9 @@ test("desktop nav keeps primary links and Work/More menus", async ({
   await expect(page.locator("#navMoreMenu .nav-item")).toHaveText([
     "Now",
     "Playground",
+    "NAS",
+    "GlobalPulse",
+    "Mail",
     "Contact",
   ]);
   await page.getByRole("menuitem", { name: "Now" }).click({ trial: true });

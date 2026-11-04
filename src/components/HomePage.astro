@@ -200,6 +200,35 @@ const highlights = copy.home.highlights;
       </div>
     </section>
 
+    <section class="home-section home-services" id="services">
+      <div class="container">
+        <div class="section-head reveal-on-scroll">
+          <div>
+            <h2 class="section-title">{home.servicesTitle}</h2>
+            <p class="section-lead">{home.servicesLead}</p>
+          </div>
+        </div>
+        <div class="service-list reveal-on-scroll">
+          {
+            home.services.map((item) => (
+              <a
+                class="service-row"
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>
+                  <span class="service-title">{item.title}</span>
+                  <span class="service-detail">{item.detail}</span>
+                </span>
+                <span class="service-host">{item.host}</span>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
     <section class="home-section tech-stack" id="stack">
       <div class="container">
         <h2 class="section-title reveal-on-scroll">{home.stackTitle}</h2>
