@@ -1,5 +1,6 @@
 ---
 import BackNav from "./BackNav.astro";
+import CaseHeading from "./CaseHeading.astro";
 import Contact from "./Contact.astro";
 import Footer from "./Footer.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
@@ -31,8 +32,52 @@ if (!study) {
 const coverDark =
   study.coverDark ?? study.cover.replace(/\.jpg$/i, "-dark.jpg");
 const isZh = locale === "zh";
-const heading = (n: number, title: string) =>
-  `${String(n).padStart(2, "0")}. ${title}`;
+const narrative = slug === "testcase-generator" || slug === "docker-suite";
+const infra = slug === "docker-suite";
+const narrativeTitles: Record<string, string> = infra
+  ? {
+      problem: isZh ? "这个项目解决什么" : "What it is for",
+      features: isZh ? "支持的数据库" : "Supported databases",
+      role: isZh ? "我做了什么" : "What I did",
+      deployment: isZh ? "拉取并运行" : "Pull and run",
+      metrics: isZh ? "Docker Hub 数据" : "Docker Hub proof",
+      github: "GitHub",
+      liveDemo: isZh ? "安装入口" : "Install path",
+      outcomes: isZh ? "交付了什么" : "What shipped",
+      artifacts: isZh ? "可核验证据" : "Inspectable proof",
+      links: isZh ? "链接" : "Links",
+    }
+  : {
+      problem: isZh ? "问题" : "The Problem",
+      solution: isZh ? "工作方式" : "How It Works",
+      features: isZh ? "产品能力" : "Product Features",
+      architecture: isZh ? "工程实现" : "Engineering",
+      role: isZh ? "我做了什么" : "What I did",
+      stack: isZh ? "技术" : "Stack",
+      metrics: isZh ? "证据与入口" : "Proof & Access",
+      deployment: isZh ? "如何运行" : "How to run",
+      github: "GitHub",
+      liveDemo: isZh ? "试用" : "Try it",
+      tradeoffs: isZh ? "取舍" : "Tradeoffs",
+      outcomes: isZh ? "交付了什么" : "What shipped",
+      artifacts: isZh ? "可核验证据" : "Inspectable proof",
+      links: isZh ? "链接" : "Links",
+    };
+const regionKeys = new Set(
+  infra
+    ? ["problem", "features", "deployment", "metrics"]
+    : ["problem", "solution", "features", "architecture", "metrics"],
+);
+
+function titleFor(key: string, fallback: string, n: number) {
+  if (!narrative) return `${String(n).padStart(2, "0")}. ${fallback}`;
+  return narrativeTitles[key] ?? fallback;
+}
+
+function headingAs(key: string): "h2" | "h3" {
+  if (!narrative || regionKeys.has(key)) return "h2";
+  return "h3";
+}
 
 const githubHref =
   study.proof?.github ??
@@ -96,7 +141,10 @@ const relatedNoteLinks = study.links.filter((link) =>
 >
   <main
     id="main-content"
-    class:list={["case-page", { "case-page--flagship": study.flagship }]}
+    class:list={[
+      "case-page",
+      { "case-page--flagship": study.flagship, "case-page--narrative": narrative },
+    ]}
   >
     <section class="hero hero--detail">
       <div class="hero-atmosphere" aria-hidden="true"></div>
@@ -195,32 +243,58 @@ const relatedNoteLinks = study.links.filter((link) =>
     <section class="case-body">
       <div class="container case-grid">
         {
-          showOverview ? (
+          showOverview && !narrative ? (
             <article class="case-block reveal-on-scroll" id="overview">
-              <h2>{heading(sectionNumbers.overview, page.caseOverviewTitle)}</h2>
+              <CaseHeading
+                as="h2"
+                text={titleFor(
+                  "overview",
+                  page.caseOverviewTitle,
+                  sectionNumbers.overview,
+                )}
+              />
               <p>{overviewText}</p>
             </article>
           ) : null
         }
 
         <article class="case-block reveal-on-scroll" id="problem">
-          <h2>{heading(sectionNumbers.problem, page.caseProblemTitle)}</h2>
+          <CaseHeading
+            as={headingAs("problem")}
+            text={titleFor("problem", page.caseProblemTitle, sectionNumbers.problem)}
+          />
           <p class="case-section-lead">{page.caseProblemLead}</p>
           <p>{study.problem}</p>
         </article>
 
+        {
+          !infra ? (
         <article class="case-block reveal-on-scroll" id="solution">
-          <h2>{heading(sectionNumbers.solution, page.caseSolutionTitle)}</h2>
+          <CaseHeading
+            as={headingAs("solution")}
+            text={titleFor(
+              "solution",
+              page.caseSolutionTitle,
+              sectionNumbers.solution,
+            )}
+          />
           <p class="case-section-lead">{page.caseSolutionLead}</p>
           <p>{study.solution}</p>
         </article>
+          ) : null
+        }
 
         {
-          study.architecture && study.architecture.length > 0 ? (
+          study.architecture && study.architecture.length > 0 && !infra ? (
             <article class="case-block reveal-on-scroll" id="architecture">
-              <h2>
-                {heading(sectionNumbers.architecture, page.caseArchitectureTitle)}
-              </h2>
+              <CaseHeading
+                as={headingAs("architecture")}
+                text={titleFor(
+                  "architecture",
+                  page.caseArchitectureTitle,
+                  sectionNumbers.architecture,
+                )}
+              />
               <p class="case-section-lead">{page.caseArchitectureLead}</p>
               {study.architecture.map((chain) => (
                 <div class="arch-block">
@@ -239,7 +313,14 @@ const relatedNoteLinks = study.links.filter((link) =>
         {
           study.features && study.features.length > 0 ? (
             <article class="case-block reveal-on-scroll" id="features">
-              <h2>{heading(sectionNumbers.features, page.caseFeaturesTitle)}</h2>
+              <CaseHeading
+                as={headingAs("features")}
+                text={titleFor(
+                  "features",
+                  page.caseFeaturesTitle,
+                  sectionNumbers.features,
+                )}
+              />
               <p class="case-section-lead">{page.caseFeaturesLead}</p>
               <ul>
                 {study.features.map((item) => (
@@ -251,7 +332,10 @@ const relatedNoteLinks = study.links.filter((link) =>
         }
 
         <article class="case-block reveal-on-scroll" id="role">
-          <h2>{heading(sectionNumbers.role, page.caseRoleTitle)}</h2>
+          <CaseHeading
+            as={headingAs("role")}
+            text={titleFor("role", page.caseRoleTitle, sectionNumbers.role)}
+          />
           <p class="case-section-lead">{page.caseRoleLead}</p>
           {
             roleItems ? (
@@ -273,7 +357,10 @@ const relatedNoteLinks = study.links.filter((link) =>
         {
           study.techStack && study.techStack.length > 0 ? (
             <article class="case-block reveal-on-scroll" id="stack">
-              <h2>{heading(sectionNumbers.stack, page.caseStackTitle)}</h2>
+              <CaseHeading
+                as={headingAs("stack")}
+                text={titleFor("stack", page.caseStackTitle, sectionNumbers.stack)}
+              />
               <p class="case-section-lead">{page.caseStackLead}</p>
               <ul class="stack-list stack-list--inline">
                 {study.techStack.map((item) => (
@@ -285,7 +372,10 @@ const relatedNoteLinks = study.links.filter((link) =>
         }
 
         <article class="case-block reveal-on-scroll" id="metrics">
-          <h2>{heading(sectionNumbers.metrics, page.caseMetricsTitle)}</h2>
+          <CaseHeading
+            as={headingAs("metrics")}
+            text={titleFor("metrics", page.caseMetricsTitle, sectionNumbers.metrics)}
+          />
           <p class="case-section-lead">
             {
               slug === "testcase-generator"
@@ -377,7 +467,14 @@ const relatedNoteLinks = study.links.filter((link) =>
         </article>
 
         <article class="case-block reveal-on-scroll" id="deployment">
-          <h2>{heading(sectionNumbers.deployment, page.caseDeploymentTitle)}</h2>
+          <CaseHeading
+            as={headingAs("deployment")}
+            text={titleFor(
+              "deployment",
+              page.caseDeploymentTitle,
+              sectionNumbers.deployment,
+            )}
+          />
           <p class="case-section-lead">{page.caseDeploymentLead}</p>
           {
             study.deployment ? (
@@ -412,7 +509,10 @@ const relatedNoteLinks = study.links.filter((link) =>
         </article>
 
         <article class="case-block reveal-on-scroll" id="github">
-          <h2>{heading(sectionNumbers.github, page.caseGithubTitle)}</h2>
+          <CaseHeading
+            as={headingAs("github")}
+            text={titleFor("github", page.caseGithubTitle, sectionNumbers.github)}
+          />
           {
             githubHref ? (
               <div class="project-links">
@@ -440,7 +540,14 @@ const relatedNoteLinks = study.links.filter((link) =>
         </article>
 
         <article class="case-block reveal-on-scroll" id="live-demo">
-          <h2>{heading(sectionNumbers.liveDemo, page.caseLiveDemoTitle)}</h2>
+          <CaseHeading
+            as={headingAs("liveDemo")}
+            text={titleFor(
+              "liveDemo",
+              page.caseLiveDemoTitle,
+              sectionNumbers.liveDemo,
+            )}
+          />
           {
             liveDemoHref ? (
               <div class="project-links">
@@ -469,11 +576,16 @@ const relatedNoteLinks = study.links.filter((link) =>
         </article>
 
         {
-          study.tradeoffs && study.tradeoffs.length > 0 ? (
+          study.tradeoffs && study.tradeoffs.length > 0 && !infra ? (
             <article class="case-block reveal-on-scroll" id="tradeoffs">
-              <h2>
-                {heading(sectionNumbers.tradeoffs, page.caseTradeoffsTitle)}
-              </h2>
+              <CaseHeading
+                as={headingAs("tradeoffs")}
+                text={titleFor(
+                  "tradeoffs",
+                  page.caseTradeoffsTitle,
+                  sectionNumbers.tradeoffs,
+                )}
+              />
               <ul>
                 {study.tradeoffs.map((item) => (
                   <li>{item}</li>
@@ -486,9 +598,14 @@ const relatedNoteLinks = study.links.filter((link) =>
         {
           study.outcomes && study.outcomes.length > 0 ? (
             <article class="case-block reveal-on-scroll" id="outcomes">
-              <h2>
-                {heading(sectionNumbers.outcomes, page.caseOutcomesTitle)}
-              </h2>
+              <CaseHeading
+                as={headingAs("outcomes")}
+                text={titleFor(
+                  "outcomes",
+                  page.caseOutcomesTitle,
+                  sectionNumbers.outcomes,
+                )}
+              />
               <ul>
                 {study.outcomes.map((item) => (
                   <li>{item}</li>
@@ -501,9 +618,14 @@ const relatedNoteLinks = study.links.filter((link) =>
         {
           study.artifacts && study.artifacts.length > 0 ? (
             <article class="case-block reveal-on-scroll" id="artifacts">
-              <h2>
-                {heading(sectionNumbers.artifacts, page.caseArtifactsTitle)}
-              </h2>
+              <CaseHeading
+                as={headingAs("artifacts")}
+                text={titleFor(
+                  "artifacts",
+                  page.caseArtifactsTitle,
+                  sectionNumbers.artifacts,
+                )}
+              />
               <div class="case-artifacts">
                 {study.artifacts.map((item) => (
                   <article class="case-artifact">
@@ -533,7 +655,10 @@ const relatedNoteLinks = study.links.filter((link) =>
         {
           study.links && study.links.length > 0 ? (
             <article class="case-block reveal-on-scroll" id="links">
-              <h2>{heading(sectionNumbers.links, page.caseLinksTitle)}</h2>
+              <CaseHeading
+                as={headingAs("links")}
+                text={titleFor("links", page.caseLinksTitle, sectionNumbers.links)}
+              />
               {relatedNoteLinks.length > 0 ? (
                 <p class="case-section-lead">
                   {isZh

@@ -35,7 +35,11 @@ export type PortfolioHome = {
     description: string;
     href: string;
     tags: string[];
+    flow?: string[];
   }[];
+  heroKicker: string;
+  capabilitiesTitle: string;
+  capabilities: { title: string; detail: string; href: string }[];
   stackTitle: string;
   stackLead: string;
   stack: { title: string; items: string[] }[];
@@ -59,6 +63,12 @@ const featuredEn = [
       "PDF / Word / TXT / Image / Video → AI → Test Cases → Human Review → Excel / Markdown / XMind. Runs via Docker, local source, npm, or OpenClaw plugin.",
     href: "/en/work/testcase-generator",
     tags: ["Flagship", "AI Testing", "Live Demo"],
+    flow: [
+      "Requirements in",
+      "AI drafts the cases",
+      "Human review",
+      "Excel · Markdown · XMind",
+    ],
   },
   {
     title: "Test DB Docker Suite",
@@ -77,6 +87,7 @@ const featuredZh = [
       "PDF / Word / TXT / 图片 / 视频 → AI → 用例 → 人工评审 → Excel / Markdown / XMind。支持 Docker、本地源码、npm 与 OpenClaw 插件。",
     href: "/zh/work/testcase-generator",
     tags: ["旗舰", "AI Testing", "在线 Demo"],
+    flow: ["需求进入", "AI 起草用例", "人工评审", "Excel · Markdown · XMind"],
   },
   {
     title: "测试库 Docker 套件",
@@ -91,18 +102,21 @@ export function getPortfolioHome(locale: Locale): PortfolioHome {
   const isZh = locale === "zh";
 
   return {
-    greeting: isZh ? "你好，我是 XuXu。" : "Hi, I'm XuXu.",
+    greeting: isZh
+      ? "工程品质。由 AI 加速。"
+      : "Engineering Quality. Accelerated by AI.",
+    heroKicker: isZh ? "AI · 质量工程" : "AI · Quality Engineering",
     roles: ["QA Engineer", "SDET", "AI Testing"],
     tagline: isZh ? "可安装的质量工程" : "Installable Quality Engineering",
     description: isZh
-      ? "我构建可依赖的测试自动化、AI 驱动的测试工具，以及团队能安装、能运行、能集成的可复用质量基础设施。"
-      : "I build reliable test automation, AI-powered testing tools, and reusable quality infrastructure that teams can install, run, and integrate.",
-    ctaWork: isZh ? "查看项目" : "View Projects",
+      ? "构建可落地的 AI 测试工具、自动化系统和基础设施，把复杂的工程流程变成可靠的产品。"
+      : "Building practical AI testing tools, automation systems, and infrastructure that turn complex engineering workflows into reliable products.",
+    ctaWork: isZh ? "探索产品" : "Explore Products",
     ctaDemo: isZh ? "试用 AI 用例生成器" : "Try AI Test Case Generator",
     ctaDemoHref: isZh
       ? "/zh/demo/ai-testcase-generator"
       : "/en/demo/ai-testcase-generator",
-    ctaGithub: "GitHub",
+    ctaGithub: isZh ? "查看 GitHub" : "View GitHub",
     whatIDoTitle: isZh ? "能力方向" : "What I Do",
     whatIDo: [
       {
@@ -185,6 +199,31 @@ export function getPortfolioHome(locale: Locale): PortfolioHome {
         href: "https://mail.xuxuclassmate.com",
         action: isZh ? "打开" : "Open",
         detail: isZh ? "撰写、附件、发送记录。" : "Compose, attachments, and history.",
+      },
+    ],
+    capabilitiesTitle: isZh ? "能力领域" : "Capabilities",
+    capabilities: [
+      {
+        title: isZh ? "自动化工程" : "Automation Engineering",
+        detail: "Playwright · Java · Python",
+        href: isZh ? "/zh/playwright" : "/en/playwright",
+      },
+      {
+        title: isZh ? "AI 测试" : "AI-powered Testing",
+        detail: isZh ? "LLM · 多模态 · AI Agents" : "LLM · Multimodal · AI Agents",
+        href: isZh ? "/zh/ai-testing" : "/en/ai-testing",
+      },
+      {
+        title: isZh ? "性能与可靠性" : "Performance & Reliability",
+        detail: isZh ? "Locust · Go · 压测" : "Locust · Go · Load Testing",
+        href: isZh
+          ? "/zh/blog/locust-api-performance-testing"
+          : "/en/blog/locust-api-performance-testing",
+      },
+      {
+        title: isZh ? "开发者基础设施" : "Developer Infrastructure",
+        detail: isZh ? "Docker · CI/CD · 数据库" : "Docker · CI/CD · Databases",
+        href: isZh ? "/zh/infrastructure" : "/en/infrastructure",
       },
     ],
     stackTitle: isZh ? "技术栈" : "Technical Stack",

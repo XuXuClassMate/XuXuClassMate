@@ -381,9 +381,42 @@ html[data-theme="light"] .back-nav--prominent {
   padding: 1.5rem;
 }
 
-.case-block h2 {
+.case-block h2,
+.case-block h3.case-block-title {
   font-size: 1.1rem;
   margin-bottom: 0.75rem;
+}
+
+.case-page--narrative .case-cover {
+  display: none;
+}
+
+.case-page--narrative .pipeline-board {
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.case-page--narrative .case-block {
+  background: none;
+  border: 0;
+  border-radius: 0;
+  padding: 0 0 1.5rem;
+}
+
+.case-page--narrative .case-block h2.case-block-title {
+  margin-top: 1.5rem;
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.case-page--narrative .case-block h3.case-block-title {
+  margin-top: 1.25rem;
+  font-size: 21px;
+  font-weight: 600;
 }
 
 .case-block ul {

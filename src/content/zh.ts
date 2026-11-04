@@ -138,7 +138,7 @@ export const zh: LocaleCopy = {
       "QA Engineer / SDET，专注测试自动化、AI Testing、接口测试与性能测试——以及 Playwright、Docker Testing 与 AI 用例生成。",
     positioning:
       "QA Engineer + SDET + AI Testing——团队可运行的可安装质量工程。",
-    highlightsTitle: "数据一览",
+    highlightsTitle: "工程影响",
     highlightsSubtitle: "公开实时指标 · 每日更新",
     highlightsProof: "能验证，才算展示。",
     highlights: [
@@ -178,26 +178,16 @@ export const zh: LocaleCopy = {
     principlesLead: "不能安装、不能运行、不能集成，就不算完成。",
     principles: [
       {
-        title: "Installable > Demoable",
-        description:
-          "Docker、CLI 或 ClawHub——团队装不上、跑不起来，幻灯片就不算交付。",
+        title: "做出来就能跑",
+        description: "团队装不上、跑不起来，就不算完成。",
       },
       {
-        title: "AI with Human Review",
-        description:
-          "AI 加速用例生成，但每条产出都经过测试 / 开发 / 产品经理结构化评审闭环——不是裸 LLM 输出。",
+        title: "AI 起草，人来判断",
+        description: "AI 生成用例。测试、开发和产品评审决定什么可以交付。",
       },
       {
-        title: "Reusable Environments",
-        description: "容器、数据库镜像与网关，让 CI 与笔记本启动同一套栈。",
-      },
-      {
-        title: "Quality Is a System",
-        description: "自动化、基础设施与评审闭环会复利——质量不是一次性清单。",
-      },
-      {
-        title: "Judgment Still Leads",
-        description: "AI 加速草稿；质量手艺决定什么够格上线。",
+        title: "工程可以扩展",
+        description: "环境和质量体系按可复用的方式搭建。",
       },
     ],
     channelsTitle: "关注渠道",

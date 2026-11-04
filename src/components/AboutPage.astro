@@ -4,6 +4,7 @@ import Footer from "./Footer.astro";
 import PageHero from "./PageHero.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getAbout } from "../content/about";
+import { getPortfolioHome } from "../content/portfolio-home";
 import { getCopy, type Locale } from "../lib/i18n";
 
 type Props = { locale: Locale };
@@ -11,6 +12,7 @@ type Props = { locale: Locale };
 const { locale } = Astro.props;
 const copy = getCopy(locale);
 const about = getAbout(locale);
+const home = getPortfolioHome(locale);
 ---
 
 <BaseLayout
@@ -43,6 +45,23 @@ const about = getAbout(locale);
         </section>
       ))
     }
+
+    <section class="home-section">
+      <div class="container">
+        <h2 class="section-title">{home.stackTitle}</h2>
+        <p class="section-lead">{home.stackLead}</p>
+        <dl class="spec-table">
+          {
+            home.stack.map((group) => (
+              <div>
+                <dt>{group.title}</dt>
+                <dd>{group.items.join(" · ")}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </section>
   </main>
 
   <Contact

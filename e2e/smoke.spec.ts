@@ -25,46 +25,50 @@ async function expectMenuBelowHeader(page: Page, menuSelector: string): Promise<
 test("home renders and language switch works", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "Hi, I'm XuXu.",
+    "Engineering Quality. Accelerated by AI.",
   );
   await expect(page.locator(".hero-role-line")).toHaveText(
-    "QA Engineer · SDET · AI Testing",
+    "AI · Quality Engineering",
   );
-  await expect(page.locator(".hero-tagline")).toHaveText(
-    "Installable Quality Engineering",
+  await expect(page.locator(".hero-desc")).toContainText("AI testing tools");
+  await expect(page.locator(".hero-desc")).toContainText("automation systems");
+  await expect(page.getByRole("link", { name: "Explore Products" })).toHaveAttribute(
+    "href",
+    "#featured",
   );
-  await expect(page.locator(".hero-desc")).toContainText(
-    "reliable test automation",
-  );
-  await expect(page.locator(".hero-desc")).toContainText(
-    "AI-powered testing tools",
-  );
-  await expect(page.getByRole("link", { name: "View Projects" })).toBeVisible();
   await expect(
     page.getByRole("link", { name: "Try AI Test Case Generator" }),
   ).toHaveAttribute("href", "/en/demo/ai-testcase-generator");
+  await expect(page.locator(".hero-actions .btn-ghost")).toContainText(
+    "View GitHub",
+  );
   await expect(
-    page.locator(".hero-actions .btn-text"),
-  ).toContainText("GitHub");
-  await expect(page.getByRole("heading", { name: "By the Numbers" })).toBeVisible();
+    page.getByRole("heading", { name: "Engineering Impact" }),
+  ).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Product Adoption" })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Engineering Results" }),
+  ).toBeVisible();
   await expect(page.getByText("Live Public Metrics · Updated Daily")).toBeVisible();
   await expect(page.locator(".highlights .home-updated")).toHaveCount(0);
   await expect(page.getByRole("link", { name: /View Docker Hub/i }).first()).toBeVisible();
   await expect(page.getByRole("link", { name: /View ClawHub/i }).first()).toBeVisible();
   await expect(page.getByRole("heading", { name: "Featured Projects" })).toBeVisible();
   await expect(
-    page.getByText("From requirements to reviewable test cases."),
+    page.getByText("From requirements to reviewable test cases.").first(),
   ).toBeVisible();
-  await expect(page.getByRole("heading", { name: "AI with Human Review" })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "AI with Human Judgment" }),
+  ).toBeVisible();
   await expect(page.getByText("500+").first()).toBeVisible();
   await expect(page.getByText("Built with Astro")).toHaveCount(0);
   await expect(page.getByText("Cloudflare Pages")).toHaveCount(0);
   await page.getByRole("link", { name: "Switch to Chinese" }).click();
   await expect(page).toHaveURL(/\/zh\/?$/);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "你好，我是 XuXu。",
+    "工程品质。由 AI 加速。",
   );
-  await expect(page.locator(".hero-tagline")).toHaveText("可安装的质量工程");
+  await expect(page.locator(".hero-desc")).toContainText("AI 测试工具");
 });
 
 test("footer exposes professional profiles only", async ({ page }) => {
@@ -108,14 +112,18 @@ test("unified case study template renders", async ({ page }) => {
     "AI Test Case Generator",
   );
   await expect(page.locator(".subtitle")).toContainText("FLAGSHIP");
+  await expect(page.getByRole("heading", { name: "The Problem" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "How It Works" })).toBeVisible();
   await expect(
-    page.getByRole("heading", { name: "01. Project Overview" }),
+    page.getByRole("heading", { name: "Product Features" }),
   ).toBeVisible();
-  await expect(page.getByRole("heading", { name: "02. Problem" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "03. Solution" })).toBeVisible();
   await expect(
-    page.getByRole("heading", { name: "06. My Role" }),
+    page.getByRole("heading", { name: "Engineering", exact: true }),
   ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Proof & Access" }),
+  ).toBeVisible();
+  await expect(page.getByRole("heading", { name: "What I did" })).toBeVisible();
   await expect(page.getByText("What did I specifically do?")).toBeVisible();
   await expect(page.getByRole("heading", { name: "Try it now" })).toBeVisible();
   await expect(
@@ -377,6 +385,13 @@ test("playground page lists tryable experiences", async ({ page }) => {
   await expect(
     page.getByRole("heading", { name: "Test DB Docker Suite" }),
   ).toBeVisible();
+  const dockerCard = page.locator("article").filter({
+    has: page.getByRole("heading", { name: "Test DB Docker Suite" }),
+  });
+  await expect(dockerCard.getByRole("link", { name: "GitHub" })).toHaveCount(0);
+  await expect(
+    dockerCard.getByRole("link", { name: "Open Docker Hub" }),
+  ).toHaveAttribute("href", "https://hub.docker.com/u/xuxuclassmate");
   await expect(
     page.getByRole("link", { name: "Open interactive demo" }),
   ).toHaveAttribute("href", "/en/demo/ai-testcase-generator");
@@ -454,6 +469,9 @@ test("new case studies render with project OG covers", async ({ page }) => {
 
 test("docker suite proof shows top pull metrics", async ({ page }) => {
   await page.goto("/zh/work/docker-suite");
+  await expect(page.getByRole("heading", { name: "支持的数据库" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "拉取并运行" })).toBeVisible();
+  await expect(page.getByText("暂无公开 GitHub 仓库。")).toBeVisible();
   await expect(page.locator('[data-metric="docker:dameng"]')).toBeVisible();
   await expect(page.locator('[data-metric="docker:highgo"]')).toBeVisible();
   await expect(page.locator('[data-metric="docker:kingbase"]')).toBeVisible();
@@ -595,7 +613,9 @@ test("H5 layout fits common phone widths without horizontal overflow", async ({
         expect(metrics.fullWidth, `CTA width ${path} @ ${phone.width}`).toBe(true);
       }
       if (path === "/") {
-        await expect(page.locator(".hero-actions .btn-text")).toBeVisible();
+        await expect(
+          page.locator(".hero-actions").getByRole("link", { name: /GitHub/ }),
+        ).toBeVisible();
       }
     }
   }
@@ -630,7 +650,7 @@ test("english locale home aliases serve content with root canonical", async ({
       "https://www.xuxuclassmate.com/",
     );
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-      "Hi, I'm XuXu.",
+      "Engineering Quality. Accelerated by AI.",
     );
   }
 });
