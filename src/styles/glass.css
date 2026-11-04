@@ -59,7 +59,7 @@ html[data-theme="light"] {
 
 /* Shared liquid glass recipe (functional layer) */
 .liquid-glass,
-.header,
+.header::after,
 .nav-more-menu,
 .btn-ghost,
 .theme-toggle,
@@ -106,21 +106,50 @@ html[data-theme="light"] {
 
 .header {
   position: fixed;
-  overflow: hidden;
+  overflow: visible;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  isolation: auto;
+}
+
+.header::before {
+  z-index: 1;
+}
+
+.header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  border-width: 0 0 0.5px;
+  border-radius: 0;
 }
 
 .header > .container {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
-.header.is-scrolled {
+.header.is-scrolled::after {
   background: var(--liquid-fill-strong);
   box-shadow:
     inset 0 1px 0 var(--liquid-specular),
     inset 0 -0.5px 0 rgba(0, 0, 0, 0.2),
     0 0 0 0.5px var(--liquid-edge),
     0 8px 24px rgba(0, 0, 0, 0.14);
+}
+
+.nav-more,
+.glass-tint {
+  position: relative;
+  z-index: 2;
+}
+
+.nav-more-menu,
+.glass-tint-panel {
+  z-index: 30;
 }
 
 .nav-more-menu {
