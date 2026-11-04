@@ -65,6 +65,7 @@ html[data-theme="dark"] {
   --body-wash-b: transparent;
   --hero-radial-a: rgba(10, 132, 255, 0.22);
   --hero-radial-b: rgba(100, 210, 255, 0.12);
+  --hero-radial-c: rgba(191, 90, 242, 0.16);
   --hero-fade: transparent;
   --hero-grid-a: transparent;
   --hero-grid-b: transparent;
@@ -129,6 +130,7 @@ html[data-theme="light"] {
   --body-wash-b: transparent;
   --hero-radial-a: rgba(0, 113, 227, 0.18);
   --hero-radial-b: rgba(50, 173, 230, 0.14);
+  --hero-radial-c: rgba(175, 82, 222, 0.12);
   --hero-fade: transparent;
   --hero-grid-a: transparent;
   --hero-grid-b: transparent;

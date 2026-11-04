@@ -327,20 +327,18 @@ html[data-theme="light"] {
 
 .featured-row,
 .article-row {
-  border-radius: 14px;
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-  margin-left: -0.75rem;
-  margin-right: -0.75rem;
+  border-radius: 24px;
   transition:
     background 0.3s var(--liquid-ease),
-    transform 0.3s var(--liquid-ease);
+    transform 0.35s var(--liquid-ease),
+    box-shadow 0.35s var(--liquid-ease);
 }
 
 .featured-row:hover,
 .article-row:hover {
-  background: var(--content-surface-raised);
-  transform: translateX(3px);
+  background: var(--content-surface);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
 }
 
 .stack-list--inline li {
@@ -601,16 +599,18 @@ html[data-theme="light"] {
 .featured-row h3,
 .article-row h3,
 .timeline-body h3 {
-  font-family: var(--font-body);
-  font-size: var(--type-headline);
+  font-family: var(--font-display);
+  font-size: 21px;
   font-weight: 600;
-  line-height: 22px;
-  letter-spacing: var(--track-headline);
+  line-height: 1.25;
+  letter-spacing: -0.022em;
 }
 
 .highlight-value,
 .achievement-value {
   font-family: var(--font-display);
-  font-weight: 400;
-  letter-spacing: var(--track-large-title);
+  font-size: clamp(36px, 4vw, 52px);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
 }

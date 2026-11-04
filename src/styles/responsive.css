@@ -34,16 +34,17 @@ object {
 }
 
 @media (max-width: 992px) {
-  .hero-title {
-    font-size: clamp(2.2rem, 8vw, 3rem);
+  .hero-title,
+  .hero--home .hero-title {
+    font-size: clamp(40px, 8vw, 56px);
   }
 
   .hero-desc {
-    font-size: 18px;
+    font-size: 19px;
   }
 
   .section-title {
-    font-size: 1.8rem;
+    font-size: clamp(28px, 4vw, 36px);
   }
 }
 
@@ -247,30 +248,31 @@ object {
   }
 
   .hero-brand {
-    font-size: clamp(1.45rem, 6.5vw, 1.9rem);
-    margin-bottom: 14px;
+    font-size: 14px;
+    margin-bottom: 10px;
   }
 
-  .hero-title {
-    font-size: clamp(1.85rem, 8.5vw, 2.4rem);
+  .hero-title,
+  .hero--home .hero-title {
+    font-size: clamp(36px, 10vw, 48px);
     max-width: none;
     overflow-wrap: anywhere;
   }
 
   .hero-desc,
   .hero-positioning {
-    font-size: 0.98rem;
+    font-size: 17px;
     overflow-wrap: break-word;
   }
 
   .hero-role-line {
-    font-size: 0.98rem;
+    font-size: 20px;
     text-wrap: pretty;
   }
 
   .hero-tagline {
-    font-size: 0.78rem;
-    letter-spacing: 0.04em;
+    font-size: 15px;
+    letter-spacing: -0.01em;
   }
 
   .hero {
@@ -461,23 +463,24 @@ object {
     font-size: 0.95rem;
   }
 
-  .hero-title {
-    font-size: clamp(1.65rem, 8vw, 1.85rem);
+  .hero-title,
+  .hero--home .hero-title {
+    font-size: clamp(34px, 9vw, 42px);
   }
 
   .hero-brand {
-    font-size: clamp(1.3rem, 6vw, 1.55rem);
+    font-size: 13px;
   }
 
   .hero-desc,
   .hero-positioning,
   .hero-role-line {
-    font-size: 0.95rem;
+    font-size: 16px;
   }
 
   .section-title {
-    font-size: 1.5rem;
-    margin-bottom: 24px;
+    font-size: 28px;
+    margin-bottom: 20px;
   }
 
   .project-content,
@@ -523,8 +526,9 @@ object {
     max-width: min(8.5rem, 42vw);
   }
 
-  .hero-title {
-    font-size: 1.55rem;
+  .hero-title,
+  .hero--home .hero-title {
+    font-size: 32px;
   }
 
   .hero-actions .btn-primary,

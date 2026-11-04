@@ -80,11 +80,11 @@
 
 .hero-brand {
   font-family: var(--font-body);
-  font-size: var(--type-subhead);
+  font-size: 15px;
   font-weight: 600;
-  letter-spacing: var(--track-subhead);
+  letter-spacing: -0.01em;
   line-height: 20px;
-  margin-bottom: 8px;
+  margin-bottom: 14px;
   color: var(--muted);
 }
 
@@ -130,23 +130,23 @@
 
 .hero-title {
   font-family: var(--font-display);
-  font-size: var(--type-large-title);
-  font-weight: 400;
-  line-height: 41px;
-  letter-spacing: var(--track-large-title);
-  margin-bottom: 8px;
-  max-width: 20ch;
+  font-size: clamp(44px, 6.4vw, 72px);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  margin-bottom: 16px;
+  max-width: 14ch;
   font-synthesis: none;
 }
 
 .hero-desc {
-  font-size: var(--type-body);
+  font-size: 21px;
   font-weight: 400;
   color: var(--muted);
-  max-width: 36rem;
-  margin: 0 0 28px;
-  line-height: 22px;
-  letter-spacing: var(--track-body);
+  max-width: 38rem;
+  margin: 0 0 32px;
+  line-height: 1.4;
+  letter-spacing: -0.022em;
 }
 
 .hero-positioning {
@@ -305,12 +305,12 @@
 
 .section-title {
   font-family: var(--font-display);
-  font-size: var(--type-title2);
-  font-weight: 400;
-  line-height: 28px;
-  letter-spacing: var(--track-title);
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
   text-align: left;
-  margin-bottom: 20px;
+  margin-bottom: 28px;
   font-synthesis: none;
 }
 
