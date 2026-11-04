@@ -52,16 +52,37 @@ body {
 
 .header::after {
   border-radius: 0;
-  box-shadow: none;
-  background: rgba(251, 251, 253, 0.86);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  border-bottom: 0.5px solid rgba(0, 0, 0, 0.16);
+  background: var(--lg-fill);
+  backdrop-filter: saturate(180%) blur(var(--lg-blur-regular));
+  -webkit-backdrop-filter: saturate(180%) blur(var(--lg-blur-regular));
+  border-bottom: 0;
+  box-shadow:
+    inset 0 1px 0 var(--liquid-specular),
+    inset 0 40px 10px -40px var(--lg-inner),
+    inset 0 -40px 10px -40px var(--lg-inner),
+    0 0.5px 0 var(--separator);
+}
+
+html.lg-svg .header::after {
+  backdrop-filter: saturate(180%) blur(var(--lg-blur-regular)) url(#lg-refract);
+  -webkit-backdrop-filter: saturate(180%) blur(var(--lg-blur-regular)) url(#lg-refract);
+}
+
+.header.is-scrolled::after,
+html.lg-svg .header.is-scrolled::after {
+  background: var(--lg-fill-strong);
+  backdrop-filter: saturate(180%) blur(calc(var(--lg-blur-regular) + 4px));
+  -webkit-backdrop-filter: saturate(180%) blur(calc(var(--lg-blur-regular) + 4px));
+}
+
+html.lg-svg .header.is-scrolled::after {
+  backdrop-filter: saturate(180%) blur(calc(var(--lg-blur-regular) + 4px)) url(#lg-refract);
+  -webkit-backdrop-filter: saturate(180%) blur(calc(var(--lg-blur-regular) + 4px)) url(#lg-refract);
 }
 
 html[data-theme="dark"] .header::after {
-  background: rgba(0, 0, 0, 0.8);
-  border-bottom-color: rgba(255, 255, 255, 0.16);
+  background: var(--lg-fill);
+  border-bottom: 0;
 }
 
 .header > .container {
@@ -1202,10 +1223,43 @@ html.lg-svg .hero--home .btn-text {
   display: none;
 }
 
+.btn-primary,
+.copy-email-btn,
+.back-to-top,
+.tabbar-item,
+.nav-more-menu .nav-item {
+  transition: transform 0.2s var(--lg-ease, cubic-bezier(0.32, 0.72, 0, 1));
+}
+
+.btn-primary:active,
+.copy-email-btn:active,
+.back-to-top:active,
+.tabbar-item:active,
+.nav-more-menu .nav-item:active {
+  transform: scale(0.97);
+}
+
+.project-card,
+.note-card,
+.playground-card,
+.approach-card,
+.highlight-card,
+.principle-card,
+.service-card,
+.article-row {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .btn-primary:hover,
+  .btn-primary:active,
+  .copy-email-btn:active,
+  .back-to-top:active,
+  .tabbar-item:active,
   .product-stage,
   .product-cell {
+    transform: none;
     transition: none;
   }
 }
