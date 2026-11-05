@@ -44,6 +44,8 @@ export const zh: LocaleCopy = {
     more: "更多",
     innonestx: "开源",
     openSource: "开源",
+    products: "产品",
+    engineering: "工程",
     playground: "体验台",
     now: "Now",
     pulse: "GlobalPulse",

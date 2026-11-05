@@ -63,6 +63,8 @@ export const en: LocaleCopy = {
     more: "More",
     innonestx: "Open Source",
     openSource: "Open Source",
+    products: "Products",
+    engineering: "Engineering",
     playground: "Playground",
     now: "Now",
     pulse: "GlobalPulse",

@@ -1,0 +1,139 @@
+---
+import BackNav from "./BackNav.astro";
+import Contact from "./Contact.astro";
+import Footer from "./Footer.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCase, getCopy, pageHref, type Locale } from "../lib/i18n";
+import { getMetrics, resolveMetric } from "../lib/metrics";
+
+type Props = { locale: Locale };
+
+const { locale } = Astro.props;
+const isZh = locale === "zh";
+const copy = getCopy(locale);
+const page = copy.work;
+const study = getCase(locale, "docker-suite");
+const metrics = await getMetrics();
+const workHref = pageHref(locale, "work");
+
+if (!study) {
+  throw new Error("Missing docker-suite case");
+}
+
+const databases = isZh
+  ? ["达梦", "瀚高", "人大金仓", "TiDB"]
+  : ["Dameng", "Highgo", "Kingbase", "TiDB"];
+---
+
+<BaseLayout locale={locale} page="work" caseSlug="docker-suite" ogImagePath={study.cover} metaOverride={study.meta}>
+  <main id="main-content" class="story story--infra">
+    <section class="story-hero story-hero--infra">
+      <div class="story-wrap">
+        <BackNav href={workHref} label={page.caseBackLabel} />
+        <p class="subtitle">{isZh ? "基础设施" : "INFRASTRUCTURE"}</p>
+        <h1>{study.title}</h1>
+        <p class="story-lead">{study.description}</p>
+      </div>
+    </section>
+
+    <section class="story-band">
+      <div class="story-wrap">
+        <h2>{isZh ? "支持的数据库" : "Supported Databases"}</h2>
+        <ul class="db-row">
+          {databases.map((name) => <li>{name}</li>)}
+        </ul>
+        <ul class="story-plain">
+          {study.features?.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </section>
+
+    <section class="story-band story-band--ink">
+      <div class="story-wrap">
+        <h2>{isZh ? "Docker 镜像" : "Docker Images"}</h2>
+        <p class="story-lead">
+          {
+            isZh
+              ? "镜像发布在 xuxuclassmate 的 Docker Hub 命名空间，按库分开拉取。"
+              : "Images live in the xuxuclassmate Docker Hub namespace, one database per image."
+          }
+        </p>
+        <p>
+          <a href="https://hub.docker.com/u/xuxuclassmate" target="_blank" rel="noopener noreferrer">
+            hub.docker.com/u/xuxuclassmate
+          </a>
+        </p>
+      </div>
+    </section>
+
+    <section class="story-band">
+      <div class="story-wrap">
+        <h2>{isZh ? "快速开始" : "Quick Start"}</h2>
+        {study.deployment?.summary ? <p class="story-lead">{study.deployment.summary}</p> : null}
+        <ol class="story-steps">
+          {study.deployment?.steps.map((step) => <li>{step}</li>)}
+        </ol>
+      </div>
+    </section>
+
+    <section class="story-band story-band--proof">
+      <div class="story-wrap">
+        <h2>{isZh ? "拉取数据" : "Pull Statistics"}</h2>
+        <div class="story-metrics">
+          {
+            study.metrics.map((metric) => (
+              <article>
+                <span
+                  {...(metric.metric
+                    ? {
+                        "data-metric": metric.metric,
+                        "data-metric-fallback": metric.value,
+                      }
+                    : {})}
+                >
+                  {resolveMetric(metrics, metric.metric, metric.value)}
+                </span>
+                <p>{metric.label}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="story-band" id="docs">
+      <div class="story-wrap">
+        <h2>{isZh ? "文档" : "Documentation"}</h2>
+        <p>{isZh ? "暂无公开 GitHub 仓库。" : "No public GitHub repository yet."}</p>
+        <div class="story-links">
+          {
+            study.deployment?.channels.map((channel) => (
+              <a href={channel.href} target="_blank" rel="noopener noreferrer">
+                {channel.label}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="back-nav-footer">
+      <div class="container">
+        <BackNav href={workHref} label={page.caseBackLabel} prominent />
+      </div>
+    </section>
+  </main>
+  <Contact
+    label={copy.contactLabel}
+    hint={copy.contactHint}
+    offers={copy.contactOffers}
+    copyLabel={copy.copyEmail}
+    copiedLabel={copy.copiedEmail}
+  />
+  <Footer
+    brand={copy.brand}
+    description={page.footerDesc}
+    copyright={copy.copyright}
+    social={page.social}
+  />
+</BaseLayout>

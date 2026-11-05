@@ -1,0 +1,232 @@
+---
+import BackNav from "./BackNav.astro";
+import Contact from "./Contact.astro";
+import Footer from "./Footer.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCase, getCopy, pageHref, type Locale } from "../lib/i18n";
+import { getMetrics, resolveMetric } from "../lib/metrics";
+
+type Props = { locale: Locale };
+
+const { locale } = Astro.props;
+const isZh = locale === "zh";
+const copy = getCopy(locale);
+const page = copy.work;
+const study = getCase(locale, "testcase-generator");
+const metrics = await getMetrics();
+const workHref = pageHref(locale, "work");
+
+if (!study) {
+  throw new Error("Missing testcase-generator case");
+}
+
+const productLine = isZh
+  ? "可安装的 AI 工具，可信赖的质量。"
+  : "AI tools you can install — quality you can trust.";
+
+const shots = [
+  {
+    src: "/images/product-generator-input.jpg",
+    title: isZh ? "上传需求" : "Upload a requirement",
+    alt: isZh ? "交互 Demo 中已载入的需求" : "A requirement loaded in the interactive demo",
+  },
+  {
+    src: "/images/product-generator-cases.jpg",
+    title: isZh ? "AI 生成" : "AI generates cases",
+    alt: isZh ? "生成的结构化测试用例" : "Structured test cases from the interactive demo",
+  },
+  {
+    src: "/images/product-generator-review.jpg",
+    title: isZh ? "人工审核" : "Human review",
+    alt: isZh ? "QA、开发、产品角色审核" : "QA, developer, and product review roles",
+  },
+  {
+    src: "/images/product-generator-export.jpg",
+    title: isZh ? "导出结果" : "Export",
+    alt: isZh ? "Excel、Markdown 和 XMind 导出" : "Excel, Markdown, and XMind export",
+  },
+];
+
+const note = study.links.find((link) => /engineering note/i.test(link.label));
+---
+
+<BaseLayout locale={locale} page="work" caseSlug="testcase-generator" ogImagePath={study.cover} metaOverride={study.meta}>
+  <main id="main-content" class="story story--product">
+    <section class="story-hero">
+      <div class="story-wrap">
+        <BackNav href={workHref} label={page.caseBackLabel} />
+        <p class="subtitle">{isZh ? "旗舰" : "FLAGSHIP"}</p>
+        <h1>{study.title}</h1>
+        <p class="story-line">{productLine}</p>
+        <p class="story-lead">{study.description}</p>
+        <figure class="story-hero-shot">
+          <img
+            src="/images/product-generator-cases.jpg"
+            alt={shots[1].alt}
+            width="1200"
+            height="420"
+          />
+        </figure>
+      </div>
+    </section>
+
+    <section class="story-band" id="workflow">
+      <div class="story-wrap">
+        <h2>{isZh ? "工作流" : "Workflow"}</h2>
+        <ol class="story-flow">
+          {
+            study.pipeline?.stages.map((stage, index) => (
+              <li>
+                <span>{index + 1}</span>
+                {stage}
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section class="story-band story-band--paper" id="features">
+      <div class="story-wrap">
+        <h2>{isZh ? "功能与真实界面" : "Features"}</h2>
+        <div class="story-shots">
+          {
+            shots.map((shot) => (
+              <figure>
+                <img src={shot.src} alt={shot.alt} width="1200" height="640" />
+                <figcaption>{shot.title}</figcaption>
+              </figure>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="story-band" id="engineering">
+      <div class="story-wrap">
+        <h2>{isZh ? "工程实现" : "Engineering"}</h2>
+        {
+          study.architecture?.map((chain) => (
+            <div class="story-arch">
+              <h3>{chain.title}</h3>
+              <ol>
+                {chain.layers.map((layer) => (
+                  <li>{layer}</li>
+                ))}
+              </ol>
+            </div>
+          ))
+        }
+        {
+          study.tradeoffs?.[0] ? <p class="story-note">{study.tradeoffs[0]}</p> : null
+        }
+      </div>
+    </section>
+
+    <section class="story-band story-band--proof" id="proof">
+      <div class="story-wrap">
+        <h2>{isZh ? "数据证明" : "Proof"}</h2>
+        <p class="story-lead">
+          {
+            isZh
+              ? "Docker 拉取经 Docker Hub API Gateway 实时采集；npm 与 OpenClaw / ClawHub 同步刷新。"
+              : "Docker pulls refresh live via the Docker Hub API Gateway; npm and OpenClaw / ClawHub stay in sync."
+          }
+        </p>
+        <div class="story-metrics">
+          {
+            study.metrics.map((metric) => (
+              <article>
+                <span
+                  {...(metric.metric
+                    ? {
+                        "data-metric": metric.metric,
+                        "data-metric-fallback": metric.value,
+                      }
+                    : {})}
+                >
+                  {resolveMetric(metrics, metric.metric, metric.value)}
+                </span>
+                {
+                  metric.href ? (
+                    <a href={metric.href} target="_blank" rel="noopener noreferrer">
+                      {metric.label}
+                    </a>
+                  ) : (
+                    <p>{metric.label}</p>
+                  )
+                }
+              </article>
+            ))
+          }
+        </div>
+        <p class="story-embed">
+          <a
+            href="https://docker-hub-pull-counter.vercel.app/api/repo/details?namespace=xuxuclassmate&repo=testcase-generator"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="https://docker-hub-pull-counter.vercel.app/api/docker-stats?username=xuxuclassmate&repo=testcase-generator"
+              alt={isZh ? "testcase-generator Docker 拉取实时卡片" : "testcase-generator Docker pulls live card"}
+              width="420"
+              height="180"
+            />
+          </a>
+        </p>
+      </div>
+    </section>
+
+    <section class="story-band story-band--start" id="start">
+      <div class="story-wrap">
+        <h2>{isZh ? "开始使用" : "Get Started"}</h2>
+        {study.tryItNow?.note ? <p class="story-lead">{study.tryItNow.note}</p> : null}
+        {
+          study.tryItNow?.command ? (
+            <pre class="story-command"><code>{study.tryItNow.command}</code></pre>
+          ) : null
+        }
+        <div class="story-links">
+          {
+            study.tryItNow ? (
+              <a class="btn-primary" href={study.tryItNow.primary.href}>
+                {study.tryItNow.primary.label}
+              </a>
+            ) : null
+          }
+          {
+            study.tryItNow?.secondary?.map((link) => (
+              <a href={link.href} target="_blank" rel="noopener noreferrer">
+                {link.label}
+              </a>
+            ))
+          }
+          {
+            note ? (
+              <a href={note.href}>{note.label}</a>
+            ) : null
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="back-nav-footer">
+      <div class="container">
+        <BackNav href={workHref} label={page.caseBackLabel} prominent />
+      </div>
+    </section>
+  </main>
+  <Contact
+    label={copy.contactLabel}
+    hint={copy.contactHint}
+    offers={copy.contactOffers}
+    copyLabel={copy.copyEmail}
+    copiedLabel={copy.copiedEmail}
+  />
+  <Footer
+    brand={copy.brand}
+    description={page.footerDesc}
+    copyright={copy.copyright}
+    social={page.social}
+  />
+</BaseLayout>

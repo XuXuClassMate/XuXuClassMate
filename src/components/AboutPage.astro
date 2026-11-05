@@ -13,42 +13,52 @@ const { locale } = Astro.props;
 const copy = getCopy(locale);
 const about = getAbout(locale);
 const home = getPortfolioHome(locale);
+const isZh = locale === "zh";
 ---
 
-<BaseLayout
-  locale={locale}
-  page="about"
-  metaOverride={about.meta}
->
+<BaseLayout locale={locale} page="about" metaOverride={about.meta}>
   <main id="main-content" class="lab-page about-page">
     <PageHero
-      subtitle={about.subtitle}
+      subtitle="QA Engineer · SDET · AI Testing"
       title={about.title}
       description={about.intro}
       actions={[
         { href: about.ctaWorkHref, label: about.ctaWork, primary: true },
-        { href: about.ctaLabHref, label: about.ctaLab },
       ]}
     />
 
-    {
-      about.sections.map((section) => (
-        <section class="home-section">
-          <div class="container">
-            <h2 class="section-title reveal-on-scroll">{section.title}</h2>
-            <ul class="capability-list reveal-on-scroll">
-              {section.items.map((item) => (
-                <li>{item}</li>
-              ))}
-            </ul>
-          </div>
-        </section>
-      ))
-    }
+    <section class="home-section">
+      <div class="container">
+        <h2 class="section-title">{isZh ? "工程经历" : "Engineering Journey"}</h2>
+        <p class="section-lead">
+          {
+            isZh
+              ? "从测试自动化、接口和性能，做到可安装的 AI 测试工具。重点一直是让质量工作能在真实环境里跑起来。"
+              : "From test automation, APIs, and performance into installable AI testing tools. The through-line is quality work that runs in a real environment."
+          }
+        </p>
+      </div>
+    </section>
 
     <section class="home-section">
       <div class="container">
-        <h2 class="section-title">{copy.home.principlesTitle}</h2>
+        <h2 class="section-title">{isZh ? "部分成果" : "Selected Achievements"}</h2>
+        <div class="story-metrics">
+          {
+            home.achievements.slice(0, 2).map((item) => (
+              <article>
+                <span>{item.value}</span>
+                <p>{item.label}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="home-section">
+      <div class="container">
+        <h2 class="section-title">{isZh ? "工程原则" : "Engineering Philosophy"}</h2>
         <div class="principle-list">
           {
             copy.home.principles.map((item) => (
@@ -64,18 +74,14 @@ const home = getPortfolioHome(locale);
 
     <section class="home-section">
       <div class="container">
-        <h2 class="section-title">{home.stackTitle}</h2>
-        <p class="section-lead">{home.stackLead}</p>
-        <dl class="spec-table">
+        <h2 class="section-title">{isZh ? "职业方向" : "Career Focus"}</h2>
+        <p class="section-lead">
           {
-            home.stack.map((group) => (
-              <div>
-                <dt>{group.title}</dt>
-                <dd>{group.items.join(" · ")}</dd>
-              </div>
-            ))
+            isZh
+              ? "QA / SDET 角色，以及能安装、能评审、能留下证据的质量工程。"
+              : "QA / SDET roles, and quality engineering that can be installed, reviewed, and proven."
           }
-        </dl>
+        </p>
       </div>
     </section>
   </main>
