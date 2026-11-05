@@ -52,15 +52,6 @@ const imageDark = item.imageDark ?? item.image?.replace(/\.jpg$/i, "-dark.jpg");
     {item.status ? <span class="project-category">{item.status}</span> : null}
     <h3>{item.title}</h3>
     <p>{item.description}</p>
-    {
-      item.tags?.length ? (
-        <div class="project-tech">
-          {item.tags.map((tag) => (
-            <span>{tag}</span>
-          ))}
-        </div>
-      ) : null
-    }
     <div class="project-links">
       {
         item.demoHref && item.demoLabel ? (

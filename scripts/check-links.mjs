@@ -6,6 +6,7 @@
 const URLS = [
   "https://www.xuxuclassmate.com/",
   "https://pulse.xuxuclassmate.com/",
+  "https://watch.xuxuclassmate.com/",
   "https://github.com/XuXuClassMate",
   "https://github.com/InnoNestX/testcase-generator",
   "https://github.com/InnoNestX/trading-assistant",

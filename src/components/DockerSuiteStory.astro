@@ -33,17 +33,8 @@ const databases = isZh
         <p class="subtitle">{isZh ? "基础设施" : "INFRASTRUCTURE"}</p>
         <h1>{study.title}</h1>
         <p class="story-lead">{study.description}</p>
-      </div>
-    </section>
-
-    <section class="story-band">
-      <div class="story-wrap">
-        <h2>{isZh ? "数据库镜像" : "Database Images"}</h2>
         <ul class="db-row">
           {databases.map((name) => <li>{name}</li>)}
-        </ul>
-        <ul class="story-plain">
-          {study.features?.map((item) => <li>{item}</li>)}
         </ul>
       </div>
     </section>
@@ -77,19 +68,47 @@ const databases = isZh
       <div class="story-wrap">
         <h2>{isZh ? "快速开始" : "Quick Start"}</h2>
         {study.deployment?.summary ? <p class="story-lead">{study.deployment.summary}</p> : null}
-        <pre class="story-command"><code>docker pull xuxuclassmate/dameng
-docker pull xuxuclassmate/highgo
-docker pull xuxuclassmate/kingbase
-docker pull xuxuclassmate/tidb</code></pre>
+        <div class="terminal">
+          <div class="terminal-bar">
+            <span class="terminal-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span>Terminal</span>
+            <button
+              type="button"
+              class="terminal-copy"
+              data-copy-target="docker-pulls"
+              data-copy-label={isZh ? "复制" : "Copy"}
+              data-copied-label={isZh ? "已复制" : "Copied"}
+            >
+              {isZh ? "复制" : "Copy"}
+            </button>
+          </div>
+          <pre class="terminal-body" id="docker-pulls"><code><span class="tok-cmt">{isZh ? "# CI 里固定标签。端口和环境变量以该镜像文档为准。" : "# Pin a tag in CI. Ports and env follow that image's docs."}</span>
+<span class="tok-cmd">docker</span> <span class="tok-kw">pull</span> <span class="tok-img">xuxuclassmate/dameng</span>
+<span class="tok-cmd">docker</span> <span class="tok-kw">pull</span> <span class="tok-img">xuxuclassmate/highgo</span>
+<span class="tok-cmd">docker</span> <span class="tok-kw">pull</span> <span class="tok-img">xuxuclassmate/kingbase</span>
+<span class="tok-cmd">docker</span> <span class="tok-kw">pull</span> <span class="tok-img">xuxuclassmate/tidb</span>
+
+<span class="tok-cmd">docker</span> <span class="tok-kw">run</span> -d --name qa-dameng \
+  -p 5236:5236 \
+  -e DM_PASSWORD=ChangeMe \
+  <span class="tok-img">xuxuclassmate/dameng</span></code></pre>
+        </div>
         <ol class="story-steps">
           {study.deployment?.steps.map((step) => <li>{step}</li>)}
         </ol>
       </div>
     </section>
 
-    <section class="story-band" id="docs">
+    <section class="story-band">
       <div class="story-wrap">
         <h2>{isZh ? "文档" : "Documentation"}</h2>
+        <p class="story-lead">
+          {
+            isZh
+              ? "CI 里固定标签。端口和环境变量以各镜像文档为准，不另造一层封装。"
+              : "Pin tags in CI. Ports and environment variables follow each image's docs — no extra wrapper."
+          }
+        </p>
         <div class="story-links">
           {
             study.deployment?.channels.map((channel) => (

@@ -228,12 +228,12 @@ html.lg-svg .glass-tint-toggle {
 .language-switch,
 .back-to-top {
   transition:
-    transform 0.35s var(--liquid-spring),
-    background 0.3s var(--liquid-ease),
-    border-color 0.3s var(--liquid-ease),
-    box-shadow 0.3s var(--liquid-ease),
-    color 0.25s var(--liquid-ease),
-    opacity 0.25s var(--liquid-ease);
+    transform 0.18s ease-out,
+    background 0.18s ease-out,
+    border-color 0.18s ease-out,
+    box-shadow 0.18s ease-out,
+    color 0.18s ease-out,
+    opacity 0.18s ease-out;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -243,7 +243,7 @@ html.lg-svg .glass-tint-toggle {
 .filter-btn:hover,
 .copy-email-btn:hover,
 .back-to-top:hover {
-  transform: scale(1.02);
+  transform: translateY(-2px);
 }
 
 .liquid-interactive:active,
@@ -268,7 +268,7 @@ html.lg-svg .glass-tint-toggle {
 }
 
 .btn-primary:hover {
-  transform: scale(1.02);
+  transform: translateY(-2px);
 }
 
 .filter-btn.is-active,

@@ -29,36 +29,77 @@ const shots = [
     src: "/images/product-generator-input.jpg",
     title: isZh ? "上传需求" : "Upload a requirement",
     alt: isZh ? "交互 Demo 中已载入的需求" : "A requirement loaded in the interactive demo",
+    body: isZh
+      ? "PDF、Word、图片或视频进去之后，先抽出验收标准，再写用例。"
+      : "PDF, Word, image, or video goes in. Acceptance criteria come out before any case is written.",
   },
   {
     src: "/images/product-generator-cases.jpg",
     title: isZh ? "AI 生成" : "AI generates cases",
     alt: isZh ? "生成的结构化测试用例" : "Structured test cases from the interactive demo",
+    body: isZh
+      ? "生成带步骤、预期结果和优先级的结构化用例。"
+      : "Drafts structured cases with steps, expected results, and priority.",
   },
   {
     src: "/images/product-generator-review.jpg",
     title: isZh ? "人工审核" : "Human review",
     alt: isZh ? "QA、开发、产品角色审核" : "QA, developer, and product review roles",
+    body: isZh
+      ? "QA、开发和产品看同一组用例。人决定什么能交付。"
+      : "QA, Dev, and Product review the same cases. People decide what ships.",
   },
   {
     src: "/images/product-generator-export.jpg",
-    title: isZh ? "导出结果" : "Export",
+    title: isZh ? "结构化导出" : "Structured export",
     alt: isZh ? "Excel、Markdown 和 XMind 导出" : "Excel, Markdown, and XMind export",
+    body: isZh
+      ? "审核后的结果导出为 Excel、Markdown 和 XMind。"
+      : "Excel, Markdown, and XMind from the reviewed set.",
   },
 ];
 
 const note = study.links.find((link) => /engineering note/i.test(link.label));
+
+function paintCommand(command: string): string {
+  return command
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .split("\n")
+    .map((line) => {
+      if (line.trimStart().startsWith("#")) return `<span class="tok-cmt">${line}</span>`;
+      return line
+        .replace(/\b(docker|npm|testcase-generator)\b/g, '<span class="tok-cmd">$1</span>')
+        .replace(/\b(pull|run|install)\b/g, '<span class="tok-kw">$1</span>');
+    })
+    .join("\n");
+}
 ---
 
 <BaseLayout locale={locale} page="work" caseSlug="testcase-generator" ogImagePath={study.cover} metaOverride={study.meta}>
   <main id="main-content" class="story story--product">
     <section class="story-hero">
-      <div class="story-wrap">
-        <BackNav href={workHref} label={page.caseBackLabel} />
-        <p class="subtitle">{isZh ? "旗舰" : "FLAGSHIP"}</p>
-        <h1>{study.title}</h1>
-        <p class="story-line">{productLine}</p>
-        <figure class="story-hero-shot">
+      <div class="story-wrap story-split">
+        <div class="story-copy">
+          <BackNav href={workHref} label={page.caseBackLabel} />
+          <p class="subtitle">{isZh ? "旗舰" : "FLAGSHIP"}</p>
+          <h1>{study.title}</h1>
+          <p class="story-line">{productLine}</p>
+          <div class="story-links">
+            {
+              study.tryItNow ? (
+                <a class="btn-primary" href={study.tryItNow.primary.href}>
+                  {study.tryItNow.primary.label}
+                </a>
+              ) : null
+            }
+            <a href="https://github.com/InnoNestX/testcase-generator" target="_blank" rel="noopener noreferrer">
+              GitHub
+            </a>
+          </div>
+        </div>
+        <figure class="device">
+          <div class="device-bar" aria-hidden="true"><span></span><span></span><span></span></div>
           <img
             src="/images/product-generator-workspace.jpg"
             alt={shots[1].alt}
@@ -76,7 +117,14 @@ const note = study.links.find((link) => /engineering note/i.test(link.label));
           {
             study.pipeline?.stages.map((stage, index) => (
               <li>
-                <span>{index + 1}</span>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <strong>
+                  {
+                    (isZh
+                      ? ["上传需求", "AI 生成", "人工审核", "结构化导出"]
+                      : ["Requirements upload", "AI generation", "Human review", "Structured export"])[index] ?? stage
+                  }
+                </strong>
                 {stage}
               </li>
             ))
@@ -88,22 +136,26 @@ const note = study.links.find((link) => /engineering note/i.test(link.label));
     <section class="story-band story-band--paper" id="features">
       <div class="story-wrap">
         <h2>{isZh ? "产品功能" : "Product Features"}</h2>
-        <div class="story-shots">
-          {
-            shots.map((shot) => (
-              <figure>
+        {
+          shots.map((shot, index) => (
+            <div class:list={["story-split", "story-feature", { "story-split--flip": index % 2 === 1 }]}>
+              <div class="story-copy">
+                <h3>{shot.title}</h3>
+                <p>{shot.body}</p>
+              </div>
+              <figure class="device">
+                <div class="device-bar" aria-hidden="true"><span></span><span></span><span></span></div>
                 <img src={shot.src} alt={shot.alt} width="1200" height="640" />
-                <figcaption>{shot.title}</figcaption>
               </figure>
-            ))
-          }
-        </div>
+            </div>
+          ))
+        }
       </div>
     </section>
 
     <section class="story-band" id="engineering">
       <div class="story-wrap">
-        <h2>{isZh ? "工程实现" : "Engineering"}</h2>
+        <h2>{isZh ? "工程架构" : "Engineering Architecture"}</h2>
         {
           study.architecture?.map((chain) => (
             <div class="story-arch">
@@ -132,7 +184,7 @@ const note = study.links.find((link) => /engineering note/i.test(link.label));
 
     <section class="story-band story-band--proof" id="proof">
       <div class="story-wrap">
-        <h2>{isZh ? "数据证明" : "Proof"}</h2>
+        <h2>{isZh ? "采用证明" : "Proof & Adoption"}</h2>
         <p class="story-lead">
           {
             isZh
@@ -187,20 +239,28 @@ const note = study.links.find((link) => /engineering note/i.test(link.label));
     <section class="story-band story-band--start" id="start">
       <div class="story-wrap">
         <h2>{isZh ? "开始使用" : "Get Started"}</h2>
-        {study.tryItNow?.note ? <p class="story-lead">{study.tryItNow.note}</p> : null}
+        {study.tryItNow?.note ? <p class="story-tip">{study.tryItNow.note}</p> : null}
         {
           study.tryItNow?.command ? (
-            <pre class="story-command"><code>{study.tryItNow.command}</code></pre>
+            <div class="terminal">
+              <div class="terminal-bar">
+                <span class="terminal-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span>Terminal</span>
+                <button
+                  type="button"
+                  class="terminal-copy"
+                  data-copy-target="generator-run"
+                  data-copy-label={isZh ? "复制" : "Copy"}
+                  data-copied-label={isZh ? "已复制" : "Copied"}
+                >
+                  {isZh ? "复制" : "Copy"}
+                </button>
+              </div>
+              <pre class="terminal-body" id="generator-run" set:html={paintCommand(study.tryItNow.command)} />
+            </div>
           ) : null
         }
         <div class="story-links">
-          {
-            study.tryItNow ? (
-              <a class="btn-primary" href={study.tryItNow.primary.href}>
-                {study.tryItNow.primary.label}
-              </a>
-            ) : null
-          }
           {
             study.tryItNow?.secondary
               ?.filter((link) => /docs|docker hub/i.test(link.label))

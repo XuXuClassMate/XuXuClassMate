@@ -33,9 +33,9 @@
   padding: 0.35rem 0.7rem;
   border-radius: 980px;
   transition:
-    color 0.3s var(--ease-ui, ease),
-    background 0.3s var(--ease-ui, ease),
-    transform 0.3s var(--liquid-spring, ease);
+    color 0.2s ease-out,
+    background 0.2s ease-out,
+    transform 0.2s ease-out;
 }
 
 .social-links a .icon {
@@ -47,12 +47,11 @@
 .social-links a:hover {
   color: var(--primary);
   background: var(--primary-soft);
-  transform: scale(1.03);
+  transform: translateY(-2px);
 }
 
 .social-links a:hover .icon {
-  transform: scale(1.05);
-  transition: transform 0.3s var(--liquid-spring, ease);
+  transition: transform 0.2s ease-out;
 }
 
 .footer-bottom {
@@ -64,4 +63,18 @@
 .copyright {
   color: var(--text-secondary);
   font-size: 14px;
+}
+
+.footer-sites {
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.footer-sites a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.footer-sites a:hover {
+  text-decoration: underline;
 }

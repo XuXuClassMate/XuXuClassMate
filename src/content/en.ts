@@ -1697,7 +1697,7 @@ export const en: LocaleCopy = {
         },
       },
     ],
-    footerDesc: "AI tools you can install — quality you can trust",
+    footerDesc: "QA Engineer · SDET · AI Testing.",
     social: [
       {
         href: "https://github.com/XuXuClassMate",

@@ -290,15 +290,15 @@ function toCard(locale: Locale, id: ProjectId): Card {
     status:
       project.href === "#"
         ? locale === "zh"
-          ? "仓库即将公开"
-          : "Repository coming soon"
-        : project.id === "docker-suite"
+          ? "即将公开"
+          : "Coming Soon"
+        : project.id === "automation-framework"
           ? locale === "zh"
-            ? "暂无公开 GitHub"
-            : "No public GitHub"
+            ? "稳定"
+            : "Stable"
           : locale === "zh"
-            ? "已公开"
-            : "Public",
+            ? "使用中"
+            : "Active",
     ctaHref: project.ctaHref,
     ctaLabel: copy.ctaLabel,
     category: groupLabel(locale, project.group),

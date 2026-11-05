@@ -1662,7 +1662,7 @@ export const zh: LocaleCopy = {
         },
       },
     ],
-    footerDesc: "能安装的 AI 工具，信得过的质量",
+    footerDesc: "QA Engineer · SDET · AI Testing.",
     social: [
       {
         href: "https://github.com/XuXuClassMate",
