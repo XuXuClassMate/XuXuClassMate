@@ -1989,6 +1989,19 @@ html.lg-svg .apple-home .hero--home .btn-ghost:hover {
   background: #fff;
 }
 
+.db-home {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 28px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
 .tile--ink .selected-row {
   flex-direction: column;
   align-items: center;

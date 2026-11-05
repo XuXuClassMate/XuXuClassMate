@@ -57,20 +57,17 @@ const impactNote = isZh
         <picture>
           <source
             media="(max-width: 768px)"
-            srcset="/images/product-generator-case-phone.jpg"
+            srcset="/images/product-generator-workspace-phone.jpg"
           />
           <img
-            src="/images/product-generator-cases.jpg"
+            src="/images/product-generator-workspace.jpg"
             alt={isZh
-              ? "AI 测试用例生成器交互 Demo 的用例结果"
-              : "Test cases from the AI Test Case Generator interactive demo"}
-            width="1200"
-            height="420"
+              ? "交互 Demo 跑完后的需求、用例、审核和导出"
+              : "The interactive demo after a run: requirement, cases, review, and export"}
+            width="1280"
+            height="1433"
           />
         </picture>
-        <figcaption>
-          <a href={home.ctaDemoHref}>{home.ctaDemo}</a>
-        </figcaption>
       </figure>
     </section>
 
@@ -123,6 +120,7 @@ const impactNote = isZh
       {
         flagship && (
           <p class="band-links">
+            <a href={home.ctaDemoHref}>{home.ctaDemo}</a>
             <a href={flagship.href}>
               {home.featuredMore}
               <span aria-hidden="true">›</span>
@@ -144,16 +142,14 @@ const impactNote = isZh
                 <span aria-hidden="true">›</span>
               </span>
             </span>
-            <figure class="tile-stage">
-              <img
-                src="/images/product-stage-databases.jpg"
-                alt={isZh
-                  ? "五个浅色圆柱，中间一只有蓝色细环"
-                  : "Five pale cylinders, the center one marked with a blue ring"}
-                width="1280"
-                height="720"
-              />
-            </figure>
+            <ul class="db-home">
+              {(isZh
+                ? ["达梦", "瀚高", "人大金仓", "TiDB"]
+                : ["Dameng", "Highgo", "Kingbase", "TiDB"]
+              ).map((name) => (
+                <li>{name}</li>
+              ))}
+            </ul>
           </a>
         ))
       }

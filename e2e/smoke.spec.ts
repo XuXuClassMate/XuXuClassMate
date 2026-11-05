@@ -96,7 +96,7 @@ test("unified case study template renders", async ({ page }) => {
   );
   await expect(page.locator(".subtitle")).toContainText("FLAGSHIP");
   await expect(page.getByRole("heading", { name: "Workflow" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Features" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Product Features" })).toBeVisible();
   await expect(
     page.getByRole("heading", { name: "Engineering", exact: true }),
   ).toBeVisible();
@@ -390,7 +390,7 @@ test("docker suite proof shows top pull metrics", async ({ page }) => {
   await page.goto("/zh/work/docker-suite");
   await expect(page.getByRole("heading", { name: "支持的数据库" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "快速开始" })).toBeVisible();
-  await expect(page.getByText("暂无公开 GitHub 仓库。")).toBeVisible();
+  await expect(page.getByText("docker pull xuxuclassmate/dameng")).toBeVisible();
   await expect(page.locator('[data-metric="docker:dameng"]')).toBeVisible();
   await expect(page.locator('[data-metric="docker:highgo"]')).toBeVisible();
   await expect(page.locator('[data-metric="docker:kingbase"]')).toBeVisible();
