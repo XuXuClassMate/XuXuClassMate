@@ -192,7 +192,7 @@ export function getPortfolioHome(locale: Locale): PortfolioHome {
         host: "nas.xuxuclassmate.com",
         href: "https://nas.xuxuclassmate.com",
         action: isZh ? "打开" : "Open",
-        detail: isZh ? "自托管存储的登录入口。" : "Sign in to the self-hosted NAS.",
+        detail: isZh ? "自托管存储。" : "Self-hosted storage.",
       },
       {
         id: "pulse",
@@ -216,9 +216,7 @@ export function getPortfolioHome(locale: Locale): PortfolioHome {
         host: "watch.xuxuclassmate.com",
         href: "https://watch.xuxuclassmate.com/",
         action: isZh ? "打开" : "Open",
-        detail: isZh
-          ? "站点流量与安全监控，登录后查看。"
-          : "Traffic and security monitor. Sign-in required.",
+        detail: isZh ? "站点流量与安全监控。" : "Traffic and security monitor.",
       },
     ],
     capabilitiesTitle: isZh ? "能力领域" : "Capabilities",
