@@ -48,34 +48,6 @@ const databases = isZh
       </div>
     </section>
 
-    <section class="story-band story-band--ink">
-      <div class="story-wrap">
-        <h2>{isZh ? "Docker 镜像" : "Docker Images"}</h2>
-        <p class="story-lead">
-          {
-            isZh
-              ? "镜像发布在 xuxuclassmate 的 Docker Hub 命名空间，按库分开拉取。"
-              : "Images live in the xuxuclassmate Docker Hub namespace, one database per image."
-          }
-        </p>
-        <p>
-          <a href="https://hub.docker.com/u/xuxuclassmate" target="_blank" rel="noopener noreferrer">
-            hub.docker.com/u/xuxuclassmate
-          </a>
-        </p>
-      </div>
-    </section>
-
-    <section class="story-band">
-      <div class="story-wrap">
-        <h2>{isZh ? "快速开始" : "Quick Start"}</h2>
-        {study.deployment?.summary ? <p class="story-lead">{study.deployment.summary}</p> : null}
-        <ol class="story-steps">
-          {study.deployment?.steps.map((step) => <li>{step}</li>)}
-        </ol>
-      </div>
-    </section>
-
     <section class="story-band story-band--proof">
       <div class="story-wrap">
         <h2>{isZh ? "拉取数据" : "Pull Statistics"}</h2>
@@ -101,10 +73,23 @@ const databases = isZh
       </div>
     </section>
 
+    <section class="story-band">
+      <div class="story-wrap">
+        <h2>{isZh ? "快速开始" : "Quick Start"}</h2>
+        {study.deployment?.summary ? <p class="story-lead">{study.deployment.summary}</p> : null}
+        <pre class="story-command"><code>docker pull xuxuclassmate/dameng
+docker pull xuxuclassmate/highgo
+docker pull xuxuclassmate/kingbase
+docker pull xuxuclassmate/tidb</code></pre>
+        <ol class="story-steps">
+          {study.deployment?.steps.map((step) => <li>{step}</li>)}
+        </ol>
+      </div>
+    </section>
+
     <section class="story-band" id="docs">
       <div class="story-wrap">
         <h2>{isZh ? "文档" : "Documentation"}</h2>
-        <p>{isZh ? "暂无公开 GitHub 仓库。" : "No public GitHub repository yet."}</p>
         <div class="story-links">
           {
             study.deployment?.channels.map((channel) => (

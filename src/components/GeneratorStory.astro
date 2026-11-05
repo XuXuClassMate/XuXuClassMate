@@ -58,7 +58,6 @@ const note = study.links.find((link) => /engineering note/i.test(link.label));
         <p class="subtitle">{isZh ? "旗舰" : "FLAGSHIP"}</p>
         <h1>{study.title}</h1>
         <p class="story-line">{productLine}</p>
-        <p class="story-lead">{study.description}</p>
         <figure class="story-hero-shot">
           <img
             src="/images/product-generator-cases.jpg"
@@ -88,7 +87,7 @@ const note = study.links.find((link) => /engineering note/i.test(link.label));
 
     <section class="story-band story-band--paper" id="features">
       <div class="story-wrap">
-        <h2>{isZh ? "功能与真实界面" : "Features"}</h2>
+        <h2>{isZh ? "产品功能" : "Product Features"}</h2>
         <div class="story-shots">
           {
             shots.map((shot) => (
@@ -116,6 +115,14 @@ const note = study.links.find((link) => /engineering note/i.test(link.label));
               </ol>
             </div>
           ))
+        }
+        {
+          study.contribution?.[0] ? <p class="story-note">{study.contribution[0]}</p> : null
+        }
+        {
+          study.techStack?.length ? (
+            <p class="story-note">{study.techStack.join(" · ")}</p>
+          ) : null
         }
         {
           study.tradeoffs?.[0] ? <p class="story-note">{study.tradeoffs[0]}</p> : null
