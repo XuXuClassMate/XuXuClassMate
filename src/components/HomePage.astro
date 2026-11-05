@@ -57,20 +57,14 @@ const impactNote = isZh
         </p>
       </div>
       <figure class="hero-visual">
-        <picture>
-          <source
-            media="(max-width: 768px)"
-            srcset="/images/product-generator-case-phone.jpg"
-          />
-          <img
-            src="/images/product-generator-cases.jpg"
-            alt={isZh
-              ? "AI 测试用例生成器交互 Demo 的用例结果"
-              : "Test cases from the AI Test Case Generator interactive demo"}
-            width="1200"
-            height="420"
-          />
-        </picture>
+        <img
+          src="/images/product-stage-cases.jpg"
+          alt={isZh
+            ? "一叠空白文稿，旁边是一张带横线的卡片"
+            : "A stack of blank sheets beside a lined card"}
+          width="1280"
+          height="720"
+        />
       </figure>
     </section>
 
@@ -81,12 +75,12 @@ const impactNote = isZh
       </div>
       <figure class="tile-product">
         <img
-          src="/images/product-generator-input.jpg"
+          src="/images/product-generator-cases.jpg"
           alt={isZh
-            ? "交互 Demo 中已载入的需求"
-            : "A requirement loaded in the interactive demo"}
-          width="900"
-          height="640"
+            ? "交互 Demo 生成的结构化测试用例"
+            : "Structured test cases from the interactive demo"}
+          width="1200"
+          height="420"
         />
       </figure>
       {
@@ -169,6 +163,16 @@ const impactNote = isZh
               <h2>{item.title}</h2>
               <p>{item.description}</p>
             </span>
+            <figure class="tile-stage">
+              <img
+                src="/images/product-stage-databases.jpg"
+                alt={isZh
+                  ? "五个浅色圆柱，中间一只有蓝色细环"
+                  : "Five pale cylinders, the center one marked with a blue ring"}
+                width="1280"
+                height="720"
+              />
+            </figure>
             <span class="selected-link">
               {home.featuredMore}
               <span aria-hidden="true">›</span>
@@ -203,6 +207,16 @@ const impactNote = isZh
           <span aria-hidden="true">›</span>
         </a>
       </div>
+      <figure class="tile-stage">
+        <img
+          src="/images/product-stage-notes.jpg"
+          alt={isZh
+            ? "两本合上的笔记本和一支铅笔"
+            : "Two closed notebooks and a pencil"}
+          width="1280"
+          height="720"
+        />
+      </figure>
       <div class="note-rows">
         {
           articles.map((item) => (

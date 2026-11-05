@@ -1898,17 +1898,40 @@ html.lg-svg .apple-home .hero--home .btn-ghost:hover {
 }
 
 .hero-visual {
-  width: min(1040px, 100%);
+  width: min(1080px, 92vw);
   margin: 36px auto 0;
 }
 
 .hero-visual img {
-  border-radius: 12px 12px 0 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.tile-stage {
+  width: min(1080px, 92vw);
+  margin: 28px auto 0;
+}
+
+.tile-stage img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: transparent;
+}
+
+.tile--ink .tile-stage {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.tile--ink .tile-stage img {
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 62%, transparent 96%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 62%, transparent 96%);
 }
 
 .tile-product {
-  width: min(720px, 100%);
-  margin: 28px auto 48px;
+  width: min(1040px, 92vw);
+  margin: 28px auto 36px;
 }
 
 .tile-product img {
@@ -1994,8 +2017,19 @@ html[data-theme="dark"] .tile--soft {
     justify-content: center;
   }
 
+  .hero-visual,
+  .tile-stage,
+  .tile-product {
+    width: 100%;
+  }
+
   .hero-visual img,
-  .shot-row img {
+  .tile-stage img {
+    border-radius: 0;
+    max-height: none;
+  }
+
+  .tile-product img {
     border-radius: 16px;
     max-height: none;
   }
