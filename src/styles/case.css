@@ -3,7 +3,9 @@
   display: block;
   position: relative;
   overflow: hidden;
-  border-bottom: 1px solid var(--line);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 12px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.06);
   aspect-ratio: 16 / 9;
   width: 100%;
   flex: 0 0 auto;
@@ -56,9 +58,14 @@ html[data-theme="light"] .theme-cover--dark {
   pointer-events: none;
 }
 
+html[data-theme="dark"] .project-cover {
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+}
+
 .project-card:hover .project-cover .theme-cover--light,
 .project-card:hover .project-cover .theme-cover--dark {
-  transform: scale(1.03);
+  transform: none;
 }
 
 /* Only scale the visible cover to avoid ghosting */

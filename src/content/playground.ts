@@ -132,6 +132,24 @@ const EXPERIENCES: ExperienceDef[] = [
     },
   },
   {
+    id: "watch",
+    mode: "live",
+    title: "Watch",
+    ctaExternal: true,
+    ctaHref: {
+      en: "https://watch.xuxuclassmate.com/",
+      zh: "https://watch.xuxuclassmate.com/",
+    },
+    description: {
+      en: "Private traffic and security monitor at watch.xuxuclassmate.com. Sign-in required.",
+      zh: "watch.xuxuclassmate.com 上的站点流量与安全监控。需要登录后查看。",
+    },
+    ctaLabel: {
+      en: "Open Watch",
+      zh: "打开 Watch",
+    },
+  },
+  {
     id: "docker-suite",
     mode: "install",
     title: "Test DB Docker Suite",

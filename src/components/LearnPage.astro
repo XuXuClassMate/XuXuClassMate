@@ -130,60 +130,6 @@ const storyLabels = isZh
       </div>
     </section>
 
-    <section class="current-learning">
-      <div class="container">
-        <h2 class="section-title reveal-on-scroll">{isZh ? "当前重点" : "Current Focus"}</h2>
-        <div class="focus-content reveal-on-scroll">
-          <div class="focus-item">
-            <h3>{page.focusHeading}</h3>
-            <p>{page.focusIntro}</p>
-            <ul>
-              {page.focusItems.map((item) => <li>{item}</li>)}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="learn-funnel">
-      <div class="container reveal-on-scroll">
-        <div class="learn-funnel-panel">
-          <h2>{locale === "zh" ? "继续往下看" : "Keep going"}</h2>
-          <p>
-            {
-              locale === "zh"
-                ? "从旗舰 AI 用例生成器开始验证可安装能力，或继续读工程笔记。"
-                : "Start with the flagship AI Test Case Generator, or keep reading Engineering Notes."
-            }
-          </p>
-          <div class="hero-actions">
-            <a
-              class="btn-primary"
-              href={
-                locale === "zh"
-                  ? "/zh/work/testcase-generator"
-                  : "/en/work/testcase-generator"
-              }
-            >
-              {locale === "zh" ? "旗舰案例" : "Flagship case study"}
-            </a>
-            <a
-              class="btn-ghost"
-              href={
-                locale === "zh"
-                  ? "/zh/demo/ai-testcase-generator"
-                  : "/en/demo/ai-testcase-generator"
-              }
-            >
-              {locale === "zh" ? "试用 Demo" : "Try demo"}
-            </a>
-            <a class="btn-ghost" href={locale === "zh" ? "/zh/blog" : "/en/blog"}>
-              {locale === "zh" ? "工程笔记" : "Engineering Notes"}
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
 
   <Contact

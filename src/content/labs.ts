@@ -126,6 +126,7 @@ export function getInfrastructureLab(locale: Locale): LabPage {
           "pulse.xuxuclassmate.com（GlobalPulse 控制台）",
           "mail.xuxuclassmate.com（Custom Mail）",
           "nas.xuxuclassmate.com（自托管 NAS）",
+          "watch.xuxuclassmate.com（站点监控，需登录）",
           "Docker / Compose 测试库套件",
           "API Gateway / Tunnel 模式",
         ]
@@ -134,6 +135,7 @@ export function getInfrastructureLab(locale: Locale): LabPage {
           "pulse.xuxuclassmate.com (GlobalPulse console)",
           "mail.xuxuclassmate.com (Custom Mail)",
           "nas.xuxuclassmate.com (self-hosted NAS)",
+          "watch.xuxuclassmate.com (site monitor, sign-in required)",
           "Docker / Compose QA image suite",
           "API Gateway / Tunnel patterns",
         ],

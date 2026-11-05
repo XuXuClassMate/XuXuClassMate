@@ -33,7 +33,7 @@ The site is built for people who care about **how QA and SDET work actually ship
 | **Developer Infrastructure** | [GlobalPulse](https://github.com/InnoNestX/GlobalPulse) · [Custom Mail](https://github.com/InnoNestX/Custom-Mail) · [Docker Hub API Gateway](https://github.com/InnoNestX/docker-hub-pull-counter) |
 | **AI / Agent** | [Trading Assistant Core](https://github.com/InnoNestX/trading-assistant) · OpenClaw skills on [ClawHub](https://clawhub.ai/xuxuclassmate) |
 
-Related live services: [GlobalPulse](https://pulse.xuxuclassmate.com/) · [Custom Mail](https://mail.xuxuclassmate.com)
+Related live services: [GlobalPulse](https://pulse.xuxuclassmate.com/) · [Custom Mail](https://mail.xuxuclassmate.com) · [Watch](https://watch.xuxuclassmate.com/)
 
 Open-source org: [InnoNestX on GitHub](https://github.com/InnoNestX)
 

@@ -174,7 +174,7 @@ export function getPortfolioHome(locale: Locale): PortfolioHome {
     featuredMore: isZh ? "进一步了解" : "Learn more",
     featured: isZh ? featuredZh : featuredEn,
     servicesTitle: isZh ? "在线服务" : "Services",
-    servicesLead: isZh ? "三台正在运行的服务。" : "Three services, already running.",
+    servicesLead: isZh ? "四台正在运行的服务。" : "Four services, already running.",
     services: [
       {
         id: "nas",
@@ -199,6 +199,16 @@ export function getPortfolioHome(locale: Locale): PortfolioHome {
         href: "https://mail.xuxuclassmate.com",
         action: isZh ? "打开" : "Open",
         detail: isZh ? "撰写、附件、发送记录。" : "Compose, attachments, and history.",
+      },
+      {
+        id: "watch",
+        title: "Watch",
+        host: "watch.xuxuclassmate.com",
+        href: "https://watch.xuxuclassmate.com/",
+        action: isZh ? "打开" : "Open",
+        detail: isZh
+          ? "站点流量与安全监控，登录后查看。"
+          : "Traffic and security monitor. Sign-in required.",
       },
     ],
     capabilitiesTitle: isZh ? "能力领域" : "Capabilities",

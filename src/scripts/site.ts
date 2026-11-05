@@ -197,6 +197,25 @@ async function copyText(value: string): Promise<boolean> {
   return ok;
 }
 
+function initTerminalCopy(): void {
+  document.querySelectorAll<HTMLButtonElement>("[data-copy-target]").forEach((button) => {
+    const node = document.getElementById(button.dataset.copyTarget ?? "");
+    if (!node) return;
+    const copyLabel = button.dataset.copyLabel ?? "Copy";
+    const copiedLabel = button.dataset.copiedLabel ?? "Copied";
+    button.addEventListener("click", async () => {
+      const ok = await copyText(node.innerText);
+      if (!ok) return;
+      button.classList.add("is-copied");
+      button.textContent = copiedLabel;
+      window.setTimeout(() => {
+        button.classList.remove("is-copied");
+        button.textContent = copyLabel;
+      }, 1600);
+    });
+  });
+}
+
 function initCopyEmail(): void {
   const button = document.getElementById("copyEmailBtn");
   if (!(button instanceof HTMLButtonElement)) return;
@@ -660,6 +679,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initScrollReveal();
   initProjectFilters();
   initCopyEmail();
+  initTerminalCopy();
   initHighlightCountUp();
   initLiveMetrics();
   initBackToTop();

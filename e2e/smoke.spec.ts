@@ -98,7 +98,7 @@ test("unified case study template renders", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Workflow" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Product Features" })).toBeVisible();
   await expect(
-    page.getByRole("heading", { name: "Engineering", exact: true }),
+    page.getByRole("heading", { name: "Engineering Architecture", exact: true }),
   ).toBeVisible();
   await expect(page.getByRole("heading", { name: "Proof" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Get Started" })).toBeVisible();
@@ -278,7 +278,7 @@ test("open source page introduces InnoNestX", async ({ page }) => {
   ).toHaveAttribute("href", "/en/playground");
   await expect(
     page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: "Open Source", exact: true }),
-  ).toHaveCount(0);
+  ).toHaveClass(/active/);
 });
 
 test("desktop nav keeps products, engineering, open source, and about", async ({
@@ -289,7 +289,7 @@ test("desktop nav keeps products, engineering, open source, and about", async ({
   const nav = page.getByRole("navigation", { name: "Primary" });
   await expect(nav.getByRole("link", { name: "Products", exact: true })).toBeVisible();
   await expect(nav.getByRole("link", { name: "Engineering", exact: true })).toBeVisible();
-  await expect(nav.getByRole("link", { name: "Open Source", exact: true })).toHaveCount(0);
+  await expect(nav.getByRole("link", { name: "Open Source", exact: true })).toBeVisible();
   await expect(nav.getByRole("link", { name: "About", exact: true })).toBeVisible();
   await expect(nav.getByRole("link", { name: "Projects", exact: true })).toHaveCount(0);
   await expect(page.getByRole("button", { name: /Work/ })).toHaveCount(0);
@@ -319,6 +319,11 @@ test("playground page lists tryable experiences", async ({ page }) => {
     page.getByRole("heading", { name: "Docker Hub API Gateway" }),
   ).toBeVisible();
   await expect(page.getByRole("heading", { name: "GlobalPulse" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Watch", exact: true })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Open Watch" })).toHaveAttribute(
+    "href",
+    "https://watch.xuxuclassmate.com/",
+  );
   await expect(
     page.getByRole("heading", { name: "Test DB Docker Suite" }),
   ).toBeVisible();
@@ -352,7 +357,7 @@ test("mobile nav is a bottom sheet above the tab bar", async ({
   expect(tabbar).not.toBeNull();
   expect(drawer!.height).toBeGreaterThan(400);
   expect(drawer!.y + drawer!.height).toBeLessThanOrEqual(tabbar!.y + 1);
-  for (const label of ["Products", "Engineering", "About"]) {
+  for (const label of ["Products", "Engineering", "Open Source", "About"]) {
     await expect(
       page.locator(".nav-links").getByRole("link", { name: label }),
     ).toBeVisible();
@@ -388,8 +393,10 @@ test("new case studies render with project OG covers", async ({ page }) => {
 
 test("docker suite proof shows top pull metrics", async ({ page }) => {
   await page.goto("/zh/work/docker-suite");
-  await expect(page.getByRole("heading", { name: "数据库镜像" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "使用数据" })).toBeVisible();
+  await expect(page.getByText("达梦", { exact: true })).toBeVisible();
   await expect(page.getByRole("heading", { name: "快速开始" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "文档" })).toBeVisible();
   await expect(page.getByText("docker pull xuxuclassmate/dameng")).toBeVisible();
   await expect(page.locator('[data-metric="docker:dameng"]')).toBeVisible();
   await expect(page.locator('[data-metric="docker:highgo"]')).toBeVisible();
@@ -436,15 +443,13 @@ test("learn page covers management and Locust", async ({ page }) => {
   ).toBeVisible();
   await expect(page.getByRole("heading", { name: "Technical Decisions" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Measurable Outcomes" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Current Focus" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Current Focus" })).toHaveCount(0);
+  await expect(page.getByRole("heading", { name: "Keep going" })).toHaveCount(0);
   await expect(
     page.getByRole("heading", { name: "Database bottlenecks under concurrency" }),
   ).toBeVisible();
   await expect(page.getByText("Locust / Go load profiles").first()).toBeVisible();
   await expect(page.getByRole("heading", { name: "Learning Resources" })).toHaveCount(0);
-  await expect(
-    page.getByRole("link", { name: "Flagship case study", exact: true }),
-  ).toHaveAttribute("href", "/en/work/testcase-generator");
 });
 
 test("copy email button updates label", async ({ page, context }) => {
