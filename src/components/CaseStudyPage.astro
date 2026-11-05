@@ -1,5 +1,7 @@
 ---
 import BackNav from "./BackNav.astro";
+import DockerSuiteStory from "./DockerSuiteStory.astro";
+import GeneratorStory from "./GeneratorStory.astro";
 import CaseHeading from "./CaseHeading.astro";
 import Contact from "./Contact.astro";
 import Footer from "./Footer.astro";
@@ -132,6 +134,12 @@ const relatedNoteLinks = study.links.filter((link) =>
 );
 ---
 
+{
+  slug === "testcase-generator" ? (
+    <GeneratorStory locale={locale} />
+  ) : slug === "docker-suite" ? (
+    <DockerSuiteStory locale={locale} />
+  ) : (
 <BaseLayout
   locale={locale}
   page="work"
@@ -749,3 +757,5 @@ const relatedNoteLinks = study.links.filter((link) =>
     social={page.social}
   />
 </BaseLayout>
+  )
+}

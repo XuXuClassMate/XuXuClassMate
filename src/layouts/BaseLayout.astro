@@ -66,13 +66,6 @@ const alternates = caseSlug
     : hreflangLinks(page);
 const homeHref = locale === "zh" ? pageHref("zh", "home") : "/";
 const active = page === "home" ? undefined : page;
-const workActive =
-  active === "learn" ||
-  active === "open-source" ||
-  active === "innonestx";
-const moreActive =
-  active === "now" ||
-  active === "playground";
 const ogTitle = meta.ogTitle ?? meta.title;
 const ogImage = absoluteUrl(ogImagePath ?? "/images/og-default.jpg");
 const structuredData = noindex
@@ -188,6 +181,39 @@ const langSwitchHref = alternateLocalePath(Astro.url.pathname);
           <div class="nav-end">
             <div class="nav-links" id="navLinks">
               <a
+                href={pageHref(locale, "work")}
+                class:list={[
+                  "nav-item",
+                  "nav-item--products",
+                  { active: active === "work" },
+                ]}
+              >
+                {copy.nav.products ?? "Products"}
+              </a>
+              <a
+                href={pageHref(locale, "learn")}
+                class:list={[
+                  "nav-item",
+                  "nav-item--engineering",
+                  { active: active === "learn" },
+                ]}
+              >
+                {copy.nav.engineering ?? "Engineering"}
+              </a>
+              <a
+                href={pageHref(locale, "open-source")}
+                class:list={[
+                  "nav-item",
+                  "nav-item--open-source",
+                  {
+                    active:
+                      active === "open-source" || active === "innonestx",
+                  },
+                ]}
+              >
+                {copy.nav.openSource ?? copy.nav.innonestx}
+              </a>
+              <a
                 href={pageHref(locale, "about")}
                 class:list={[
                   "nav-item",
@@ -197,171 +223,6 @@ const langSwitchHref = alternateLocalePath(Astro.url.pathname);
               >
                 {copy.nav.about}
               </a>
-              <div
-                class:list={["nav-more", { "is-open": workActive }]}
-                data-nav-more
-              >
-                <button
-                  type="button"
-                  class:list={[
-                    "nav-item",
-                    "nav-more-toggle",
-                    { active: workActive },
-                  ]}
-                  aria-expanded={workActive ? "true" : "false"}
-                  aria-haspopup="true"
-                  aria-controls="navWorkMenu"
-                  data-nav-more-toggle
-                >
-                  {copy.nav.workMenu ?? "Work"}
-                  <span class="nav-more-caret" aria-hidden="true">▾</span>
-                </button>
-                <div
-                  class="nav-more-menu lg-elevated"
-                  id="navWorkMenu"
-                  role="menu"
-                  data-nav-more-menu
-                >
-                  <a
-                    href={pageHref(locale, "learn")}
-                    class:list={[
-                      "nav-item",
-                      "nav-item--experience",
-                      { active: active === "learn" },
-                    ]}
-                    role="menuitem"
-                  >
-                    {copy.nav.experience}
-                  </a>
-                  <a
-                    href={pageHref(locale, "open-source")}
-                    class:list={[
-                      "nav-item",
-                      "nav-item--open-source",
-                      {
-                        active:
-                          active === "open-source" || active === "innonestx",
-                      },
-                    ]}
-                    role="menuitem"
-                  >
-                    {copy.nav.openSource ?? copy.nav.innonestx}
-                  </a>
-                </div>
-              </div>
-              <a
-                href={pageHref(locale, "work")}
-                class:list={[
-                  "nav-item",
-                  "nav-item--projects",
-                  { active: active === "work" },
-                ]}
-              >
-                {copy.nav.projects}
-              </a>
-              <a
-                href={pageHref(locale, "ai-testing")}
-                class:list={[
-                  "nav-item",
-                  "nav-item--ai-testing",
-                  { active: active === "ai-testing" },
-                ]}
-              >
-                {copy.nav.aiTesting}
-              </a>
-              <a
-                href={pageHref(locale, "blog")}
-                class:list={[
-                  "nav-item",
-                  "nav-item--notes",
-                  { active: active === "blog" || active === "notes" },
-                ]}
-              >
-                {copy.nav.notes ?? copy.nav.blog}
-              </a>
-              <div
-                class:list={["nav-more", { "is-open": moreActive }]}
-                data-nav-more
-              >
-                <button
-                  type="button"
-                  class:list={[
-                    "nav-item",
-                    "nav-more-toggle",
-                    { active: moreActive },
-                  ]}
-                  aria-expanded={moreActive ? "true" : "false"}
-                  aria-haspopup="true"
-                  aria-controls="navMoreMenu"
-                  data-nav-more-toggle
-                >
-                  {copy.nav.more ?? "More"}
-                  <span class="nav-more-caret" aria-hidden="true">▾</span>
-                </button>
-                <div
-                  class="nav-more-menu lg-elevated"
-                  id="navMoreMenu"
-                  role="menu"
-                  data-nav-more-menu
-                >
-                  <a
-                    href={pageHref(locale, "now")}
-                    class:list={[
-                      "nav-item",
-                      "nav-item--now",
-                      { active: active === "now" },
-                    ]}
-                    role="menuitem"
-                  >
-                    {copy.nav.now}
-                  </a>
-                  <a
-                    href={pageHref(locale, "playground")}
-                    class:list={[
-                      "nav-item",
-                      "nav-item--playground",
-                      { active: active === "playground" },
-                    ]}
-                    role="menuitem"
-                  >
-                    {copy.nav.playground}
-                  </a>
-                  <a
-                    href="https://nas.xuxuclassmate.com"
-                    class="nav-item"
-                    role="menuitem"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {copy.nav.nas}
-                  </a>
-                  <a
-                    href="https://pulse.xuxuclassmate.com/"
-                    class="nav-item"
-                    role="menuitem"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {copy.nav.pulse}
-                  </a>
-                  <a
-                    href="https://mail.xuxuclassmate.com"
-                    class="nav-item"
-                    role="menuitem"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {copy.nav.mail}
-                  </a>
-                  <a
-                    href="#contact"
-                    class="nav-item nav-item--contact"
-                    role="menuitem"
-                  >
-                    {copy.nav.contact}
-                  </a>
-                </div>
-              </div>
               <div class="nav-utils">
                 <a
                   href={langSwitchHref}
@@ -371,58 +232,6 @@ const langSwitchHref = alternateLocalePath(Astro.url.pathname);
                 >
                   {copy.languageSwitch}
                 </a>
-                <div class="glass-tint" data-glass-tint>
-                  <button
-                    type="button"
-                    class="glass-tint-toggle"
-                    id="glassTintToggle"
-                    aria-label={locale === "zh" ? "玻璃透明度" : "Glass transparency"}
-                    title={locale === "zh" ? "玻璃透明度" : "Glass transparency"}
-                    aria-expanded="false"
-                    aria-controls="glassTintPanel"
-                    data-glass-tint-toggle
-                  >
-                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                      <path
-                        d="M12 3c-2.8 3.4-4.5 6.4-4.5 9a4.5 4.5 0 1 0 9 0c0-2.6-1.7-5.6-4.5-9Z"
-                        stroke="currentColor"
-                        stroke-width="1.6"
-                        stroke-linejoin="round"
-                      />
-                      <path
-                        d="M9.2 14.2c.7 1.4 1.9 2.3 2.8 2.3"
-                        stroke="currentColor"
-                        stroke-width="1.6"
-                        stroke-linecap="round"
-                      />
-                    </svg>
-                  </button>
-                  <div
-                    class="glass-tint-panel lg-elevated"
-                    id="glassTintPanel"
-                    role="group"
-                    aria-label={locale === "zh" ? "Liquid Glass 透明度" : "Liquid Glass tint"}
-                    data-glass-tint-panel
-                  >
-                    <div class="glass-tint-label">
-                      <span>{locale === "zh" ? "通透" : "Clear"}</span>
-                      <span>{locale === "zh" ? "着色" : "Tinted"}</span>
-                    </div>
-                    <input
-                      class="glass-tint-slider"
-                      id="glassTintSlider"
-                      type="range"
-                      min="0"
-                      max="100"
-                      step="1"
-                      value="45"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                      aria-label={locale === "zh" ? "调整玻璃着色" : "Adjust glass tint"}
-                      data-glass-tint-slider
-                    />
-                  </div>
-                </div>
                 <button
                   type="button"
                   class="theme-toggle"
@@ -477,11 +286,11 @@ const langSwitchHref = alternateLocalePath(Astro.url.pathname);
       </a>
       <a class:list={["tabbar-item", { "is-active": page === "work" }]} href={pageHref(locale, "work")}>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.5"></rect><rect x="13" y="4" width="7" height="7" rx="1.5"></rect><rect x="4" y="13" width="7" height="7" rx="1.5"></rect><rect x="13" y="13" width="7" height="7" rx="1.5"></rect></svg>
-        <span>{copy.nav.projects}</span>
+        <span>{copy.nav.products ?? copy.nav.projects}</span>
       </a>
-      <a class:list={["tabbar-item", { "is-active": page === "blog" || page === "notes" }]} href={pageHref(locale, "blog")}>
+      <a class:list={["tabbar-item", { "is-active": page === "learn" }]} href={pageHref(locale, "learn")}>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M7 3.5h8.5L19 7v13.5a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-16a1 1 0 0 1 1-1Z"></path><path d="M15 3.5V7h4M8.5 12h7M8.5 16h5"></path></svg>
-        <span>{copy.nav.notes}</span>
+        <span>{copy.nav.engineering ?? "Engineering"}</span>
       </a>
       <a class:list={["tabbar-item", { "is-active": page === "about" }]} href={pageHref(locale, "about")}>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="8" r="3.2"></circle><path d="M5.5 19.5c1.2-2.8 3.4-4 6.5-4s5.3 1.2 6.5 4"></path></svg>

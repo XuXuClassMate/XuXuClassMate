@@ -1,26 +1,6 @@
-import { expect, test, type Page } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-
-async function expectMenuBelowHeader(page: Page, menuSelector: string): Promise<void> {
-  const menu = page.locator(menuSelector);
-  await expect(menu).toBeVisible();
-  const hit = await menu.evaluate((el) => {
-    const rect = el.getBoundingClientRect();
-    const x = rect.left + rect.width / 2;
-    const y = rect.top + rect.height / 2;
-    const target = document.elementFromPoint(x, y);
-    const header = document.getElementById("siteHeader")?.getBoundingClientRect();
-    return {
-      hitMenu: Boolean(target && el.contains(target)),
-      extendsBelowHeader: header ? rect.bottom > header.bottom + 12 : false,
-      height: rect.height,
-    };
-  });
-  expect(hit.height).toBeGreaterThan(40);
-  expect(hit.extendsBelowHeader).toBe(true);
-  expect(hit.hitMenu).toBe(true);
-}
 
 test("home renders and language switch works", async ({ page }) => {
   await page.goto("/");
@@ -115,35 +95,23 @@ test("unified case study template renders", async ({ page }) => {
     "AI Test Case Generator",
   );
   await expect(page.locator(".subtitle")).toContainText("FLAGSHIP");
-  await expect(page.getByRole("heading", { name: "The Problem" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "How It Works" })).toBeVisible();
-  await expect(
-    page.getByRole("heading", { name: "Product Features" }),
-  ).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Workflow" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Features" })).toBeVisible();
   await expect(
     page.getByRole("heading", { name: "Engineering", exact: true }),
   ).toBeVisible();
-  await expect(
-    page.getByRole("heading", { name: "Proof & Access" }),
-  ).toBeVisible();
-  await expect(page.getByRole("heading", { name: "What I did" })).toBeVisible();
-  await expect(page.getByText("What did I specifically do?")).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Try it now" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Proof" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Get Started" })).toBeVisible();
+  await expect(page.getByText("AI tools you can install — quality you can trust.")).toBeVisible();
   await expect(
     page.getByRole("link", { name: "Open interactive demo" }),
   ).toHaveAttribute("href", "/en/demo/ai-testcase-generator");
   await expect(
     page.getByRole("link", { name: "Official docs" }).first(),
   ).toHaveAttribute("href", "https://innonestx.github.io/testcase-generator/");
-  await expect(page.locator(".pipeline-stages")).toContainText(
+  await expect(page.locator(".story-flow")).toContainText(
     "Three-persona review loop",
   );
-  await expect(page.getByRole("heading", { name: /Tradeoffs/i })).toBeVisible();
-  await expect(page.getByRole("heading", { name: /What shipped/i })).toBeVisible();
-  await expect(
-    page.getByRole("heading", { name: /Inspectable proof/i }),
-  ).toBeVisible();
-  await expect(page.getByRole("heading", { name: /Links/i })).toBeVisible();
   await expect(
     page.getByRole("link", { name: "Engineering note: multimodal build" }),
   ).toHaveAttribute("href", "/en/blog/ai-testcase-generator-multimodal");
@@ -308,65 +276,31 @@ test("open source page introduces InnoNestX", async ({ page }) => {
   await expect(
     page.getByRole("link", { name: "Try on Playground" }),
   ).toHaveAttribute("href", "/en/playground");
-  await expect(page.getByRole("button", { name: /Work/ })).toHaveClass(
-    /active/,
-  );
   await expect(
-    page.locator("#navWorkMenu .nav-item.active"),
-  ).toHaveText("Open Source");
+    page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: "Open Source", exact: true }),
+  ).toHaveClass(/active/);
 });
 
-test("desktop nav keeps primary links and Work/More menus", async ({
+test("desktop nav keeps products, engineering, open source, and about", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 1280, height: 800 });
   await page.goto("/");
   const nav = page.getByRole("navigation", { name: "Primary" });
+  await expect(nav.getByRole("link", { name: "Products", exact: true })).toBeVisible();
+  await expect(nav.getByRole("link", { name: "Engineering", exact: true })).toBeVisible();
+  await expect(nav.getByRole("link", { name: "Open Source", exact: true })).toBeVisible();
   await expect(nav.getByRole("link", { name: "About", exact: true })).toBeVisible();
-  await expect(page.getByRole("button", { name: /Work/ })).toBeVisible();
-  await expect(
-    nav.getByRole("link", { name: "Projects", exact: true }),
-  ).toBeVisible();
-  await expect(
-    nav.getByRole("link", { name: "AI Testing", exact: true }),
-  ).toBeVisible();
-  await expect(nav.getByRole("link", { name: "Notes", exact: true })).toBeVisible();
-  await expect(page.getByRole("button", { name: /More/ })).toBeVisible();
+  await expect(nav.getByRole("link", { name: "Projects", exact: true })).toHaveCount(0);
+  await expect(page.getByRole("button", { name: /Work/ })).toHaveCount(0);
+  await expect(page.getByRole("button", { name: /More/ })).toHaveCount(0);
+  await expect(page.locator("#glassTintToggle")).toHaveCount(0);
   await expect(
     nav.getByRole("link", { name: /Switch to Chinese/i }),
   ).toBeVisible();
   await expect(page.locator("#themeToggle")).toBeVisible();
 
-  await page.getByRole("button", { name: /Work/ }).click();
-  await expectMenuBelowHeader(page, "#navWorkMenu");
-  await expect(
-    page.getByRole("menuitem", { name: "Experience" }),
-  ).toBeVisible();
-  await expect(
-    page.getByRole("menuitem", { name: "Open Source" }),
-  ).toBeVisible();
-  await expect(page.locator("#navWorkMenu .nav-item")).toHaveText([
-    "Experience",
-    "Open Source",
-  ]);
-  await page.getByRole("menuitem", { name: "Experience" }).click({ trial: true });
-
-  await page.getByRole("button", { name: /More/ }).click();
-  await expect(page.locator("#navWorkMenu")).toBeHidden();
-  await expectMenuBelowHeader(page, "#navMoreMenu");
-  await expect(page.getByRole("menuitem", { name: "Now" })).toBeVisible();
-  await expect(page.getByRole("menuitem", { name: "Playground" })).toBeVisible();
-  await expect(page.getByRole("menuitem", { name: "Contact" })).toBeVisible();
-  await expect(page.locator("#navMoreMenu .nav-item")).toHaveText([
-    "Now",
-    "Playground",
-    "NAS",
-    "GlobalPulse",
-    "Mail",
-    "Contact",
-  ]);
-  await page.getByRole("menuitem", { name: "Now" }).click({ trial: true });
-
+  await page.goto("/en/design-lab");
   await page.locator("#glassTintToggle").click();
   const tintPanel = page.locator("#glassTintPanel");
   await expect(tintPanel).toBeVisible();
@@ -399,10 +333,6 @@ test("playground page lists tryable experiences", async ({ page }) => {
     page.getByRole("link", { name: "Open interactive demo" }),
   ).toHaveAttribute("href", "/en/demo/ai-testcase-generator");
   await expect(page.locator("#try-docker-hub-api")).toBeVisible();
-  await expect(page.locator("#navMoreMenu").locator("..")).toHaveClass(/is-open/);
-  await expect(
-    page.locator("#navMoreMenu .nav-item.active"),
-  ).toHaveText("Playground");
 });
 
 test("mobile nav is a bottom sheet above the tab bar", async ({
@@ -422,27 +352,13 @@ test("mobile nav is a bottom sheet above the tab bar", async ({
   expect(tabbar).not.toBeNull();
   expect(drawer!.height).toBeGreaterThan(400);
   expect(drawer!.y + drawer!.height).toBeLessThanOrEqual(tabbar!.y + 1);
-  for (const label of ["About", "Projects", "AI Testing", "Notes"]) {
+  for (const label of ["Products", "Engineering", "Open Source", "About"]) {
     await expect(
       page.locator(".nav-links").getByRole("link", { name: label }),
     ).toBeVisible();
   }
-  await expect(page.getByRole("button", { name: /Work/ })).toBeVisible();
-  await expect(page.getByRole("button", { name: /More/ })).toBeVisible();
-  await expect(
-    page.getByRole("menuitem", { name: "Experience" }),
-  ).toBeHidden();
-  await page.getByRole("button", { name: /Work/ }).click();
-  await expect(
-    page.getByRole("menuitem", { name: "Experience" }),
-  ).toBeVisible();
-  await expect(
-    page.getByRole("menuitem", { name: "Open Source" }),
-  ).toBeVisible();
-  await page.getByRole("button", { name: /More/ }).click();
-  await expect(page.getByRole("menuitem", { name: "Now" })).toBeVisible();
-  await expect(page.getByRole("menuitem", { name: "Playground" })).toBeVisible();
-  await expect(page.getByRole("menuitem", { name: "Contact" })).toBeVisible();
+  await expect(page.getByRole("button", { name: /Work/ })).toHaveCount(0);
+  await expect(page.locator("#glassTintToggle")).toHaveCount(0);
   await expect(page.locator(".nav-links .language-switch")).toBeVisible();
   await expect(page.locator("#themeToggle")).toBeVisible();
   await expect(page.locator(".theme-toggle-label")).toHaveText("Theme");
@@ -473,7 +389,7 @@ test("new case studies render with project OG covers", async ({ page }) => {
 test("docker suite proof shows top pull metrics", async ({ page }) => {
   await page.goto("/zh/work/docker-suite");
   await expect(page.getByRole("heading", { name: "支持的数据库" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "拉取并运行" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "快速开始" })).toBeVisible();
   await expect(page.getByText("暂无公开 GitHub 仓库。")).toBeVisible();
   await expect(page.locator('[data-metric="docker:dameng"]')).toBeVisible();
   await expect(page.locator('[data-metric="docker:highgo"]')).toBeVisible();

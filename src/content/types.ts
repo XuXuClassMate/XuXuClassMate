@@ -284,6 +284,8 @@ export type LocaleCopy = {
     more?: string;
     innonestx?: string;
     openSource?: string;
+    products?: string;
+    engineering?: string;
     playground?: string;
     now?: string;
     pulse?: string;
