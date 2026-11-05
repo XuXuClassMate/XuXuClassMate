@@ -49,7 +49,7 @@ const imageDark = item.imageDark ?? item.image?.replace(/\.jpg$/i, "-dark.jpg");
     ) : null
   }
   <div class="project-content">
-    {item.category ? <span class="project-category">{item.category}</span> : null}
+    {item.status ? <span class="project-category">{item.status}</span> : null}
     <h3>{item.title}</h3>
     <p>{item.description}</p>
     {
@@ -63,6 +63,13 @@ const imageDark = item.imageDark ?? item.image?.replace(/\.jpg$/i, "-dark.jpg");
     }
     <div class="project-links">
       {
+        item.demoHref && item.demoLabel ? (
+          <a href={item.demoHref} class="project-link">
+            {item.demoLabel}
+          </a>
+        ) : null
+      }
+      {
         item.caseHref && item.caseLabel ? (
           <a href={item.caseHref} class="project-link">
             {item.caseLabel}
@@ -70,7 +77,7 @@ const imageDark = item.imageDark ?? item.image?.replace(/\.jpg$/i, "-dark.jpg");
         ) : null
       }
       {
-        item.href && item.linkLabel ? (
+        item.href && item.linkLabel && item.href !== "#" ? (
           <a
             href={item.href}
             class={`project-link${item.caseHref ? " project-link--secondary" : ""}`}

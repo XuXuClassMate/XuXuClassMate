@@ -60,7 +60,7 @@ const note = study.links.find((link) => /engineering note/i.test(link.label));
         <p class="story-line">{productLine}</p>
         <figure class="story-hero-shot">
           <img
-            src="/images/product-generator-cases.jpg"
+            src="/images/product-generator-workspace.jpg"
             alt={shots[1].alt}
             width="1200"
             height="420"
@@ -202,11 +202,13 @@ const note = study.links.find((link) => /engineering note/i.test(link.label));
             ) : null
           }
           {
-            study.tryItNow?.secondary?.map((link) => (
-              <a href={link.href} target="_blank" rel="noopener noreferrer">
-                {link.label}
-              </a>
-            ))
+            study.tryItNow?.secondary
+              ?.filter((link) => /docs|docker hub/i.test(link.label))
+              .map((link) => (
+                <a href={link.href} target="_blank" rel="noopener noreferrer">
+                  {link.label}
+                </a>
+              ))
           }
           {
             note ? (

@@ -40,7 +40,7 @@ const {
         {subtitle}
       </p>
       <h1 class="hero-title">{title}</h1>
-      <p class="hero-desc">{description}</p>
+      {description ? <p class="hero-desc">{description}</p> : null}
       {positioning ? <p class="hero-positioning">{positioning}</p> : null}
       {
         actions.length > 0 ? (

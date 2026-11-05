@@ -38,7 +38,7 @@ const databases = isZh
 
     <section class="story-band">
       <div class="story-wrap">
-        <h2>{isZh ? "支持的数据库" : "Supported Databases"}</h2>
+        <h2>{isZh ? "数据库镜像" : "Database Images"}</h2>
         <ul class="db-row">
           {databases.map((name) => <li>{name}</li>)}
         </ul>
@@ -50,7 +50,7 @@ const databases = isZh
 
     <section class="story-band story-band--proof">
       <div class="story-wrap">
-        <h2>{isZh ? "拉取数据" : "Pull Statistics"}</h2>
+        <h2>{isZh ? "使用数据" : "Usage Statistics"}</h2>
         <div class="story-metrics">
           {
             study.metrics.map((metric) => (

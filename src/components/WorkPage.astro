@@ -50,61 +50,6 @@ const groups = getProjectGroups(locale);
       </div>
     </section>
 
-    <section class="approach">
-      <div class="container">
-        <h2 class="section-title reveal-on-scroll">{page.approachTitle}</h2>
-        <div class="approach-grid">
-          {
-            page.approach.map((item, index) => (
-              <div
-                class={`approach-card reveal-on-scroll reveal-delay-${index + 1}`}
-              >
-                <span class="approach-index" aria-hidden="true">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-    </section>
-
-    <section class="technical-skills">
-      <div class="container">
-        <h2 class="section-title reveal-on-scroll">{page.skillsTitle}</h2>
-        <div class="skills-grid skills-grid--evidence">
-          {
-            page.skills.map((skill, index) => (
-              <div
-                class={`skill-item skill-item--evidence reveal-on-scroll reveal-delay-${(index % 3) + 1}`}
-              >
-                <h3>{skill.title}</h3>
-                <ul class="skill-list">
-                  {skill.items.map((entry) => (
-                    <li>{entry}</li>
-                  ))}
-                </ul>
-                {skill.evidence?.length ? (
-                  <div class="skill-evidence">
-                    {skill.evidence.map((link) => (
-                      <a
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {link.label}
-                      </a>
-                    ))}
-                  </div>
-                ) : null}
-              </div>
-            ))
-          }
-        </div>
-      </div>
-    </section>
   </main>
 
   <Contact

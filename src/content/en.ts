@@ -272,7 +272,7 @@ export const en: LocaleCopy = {
         href: "/en/open-source",
       },
     ],
-    footerDesc: "QA Engineer · SDET · AI Testing — Installable Quality Engineering",
+    footerDesc: "QA Engineer · SDET · AI Testing.",
     social: [...homeSocial],
   },
   learn: {
@@ -403,39 +403,56 @@ export const en: LocaleCopy = {
     stories: [
       {
         title: "Database bottlenecks under concurrency",
+        background: "Account and fund flows under high concurrency.",
         challenge:
-          "High-concurrency account and fund flows hit database saturation — latency spiked before the app layer looked unhealthy.",
+          "The database saturated first. Latency spiked while the app layer still looked healthy.",
+        role: "I owned the QA side of the diagnosis: the load profile and a shared read of the SQL, with engineering on the schema.",
         approach:
           "Locust / Go load profiles (Locust WebUI), SQL / index review with engineering, and reproducible Docker DB environments for shared diagnosis.",
+        verification:
+          "The same Docker database image, under those Locust / Go profiles, reviewed in the same run with engineering.",
+        decision: "Diagnose on a reproducible database image before changing the app.",
         result:
-          "Stabilized critical paths under 500+ QPS pressure and shortened the feedback loop between QA and backend.",
+          "Critical paths held under 500+ QPS pressure. Scope: the account and fund paths in that diagnosis, not the whole product.",
       },
       {
         title: "Complex account / fund / risk workflows",
-        challenge:
-          "End-to-end paths crossed account, fund, and risk-control systems — UI clicks alone could not prove release readiness.",
+        background: "Release checks that crossed account, fund, and risk-control systems.",
+        challenge: "UI clicks alone could not prove release readiness.",
+        role: "I built the layered automation and the fixtures the regression actually ran.",
         approach:
           "Layered Playwright + API automation, shared fixtures, and environment parity so regression covered the real business chain.",
+        verification:
+          "Account, fund, and risk paths executed through API and UI together.",
+        decision: "Cover the business chain. UI clicks are not the proof.",
         result:
-          "Raised automation coverage above 80% on priority flows and cut regression cycle time by about 40%.",
+          "Automation coverage went above 80% on priority flows, and regression cycle time dropped by about 40%. Scope: those priority flows.",
       },
       {
         title: "Regression efficiency at team scale",
-        challenge:
-          "Manual regression could not keep up with release cadence across ByteDance, SOE, and startup delivery models.",
+        background: "Release cadence across ByteDance, SOE, and startup delivery.",
+        challenge: "Manual regression could not keep up with that cadence.",
+        role: "I set the framework and the CI quality gates for those release rhythms.",
         approach:
           "Framework design, CI/CD quality gates, and reusable suites instead of one-off scripts tied to a single language.",
+        verification: "Release readiness on the paths we tuned, not a count of scripts.",
+        decision: "Reusable suites and a quality gate, not a script per release.",
         result:
-          "Teams shipped with clearer release readiness signals and 20–35% better response-time outcomes on tuned paths.",
+          "Clearer release-readiness signals, and 20–35% better response time on the paths we tuned. Scope: those tuned paths.",
       },
       {
         title: "Turning AI test drafts into installable products",
+        background: "LLM case drafts that looked finished in a demo.",
         challenge:
-          "LLM-generated cases looked impressive in demos but failed QA adoption — missing coverage, executability, and a path teams could install.",
+          "Teams could not adopt them: coverage, executability, and an install path were missing.",
+        role: "I turned the draft loop into something a team can install. The build stays on the flagship case study.",
         approach:
-          "Productized multimodal intake, a scored human review loop (Test / Developer / Product Manager), and four run modes: Docker, npm, OpenClaw, and local source.",
+          "An installable review loop — Test, Developer, and Product — with Docker, npm, OpenClaw, and local source. Pipeline detail is on the case study, not repeated here.",
+        verification:
+          "Docker, npm, and ClawHub publish records. The counts live on the product page.",
+        decision: "Ship an installable review loop. Leave the build detail on the case study.",
         result:
-          "Shipped the AI Test Case Generator as a flagship installable product with live Docker / npm / ClawHub proof — not a notebook demo.",
+          "The AI Test Case Generator shipped as an installable product. Scope: that product, proved by its own Docker / npm / ClawHub records.",
       },
     ],
     focusTitle: "Current Learning Focus",
@@ -448,7 +465,7 @@ export const en: LocaleCopy = {
       "Locust / Go load craft behind AI tools",
       "Product systems on Workers and APIs",
     ],
-    footerDesc: "Learning in public — AI tools with quality roots",
+    footerDesc: "QA Engineer · SDET · AI Testing.",
     social: [
       {
         href: "https://github.com/XuXuClassMate",
@@ -1710,7 +1727,7 @@ export const en: LocaleCopy = {
     filterAll: "All",
     categoriesLabel: "Browse by topic",
     items: getNotes("en"),
-    footerDesc: "QA Engineer · SDET · AI Testing — written as Engineering Notes",
+    footerDesc: "QA Engineer · SDET · AI Testing.",
     social: [...homeSocial],
   },
   openSource: {
@@ -1748,7 +1765,7 @@ export const en: LocaleCopy = {
     orgCtaLabel: "GitHub organization",
     orgCtaHref: "https://github.com/InnoNestX",
     playgroundCtaLabel: "Try on Playground",
-    footerDesc: "InnoNestX — open-source arm of XuXuClassMate",
+    footerDesc: "QA Engineer · SDET · AI Testing.",
     social: [...homeSocial],
   },
   playground: {
@@ -1788,7 +1805,7 @@ export const en: LocaleCopy = {
     tryResultRepos: "Repositories",
     tryDefaultUsername: "xuxuclassmate",
     openSourceLabel: "Open Source page",
-    footerDesc: "Playground — try before you fork",
+    footerDesc: "QA Engineer · SDET · AI Testing.",
     social: [...homeSocial],
   },
   now: {
@@ -1801,7 +1818,7 @@ export const en: LocaleCopy = {
     updatedIso: NOW_UPDATED.iso,
     cadence: "I refresh this page about once a month.",
     sections: getNowSections("en"),
-    footerDesc: "What I’m working on now — updated monthly",
+    footerDesc: "QA Engineer · SDET · AI Testing.",
     social: [...homeSocial],
   },
   notFound: {
@@ -1809,7 +1826,7 @@ export const en: LocaleCopy = {
     message:
       "This page seems to have taken a coffee break ☕. Let’s get you back on track!",
     homeLabel: "Back to Home",
-    footerDesc: "Building AI tools with a quality-first mindset",
+    footerDesc: "QA Engineer · SDET · AI Testing.",
     social: [...homeSocial],
   },
 };
