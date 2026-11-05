@@ -201,16 +201,6 @@ const langSwitchHref = alternateLocalePath(Astro.url.pathname);
                 {copy.nav.engineering ?? "Engineering"}
               </a>
               <a
-                href={pageHref(locale, "open-source")}
-                class:list={[
-                  "nav-item",
-                  "nav-item--open-source",
-                  { active: active === "open-source" },
-                ]}
-              >
-                {copy.nav.openSource ?? "Open Source"}
-              </a>
-              <a
                 href={pageHref(locale, "about")}
                 class:list={[
                   "nav-item",

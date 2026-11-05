@@ -278,7 +278,7 @@ test("open source page introduces InnoNestX", async ({ page }) => {
   ).toHaveAttribute("href", "/en/playground");
   await expect(
     page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: "Open Source", exact: true }),
-  ).toHaveClass(/active/);
+  ).toHaveCount(0);
 });
 
 test("desktop nav keeps products, engineering, open source, and about", async ({
@@ -289,7 +289,7 @@ test("desktop nav keeps products, engineering, open source, and about", async ({
   const nav = page.getByRole("navigation", { name: "Primary" });
   await expect(nav.getByRole("link", { name: "Products", exact: true })).toBeVisible();
   await expect(nav.getByRole("link", { name: "Engineering", exact: true })).toBeVisible();
-  await expect(nav.getByRole("link", { name: "Open Source", exact: true })).toBeVisible();
+  await expect(nav.getByRole("link", { name: "Open Source", exact: true })).toHaveCount(0);
   await expect(nav.getByRole("link", { name: "About", exact: true })).toBeVisible();
   await expect(nav.getByRole("link", { name: "Projects", exact: true })).toHaveCount(0);
   await expect(page.getByRole("button", { name: /Work/ })).toHaveCount(0);
@@ -318,12 +318,9 @@ test("playground page lists tryable experiences", async ({ page }) => {
   await expect(
     page.getByRole("heading", { name: "Docker Hub API Gateway" }),
   ).toBeVisible();
-  await expect(page.getByRole("heading", { name: "GlobalPulse" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Watch", exact: true })).toBeVisible();
-  await expect(page.getByRole("link", { name: "Open Watch" })).toHaveAttribute(
-    "href",
-    "https://watch.xuxuclassmate.com/",
-  );
+  await expect(
+    page.getByRole("heading", { name: "Watch", exact: true }),
+  ).toHaveCount(0);
   await expect(
     page.getByRole("heading", { name: "Test DB Docker Suite" }),
   ).toBeVisible();
@@ -338,6 +335,23 @@ test("playground page lists tryable experiences", async ({ page }) => {
     page.getByRole("link", { name: "Open interactive demo" }),
   ).toHaveAttribute("href", "/en/demo/ai-testcase-generator");
   await expect(page.locator("#try-docker-hub-api")).toBeVisible();
+
+  await page.goto("/en/about");
+  const services = page.locator("#services");
+  await expect(services.getByRole("heading", { name: "Services" })).toBeVisible();
+  for (const host of [
+    "www.xuxuclassmate.com",
+    "nas.xuxuclassmate.com",
+    "pulse.xuxuclassmate.com",
+    "mail.xuxuclassmate.com",
+    "watch.xuxuclassmate.com",
+  ]) {
+    await expect(services.getByRole("link", { name: new RegExp(host) })).toHaveAttribute(
+      "href",
+      new RegExp(host.replace(/\./g, "\\.")),
+    );
+  }
+  await expect(page.locator(".footer-sites")).toHaveCount(0);
 });
 
 test("mobile nav is a bottom sheet above the tab bar", async ({
@@ -357,7 +371,7 @@ test("mobile nav is a bottom sheet above the tab bar", async ({
   expect(tabbar).not.toBeNull();
   expect(drawer!.height).toBeGreaterThan(400);
   expect(drawer!.y + drawer!.height).toBeLessThanOrEqual(tabbar!.y + 1);
-  for (const label of ["Products", "Engineering", "Open Source", "About"]) {
+  for (const label of ["Products", "Engineering", "About"]) {
     await expect(
       page.locator(".nav-links").getByRole("link", { name: label }),
     ).toBeVisible();

@@ -174,8 +174,18 @@ export function getPortfolioHome(locale: Locale): PortfolioHome {
     featuredMore: isZh ? "进一步了解" : "Learn more",
     featured: isZh ? featuredZh : featuredEn,
     servicesTitle: isZh ? "在线服务" : "Services",
-    servicesLead: isZh ? "四台正在运行的服务。" : "Four services, already running.",
+    servicesLead: isZh
+      ? "这些站点都在这个名字下面运行。"
+      : "These sites are running under this name.",
     services: [
+      {
+        id: "www",
+        title: "www",
+        host: "www.xuxuclassmate.com",
+        href: "https://www.xuxuclassmate.com/",
+        action: isZh ? "打开" : "Open",
+        detail: isZh ? "作品与产品目录。" : "Portfolio and product index.",
+      },
       {
         id: "nas",
         title: "NAS",
