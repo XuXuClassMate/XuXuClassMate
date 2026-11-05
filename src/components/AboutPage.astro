@@ -91,6 +91,26 @@ const isZh = locale === "zh";
         </p>
       </div>
     </section>
+
+    <section class="home-section" id="services">
+      <div class="container">
+        <h2 class="section-title">{home.servicesTitle}</h2>
+        <p class="section-lead">{home.servicesLead}</p>
+        <ul class="service-directory">
+          {
+            home.services.map((item) => (
+              <li>
+                <a href={item.href} target="_blank" rel="noopener noreferrer">
+                  <span class="service-directory-name">{item.title}</span>
+                  <span class="service-directory-detail">{item.detail}</span>
+                  <span class="service-directory-host">{item.host}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
   </main>
 
   <Contact

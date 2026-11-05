@@ -64,17 +64,3 @@
   color: var(--text-secondary);
   font-size: 14px;
 }
-
-.footer-sites {
-  margin-top: 8px;
-  font-size: 14px;
-}
-
-.footer-sites a {
-  color: var(--primary);
-  text-decoration: none;
-}
-
-.footer-sites a:hover {
-  text-decoration: underline;
-}
