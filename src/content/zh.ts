@@ -246,7 +246,7 @@ export const zh: LocaleCopy = {
         href: "/zh/open-source",
       },
     ],
-    footerDesc: "QA Engineer · SDET · AI Testing — 可安装的质量工程",
+    footerDesc: "QA Engineer · SDET · AI Testing.",
     social: [
       {
         href: "https://github.com/XuXuClassMate",
@@ -392,39 +392,47 @@ export const zh: LocaleCopy = {
     stories: [
       {
         title: "高并发下的数据库瓶颈",
-        challenge:
-          "账号与资金链路在高并发下先打穿数据库——应用层看起来还健康，延迟已经飙升。",
+        background: "高并发下的账号与资金链路。",
+        challenge: "数据库先饱和。应用层看起来还健康，延迟已经飙升。",
+        role: "我负责诊断里的 QA 一侧：压测画像，以及和研发一起读 SQL。表结构改动在负责 schema 的工程师手里。",
         approach:
           "Locust / Go 压测画像（Locust WebUI）、与研发一起做 SQL / 索引复盘，并用可复现的 Docker 数据库环境对齐诊断。",
-        result:
-          "在 500+ QPS 压力下稳住关键路径，缩短 QA 与后端之间的反馈闭环。",
+        verification: "同一份 Docker 数据库镜像，在这些 Locust / Go 画像下跑，和研发看同一次结果。",
+        decision: "先在可复现的数据库镜像上诊断，再改应用。",
+        result: "关键路径在 500+ QPS 压力下稳住。口径：那次诊断里的账号与资金路径，不是整个产品。",
       },
       {
         title: "复杂账号 / 资金 / 风控流程",
-        challenge:
-          "端到端路径跨越账号、资金与风控系统——只靠 UI 点击无法证明发布就绪。",
+        background: "横跨账号、资金与风控的发布检查。",
+        challenge: "只靠 UI 点击无法证明发布就绪。",
+        role: "我做了分层自动化和回归真正在跑的 fixtures。",
         approach:
           "分层 Playwright + 接口自动化、共享 fixtures，以及环境对齐，让回归覆盖真实业务链。",
-        result:
-          "优先链路自动化覆盖率超过 80%，回归周期大约缩短 40%。",
+        verification: "账号、资金、风控路径由接口和 UI 一起执行。",
+        decision: "覆盖业务链。UI 点击不是证据。",
+        result: "优先链路自动化覆盖率超过 80%，回归周期大约缩短 40%。口径：这些优先链路。",
       },
       {
         title: "团队规模下的回归效率",
-        challenge:
-          "人工回归跟不上字节、国企、初创等不同交付节奏下的发版频率。",
+        background: "字节、国企、初创几种交付节奏下的发版频率。",
+        challenge: "人工回归跟不上这个节奏。",
+        role: "我为这些发版节奏定了框架和 CI 质量门禁。",
         approach:
           "框架设计、CI/CD 质量门禁，以及可复用套件——而不是绑死单一语言的一次性脚本。",
-        result:
-          "团队获得更清晰的发布就绪信号，调优路径上响应时间改善约 20–35%。",
+        verification: "看调优路径上的发布就绪，不看脚本数量。",
+        decision: "可复用套件加质量门禁，而不是每次发版写一段脚本。",
+        result: "发布就绪信号更清楚，调优路径上响应时间改善约 20–35%。口径：这些调优过的路径。",
       },
       {
         title: "把 AI 用例草稿做成可安装产品",
-        challenge:
-          "LLM 生成的用例在演示里很炫，但 QA 用不起来——缺覆盖、缺可执行性，也没有可安装路径。",
+        background: "演示里看起来已经完成的 LLM 用例草稿。",
+        challenge: "团队用不上：缺覆盖、缺可执行性，也没有安装路径。",
+        role: "我把草稿闭环做成团队可以安装的东西。实现细节留在旗舰案例页。",
         approach:
-          "产品化多模态接入、结构化人工评审闭环（测试 / 开发 / 产品经理），并交付 Docker、npm、OpenClaw 与本地源码四条运行路径。",
-        result:
-          "把 AI 测试用例生成器做成旗舰可安装产品，并用 Docker / npm / ClawHub 实时数据证明——不是笔记本演示。",
+          "可安装的评审闭环——测试、开发、产品——以及 Docker、npm、OpenClaw 和本地源码。流水线不在这里重复。",
+        verification: "Docker、npm、ClawHub 的发布记录。数字在产品页。",
+        decision: "交付可安装的评审闭环。构建细节留在案例页。",
+        result: "AI 测试用例生成器作为可安装产品交付。口径：这个产品，证据是它自己的 Docker / npm / ClawHub 记录。",
       },
     ],
     focusTitle: "当前学习重点",
@@ -436,7 +444,7 @@ export const zh: LocaleCopy = {
       "Locust / Go 压测与自动化手艺支撑 AI 工具",
       "产品系统（Workers / API）",
     ],
-    footerDesc: "公开学习——带着质量根基做 AI 工具",
+    footerDesc: "QA Engineer · SDET · AI Testing.",
     social: [
       {
         href: "https://github.com/XuXuClassMate",
@@ -1684,7 +1692,7 @@ export const zh: LocaleCopy = {
     filterAll: "全部",
     categoriesLabel: "按主题浏览",
     items: getNotes("zh"),
-    footerDesc: "QA Engineer · SDET · AI Testing — 写成工程笔记",
+    footerDesc: "QA Engineer · SDET · AI Testing.",
     social: [
       {
         href: "https://github.com/XuXuClassMate",
@@ -1738,7 +1746,7 @@ export const zh: LocaleCopy = {
     orgCtaLabel: "GitHub 组织主页",
     orgCtaHref: "https://github.com/InnoNestX",
     playgroundCtaLabel: "去体验台试用",
-    footerDesc: "InnoNestX —— XuXuClassMate 的开源侧",
+    footerDesc: "QA Engineer · SDET · AI Testing.",
     social: [
       {
         href: "https://github.com/XuXuClassMate",
@@ -1794,7 +1802,7 @@ export const zh: LocaleCopy = {
     tryResultRepos: "仓库数",
     tryDefaultUsername: "xuxuclassmate",
     openSourceLabel: "开源页面",
-    footerDesc: "体验台——先试用，再 fork",
+    footerDesc: "QA Engineer · SDET · AI Testing.",
     social: [
       {
         href: "https://github.com/XuXuClassMate",
@@ -1823,7 +1831,7 @@ export const zh: LocaleCopy = {
     updatedIso: NOW_UPDATED.iso,
     cadence: "大约每月更新一次。",
     sections: getNowSections("zh"),
-    footerDesc: "我正在做的事——每月更新",
+    footerDesc: "QA Engineer · SDET · AI Testing.",
     social: [
       {
         href: "https://github.com/XuXuClassMate",
@@ -1846,7 +1854,7 @@ export const zh: LocaleCopy = {
     title: "页面走丢了",
     message: "这个地址好像去喝咖啡了。我们带你回主页。",
     homeLabel: "返回首页",
-    footerDesc: "用质量思维建造 AI 工具",
+    footerDesc: "QA Engineer · SDET · AI Testing.",
     social: [
       {
         href: "https://github.com/XuXuClassMate",

@@ -70,7 +70,7 @@ export const PROJECTS: Record<ProjectId, ProjectDef> = {
     group: "quality",
     href: "https://github.com/InnoNestX/testcase-generator",
     ctaHref: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
-    image: "/images/cover-testcase.jpg",
+    image: "/images/product-generator-cases.jpg",
     en: {
       title: "AI Test Case Generator",
       description:
@@ -285,8 +285,20 @@ function toCard(locale: Locale, id: ProjectId): Card {
     title: copy.title,
     description: copy.description,
     tags: copy.tags,
-    href: project.href,
-    linkLabel: copy.linkLabel,
+    href: project.href === "#" ? undefined : project.href,
+    linkLabel: project.href === "#" ? undefined : copy.linkLabel,
+    status:
+      project.href === "#"
+        ? locale === "zh"
+          ? "仓库即将公开"
+          : "Repository coming soon"
+        : project.id === "docker-suite"
+          ? locale === "zh"
+            ? "暂无公开 GitHub"
+            : "No public GitHub"
+          : locale === "zh"
+            ? "已公开"
+            : "Public",
     ctaHref: project.ctaHref,
     ctaLabel: copy.ctaLabel,
     category: groupLabel(locale, project.group),
@@ -295,6 +307,16 @@ function toCard(locale: Locale, id: ProjectId): Card {
     slug: project.id,
     caseHref: `/${locale}/work/${project.id}`,
     caseLabel: copy.caseLabel,
+    demoHref:
+      id === "testcase-generator"
+        ? `/${locale}/demo/ai-testcase-generator`
+        : undefined,
+    demoLabel:
+      id === "testcase-generator"
+        ? locale === "zh"
+          ? "试用 Demo"
+          : "Demo"
+        : undefined,
   };
 }
 

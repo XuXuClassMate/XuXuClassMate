@@ -10,6 +10,24 @@ type Props = { locale: Locale };
 const { locale } = Astro.props;
 const copy = getCopy(locale);
 const page = copy.learn;
+const isZh = locale === "zh";
+const storyLabels = isZh
+  ? {
+      background: "背景",
+      problem: "问题",
+      role: "职责",
+      approach: "方案",
+      verification: "验证",
+      result: "结果与口径",
+    }
+  : {
+      background: "Background",
+      problem: "Problem",
+      role: "Role",
+      approach: "Approach",
+      verification: "Verification",
+      result: "Result and scope",
+    };
 ---
 
 <BaseLayout locale={locale} page="learn">
@@ -22,7 +40,7 @@ const page = copy.learn;
 
     <section class="timeline-section">
       <div class="container">
-        <h2 class="section-title reveal-on-scroll">{page.timelineTitle}</h2>
+        <h2 class="section-title reveal-on-scroll">{isZh ? "工程经历" : "Engineering Journey"}</h2>
         <ol class="timeline">
           {
             page.timeline.map((item, index) => (
@@ -45,25 +63,37 @@ const page = copy.learn;
 
     <section class="experience-stories">
       <div class="container">
-        <h2 class="section-title reveal-on-scroll">{page.storiesTitle}</h2>
-        <div class="stories-grid">
+        <h2 class="section-title reveal-on-scroll">{isZh ? "工程难题" : "Selected Engineering Challenges"}</h2>
+        <div class="stories-grid stories-grid--cases">
           {
             page.stories.map((item, index) => (
               <article
                 class={`story-card reveal-on-scroll reveal-delay-${(index % 3) + 1}`}
               >
                 <h3>{item.title}</h3>
-                <dl class="story-flow">
+                <dl class="story-case">
                   <div>
-                    <dt>{page.storiesChallengeLabel}</dt>
+                    <dt>{storyLabels.background}</dt>
+                    <dd>{item.background}</dd>
+                  </div>
+                  <div>
+                    <dt>{storyLabels.problem}</dt>
                     <dd>{item.challenge}</dd>
                   </div>
                   <div>
-                    <dt>{page.storiesApproachLabel}</dt>
+                    <dt>{storyLabels.role}</dt>
+                    <dd>{item.role}</dd>
+                  </div>
+                  <div>
+                    <dt>{storyLabels.approach}</dt>
                     <dd>{item.approach}</dd>
                   </div>
                   <div>
-                    <dt>{page.storiesResultLabel}</dt>
+                    <dt>{storyLabels.verification}</dt>
+                    <dd>{item.verification}</dd>
+                  </div>
+                  <div>
+                    <dt>{storyLabels.result}</dt>
                     <dd>{item.result}</dd>
                   </div>
                 </dl>
@@ -76,59 +106,33 @@ const page = copy.learn;
 
     <section class="skills">
       <div class="container">
-        <h2 class="section-title reveal-on-scroll">{page.stackTitle}</h2>
-        <div class="skills-grid">
-          {
-            page.stack.map((item, index) => (
-              <div
-                class={`skill-card reveal-on-scroll reveal-delay-${index + 1}`}
-              >
-                <h3>{item.title}</h3>
-                <ul class="skill-list">
-                  {item.items?.map((entry) => (
-                    <li>{entry}</li>
-                  ))}
-                </ul>
-              </div>
-            ))
-          }
-        </div>
+        <h2 class="section-title reveal-on-scroll">{isZh ? "技术决定" : "Technical Decisions"}</h2>
+        <ul class="story-plain">
+          {page.stories.map((item) => (
+            <li>
+              <strong>{item.title}.</strong> {item.decision}
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
 
-    <section class="learning-path">
+    <section class="experience-stories">
       <div class="container">
-        <h2 class="section-title reveal-on-scroll">{page.resourcesTitle}</h2>
-        <div class="notes-grid">
-          {
-            page.resources.map((item, index) => (
-              <article
-                class={`note-card reveal-on-scroll reveal-delay-${(index % 3) + 1}`}
-              >
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-                <a
-                  href={item.href}
-                  class="read-more"
-                  target={item.href?.startsWith("http") ? "_blank" : undefined}
-                  rel={
-                    item.href?.startsWith("http")
-                      ? "noopener noreferrer"
-                      : undefined
-                  }
-                >
-                  {item.linkLabel}
-                </a>
-              </article>
-            ))
-          }
-        </div>
+        <h2 class="section-title reveal-on-scroll">{isZh ? "可核结果" : "Measurable Outcomes"}</h2>
+        <ul class="story-plain">
+          {page.stories.map((item) => (
+            <li>
+              <strong>{item.title}.</strong> {item.result}
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
 
     <section class="current-learning">
       <div class="container">
-        <h2 class="section-title reveal-on-scroll">{page.focusTitle}</h2>
+        <h2 class="section-title reveal-on-scroll">{isZh ? "当前重点" : "Current Focus"}</h2>
         <div class="focus-content reveal-on-scroll">
           <div class="focus-item">
             <h3>{page.focusHeading}</h3>

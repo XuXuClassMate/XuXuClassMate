@@ -79,6 +79,8 @@ export type Card = {
   slug?: CaseSlug;
   /** Optional status chip (e.g. Live / Open source). */
   status?: string;
+  demoHref?: string;
+  demoLabel?: string;
 };
 
 export type Highlight = {
@@ -332,8 +334,12 @@ export type LocaleCopy = {
     storiesResultLabel: string;
     stories: Array<{
       title: string;
+      background: string;
       challenge: string;
+      role: string;
       approach: string;
+      verification: string;
+      decision: string;
       result: string;
     }>;
     focusTitle: string;

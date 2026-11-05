@@ -21,11 +21,18 @@ const isZh = locale === "zh";
     <PageHero
       subtitle="QA Engineer · SDET · AI Testing"
       title={about.title}
-      description={about.intro}
+      description=""
       actions={[
         { href: about.ctaWorkHref, label: about.ctaWork, primary: true },
       ]}
     />
+
+    <section class="home-section">
+      <div class="container">
+        <h2 class="section-title">{isZh ? "我是谁" : "Who I Am"}</h2>
+        <p class="section-lead">{about.intro}</p>
+      </div>
+    </section>
 
     <section class="home-section">
       <div class="container">
@@ -42,7 +49,7 @@ const isZh = locale === "zh";
 
     <section class="home-section">
       <div class="container">
-        <h2 class="section-title">{isZh ? "部分成果" : "Selected Achievements"}</h2>
+        <h2 class="section-title">{isZh ? "部分结果" : "Selected Results"}</h2>
         <div class="story-metrics">
           {
             home.achievements.slice(0, 2).map((item) => (
