@@ -2207,7 +2207,7 @@ html[data-theme="dark"] .tile--soft {
   .apple-home .hero--home .hero-actions {
     width: 100%;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     gap: 14px;
   }
 
@@ -2215,7 +2215,7 @@ html[data-theme="dark"] .tile--soft {
   .apple-home .hero--home .btn-ghost,
   html.lg-svg .apple-home .hero--home .btn-primary,
   html.lg-svg .apple-home .hero--home .btn-ghost {
-    width: auto;
+    width: 100%;
     justify-content: center;
   }
 
