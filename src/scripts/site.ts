@@ -476,7 +476,7 @@ function systemTheme(): Theme {
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
-function storedTheme(): Theme | null {
+function savedTheme(): Theme | null {
   try {
     const stored = localStorage.getItem(THEME_KEY);
     if (stored === "light" || stored === "dark") return stored;
@@ -487,7 +487,7 @@ function storedTheme(): Theme | null {
 }
 
 function readTheme(): Theme {
-  return storedTheme() ?? systemTheme();
+  return savedTheme() ?? systemTheme();
 }
 
 function applyTheme(theme: Theme, persist: boolean): void {
@@ -530,7 +530,7 @@ function applyTheme(theme: Theme, persist: boolean): void {
 
 function initThemeToggle(): void {
   const followSystem = () => {
-    if (storedTheme()) return;
+    if (savedTheme()) return;
     applyTheme(systemTheme(), false);
   };
 
