@@ -99,12 +99,41 @@ function initNavMore(): void {
   });
 }
 
+function initFilm(): void {
+  const films = document.querySelectorAll<HTMLElement>("[data-film]");
+  if (films.length === 0) return;
+
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  for (const film of films) {
+    const steps = [...film.querySelectorAll<HTMLElement>(".film-step")];
+    if (steps.length < 2 || reduce) {
+      for (const step of steps) step.classList.add("is-on");
+      continue;
+    }
+
+    film.classList.add("is-live");
+    const update = () => {
+      const scrollable = Math.max(film.offsetHeight - window.innerHeight, 1);
+      const passed = Math.min(Math.max(-film.getBoundingClientRect().top, 0), scrollable);
+      const progress = passed / scrollable;
+      const index = Math.min(steps.length - 1, Math.floor(progress * steps.length));
+      steps.forEach((step, stepIndex) => step.classList.toggle("is-on", stepIndex === index));
+      film.style.setProperty("--film-p", progress.toFixed(4));
+    };
+
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+  }
+}
+
 function initHeaderScroll(): void {
   const header = document.getElementById("siteHeader");
   if (!(header instanceof HTMLElement)) return;
 
   const update = () => {
-    header.classList.toggle("is-scrolled", window.scrollY > 12);
+    header.classList.toggle("is-scrolled", window.scrollY > 20);
   };
 
   update();
@@ -407,21 +436,6 @@ function initLiveMetrics(): void {
     });
 }
 
-function initBackToTop(): void {
-  const button = document.getElementById("backToTop");
-  if (!(button instanceof HTMLButtonElement)) return;
-
-  const update = () => {
-    button.classList.toggle("is-visible", window.scrollY > 480);
-  };
-
-  update();
-  window.addEventListener("scroll", update, { passive: true });
-  button.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-}
-
 function initTypewriter(): void {
   const node = document.querySelector<HTMLElement>("[data-typewriter]");
   if (!node) return;
@@ -455,27 +469,42 @@ function initTypewriter(): void {
 
 type Theme = "dark" | "light";
 
-const THEME_KEY = "xuxu-theme";
+const THEME_KEY = "xuxu-theme-choice";
 const LIQUID_TINT_KEY = "xuxu-liquid-tint";
 
-function readTheme(): Theme {
-  const attr = document.documentElement.getAttribute("data-theme");
-  if (attr === "light" || attr === "dark") return attr;
+function systemTheme(): Theme {
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+
+function storedTheme(): Theme | null {
   try {
     const stored = localStorage.getItem(THEME_KEY);
     if (stored === "light" || stored === "dark") return stored;
   } catch {
     // ignore
   }
-  return "light";
+  return null;
 }
 
-function applyTheme(theme: Theme): void {
-  document.documentElement.setAttribute("data-theme", theme);
-  try {
-    localStorage.setItem(THEME_KEY, theme);
-  } catch {
-    // ignore
+function readTheme(): Theme {
+  return storedTheme() ?? systemTheme();
+}
+
+function applyTheme(theme: Theme, persist: boolean): void {
+  const root = document.documentElement;
+  if (persist) {
+    root.classList.add("theme-changing");
+    window.setTimeout(() => root.classList.remove("theme-changing"), 400);
+  }
+  root.setAttribute("data-theme", theme);
+  root.style.colorScheme = theme;
+  root.style.backgroundColor = theme === "dark" ? "#121212" : "#f5f5f7";
+  if (persist) {
+    try {
+      localStorage.setItem(THEME_KEY, theme);
+    } catch {
+      // ignore
+    }
   }
 
   const button = document.getElementById("themeToggle");
@@ -500,14 +529,24 @@ function applyTheme(theme: Theme): void {
 }
 
 function initThemeToggle(): void {
-  applyTheme(readTheme());
+  const followSystem = () => {
+    if (storedTheme()) return;
+    applyTheme(systemTheme(), false);
+  };
+
+  followSystem();
+
+  const media = window.matchMedia("(prefers-color-scheme: dark)");
+  media.addEventListener("change", followSystem);
+  window.addEventListener("pageshow", followSystem);
+  window.setTimeout(followSystem, 0);
 
   const button = document.getElementById("themeToggle");
   if (!(button instanceof HTMLButtonElement)) return;
 
   button.addEventListener("click", () => {
     const next: Theme = readTheme() === "dark" ? "light" : "dark";
-    applyTheme(next);
+    applyTheme(next, true);
   });
 }
 
@@ -583,7 +622,7 @@ function initLiquidInteractions(): void {
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const targets = [
     ...document.querySelectorAll<HTMLElement>(
-      ".btn-ghost, .btn-primary, .theme-toggle, .filter-btn, .copy-email-btn, .back-to-top, .glass-tint-toggle, .language-switch",
+      ".btn-ghost, .btn-primary, .theme-toggle, .filter-btn, .copy-email-btn, .glass-tint-toggle, .language-switch",
     ),
   ];
 
@@ -602,7 +641,7 @@ function initLiquidInteractions(): void {
 
   const specularHosts = [
     ...document.querySelectorAll<HTMLElement>(
-      ".header, .btn-ghost, .theme-toggle, .nav-more-menu, .back-to-top, .filter-btn, .glass-tint-panel",
+      ".header, .btn-ghost, .theme-toggle, .nav-more-menu, .filter-btn, .glass-tint-panel",
     ),
   ];
 
@@ -671,20 +710,77 @@ function initLiquidOptics(): void {
   document.documentElement.classList.add("lg-svg");
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+function initShowcaseSettle(): void {
+  const nodes = [...document.querySelectorAll<HTMLElement>(".showcase")];
+  if (nodes.length === 0) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (CSS.supports("animation-timeline: scroll()")) return;
+
+  let ticking = false;
+  const update = () => {
+    const progress = Math.min(1, Math.max(0, window.scrollY / 480));
+    const scale = 1.045 - progress * 0.045;
+    const opacity = 1 - progress * 0.08;
+    for (const node of nodes) {
+      node.style.transform = `scale(${scale})`;
+      node.style.opacity = String(opacity);
+    }
+    ticking = false;
+  };
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  };
+  update();
+  window.addEventListener("scroll", onScroll, { passive: true });
+}
+
+function initMetricSheen(): void {
+  const groups = [
+    ...document.querySelectorAll<HTMLElement>(".impact-row"),
+  ];
+  if (groups.length === 0) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (!("IntersectionObserver" in window)) {
+    for (const group of groups) group.classList.add("is-lit");
+    return;
+  }
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        entry.target.classList.add("is-lit");
+        observer.unobserve(entry.target);
+      }
+    },
+    { threshold: 0.4 },
+  );
+  for (const group of groups) observer.observe(group);
+}
+
+function bootPage() {
   initLiquidOptics();
   initMobileNav();
   initNavMore();
+  initFilm();
   initHeaderScroll();
   initScrollReveal();
+  initShowcaseSettle();
+  initMetricSheen();
   initProjectFilters();
   initCopyEmail();
   initTerminalCopy();
   initHighlightCountUp();
   initLiveMetrics();
-  initBackToTop();
   initTypewriter();
   initThemeToggle();
   initGlassTint();
   initLiquidInteractions();
-});
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", bootPage);
+} else {
+  bootPage();
+}

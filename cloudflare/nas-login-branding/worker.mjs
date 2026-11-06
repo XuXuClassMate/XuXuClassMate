@@ -1,16 +1,46 @@
+import { recordExchange } from "../http-log/src/record.mjs";
+
 const LOGIN_CSS = `
 :root {
+  color-scheme: light dark;
+  --nas-page: #1c1c1e;
+  --nas-ink: #f5f5f7;
+  --nas-secondary: rgba(245, 245, 247, 0.72);
+  --nas-card: #2c2c2e;
+  --nas-card-ink: #f5f5f7;
+  --nas-card-body: rgba(245, 245, 247, 0.78);
+  --nas-muted: rgba(245, 245, 247, 0.5);
+  --nas-link: #2997ff;
+  --nas-signin-bg: #fff;
+  --nas-signin-ink: #1d1d1f;
+  --nas-signin-hover: #f5f5f7;
   --icloud-blue: #0071e3;
-  --icloud-link: #0066cc;
+  --icloud-link: var(--nas-link);
   --icloud-label: #1d1d1f;
   --icloud-secondary: #6e6e73;
   --icloud-line: #d2d2d7;
-  --icloud-page: #1c1c1e;
+  --icloud-page: var(--nas-page);
   --icloud-green: #34c759;
   --icloud-font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
     "PingFang SC", "Hiragino Sans GB", "Helvetica Neue", sans-serif;
   --icloud-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
     "PingFang SC", "Hiragino Sans GB", "Helvetica Neue", sans-serif;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --nas-page: #ffffff;
+    --nas-ink: #1d1d1f;
+    --nas-secondary: #6e6e73;
+    --nas-card: #f5f5f7;
+    --nas-card-ink: #1d1d1f;
+    --nas-card-body: #6e6e73;
+    --nas-muted: rgba(0, 0, 0, 0.48);
+    --nas-link: #0066cc;
+    --nas-signin-bg: #1d1d1f;
+    --nas-signin-ink: #f5f5f7;
+    --nas-signin-hover: #333336;
+  }
 }
 
 html,
@@ -30,6 +60,21 @@ body,
   font-family: var(--icloud-font) !important;
   color: var(--icloud-label) !important;
   -webkit-font-smoothing: antialiased !important;
+}
+
+html,
+body,
+#app,
+.contain,
+.login {
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+body,
+#app,
+.contain {
+  width: 100% !important;
 }
 
 body,
@@ -82,8 +127,8 @@ body,
   padding: 88px 24px 112px !important;
   box-sizing: border-box !important;
   transform: none !important;
-  color: var(--icloud-label) !important;
-  color-scheme: light !important;
+  color: var(--nas-ink) !important;
+  color-scheme: light dark !important;
   border: 0 !important;
   border-radius: 0 !important;
   box-shadow: none !important;
@@ -589,7 +634,7 @@ html[lang="zh-CN"] .login-mode.qrcode-mode::after {
   width: min(980px, calc(100% - 48px));
   margin: 0 auto;
   padding: 28px 0 40px;
-  color: rgba(245, 245, 247, 0.5);
+  color: var(--nas-muted);
   font: 400 12px/1.6 var(--icloud-font);
   letter-spacing: -0.06px;
   text-align: center;
@@ -614,15 +659,82 @@ a[href*="beian.miit.gov.cn"] {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 520px) and (max-height: 620px) {
   .login {
-    padding: 72px 20px 104px !important;
+    padding: 72px 20px 48px !important;
     justify-content: flex-start !important;
   }
+}
+
+@media (max-width: 520px) and (min-height: 621px) {
+  .login {
+    justify-content: center !important;
+    min-height: 100svh !important;
+    min-height: 100dvh !important;
+    padding: 72px 24px !important;
+  }
+
+  html:not([data-xuxu-auth="form"]) .login .logo-title-area .logo-image {
+    width: 144px !important;
+    height: 108px !important;
+  }
+
+  html:not([data-xuxu-auth="form"]) .xuxu-wordmark {
+    margin-top: 22px !important;
+    font-size: 48px !important;
+    letter-spacing: -1.2px !important;
+  }
+
+  html:not([data-xuxu-auth="form"]) .xuxu-signin {
+    margin-top: 36px !important;
+  }
+
+  html:not([data-xuxu-auth="form"]) .xuxu-tagline {
+    margin-top: 40px !important;
+    font-size: 28px !important;
+    letter-spacing: -0.5px !important;
+  }
+}
+
+@media (max-width: 480px) {
 
   .titleText,
   .qrcode-title {
     font-size: 28px !important;
+  }
+
+  .xuxu-wordmark {
+    font-size: 40px !important;
+    letter-spacing: -1px !important;
+  }
+
+  .xuxu-tagline {
+    font-size: 22px !important;
+    letter-spacing: -0.4px !important;
+    margin-top: 24px !important;
+  }
+
+  .logo-title-area,
+  .titleText,
+  .qrcode-title,
+  .xuxu-subtitle,
+  .xuxu-account,
+  .login .el-form,
+  .login > .el-row,
+  .loginFooter,
+  .qrcode-code,
+  .qrcode-desc {
+    width: 100% !important;
+  }
+
+  .xuxu-promo,
+  .xuxu-copyright {
+    width: calc(100% - 32px) !important;
+  }
+
+  .xuxu-card {
+    min-height: 0 !important;
+    padding: 24px 20px 28px !important;
   }
 }
 
@@ -657,17 +769,23 @@ html[data-xuxu-auth="form"] .login .logo-title-area .logo-image {
 .xuxu-wordmark,
 .xuxu-tagline,
 .xuxu-nav {
-  color: #f5f5f7 !important;
+  color: var(--nas-ink) !important;
+}
+
+.xuxu-wordmark,
+.xuxu-tagline {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
 }
 
 .xuxu-subtitle,
 .qrcode-desc {
-  color: rgba(245, 245, 247, 0.72) !important;
+  color: var(--nas-secondary) !important;
 }
 
 .xuxu-language-toggle,
 .xuxu-back {
-  color: #f5f5f7;
+  color: var(--nas-ink);
 }
 
 .xuxu-nav {
@@ -697,15 +815,15 @@ html[data-xuxu-auth="form"] .login .logo-title-area .logo-image {
   padding: 0 22px;
   border: 0;
   border-radius: 980px;
-  background: #fff;
-  color: #1d1d1f;
+  background: var(--nas-signin-bg);
+  color: var(--nas-signin-ink);
   font: 400 17px/44px var(--icloud-font);
   letter-spacing: -0.37px;
   cursor: pointer;
 }
 
 .xuxu-signin:hover {
-  background: #f5f5f7;
+  background: var(--nas-signin-hover);
 }
 
 .xuxu-signin:active {
@@ -746,20 +864,20 @@ html[data-xuxu-auth="form"] .login .logo-title-area .logo-image {
   min-height: 280px;
   padding: 36px 32px 40px;
   border-radius: 28px;
-  background: #2c2c2e;
+  background: var(--nas-card);
   box-sizing: border-box;
 }
 
 .xuxu-card-title {
   margin: 0 0 16px;
-  color: #f5f5f7;
+  color: var(--nas-card-ink);
   font: 600 32px/1.15 var(--icloud-display);
   letter-spacing: -0.4px;
 }
 
 .xuxu-card-body {
   margin: 0;
-  color: rgba(245, 245, 247, 0.78);
+  color: var(--nas-card-body);
   font: 400 17px/1.45 var(--icloud-font);
   letter-spacing: -0.37px;
 }
@@ -769,7 +887,8 @@ html[data-xuxu-auth="form"] .login .logo-title-area .logo-image {
   width: min(980px, calc(100% - 48px));
   margin: 0 auto;
   padding: 28px 0 40px;
-  color: rgba(245, 245, 247, 0.5);
+  color: var(--nas-muted);
+  box-sizing: border-box !important;
 }
 
 @media (max-width: 800px) {
@@ -1085,11 +1204,32 @@ const LOGIN_SCRIPT = `
     });
   }
 
+  function fitHero() {
+    const login = document.querySelector(".login");
+    if (!login) return;
+    if (!window.matchMedia("(max-width: 520px)").matches) {
+      login.style.removeProperty("min-height");
+      login.style.removeProperty("justify-content");
+      return;
+    }
+    const viewport = window.visualViewport;
+    const height = Math.round((viewport && viewport.height) || window.innerHeight);
+    login.style.setProperty("min-height", height + "px", "important");
+    login.style.setProperty("justify-content", height < 620 ? "flex-start" : "center", "important");
+  }
+
   function applyLanguage() {
     scheduled = false;
     const login = document.querySelector(".login");
     if (!login) return;
     bindLogin(login);
+    fitHero();
+    if (!window.__xuxuHeroFit) {
+      window.__xuxuHeroFit = true;
+      window.addEventListener("resize", fitHero);
+      window.addEventListener("orientationchange", fitHero);
+      if (window.visualViewport) window.visualViewport.addEventListener("resize", fitHero);
+    }
 
     const language = getLanguage();
     const text = copy[language];
@@ -1224,7 +1364,7 @@ class LoginHtmlRewriter {
 class LoginHeadRewriter {
   element(element) {
     element.append(
-      `<meta name="color-scheme" content="light"><style id="xuxu-nas-login-branding">${LOGIN_CSS}</style>`,
+      `<meta name="color-scheme" content="light dark"><style id="xuxu-nas-login-branding">${LOGIN_CSS}</style>`,
       { html: true },
     );
   }
@@ -1239,8 +1379,7 @@ class LoginBodyRewriter {
   }
 }
 
-export default {
-  async fetch(request) {
+async function render(request) {
     const response = await fetch(request);
     const contentType = response.headers.get("content-type") || "";
     const { pathname } = new URL(request.url);
@@ -1273,6 +1412,13 @@ export default {
       });
     }
 
+    return response;
+}
+
+export default {
+  async fetch(request, env, ctx) {
+    const response = await render(request);
+    if (env?.LOGS) ctx.waitUntil(recordExchange(env.LOGS, request, response).catch(() => {}));
     return response;
   },
 };

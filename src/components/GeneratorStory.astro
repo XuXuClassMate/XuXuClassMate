@@ -98,7 +98,7 @@ function paintCommand(command: string): string {
             </a>
           </div>
         </div>
-        <figure class="device">
+        <figure class="device showcase">
           <div class="device-bar" aria-hidden="true"><span></span><span></span><span></span></div>
           <img
             src="/images/product-generator-workspace.jpg"
@@ -133,23 +133,30 @@ function paintCommand(command: string): string {
       </div>
     </section>
 
-    <section class="story-band story-band--paper" id="features">
-      <div class="story-wrap">
-        <h2>{isZh ? "产品功能" : "Product Features"}</h2>
-        {
-          shots.map((shot, index) => (
-            <div class:list={["story-split", "story-feature", { "story-split--flip": index % 2 === 1 }]}>
-              <div class="story-copy">
-                <h3>{shot.title}</h3>
-                <p>{shot.body}</p>
-              </div>
-              <figure class="device">
-                <div class="device-bar" aria-hidden="true"><span></span><span></span><span></span></div>
-                <img src={shot.src} alt={shot.alt} width="1200" height="640" />
-              </figure>
-            </div>
-          ))
-        }
+    <section class="story-band story-film" id="features">
+      <div class="film" data-film>
+        <div class="film-pin">
+          <h2>{isZh ? "产品功能" : "Product Features"}</h2>
+          <div class="film-stage">
+            {
+              shots.map((shot) => (
+                <article class="film-step">
+                  <figure class="film-frame device">
+                    <div class="device-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+                    <img src={shot.src} alt={shot.alt} width="1200" height="640" />
+                  </figure>
+                  <div class="film-caption">
+                    <h3>{shot.title}</h3>
+                    <p>{shot.body}</p>
+                  </div>
+                </article>
+              ))
+            }
+          </div>
+          <div class="film-meter" aria-hidden="true">
+            <span></span>
+          </div>
+        </div>
       </div>
     </section>
 

@@ -1,6 +1,8 @@
-.experience-stories {
-  padding: 112px 0;
-  background: var(--bg-soft);
+.experience-stories,
+.timeline-section,
+.skills {
+  padding: 72px 0;
+  background: var(--bg);
 }
 
 .stories-grid {
@@ -21,12 +23,12 @@
 }
 
 .story-case dt {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--primary);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  color: var(--muted);
   margin-bottom: 0.2rem;
 }
 
@@ -110,7 +112,7 @@
 
 .featured-projects {
   padding: 96px 0;
-  background: var(--bg-soft);
+  background: var(--bg);
 }
 
 .project-group--spaced {

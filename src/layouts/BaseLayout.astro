@@ -75,9 +75,34 @@ const langSwitchHref = alternateLocalePath(Astro.url.pathname);
 ---
 
 <!doctype html>
-<html lang={locale} data-theme="light" style="--liquid-tint: 0.45">
+<html lang={locale} style="--liquid-tint: 0.45">
   <head>
     <meta charset="UTF-8" />
+    <script is:inline>
+      (function () {
+        var theme = "light";
+        try {
+          var stored = localStorage.getItem("xuxu-theme-choice");
+          if (stored === "light" || stored === "dark") theme = stored;
+          else if (window.matchMedia("(prefers-color-scheme: dark)").matches) theme = "dark";
+        } catch (e) {}
+        var root = document.documentElement;
+        root.setAttribute("data-theme", theme);
+        root.style.colorScheme = theme;
+        root.style.backgroundColor = theme === "dark" ? "#121212" : "#f5f5f7";
+        try {
+          var tint = localStorage.getItem("xuxu-liquid-tint");
+          var n = tint == null ? 0.45 : Number(tint);
+          if (!isFinite(n)) n = 0.45;
+          n = Math.min(1, Math.max(0, n));
+          root.style.setProperty("--liquid-tint", String(n));
+        } catch (e) {}
+      })();
+    </script>
+    <style is:inline>
+      html { background-color: #f5f5f7; color-scheme: light; }
+      html[data-theme="dark"] { background-color: #121212; color-scheme: dark; }
+    </style>
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, viewport-fit=cover"
@@ -85,22 +110,6 @@ const langSwitchHref = alternateLocalePath(Astro.url.pathname);
     <meta name="format-detection" content="telephone=no" />
     <meta name="mobile-web-app-capable" content="yes" />
     <title>{meta.title}</title>
-    <script is:inline>
-      (function () {
-        try {
-          let theme = localStorage.getItem("xuxu-theme");
-          if (theme !== "light" && theme !== "dark") theme = "light";
-          document.documentElement.setAttribute("data-theme", theme);
-          const tint = localStorage.getItem("xuxu-liquid-tint");
-          let n = tint == null ? 0.45 : Number(tint);
-          if (!Number.isFinite(n)) n = 0.45;
-          n = Math.min(1, Math.max(0, n));
-          document.documentElement.style.setProperty("--liquid-tint", String(n));
-        } catch {
-          document.documentElement.setAttribute("data-theme", "light");
-        }
-      })();
-    </script>
     {
       noindex ? (
         <meta name="robots" content="noindex, nofollow" />
@@ -167,6 +176,7 @@ const langSwitchHref = alternateLocalePath(Astro.url.pathname);
     </svg>
     <a class="skip-link" href="#main-content">{copy.skipToContent}</a>
     <header class="header" id="siteHeader">
+      <div class="header-glass" aria-hidden="true"></div>
       <div class="container">
         <nav class="nav" aria-label="Primary">
           <a href={homeHref} class="logo">
@@ -180,6 +190,8 @@ const langSwitchHref = alternateLocalePath(Astro.url.pathname);
           </a>
           <div class="nav-end">
             <div class="nav-links" id="navLinks">
+              <div class="nav-links-glass" aria-hidden="true"></div>
+              <div class="nav-links-scroll">
               <a
                 href={pageHref(locale, "work")}
                 class:list={[
@@ -245,6 +257,7 @@ const langSwitchHref = alternateLocalePath(Astro.url.pathname);
                   <span class="theme-toggle-label">{copy.themeToggle}</span>
                 </button>
               </div>
+              </div>
             </div>
             <button
               id="mobileNavToggle"
@@ -288,15 +301,6 @@ const langSwitchHref = alternateLocalePath(Astro.url.pathname);
         <span>{copy.menuLabel}</span>
       </button>
     </nav>
-    <button
-      type="button"
-      class="back-to-top lg-regular"
-      id="backToTop"
-      aria-label={copy.backToTop}
-      title={copy.backToTop}
-    >
-      ↑
-    </button>
     <script src="../scripts/site.ts"></script>
   </body>
 </html>

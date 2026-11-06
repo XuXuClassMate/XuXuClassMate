@@ -70,7 +70,7 @@ export const PROJECTS: Record<ProjectId, ProjectDef> = {
     group: "quality",
     href: "https://github.com/InnoNestX/testcase-generator",
     ctaHref: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
-    image: "/images/product-generator-cases.jpg",
+    image: "/images/cover-testcase.jpg",
     en: {
       title: "AI Test Case Generator",
       description:

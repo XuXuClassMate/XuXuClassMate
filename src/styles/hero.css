@@ -297,7 +297,7 @@
 
 .hero:not(.hero--home) .btn-primary,
 .hero:not(.hero--home) .btn-ghost {
-  min-width: 12.5rem;
+  min-width: 0;
   clip-path: none;
 }
 

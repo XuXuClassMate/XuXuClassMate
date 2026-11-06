@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="referrer" content="no-referrer" />
+    <title>Watch · xuxuclassmate.com</title>
+    <link rel="icon" href="/logo.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="stylesheet" href="/app.css" />
+  </head>
+  <body>
+    <div class="atmosphere" aria-hidden="true">
+      <span class="orb orb-a"></span>
+      <span class="orb orb-b"></span>
+      <span class="orb orb-c"></span>
+    </div>
+    <div class="shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <img class="mark" src="/logo.svg" alt="" width="36" height="36" />
+          <div>
+            <strong>Watch</strong>
+            <span>安全监控</span>
+          </div>
+        </div>
+        <nav class="nav" aria-label="视图">
+          <button type="button" data-view="overview" aria-current="page">总览</button>
+          <button type="button" data-view="domains">域名</button>
+          <button type="button" data-view="scans">扫描 <span id="scan-count" hidden></span></button>
+          <button type="button" data-view="visitors">访问</button>
+          <button type="button" data-view="logs">日志</button>
+        </nav>
+      </aside>
+      <main>
+        <header class="top">
+          <div>
+            <p class="eyebrow">xuxuclassmate.com</p>
+            <h1 id="title">总览</h1>
+          </div>
+          <div class="top-actions">
+            <div class="segment" role="tablist" aria-label="时间范围">
+              <button type="button" data-range="24h" aria-selected="true">24 小时</button>
+              <button type="button" data-range="7d" aria-selected="false">7 天</button>
+              <button type="button" data-range="30d" aria-selected="false">30 天</button>
+            </div>
+            <a class="icon-button" href="/logout" aria-label="退出登录">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M9.5 7V5.8A1.8 1.8 0 0 1 11.3 4h7A1.8 1.8 0 0 1 20.1 5.8v12.4a1.8 1.8 0 0 1-1.8 1.8h-7a1.8 1.8 0 0 1-1.8-1.8V17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+                <path d="M13 12H4.2M6.6 9.4 4 12l2.6 2.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </a>
+            <button type="button" id="theme" class="icon-button theme" aria-label="切换外观">
+              <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M16.2 3.4a8.2 8.2 0 1 0 4.4 14.1A8.4 8.4 0 0 1 16.2 3.4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path>
+              </svg>
+              <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="3.4" fill="none" stroke="currentColor" stroke-width="1.8"></circle>
+                <path d="M12 3v2.2M12 18.8V21M3 12h2.2M18.8 12H21M5.6 5.6l1.6 1.6M16.8 16.8l1.6 1.6M18.4 5.6l-1.6 1.6M7.2 16.8l-1.6 1.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+              </svg>
+            </button>
+          </div>
+        </header>
+        <p id="status" class="status">正在读取 Cloudflare…</p>
+        <div id="app"></div>
+      </main>
+    </div>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

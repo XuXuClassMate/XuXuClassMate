@@ -48,6 +48,11 @@ html[data-theme="dark"] .theme-cover--dark {
   pointer-events: auto;
 }
 
+html[data-theme="dark"] .project-cover:not(:has(.theme-cover--dark)) .theme-cover--light {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 html[data-theme="light"] .theme-cover--light {
   opacity: 1;
   pointer-events: auto;

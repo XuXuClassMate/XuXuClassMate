@@ -9,6 +9,9 @@ type Props = {
 
 const { item, index = 0, filterable = false } = Astro.props;
 const delay = (index % 3) + 1;
+const valueLine = (item.description.split(/\s*[—–]\s*|——/)[0] ?? item.description)
+  .split("。")[0]
+  .trim();
 const imageDark = item.imageDark ?? item.image?.replace(/\.jpg$/i, "-dark.jpg");
 ---
 
@@ -43,6 +46,7 @@ const imageDark = item.imageDark ?? item.image?.replace(/\.jpg$/i, "-dark.jpg");
             loading="lazy"
             decoding="async"
             aria-hidden="true"
+            onerror="this.remove()"
           />
         ) : null}
       </a>
@@ -51,7 +55,7 @@ const imageDark = item.imageDark ?? item.image?.replace(/\.jpg$/i, "-dark.jpg");
   <div class="project-content">
     {item.status ? <span class="project-category">{item.status}</span> : null}
     <h3>{item.title}</h3>
-    <p>{item.description}</p>
+    <p>{valueLine}</p>
     <div class="project-links">
       {
         item.demoHref && item.demoLabel ? (

@@ -42,7 +42,10 @@ const impactNote = isZh
         <h1 class="hero-title">{home.greeting}</h1>
         <p class="hero-desc">{home.description}</p>
         <div class="hero-actions">
-          <a class="btn-primary" href="#featured">{home.ctaWork}</a>
+          <a class="btn-primary" href="#featured">
+            {home.ctaWork}
+            <span aria-hidden="true">›</span>
+          </a>
           <a
             class="btn-ghost"
             href={home.connectGithub}
@@ -50,77 +53,35 @@ const impactNote = isZh
             rel="noopener noreferrer"
           >
             {home.ctaGithub}
+            <span aria-hidden="true">›</span>
           </a>
         </div>
       </div>
       <figure class="hero-visual">
-        <picture>
-          <source
-            media="(max-width: 768px)"
-            srcset="/images/product-generator-workspace-phone.jpg"
-          />
+        <div class="device showcase">
+          <div class="device-bar" aria-hidden="true"><span></span><span></span><span></span></div>
           <img
             src="/images/product-generator-workspace.jpg"
             alt={isZh
               ? "交互 Demo 跑完后的需求、用例、审核和导出"
               : "The interactive demo after a run: requirement, cases, review, and export"}
-            width="1280"
-            height="1433"
+            width="2560"
+            height="2866"
           />
-        </picture>
+        </div>
       </figure>
     </section>
 
-    <section class="tile tile--soft" id="featured">
+    <section class="tile tile--paper store-billboard" id="featured">
       <div class="tile-copy">
         <h2 class="tile-kicker">{home.featuredTitle}</h2>
+        {flagship ? <p class="store-name">{flagship.title}</p> : null}
         {flagship?.pitch ? <p class="tile-statement">{flagship.pitch}</p> : null}
-      </div>
-      {
-        flagship?.flow && (
-          <ol class="flow-row">
-            {flagship.flow.map((step, index) => (
-              <li>
-                <span>{index + 1}</span>
-                {step}
-              </li>
-            ))}
-          </ol>
-        )
-      }
-      <div class="shot-trio">
-        <figure>
-          <img
-            src="/images/product-generator-input.jpg"
-            alt={isZh ? "已载入的需求" : "A requirement loaded in the demo"}
-            width="900"
-            height="640"
-          />
-          <figcaption>{isZh ? "上传需求" : "Upload"}</figcaption>
-        </figure>
-        <figure>
-          <img
-            src="/images/product-generator-review.jpg"
-            alt={isZh ? "多角色审核" : "Multi-role review in the demo"}
-            width="900"
-            height="280"
-          />
-          <figcaption>{isZh ? "人工审核" : "Review"}</figcaption>
-        </figure>
-        <figure>
-          <img
-            src="/images/product-generator-export.jpg"
-            alt={isZh ? "导出格式" : "Export formats in the demo"}
-            width="900"
-            height="280"
-          />
-          <figcaption>{isZh ? "导出" : "Export"}</figcaption>
-        </figure>
       </div>
       {
         flagship && (
           <p class="band-links">
-            <a href={home.ctaDemoHref}>{home.ctaDemo}</a>
+            <a href={home.ctaDemoHref}>{home.ctaDemo}<span aria-hidden="true">›</span></a>
             <a href={flagship.href}>
               {home.featuredMore}
               <span aria-hidden="true">›</span>
@@ -128,31 +89,59 @@ const impactNote = isZh
           </p>
         )
       }
+      {
+        flagship?.flow && (
+          <p class="store-flow">{flagship.flow.join("  ·  ")}</p>
+        )
+      }
+      <figure class="store-shot">
+        <img
+          src="/images/product-generator-cases.jpg"
+          alt={isZh ? "生成后的测试用例" : "Generated test cases"}
+          width="1280"
+          height="800"
+        />
+      </figure>
     </section>
 
-    <section class="tile tile--ink" id="selected">
+    <section class="tile tile--paper store-billboard" id="selected">
       {
         moreFeatured.map((item) => (
-          <a class="selected-row" href={item.href}>
-            <span class="selected-copy">
-              <h2>{item.title}</h2>
-              <p>{item.description}</p>
-              <span class="selected-link">
+          <div class="tile-copy">
+            <h2 class="store-name">{item.title}</h2>
+            <p class="tile-statement">{item.description}</p>
+            <p class="band-links">
+              <a href={item.href}>
                 {home.featuredMore}
                 <span aria-hidden="true">›</span>
-              </span>
-            </span>
-            <ul class="db-home">
-              {(isZh
-                ? ["达梦", "瀚高", "人大金仓", "TiDB"]
-                : ["Dameng", "Highgo", "Kingbase", "TiDB"]
-              ).map((name) => (
-                <li>{name}</li>
-              ))}
-            </ul>
-          </a>
+              </a>
+              {
+                pulls && (
+                  <a href={pulls.href} target="_blank" rel="noopener noreferrer">
+                    {pulls.linkLabel}
+                  </a>
+                )
+              }
+            </p>
+          </div>
         ))
       }
+      <ul class="db-home">
+        {(isZh
+          ? ["达梦", "瀚高", "人大金仓", "TiDB"]
+          : ["Dameng", "Highgo", "Kingbase", "TiDB"]
+        ).map((name) => (
+          <li>{name}</li>
+        ))}
+      </ul>
+      <figure class="store-shot">
+        <img
+          src="/images/product-stage-databases.png"
+          alt={isZh ? "一组数据库环境" : "A row of database environments"}
+          width="1022"
+          height="244"
+        />
+      </figure>
     </section>
 
     <section class="tile tile--paper" id="by-the-numbers">
@@ -215,6 +204,7 @@ const impactNote = isZh
       </div>
     </section>
 
+    <div class="store-grid">
     <section class="closer" id="opensource">
       <div class="tile-copy">
         <h2>{home.ossTitle}</h2>
@@ -261,6 +251,7 @@ const impactNote = isZh
         }
       </div>
     </section>
+    </div>
   </main>
 
   <Contact
