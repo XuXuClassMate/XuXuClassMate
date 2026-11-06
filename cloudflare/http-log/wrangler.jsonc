@@ -1,0 +1,21 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "xuxu-http-log",
+  "account_id": "d707d6027ca320d83325b0e23f4c4521",
+  "main": "src/index.mjs",
+  "compatibility_date": "2026-11-05",
+  "workers_dev": false,
+  "routes": [
+    {
+      "pattern": "www.xuxuclassmate.com/*",
+      "zone_name": "xuxuclassmate.com"
+    }
+  ],
+  "d1_databases": [
+    {
+      "binding": "LOGS",
+      "database_name": "xuxu-watch-http",
+      "database_id": "e7bd3750-d916-4a5c-8f56-169cf2d39cea"
+    }
+  ]
+}

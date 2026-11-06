@@ -77,9 +77,9 @@ html[data-theme="light"] {
 
 html[data-theme="dark"] {
   --lg-fill: color-mix(in srgb, #1a1a1a calc((33.3 + var(--liquid-tint, 0.45) * 66.7) * 1%), transparent);
-  --lg-fill-strong: color-mix(in srgb, #000000 calc((48 + var(--liquid-tint, 0.45) * 40) * 1%), transparent);
-  --lg-rim: rgba(255, 255, 255, 0.16);
-  --lg-rim-small: #e6e6e6;
+  --lg-fill-strong: color-mix(in srgb, #121212 calc((48 + var(--liquid-tint, 0.45) * 40) * 1%), transparent);
+  --lg-rim: rgba(255, 255, 255, 0.12);
+  --lg-rim-small: rgba(255, 255, 255, 0.14);
   --lg-inner: #1a1a1a;
   --lg-shadow: 0 8px 48px rgba(0, 0, 0, 0.45);
   --lg-shadow-elevated: 0 16px 48px rgba(0, 0, 0, 0.55);
@@ -87,8 +87,8 @@ html[data-theme="dark"] {
   --color-label: #ffffff;
   --color-secondary-label: rgba(235, 235, 245, 0.6);
   --color-tertiary-label: rgba(235, 235, 245, 0.3);
-  --color-bg: #1c1c1e;
-  --color-bg-elevated: #1c1c1e;
+  --color-bg: #121212;
+  --color-bg-elevated: #1a1a1a;
   --color-fill: rgba(120, 120, 128, 0.36);
   --color-accent: #0a84ff;
   --color-success: #30d158;
@@ -99,10 +99,10 @@ html[data-theme="dark"] {
   --liquid-specular: rgba(255, 255, 255, 0.22);
   --liquid-specular-soft: rgba(255, 255, 255, 0.08);
   --liquid-edge: var(--lg-rim);
-  --liquid-rim: rgba(166, 166, 166, 0.45);
+  --liquid-rim: rgba(255, 255, 255, 0.12);
   --liquid-sheen: rgba(255, 255, 255, 0.16);
-  --content-surface: #1c1c1e;
-  --content-surface-raised: #2c2c2e;
+  --content-surface: #1a1a1a;
+  --content-surface-raised: #1a1a1a;
   --content-border: var(--separator);
 }
 

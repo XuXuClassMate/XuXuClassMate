@@ -71,7 +71,9 @@ object {
     max-width: min(12.5rem, 52vw);
   }
 
-  /* Closed drawer: header is logo + hamburger only (theme lives in the menu). */
+  /* Closed drawer: header is logo + hamburger only (theme lives in the menu).
+     Blur lives on a sibling of the scroller. iOS drops backdrop-filter when
+     the same element (or an ancestor) also scrolls. */
   .nav-links {
     display: none;
     position: fixed;
@@ -81,34 +83,68 @@ object {
     bottom: calc(var(--tabbar-height, 54px) + var(--tabbar-float, 12px) + 8px + env(safe-area-inset-bottom, 0px));
     width: auto;
     height: auto;
-    min-height: min(68dvh, 640px);
+    min-height: min(52dvh, 480px);
     max-height: min(74dvh, 680px);
     max-width: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    -webkit-overflow-scrolling: touch;
-    background: var(--bg);
+    overflow: visible;
+    background: transparent;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     border: 0.5px solid var(--liquid-edge, var(--line));
     border-radius: 28px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
+    padding: 0;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    z-index: 1001;
+    gap: 0;
+  }
+
+  .nav-links-glass {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    background: rgba(245, 245, 247, 0.46);
+    background: color-mix(in srgb, var(--bg) 46%, transparent);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    backdrop-filter: blur(28px) saturate(180%);
     box-shadow:
       inset 0 1px 0 var(--liquid-specular, transparent),
-      0 24px 60px rgba(0, 0, 0, 0.18);
+      inset 0 40px 12px -40px var(--lg-inner, #282828),
+      inset 0 -40px 12px -40px var(--lg-inner, #282828);
+  }
+
+  html[data-theme="dark"] .nav-links-glass {
+    background: rgba(18, 18, 18, 0.46);
+    background: color-mix(in srgb, var(--bg) 46%, transparent);
+  }
+
+  .nav-links-scroll {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.2rem;
+    min-height: 0;
+    max-height: min(74dvh, 680px);
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
     padding:
       16px
       max(1.25rem, env(safe-area-inset-right, 0px))
       16px
       max(1.25rem, env(safe-area-inset-left, 0px));
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: flex-start;
-    z-index: 1001;
-    gap: 0.2rem;
+    border-radius: inherit;
   }
 
-  .nav-links::before {
+  .nav-links-scroll::before {
     content: "";
     width: 36px;
     height: 5px;
@@ -120,7 +156,15 @@ object {
 
   .nav-links.show {
     display: flex;
+  }
+
+  .nav-links.show .nav-links-scroll {
     animation: nav-sheet-in 0.22s ease;
+  }
+
+  html.lg-svg .nav-links-glass {
+    backdrop-filter: blur(28px) saturate(180%) url(#lg-refract);
+    -webkit-backdrop-filter: blur(28px) saturate(180%) url(#lg-refract);
   }
 
   @keyframes nav-sheet-in {

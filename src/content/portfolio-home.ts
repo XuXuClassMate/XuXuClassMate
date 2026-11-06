@@ -22,7 +22,7 @@ export type PortfolioHome = {
   servicesTitle: string;
   servicesLead: string;
   services: {
-    id: "nas" | "pulse" | "mail";
+    id: "www" | "nas" | "pulse" | "mail" | "watch" | "ssh";
     title: string;
     detail: string;
     host: string;
@@ -217,6 +217,14 @@ export function getPortfolioHome(locale: Locale): PortfolioHome {
         href: "https://watch.xuxuclassmate.com/",
         action: isZh ? "打开" : "Open",
         detail: isZh ? "站点流量与安全监控。" : "Traffic and security monitor.",
+      },
+      {
+        id: "ssh",
+        title: "SSH",
+        host: "ssh.xuxuclassmate.com",
+        href: "https://ssh.xuxuclassmate.com/",
+        action: isZh ? "打开" : "Open",
+        detail: isZh ? "服务器安全终端。" : "Secure shell for the server.",
       },
     ],
     capabilitiesTitle: isZh ? "能力领域" : "Capabilities",
