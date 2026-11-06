@@ -153,7 +153,7 @@ async function dashboard(request: Request, env: Env, ctx: WaitUntil): Promise<Re
   }
 
   const range = parseRange(new URL(request.url).searchParams.get("range"));
-  const cache = caches.default;
+  const cache = (caches as unknown as { default: Cache }).default;
   const cacheKey = new Request(`https://watch.xuxuclassmate.com/internal/${CACHE_VERSION}/${range}`);
   const cached = await cache.match(cacheKey);
   if (cached) {
@@ -544,7 +544,7 @@ function scanQuery(includeEvents: boolean): string {
   }`;
 }
 
-function json(body: unknown, status: number): Response {
+function json(body: unknown, status = 200): Response {
   return new Response(JSON.stringify(body), {
     status,
     headers: {

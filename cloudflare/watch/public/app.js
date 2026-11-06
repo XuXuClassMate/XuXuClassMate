@@ -298,19 +298,6 @@ function logStamp(value) {
   return `${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
 }
 
-function logAction(row) {
-  const label = actions[row.securityAction];
-  if (!label || row.securityAction === "allow" || row.securityAction === "unknown") return "";
-  return ` · ${label}`;
-}
-
-function logTime(value) {
-  if (!value) return "—";
-  const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return String(value).slice(0, 19);
-  return date.toLocaleString("sv-SE", { hour12: false }).replace("T", " ");
-}
-
 function renderVisitors(data) {
   const recent = data.recent || [];
   const sources = data.visitors || [];
