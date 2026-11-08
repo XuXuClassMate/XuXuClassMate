@@ -99,6 +99,32 @@ function initNavMore(): void {
   });
 }
 
+function initExportCinema(): void {
+  const cinemas = document.querySelectorAll<HTMLElement>("[data-export-cinema]");
+  for (const cinema of cinemas) {
+    const step = cinema.closest<HTMLElement>(".film-step--export");
+    if (!step) continue;
+
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const play = () => {
+      if (!step.classList.contains("is-on")) {
+        cinema.classList.remove("is-playing");
+        return;
+      }
+      cinema.classList.add("is-playing");
+      if (reduce) return;
+      cinema.classList.remove("is-playing");
+      void cinema.offsetWidth;
+      cinema.classList.add("is-playing");
+    };
+
+    play();
+    const observer = new MutationObserver(play);
+    observer.observe(step, { attributes: true, attributeFilter: ["class"] });
+  }
+}
+
 function initFilm(): void {
   const films = document.querySelectorAll<HTMLElement>("[data-film]");
   if (films.length === 0) return;
@@ -853,6 +879,7 @@ function bootPage() {
   initMobileNav();
   initNavMore();
   initFilm();
+  initExportCinema();
   initHighlightsCarousel();
   initHeaderScroll();
   initScrollReveal();

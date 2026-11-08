@@ -49,12 +49,23 @@ const shots = [
       : "QA, Dev, and Product score the same cases on coverage, logic, executability, clarity, and security. The default bar is 90 out of 100, across at most five rounds.",
   },
   {
-    src: "/images/product-generator-export.jpg",
-    title: isZh ? "结构化导出" : "Structured export",
-    alt: isZh ? "Excel、Markdown 和 XMind 导出" : "Excel, Markdown, and XMind export",
+    title: isZh ? "一键导出三种格式" : "Three export formats, one reviewed set",
+    alt: isZh ? "导出 Excel、Markdown、XMind 动画示意" : "Animated Excel, Markdown, and XMind export",
     body: isZh
-      ? "审核后的结果导出为 Excel、Markdown 和 XMind。"
-      : "Excel, Markdown, and XMind from the reviewed set.",
+      ? "评审通过的用例会同时打包成三种团队已在用的交付物，各取所需、内容一致。"
+      : "Every case that clears review ships in three artifacts teams already use—same scenarios, different surfaces.",
+    export: true,
+    bullets: isZh
+      ? [
+          { name: "Excel", detail: "用例表、优先级与执行状态，给测试与项目管理。" },
+          { name: "Markdown", detail: "可进仓库与 Wiki，方便评审留痕与版本对比。" },
+          { name: "XMind", detail: "思维导图分工坊对齐，快速拆模块与场景树。" },
+        ]
+      : [
+          { name: "Excel", detail: "Sheets with priority and run status for QA and project tracking." },
+          { name: "Markdown", detail: "Repo- and wiki-ready text for review history and diffs." },
+          { name: "XMind", detail: "Mind-map workshops to align modules and scenario trees." },
+        ],
   },
 ];
 
@@ -139,14 +150,79 @@ function paintCommand(command: string): string {
           <div class="film-stage">
             {
               shots.map((shot) => (
-                <article class="film-step">
+                <article class:list={["film-step", shot.export && "film-step--export"]}>
                   <figure class="film-frame device">
                     <div class="device-bar" aria-hidden="true"><span></span><span></span><span></span></div>
-                    <img src={shot.src} alt={shot.alt} width="1200" height="640" />
+                    {
+                      shot.export && shot.bullets ? (
+                        <div class="export-cinema" data-export-cinema aria-label={shot.alt}>
+                          <div class="export-cinema-beam" aria-hidden="true" />
+                          <div class="export-cinema-source">
+                            <span class="export-cinema-badge">
+                              {isZh ? "评审已通过" : "Review cleared"}
+                            </span>
+                            <p class="export-cinema-count">
+                              {isZh ? "同一份用例集" : "One reviewed case set"}
+                            </p>
+                            <ul class="export-cinema-log" aria-hidden="true">
+                              <li>{isZh ? "打包 Excel…" : "Packaging Excel…"}</li>
+                              <li>{isZh ? "写入 Markdown…" : "Writing Markdown…"}</li>
+                              <li>{isZh ? "生成 XMind…" : "Building XMind…"}</li>
+                            </ul>
+                          </div>
+                          <ul class="export-cinema-formats">
+                            {
+                              shot.bullets.map((item, i) => (
+                                <li
+                                  class:list={[
+                                    "export-format",
+                                    `export-format--${item.name.toLowerCase()}`,
+                                  ]}
+                                  style={`--export-i: ${i}`}
+                                >
+                                  <span class="export-format-glyph" aria-hidden="true">
+                                    {item.name === "Excel"
+                                      ? "XLS"
+                                      : item.name === "Markdown"
+                                        ? "MD"
+                                        : "MAP"}
+                                  </span>
+                                  <strong>{item.name}</strong>
+                                  <span class="export-format-detail">{item.detail}</span>
+                                  <span class="export-format-ready" aria-hidden="true">
+                                    {isZh ? "可下载" : "Ready"}
+                                  </span>
+                                </li>
+                              ))
+                            }
+                          </ul>
+                        </div>
+                      ) : (
+                        <img
+                          src={shot.src}
+                          alt={shot.alt}
+                          width="1200"
+                          height="640"
+                          loading="lazy"
+                        />
+                      )
+                    }
                   </figure>
                   <div class="film-caption">
                     <h3>{shot.title}</h3>
                     <p>{shot.body}</p>
+                    {
+                      shot.bullets ? (
+                        <ul class="film-caption-formats">
+                          {shot.bullets.map((item) => (
+                            <li>
+                              <strong>{item.name}</strong>
+                              <span>{item.detail}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      ) : null
+                    }
                   </div>
                 </article>
               ))

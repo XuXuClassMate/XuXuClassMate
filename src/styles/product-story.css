@@ -603,6 +603,12 @@ html[data-theme="dark"] .story-film {
   background: #111;
 }
 
+.film.is-live .film-frame .export-cinema {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+}
+
 .film.is-live .film-caption {
   flex: none;
 }
@@ -649,6 +655,242 @@ html[data-theme="dark"] .story-film {
   }
 }
 
+/* Export step — cinematic handoff (testcase-generator) */
+.film-step--export .film-frame {
+  background: #0a0a0c;
+}
+
+.export-cinema {
+  position: relative;
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: 20px;
+  align-items: center;
+  min-height: min(52vh, 420px);
+  padding: 28px 24px 32px;
+  overflow: hidden;
+}
+
+.export-cinema-beam {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(420px 240px at 22% 58%, rgba(0, 113, 227, 0.28), transparent 70%),
+    radial-gradient(380px 220px at 78% 42%, rgba(52, 199, 89, 0.16), transparent 72%);
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.export-cinema-source {
+  position: relative;
+  z-index: 1;
+  padding: 22px 20px;
+  border-radius: 16px;
+  border: 0.5px solid rgba(255, 255, 255, 0.14);
+  background: rgba(28, 28, 30, 0.92);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
+}
+
+.export-cinema-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 980px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #34c759;
+  background: rgba(52, 199, 89, 0.16);
+}
+
+.export-cinema-count {
+  margin: 14px 0 0;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #f5f5f7;
+}
+
+.export-cinema-log {
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #a1a1a6;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+.export-cinema-log li {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.film-step--export.is-on .export-cinema.is-playing .export-cinema-log li:nth-child(1) {
+  animation: export-log-line 0.45s cubic-bezier(0.25, 1, 0.5, 1) 0.35s forwards;
+}
+
+.film-step--export.is-on .export-cinema.is-playing .export-cinema-log li:nth-child(2) {
+  animation: export-log-line 0.45s cubic-bezier(0.25, 1, 0.5, 1) 0.75s forwards;
+}
+
+.film-step--export.is-on .export-cinema.is-playing .export-cinema-log li:nth-child(3) {
+  animation: export-log-line 0.45s cubic-bezier(0.25, 1, 0.5, 1) 1.15s forwards;
+}
+
+@keyframes export-log-line {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.export-cinema-formats {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.export-format {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    "glyph title"
+    "glyph detail"
+    "glyph ready";
+  column-gap: 14px;
+  row-gap: 2px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 0.5px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  opacity: 0;
+  transform: translateX(24px) scale(0.97);
+}
+
+.export-format-glyph {
+  grid-area: glyph;
+  align-self: center;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #f5f5f7;
+}
+
+.export-format--excel .export-format-glyph {
+  background: linear-gradient(145deg, #1e6e41, #34c759);
+}
+
+.export-format--markdown .export-format-glyph {
+  background: linear-gradient(145deg, #2b2b2e, #6e6e73);
+}
+
+.export-format--xmind .export-format-glyph {
+  background: linear-gradient(145deg, #b84d00, #ff9f0a);
+}
+
+.export-format strong {
+  grid-area: title;
+  font-size: 17px;
+  font-weight: 600;
+  color: #f5f5f7;
+}
+
+.export-format-detail {
+  grid-area: detail;
+  font-size: 13px;
+  line-height: 1.35;
+  color: #a1a1a6;
+}
+
+.export-format-ready {
+  grid-area: ready;
+  font-size: 12px;
+  font-weight: 600;
+  color: #2997ff;
+  opacity: 0;
+}
+
+.film-step--export.is-on .export-cinema.is-playing .export-format {
+  animation: export-card-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(0.45s + var(--export-i, 0) * 0.22s);
+}
+
+.film-step--export.is-on .export-cinema.is-playing .export-format-ready {
+  animation: export-ready-in 0.4s ease forwards;
+  animation-delay: calc(0.95s + var(--export-i, 0) * 0.22s);
+}
+
+@keyframes export-card-in {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes export-ready-in {
+  to {
+    opacity: 1;
+  }
+}
+
+.film-step--export.is-on .export-cinema.is-playing .export-cinema-beam {
+  animation: export-beam-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes export-beam-pulse {
+  0%,
+  100% {
+    opacity: 0.65;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.film-caption-formats {
+  max-width: 36rem;
+  margin: 18px auto 0;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+}
+
+.film-caption-formats li {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: 10px;
+  padding: 10px 0;
+  border-top: 0.5px solid rgba(255, 255, 255, 0.14);
+  font-size: 14px;
+  line-height: 1.4;
+  color: #d2d2d7;
+}
+
+.film-caption-formats strong {
+  color: #f5f5f7;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .export-cinema {
+    grid-template-columns: 1fr;
+    min-height: 0;
+    padding: 20px 16px 24px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .film.is-live {
     height: auto;
@@ -674,5 +916,13 @@ html[data-theme="dark"] .story-film {
 
   .film.is-live .film-frame img {
     height: auto;
+  }
+
+  .export-cinema-log li,
+  .export-format,
+  .export-format-ready {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
   }
 }
