@@ -1,5 +1,4 @@
 ---
-import Contact from "./Contact.astro";
 import Footer from "./Footer.astro";
 import PageHero from "./PageHero.astro";
 import ProjectCard from "./ProjectCard.astro";
@@ -52,13 +51,6 @@ const groups = getProjectGroups(locale);
 
   </main>
 
-  <Contact
-    label={copy.contactLabel}
-    hint={copy.contactHint}
-    offers={copy.contactOffers}
-    copyLabel={copy.copyEmail}
-    copiedLabel={copy.copiedEmail}
-  />
   <Footer
     brand={copy.brand}
     description={page.footerDesc}

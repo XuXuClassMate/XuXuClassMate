@@ -330,6 +330,28 @@ body.site-apple .footer-apple-brand {
   color: #6e6e73;
 }
 
+body.site-apple .footer-apple-mail {
+  margin: 4px 0 0;
+}
+
+body.site-apple .footer-apple-mail a {
+  font-size: 12px;
+  color: #6e6e73;
+  text-decoration: none;
+}
+
+body.site-apple .footer-apple-mail a:hover {
+  color: var(--ac-ink);
+  text-decoration: underline;
+}
+
+/* Contact block only on About — apple.com puts reach-out in footer elsewhere */
+body.site-apple .about-page + .contact-section,
+body.site-apple main.about-page ~ .contact-section {
+  background: #f5f5f7;
+  border-top: 0.5px solid rgba(0, 0, 0, 0.12);
+}
+
 @media (max-width: 734px) {
   body.site-apple .footer-apple-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));

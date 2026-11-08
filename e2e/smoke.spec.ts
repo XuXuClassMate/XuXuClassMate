@@ -386,7 +386,7 @@ test("mobile nav is a bottom sheet above the tab bar", async ({
 });
 
 test("contact offers list is visible", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/en/about");
   await expect(page.locator(".contact-offers li").first()).toBeVisible();
 });
 
