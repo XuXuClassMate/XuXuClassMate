@@ -1,0 +1,11 @@
+---
+description: Git 提交只用本人身份，禁止任何 Cursor 署名或文案
+alwaysApply: true
+---
+
+# 禁止 Cursor 出现在 Git / 发布物中
+
+- **永远不要**在 commit、merge、PR 描述、CHANGELOG、CONTRIBUTORS、README、sponsor 区加入 Cursor / Anysphere / `cursoragent@cursor.com` 相关信息。
+- **禁止**使用 `git commit --trailer "Co-authored-by: Cursor …"` 或任何会为提交附加 Cursor 合著者的参数。
+- 提交作者仅使用仓库维护者本人（与本地 `git config user.name` / `user.email` 一致，通常为 XuXuClassMate / `xuxuclassmate@gmail.com`）。
+- 若工具或 IDE 自动插入 `Co-authored-by: Cursor`，在推送前必须删掉；本地已通过 `.githooks/prepare-commit-msg` 自动剥离（需 `git config core.hooksPath .githooks`）。

@@ -1,0 +1,11 @@
+#!/bin/sh
+# Remove Cursor agent co-author trailers before the commit is created.
+MSG_FILE="$1"
+[ -n "$MSG_FILE" ] && [ -f "$MSG_FILE" ] || exit 0
+
+# Portable in-place filter (macOS + Linux)
+tmp="${MSG_FILE}.tmp.$$"
+grep -viE '^co-authored-by:[[:space:]]*cursor[[:space:]]*<cursoragent@cursor\.com>' "$MSG_FILE" |
+  grep -viE '^co-authored-by:.*cursoragent@cursor\.com' >"$tmp" || true
+mv "$tmp" "$MSG_FILE"
+exit 0
