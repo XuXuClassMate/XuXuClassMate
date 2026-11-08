@@ -194,12 +194,12 @@ body.page-home .section-gallery .tile-image-wrapper img {
   border-radius: 0 0 18px 18px;
 }
 
-/* Hide iOS tab bar on home — apple.com has none */
-@media (max-width: 768px) {
-  body.page-home .tabbar {
-    display: none !important;
-  }
+/* apple.com has no bottom tab bar on any viewport */
+body.page-home .tabbar {
+  display: none !important;
+}
 
+@media (max-width: 768px) {
   body.page-home .mobile-nav-toggle {
     display: inline-flex !important;
   }
