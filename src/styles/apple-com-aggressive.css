@@ -339,7 +339,7 @@ body.site-apple .page-home .hero--home .btn-ghost {
 }
 
 /* Demo / forms keep filled primary */
-body.site-apple .demo-generator .btn-primary,
+body.site-apple .demo-generator-page .btn-primary,
 body.site-apple .case-try .btn-primary,
 body.site-apple button.btn-primary[type="submit"] {
   background: #0071e3 !important;

@@ -22,7 +22,8 @@
     "covers": "node scripts/generate-covers.mjs",
     "deploy": "npm run build && wrangler pages deploy dist",
     "check:apple-home": "node scripts/compare-apple-home.mjs",
-    "check:apple-site": "node scripts/compare-apple-site.mjs"
+    "check:apple-site": "node scripts/compare-apple-site.mjs",
+    "check:apple-pages": "node scripts/audit-apple-pages.mjs"
   },
   "dependencies": {
     "@fontsource/ibm-plex-mono": "^5.3.0",

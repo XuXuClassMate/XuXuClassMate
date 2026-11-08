@@ -29,7 +29,7 @@ const {
 
 <section class:list={["hero", { "hero--home": home, "hero--signature": home }]}>
   {home ? <div class="hero-blob" aria-hidden="true"></div> : null}
-  <div class="hero-atmosphere" aria-hidden="true"></div>
+  {home ? <div class="hero-atmosphere" aria-hidden="true"></div> : null}
   <div class="container">
     <div class="hero-content reveal">
       {brand ? <p class="hero-brand">{brand}</p> : null}
