@@ -1,0 +1,506 @@
+/* apple.com–style homepage: full-bleed media, typographic promos, no card chrome */
+
+.apple-home.apple-com {
+  gap: 0;
+  background: var(--ac-bg, #ffffff);
+}
+
+.apple-com {
+  --ac-bg: #ffffff;
+  --ac-bg-alt: #f5f5f7;
+  --ac-ink: #1d1d1f;
+  --ac-muted: #6e6e73;
+  --ac-link: #0066cc;
+  --ac-section-pad: clamp(48px, 8vw, 88px);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: var(--ac-bg);
+  color: var(--ac-ink);
+}
+
+html[data-theme="dark"] .apple-com {
+  --ac-bg: #000000;
+  --ac-bg-alt: #1c1c1e;
+  --ac-ink: #f5f5f7;
+  --ac-muted: #a1a1a6;
+  --ac-link: #2997ff;
+}
+
+/* —— Hero —— */
+.apple-com .ac-hero {
+  padding: calc(52px + env(safe-area-inset-top, 0px)) 0 0;
+  text-align: center;
+  background: var(--ac-bg);
+}
+
+.apple-com .ac-hero-inner {
+  width: min(980px, 100%);
+  margin: 0 auto;
+  padding: 0 22px 12px;
+}
+
+.apple-com .ac-eyebrow {
+  margin: 0 0 6px;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.022em;
+  color: var(--ac-muted);
+}
+
+.apple-com .ac-hero .hero-title {
+  margin: 0;
+  font-size: clamp(40px, 7.2vw, 80px);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  color: var(--ac-ink);
+}
+
+.apple-com .ac-hero .hero-desc {
+  margin: 12px auto 0;
+  max-width: 28em;
+  font-size: clamp(19px, 2.4vw, 24px);
+  font-weight: 400;
+  line-height: 1.24;
+  letter-spacing: 0.007em;
+  color: var(--ac-muted);
+}
+
+.apple-com .ac-hero .hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 26px 36px;
+  margin-top: 18px;
+}
+
+.apple-com .ac-hero-stage {
+  width: min(1200px, 100%);
+  margin: clamp(20px, 4vw, 36px) auto 0;
+  padding: 0 max(0px, calc((100vw - 1200px) / 2));
+}
+
+.apple-com .ac-hero-stage img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: min(72vh, 820px);
+  object-fit: cover;
+  object-position: center 20%;
+  border-radius: 0;
+}
+
+/* Hero CTAs = apple.com text links (override global pill buttons) */
+.apple-com .hero--home .btn-primary,
+.apple-com .hero--home .btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  width: auto;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: var(--ac-link);
+  font-size: 21px;
+  font-weight: 400;
+  letter-spacing: 0.011em;
+  line-height: 1.381;
+  text-decoration: none;
+  transition: color 0.28s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.apple-com .hero--home .btn-primary:hover,
+.apple-com .hero--home .btn-ghost:hover,
+.apple-com .hero--home .btn-primary:active,
+.apple-com .hero--home .btn-ghost:active {
+  transform: none;
+  background: none;
+  box-shadow: none;
+  color: var(--primary-deep, #0077ed);
+  text-decoration: underline;
+}
+
+/* Beat Liquid Glass pill overrides on the homepage */
+html.lg-svg .apple-home.apple-com .hero--home .btn-primary,
+html.lg-svg .apple-home.apple-com .hero--home .btn-ghost,
+html[data-theme="dark"] html.lg-svg .apple-home.apple-com .hero--home .btn-ghost {
+  width: auto;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: var(--ac-link);
+}
+
+html.lg-svg .apple-home.apple-com .hero--home .btn-primary:hover,
+html.lg-svg .apple-home.apple-com .hero--home .btn-ghost:hover {
+  transform: none;
+  background: none;
+  box-shadow: none;
+  color: var(--primary-deep, #0077ed);
+  text-decoration: underline;
+}
+
+/* —— Product promos —— */
+.apple-com .ac-promo {
+  padding: var(--ac-section-pad) 0 clamp(32px, 6vw, 56px);
+  text-align: center;
+  background: var(--ac-bg-alt);
+}
+
+.apple-com .ac-promo:nth-of-type(odd) {
+  background: var(--ac-bg);
+}
+
+.apple-com .ac-promo--inset {
+  background: var(--ac-bg);
+}
+
+.apple-com .ac-promo-copy {
+  width: min(820px, 100%);
+  margin: 0 auto;
+  padding: 0 22px 20px;
+}
+
+.apple-com .ac-product-name {
+  margin: 4px 0 0;
+  font-size: clamp(32px, 5.5vw, 56px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.07;
+  color: var(--ac-ink);
+}
+
+.apple-com .ac-product-tagline {
+  margin: 8px auto 0;
+  max-width: 18em;
+  font-size: clamp(21px, 3vw, 28px);
+  font-weight: 400;
+  line-height: 1.14;
+  letter-spacing: 0.007em;
+  color: var(--ac-ink);
+}
+
+.apple-com .ac-flow {
+  margin: 14px auto 0;
+  max-width: 36rem;
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  color: var(--ac-muted);
+}
+
+.apple-com .ac-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 22px 32px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.apple-com .ac-cta-row a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 44px;
+  color: var(--ac-link);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.35;
+  text-decoration: none;
+}
+
+.apple-com .ac-cta-row a:hover {
+  text-decoration: underline;
+}
+
+.apple-com .ac-promo-figure {
+  width: min(1060px, 100%);
+  margin: clamp(8px, 2vw, 24px) auto 0;
+  padding: 0 22px;
+}
+
+.apple-com .ac-promo-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+html[data-theme="dark"] .apple-com .ac-promo-figure img {
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.45);
+}
+
+.apple-com .ac-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 18px auto 0;
+  padding: 0 22px;
+  max-width: 640px;
+  list-style: none;
+}
+
+.apple-com .ac-chip-row li {
+  padding: 6px 14px;
+  border-radius: 980px;
+  background: color-mix(in srgb, var(--ac-ink) 6%, transparent);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ac-muted);
+}
+
+/* —— Metrics band —— */
+.apple-com .ac-metrics {
+  padding: var(--ac-section-pad) 22px;
+  background: var(--ac-bg-alt);
+  text-align: center;
+}
+
+.apple-com .ac-metrics h2 {
+  margin: 0;
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.apple-com .ac-metrics .ac-lead {
+  margin: 10px auto 0;
+  max-width: 36rem;
+  font-size: 17px;
+  line-height: 1.45;
+  color: var(--ac-muted);
+}
+
+.apple-com .ac-metrics .ac-note {
+  margin: 8px auto 28px;
+  max-width: 42rem;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--ac-muted);
+}
+
+.apple-com .ac-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 28px 20px;
+  width: min(980px, 100%);
+  margin: 0 auto;
+}
+
+.apple-com .ac-metrics-grid article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.apple-com .ac-metrics-grid .impact-value {
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.apple-com .ac-metrics-grid .impact-label {
+  max-width: 14ch;
+  font-size: 14px;
+  line-height: 1.35;
+  color: var(--ac-muted);
+}
+
+.apple-com .ac-metrics-grid a {
+  margin-top: 2px;
+  color: var(--ac-link);
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.apple-com .ac-metrics-grid a:hover {
+  text-decoration: underline;
+}
+
+/* —— Bento (bottom promos) —— */
+.apple-com .ac-bento {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 12px 22px var(--ac-section-pad);
+  background: var(--ac-bg);
+}
+
+.apple-com .ac-bento-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 420px;
+  padding: 48px 28px 24px;
+  border-radius: 18px;
+  background: var(--ac-bg-alt);
+  color: inherit;
+  text-align: center;
+  text-decoration: none;
+  overflow: hidden;
+  transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.apple-com .ac-bento-tile:hover {
+  transform: scale(1.01);
+}
+
+.apple-com .ac-bento-tile h2 {
+  margin: 0;
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.apple-com .ac-bento-tile p {
+  margin: 10px auto 0;
+  max-width: 22em;
+  font-size: 17px;
+  line-height: 1.35;
+  color: var(--ac-muted);
+}
+
+.apple-com .ac-bento-tile .ac-bento-cta {
+  margin-top: 14px;
+  color: var(--ac-link);
+  font-size: 17px;
+}
+
+.apple-com .ac-bento-media {
+  width: min(92%, 340px);
+  margin: auto auto 0;
+  padding-top: 24px;
+}
+
+.apple-com .ac-bento-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.apple-com .ac-articles {
+  padding: 0 22px var(--ac-section-pad);
+  background: var(--ac-bg);
+}
+
+.apple-com .ac-articles-inner {
+  width: min(760px, 100%);
+  margin: 0 auto;
+  border-top: 0.5px solid color-mix(in srgb, var(--ac-ink) 16%, transparent);
+}
+
+.apple-com .ac-articles a {
+  display: block;
+  padding: 28px 0;
+  border-bottom: 0.5px solid color-mix(in srgb, var(--ac-ink) 12%, transparent);
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.25s ease;
+}
+
+.apple-com .ac-articles a:hover {
+  opacity: 0.72;
+}
+
+.apple-com .ac-articles h3 {
+  margin: 0;
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.apple-com .ac-articles p {
+  margin: 6px 0 0;
+  font-size: 17px;
+  line-height: 1.4;
+  color: var(--ac-muted);
+}
+
+/* Neutralize legacy glass / tile chrome inside apple-com */
+.apple-com .tile,
+.apple-com .tile--paper,
+.apple-com .closer {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  backdrop-filter: none;
+  box-shadow: none;
+}
+
+@media (max-width: 900px) {
+  .apple-com .ac-metrics-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 16px;
+  }
+
+  .apple-com .ac-bento {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 400px) {
+  .apple-com .ac-metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .apple-com .ac-hero .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 4px;
+  }
+
+  .apple-com .hero--home .btn-primary,
+  .apple-com .hero--home .btn-ghost {
+    justify-content: center;
+    width: 100%;
+    min-height: 48px;
+  }
+
+  .apple-com .ac-hero-stage img {
+    max-height: 56vh;
+    border-radius: 0;
+  }
+
+  .apple-com .ac-promo-figure img {
+    border-radius: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .apple-com .ac-bento-tile {
+    transition: none;
+  }
+
+  .apple-com .ac-bento-tile:hover {
+    transform: none;
+  }
+}

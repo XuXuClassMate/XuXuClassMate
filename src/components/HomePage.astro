@@ -32,13 +32,17 @@ const qps = home.achievements[1];
 const impactNote = isZh
   ? "Docker 与 ClawHub 是公开累计，每日更新。覆盖率和 QPS 来自过往交付，不是实时计数。"
   : "Docker and ClawHub totals are public and updated daily. Coverage and QPS are from past delivery work, not live counters.";
+const dockerFeatured = moreFeatured[0];
+const dbNames = isZh
+  ? ["达梦", "瀚高", "人大金仓", "TiDB"]
+  : ["Dameng", "Highgo", "Kingbase", "TiDB"];
 ---
 
 <BaseLayout locale={locale} page="home">
-  <main id="main-content" class="apple-home">
-    <section class="tile tile--hero hero hero--home">
-      <div class="tile-copy hero-copy">
-        <p class="hero-role-line">{home.heroKicker}</p>
+  <main id="main-content" class="apple-home apple-com">
+    <section class="ac-hero hero hero--home" id="top">
+      <div class="ac-hero-inner">
+        <p class="ac-eyebrow">{home.heroKicker}</p>
         <h1 class="hero-title">{home.greeting}</h1>
         <p class="hero-desc">{home.description}</p>
         <div class="hero-actions">
@@ -57,100 +61,127 @@ const impactNote = isZh
           </a>
         </div>
       </div>
-      <figure class="hero-visual">
-        <div class="device showcase">
-          <div class="device-bar" aria-hidden="true"><span></span><span></span><span></span></div>
-          <img
-            src="/images/product-generator-workspace.jpg"
-            alt={isZh
-              ? "交互 Demo 跑完后的需求、用例、审核和导出"
-              : "The interactive demo after a run: requirement, cases, review, and export"}
-            width="2560"
-            height="2866"
+      <div class="ac-hero-stage">
+        <picture>
+          <source
+            type="image/jpeg"
+            media="(prefers-color-scheme: dark)"
+            srcset="/images/home/hero-main.jpg"
           />
-        </div>
-      </figure>
+          <img
+            src="/images/home/hero-main.jpg"
+            alt={isZh
+              ? "笔记本电脑上的开发与测试工作区"
+              : "A laptop workspace for development and testing"}
+            width="2400"
+            height="1600"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </picture>
+      </div>
     </section>
 
-    <section class="tile tile--paper store-billboard" id="featured">
-      <div class="tile-copy">
-        <h2 class="tile-kicker">{home.featuredTitle}</h2>
-        {flagship ? <p class="store-name">{flagship.title}</p> : null}
-        {flagship?.pitch ? <p class="tile-statement">{flagship.pitch}</p> : null}
+    <section class="ac-promo" id="featured">
+      <div class="ac-promo-copy">
+        <h2 class="ac-eyebrow">{home.featuredTitle}</h2>
+        {flagship ? <p class="ac-product-name">{flagship.title}</p> : null}
+        {flagship?.pitch ? (
+          <p class="ac-product-tagline">{flagship.pitch}</p>
+        ) : null}
+        {
+          flagship && (
+            <ul class="ac-cta-row">
+              <li>
+                <a href={home.ctaDemoHref}>
+                  {home.ctaDemo}
+                  <span aria-hidden="true">›</span>
+                </a>
+              </li>
+              <li>
+                <a href={flagship.href}>
+                  {home.featuredMore}
+                  <span aria-hidden="true">›</span>
+                </a>
+              </li>
+            </ul>
+          )
+        }
+        {flagship?.flow ? (
+          <p class="ac-flow">{flagship.flow.join("  ·  ")}</p>
+        ) : null}
       </div>
-      {
-        flagship && (
-          <p class="band-links">
-            <a href={home.ctaDemoHref}>{home.ctaDemo}<span aria-hidden="true">›</span></a>
-            <a href={flagship.href}>
-              {home.featuredMore}
-              <span aria-hidden="true">›</span>
-            </a>
-          </p>
-        )
-      }
-      {
-        flagship?.flow && (
-          <p class="store-flow">{flagship.flow.join("  ·  ")}</p>
-        )
-      }
-      <figure class="store-shot">
+      <figure class="ac-promo-figure">
         <img
-          src="/images/product-generator-cases.jpg"
-          alt={isZh ? "生成后的测试用例" : "Generated test cases"}
-          width="1280"
-          height="800"
+          src="/images/home/promo-flagship.jpg"
+          alt={isZh
+            ? "生成式 AI 与测试工程"
+            : "Generative AI and test engineering"}
+          width="2000"
+          height="1333"
+          loading="lazy"
+          decoding="async"
         />
       </figure>
     </section>
 
-    <section class="tile tile--paper store-billboard" id="selected">
-      {
-        moreFeatured.map((item) => (
-          <div class="tile-copy">
-            <h2 class="store-name">{item.title}</h2>
-            <p class="tile-statement">{item.description}</p>
-            <p class="band-links">
-              <a href={item.href}>
-                {home.featuredMore}
-                <span aria-hidden="true">›</span>
-              </a>
-              {
-                pulls && (
-                  <a href={pulls.href} target="_blank" rel="noopener noreferrer">
+    {
+      dockerFeatured && (
+        <section class="ac-promo ac-promo--inset" id="selected">
+          <div class="ac-promo-copy">
+            <h2 class="ac-eyebrow">
+              {isZh ? "测试基础设施" : "Test infrastructure"}
+            </h2>
+            <p class="ac-product-name">{dockerFeatured.title}</p>
+            <p class="ac-product-tagline">{dockerFeatured.description}</p>
+            <ul class="ac-cta-row">
+              <li>
+                <a href={dockerFeatured.href}>
+                  {home.featuredMore}
+                  <span aria-hidden="true">›</span>
+                </a>
+              </li>
+              {pulls ? (
+                <li>
+                  <a
+                    href={pulls.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     {pulls.linkLabel}
+                    <span aria-hidden="true">›</span>
                   </a>
-                )
-              }
-            </p>
+                </li>
+              ) : null}
+            </ul>
+            <ul class="ac-chip-row">
+              {dbNames.map((name) => (
+                <li>{name}</li>
+              ))}
+            </ul>
           </div>
-        ))
-      }
-      <ul class="db-home">
-        {(isZh
-          ? ["达梦", "瀚高", "人大金仓", "TiDB"]
-          : ["Dameng", "Highgo", "Kingbase", "TiDB"]
-        ).map((name) => (
-          <li>{name}</li>
-        ))}
-      </ul>
-      <figure class="store-shot">
-        <img
-          src="/images/product-stage-databases.png"
-          alt={isZh ? "一组数据库环境" : "A row of database environments"}
-          width="1022"
-          height="244"
-        />
-      </figure>
-    </section>
+          <figure class="ac-promo-figure">
+            <img
+              src="/images/home/promo-infra.jpg"
+              alt={isZh
+                ? "数据中心与容器化测试环境"
+                : "Data center and containerized test environments"}
+              width="2000"
+              height="1333"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        </section>
+      )
+    }
 
-    <section class="tile tile--paper" id="by-the-numbers">
-      <div class="tile-copy">
-        <h2>{copy.home.highlightsTitle}</h2>
-        <p class="highlights-subtitle">{copy.home.highlightsSubtitle}</p>
-        <p class="band-note">{impactNote}</p>
-      </div>
-      <div class="impact-row">
+    <section class="ac-metrics" id="by-the-numbers">
+      <h2>{copy.home.highlightsTitle}</h2>
+      <p class="ac-lead">{copy.home.highlightsSubtitle}</p>
+      <p class="ac-note">{impactNote}</p>
+      <div class="ac-metrics-grid impact-row">
         {
           pulls && (
             <article>
@@ -204,43 +235,55 @@ const impactNote = isZh
       </div>
     </section>
 
-    <div class="store-grid">
-    <section class="closer" id="opensource">
-      <div class="tile-copy">
+    <section class="ac-bento" aria-label={isZh ? "更多入口" : "More"}>
+      <a class="ac-bento-tile" id="opensource" href={orgHref}>
         <h2>{home.ossTitle}</h2>
-        <p class="band-lead">{home.ossDescription}</p>
-        <p class="band-links">
-          <a href={home.connectGithub} target="_blank" rel="noopener noreferrer">
-            {home.ossGithubLabel}
-            <span aria-hidden="true">›</span>
-          </a>
-          <a href={orgHref}>
-            {home.ossOrgLabel}
-            <span aria-hidden="true">›</span>
-          </a>
+        <p>{home.ossDescription}</p>
+        <span class="ac-bento-cta">
+          {home.ossOrgLabel}
+          <span aria-hidden="true"> ›</span>
+        </span>
+        <div class="ac-bento-media">
+          <img
+            src="/images/cover-docker.jpg"
+            alt=""
+            width="800"
+            height="450"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      </a>
+      <a
+        class="ac-bento-tile"
+        id="articles"
+        href={blogHref}
+      >
+        <h2>{home.articlesTitle}</h2>
+        <p>
+          {isZh
+            ? "工程笔记与交付复盘，按产品页节奏阅读。"
+            : "Engineering notes and delivery write-ups, sized for calm reading."}
         </p>
-      </div>
+        <span class="ac-bento-cta">
+          {home.articlesCta}
+          <span aria-hidden="true"> ›</span>
+        </span>
+        <div class="ac-bento-media">
+          <img
+            src="/images/home/promo-notes.jpg"
+            alt=""
+            width="1200"
+            height="800"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      </a>
     </section>
 
-    <section class="closer closer--notes" id="articles">
-      <div class="tile-copy band-copy--row">
-        <h2>{home.articlesTitle}</h2>
-        <a href={blogHref}>
-          {home.articlesCta}
-          <span aria-hidden="true">›</span>
-        </a>
-      </div>
-      <figure class="tile-stage">
-        <img
-          src="/images/product-stage-notes.jpg"
-          alt={isZh
-            ? "两本合上的笔记本和一支铅笔"
-            : "Two closed notebooks and a pencil"}
-          width="1280"
-          height="720"
-        />
-      </figure>
-      <div class="note-rows">
+    <div class="ac-articles">
+      <div class="ac-articles-inner note-rows">
         {
           articles.map((item) => (
             <a href={item.href}>
@@ -250,7 +293,6 @@ const impactNote = isZh
           ))
         }
       </div>
-    </section>
     </div>
   </main>
 
