@@ -328,11 +328,6 @@ body.site-apple .btn-home:hover {
   background: #0077ed;
 }
 
-/* Global nav on inner pages — keep logo text hidden like apple */
-body.site-apple:not(.page-home) .header.globalnav .logo-text {
-  display: none;
-}
-
 @media (max-width: 734px) {
   body.site-apple .notes-grid--index,
   body.site-apple .playground-grid,
