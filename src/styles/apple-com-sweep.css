@@ -305,6 +305,96 @@ body.site-apple .note-page article.prose {
   padding: 48px 22px 64px;
 }
 
+/* Online services list (About + Home) — apple.com directory rows */
+body.site-apple .service-directory {
+  list-style: none;
+  width: min(760px, 100%);
+  margin: 28px auto 0;
+  padding: 0;
+  border-top: 0.5px solid rgba(0, 0, 0, 0.12);
+}
+
+html[data-theme="dark"] body.site-apple .service-directory {
+  border-top-color: rgba(255, 255, 255, 0.12);
+}
+
+body.site-apple .service-directory a {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "name host"
+    "detail host";
+  column-gap: 24px;
+  row-gap: 4px;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.12);
+  color: var(--ac-ink);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+html[data-theme="dark"] body.site-apple .service-directory a {
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+
+body.site-apple .service-directory-name {
+  grid-area: name;
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+body.site-apple .service-directory-detail {
+  grid-area: detail;
+  font-size: 14px;
+  line-height: 1.35;
+  color: var(--ac-muted);
+}
+
+body.site-apple .service-directory-host {
+  grid-area: host;
+  justify-self: end;
+  color: var(--ac-link);
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+body.site-apple .service-directory-host span {
+  margin-left: 2px;
+}
+
+body.site-apple .service-directory a:hover .service-directory-host {
+  text-decoration: underline;
+}
+
+body.site-apple .about-page .home-section,
+body.site-apple .section-services {
+  background: #f5f5f7;
+}
+
+html[data-theme="dark"] body.site-apple .about-page .home-section,
+html[data-theme="dark"] body.site-apple .section-services {
+  background: #000000;
+}
+
+@media (max-width: 640px) {
+  body.site-apple .service-directory a {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "name"
+      "detail"
+      "host";
+    row-gap: 6px;
+    justify-items: start;
+    padding: 18px 0;
+  }
+
+  body.site-apple .service-directory-host {
+    justify-self: start;
+  }
+}
+
 /* —— Motion / glass remnants —— */
 body.site-apple .impact-value::after,
 body.site-apple .story-metrics span::after,

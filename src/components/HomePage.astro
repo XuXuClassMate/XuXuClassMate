@@ -24,16 +24,26 @@ const learnMore = home.featuredMore;
 const demoLabel = home.ctaDemo;
 const buyLabel = isZh ? "体验" : "Try";
 const articles = getLatestArticles(locale).slice(0, 4);
+const serviceCover: Record<string, string> = {
+  www: "/images/home/hero-product.jpg",
+  nas: "/images/cover-docker.jpg",
+  pulse: "/images/cover-globalpulse.jpg",
+  mail: "/images/cover-custom-mail.jpg",
+  watch: "/images/cover-globalpulse.jpg",
+  ssh: "/images/cover-automation.jpg",
+};
 const entertainment = [
   ...articles.map((item) => ({
     title: item.title,
+    detail: "",
     href: item.href,
     image: "/images/home/promo-notes.jpg",
   })),
-  ...home.services.slice(0, 4).map((s) => ({
+  ...home.services.map((s) => ({
     title: s.title,
+    detail: s.detail,
     href: s.href,
-    image: "/images/cover-docker.jpg",
+    image: serviceCover[s.id] ?? "/images/cover-docker.jpg",
   })),
 ];
 ---
@@ -213,6 +223,33 @@ const entertainment = [
         </div>
       </article>
     </section>
+
+    <section class="section section-services" id="services">
+      <div class="container">
+        <h2 class="section-title">{home.servicesTitle}</h2>
+        <p class="section-lead">{home.servicesLead}</p>
+        <ul class="service-directory">
+          {
+            home.services.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span class="service-directory-name">{item.title}</span>
+                  <span class="service-directory-detail">{item.detail}</span>
+                  <span class="service-directory-host">
+                    {item.host}
+                    <span aria-hidden="true">›</span>
+                  </span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
   </main>
 
   <section
@@ -235,6 +272,9 @@ const entertainment = [
                   <img src={item.image} alt="" width="400" height="225" loading="lazy" />
                 </div>
                 <p class="entertainment-label">{item.title}</p>
+                {item.detail ? (
+                  <p class="entertainment-detail">{item.detail}</p>
+                ) : null}
               </a>
             </li>
           ))
