@@ -128,12 +128,18 @@ function initFilm(): void {
   }
 }
 
+function isAppleSite(): boolean {
+  return document.body.classList.contains("site-apple");
+}
+
 function initHeaderScroll(): void {
   const header = document.getElementById("siteHeader");
   if (!(header instanceof HTMLElement)) return;
 
+  const threshold = isAppleSite() ? 8 : 20;
+
   const update = () => {
-    header.classList.toggle("is-scrolled", window.scrollY > 20);
+    header.classList.toggle("is-scrolled", window.scrollY > threshold);
   };
 
   update();
@@ -152,6 +158,7 @@ function initScrollReveal(): void {
     return;
   }
 
+  const apple = isAppleSite();
   const observer = new IntersectionObserver(
     (entries) => {
       for (const entry of entries) {
@@ -160,7 +167,10 @@ function initScrollReveal(): void {
         observer.unobserve(entry.target);
       }
     },
-    { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
+    {
+      threshold: apple ? 0.05 : 0.12,
+      rootMargin: apple ? "0px 0px -4% 0px" : "0px 0px -40px 0px",
+    },
   );
 
   for (const node of nodes) {
@@ -637,7 +647,7 @@ function initLiquidInteractions(): void {
     node.addEventListener("pointercancel", release);
   }
 
-  if (reduceMotion) return;
+  if (reduceMotion || isAppleSite()) return;
 
   const specularHosts = [
     ...document.querySelectorAll<HTMLElement>(
@@ -695,6 +705,7 @@ function buildLensMap(): string {
 }
 
 function initLiquidOptics(): void {
+  if (isAppleSite()) return;
   const reduce = window.matchMedia("(prefers-reduced-transparency: reduce)").matches;
   const ua = navigator.userAgent;
   const iOS =
@@ -711,6 +722,7 @@ function initLiquidOptics(): void {
 }
 
 function initShowcaseSettle(): void {
+  if (isAppleSite()) return;
   const nodes = [...document.querySelectorAll<HTMLElement>(".showcase")];
   if (nodes.length === 0) return;
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;

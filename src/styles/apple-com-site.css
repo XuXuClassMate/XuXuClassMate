@@ -1,0 +1,460 @@
+/* Site-wide apple.com: typography, chrome, motion, flat content surfaces */
+
+body.site-apple {
+  --ac-link: #0066cc;
+  --ac-ink: #1d1d1f;
+  --ac-muted: #6e6e73;
+  --ac-spring: cubic-bezier(0.25, 1, 0.5, 1);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+html[data-theme="dark"] body.site-apple {
+  --ac-link: #2997ff;
+  --ac-ink: #f5f5f7;
+  --ac-muted: #a1a1a6;
+}
+
+html[data-theme="light"] body.site-apple {
+  --bg: #ffffff;
+  --bg-soft: #f5f5f7;
+  background: #ffffff;
+  color: var(--ac-ink);
+}
+
+html[data-theme="dark"] body.site-apple {
+  --bg: #000000;
+  --bg-soft: #1c1c1e;
+  background: #000000;
+}
+
+/* —— Global motion (apple.com scroll + press) —— */
+body.site-apple .reveal-on-scroll {
+  opacity: 0;
+  transform: translate3d(0, 16px, 0);
+  transition:
+    opacity 0.65s var(--ac-spring),
+    transform 0.65s var(--ac-spring);
+  will-change: opacity, transform;
+}
+
+body.site-apple .reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+body.site-apple a,
+body.site-apple button,
+body.site-apple .tabbar-item,
+body.site-apple .filter-btn {
+  transition:
+    color 0.28s var(--ac-spring),
+    opacity 0.28s var(--ac-spring),
+    transform 0.22s var(--ac-spring),
+    background 0.28s var(--ac-spring);
+}
+
+body.site-apple .btn-primary:active,
+body.site-apple .btn-ghost:active,
+body.site-apple .filter-btn:active,
+body.site-apple .tabbar-item:active,
+body.site-apple .copy-email-btn:active,
+body.site-apple .theme-toggle:active,
+body.site-apple .language-switch:active,
+body.site-apple .mobile-nav-toggle:active {
+  transform: scale(0.97);
+}
+
+body.site-apple .is-pressed {
+  transform: scale(0.97);
+}
+
+/* —— Header (global nav ≈ apple.com) —— */
+body.site-apple .header::after,
+html.lg-svg body.site-apple .header::after {
+  background: rgba(251, 251, 253, 0.82);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  box-shadow: none;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.16);
+  transition: background 0.35s var(--ac-spring);
+}
+
+html[data-theme="dark"] body.site-apple .header::after {
+  background: rgba(22, 22, 23, 0.86);
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+
+body.site-apple .header.is-scrolled::after {
+  background: rgba(251, 251, 253, 0.92);
+}
+
+html[data-theme="dark"] body.site-apple .header.is-scrolled::after {
+  background: rgba(22, 22, 23, 0.94);
+}
+
+body.site-apple .header-glass {
+  opacity: 0;
+  pointer-events: none;
+}
+
+body.site-apple .nav {
+  min-height: 44px;
+}
+
+body.site-apple .nav-item,
+body.site-apple .language-switch,
+body.site-apple .theme-toggle,
+body.site-apple .nav-more-toggle {
+  height: 44px;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.33337;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+html[data-theme="dark"] body.site-apple .nav-item,
+html[data-theme="dark"] body.site-apple .language-switch,
+html[data-theme="dark"] body.site-apple .theme-toggle {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+body.site-apple .nav-item:hover,
+body.site-apple .language-switch:hover,
+body.site-apple .theme-toggle:hover {
+  color: var(--ac-ink);
+  background: transparent;
+  transform: none;
+}
+
+body.site-apple .nav-links-glass {
+  display: none;
+}
+
+body.site-apple .logo-text {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+body.site-apple .logo img {
+  width: 20px;
+  height: 20px;
+}
+
+/* —— Inner page heroes —— */
+body.site-apple .hero:not(.hero--home) {
+  min-height: 0;
+  padding: calc(56px + env(safe-area-inset-top, 0px)) 0 40px;
+  text-align: center;
+  align-items: flex-start;
+  background: #ffffff;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.12);
+}
+
+html[data-theme="dark"] body.site-apple .hero:not(.hero--home) {
+  background: #000000;
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+
+body.site-apple .hero:not(.hero--home)::before,
+body.site-apple .hero:not(.hero--home) .hero-blob,
+body.site-apple .hero:not(.hero--home) .hero-atmosphere {
+  display: none;
+}
+
+body.site-apple .hero:not(.hero--home) .hero-content {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+body.site-apple .hero:not(.hero--home) .subtitle {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--ac-muted);
+  letter-spacing: -0.022em;
+}
+
+body.site-apple .hero:not(.hero--home) .hero-title {
+  margin-top: 4px;
+  font-size: clamp(36px, 6vw, 56px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.07;
+}
+
+body.site-apple .hero:not(.hero--home) .hero-desc {
+  margin: 12px auto 0;
+  max-width: 36em;
+  font-size: 19px;
+  line-height: 1.35;
+  color: var(--ac-muted);
+}
+
+body.site-apple .hero:not(.hero--home) .hero-actions {
+  justify-content: center;
+  gap: 24px 32px;
+  margin-top: 16px;
+}
+
+body.site-apple .hero:not(.hero--home) .btn-primary,
+body.site-apple .hero:not(.hero--home) .btn-ghost {
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: var(--ac-link);
+  font-size: 17px;
+  font-weight: 400;
+}
+
+body.site-apple .hero:not(.hero--home) .btn-primary:hover,
+body.site-apple .hero:not(.hero--home) .btn-ghost:hover {
+  transform: none;
+  background: none;
+  text-decoration: underline;
+}
+
+/* —— Sections & typography —— */
+body.site-apple .section-title {
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  text-align: center;
+}
+
+body.site-apple .featured-projects,
+body.site-apple .notes-index,
+body.site-apple .learn-page section,
+body.site-apple .org-page section {
+  padding: 48px 0 64px;
+  background: #f5f5f7;
+}
+
+html[data-theme="dark"] body.site-apple .featured-projects,
+html[data-theme="dark"] body.site-apple .notes-index,
+html[data-theme="dark"] body.site-apple .learn-page section,
+html[data-theme="dark"] body.site-apple .org-page section {
+  background: #000000;
+}
+
+body.site-apple .container {
+  max-width: 980px;
+}
+
+body.site-apple .project-grid,
+body.site-apple .notes-grid,
+body.site-apple .blog-grid {
+  gap: 28px 20px;
+}
+
+body.site-apple .project-card,
+body.site-apple .note-card {
+  padding: 0 0 24px;
+  border-radius: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+body.site-apple .project-card::before,
+body.site-apple .note-card::before {
+  display: none;
+}
+
+body.site-apple .project-card:hover,
+body.site-apple .note-card:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+body.site-apple .project-cover img {
+  border-radius: 12px;
+  transition: opacity 0.35s var(--ac-spring);
+}
+
+body.site-apple .project-card:hover .project-cover img {
+  opacity: 0.92;
+}
+
+body.site-apple .project-link,
+body.site-apple .note-card a,
+body.site-apple .section-cta {
+  color: var(--ac-link);
+  font-size: 17px;
+  text-decoration: none;
+}
+
+body.site-apple .project-link:hover,
+body.site-apple .note-card a:hover,
+body.site-apple .section-cta:hover {
+  text-decoration: underline;
+}
+
+body.site-apple .filter-btn {
+  min-height: 36px;
+  padding: 0 14px;
+  border-radius: 980px;
+  border: 0;
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--ac-ink);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+html[data-theme="dark"] body.site-apple .filter-btn {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+body.site-apple .filter-btn.is-active {
+  background: var(--ac-ink);
+  color: #ffffff;
+}
+
+html[data-theme="dark"] body.site-apple .filter-btn.is-active {
+  background: #f5f5f7;
+  color: #1d1d1f;
+}
+
+/* —— Contact —— */
+body.site-apple .contact-section {
+  padding: 56px 22px;
+  background: #ffffff;
+  border-top: 0.5px solid rgba(0, 0, 0, 0.12);
+}
+
+html[data-theme="dark"] body.site-apple .contact-section {
+  background: #000000;
+  border-top-color: rgba(255, 255, 255, 0.12);
+}
+
+body.site-apple .contact-panel,
+body.site-apple .contact-info {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+body.site-apple .contact-info h2 {
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+body.site-apple .contact-email,
+body.site-apple .copy-email-btn {
+  color: var(--ac-link);
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* —— Footer —— */
+body.site-apple .footer {
+  padding: 20px 0 calc(24px + env(safe-area-inset-bottom, 0px));
+  background: #f5f5f7;
+  border-top: 0.5px solid rgba(0, 0, 0, 0.16);
+}
+
+html[data-theme="dark"] body.site-apple .footer {
+  background: #1c1c1e;
+  border-top-color: rgba(255, 255, 255, 0.12);
+}
+
+body.site-apple .footer-desc,
+body.site-apple .copyright {
+  font-size: 12px;
+  line-height: 1.33337;
+  color: var(--ac-muted);
+}
+
+body.site-apple .social-links a {
+  font-size: 12px;
+  border-radius: 0;
+  background: transparent;
+}
+
+body.site-apple .social-links a:hover {
+  transform: none;
+  background: transparent;
+  text-decoration: underline;
+}
+
+/* —— Mobile tab bar —— */
+body.site-apple .tabbar {
+  background: rgba(251, 251, 253, 0.86);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-top: 0.5px solid rgba(0, 0, 0, 0.16);
+  box-shadow: none;
+}
+
+html[data-theme="dark"] body.site-apple .tabbar {
+  background: rgba(22, 22, 23, 0.9);
+  border-top-color: rgba(255, 255, 255, 0.12);
+}
+
+body.site-apple .tabbar-item {
+  font-size: 10px;
+  letter-spacing: -0.01em;
+  color: var(--ac-muted);
+}
+
+body.site-apple .tabbar-item.is-active {
+  color: var(--ac-link);
+}
+
+/* —— Case / story pages —— */
+body.site-apple .case-block,
+body.site-apple .story section {
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+body.site-apple .case-hero,
+body.site-apple .story-hero {
+  text-align: center;
+}
+
+body.site-apple .btn-primary:not(.hero--home .btn-primary) {
+  border-radius: 980px;
+  font-size: 17px;
+  font-weight: 400;
+  min-height: 44px;
+  padding: 0 22px;
+  box-shadow: none;
+  transition: transform 0.28s var(--ac-spring), background 0.28s var(--ac-spring);
+}
+
+body.site-apple .page-home .btn-primary,
+body.site-apple .page-home .btn-ghost,
+body.site-apple .hero--home .btn-primary,
+body.site-apple .hero--home .btn-ghost {
+  border-radius: 0;
+  padding: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.site-apple .reveal-on-scroll {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  body.site-apple .btn-primary:active,
+  body.site-apple .btn-ghost:active {
+    transform: none;
+  }
+}
