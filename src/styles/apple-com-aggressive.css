@@ -350,7 +350,7 @@ body.site-apple button.btn-primary[type="submit"] {
 
 /* —— Apple footer —— */
 body.site-apple .footer--apple {
-  padding: 18px 0 32px;
+  padding: 18px 0 24px;
   background: #f5f5f7;
 }
 
@@ -417,8 +417,8 @@ body.site-apple .footer-apple-social a {
 }
 
 body.site-apple .footer-apple-legal {
-  margin-top: 24px;
-  padding-top: 16px;
+  margin-top: 12px;
+  padding-top: 12px;
   border-top: 0.5px solid rgba(0, 0, 0, 0.16);
   text-align: left;
 }
@@ -427,25 +427,55 @@ html[data-theme="dark"] body.site-apple .footer-apple-legal {
   border-top-color: rgba(255, 255, 255, 0.12);
 }
 
-body.site-apple .footer-apple-brand {
-  margin: 6px 0 0;
+body.site-apple .footer-apple-locale {
+  margin: 0 0 6px;
+  padding: 0;
   font-size: 12px;
-  color: #6e6e73;
+  line-height: 1.33337;
 }
 
-body.site-apple .footer-apple-mail {
-  margin: 4px 0 0;
-}
-
-body.site-apple .footer-apple-mail a {
-  font-size: 12px;
-  color: #6e6e73;
+body.site-apple .footer-apple-locale-link {
+  color: #0066cc;
   text-decoration: none;
 }
 
-body.site-apple .footer-apple-mail a:hover {
+body.site-apple .footer-apple-locale-link:hover {
+  text-decoration: underline;
+}
+
+html[data-theme="dark"] body.site-apple .footer-apple-locale-link {
+  color: #2997ff;
+}
+
+body.site-apple .footer-apple-legal-line {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.65;
+  color: #6e6e73;
+  max-width: 880px;
+}
+
+body.site-apple .footer-apple-legal-copy {
+  margin-right: 6px;
+}
+
+body.site-apple .footer-apple-legal-link {
+  display: inline;
+  margin: 0 0 0 6px;
+  padding: 0;
+  border: 0;
+  color: #6e6e73;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+body.site-apple .footer-apple-legal-link:hover {
   color: var(--ac-ink);
   text-decoration: underline;
+}
+
+body.site-apple .footer-apple-col--connect a {
+  word-break: break-all;
 }
 
 /* Contact block only on About — apple.com puts reach-out in footer elsewhere */
