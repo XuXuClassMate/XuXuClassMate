@@ -1,6 +1,8 @@
 ---
 import Icon from "./Icon.astro";
 import type { SocialLink } from "../content/types";
+import { getPortfolioHome } from "../content/portfolio-home";
+import { getCopy, pageHref, type Locale } from "../lib/i18n";
 
 type Props = {
   brand: string;
@@ -10,28 +12,86 @@ type Props = {
 };
 
 const { brand, description, copyright, social } = Astro.props;
+const locale: Locale = Astro.url.pathname.startsWith("/zh") ? "zh" : "en";
+const copy = getCopy(locale);
+const home = getPortfolioHome(locale);
+const isZh = locale === "zh";
+const shopLinks = [
+  { label: copy.nav.products ?? "Products", href: pageHref(locale, "work") },
+  { label: isZh ? "交互 Demo" : "Live demo", href: home.ctaDemoHref },
+  { label: copy.nav.openSource, href: pageHref(locale, "open-source") },
+];
+const learnLinks = [
+  { label: copy.nav.engineering, href: pageHref(locale, "learn") },
+  { label: copy.nav.notes, href: pageHref(locale, "blog") },
+  { label: copy.nav.aiTesting, href: pageHref(locale, "ai-testing") },
+];
+const aboutLinks = [
+  { label: copy.nav.about, href: pageHref(locale, "about") },
+  { label: copy.nav.now, href: pageHref(locale, "now") },
+  { label: "GitHub", href: "https://github.com/XuXuClassMate" },
+];
 ---
 
-<footer class="footer">
-  <div class="container">
-    <div class="footer-content">
-      <div class="footer-left">
-        <span class="logo-text">{brand}</span>
-        <p class="footer-desc">{description}</p>
+<footer class="footer footer--apple">
+  <div class="container footer-apple-wrap">
+    <p class="footer-apple-lead">{description}</p>
+    <div class="footer-apple-grid">
+      <div class="footer-apple-col">
+        <h2 class="footer-apple-heading">{isZh ? "产品" : "Shop"}</h2>
+        <ul>
+          {shopLinks.map((link) => (
+            <li>
+              <a href={link.href}>{link.label}</a>
+            </li>
+          ))}
+        </ul>
       </div>
-      <div class="social-links">
-        {
-          social.map((item) => (
-            <a href={item.href} target="_blank" rel="noopener noreferrer">
-              <Icon name={item.icon} />
-              <span>{item.label}</span>
-            </a>
-          ))
-        }
+      <div class="footer-apple-col">
+        <h2 class="footer-apple-heading">{isZh ? "工程" : "Learn"}</h2>
+        <ul>
+          {learnLinks.map((link) => (
+            <li>
+              <a href={link.href}>{link.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="footer-apple-col">
+        <h2 class="footer-apple-heading">{isZh ? "关于" : "About"}</h2>
+        <ul>
+          {aboutLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                target={link.href.startsWith("http") ? "_blank" : undefined}
+                rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="footer-apple-col footer-apple-col--connect">
+        <h2 class="footer-apple-heading">{isZh ? "连接" : "Connect"}</h2>
+        <ul class="footer-apple-social">
+          {
+            social.map((item) => (
+              <li>
+                <a href={item.href} target="_blank" rel="noopener noreferrer">
+                  <Icon name={item.icon} />
+                  <span>{item.label}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
       </div>
     </div>
-    <div class="footer-bottom">
+    <div class="footer-bottom footer-apple-legal">
       <p class="copyright">{copyright}</p>
+      <p class="footer-apple-brand">{brand}</p>
     </div>
   </div>
 </footer>

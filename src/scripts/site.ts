@@ -450,6 +450,11 @@ function initTypewriter(): void {
   const node = document.querySelector<HTMLElement>("[data-typewriter]");
   if (!node) return;
 
+  if (isAppleSite()) {
+    node.classList.add("is-typed");
+    return;
+  }
+
   const full = (node.textContent ?? "").trim();
   if (!full) return;
 
@@ -749,6 +754,7 @@ function initShowcaseSettle(): void {
 }
 
 function initMetricSheen(): void {
+  if (isAppleSite()) return;
   const groups = [
     ...document.querySelectorAll<HTMLElement>(".impact-row"),
   ];
