@@ -427,51 +427,24 @@ html[data-theme="dark"] body.site-apple .footer-apple-legal {
   border-top-color: rgba(255, 255, 255, 0.12);
 }
 
-body.site-apple .footer-apple-locale {
+body.site-apple .footer-apple-region {
   margin: 0 0 6px;
   padding: 0;
   font-size: 12px;
   line-height: 1.33337;
-}
-
-body.site-apple .footer-apple-locale-link {
-  color: #0066cc;
-  text-decoration: none;
-}
-
-body.site-apple .footer-apple-locale-link:hover {
-  text-decoration: underline;
-}
-
-html[data-theme="dark"] body.site-apple .footer-apple-locale-link {
-  color: #2997ff;
+  color: #6e6e73;
 }
 
 body.site-apple .footer-apple-legal-line {
   margin: 0;
   font-size: 12px;
-  line-height: 1.65;
+  line-height: 1.33337;
   color: #6e6e73;
   max-width: 880px;
 }
 
 body.site-apple .footer-apple-legal-copy {
-  margin-right: 6px;
-}
-
-body.site-apple .footer-apple-legal-link {
-  display: inline;
-  margin: 0 0 0 6px;
-  padding: 0;
-  border: 0;
-  color: #6e6e73;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-body.site-apple .footer-apple-legal-link:hover {
-  color: var(--ac-ink);
-  text-decoration: underline;
+  margin: 0;
 }
 
 body.site-apple .footer-apple-col--connect a {
