@@ -1,0 +1,342 @@
+/* Inner pages — apple.com store / support / product parity (loads last) */
+
+body.site-apple main.apple-page {
+  background: #ffffff;
+  color: var(--ac-ink);
+}
+
+html[data-theme="dark"] body.site-apple main.apple-page {
+  background: #000000;
+}
+
+/* Detail heroes (case / note) — override case.css gradients */
+body.site-apple .hero.hero--detail,
+body.site-apple .hero.hero--apple-product {
+  min-height: 0;
+  padding: calc(48px + env(safe-area-inset-top, 0px)) 0 36px;
+  text-align: center;
+  background: #ffffff !important;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.12);
+}
+
+html[data-theme="dark"] body.site-apple .hero.hero--detail,
+html[data-theme="dark"] body.site-apple .hero.hero--apple-product {
+  background: #000000 !important;
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+
+body.site-apple .hero.hero--detail::before,
+body.site-apple .hero.hero--detail .hero-atmosphere,
+body.site-apple .hero.hero--apple-product::before,
+body.site-apple .hero.hero--apple-product .hero-atmosphere {
+  display: none !important;
+}
+
+body.site-apple .hero.hero--detail .subtitle,
+body.site-apple .hero.hero--detail .subtitle::before {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--ac-muted);
+  background: none !important;
+  -webkit-text-fill-color: unset;
+}
+
+body.site-apple .hero.hero--detail .hero-title {
+  font-size: clamp(32px, 5.5vw, 48px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+  background: none !important;
+  -webkit-text-fill-color: unset;
+  color: var(--ac-ink);
+}
+
+body.site-apple .hero.hero--detail .hero-desc {
+  font-size: 19px;
+  line-height: 1.35;
+  color: var(--ac-muted);
+  max-width: 36em;
+  margin-inline: auto;
+}
+
+body.site-apple .hero.hero--detail .hero-actions .btn-primary,
+body.site-apple .hero.hero--detail .hero-actions .btn-ghost {
+  background: none !important;
+  color: var(--ac-link) !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  font-size: 17px;
+}
+
+body.site-apple .detail-topbar a,
+body.site-apple .back-nav a {
+  color: var(--ac-link);
+  font-size: 14px;
+  text-decoration: none;
+}
+
+body.site-apple .detail-topbar a:hover,
+body.site-apple .back-nav a:hover {
+  text-decoration: underline;
+}
+
+/* Index sections */
+body.site-apple .timeline-section,
+body.site-apple .playground-experiences,
+body.site-apple .playground-try,
+body.site-apple .playground-modes,
+body.site-apple .values-section,
+body.site-apple .approach-section,
+body.site-apple .now-section,
+body.site-apple .org-repos,
+body.site-apple .org-highlights,
+body.site-apple .notes-index {
+  padding: 48px 0 64px;
+  background: #f5f5f7;
+}
+
+html[data-theme="dark"] body.site-apple .timeline-section,
+html[data-theme="dark"] body.site-apple .playground-experiences,
+html[data-theme="dark"] body.site-apple .playground-try,
+html[data-theme="dark"] body.site-apple .playground-modes,
+html[data-theme="dark"] body.site-apple .notes-index {
+  background: #000000;
+}
+
+/* Work tiles — reconcile with apple-com-site flat cards */
+body.site-apple .featured-projects .project-card {
+  padding: 32px 24px 24px !important;
+  border-radius: 18px !important;
+  background: #ffffff !important;
+  min-height: 380px;
+  text-align: center;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="dark"] body.site-apple .featured-projects .project-card {
+  background: #1c1c1e !important;
+}
+
+/* Notes / blog index cards */
+body.site-apple .notes-grid--index {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+body.site-apple .note-card--rich {
+  padding: 28px 22px 32px !important;
+  border-radius: 18px !important;
+  background: #ffffff !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  text-align: center;
+}
+
+html[data-theme="dark"] body.site-apple .note-card--rich {
+  background: #1c1c1e !important;
+}
+
+body.site-apple .note-card--rich h2 {
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+body.site-apple .note-card--rich h2 a {
+  color: var(--ac-ink);
+  text-decoration: none;
+}
+
+body.site-apple .note-card--rich h2 a:hover {
+  text-decoration: underline;
+}
+
+body.site-apple .note-category,
+body.site-apple .note-tags li {
+  font-size: 12px;
+  color: var(--ac-muted);
+}
+
+/* Learn timeline */
+body.site-apple .timeline {
+  border: 0;
+  padding: 0;
+  margin: 32px auto 0;
+  max-width: 680px;
+}
+
+body.site-apple .timeline-item {
+  padding: 24px 0;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.12);
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="dark"] body.site-apple .timeline-item {
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+
+body.site-apple .timeline-index {
+  color: var(--ac-muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Playground */
+body.site-apple .playground-card,
+body.site-apple .playground-mode-card,
+body.site-apple .playground-try-panel {
+  border-radius: 18px !important;
+  background: #ffffff !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 28px 22px !important;
+}
+
+html[data-theme="dark"] body.site-apple .playground-card,
+html[data-theme="dark"] body.site-apple .playground-mode-card,
+html[data-theme="dark"] body.site-apple .playground-try-panel {
+  background: #1c1c1e !important;
+}
+
+body.site-apple .playground-grid,
+body.site-apple .playground-modes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+body.site-apple .playground-try-input {
+  border-radius: 12px;
+  border: 0.5px solid rgba(0, 0, 0, 0.16);
+  background: #ffffff;
+  font-size: 17px;
+}
+
+/* Product story pages (e.g. testcase-generator) */
+body.site-apple .story-hero {
+  padding: calc(48px + env(safe-area-inset-top, 0px)) 0 40px;
+  text-align: center;
+  background: #ffffff !important;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.12);
+}
+
+html[data-theme="dark"] body.site-apple .story-hero {
+  background: #000000 !important;
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+
+body.site-apple .story--product .story-hero h1,
+body.site-apple .story--infra .story-hero h1 {
+  font-size: clamp(32px, 5.5vw, 56px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.07;
+}
+
+/* Case / story body */
+body.site-apple .case-page .case-block,
+body.site-apple .story section {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+body.site-apple .case-page .impact-row,
+body.site-apple .case-page .spec-grid {
+  gap: 12px;
+}
+
+body.site-apple .case-page .impact-card,
+body.site-apple .case-page .spec-cell {
+  border-radius: 18px;
+  background: #f5f5f7;
+  border: 0;
+  box-shadow: none;
+}
+
+html[data-theme="dark"] body.site-apple .case-page .impact-card,
+html[data-theme="dark"] body.site-apple .case-page .spec-cell {
+  background: #1c1c1e;
+}
+
+/* Lab / about */
+body.site-apple .lab-page .value-card,
+body.site-apple .lab-page .approach-card {
+  border-radius: 18px;
+  background: #f5f5f7;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 28px 22px;
+}
+
+body.site-apple .demo-generator-page .demo-panel {
+  border-radius: 18px;
+  border: 0.5px solid rgba(0, 0, 0, 0.12);
+  background: #f5f5f7;
+  box-shadow: none;
+}
+
+/* 404 */
+body.site-apple .error-wrapper {
+  min-height: calc(100vh - 120px);
+  padding: 64px 22px;
+  background: #f5f5f7;
+}
+
+body.site-apple .error-content {
+  max-width: 480px;
+  padding: 40px 28px;
+  border-radius: 18px;
+  background: #ffffff;
+  border: 0;
+  box-shadow: none;
+}
+
+body.site-apple .error-code {
+  font-size: clamp(72px, 20vw, 120px);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  background: none !important;
+  -webkit-text-fill-color: var(--ac-ink);
+  color: var(--ac-ink);
+}
+
+body.site-apple .error-icon {
+  color: var(--ac-muted);
+  opacity: 0.35;
+}
+
+body.site-apple .btn-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 22px;
+  border-radius: 980px;
+  background: #0071e3;
+  color: #ffffff;
+  font-size: 17px;
+  text-decoration: none;
+  border: 0;
+  box-shadow: none;
+}
+
+body.site-apple .btn-home:hover {
+  background: #0077ed;
+}
+
+/* Global nav on inner pages — keep logo text hidden like apple */
+body.site-apple:not(.page-home) .header.globalnav .logo-text {
+  display: none;
+}
+
+@media (max-width: 734px) {
+  body.site-apple .notes-grid--index,
+  body.site-apple .playground-grid,
+  body.site-apple .playground-modes-grid {
+    grid-template-columns: 1fr;
+  }
+}
