@@ -22,7 +22,7 @@ const universal = [
   "globalnav",
   "footer--apple",
   "footer-apple-legal-line",
-  "footer-apple-locale",
+  "data-footer-region",
 ];
 
 function pageMarkers(html, urlPath) {

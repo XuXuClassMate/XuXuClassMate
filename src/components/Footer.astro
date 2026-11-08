@@ -2,13 +2,7 @@
 import Icon from "./Icon.astro";
 import type { SocialLink } from "../content/types";
 import { getPortfolioHome } from "../content/portfolio-home";
-import {
-  CONTACT_EMAIL,
-  alternateLocalePath,
-  getCopy,
-  pageHref,
-  type Locale,
-} from "../lib/i18n";
+import { CONTACT_EMAIL, getCopy, pageHref, type Locale } from "../lib/i18n";
 
 type Props = {
   brand: string;
@@ -22,8 +16,6 @@ const locale: Locale = Astro.url.pathname.startsWith("/zh") ? "zh" : "en";
 const copy = getCopy(locale);
 const home = getPortfolioHome(locale);
 const isZh = locale === "zh";
-const localeSwitchHref = alternateLocalePath(Astro.url.pathname);
-const localeCurrentLabel = locale === "en" ? "United States" : "中国大陆";
 const shopLinks = [
   { label: copy.nav.products ?? "Products", href: pageHref(locale, "work") },
   { label: isZh ? "交互 Demo" : "Live demo", href: home.ctaDemoHref },
@@ -39,26 +31,11 @@ const aboutLinks = [
   { label: copy.nav.now, href: pageHref(locale, "now") },
   { label: "GitHub", href: "https://github.com/XuXuClassMate" },
 ];
-const legalLinks = isZh
-  ? [
-      { label: "隐私政策", href: pageHref("zh", "about") },
-      { label: "使用条款", href: pageHref("zh", "about") },
-      { label: "销售与退款", href: `mailto:${CONTACT_EMAIL}` },
-      { label: "法律信息", href: pageHref("zh", "about") },
-      { label: "网站地图", href: "/sitemap.xml" },
-    ]
-  : [
-      { label: "Privacy Policy", href: pageHref("en", "about") },
-      { label: "Terms of Use", href: pageHref("en", "about") },
-      { label: "Sales and Refunds", href: `mailto:${CONTACT_EMAIL}` },
-      { label: "Legal", href: pageHref("en", "about") },
-      { label: "Site Map", href: "/sitemap.xml" },
-    ];
 const rightsReserved = isZh ? "保留所有权利。" : "All rights reserved.";
 const legalCopy = isZh
   ? `Copyright © 2020-2026 ${brand}。${rightsReserved}`
   : `Copyright © 2020-2026 ${brand}. ${rightsReserved}`;
-const localeNavLabel = isZh ? "选择语言" : "Choose your language";
+const regionLabel = isZh ? "所在地区" : "Your location";
 ---
 
 <footer class="footer footer--apple">
@@ -121,21 +98,30 @@ const localeNavLabel = isZh ? "选择语言" : "Choose your language";
       </div>
     </div>
     <div class="footer-bottom footer-apple-legal">
-      <p class="footer-apple-locale">
-        <a href={localeSwitchHref} class="footer-apple-locale-link">
-          {localeCurrentLabel}
-        </a>
+      <p class="footer-apple-region" data-footer-region hidden>
+        <span class="sr-only">{regionLabel}</span>
+        <span data-footer-region-name></span>
       </p>
       <p class="footer-apple-legal-line">
         <span class="footer-apple-legal-copy">{legalCopy}</span>
-        {
-          legalLinks.map((link) => (
-            <a class="footer-apple-legal-link" href={link.href}>
-              {link.label}
-            </a>
-          ))
-        }
       </p>
     </div>
   </div>
+  <script is:inline>
+    (function () {
+      var row = document.querySelector("[data-footer-region]");
+      var nameEl = document.querySelector("[data-footer-region-name]");
+      if (!row || !nameEl) return;
+      fetch("/api/geo", { credentials: "same-origin" })
+        .then(function (res) {
+          return res.ok ? res.json() : null;
+        })
+        .then(function (data) {
+          if (!data || !data.name) return;
+          nameEl.textContent = data.name;
+          row.hidden = false;
+        })
+        .catch(function () {});
+    })();
+  </script>
 </footer>
