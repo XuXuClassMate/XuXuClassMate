@@ -5,7 +5,7 @@ import { join } from "node:path";
 test("home renders and language switch works", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "Engineering Quality. Accelerated by AI.",
+    "AI Test Case Generator",
   );
   await expect(page.locator(".hero-role-line")).toHaveText(
     "AI-powered Quality Engineering",
@@ -14,20 +14,17 @@ test("home renders and language switch works", async ({ page }) => {
   await expect(page.locator(".hero-desc")).toContainText(
     "reusable engineering infrastructure",
   );
-  await expect(page.getByRole("link", { name: "Explore Products" })).toHaveAttribute(
-    "href",
-    "#highlights",
-  );
+  await expect(
+    page.getByRole("link", { name: "Learn more" }).first(),
+  ).toBeVisible();
   await expect(
     page.getByRole("link", { name: "Try AI Test Case Generator" }),
   ).toHaveAttribute("href", "/en/demo/ai-testcase-generator");
   await expect(page.locator(".hero-actions .btn-ghost")).toContainText(
-    "View GitHub",
+    "Try AI Test Case Generator",
   );
-  await expect(
-    page.getByRole("heading", { name: "Get the highlights." }),
-  ).toBeVisible();
-  await expect(page.locator("[data-highlights-carousel]")).toBeVisible();
+  await expect(page.locator(".section-promo, .section-hero").first()).toBeVisible();
+  await expect(page.locator(".tile-headline").first()).toBeVisible();
   await expect(
     page.getByText("From requirements to reviewable test cases.").first(),
   ).toBeVisible();
@@ -38,7 +35,7 @@ test("home renders and language switch works", async ({ page }) => {
   await page.getByRole("link", { name: "Switch to Chinese" }).click();
   await expect(page).toHaveURL(/\/zh\/?$/);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "工程品质。由 AI 加速。",
+    "AI 测试用例生成器",
   );
   await expect(page.locator(".hero-desc")).toContainText("AI 测试工具");
 });
@@ -346,7 +343,7 @@ test("mobile nav is a bottom sheet above the tab bar", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/");
+  await page.goto("/en/work");
   await expect(page.locator(".nav-links")).not.toHaveClass(/show/);
   await expect(page.locator(".tabbar")).toBeVisible();
   await expect(page.locator("#mobileNavToggle")).toBeHidden();

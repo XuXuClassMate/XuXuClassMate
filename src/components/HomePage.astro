@@ -1,12 +1,8 @@
 ---
 import Footer from "./Footer.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import {
-  getLatestArticles,
-  getPortfolioHome,
-} from "../content/portfolio-home";
+import { getPortfolioHome } from "../content/portfolio-home";
 import { getCopy, pageHref, type Locale } from "../lib/i18n";
-import { getMetrics, resolveMetric } from "../lib/metrics";
 
 type Props = {
   locale: Locale;
@@ -15,253 +11,190 @@ type Props = {
 const { locale } = Astro.props;
 const copy = getCopy(locale);
 const home = getPortfolioHome(locale);
-const articles = getLatestArticles(locale).slice(0, 2);
 const blogHref = pageHref(locale, "blog");
 const orgHref = pageHref(locale, "open-source");
-const metrics = await getMetrics();
 const highlights = copy.home.highlights;
 const [flagship, dockerFeatured] = home.featured;
 const isZh = locale === "zh";
 const pulls = highlights.find((item) => item.metric === "docker:total-pulls");
-const clawhub = highlights.find(
-  (item) => item.metric === "clawhub:total-downloads",
-);
-const coverage = home.achievements[0];
-const highlightsTitle = isZh ? "精彩要点。" : "Get the highlights.";
-const filmLabel = isZh ? "观看 Demo" : "Watch the film";
-const pauseLabel = isZh ? "暂停轮播" : "Pause highlights";
+const learnMore = home.featuredMore;
+const demoLabel = home.ctaDemo;
 ---
 
 <BaseLayout locale={locale} page="home">
-  <main id="main-content" class="apple-home apple-com">
-    <section class="ac-hero hero hero--home" id="top">
-      <div class="ac-hero-inner">
-        <p class="ac-eyebrow hero-role-line">{home.heroKicker}</p>
-        <h1 class="hero-title">{home.greeting}</h1>
-        <p class="hero-desc sr-only">{home.description}</p>
-        <div class="hero-actions">
-          <a class="btn-primary" href="#highlights">
-            {home.ctaWork}
-            <span aria-hidden="true">›</span>
-          </a>
-          <a
-            class="btn-ghost"
-            href={home.connectGithub}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {home.ctaGithub}
-            <span aria-hidden="true">›</span>
-          </a>
-        </div>
-      </div>
-      <div class="ac-hero-stage ac-bleed">
-        <img
-          src="/images/home/hero-product.jpg"
-          alt=""
-          width="2560"
-          height="2866"
-          loading="eager"
-          fetchpriority="high"
-          decoding="async"
-        />
-      </div>
-    </section>
-
+  <main id="main-content" class="apple-home apple-com apple-homepage">
     {
       flagship && (
-        <header class="ac-product-bar">
-          <p class="ac-product-bar-title">{flagship.title}</p>
-          <nav class="ac-product-bar-nav" aria-label={isZh ? "产品" : "Product"}>
-            <a href="#highlights" class="is-active">
-              {isZh ? "概览" : "Overview"}
-            </a>
-            <a href={flagship.href}>{home.featuredMore}</a>
-            <a href={dockerFeatured?.href ?? pageHref(locale, "work")}>
-              {isZh ? "对比" : "Compare"}
-            </a>
-          </nav>
-          <a class="ac-product-bar-buy" href={home.ctaDemoHref}>
-            {home.ctaDemo}
-          </a>
-        </header>
+        <section class="section section-hero theme-dark" id="highlights">
+          <div class="tile-wrapper">
+            <a
+              class="tile-link"
+              href={flagship.href}
+              aria-hidden="true"
+              tabindex="-1"
+            />
+            <div class="tile-content">
+              <div class="tile-copy-wrapper">
+                <p class="tile-eyebrow hero-role-line">{home.heroKicker}</p>
+                <h1 class="tile-headline hero-title">{flagship.title}</h1>
+                <p class="tile-subhead">{flagship.pitch}</p>
+                <p class="hero-desc sr-only">{home.description}</p>
+              </div>
+              <div class="tile-ctas hero-actions">
+                <a class="apple-button btn-primary" href={flagship.href}>
+                  {learnMore}
+                </a>
+                <a
+                  class="apple-button apple-button-secondary btn-ghost"
+                  href={home.ctaDemoHref}
+                >
+                  {demoLabel}
+                </a>
+              </div>
+            </div>
+            <div class="tile-image-wrapper">
+              <img
+                src="/images/home/hero-product.jpg"
+                alt=""
+                width="2560"
+                height="2866"
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+              />
+            </div>
+          </div>
+        </section>
       )
     }
 
-    <section
-      class="ac-highlights"
-      id="highlights"
-      data-highlights-carousel
-      aria-roledescription="carousel"
-      aria-label={highlightsTitle}
-    >
-      <div class="ac-highlights-head">
-        <h2>{highlightsTitle}</h2>
-        <a class="ac-film-link" href={home.ctaDemoHref}>
-          <span aria-hidden="true">▶</span>
-          {filmLabel}
-        </a>
-      </div>
-
-      <div class="ac-highlights-viewport">
-        <ul class="ac-highlights-track">
-          {
-            flagship && (
-              <li class="ac-highlight-slide is-active">
-                <article class="ac-highlight-card">
-                  <span class="ac-highlight-glow ac-highlight-glow--blue" aria-hidden="true" />
-                  <h3>{flagship.pitch ?? flagship.title}</h3>
-                  <div class="ac-highlight-visual">
-                    <img
-                      src="/images/home/promo-cases.jpg"
-                      alt=""
-                      width="1280"
-                      height="800"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
-                </article>
-              </li>
-            )
-          }
-          {
-            dockerFeatured && (
-              <li class="ac-highlight-slide">
-                <article class="ac-highlight-card">
-                  <span class="ac-highlight-glow ac-highlight-glow--violet" aria-hidden="true" />
-                  <h3>
-                    {isZh ? "多库 Docker。即开即用。" : "Multi-DB Docker. Ready when you are."}
-                  </h3>
-                  <div class="ac-highlight-visual">
-                    <img
-                      src="/images/home/promo-infra.jpg"
-                      alt=""
-                      width="2000"
-                      height="1333"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
-                </article>
-              </li>
-            )
-          }
-          <li class="ac-highlight-slide">
-            <article class="ac-highlight-card">
-              <span class="ac-highlight-glow ac-highlight-glow--teal" aria-hidden="true" />
-              <h3>{isZh ? "公开交付数据。" : "Proof in the numbers."}</h3>
-              <div class="ac-highlight-metrics impact-row">
-                {
-                  pulls && (
-                    <div>
-                      <span
-                        class="impact-value"
-                        data-metric={pulls.metric}
-                        data-metric-fallback={pulls.value}
-                      >
-                        {resolveMetric(metrics, pulls.metric, pulls.value)}
-                      </span>
-                      <small>{pulls.label}</small>
-                    </div>
-                  )
-                }
-                {
-                  clawhub && (
-                    <div>
-                      <span
-                        class="impact-value"
-                        data-metric={clawhub.metric}
-                        data-metric-fallback={clawhub.value}
-                      >
-                        {resolveMetric(metrics, clawhub.metric, clawhub.value)}
-                      </span>
-                      <small>{clawhub.label}</small>
-                    </div>
-                  )
-                }
-                {
-                  coverage && (
-                    <div>
-                      <span class="impact-value">{coverage.value}</span>
-                      <small>{coverage.label}</small>
-                    </div>
-                  )
-                }
+    {
+      dockerFeatured && (
+        <section class="section section-promo theme-light">
+          <div class="tile-wrapper">
+            <a
+              class="tile-link"
+              href={dockerFeatured.href}
+              aria-hidden="true"
+              tabindex="-1"
+            />
+            <div class="tile-content">
+              <div class="tile-copy-wrapper">
+                <h2 class="tile-headline">{dockerFeatured.title}</h2>
+                <p class="tile-subhead">
+                  {isZh ? "多库 Docker，即开即用。" : "Test DB images. Ready to run."}
+                </p>
               </div>
-            </article>
-          </li>
-          <li class="ac-highlight-slide">
-            <article class="ac-highlight-card">
-              <span class="ac-highlight-glow ac-highlight-glow--blue" aria-hidden="true" />
-              <h3>{isZh ? "一整块工作区。" : "One continuous workspace."}</h3>
-              <div class="ac-highlight-visual">
-                <img
-                  src="/images/home/hero-product.jpg"
-                  alt=""
-                  width="2560"
-                  height="2866"
-                  loading="lazy"
-                  decoding="async"
-                />
+              <div class="tile-ctas">
+                <a class="apple-button" href={dockerFeatured.href}>
+                  {learnMore}
+                </a>
+                {pulls ? (
+                  <a
+                    class="apple-button apple-button-secondary"
+                    href={pulls.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {pulls.linkLabel}
+                  </a>
+                ) : null}
               </div>
-            </article>
-          </li>
-        </ul>
-      </div>
+            </div>
+            <div class="tile-image-wrapper">
+              <img
+                src="/images/home/promo-infra.jpg"
+                alt=""
+                width="2000"
+                height="1333"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </div>
+        </section>
+      )
+    }
 
-      <div class="ac-highlights-controls">
-        <div class="ac-highlights-dots" role="tablist" aria-label={isZh ? "幻灯片" : "Slides"} />
-        <button
-          type="button"
-          class="ac-highlights-pause"
-          data-highlights-pause
-          aria-label={pauseLabel}
-        >
-          ❚❚
-        </button>
-      </div>
-    </section>
-
-    <section class="ac-bento" aria-label={isZh ? "更多" : "More"}>
-      <a class="ac-bento-tile ac-bento-tile--light" id="opensource" href={orgHref}>
-        <div class="ac-bento-copy">
-          <h2>{home.ossTitle}</h2>
-          <span class="ac-bento-cta">
-            {home.ossOrgLabel}
-            <span aria-hidden="true"> ›</span>
-          </span>
-        </div>
-        <div class="ac-bento-media">
-          <img src="/images/home/promo-docker-cover.jpg" alt="" width="800" height="450" loading="lazy" />
-        </div>
-      </a>
-      <a class="ac-bento-tile ac-bento-tile--alt" id="articles" href={blogHref}>
-        <div class="ac-bento-copy">
-          <h2>{home.articlesTitle}</h2>
-          <span class="ac-bento-cta">
-            {home.articlesCta}
-            <span aria-hidden="true"> ›</span>
-          </span>
-        </div>
-        <div class="ac-bento-media">
-          <img src="/images/home/promo-notes.jpg" alt="" width="1200" height="800" loading="lazy" />
-        </div>
-      </a>
-    </section>
-
-    <div class="ac-articles">
-      <div class="ac-articles-inner note-rows">
-        {
-          articles.map((item) => (
-            <a href={item.href}>
-              <h3>{item.title}</h3>
+    <section class="section section-promo theme-dark">
+      <div class="tile-wrapper">
+        <div class="tile-content">
+          <div class="tile-copy-wrapper">
+            <h2 class="tile-headline">
+              {isZh ? "生成式测试工程" : "Generative testing"}
+            </h2>
+            <p class="tile-subhead">
+              {isZh
+                ? "从需求到可评审用例。"
+                : "From requirements to reviewable cases."}
+            </p>
+          </div>
+          <div class="tile-ctas">
+            <a class="apple-button" href={home.ctaDemoHref}>
+              {demoLabel}
             </a>
-          ))
-        }
+            <a
+              class="apple-button apple-button-secondary"
+              href={home.connectGithub}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {home.ctaGithub}
+            </a>
+          </div>
+        </div>
+        <div class="tile-image-wrapper">
+          <img
+            src="/images/home/promo-cases.jpg"
+            alt=""
+            width="1280"
+            height="800"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
       </div>
-    </div>
+    </section>
   </main>
+
+  <section class="section section-gallery" aria-label={isZh ? "更多" : "More"}>
+    <article class="tile-wrapper">
+      <a class="tile-link" href={orgHref} aria-hidden="true" tabindex="-1" />
+      <div class="tile-content">
+        <h2 class="tile-headline">{home.ossTitle}</h2>
+        <div class="tile-ctas">
+          <a class="apple-button" href={orgHref}>{home.ossOrgLabel}</a>
+        </div>
+      </div>
+      <div class="tile-image-wrapper">
+        <img
+          src="/images/home/promo-docker-cover.jpg"
+          alt=""
+          width="800"
+          height="450"
+          loading="lazy"
+        />
+      </div>
+    </article>
+    <article class="tile-wrapper">
+      <a class="tile-link" href={blogHref} aria-hidden="true" tabindex="-1" />
+      <div class="tile-content">
+        <h2 class="tile-headline">{home.articlesTitle}</h2>
+        <div class="tile-ctas">
+          <a class="apple-button" href={blogHref}>{home.articlesCta}</a>
+        </div>
+      </div>
+      <div class="tile-image-wrapper">
+        <img
+          src="/images/home/promo-notes.jpg"
+          alt=""
+          width="1200"
+          height="800"
+          loading="lazy"
+        />
+      </div>
+    </article>
+  </section>
 
   <Footer
     brand={copy.brand}

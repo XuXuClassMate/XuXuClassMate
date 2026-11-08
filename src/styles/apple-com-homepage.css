@@ -1,0 +1,254 @@
+/* apple.com homepage — section-hero / section-promo tile stack (measured from apple.com) */
+
+body.page-home {
+  background: #ffffff;
+  color: #1d1d1f;
+}
+
+body.page-home .apple-homepage {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 12px;
+  background: #ffffff;
+}
+
+body.page-home .section {
+  position: relative;
+  overflow: hidden;
+}
+
+body.page-home .tile-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  padding: 55px 0 0;
+  max-width: 100%;
+  text-align: center;
+}
+
+body.page-home .tile-link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+body.page-home .tile-content {
+  position: relative;
+  z-index: 2;
+  width: min(640px, 100%);
+  padding: 0 22px;
+  pointer-events: none;
+}
+
+body.page-home .tile-copy-wrapper {
+  margin-bottom: 14px;
+}
+
+body.page-home .tile-headline {
+  margin: 0;
+  font-size: clamp(32px, 5.5vw, 56px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.07;
+  color: #1d1d1f;
+}
+
+body.page-home .tile-subhead {
+  margin: 6px 0 0;
+  font-size: clamp(19px, 2.5vw, 24px);
+  font-weight: 400;
+  letter-spacing: 0.007em;
+  line-height: 1.16;
+  color: #1d1d1f;
+}
+
+body.page-home .theme-dark .tile-headline,
+body.page-home .theme-dark .tile-subhead {
+  color: #f5f5f7;
+}
+
+body.page-home .tile-eyebrow {
+  margin: 0 0 4px;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #6e6e73;
+}
+
+body.page-home .theme-dark .tile-eyebrow {
+  color: #a1a1a6;
+}
+
+body.page-home .tile-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 18px 26px;
+  margin-top: 18px;
+  pointer-events: auto;
+}
+
+body.page-home .apple-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 8px 15px;
+  border: 0;
+  border-radius: 980px;
+  background: #0071e3;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  transition: background 0.28s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+body.page-home .apple-button:hover {
+  background: #0077ed;
+}
+
+body.page-home .apple-button-secondary {
+  background: transparent;
+  color: #0066cc;
+  padding: 8px 0;
+  border-radius: 0;
+  min-height: 44px;
+}
+
+body.page-home .theme-dark .apple-button-secondary {
+  color: #2997ff;
+}
+
+body.page-home .apple-button-secondary:hover {
+  background: transparent;
+  text-decoration: underline;
+}
+
+body.page-home .tile-image-wrapper {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  margin-top: 28px;
+  line-height: 0;
+}
+
+body.page-home .tile-image-wrapper img {
+  display: block;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: auto;
+  object-fit: contain;
+}
+
+body.page-home .section-hero .tile-wrapper {
+  padding-top: 48px;
+}
+
+body.page-home .section-hero.theme-dark {
+  background: #000000;
+}
+
+body.page-home .section-promo {
+  background: #f5f5f7;
+}
+
+body.page-home .section-promo.theme-light {
+  background: #ffffff;
+}
+
+body.page-home .section-promo.theme-dark {
+  background: #000000;
+}
+
+body.page-home .section-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  padding: 0 12px 12px;
+  max-width: 1068px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+body.page-home .section-gallery .tile-wrapper {
+  padding: 44px 0 0;
+  border-radius: 18px;
+  background: #f5f5f7;
+}
+
+body.page-home .section-gallery .tile-headline {
+  font-size: clamp(24px, 3vw, 32px);
+}
+
+body.page-home .section-gallery .tile-image-wrapper img {
+  max-height: 240px;
+  object-fit: cover;
+  border-radius: 0 0 18px 18px;
+}
+
+/* Hide iOS tab bar on home — apple.com has none */
+@media (max-width: 768px) {
+  body.page-home .tabbar {
+    display: none !important;
+  }
+
+  body.page-home .mobile-nav-toggle {
+    display: inline-flex !important;
+  }
+
+  body.page-home .nav-links {
+    bottom: max(12px, env(safe-area-inset-bottom, 0px));
+    border-radius: 18px;
+  }
+
+  body.page-home main {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+}
+
+@media (max-width: 734px) {
+  body.page-home .section-gallery {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Neutralize old home layers on apple homepage */
+body.page-home .ac-highlights,
+body.page-home .ac-product-bar,
+body.page-home .ac-rail,
+body.page-home .ac-bento,
+body.page-home .ac-hero {
+  display: none;
+}
+
+body.page-home .header > .container {
+  max-width: 1024px;
+}
+
+body.page-home .apple-button {
+  background: #0071e3 !important;
+  color: #ffffff !important;
+  border-radius: 980px !important;
+  padding: 8px 15px !important;
+  font-size: 14px !important;
+  box-shadow: none !important;
+}
+
+body.page-home .apple-button-secondary {
+  background: transparent !important;
+  color: #2997ff !important;
+  padding: 8px 0 !important;
+  border-radius: 0 !important;
+}
+
+body.page-home .section-promo.theme-light .apple-button-secondary {
+  color: #0066cc !important;
+}
