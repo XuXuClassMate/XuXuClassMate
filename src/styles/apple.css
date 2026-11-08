@@ -1557,9 +1557,12 @@ html[data-theme="dark"] .apple-home .service-card {
 
 .apple-home .tile--paper,
 .apple-home .closer {
-  margin: 12px max(12px, env(safe-area-inset-left, 0px)) 20px
-    max(12px, env(safe-area-inset-right, 0px));
-  padding: 48px 28px 52px;
+  box-sizing: border-box;
+  width: calc(100% - 24px);
+  max-width: calc(100% - 24px);
+  margin: 12px auto 20px;
+  padding: 48px max(16px, env(safe-area-inset-left, 0px)) 52px
+    max(16px, env(safe-area-inset-right, 0px));
   border-radius: 24px;
   border: 0.5px solid color-mix(in srgb, var(--lg-rim) 72%, transparent);
   background: rgba(255, 255, 255, 0.7);
@@ -1797,6 +1800,8 @@ html[data-theme="dark"] .apple-home .hero--home {
   flex-direction: column;
   align-items: center;
   gap: 6px;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .impact-value {
@@ -1914,7 +1919,8 @@ html[data-theme="dark"] .note-rows a {
   }
 
   .impact-row {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 16px;
   }
 
   .selected-row,
@@ -1925,6 +1931,23 @@ html[data-theme="dark"] .note-rows a {
 
   .home-band {
     padding: 56px 16px;
+  }
+}
+
+@media (max-width: 400px) {
+  .impact-row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .impact-value {
+    font-size: clamp(32px, 10vw, 48px);
+  }
+
+  .apple-home .tile--paper,
+  .apple-home .closer {
+    width: calc(100% - 16px);
+    max-width: calc(100% - 16px);
   }
 }
 
