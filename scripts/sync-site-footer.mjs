@@ -1,3 +1,4 @@
+/** Syncs main-site footer into local cloudflare/watch (gitignored — deploy wrangler from machine). */
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
