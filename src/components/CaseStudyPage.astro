@@ -3,7 +3,6 @@ import BackNav from "./BackNav.astro";
 import DockerSuiteStory from "./DockerSuiteStory.astro";
 import GeneratorStory from "./GeneratorStory.astro";
 import CaseHeading from "./CaseHeading.astro";
-import Contact from "./Contact.astro";
 import Footer from "./Footer.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import {
@@ -716,13 +715,6 @@ const relatedNoteLinks = study.links.filter((link) =>
     </section>
   </main>
 
-  <Contact
-    label={copy.contactLabel}
-    hint={copy.contactHint}
-    offers={copy.contactOffers}
-    copyLabel={copy.copyEmail}
-    copiedLabel={copy.copiedEmail}
-  />
   <Footer
     brand={copy.brand}
     description={page.footerDesc}

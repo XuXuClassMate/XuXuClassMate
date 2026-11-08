@@ -1,6 +1,5 @@
 ---
 import BackNav from "./BackNav.astro";
-import Contact from "./Contact.astro";
 import Footer from "./Footer.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCase, getCopy, pageHref, type Locale } from "../lib/i18n";
@@ -127,13 +126,6 @@ const databases = isZh
       </div>
     </section>
   </main>
-  <Contact
-    label={copy.contactLabel}
-    hint={copy.contactHint}
-    offers={copy.contactOffers}
-    copyLabel={copy.copyEmail}
-    copiedLabel={copy.copiedEmail}
-  />
   <Footer
     brand={copy.brand}
     description={page.footerDesc}

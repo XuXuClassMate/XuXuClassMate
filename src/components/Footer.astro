@@ -2,7 +2,7 @@
 import Icon from "./Icon.astro";
 import type { SocialLink } from "../content/types";
 import { getPortfolioHome } from "../content/portfolio-home";
-import { getCopy, pageHref, type Locale } from "../lib/i18n";
+import { CONTACT_EMAIL, getCopy, pageHref, type Locale } from "../lib/i18n";
 
 type Props = {
   brand: string;
@@ -91,6 +91,9 @@ const aboutLinks = [
     </div>
     <div class="footer-bottom footer-apple-legal">
       <p class="copyright">{copyright}</p>
+      <p class="footer-apple-mail">
+        <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+      </p>
       <p class="footer-apple-brand">{brand}</p>
     </div>
   </div>

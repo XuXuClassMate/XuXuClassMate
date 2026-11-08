@@ -1,5 +1,4 @@
 ---
-import Contact from "./Contact.astro";
 import Footer from "./Footer.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import {
@@ -304,15 +303,6 @@ const railLinks = [
     </div>
   </main>
 
-  <div class="ac-contact">
-    <Contact
-      label={copy.contactLabel}
-      hint={copy.contactHint}
-      offers={copy.contactOffers}
-      copyLabel={copy.copyEmail}
-      copiedLabel={copy.copiedEmail}
-    />
-  </div>
   <Footer
     brand={copy.brand}
     description={copy.home.footerDesc}
