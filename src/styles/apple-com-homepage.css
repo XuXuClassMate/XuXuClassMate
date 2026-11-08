@@ -194,26 +194,6 @@ body.page-home .section-gallery .tile-image-wrapper img {
   border-radius: 0 0 18px 18px;
 }
 
-/* apple.com has no bottom tab bar on any viewport */
-body.page-home .tabbar {
-  display: none !important;
-}
-
-@media (max-width: 768px) {
-  body.page-home .mobile-nav-toggle {
-    display: inline-flex !important;
-  }
-
-  body.page-home .nav-links {
-    bottom: max(12px, env(safe-area-inset-bottom, 0px));
-    border-radius: 18px;
-  }
-
-  body.page-home main {
-    padding-bottom: env(safe-area-inset-bottom, 0px);
-  }
-}
-
 @media (max-width: 734px) {
   body.page-home .section-gallery {
     grid-template-columns: 1fr;
@@ -406,52 +386,8 @@ body.page-home .entertainment-label {
   color: #f5f5f7;
 }
 
-body.site-apple .header.globalnav .nav-links-scroll {
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
-  justify-content: center;
-  gap: 0;
-}
-
-body.site-apple .header.globalnav .nav-item {
-  padding: 0 0.65em;
-  white-space: nowrap;
-}
-
-body.page-home .header.globalnav .nav-utils .theme-toggle {
-  display: none;
-}
-
-@media (max-width: 1068px) {
-  body.page-home .header.globalnav .nav-item--products,
-  body.page-home .header.globalnav .nav-item--engineering {
-    display: none;
-  }
-}
-
 @media (max-width: 734px) {
   body.page-home .section-promo-duo {
     grid-template-columns: 1fr;
-  }
-
-  body.page-home .header.globalnav .nav {
-    position: relative;
-    justify-content: space-between;
-  }
-
-  body.page-home .header.globalnav .logo {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  body.page-home .header.globalnav .logo-text {
-    display: none;
-  }
-
-  body.page-home .header.globalnav .nav-item--oss,
-  body.page-home .header.globalnav .nav-item--notes {
-    display: none;
   }
 }

@@ -44,6 +44,72 @@ body.site-apple .header.globalnav .nav-item--demo {
   display: none;
 }
 
+/* —— Unified chrome (all pages) —— */
+body.site-apple .header .logo-text {
+  display: none;
+}
+
+body.site-apple .tabbar {
+  display: none !important;
+}
+
+@media (min-width: 769px) {
+  body.site-apple .header .nav-utils .theme-toggle,
+  body.site-apple .header .nav-utils .language-switch {
+    display: inline-flex !important;
+    align-items: center;
+  }
+}
+
+@media (max-width: 768px) {
+  body.site-apple {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  body.site-apple .mobile-nav-toggle {
+    display: inline-flex !important;
+  }
+
+  body.site-apple .nav-links {
+    inset: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    min-height: 0;
+    border-radius: 0;
+    border: 0;
+    box-shadow: none;
+  }
+
+  body.site-apple .nav-links-glass {
+    display: none !important;
+  }
+
+  body.site-apple .nav-links-scroll {
+    max-height: none;
+    padding-top: calc(48px + env(safe-area-inset-top, 0px));
+  }
+
+  body.site-apple .nav-links-scroll::before {
+    display: none;
+  }
+
+  body.site-apple .header.globalnav .nav {
+    position: relative;
+    justify-content: space-between;
+  }
+
+  body.site-apple .header.globalnav .logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
 /* —— Global nav (desktop ≈ apple.com) —— */
 @media (min-width: 769px) {
   body.site-apple .header > .container {
@@ -61,10 +127,6 @@ body.site-apple .header.globalnav .nav-item--demo {
     position: absolute;
     left: 0;
     z-index: 2;
-  }
-
-  body.site-apple .header .logo-text {
-    display: none;
   }
 
   body.site-apple .nav-end {
