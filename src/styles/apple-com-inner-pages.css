@@ -68,17 +68,6 @@ body.site-apple .hero.hero--detail .hero-actions .btn-ghost {
   font-size: 17px;
 }
 
-body.site-apple .detail-topbar a,
-body.site-apple .back-nav a {
-  color: var(--ac-link);
-  font-size: 14px;
-  text-decoration: none;
-}
-
-body.site-apple .detail-topbar a:hover,
-body.site-apple .back-nav a:hover {
-  text-decoration: underline;
-}
 
 /* Index sections */
 body.site-apple .timeline-section,

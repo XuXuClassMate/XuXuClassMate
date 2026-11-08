@@ -1,0 +1,344 @@
+/* Final sweep: neutralize legacy portfolio chrome on every body.site-apple page */
+
+/* —— Heroes (PageHero + shared) —— */
+body.site-apple .hero:not(.hero--home)::before,
+body.site-apple .hero:not(.hero--home) .hero-blob,
+body.site-apple .hero:not(.hero--home) .hero-atmosphere {
+  display: none !important;
+}
+
+body.site-apple .hero:not(.hero--home) {
+  background: #ffffff !important;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.12);
+  box-shadow: none !important;
+}
+
+html[data-theme="dark"] body.site-apple .hero:not(.hero--home) {
+  background: #000000 !important;
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+
+body.site-apple .hero:not(.hero--home) .subtitle {
+  border: 0 !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+  color: var(--ac-muted);
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.022em;
+}
+
+body.site-apple .hero:not(.hero--home) .subtitle::before {
+  display: none !important;
+}
+
+body.site-apple .hero:not(.hero--home) .hero-title {
+  background: none !important;
+  -webkit-text-fill-color: unset;
+  color: var(--ac-ink);
+}
+
+body.site-apple .hero-actions .btn-primary,
+body.site-apple .hero-actions .btn-ghost,
+body.site-apple .story-links .btn-primary,
+body.site-apple .story-links a.btn-primary {
+  background: none !important;
+  color: var(--ac-link) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  min-height: 44px;
+  padding: 0 !important;
+  font-size: 17px;
+  font-weight: 400;
+  transform: none !important;
+  width: auto !important;
+  max-width: none !important;
+  clip-path: none !important;
+}
+
+body.site-apple .hero-actions .btn-primary:hover,
+body.site-apple .hero-actions .btn-ghost:hover,
+body.site-apple .story-links .btn-primary:hover {
+  text-decoration: underline;
+  transform: none !important;
+}
+
+/* —— Back navigation —— */
+body.site-apple .back-nav,
+body.site-apple a.back-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 44px;
+  margin: 0;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: var(--ac-link) !important;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+body.site-apple .back-nav:hover,
+body.site-apple a.back-nav:hover {
+  color: var(--ac-link) !important;
+  text-decoration: underline;
+  transform: none !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+body.site-apple .back-nav-icon {
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background: transparent !important;
+  color: var(--ac-link);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+body.site-apple .back-nav--prominent {
+  width: auto;
+  min-width: 0;
+  justify-content: flex-start;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+body.site-apple .back-nav-footer-panel {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+body.site-apple .detail-topbar {
+  display: flex;
+  justify-content: flex-start;
+  margin: 0 auto 12px;
+  max-width: 980px;
+  padding: 0 22px;
+}
+
+/* —— Case study —— */
+body.site-apple .case-metric,
+body.site-apple .case-try {
+  border-radius: 18px;
+  border: 0.5px solid rgba(0, 0, 0, 0.12) !important;
+  background: #f5f5f7 !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="dark"] body.site-apple .case-metric,
+html[data-theme="dark"] body.site-apple .case-try {
+  background: #1c1c1e !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+body.site-apple .case-try-command,
+body.site-apple .case-section-lead {
+  font-family: inherit;
+  color: var(--ac-muted);
+}
+
+body.site-apple .case-try-command {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 0.5px solid rgba(0, 0, 0, 0.12);
+}
+
+/* —— Product story —— */
+body.site-apple .story-band,
+body.site-apple .story-band--paper,
+body.site-apple .story-band--proof,
+body.site-apple .story-band--ink {
+  padding: 48px 0 !important;
+  background: #f5f5f7 !important;
+  border: 0;
+}
+
+body.site-apple .story-band--ink {
+  background: #ffffff !important;
+}
+
+html[data-theme="dark"] body.site-apple .story-band,
+html[data-theme="dark"] body.site-apple .story-band--paper,
+html[data-theme="dark"] body.site-apple .story-band--proof,
+html[data-theme="dark"] body.site-apple .story-band--ink {
+  background: #000000 !important;
+}
+
+body.site-apple .story-band h2 {
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+body.site-apple .device {
+  border-radius: 18px;
+  border: 0.5px solid rgba(0, 0, 0, 0.12);
+  box-shadow: none !important;
+  overflow: hidden;
+}
+
+body.site-apple .story-links a:not(.btn-primary) {
+  color: var(--ac-link);
+  font-size: 17px;
+  text-decoration: none;
+}
+
+body.site-apple .story-links a:not(.btn-primary):hover {
+  text-decoration: underline;
+}
+
+/* —— Demo generator —— */
+body.site-apple .demo-generator-page .demo-badge,
+body.site-apple .demo-generator-page .demo-banner {
+  background: transparent;
+  border: 0;
+  color: var(--ac-muted);
+  font-size: 12px;
+}
+
+body.site-apple .demo-pipeline li {
+  border-radius: 12px;
+  border: 0.5px solid rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+}
+
+body.site-apple .demo-pipeline li.is-active {
+  border-color: rgba(0, 0, 0, 0.16);
+  background: #f5f5f7;
+  box-shadow: none;
+}
+
+body.site-apple .demo-generator-page .demo-panel {
+  box-shadow: none !important;
+}
+
+body.site-apple .demo-generator-page button.btn-primary[type="submit"],
+body.site-apple .demo-generator-page .demo-panel .btn-primary {
+  background: #0071e3 !important;
+  color: #ffffff !important;
+  border-radius: 980px !important;
+  padding: 8px 22px !important;
+  width: auto !important;
+  max-width: none !important;
+}
+
+/* —— Playground —— */
+body.site-apple .playground-mode,
+body.site-apple .playground-mode--interactive,
+body.site-apple .playground-mode--live,
+body.site-apple .playground-mode--install {
+  border: 0 !important;
+  border-radius: 980px !important;
+  background: rgba(0, 0, 0, 0.06) !important;
+  color: var(--ac-ink) !important;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+html[data-theme="dark"] body.site-apple .playground-mode,
+html[data-theme="dark"] body.site-apple .playground-mode--interactive,
+html[data-theme="dark"] body.site-apple .playground-mode--live,
+html[data-theme="dark"] body.site-apple .playground-mode--install {
+  background: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* —— About / lab / org / now —— */
+body.site-apple .about-page .home-section,
+body.site-apple .lab-page .home-section,
+body.site-apple .ai-lab-page .home-section {
+  padding: 48px 0;
+  background: #f5f5f7;
+}
+
+body.site-apple .capability-list li,
+body.site-apple .featured-row {
+  border: 0 !important;
+  border-radius: 18px !important;
+  background: #f5f5f7 !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+body.site-apple .org-brand,
+body.site-apple .org-catalog,
+body.site-apple .org-metrics,
+body.site-apple .org-cta {
+  padding: 48px 0;
+  background: #f5f5f7;
+}
+
+body.site-apple .org-brand-panel {
+  border-radius: 18px;
+  border: 0.5px solid rgba(0, 0, 0, 0.12);
+  background: #ffffff;
+  box-shadow: none !important;
+}
+
+body.site-apple .now-sections .now-section {
+  border: 0 !important;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: none !important;
+}
+
+body.site-apple .note-page .note-body,
+body.site-apple .note-page article.prose {
+  max-width: 692px;
+  margin-inline: auto;
+  padding: 48px 22px 64px;
+}
+
+/* —— Motion / glass remnants —— */
+body.site-apple .impact-value::after,
+body.site-apple .story-metrics span::after,
+body.site-apple .project-card::before,
+body.site-apple .note-card::before {
+  display: none !important;
+}
+
+body.site-apple .project-card:hover,
+body.site-apple .note-card:hover,
+body.site-apple .featured-row:hover,
+body.site-apple .capability-list li:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+body.site-apple .theme-toggle,
+body.site-apple .filter-btn,
+body.site-apple .copy-email-btn {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+body.site-apple .contact-section .contact-panel,
+body.site-apple .contact-section .contact-info {
+  backdrop-filter: none !important;
+}
+
+@media (max-width: 768px) {
+  body.site-apple .hero-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px 24px;
+  }
+}
