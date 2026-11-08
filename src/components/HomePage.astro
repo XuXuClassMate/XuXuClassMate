@@ -19,6 +19,7 @@ const home = getPortfolioHome(locale);
 const articles = getLatestArticles(locale).slice(0, 2);
 const blogHref = pageHref(locale, "blog");
 const orgHref = pageHref(locale, "open-source");
+const workHref = pageHref(locale, "work");
 const metrics = await getMetrics();
 const highlights = copy.home.highlights;
 const [flagship, ...moreFeatured] = home.featured;
@@ -36,6 +37,10 @@ const dockerFeatured = moreFeatured[0];
 const dbNames = isZh
   ? ["达梦", "瀚高", "人大金仓", "TiDB"]
   : ["Dameng", "Highgo", "Kingbase", "TiDB"];
+const railLinks = [
+  ...home.capabilities.slice(0, 4),
+  { title: home.featuredCta, detail: "", href: workHref },
+];
 ---
 
 <BaseLayout locale={locale} page="home">
@@ -61,27 +66,32 @@ const dbNames = isZh
           </a>
         </div>
       </div>
-      <div class="ac-hero-stage">
-        <picture>
-          <source
-            type="image/jpeg"
-            media="(prefers-color-scheme: dark)"
-            srcset="/images/home/hero-main.jpg"
-          />
-          <img
-            src="/images/home/hero-main.jpg"
-            alt={isZh
-              ? "笔记本电脑上的开发与测试工作区"
-              : "A laptop workspace for development and testing"}
-            width="2400"
-            height="1600"
-            loading="eager"
-            fetchpriority="high"
-            decoding="async"
-          />
-        </picture>
+      <div class="ac-hero-stage ac-bleed">
+        <img
+          src="/images/home/hero-product.jpg"
+          alt={isZh
+            ? "AI 测试用例生成器工作区界面"
+            : "AI test case generator workspace"}
+          width="2560"
+          height="2866"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
       </div>
     </section>
+
+    <nav class="ac-rail" aria-label={home.capabilitiesTitle}>
+      <ul>
+        {
+          railLinks.map((item) => (
+            <li>
+              <a href={item.href}>{item.title}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
 
     <section class="ac-promo" id="featured">
       <div class="ac-promo-copy">
@@ -112,14 +122,12 @@ const dbNames = isZh
           <p class="ac-flow">{flagship.flow.join("  ·  ")}</p>
         ) : null}
       </div>
-      <figure class="ac-promo-figure">
+      <figure class="ac-promo-figure ac-bleed ac-bleed--inset">
         <img
-          src="/images/home/promo-flagship.jpg"
-          alt={isZh
-            ? "生成式 AI 与测试工程"
-            : "Generative AI and test engineering"}
-          width="2000"
-          height="1333"
+          src="/images/home/promo-cases.jpg"
+          alt={isZh ? "生成后的测试用例列表" : "Generated test case list"}
+          width="1280"
+          height="800"
           loading="lazy"
           decoding="async"
         />
@@ -128,7 +136,7 @@ const dbNames = isZh
 
     {
       dockerFeatured && (
-        <section class="ac-promo ac-promo--inset" id="selected">
+        <section class="ac-promo ac-promo--dark" id="selected">
           <div class="ac-promo-copy">
             <h2 class="ac-eyebrow">
               {isZh ? "测试基础设施" : "Test infrastructure"}
@@ -161,12 +169,12 @@ const dbNames = isZh
               ))}
             </ul>
           </div>
-          <figure class="ac-promo-figure">
+          <figure class="ac-promo-figure ac-bleed">
             <img
               src="/images/home/promo-infra.jpg"
               alt={isZh
-                ? "数据中心与容器化测试环境"
-                : "Data center and containerized test environments"}
+                ? "容器化测试与数据环境"
+                : "Containerized test and data environments"}
               width="2000"
               height="1333"
               loading="lazy"
@@ -236,16 +244,18 @@ const dbNames = isZh
     </section>
 
     <section class="ac-bento" aria-label={isZh ? "更多入口" : "More"}>
-      <a class="ac-bento-tile" id="opensource" href={orgHref}>
-        <h2>{home.ossTitle}</h2>
-        <p>{home.ossDescription}</p>
-        <span class="ac-bento-cta">
-          {home.ossOrgLabel}
-          <span aria-hidden="true"> ›</span>
-        </span>
+      <a class="ac-bento-tile ac-bento-tile--light" id="opensource" href={orgHref}>
+        <div class="ac-bento-copy">
+          <h2>{home.ossTitle}</h2>
+          <p>{home.ossDescription}</p>
+          <span class="ac-bento-cta">
+            {home.ossOrgLabel}
+            <span aria-hidden="true"> ›</span>
+          </span>
+        </div>
         <div class="ac-bento-media">
           <img
-            src="/images/cover-docker.jpg"
+            src="/images/home/promo-docker-cover.jpg"
             alt=""
             width="800"
             height="450"
@@ -254,21 +264,19 @@ const dbNames = isZh
           />
         </div>
       </a>
-      <a
-        class="ac-bento-tile"
-        id="articles"
-        href={blogHref}
-      >
-        <h2>{home.articlesTitle}</h2>
-        <p>
-          {isZh
-            ? "工程笔记与交付复盘，按产品页节奏阅读。"
-            : "Engineering notes and delivery write-ups, sized for calm reading."}
-        </p>
-        <span class="ac-bento-cta">
-          {home.articlesCta}
-          <span aria-hidden="true"> ›</span>
-        </span>
+      <a class="ac-bento-tile ac-bento-tile--alt" id="articles" href={blogHref}>
+        <div class="ac-bento-copy">
+          <h2>{home.articlesTitle}</h2>
+          <p>
+            {isZh
+              ? "工程笔记与交付复盘。"
+              : "Engineering notes and delivery write-ups."}
+          </p>
+          <span class="ac-bento-cta">
+            {home.articlesCta}
+            <span aria-hidden="true"> ›</span>
+          </span>
+        </div>
         <div class="ac-bento-media">
           <img
             src="/images/home/promo-notes.jpg"
@@ -296,13 +304,15 @@ const dbNames = isZh
     </div>
   </main>
 
-  <Contact
-    label={copy.contactLabel}
-    hint={copy.contactHint}
-    offers={copy.contactOffers}
-    copyLabel={copy.copyEmail}
-    copiedLabel={copy.copiedEmail}
-  />
+  <div class="ac-contact">
+    <Contact
+      label={copy.contactLabel}
+      hint={copy.contactHint}
+      offers={copy.contactOffers}
+      copyLabel={copy.copyEmail}
+      copiedLabel={copy.copiedEmail}
+    />
+  </div>
   <Footer
     brand={copy.brand}
     description={copy.home.footerDesc}
