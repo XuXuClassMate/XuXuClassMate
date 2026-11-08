@@ -1,4 +1,9 @@
 import { recordExchange } from "../http-log/src/record.mjs";
+import {
+  SITE_FOOTER_CSS,
+  SITE_FOOTER_DUAL_HTML,
+  SITE_FOOTER_GEO_SCRIPT,
+} from "../shared/site-footer.mjs";
 
 const LOGIN_CSS = `
 :root {
@@ -903,6 +908,8 @@ html[data-xuxu-auth="form"] .login .logo-title-area .logo-image {
 
 `;
 
+const LOGIN_CSS_FULL = LOGIN_CSS + SITE_FOOTER_CSS;
+
 const LOGIN_SCRIPT = `
 (() => {
   const copy = {
@@ -1312,20 +1319,10 @@ const LOGIN_SCRIPT = `
     }
     toggle.textContent = language === "en" ? "\\u4e2d\\u6587" : "EN";
 
-    let copyright = document.querySelector(".xuxu-copyright");
-    if (!copyright) {
-      copyright = document.createElement("div");
-      copyright.className = "xuxu-copyright";
-      const host = document.querySelector(".contain") || document.body;
-      host.appendChild(copyright);
+    const footer = document.getElementById("xuxu-site-footer");
+    if (footer) {
+      footer.dataset.activeLang = getLanguage() === "en" ? "en" : "zh";
     }
-    let label = copyright.querySelector(".xuxu-copy-label");
-    if (!label) {
-      label = document.createElement("div");
-      label.className = "xuxu-copy-label";
-      copyright.insertBefore(label, copyright.firstChild);
-    }
-    label.textContent = "\\u00a9 2020-2026 XuXuClassMate";
     applyPrompts();
     applyMarketing(text);
     login.classList.add("xuxu-icloud");
@@ -1364,7 +1361,7 @@ class LoginHtmlRewriter {
 class LoginHeadRewriter {
   element(element) {
     element.append(
-      `<meta name="color-scheme" content="light dark"><style id="xuxu-nas-login-branding">${LOGIN_CSS}</style>`,
+      `<meta name="color-scheme" content="light dark"><style id="xuxu-nas-login-branding">${LOGIN_CSS_FULL}</style>`,
       { html: true },
     );
   }
@@ -1372,6 +1369,11 @@ class LoginHeadRewriter {
 
 class LoginBodyRewriter {
   element(element) {
+    element.append(SITE_FOOTER_DUAL_HTML, { html: true });
+    element.append(
+      `<script data-cfasync="false" id="xuxu-site-footer-geo">${SITE_FOOTER_GEO_SCRIPT}</script>`,
+      { html: true },
+    );
     element.append(
       `<script data-cfasync="false" id="xuxu-nas-login-language">${LOGIN_SCRIPT}</script>`,
       { html: true },
