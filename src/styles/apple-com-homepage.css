@@ -255,6 +255,8 @@ body.page-home .section-promo.theme-light .apple-button-secondary {
 
 /* Promo ribbon (apple.com section-ribbon) */
 body.page-home .section-ribbon {
+  position: relative;
+  z-index: 100;
   background: #fafafc;
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.14);
 }
@@ -428,12 +430,6 @@ body.page-home .header.globalnav .nav-utils .theme-toggle {
   }
 }
 
-@media (max-width: 900px) {
-  body.site-apple:not(.page-home) .header.globalnav .nav-item--demo {
-    display: none;
-  }
-}
-
 @media (max-width: 734px) {
   body.page-home .section-promo-duo {
     grid-template-columns: 1fr;
@@ -454,7 +450,6 @@ body.page-home .header.globalnav .nav-utils .theme-toggle {
     display: none;
   }
 
-  body.page-home .header.globalnav .nav-item--demo,
   body.page-home .header.globalnav .nav-item--oss,
   body.page-home .header.globalnav .nav-item--notes {
     display: none;
