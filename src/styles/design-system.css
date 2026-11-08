@@ -27,11 +27,15 @@
   --material-fill-regular: 0.42;
   --material-fill-tinted: 0.72;
   --material-fill-solid: 0.96;
-  --material-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+  --material-shadow:
+    0 4px 24px -1px rgba(0, 0, 0, 0.08),
+    0 2px 8px -2px rgba(0, 0, 0, 0.04);
 }
 
 html[data-theme="dark"] {
-  --material-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+  --material-shadow:
+    0 4px 24px -1px rgba(0, 0, 0, 0.35),
+    0 2px 8px -2px rgba(0, 0, 0, 0.2);
 }
 
 /* Five materials. Content cards do not use these classes. */
