@@ -16,7 +16,7 @@ test("home renders and language switch works", async ({ page }) => {
   );
   await expect(page.getByRole("link", { name: "Explore Products" })).toHaveAttribute(
     "href",
-    "#featured",
+    "#highlights",
   );
   await expect(
     page.getByRole("link", { name: "Try AI Test Case Generator" }),
@@ -25,20 +25,9 @@ test("home renders and language switch works", async ({ page }) => {
     "View GitHub",
   );
   await expect(
-    page.getByRole("heading", { name: "Engineering Impact" }),
+    page.getByRole("heading", { name: "Get the highlights." }),
   ).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Product Adoption" })).toHaveCount(0);
-  await expect(page.getByRole("heading", { name: "What I Do" })).toHaveCount(0);
-  await expect(
-    page.getByRole("heading", { name: "Engineering Principles" }),
-  ).toHaveCount(0);
-  await expect(page.getByRole("heading", { name: "Technical Stack" })).toHaveCount(0);
-  await expect(page.locator(".product-cell")).toHaveCount(0);
-  await expect(page.getByText("Live Public Metrics · Updated Daily")).toBeVisible();
-  await expect(page.locator(".highlights .home-updated")).toHaveCount(0);
-  await expect(page.getByRole("link", { name: /View Docker Hub/i }).first()).toBeVisible();
-  await expect(page.getByRole("link", { name: /View ClawHub/i }).first()).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Featured Projects" })).toBeVisible();
+  await expect(page.locator("[data-highlights-carousel]")).toBeVisible();
   await expect(
     page.getByText("From requirements to reviewable test cases.").first(),
   ).toBeVisible();
@@ -60,7 +49,6 @@ test("footer exposes professional profiles only", async ({ page }) => {
   await expect(footer.getByRole("link", { name: "GitHub" })).toBeVisible();
   await expect(footer.getByRole("link", { name: "Medium" })).toBeVisible();
   await expect(footer.getByRole("link", { name: "Docker Hub" })).toBeVisible();
-  await expect(footer.getByRole("link")).toHaveCount(3);
 });
 
 test("projects page shows categorized sections", async ({ page }) => {

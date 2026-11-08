@@ -132,6 +132,77 @@ function isAppleSite(): boolean {
   return document.body.classList.contains("site-apple");
 }
 
+function initHighlightsCarousel(): void {
+  const root = document.querySelector<HTMLElement>("[data-highlights-carousel]");
+  if (!root) return;
+
+  const track = root.querySelector<HTMLElement>(".ac-highlights-track");
+  const slides = track
+    ? [...track.querySelectorAll<HTMLElement>(".ac-highlight-slide")]
+    : [];
+  const dotsRoot = root.querySelector<HTMLElement>(".ac-highlights-dots");
+  const pauseBtn = root.querySelector<HTMLButtonElement>("[data-highlights-pause]");
+  if (!track || slides.length < 2 || !dotsRoot) return;
+
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let index = 0;
+  let paused = reduce;
+  let timer: number | undefined;
+
+  const dotButtons = slides.map((_, i) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.setAttribute("aria-label", `Slide ${i + 1}`);
+    btn.addEventListener("click", () => go(i, true));
+    dotsRoot.appendChild(btn);
+    return btn;
+  });
+
+  const sync = () => {
+    for (const [i, slide] of slides.entries()) {
+      slide.classList.toggle("is-active", i === index);
+      dotButtons[i]?.classList.toggle("is-active", i === index);
+    }
+    const slide = slides[index];
+    const left =
+      slide.offsetLeft - (track.clientWidth - slide.offsetWidth) / 2;
+    track.scrollTo({ left: Math.max(0, left), behavior: reduce ? "auto" : "smooth" });
+  };
+
+  const go = (next: number, user = false) => {
+    index = (next + slides.length) % slides.length;
+    sync();
+    if (user) restartAutoplay();
+  };
+
+  const tick = () => go(index + 1);
+
+  const restartAutoplay = () => {
+    if (timer) window.clearInterval(timer);
+    if (paused) return;
+    timer = window.setInterval(tick, 5500);
+  };
+
+  pauseBtn?.addEventListener("click", () => {
+    paused = !paused;
+    pauseBtn.setAttribute("aria-pressed", paused ? "true" : "false");
+    pauseBtn.textContent = paused ? "▶" : "❚❚";
+    if (paused) {
+      if (timer) window.clearInterval(timer);
+    } else {
+      restartAutoplay();
+    }
+  });
+
+  if (pauseBtn) {
+    pauseBtn.setAttribute("aria-pressed", paused ? "true" : "false");
+    pauseBtn.textContent = paused ? "▶" : "❚❚";
+  }
+
+  sync();
+  if (!paused) restartAutoplay();
+}
+
 function initHeaderScroll(): void {
   const header = document.getElementById("siteHeader");
   if (!(header instanceof HTMLElement)) return;
@@ -782,6 +853,7 @@ function bootPage() {
   initMobileNav();
   initNavMore();
   initFilm();
+  initHighlightsCarousel();
   initHeaderScroll();
   initScrollReveal();
   initShowcaseSettle();

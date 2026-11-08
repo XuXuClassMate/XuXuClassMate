@@ -18,39 +18,29 @@ const home = getPortfolioHome(locale);
 const articles = getLatestArticles(locale).slice(0, 2);
 const blogHref = pageHref(locale, "blog");
 const orgHref = pageHref(locale, "open-source");
-const workHref = pageHref(locale, "work");
 const metrics = await getMetrics();
 const highlights = copy.home.highlights;
-const [flagship, ...moreFeatured] = home.featured;
+const [flagship, dockerFeatured] = home.featured;
 const isZh = locale === "zh";
 const pulls = highlights.find((item) => item.metric === "docker:total-pulls");
 const clawhub = highlights.find(
   (item) => item.metric === "clawhub:total-downloads",
 );
 const coverage = home.achievements[0];
-const qps = home.achievements[1];
-const impactNote = isZh
-  ? "Docker 与 ClawHub 是公开累计，每日更新。覆盖率和 QPS 来自过往交付，不是实时计数。"
-  : "Docker and ClawHub totals are public and updated daily. Coverage and QPS are from past delivery work, not live counters.";
-const dockerFeatured = moreFeatured[0];
-const dbNames = isZh
-  ? ["达梦", "瀚高", "人大金仓", "TiDB"]
-  : ["Dameng", "Highgo", "Kingbase", "TiDB"];
-const railLinks = [
-  ...home.capabilities.slice(0, 4),
-  { title: home.featuredCta, detail: "", href: workHref },
-];
+const highlightsTitle = isZh ? "精彩要点。" : "Get the highlights.";
+const filmLabel = isZh ? "观看 Demo" : "Watch the film";
+const pauseLabel = isZh ? "暂停轮播" : "Pause highlights";
 ---
 
 <BaseLayout locale={locale} page="home">
   <main id="main-content" class="apple-home apple-com">
     <section class="ac-hero hero hero--home" id="top">
       <div class="ac-hero-inner">
-        <p class="ac-eyebrow">{home.heroKicker}</p>
+        <p class="ac-eyebrow hero-role-line">{home.heroKicker}</p>
         <h1 class="hero-title">{home.greeting}</h1>
-        <p class="hero-desc">{home.description}</p>
+        <p class="hero-desc sr-only">{home.description}</p>
         <div class="hero-actions">
-          <a class="btn-primary" href="#featured">
+          <a class="btn-primary" href="#highlights">
             {home.ctaWork}
             <span aria-hidden="true">›</span>
           </a>
@@ -68,9 +58,7 @@ const railLinks = [
       <div class="ac-hero-stage ac-bleed">
         <img
           src="/images/home/hero-product.jpg"
-          alt={isZh
-            ? "AI 测试用例生成器工作区界面"
-            : "AI test case generator workspace"}
+          alt=""
           width="2560"
           height="2866"
           loading="eager"
@@ -80,211 +68,184 @@ const railLinks = [
       </div>
     </section>
 
-    <nav class="ac-rail" aria-label={home.capabilitiesTitle}>
-      <ul>
-        {
-          railLinks.map((item) => (
-            <li>
-              <a href={item.href}>{item.title}</a>
-            </li>
-          ))
-        }
-      </ul>
-    </nav>
-
-    <section class="ac-promo" id="featured">
-      <div class="ac-promo-copy">
-        <h2 class="ac-eyebrow">{home.featuredTitle}</h2>
-        {flagship ? <p class="ac-product-name">{flagship.title}</p> : null}
-        {flagship?.pitch ? (
-          <p class="ac-product-tagline">{flagship.pitch}</p>
-        ) : null}
-        {
-          flagship && (
-            <ul class="ac-cta-row">
-              <li>
-                <a href={home.ctaDemoHref}>
-                  {home.ctaDemo}
-                  <span aria-hidden="true">›</span>
-                </a>
-              </li>
-              <li>
-                <a href={flagship.href}>
-                  {home.featuredMore}
-                  <span aria-hidden="true">›</span>
-                </a>
-              </li>
-            </ul>
-          )
-        }
-        {flagship?.flow ? (
-          <p class="ac-flow">{flagship.flow.join("  ·  ")}</p>
-        ) : null}
-      </div>
-      <figure class="ac-promo-figure ac-bleed">
-        <img
-          src="/images/home/promo-cases.jpg"
-          alt={isZh ? "生成后的测试用例列表" : "Generated test case list"}
-          width="1280"
-          height="800"
-          loading="lazy"
-          decoding="async"
-        />
-      </figure>
-    </section>
-
     {
-      dockerFeatured && (
-        <section class="ac-promo ac-promo--dark" id="selected">
-          <div class="ac-promo-copy">
-            <h2 class="ac-eyebrow">
-              {isZh ? "测试基础设施" : "Test infrastructure"}
-            </h2>
-            <p class="ac-product-name">{dockerFeatured.title}</p>
-            <p class="ac-product-tagline">{dockerFeatured.description}</p>
-            <ul class="ac-cta-row">
-              <li>
-                <a href={dockerFeatured.href}>
-                  {home.featuredMore}
-                  <span aria-hidden="true">›</span>
-                </a>
-              </li>
-              {pulls ? (
-                <li>
-                  <a
-                    href={pulls.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {pulls.linkLabel}
-                    <span aria-hidden="true">›</span>
-                  </a>
-                </li>
-              ) : null}
-            </ul>
-            <ul class="ac-chip-row">
-              {dbNames.map((name) => (
-                <li>{name}</li>
-              ))}
-            </ul>
-          </div>
-          <figure class="ac-promo-figure ac-bleed">
-            <img
-              src="/images/home/promo-infra.jpg"
-              alt={isZh
-                ? "容器化测试与数据环境"
-                : "Containerized test and data environments"}
-              width="2000"
-              height="1333"
-              loading="lazy"
-              decoding="async"
-            />
-          </figure>
-        </section>
+      flagship && (
+        <header class="ac-product-bar">
+          <p class="ac-product-bar-title">{flagship.title}</p>
+          <nav class="ac-product-bar-nav" aria-label={isZh ? "产品" : "Product"}>
+            <a href="#highlights" class="is-active">
+              {isZh ? "概览" : "Overview"}
+            </a>
+            <a href={flagship.href}>{home.featuredMore}</a>
+            <a href={dockerFeatured?.href ?? pageHref(locale, "work")}>
+              {isZh ? "对比" : "Compare"}
+            </a>
+          </nav>
+          <a class="ac-product-bar-buy" href={home.ctaDemoHref}>
+            {home.ctaDemo}
+          </a>
+        </header>
       )
     }
 
-    <section class="ac-metrics" id="by-the-numbers">
-      <h2>{copy.home.highlightsTitle}</h2>
-      <p class="ac-lead">{copy.home.highlightsSubtitle}</p>
-      <p class="ac-note">{impactNote}</p>
-      <div class="ac-metrics-grid impact-row">
-        {
-          pulls && (
-            <article>
-              <span
-                class="impact-value"
-                data-metric={pulls.metric}
-                data-metric-fallback={pulls.value}
-              >
-                {resolveMetric(metrics, pulls.metric, pulls.value)}
-              </span>
-              <span class="impact-label">{pulls.label}</span>
-              <a href={pulls.href} target="_blank" rel="noopener noreferrer">
-                {pulls.linkLabel}
-              </a>
+    <section
+      class="ac-highlights"
+      id="highlights"
+      data-highlights-carousel
+      aria-roledescription="carousel"
+      aria-label={highlightsTitle}
+    >
+      <div class="ac-highlights-head">
+        <h2>{highlightsTitle}</h2>
+        <a class="ac-film-link" href={home.ctaDemoHref}>
+          <span aria-hidden="true">▶</span>
+          {filmLabel}
+        </a>
+      </div>
+
+      <div class="ac-highlights-viewport">
+        <ul class="ac-highlights-track">
+          {
+            flagship && (
+              <li class="ac-highlight-slide is-active">
+                <article class="ac-highlight-card">
+                  <span class="ac-highlight-glow ac-highlight-glow--blue" aria-hidden="true" />
+                  <h3>{flagship.pitch ?? flagship.title}</h3>
+                  <div class="ac-highlight-visual">
+                    <img
+                      src="/images/home/promo-cases.jpg"
+                      alt=""
+                      width="1280"
+                      height="800"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                </article>
+              </li>
+            )
+          }
+          {
+            dockerFeatured && (
+              <li class="ac-highlight-slide">
+                <article class="ac-highlight-card">
+                  <span class="ac-highlight-glow ac-highlight-glow--violet" aria-hidden="true" />
+                  <h3>
+                    {isZh ? "多库 Docker。即开即用。" : "Multi-DB Docker. Ready when you are."}
+                  </h3>
+                  <div class="ac-highlight-visual">
+                    <img
+                      src="/images/home/promo-infra.jpg"
+                      alt=""
+                      width="2000"
+                      height="1333"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                </article>
+              </li>
+            )
+          }
+          <li class="ac-highlight-slide">
+            <article class="ac-highlight-card">
+              <span class="ac-highlight-glow ac-highlight-glow--teal" aria-hidden="true" />
+              <h3>{isZh ? "公开交付数据。" : "Proof in the numbers."}</h3>
+              <div class="ac-highlight-metrics impact-row">
+                {
+                  pulls && (
+                    <div>
+                      <span
+                        class="impact-value"
+                        data-metric={pulls.metric}
+                        data-metric-fallback={pulls.value}
+                      >
+                        {resolveMetric(metrics, pulls.metric, pulls.value)}
+                      </span>
+                      <small>{pulls.label}</small>
+                    </div>
+                  )
+                }
+                {
+                  clawhub && (
+                    <div>
+                      <span
+                        class="impact-value"
+                        data-metric={clawhub.metric}
+                        data-metric-fallback={clawhub.value}
+                      >
+                        {resolveMetric(metrics, clawhub.metric, clawhub.value)}
+                      </span>
+                      <small>{clawhub.label}</small>
+                    </div>
+                  )
+                }
+                {
+                  coverage && (
+                    <div>
+                      <span class="impact-value">{coverage.value}</span>
+                      <small>{coverage.label}</small>
+                    </div>
+                  )
+                }
+              </div>
             </article>
-          )
-        }
-        {
-          clawhub && (
-            <article>
-              <span
-                class="impact-value"
-                data-metric={clawhub.metric}
-                data-metric-fallback={clawhub.value}
-              >
-                {resolveMetric(metrics, clawhub.metric, clawhub.value)}
-              </span>
-              <span class="impact-label">{clawhub.label}</span>
-              <a href={clawhub.href} target="_blank" rel="noopener noreferrer">
-                {clawhub.linkLabel}
-              </a>
+          </li>
+          <li class="ac-highlight-slide">
+            <article class="ac-highlight-card">
+              <span class="ac-highlight-glow ac-highlight-glow--blue" aria-hidden="true" />
+              <h3>{isZh ? "一整块工作区。" : "One continuous workspace."}</h3>
+              <div class="ac-highlight-visual">
+                <img
+                  src="/images/home/hero-product.jpg"
+                  alt=""
+                  width="2560"
+                  height="2866"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
             </article>
-          )
-        }
-        {
-          coverage && (
-            <article>
-              <span class="impact-value">{coverage.value}</span>
-              <span class="impact-label">{coverage.label}</span>
-            </article>
-          )
-        }
-        {
-          qps && (
-            <article>
-              <span class="impact-value">{qps.value}</span>
-              <span class="impact-label">{qps.label}</span>
-            </article>
-          )
-        }
+          </li>
+        </ul>
+      </div>
+
+      <div class="ac-highlights-controls">
+        <div class="ac-highlights-dots" role="tablist" aria-label={isZh ? "幻灯片" : "Slides"} />
+        <button
+          type="button"
+          class="ac-highlights-pause"
+          data-highlights-pause
+          aria-label={pauseLabel}
+        >
+          ❚❚
+        </button>
       </div>
     </section>
 
-    <section class="ac-bento" aria-label={isZh ? "更多入口" : "More"}>
+    <section class="ac-bento" aria-label={isZh ? "更多" : "More"}>
       <a class="ac-bento-tile ac-bento-tile--light" id="opensource" href={orgHref}>
         <div class="ac-bento-copy">
           <h2>{home.ossTitle}</h2>
-          <p>{home.ossDescription}</p>
           <span class="ac-bento-cta">
             {home.ossOrgLabel}
             <span aria-hidden="true"> ›</span>
           </span>
         </div>
         <div class="ac-bento-media">
-          <img
-            src="/images/home/promo-docker-cover.jpg"
-            alt=""
-            width="800"
-            height="450"
-            loading="lazy"
-            decoding="async"
-          />
+          <img src="/images/home/promo-docker-cover.jpg" alt="" width="800" height="450" loading="lazy" />
         </div>
       </a>
       <a class="ac-bento-tile ac-bento-tile--alt" id="articles" href={blogHref}>
         <div class="ac-bento-copy">
           <h2>{home.articlesTitle}</h2>
-          <p>
-            {isZh
-              ? "工程笔记与交付复盘。"
-              : "Engineering notes and delivery write-ups."}
-          </p>
           <span class="ac-bento-cta">
             {home.articlesCta}
             <span aria-hidden="true"> ›</span>
           </span>
         </div>
         <div class="ac-bento-media">
-          <img
-            src="/images/home/promo-notes.jpg"
-            alt=""
-            width="1200"
-            height="800"
-            loading="lazy"
-            decoding="async"
-          />
+          <img src="/images/home/promo-notes.jpg" alt="" width="1200" height="800" loading="lazy" />
         </div>
       </a>
     </section>
@@ -295,7 +256,6 @@ const railLinks = [
           articles.map((item) => (
             <a href={item.href}>
               <h3>{item.title}</h3>
-              <p>{item.description}</p>
             </a>
           ))
         }
