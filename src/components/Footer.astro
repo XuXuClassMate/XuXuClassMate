@@ -2,7 +2,13 @@
 import Icon from "./Icon.astro";
 import type { SocialLink } from "../content/types";
 import { getPortfolioHome } from "../content/portfolio-home";
-import { CONTACT_EMAIL, getCopy, pageHref, type Locale } from "../lib/i18n";
+import {
+  CONTACT_EMAIL,
+  alternateLocalePath,
+  getCopy,
+  pageHref,
+  type Locale,
+} from "../lib/i18n";
 
 type Props = {
   brand: string;
@@ -11,11 +17,13 @@ type Props = {
   social: SocialLink[];
 };
 
-const { brand, description, copyright, social } = Astro.props;
+const { brand, description, social } = Astro.props;
 const locale: Locale = Astro.url.pathname.startsWith("/zh") ? "zh" : "en";
 const copy = getCopy(locale);
 const home = getPortfolioHome(locale);
 const isZh = locale === "zh";
+const localeSwitchHref = alternateLocalePath(Astro.url.pathname);
+const localeCurrentLabel = locale === "en" ? "United States" : "中国大陆";
 const shopLinks = [
   { label: copy.nav.products ?? "Products", href: pageHref(locale, "work") },
   { label: isZh ? "交互 Demo" : "Live demo", href: home.ctaDemoHref },
@@ -31,6 +39,26 @@ const aboutLinks = [
   { label: copy.nav.now, href: pageHref(locale, "now") },
   { label: "GitHub", href: "https://github.com/XuXuClassMate" },
 ];
+const legalLinks = isZh
+  ? [
+      { label: "隐私政策", href: pageHref("zh", "about") },
+      { label: "使用条款", href: pageHref("zh", "about") },
+      { label: "销售与退款", href: `mailto:${CONTACT_EMAIL}` },
+      { label: "法律信息", href: pageHref("zh", "about") },
+      { label: "网站地图", href: "/sitemap.xml" },
+    ]
+  : [
+      { label: "Privacy Policy", href: pageHref("en", "about") },
+      { label: "Terms of Use", href: pageHref("en", "about") },
+      { label: "Sales and Refunds", href: `mailto:${CONTACT_EMAIL}` },
+      { label: "Legal", href: pageHref("en", "about") },
+      { label: "Site Map", href: "/sitemap.xml" },
+    ];
+const rightsReserved = isZh ? "保留所有权利。" : "All rights reserved.";
+const legalCopy = isZh
+  ? `Copyright © 2020-2026 ${brand}。${rightsReserved}`
+  : `Copyright © 2020-2026 ${brand}. ${rightsReserved}`;
+const localeNavLabel = isZh ? "选择语言" : "Choose your language";
 ---
 
 <footer class="footer footer--apple">
@@ -76,6 +104,9 @@ const aboutLinks = [
       <div class="footer-apple-col footer-apple-col--connect">
         <h2 class="footer-apple-heading">{isZh ? "连接" : "Connect"}</h2>
         <ul class="footer-apple-social">
+          <li>
+            <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+          </li>
           {
             social.map((item) => (
               <li>
@@ -90,11 +121,21 @@ const aboutLinks = [
       </div>
     </div>
     <div class="footer-bottom footer-apple-legal">
-      <p class="copyright">{copyright}</p>
-      <p class="footer-apple-mail">
-        <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+      <p class="footer-apple-locale">
+        <a href={localeSwitchHref} class="footer-apple-locale-link">
+          {localeCurrentLabel}
+        </a>
       </p>
-      <p class="footer-apple-brand">{brand}</p>
+      <p class="footer-apple-legal-line">
+        <span class="footer-apple-legal-copy">{legalCopy}</span>
+        {
+          legalLinks.map((link) => (
+            <a class="footer-apple-legal-link" href={link.href}>
+              {link.label}
+            </a>
+          ))
+        }
+      </p>
     </div>
   </div>
 </footer>

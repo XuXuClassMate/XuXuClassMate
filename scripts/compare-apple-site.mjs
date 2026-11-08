@@ -17,7 +17,13 @@ const sitemapPath = path.join(__dirname, "..", "public", "sitemap.xml");
 const sitemap = fs.readFileSync(sitemapPath, "utf8");
 const locs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
 
-const universal = ["site-apple", "globalnav", "footer--apple"];
+const universal = [
+  "site-apple",
+  "globalnav",
+  "footer--apple",
+  "footer-apple-legal-line",
+  "footer-apple-locale",
+];
 
 function pageMarkers(html, urlPath) {
   const isHome = urlPath === "/" || urlPath === "/zh" || urlPath === "/zh/";
