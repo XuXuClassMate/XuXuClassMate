@@ -123,18 +123,23 @@ const regionLabel = isZh ? "所在地区" : "Your location";
       </p>
     </div>
   </div>
-  <script is:inline>
+  <script is:inline define:vars={{ footerLang: isZh ? "zh" : "en" }}>
     (function () {
       var row = document.querySelector("[data-footer-region]");
       var nameEl = document.querySelector("[data-footer-region-name]");
       if (!row || !nameEl) return;
-      fetch("/api/geo", { credentials: "same-origin" })
+      fetch("/api/geo?lang=" + encodeURIComponent(footerLang), { credentials: "same-origin" })
         .then(function (res) {
           return res.ok ? res.json() : null;
         })
         .then(function (data) {
-          if (!data || !data.name) return;
-          nameEl.textContent = data.name;
+          if (!data || !data.country) return;
+          var label =
+            data.names && data.names[footerLang] != null
+              ? data.names[footerLang]
+              : data.name;
+          if (!label) return;
+          nameEl.textContent = label;
           row.hidden = false;
         })
         .catch(function () {});

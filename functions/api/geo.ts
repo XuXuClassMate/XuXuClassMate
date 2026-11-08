@@ -2,6 +2,8 @@ type PagesContext = {
   request: Request;
 };
 
+export type GeoLang = "en" | "zh";
+
 function corsHeaders(request: Request): HeadersInit {
   const origin = request.headers.get("Origin");
   if (!origin) return {};
@@ -20,6 +22,28 @@ function corsHeaders(request: Request): HeadersInit {
   return {};
 }
 
+export function regionDisplayName(country: string, lang: GeoLang): string {
+  const locale = lang === "zh" ? "zh-Hans" : "en";
+  try {
+    return new Intl.DisplayNames([locale], { type: "region" }).of(country) ?? country;
+  } catch {
+    return country;
+  }
+}
+
+function parseLangParam(request: Request): GeoLang | null {
+  const raw = new URL(request.url).searchParams.get("lang")?.trim().toLowerCase();
+  if (raw === "zh" || raw === "en") return raw;
+  return null;
+}
+
+function langFromAcceptLanguage(request: Request): GeoLang {
+  const accept = request.headers.get("Accept-Language") || "en";
+  const primary = accept.split(",")[0]?.trim().toLowerCase() || "en";
+  if (primary.startsWith("zh")) return "zh";
+  return "en";
+}
+
 export async function onRequest(context: PagesContext): Promise<Response> {
   const cors = corsHeaders(context.request);
 
@@ -28,38 +52,24 @@ export async function onRequest(context: PagesContext): Promise<Response> {
   }
 
   const country = context.request.headers.get("CF-IPCountry")?.trim() || "";
-  const accept = context.request.headers.get("Accept-Language") || "en";
-  const locale = accept.split(",")[0]?.trim() || "en";
+
+  const jsonHeaders = {
+    ...cors,
+    "Cache-Control": "private, no-store",
+    "Content-Type": "application/json; charset=utf-8",
+  };
 
   if (!country || country === "XX" || country === "T1") {
-    return Response.json(
-      { country: null, name: null },
-      {
-        headers: {
-          ...cors,
-          "Cache-Control": "private, no-store",
-          "Content-Type": "application/json; charset=utf-8",
-        },
-      },
-    );
+    return Response.json({ country: null, names: null, name: null }, { headers: jsonHeaders });
   }
 
-  let name = country;
-  try {
-    const display = new Intl.DisplayNames([locale], { type: "region" });
-    name = display.of(country) ?? country;
-  } catch {
-    name = country;
-  }
+  const names = {
+    en: regionDisplayName(country, "en"),
+    zh: regionDisplayName(country, "zh"),
+  };
 
-  return Response.json(
-    { country, name },
-    {
-      headers: {
-        ...cors,
-        "Cache-Control": "private, no-store",
-        "Content-Type": "application/json; charset=utf-8",
-      },
-    },
-  );
+  const langParam = parseLangParam(context.request);
+  const name = langParam ? names[langParam] : names[langFromAcceptLanguage(context.request)];
+
+  return Response.json({ country, names, name }, { headers: jsonHeaders });
 }
