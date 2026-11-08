@@ -13,6 +13,7 @@ import {
   type NoteSlug,
   type PageId,
 } from "../lib/i18n";
+import { getPortfolioHome } from "../content/portfolio-home";
 import "../styles/global.css";
 
 type Props = {
@@ -72,6 +73,8 @@ const structuredData = noindex
   ? null
   : jsonLdGraph(locale, page, caseSlug, noteSlug);
 const langSwitchHref = alternateLocalePath(Astro.url.pathname);
+const homeNav = getPortfolioHome(locale);
+const demoHref = homeNav.ctaDemoHref;
 ---
 
 <!doctype html>
@@ -174,6 +177,7 @@ const langSwitchHref = alternateLocalePath(Astro.url.pathname);
     class:list={{
       "site-apple": true,
       "page-home": page === "home",
+      [`page-${page}`]: true,
     }}
   >
     <svg class="lg-filters" width="0" height="0" aria-hidden="true" focusable="false">
@@ -184,7 +188,10 @@ const langSwitchHref = alternateLocalePath(Astro.url.pathname);
       </filter>
     </svg>
     <a class="skip-link" href="#main-content">{copy.skipToContent}</a>
-    <header class="header header--store" id="siteHeader">
+    <header
+      class:list={["header", "header--store", "globalnav"]}
+      id="siteHeader"
+    >
       <div class="header-glass" aria-hidden="true"></div>
       <div class="container">
         <nav class="nav" aria-label="Primary">
@@ -230,6 +237,32 @@ const langSwitchHref = alternateLocalePath(Astro.url.pathname);
                 ]}
               >
                 {copy.nav.about}
+              </a>
+              <a
+                href={pageHref(locale, "blog")}
+                class:list={[
+                  "nav-item",
+                  "nav-item--notes",
+                  { active: active === "blog" || active === "notes" },
+                ]}
+              >
+                {copy.nav.notes}
+              </a>
+              <a
+                href={pageHref(locale, "open-source")}
+                class:list={[
+                  "nav-item",
+                  "nav-item--oss",
+                  { active: active === "open-source" || active === "innonestx" },
+                ]}
+              >
+                {copy.nav.openSource}
+              </a>
+              <a
+                href={demoHref}
+                class="nav-item nav-item--demo"
+              >
+                {locale === "zh" ? "Demo" : "Demo"}
               </a>
               <div class="nav-utils">
                 <a

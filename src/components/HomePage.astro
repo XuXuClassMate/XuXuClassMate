@@ -1,7 +1,10 @@
 ---
 import Footer from "./Footer.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { getPortfolioHome } from "../content/portfolio-home";
+import {
+  getLatestArticles,
+  getPortfolioHome,
+} from "../content/portfolio-home";
 import { getCopy, pageHref, type Locale } from "../lib/i18n";
 
 type Props = {
@@ -19,9 +22,37 @@ const isZh = locale === "zh";
 const pulls = highlights.find((item) => item.metric === "docker:total-pulls");
 const learnMore = home.featuredMore;
 const demoLabel = home.ctaDemo;
+const buyLabel = isZh ? "体验" : "Try";
+const articles = getLatestArticles(locale).slice(0, 4);
+const entertainment = [
+  ...articles.map((item) => ({
+    title: item.title,
+    href: item.href,
+    image: "/images/home/promo-notes.jpg",
+  })),
+  ...home.services.slice(0, 4).map((s) => ({
+    title: s.title,
+    href: s.href,
+    image: "/images/cover-docker.jpg",
+  })),
+];
 ---
 
 <BaseLayout locale={locale} page="home">
+  <section class="section section-ribbon">
+    <div class="ribbon-wrapper">
+      <p class="ribbon-copy">
+        {isZh
+          ? "在线试用 AI 测试用例生成器。"
+          : "Shop the AI test case generator demo online."}
+      </p>
+      <a class="ribbon-link" href={home.ctaDemoHref}>
+        {isZh ? "立即体验" : "Shop"}
+        <span aria-hidden="true"> ›</span>
+      </a>
+    </div>
+  </section>
+
   <main id="main-content" class="apple-home apple-com apple-homepage">
     {
       flagship && (
@@ -48,7 +79,7 @@ const demoLabel = home.ctaDemo;
                   class="apple-button apple-button-secondary btn-ghost"
                   href={home.ctaDemoHref}
                 >
-                  {demoLabel}
+                  {buyLabel}
                 </a>
               </div>
             </div>
@@ -155,45 +186,61 @@ const demoLabel = home.ctaDemo;
         </div>
       </div>
     </section>
+
+    <section class="section section-promo-duo" aria-label={isZh ? "精选" : "Featured"}>
+      <article class="tile-wrapper theme-light">
+        <a class="tile-link" href={orgHref} aria-hidden="true" tabindex="-1" />
+        <div class="tile-content">
+          <h2 class="tile-headline">{home.ossTitle}</h2>
+          <div class="tile-ctas">
+            <a class="apple-button" href={orgHref}>{home.ossOrgLabel}</a>
+          </div>
+        </div>
+        <div class="tile-image-wrapper">
+          <img src="/images/home/promo-docker-cover.jpg" alt="" width="800" height="450" loading="lazy" />
+        </div>
+      </article>
+      <article class="tile-wrapper theme-light">
+        <a class="tile-link" href={blogHref} aria-hidden="true" tabindex="-1" />
+        <div class="tile-content">
+          <h2 class="tile-headline">{home.articlesTitle}</h2>
+          <div class="tile-ctas">
+            <a class="apple-button" href={blogHref}>{home.articlesCta}</a>
+          </div>
+        </div>
+        <div class="tile-image-wrapper">
+          <img src="/images/home/promo-notes.jpg" alt="" width="1200" height="800" loading="lazy" />
+        </div>
+      </article>
+    </section>
   </main>
 
-  <section class="section section-gallery" aria-label={isZh ? "更多" : "More"}>
-    <article class="tile-wrapper">
-      <a class="tile-link" href={orgHref} aria-hidden="true" tabindex="-1" />
-      <div class="tile-content">
-        <h2 class="tile-headline">{home.ossTitle}</h2>
-        <div class="tile-ctas">
-          <a class="apple-button" href={orgHref}>{home.ossOrgLabel}</a>
-        </div>
-      </div>
-      <div class="tile-image-wrapper">
-        <img
-          src="/images/home/promo-docker-cover.jpg"
-          alt=""
-          width="800"
-          height="450"
-          loading="lazy"
-        />
-      </div>
-    </article>
-    <article class="tile-wrapper">
-      <a class="tile-link" href={blogHref} aria-hidden="true" tabindex="-1" />
-      <div class="tile-content">
-        <h2 class="tile-headline">{home.articlesTitle}</h2>
-        <div class="tile-ctas">
-          <a class="apple-button" href={blogHref}>{home.articlesCta}</a>
-        </div>
-      </div>
-      <div class="tile-image-wrapper">
-        <img
-          src="/images/home/promo-notes.jpg"
-          alt=""
-          width="1200"
-          height="800"
-          loading="lazy"
-        />
-      </div>
-    </article>
+  <section
+    class="section section-entertainment"
+    data-entertainment-gallery
+    aria-label={isZh ? "工程内容与服务" : "Engineering & services"}
+  >
+    <div class="entertainment-header">
+      <h2 class="entertainment-title">
+        {isZh ? "持续更新的工程内容。" : "Endless engineering."}
+      </h2>
+    </div>
+    <div class="entertainment-track" data-entertainment-track>
+      <ul class="entertainment-list">
+        {
+          entertainment.map((item) => (
+            <li class="entertainment-item">
+              <a href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}>
+                <div class="entertainment-art">
+                  <img src={item.image} alt="" width="400" height="225" loading="lazy" />
+                </div>
+                <p class="entertainment-label">{item.title}</p>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
   </section>
 
   <Footer
