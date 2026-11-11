@@ -1,8 +1,22 @@
+import { LOCALES } from "../../src/content/locales";
+import type { Locale } from "../../src/content/types";
+
 type PagesContext = {
   request: Request;
 };
 
-export type GeoLang = "en" | "zh";
+const INTL_LOCALE: Record<Locale, string> = {
+  en: "en",
+  zh: "zh-Hans",
+  es: "es",
+  hi: "hi",
+  ar: "ar",
+  pt: "pt",
+  fr: "fr",
+  ru: "ru",
+  ja: "ja",
+  de: "de",
+};
 
 function corsHeaders(request: Request): HeadersInit {
   const origin = request.headers.get("Origin");
@@ -22,26 +36,29 @@ function corsHeaders(request: Request): HeadersInit {
   return {};
 }
 
-export function regionDisplayName(country: string, lang: GeoLang): string {
-  const locale = lang === "zh" ? "zh-Hans" : "en";
+export function regionDisplayName(country: string, lang: Locale): string {
   try {
-    return new Intl.DisplayNames([locale], { type: "region" }).of(country) ?? country;
+    return new Intl.DisplayNames([INTL_LOCALE[lang]], { type: "region" }).of(country) ?? country;
   } catch {
     return country;
   }
 }
 
-function parseLangParam(request: Request): GeoLang | null {
-  const raw = new URL(request.url).searchParams.get("lang")?.trim().toLowerCase();
-  if (raw === "zh" || raw === "en") return raw;
-  return null;
+function isLocale(value: string): value is Locale {
+  return (LOCALES as readonly string[]).includes(value);
 }
 
-function langFromAcceptLanguage(request: Request): GeoLang {
+function parseLangParam(request: Request): Locale | null {
+  const raw = new URL(request.url).searchParams.get("lang")?.trim().toLowerCase() || "";
+  return isLocale(raw) ? raw : null;
+}
+
+function langFromAcceptLanguage(request: Request): Locale {
   const accept = request.headers.get("Accept-Language") || "en";
   const primary = accept.split(",")[0]?.trim().toLowerCase() || "en";
-  if (primary.startsWith("zh")) return "zh";
-  return "en";
+  const code = primary.split("-")[0] || "en";
+  if (code === "zh") return "zh";
+  return isLocale(code) ? code : "en";
 }
 
 export async function onRequest(context: PagesContext): Promise<Response> {
@@ -63,13 +80,11 @@ export async function onRequest(context: PagesContext): Promise<Response> {
     return Response.json({ country: null, names: null, name: null }, { headers: jsonHeaders });
   }
 
-  const names = {
-    en: regionDisplayName(country, "en"),
-    zh: regionDisplayName(country, "zh"),
-  };
+  const names = Object.fromEntries(
+    LOCALES.map((code) => [code, regionDisplayName(country, code)]),
+  ) as Record<Locale, string>;
 
-  const langParam = parseLangParam(context.request);
-  const name = langParam ? names[langParam] : names[langFromAcceptLanguage(context.request)];
+  const lang = parseLangParam(context.request) ?? langFromAcceptLanguage(context.request);
 
-  return Response.json({ country, names, name }, { headers: jsonHeaders });
+  return Response.json({ country, names, name: names[lang] }, { headers: jsonHeaders });
 }

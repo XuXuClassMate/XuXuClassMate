@@ -2,6 +2,7 @@
 import Icon from "./Icon.astro";
 import type { SocialLink } from "../content/types";
 import { getPortfolioHome } from "../content/portfolio-home";
+import { homeSurface } from "../content/chrome";
 import { getCopy, pageHref, type Locale } from "../lib/i18n";
 
 type Props = {
@@ -32,7 +33,7 @@ const aboutLinks = [
 ];
 const rightsReserved = "All rights reserved.";
 const legalCopy = `Copyright © 2020-2026 ${brand}. ${rightsReserved}`;
-const regionLabel = "Your location";
+const regionLabel = homeSurface(locale).location;
 ---
 
 <footer class="footer footer--apple">

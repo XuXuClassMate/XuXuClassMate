@@ -29,6 +29,7 @@ export type HomeSurface = {
   themeDark: string;
   skip: string;
   language: string;
+  location: string;
   copyEmail: string;
   copied: string;
   contactLabel: string;
@@ -66,6 +67,7 @@ const en: HomeSurface = {
   themeDark: "Switch to dark theme",
   skip: "Skip to content",
   language: "Language",
+  location: "Your location",
   copyEmail: "Copy email",
   copied: "Copied",
   contactLabel: "Contact:",
@@ -105,6 +107,7 @@ const zh: HomeSurface = {
   themeDark: "切换到深色主题",
   skip: "跳到正文",
   language: "语言",
+  location: "你的位置",
   copyEmail: "复制邮箱",
   copied: "已复制",
   contactLabel: "联系：",
@@ -144,6 +147,7 @@ const es: HomeSurface = {
   themeDark: "Cambiar a tema oscuro",
   skip: "Saltar al contenido",
   language: "Idioma",
+  location: "Tu ubicación",
   copyEmail: "Copiar correo",
   copied: "Copiado",
   contactLabel: "Contacto:",
@@ -183,6 +187,7 @@ const hi: HomeSurface = {
   themeDark: "डार्क थीम पर जाएँ",
   skip: "सामग्री पर जाएँ",
   language: "भाषा",
+  location: "आपका स्थान",
   copyEmail: "ईमेल कॉपी करें",
   copied: "कॉपी हो गया",
   contactLabel: "संपर्क:",
@@ -222,6 +227,7 @@ const ar: HomeSurface = {
   themeDark: "التبديل إلى المظهر الداكن",
   skip: "تخطي إلى المحتوى",
   language: "اللغة",
+  location: "موقعك",
   copyEmail: "نسخ البريد",
   copied: "تم النسخ",
   contactLabel: "تواصل:",
@@ -261,6 +267,7 @@ const pt: HomeSurface = {
   themeDark: "Mudar para o tema escuro",
   skip: "Ir para o conteúdo",
   language: "Idioma",
+  location: "Sua localização",
   copyEmail: "Copiar e-mail",
   copied: "Copiado",
   contactLabel: "Contato:",
@@ -300,6 +307,7 @@ const fr: HomeSurface = {
   themeDark: "Passer au thème sombre",
   skip: "Aller au contenu",
   language: "Langue",
+  location: "Votre position",
   copyEmail: "Copier l’e-mail",
   copied: "Copié",
   contactLabel: "Contact :",
@@ -339,6 +347,7 @@ const ru: HomeSurface = {
   themeDark: "Тёмная тема",
   skip: "К содержанию",
   language: "Язык",
+  location: "Ваше местоположение",
   copyEmail: "Копировать почту",
   copied: "Скопировано",
   contactLabel: "Контакт:",
@@ -378,6 +387,7 @@ const ja: HomeSurface = {
   themeDark: "ダークテーマに切り替え",
   skip: "本文へスキップ",
   language: "言語",
+  location: "あなたの地域",
   copyEmail: "メールをコピー",
   copied: "コピーしました",
   contactLabel: "連絡:",
@@ -417,6 +427,7 @@ const de: HomeSurface = {
   themeDark: "Zum dunklen Design wechseln",
   skip: "Zum Inhalt springen",
   language: "Sprache",
+  location: "Ihr Standort",
   copyEmail: "E-Mail kopieren",
   copied: "Kopiert",
   contactLabel: "Kontakt:",
