@@ -101,7 +101,7 @@ const EN: GeneratorDemoCopy = {
     { id: "excel", label: "Excel" },
     { id: "markdown", label: "Markdown" },
     { id: "xmind", label: "XMind" },
-    { id: "automation", label: "Automation suite" }
+    { id: "automation", label: "Automation suite" },
   ],
   personas: ["QA Agent", "Dev Agent", "Product Agent", "Model ensemble"],
   realProductTitle: "Want the real multimodal upload?",
@@ -121,8 +121,8 @@ const EN: GeneratorDemoCopy = {
         "Reading requirement text…",
         "Detected feature: Email OTP Login",
         "Extracted 5 acceptance criteria",
-        "Flagged risk points: expiry · lockout · redirect"
-      ]
+        "Flagged risk points: expiry · lockout · redirect",
+      ],
     },
     {
       title: "Structured Test Cases",
@@ -131,8 +131,8 @@ const EN: GeneratorDemoCopy = {
         "Mapping criteria → candidate scenarios…",
         "Drafting TC-01 … TC-04",
         "Normalizing priority tags (P0 / P1)",
-        "Structured case set ready for review"
-      ]
+        "Structured case set ready for review",
+      ],
     },
     {
       title: "Multi-role / multi-model review",
@@ -142,8 +142,8 @@ const EN: GeneratorDemoCopy = {
         "QA role agent: coverage on lockout & expiry paths",
         "Dev role agent: feasibility of OTP + redirect flow",
         "Product role agent: acceptance wording alignment",
-        "Multi-model ensemble cross-check complete — ready to export"
-      ]
+        "Multi-model ensemble cross-check complete — ready to export",
+      ],
     },
     {
       title: "Automation / Integration",
@@ -151,9 +151,9 @@ const EN: GeneratorDemoCopy = {
       logs: [
         "Packaging Excel / Markdown / XMind exports…",
         "Attaching handoff notes for automation suites",
-        "Pipeline complete"
-      ]
-    }
+        "Pipeline complete",
+      ],
+    },
   ],
   samplePrd: `Feature: Email OTP Login
 
@@ -172,10 +172,10 @@ Acceptance criteria:
       steps: [
         "Open the login page",
         "Enter a registered email address",
-        "Click Request OTP"
+        "Click Request OTP",
       ],
       expected: "OTP email is sent; UI shows a 5-minute countdown.",
-      priority: "P0"
+      priority: "P0",
     },
     {
       id: "TC-02",
@@ -183,20 +183,20 @@ Acceptance criteria:
       steps: [
         "Open the login page",
         "Enter an invalid email string",
-        "Click Request OTP"
+        "Click Request OTP",
       ],
       expected: "Inline validation error; OTP is not sent.",
-      priority: "P1"
+      priority: "P1",
     },
     {
       id: "TC-03",
       title: "Lock account after 3 failed OTP attempts",
       steps: [
         "Request a valid OTP",
-        "Submit an incorrect OTP three times"
+        "Submit an incorrect OTP three times",
       ],
       expected: "Account locked for 15 minutes; clear lock message shown.",
-      priority: "P0"
+      priority: "P0",
     },
     {
       id: "TC-04",
@@ -204,20 +204,145 @@ Acceptance criteria:
       steps: [
         "Request OTP",
         "Enter the correct code within 5 minutes",
-        "Submit"
+        "Submit",
       ],
       expected: "User lands on the dashboard authenticated session.",
-      priority: "P0"
-    }
-  ]
+      priority: "P0",
+    },
+  ],
 };
 
-export function getGeneratorDemo(_locale: Locale): GeneratorDemoCopy {
-  return EN;
+const ZH: GeneratorDemoCopy = {
+  subtitle: "交互演示",
+  title: "AI 测试用例生成器",
+  description:
+    "用多模态 AI 把测试左移——浏览器 Demo。输出为示例用例，不是实时 LLM。真实产品可通过 Docker、npm 或 ClawHub 部署。",
+  badge: "Demo",
+  badgeNote:
+    "文件不会离开浏览器。生成为模拟过程，用精选示例用例，让你在几秒内感受产品流程。",
+  inputLabel: "需求输入",
+  sampleLabel: "载入示例 PRD",
+  uploadLabel: "选择文件",
+  uploadHint: "本 Demo 仅记录 PDF / Word / 图片 / 视频的文件名。",
+  generateLabel: "生成用例",
+  generatingLabel: "流水线运行中…",
+  resetLabel: "重置",
+  pipelineLabel: "流水线",
+  activityLabel: "阶段实时输出",
+  activityIdle: "先载入示例 PRD，再点击生成，观看每个阶段如何推进。",
+  resultsLabel: "结构化测试用例",
+  resultsCountLabel: "本 Demo 展示示例用例：{n} 条",
+  reviewLabel: "多角色 / 多模型评审",
+  reviewNote:
+    "QA / Dev / Product 角色 Agent 与多模型交叉检查覆盖、可落地性与表述，再进入导出。",
+  exportLabel: "自动化 / 集成交接",
+  exportHint: "点击格式即可下载基于当前用例的 Demo 样例文件。",
+  exportDownloaded: "已下载 {format}（Demo 样例）",
+  exportItems: [
+    { id: "excel", label: "Excel" },
+    { id: "markdown", label: "Markdown" },
+    { id: "xmind", label: "XMind" },
+    { id: "automation", label: "自动化套件" },
+  ],
+  personas: ["QA Agent", "Dev Agent", "Product Agent", "多模型交叉"],
+  realProductTitle: "需要真实的多模态上传？",
+  realProductBody:
+    "真正把测试左移：本机运行 Docker 镜像即可 PDF / Word / 图片 / 视频 → 生成 → 导出。本页是「先可演示」的一步。",
+  dockerLabel: "打开 Docker Hub",
+  caseStudyLabel: "阅读案例",
+  playgroundLabel: "返回体验台",
+  backLabel: "返回案例页",
+  emptyHint: "先载入示例 PRD 或附加文件名，再点击生成。",
+  fileReady: "已附加（Demo）：",
+  stages: [
+    {
+      title: "多模态 AI 解析",
+      detail: "解析需求文本，抽取验收标准与风险点。",
+      logs: [
+        "正在读取需求文本…",
+        "识别功能：邮箱 OTP 登录",
+        "抽取验收标准 5 条",
+        "标记风险点：过期 · 锁定 · 跳转",
+      ],
+    },
+    {
+      title: "结构化测试用例",
+      detail: "生成可评审用例：步骤、预期结果与优先级。",
+      logs: [
+        "将验收标准映射为候选场景…",
+        "起草 TC-01 … TC-04",
+        "统一优先级标签（P0 / P1）",
+        "结构化用例集已就绪，进入评审",
+      ],
+    },
+    {
+      title: "多角色 / 多模型评审",
+      detail: "由 QA / Dev / Product 角色 Agent 与多模型交叉评审。",
+      logs: [
+        "QA 角色 Agent：检查锁定与过期路径覆盖",
+        "Dev 角色 Agent：核对 OTP 与跳转可落地性",
+        "Product 角色 Agent：对齐验收表述",
+        "多模型交叉复核完成 — 可进入导出",
+      ],
+    },
+    {
+      title: "自动化 / 集成",
+      detail: "准备导出格式，交接给下游自动化与工具链。",
+      logs: [
+        "打包 Excel / Markdown / XMind 导出…",
+        "附加自动化套件交接说明",
+        "流水线完成",
+      ],
+    },
+  ],
+  samplePrd: `功能：邮箱 OTP 登录
+
+作为注册用户，我可以通过邮箱获取一次性验证码，并在 5 分钟内完成登录。
+
+验收标准：
+1. 用户输入有效邮箱并请求 OTP。
+2. OTP 在 5 分钟后过期。
+3. 连续失败 3 次后，账号锁定 15 分钟。
+4. 登录成功跳转仪表盘。
+5. 邮箱格式非法时展示行内校验错误。`,
+  cases: [
+    {
+      id: "TC-01",
+      title: "使用有效邮箱请求 OTP",
+      steps: ["打开登录页", "输入已注册邮箱", "点击请求 OTP"],
+      expected: "发送 OTP 邮件；界面显示 5 分钟倒计时。",
+      priority: "P0",
+    },
+    {
+      id: "TC-02",
+      title: "拒绝非法邮箱格式",
+      steps: ["打开登录页", "输入非法邮箱字符串", "点击请求 OTP"],
+      expected: "行内校验错误；不发送 OTP。",
+      priority: "P1",
+    },
+    {
+      id: "TC-03",
+      title: "OTP 失败 3 次后锁定账号",
+      steps: ["请求有效 OTP", "连续提交错误 OTP 三次"],
+      expected: "账号锁定 15 分钟，并展示清晰锁定提示。",
+      priority: "P0",
+    },
+    {
+      id: "TC-04",
+      title: "OTP 登录成功跳转仪表盘",
+      steps: ["请求 OTP", "在 5 分钟内输入正确验证码", "提交"],
+      expected: "用户进入已登录的仪表盘会话。",
+      priority: "P0",
+    },
+  ],
+};
+
+export function getGeneratorDemo(locale: Locale): GeneratorDemoCopy {
+  return locale === "zh" ? ZH : EN;
 }
 
-export function getGeneratorDemoPayload(_locale: Locale): GeneratorDemoPayload {
-  const demo = EN;
+export function getGeneratorDemoPayload(locale: Locale): GeneratorDemoPayload {
+  const demo = getGeneratorDemo(locale);
   return {
     samplePrd: demo.samplePrd,
     cases: demo.cases,
@@ -228,8 +353,8 @@ export function getGeneratorDemoPayload(_locale: Locale): GeneratorDemoPayload {
       generate: demo.generateLabel,
       fileReady: demo.fileReady,
       uploadHint: demo.uploadHint,
-      steps: "Steps",
-      expected: "Expected",
+      steps: locale === "zh" ? "步骤" : "Steps",
+      expected: locale === "zh" ? "预期结果" : "Expected",
       activityIdle: demo.activityIdle,
       reviewNote: demo.reviewNote,
       resultsCountLabel: demo.resultsCountLabel,

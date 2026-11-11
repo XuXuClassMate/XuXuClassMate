@@ -8,6 +8,7 @@
     <changefreq>weekly</changefreq>
     <priority>1.00</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/" />
   </url>
   <url>
@@ -16,6 +17,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work/testcase-generator" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/work/testcase-generator" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/work/testcase-generator" />
   </url>
   <url>
@@ -24,6 +26,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.92</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/demo/ai-testcase-generator" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/demo/ai-testcase-generator" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/demo/ai-testcase-generator" />
   </url>
   <url>
@@ -32,6 +35,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/about" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/about" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/about" />
   </url>
   <url>
@@ -40,6 +44,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/learn" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/learn" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/learn" />
   </url>
   <url>
@@ -48,6 +53,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/work" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/work" />
   </url>
   <url>
@@ -56,6 +62,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/blog" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/blog" />
   </url>
   <url>
@@ -64,6 +71,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/ai-testing" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/ai-testing" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/ai-testing" />
   </url>
   <url>
@@ -72,6 +80,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/playwright" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/playwright" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/playwright" />
   </url>
   <url>
@@ -80,6 +89,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/infrastructure" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/infrastructure" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/infrastructure" />
   </url>
   <url>
@@ -88,6 +98,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/open-source" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/open-source" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/open-source" />
   </url>
   <url>
@@ -96,6 +107,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/now" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/now" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/now" />
   </url>
   <url>
@@ -104,6 +116,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/playground" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/playground" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/playground" />
   </url>
   <url>
@@ -112,6 +125,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/ai-testcase-generator-multimodal" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/blog/ai-testcase-generator-multimodal" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/blog/ai-testcase-generator-multimodal" />
   </url>
   <url>
@@ -120,6 +134,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/ai-assisted-test-case-generation" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/blog/ai-assisted-test-case-generation" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/blog/ai-assisted-test-case-generation" />
   </url>
   <url>
@@ -128,6 +143,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work/fullstack-e2e" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/work/fullstack-e2e" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/work/fullstack-e2e" />
   </url>
   <url>
@@ -136,6 +152,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work/automation-framework" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/work/automation-framework" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/work/automation-framework" />
   </url>
   <url>
@@ -144,6 +161,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work/trading-assistant" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/work/trading-assistant" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/work/trading-assistant" />
   </url>
   <url>
@@ -152,6 +170,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work/custom-mail" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/work/custom-mail" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/work/custom-mail" />
   </url>
   <url>
@@ -160,6 +179,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work/globalpulse" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/work/globalpulse" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/work/globalpulse" />
   </url>
   <url>
@@ -168,6 +188,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work/docker-hub-api-gateway" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/work/docker-hub-api-gateway" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/work/docker-hub-api-gateway" />
   </url>
   <url>
@@ -176,6 +197,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work/docker-suite" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/work/docker-suite" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/work/docker-suite" />
   </url>
   <url>
@@ -184,6 +206,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/playwright-e2e-framework" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/blog/playwright-e2e-framework" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/blog/playwright-e2e-framework" />
   </url>
   <url>
@@ -192,6 +215,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/locust-api-performance-testing" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/blog/locust-api-performance-testing" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/blog/locust-api-performance-testing" />
   </url>
   <url>
@@ -200,6 +224,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/dockerized-test-environment" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/blog/dockerized-test-environment" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/blog/dockerized-test-environment" />
   </url>
   <url>
@@ -208,6 +233,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/ai-agent-software-testing" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/blog/ai-agent-software-testing" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/blog/ai-agent-software-testing" />
   </url>
   <url>
@@ -216,6 +242,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/enterprise-db-docker-qa" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/blog/enterprise-db-docker-qa" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/blog/enterprise-db-docker-qa" />
   </url>
   <url>
@@ -224,6 +251,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/clawhub-skill-shipping" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/blog/clawhub-skill-shipping" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/blog/clawhub-skill-shipping" />
   </url>
 </urlset>

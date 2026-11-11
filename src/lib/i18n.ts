@@ -1,5 +1,6 @@
 import { getNote as getNoteFromContent } from "../content/notes";
 import { en } from "../content/en";
+import { zh } from "../content/zh";
 import type {
   CaseSlug,
   Locale,
@@ -10,39 +11,70 @@ import type {
 
 export const SITE_ORIGIN = "https://www.xuxuclassmate.com";
 
-export function getCopy(_locale?: Locale): LocaleCopy {
-  return en;
+const catalogs: Record<Locale, LocaleCopy> = { en, zh };
+
+export function getCopy(locale: Locale = "en"): LocaleCopy {
+  return catalogs[locale] ?? en;
 }
 
 export function getCase(locale: Locale, slug: CaseSlug) {
-  return getCopy("en").work.cases.find((entry) => entry.slug === slug);
+  return getCopy(locale).work.cases.find((entry) => entry.slug === slug);
 }
 
 export function getNote(locale: Locale, slug: NoteSlug | string) {
-  return getNoteFromContent("en", slug);
+  return getNoteFromContent(locale, slug);
+}
+
+function cleanPath(path: string): string {
+  if (path === "/zh/index.html" || path === "/zh.html" || path === "/zh/" || path === "/zh") {
+    return "/zh/";
+  }
+  if (
+    path === "/en/index.html" ||
+    path === "/en.html" ||
+    path === "/en/" ||
+    path === "/en" ||
+    path === "/index.html"
+  ) {
+    return "/";
+  }
+  if (path.endsWith(".html")) return path.slice(0, -5);
+  return path;
 }
 
 /** Public path for a page. Root `/` is the English home. */
 export function pageHref(locale: Locale, page: PageId): string {
-  if (page === "home") return "/";
-  if (page === "notes") return "/en/blog";
-  if (page === "innonestx") return "/en/open-source";
-  return `/en/${page}`;
+  if (page === "home") return locale === "zh" ? "/zh/" : "/";
+  if (page === "notes") return `/${locale}/blog`;
+  if (page === "innonestx") return `/${locale}/open-source`;
+  return `/${locale}/${page}`;
 }
 
 export function caseHref(locale: Locale, slug: CaseSlug): string {
-  return `/en/work/${slug}`;
+  return `/${locale}/work/${slug}`;
 }
 
 export function noteHref(locale: Locale, slug: NoteSlug): string {
-  return `/en/blog/${slug}`;
+  return `/${locale}/blog/${slug}`;
+}
+
+/** Same page in the other language. English home stays `/`. */
+export function alternateLocalePath(pathname: string): string {
+  const trimmed =
+    pathname.length > 1 && pathname.endsWith("/") ? pathname.slice(0, -1) : pathname;
+  const path = cleanPath(trimmed);
+  if (path === "/" || path === "/zh/") return path === "/" ? "/zh/" : "/";
+  const match = path.match(/^\/(en|zh)(\/.*)?$/);
+  if (!match) return `/zh${path.startsWith("/") ? path : `/${path}`}`;
+  const from = match[1] as Locale;
+  const rest = cleanPath(match[2] ?? "/");
+  const to: Locale = from === "en" ? "zh" : "en";
+  if (rest === "/" || rest === "") return to === "en" ? "/" : "/zh/";
+  return `/${to}${rest.startsWith("/") ? rest : `/${rest}`}`;
 }
 
 export function canonicalPath(locale: Locale, page: PageId): string {
-  if (page === "home") return "/";
-  if (page === "notes") return "/en/blog";
-  if (page === "innonestx") return "/en/open-source";
-  return `/en/${page}`;
+  return pageHref(locale, page);
 }
 
 export function absoluteUrl(path: string): string {
@@ -52,19 +84,27 @@ export function absoluteUrl(path: string): string {
 
 export function hreflangLinks(
   page: PageId,
+  caseSlug?: CaseSlug,
+  noteSlug?: NoteSlug,
 ): { hreflang: string; href: string }[] {
-  const resolved =
-    page === "home"
-      ? "/"
-      : page === "notes"
-        ? "/en/blog"
-        : page === "innonestx"
-          ? "/en/open-source"
-          : `/en/${page}`;
-  const href = absoluteUrl(resolved === "/" ? "/" : resolved);
+  const enHref = absoluteUrl(
+    caseSlug
+      ? caseHref("en", caseSlug)
+      : noteSlug
+        ? noteHref("en", noteSlug)
+        : pageHref("en", page),
+  );
+  const zhHref = absoluteUrl(
+    caseSlug
+      ? caseHref("zh", caseSlug)
+      : noteSlug
+        ? noteHref("zh", noteSlug)
+        : pageHref("zh", page),
+  );
   return [
-    { hreflang: "en", href },
-    { hreflang: "x-default", href },
+    { hreflang: "en", href: enHref },
+    { hreflang: "zh", href: zhHref },
+    { hreflang: "x-default", href: enHref },
   ];
 }
 
@@ -84,11 +124,12 @@ export function jsonLdGraph(
     copy.meta.home;
   const pageUrl = absoluteUrl(
     caseSlug
-      ? `/en/work/${caseSlug}`
+      ? caseHref(locale, caseSlug)
       : noteSlug
-        ? `/en/blog/${noteSlug}`
+        ? noteHref(locale, noteSlug)
         : canonicalPath(locale, page),
   );
+  const lang = locale === "zh" ? "zh" : "en";
 
   const person = {
     "@type": "Person",
@@ -128,7 +169,7 @@ export function jsonLdGraph(
     "@id": `${SITE_ORIGIN}/#website`,
     name: "XuXuClassMate",
     url: SITE_ORIGIN,
-    inLanguage: ["en"],
+    inLanguage: ["en", "zh"],
     publisher: { "@id": `${SITE_ORIGIN}/#person` },
   };
 
@@ -145,7 +186,7 @@ export function jsonLdGraph(
     description: meta.description,
     isPartOf: { "@id": `${SITE_ORIGIN}/#website` },
     about: { "@id": `${SITE_ORIGIN}/#person` },
-    inLanguage: "en",
+    inLanguage: lang,
     ...(note
       ? {
           headline: note.title,

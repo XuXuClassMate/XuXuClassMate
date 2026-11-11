@@ -23,6 +23,8 @@ describe("i18n paths", () => {
     expect(pageHref("en", "open-source")).toBe("/en/open-source");
     expect(pageHref("en", "playground")).toBe("/en/playground");
     expect(pageHref("en", "now")).toBe("/en/now");
+    expect(pageHref("zh", "home")).toBe("/zh/");
+    expect(pageHref("zh", "about")).toBe("/zh/about");
   });
 
   it("maps case study routes", () => {
@@ -53,6 +55,7 @@ describe("i18n paths", () => {
     const root = hreflangLinks("home");
     expect(root).toEqual([
       { hreflang: "en", href: "https://www.xuxuclassmate.com/" },
+      { hreflang: "zh", href: "https://www.xuxuclassmate.com/zh/" },
       { hreflang: "x-default", href: "https://www.xuxuclassmate.com/" },
     ]);
 

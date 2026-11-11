@@ -37,20 +37,25 @@ export type LabPage = {
   cloudExploring?: string[];
 };
 
-export function getPlaywrightLab(_locale: Locale): LabPage {
+export function getPlaywrightLab(locale: Locale): LabPage {
+  const isZh = locale === "zh";
   return {
     meta: {
-      title: "Playwright Testing Lab | Playwright QA Engineer | XuXuClassMate",
-      description:
-        "Playwright + TypeScript automation lab: POM, API testing, mocking, parallel runs, multi-browser, CI/CD, Docker.",
+      title: isZh
+        ? "Playwright Testing Lab | Playwright QA | XuXuClassMate"
+        : "Playwright Testing Lab | Playwright QA Engineer | XuXuClassMate",
+      description: isZh
+        ? "Playwright + TypeScript 全链路自动化实验室：POM、API、Mock、并行、多浏览器、CI/CD、Docker。"
+        : "Playwright + TypeScript automation lab: POM, API testing, mocking, parallel runs, multi-browser, CI/CD, Docker.",
       keywords:
         "Playwright, Playwright TypeScript, Playwright QA Engineer, E2E testing, UI automation",
     },
     subtitle: "PLAYWRIGHT TESTING LAB",
     title: "Playwright Testing Lab",
-    description:
-      "A core practice area for web automation and full-chain E2E — not just UI scripts.",
-    capabilitiesTitle: "Capability map",
+    description: isZh
+      ? "Web 自动化与全链路 E2E 的核心方向 —— 不只是 UI 脚本。"
+      : "A core practice area for web automation and full-chain E2E — not just UI scripts.",
+    capabilitiesTitle: isZh ? "能力地图" : "Capability map",
     capabilities: [
       "Playwright + TypeScript",
       "Page Object Model",
@@ -66,32 +71,42 @@ export function getPlaywrightLab(_locale: Locale): LabPage {
       "CI/CD",
       "Docker",
     ],
-    featuredTitle: "Featured showcase",
+    featuredTitle: isZh ? "旗舰 Showcase" : "Featured showcase",
     featured: {
-      title: "Full-Stack E2E Testing Framework",
-      description:
-        "A full-chain automation framework covering frontend, API, database, Redis and message queue validation. Repository coming soon.",
-      status: "Coming soon",
-      href: "/en/work/fullstack-e2e",
-      linkLabel: "View case study",
+      title: isZh
+        ? "Full-Stack E2E Testing Framework"
+        : "Full-Stack E2E Testing Framework",
+      description: isZh
+        ? "覆盖前端、API、数据库、Redis 与消息队列校验的全链路自动化框架。仓库即将公开。"
+        : "A full-chain automation framework covering frontend, API, database, Redis and message queue validation. Repository coming soon.",
+      status: isZh ? "即将上线" : "Coming soon",
+      href: isZh
+        ? "/zh/work/fullstack-e2e"
+        : "/en/work/fullstack-e2e",
+      linkLabel: isZh ? "查看案例" : "View case study",
     },
   };
 }
 
-export function getInfrastructureLab(_locale: Locale): LabPage {
+export function getInfrastructureLab(locale: Locale): LabPage {
+  const isZh = locale === "zh";
   return {
     meta: {
-      title: "Test Infrastructure | Docker, CI/CD, Cloudflare | XuXuClassMate",
-      description:
-        "Docker, Compose, Linux, CI/CD, GitHub Actions, Cloudflare Workers / Tunnel, and containerized testing environments.",
+      title: isZh
+        ? "Test Infrastructure | Docker · CI/CD · Cloudflare | XuXuClassMate"
+        : "Test Infrastructure | Docker, CI/CD, Cloudflare | XuXuClassMate",
+      description: isZh
+        ? "Docker、Compose、Linux、CI/CD、GitHub Actions、Cloudflare Workers / Tunnel，以及容器化测试环境。"
+        : "Docker, Compose, Linux, CI/CD, GitHub Actions, Cloudflare Workers / Tunnel, and containerized testing environments.",
       keywords:
         "Test Infrastructure, Docker, CI/CD, GitHub Actions, Cloudflare Workers, containerized testing, Cloud-native Testing",
     },
     subtitle: "TEST INFRASTRUCTURE",
     title: "Test Infrastructure",
-    description:
-      "Repeatable test and release infrastructure — cloud-native testing that travels well on overseas job boards.",
-    capabilitiesTitle: "Capability map",
+    description: isZh
+      ? "可重复的测试与发布基础设施 —— 面向海外招聘的 Cloud-native Testing 叙事。"
+      : "Repeatable test and release infrastructure — cloud-native testing that travels well on overseas job boards.",
+    capabilitiesTitle: isZh ? "能力地图" : "Capability map",
     capabilities: [
       "Docker",
       "Docker Compose",
@@ -104,29 +119,47 @@ export function getInfrastructureLab(_locale: Locale): LabPage {
       "NAS / Self-hosted Environment",
       "Containerized Testing",
     ],
-    cloudTitle: "Cloud-native Testing",
-    cloudLive: [
-      "Cloudflare Pages (this site)",
-      "Docker / Compose QA image suite",
-      "API Gateway / Tunnel patterns",
-    ],
+    cloudTitle: isZh ? "Cloud-native Testing" : "Cloud-native Testing",
+    cloudLive: isZh
+      ? [
+          "Cloudflare Pages（本站）",
+          "Docker / Compose 测试库套件",
+          "API Gateway / Tunnel 模式",
+        ]
+      : [
+          "Cloudflare Pages (this site)",
+          "Docker / Compose QA image suite",
+          "API Gateway / Tunnel patterns",
+        ],
     cloudExploring: ["R2", "D1", "Durable Objects"],
-    proofTitle: "Proof",
+    proofTitle: isZh ? "证据" : "Proof",
     proofs: [
       {
-        title: "Docker Test Suite",
-        description: "Pullable QA database and environment images.",
-        href: "/en/work/docker-suite",
+        title: isZh ? "Docker 测试库套件" : "Docker Test Suite",
+        description: isZh
+          ? "可拉取的 QA 数据库与环境镜像。"
+          : "Pullable QA database and environment images.",
+        href: isZh
+          ? "/zh/work/docker-suite"
+          : "/en/work/docker-suite",
       },
       {
         title: "Docker Hub API Gateway",
-        description: "Live stats gateway used by READMEs and tools.",
-        href: "/en/work/docker-hub-api-gateway",
+        description: isZh
+          ? "README 与工具使用的实时统计网关。"
+          : "Live stats gateway used by READMEs and tools.",
+        href: isZh
+          ? "/zh/work/docker-hub-api-gateway"
+          : "/en/work/docker-hub-api-gateway",
       },
       {
         title: "GlobalPulse",
-        description: "Self-hosted briefings on Workers + KV.",
-        href: "/en/work/globalpulse",
+        description: isZh
+          ? "Workers + KV 上的自托管情报产品。"
+          : "Self-hosted briefings on Workers + KV.",
+        href: isZh
+          ? "/zh/work/globalpulse"
+          : "/en/work/globalpulse",
       },
     ],
   };

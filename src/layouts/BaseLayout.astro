@@ -2,6 +2,7 @@
 import Icon from "../components/Icon.astro";
 import {
   absoluteUrl,
+  alternateLocalePath,
   canonicalPath,
   getCopy,
   hreflangLinks,
@@ -51,18 +52,9 @@ const canonical = absoluteUrl(
       ? `/${locale}/blog/${noteSlug}`
       : canonicalPath(locale, page),
 );
-const alternates = caseSlug
-  ? [
-      { hreflang: "en", href: absoluteUrl(`/en/work/${caseSlug}`) },
-      { hreflang: "x-default", href: absoluteUrl(`/en/work/${caseSlug}`) },
-    ]
-  : noteSlug
-    ? [
-        { hreflang: "en", href: absoluteUrl(`/en/blog/${noteSlug}`) },
-        { hreflang: "x-default", href: absoluteUrl(`/en/blog/${noteSlug}`) },
-      ]
-    : hreflangLinks(page);
-const homeHref = "/";
+const alternates = hreflangLinks(page, caseSlug, noteSlug);
+const homeHref = pageHref(locale, "home");
+const langSwitchHref = alternateLocalePath(Astro.url.pathname);
 const active = page === "home" ? undefined : page;
 const ogTitle = meta.ogTitle ?? meta.title;
 const ogImage = absoluteUrl(ogImagePath ?? "/images/og-default.jpg");
@@ -141,7 +133,7 @@ const demoHref = homeNav.ctaDemoHref;
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={copy.brand} />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale" content={locale === "zh" ? "zh_CN" : "en_US"} />
     <meta property="og:url" content={canonical} />
     <meta property="og:title" content={ogTitle} />
     <meta property="og:description" content={meta.description} />
@@ -260,6 +252,14 @@ const demoHref = homeNav.ctaDemoHref;
                 Demo
               </a>
               <div class="nav-utils">
+                <a
+                  href={langSwitchHref}
+                  class="language-switch"
+                  aria-label={copy.languageSwitchHint}
+                  title={copy.languageSwitchHint}
+                >
+                  {copy.languageSwitch}
+                </a>
                 <button
                   type="button"
                   class="theme-toggle"

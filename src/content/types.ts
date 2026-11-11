@@ -1,4 +1,4 @@
-export type Locale = "en";
+export type Locale = "en" | "zh";
 
 export type PageId =
   | "home"

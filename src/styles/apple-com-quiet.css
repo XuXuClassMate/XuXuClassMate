@@ -20,12 +20,26 @@ body.site-apple {
   text-rendering: optimizeLegibility;
 }
 
+body.site-apple .language-switch {
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 8px;
+  color: #0066cc;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+
+body.site-apple .language-switch:hover {
+  text-decoration: underline;
+}
+
 body.site-apple .header {
   height: 48px;
   transition: none;
   background: rgba(251, 251, 253, 0.94) !important;
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  backdrop-filter: saturate(180%) blur(20px);
 }
 
 html[data-theme="dark"] body.site-apple .header {
@@ -257,6 +271,14 @@ body.site-apple .note-card:hover {
 }
 
 @media (max-width: 768px) {
+  body.site-apple .nav-links.show {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+  }
+
   body.site-apple .nav-links.show .nav-item {
     justify-content: flex-start;
     text-align: left;

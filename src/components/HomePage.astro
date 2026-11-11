@@ -18,17 +18,18 @@ const [flagship, dockerFeatured] = home.featured;
 const pulls = highlights.find((item) => item.metric === "docker:total-pulls");
 const learnMore = home.featuredMore;
 const demoLabel = home.ctaDemo;
-const buyLabel = "Try";
+const isZh = locale === "zh";
+const buyLabel = isZh ? "试用" : "Try";
 ---
 
 <BaseLayout locale={locale} page="home">
   <section class="section section-ribbon">
     <div class="ribbon-wrapper">
       <p class="ribbon-copy">
-        The AI test case generator demo is ready.
+        {isZh ? "AI 测试用例生成器演示已经就绪。" : "The AI test case generator demo is ready."}
       </p>
       <a class="ribbon-link" href={home.ctaDemoHref}>
-        Try it
+        {isZh ? "试用" : "Try it"}
         <span aria-hidden="true">›</span>
       </a>
     </div>
@@ -94,7 +95,7 @@ const buyLabel = "Try";
               <div class="tile-copy-wrapper">
                 <h2 class="tile-headline">{dockerFeatured.title}</h2>
                 <p class="tile-subhead">
-                  Test DB images. Ready to run.
+                  {isZh ? "测试数据库镜像。开箱即用。" : "Test DB images. Ready to run."}
                 </p>
               </div>
               <div class="tile-ctas">
@@ -133,10 +134,10 @@ const buyLabel = "Try";
         <div class="tile-content">
           <div class="tile-copy-wrapper">
             <h2 class="tile-headline">
-              Generative testing
+              {isZh ? "生成式测试" : "Generative testing"}
             </h2>
             <p class="tile-subhead">
-              From requirements to reviewable cases.
+              {isZh ? "从需求到可评审的用例。" : "From requirements to reviewable cases."}
             </p>
           </div>
           <div class="tile-ctas">
@@ -196,6 +197,7 @@ const buyLabel = "Try";
   </main>
 
   <Footer
+    locale={locale}
     brand={copy.brand}
     description={copy.home.footerDesc}
     copyright={copy.copyright}

@@ -10,7 +10,7 @@ function localeIndexPages() {
     hooks: {
       "astro:build:done": async ({ dir }) => {
         const root = fileURLToPath(dir);
-        for (const locale of ["en"]) {
+        for (const locale of ["en", "zh"]) {
           await rename(
             join(root, `${locale}.html`),
             join(root, locale, "index.html"),

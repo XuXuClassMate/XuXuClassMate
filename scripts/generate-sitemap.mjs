@@ -105,8 +105,14 @@ pages.sort((a, b) => Number(b.priority) - Number(a.priority));
 
 const body = pages
   .map((page) => {
-    const enHref = page.path;
+    const enHref = page.path.startsWith("/zh")
+      ? page.path === "/zh/" || page.path === "/zh"
+        ? "/"
+        : `/en${page.path.slice(3)}`
+      : page.path;
+    const zhHref = enHref === "/" ? "/zh/" : enHref.replace(/^\/en\//, "/zh/");
     const hreflang = `    <xhtml:link rel="alternate" hreflang="en" href="${ORIGIN}${enHref}" />
+    <xhtml:link rel="alternate" hreflang="zh" href="${ORIGIN}${zhHref}" />
     <xhtml:link rel="alternate" hreflang="x-default" href="${ORIGIN}${enHref === "/" ? "/" : enHref}" />`;
 
     return `  <url>

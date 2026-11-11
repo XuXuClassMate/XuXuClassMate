@@ -28,7 +28,7 @@ const homeSocial = [
 export const en: LocaleCopy = {
   brand: "XuXuClassMate",
   author: "XuXuClassMate",
-  languageSwitch: "EN",
+  languageSwitch: "中文",
   languageSwitchHint: "Switch to Chinese",
   contactLabel: "Contact:",
   contactHint:

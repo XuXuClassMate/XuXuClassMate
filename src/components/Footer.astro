@@ -5,14 +5,14 @@ import { getPortfolioHome } from "../content/portfolio-home";
 import { getCopy, pageHref, type Locale } from "../lib/i18n";
 
 type Props = {
+  locale?: Locale;
   brand: string;
   description: string;
   copyright: string;
   social: SocialLink[];
 };
 
-const { brand, description, social } = Astro.props;
-const locale: Locale = "en";
+const { brand, description, social, locale = "en" } = Astro.props;
 const copy = getCopy(locale);
 const home = getPortfolioHome(locale);
 const shopLinks = [
@@ -104,7 +104,7 @@ const regionLabel = "Your location";
       </p>
     </div>
   </div>
-  <script is:inline define:vars={{ footerLang: "en" }}>
+  <script is:inline define:vars={{ footerLang: locale }}>
     (function () {
       const row = document.querySelector("[data-footer-region]");
       const nameEl = document.querySelector("[data-footer-region-name]");
