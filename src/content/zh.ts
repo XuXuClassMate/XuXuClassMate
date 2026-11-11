@@ -11,7 +11,7 @@ export const zh: LocaleCopy = {
   brand: "XuXuClassMate",
   author: "XuXuClassMate",
   languageSwitch: "EN",
-  languageSwitchHint: "切换到 English",
+  languageSwitchHint: "语言",
   contactLabel: "联系我：",
   contactHint: "欢迎合作、咨询与工程机会——选一个方向联系我。",
   contactOffers: [

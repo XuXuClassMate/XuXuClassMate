@@ -29,7 +29,7 @@ export const en: LocaleCopy = {
   brand: "XuXuClassMate",
   author: "XuXuClassMate",
   languageSwitch: "中文",
-  languageSwitchHint: "Switch to Chinese",
+  languageSwitchHint: "Language",
   contactLabel: "Contact:",
   contactHint:
     "Open for collaboration, consulting, and engineering opportunities.",
