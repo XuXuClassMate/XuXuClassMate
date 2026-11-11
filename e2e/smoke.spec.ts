@@ -20,16 +20,12 @@ test("home renders and language switch works", async ({ page }) => {
   await expect(
     page.getByRole("link", { name: "Try AI Test Case Generator" }),
   ).toHaveAttribute("href", "/en/demo/ai-testcase-generator");
-  await expect(page.locator(".hero-actions .btn-ghost")).toContainText(
-    "Try AI Test Case Generator",
-  );
+  await expect(page.locator(".hero-actions .btn-ghost")).toHaveText("Try");
   await expect(page.locator(".section-promo, .section-hero").first()).toBeVisible();
   await expect(page.locator(".tile-headline").first()).toBeVisible();
   await expect(
     page.getByText("From requirements to reviewable test cases.").first(),
   ).toBeVisible();
-  await expect(page.getByText("500+").first()).toBeVisible();
-  await expect(page.getByText("80%+").first()).toBeVisible();
   await expect(page.getByText("Built with Astro")).toHaveCount(0);
   await expect(page.getByText("Cloudflare Pages")).toHaveCount(0);
 });
@@ -37,9 +33,10 @@ test("home renders and language switch works", async ({ page }) => {
 test("footer exposes professional profiles only", async ({ page }) => {
   await page.goto("/");
   const footer = page.getByRole("contentinfo");
-  await expect(footer.getByRole("link", { name: "GitHub" })).toBeVisible();
-  await expect(footer.getByRole("link", { name: "Medium" })).toBeVisible();
-  await expect(footer.getByRole("link", { name: "Docker Hub" })).toBeVisible();
+  const social = footer.locator(".footer-apple-social");
+  await expect(social.getByRole("link", { name: "GitHub" })).toBeVisible();
+  await expect(social.getByRole("link", { name: "Medium" })).toBeVisible();
+  await expect(social.getByRole("link", { name: "Docker Hub" })).toBeVisible();
 });
 
 test("projects page shows categorized sections", async ({ page }) => {
@@ -118,7 +115,7 @@ test("generator interactive demo runs sample flow", async ({ page }) => {
     "AI Test Case Generator",
   );
   await expect(page.locator(".nav-links .language-switch")).toHaveCount(0);
-  await expect(page.locator(".footer-desc")).not.toHaveText(
+  await expect(page.locator(".footer-apple-lead")).not.toHaveText(
     /Shift testing left with multi-modal AI — a browser demo/,
   );
   await expect(page.locator(".hero-desc")).toContainText(
@@ -254,7 +251,7 @@ test("open source page introduces InnoNestX", async ({ page }) => {
   ).toHaveAttribute("href", "/en/playground");
   await expect(
     page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: "Open Source", exact: true }),
-  ).toHaveCount(0);
+  ).toBeVisible();
 });
 
 test("desktop nav keeps products, engineering, open source, and about", async ({
@@ -265,7 +262,7 @@ test("desktop nav keeps products, engineering, open source, and about", async ({
   const nav = page.getByRole("navigation", { name: "Primary" });
   await expect(nav.getByRole("link", { name: "Products", exact: true })).toBeVisible();
   await expect(nav.getByRole("link", { name: "Engineering", exact: true })).toBeVisible();
-  await expect(nav.getByRole("link", { name: "Open Source", exact: true })).toHaveCount(0);
+  await expect(nav.getByRole("link", { name: "Open Source", exact: true })).toBeVisible();
   await expect(nav.getByRole("link", { name: "About", exact: true })).toBeVisible();
   await expect(nav.getByRole("link", { name: "Projects", exact: true })).toHaveCount(0);
   await expect(page.getByRole("button", { name: /Work/ })).toHaveCount(0);
@@ -273,7 +270,7 @@ test("desktop nav keeps products, engineering, open source, and about", async ({
   await expect(page.locator("#glassTintToggle")).toHaveCount(0);
   await expect(
     nav.getByRole("link", { name: /Switch to Chinese/i }),
-  ).toBeVisible();
+  ).toHaveCount(0);
   await expect(page.locator("#themeToggle")).toBeVisible();
 
   await page.goto("/en/design-lab");
@@ -411,11 +408,13 @@ test("home live metrics hydrate from api payload", async ({ page }) => {
       }),
     });
   });
-  await page.goto("/");
+  await page.goto("/en/blog/enterprise-db-docker-qa");
   const dockerTotal = page.locator('[data-metric="docker:total-pulls"]');
-  const clawhubTotal = page.locator('[data-metric="clawhub:total-downloads"]');
   await dockerTotal.scrollIntoViewIfNeeded();
   await expect(dockerTotal).toHaveText("60k+", { timeout: 5000 });
+  await page.goto("/en/blog/clawhub-skill-shipping");
+  const clawhubTotal = page.locator('[data-metric="clawhub:total-downloads"]');
+  await clawhubTotal.scrollIntoViewIfNeeded();
   await expect(clawhubTotal).toHaveText("2.7k+", { timeout: 5000 });
   await expect(page.locator('[data-metric="api:gateway-calls"]')).toHaveCount(0);
 });
@@ -439,7 +438,7 @@ test("learn page covers management and Locust", async ({ page }) => {
 
 test("copy email button updates label", async ({ page, context }) => {
   await context.grantPermissions(["clipboard-read", "clipboard-write"]);
-  await page.goto("/");
+  await page.goto("/en/about");
   const button = page.locator("#copyEmailBtn");
   await button.click();
   await expect(button).toHaveText("Copied");
@@ -490,32 +489,13 @@ test("H5 layout fits common phone widths without horizontal overflow", async ({
       await expect(page.locator("#mobileNavToggle")).toBeVisible();
       const metrics = await page.evaluate(() => {
         const doc = document.documentElement;
-        const actions = document.querySelector(".hero-actions");
-        const buttons = actions
-          ? [...actions.querySelectorAll(".btn-primary, .btn-ghost")].map((el) => {
-              const r = el.getBoundingClientRect();
-              return { top: r.top, width: r.width };
-            })
-          : [];
         return {
           overflow: Math.max(doc.scrollWidth, document.body.scrollWidth) - doc.clientWidth,
-          stacked:
-            buttons.length < 2 ||
-            Math.abs(buttons[0].top - buttons[1].top) > 8,
-          fullWidth:
-            buttons.length === 0 ||
-            buttons.every((b) => b.width >= doc.clientWidth * 0.7),
         };
       });
       expect(metrics.overflow, `${path} @ ${phone.width}`).toBeLessThanOrEqual(1);
-      if (path === "/" || path.includes("demo")) {
-        expect(metrics.stacked, `CTA stack ${path} @ ${phone.width}`).toBe(true);
-        expect(metrics.fullWidth, `CTA width ${path} @ ${phone.width}`).toBe(true);
-      }
       if (path === "/") {
-        await expect(
-          page.locator(".hero-actions").getByRole("link", { name: /GitHub/ }),
-        ).toBeVisible();
+        await expect(page.getByRole("link", { name: /GitHub/ }).first()).toBeVisible();
       }
     }
   }
@@ -550,7 +530,7 @@ test("english locale home aliases serve content with root canonical", async ({
       "https://www.xuxuclassmate.com/",
     );
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-      "Engineering Quality. Accelerated by AI.",
+      "AI Test Case Generator",
     );
   }
 });

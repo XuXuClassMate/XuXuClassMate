@@ -136,6 +136,8 @@ body.site-apple .header .nav-utils .theme-toggle:hover {
 
   body.site-apple .mobile-nav-toggle {
     display: inline-flex !important;
+    position: relative;
+    z-index: 1200;
   }
 
   body.site-apple .nav-links {
