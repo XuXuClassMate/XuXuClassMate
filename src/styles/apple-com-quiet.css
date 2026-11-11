@@ -75,11 +75,57 @@ body.site-apple .locale-menu-list a[aria-current="page"] {
 }
 
 @media (max-width: 768px) {
+  body.site-apple .header .nav-links-scroll,
+  body.site-apple .nav-links.show .nav-links-scroll {
+    width: 100%;
+    max-width: none;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: calc(28px + env(safe-area-inset-bottom, 0px));
+  }
+
+  body.site-apple .locale-menu {
+    width: 100%;
+  }
+
+  body.site-apple .nav-links .language-switch {
+    width: 100%;
+    min-height: 48px;
+    height: auto;
+    justify-content: flex-start;
+    padding: 12px max(28px, env(safe-area-inset-left, 0px));
+    font-size: 20px;
+    font-weight: 600;
+  }
+
   body.site-apple .locale-menu-list {
     position: static;
+    width: 100%;
+    min-width: 0;
     box-shadow: none;
     background: transparent;
-    padding-left: 28px;
+    padding: 0 16px 8px max(28px, env(safe-area-inset-left, 0px));
+  }
+
+  body.site-apple .locale-menu-list a {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    padding: 10px 4px;
+    font-size: 20px;
+  }
+
+  body.site-apple .footer-apple-legal {
+    padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  }
+
+  body.site-apple .footer-apple-region,
+  body.site-apple .footer-apple-legal-line,
+  body.site-apple .footer-apple-legal-copy,
+  body.site-apple [data-footer-region-name] {
+    white-space: normal;
+    overflow-wrap: anywhere;
   }
 }
 

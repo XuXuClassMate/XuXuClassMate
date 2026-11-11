@@ -355,9 +355,43 @@ test("mobile nav is a full-screen apple menu with theme and language", async ({
   }
   await expect(page.getByRole("button", { name: /Work/ })).toHaveCount(0);
   await expect(page.locator("#glassTintToggle")).toHaveCount(0);
-  await expect(page.locator("summary.language-switch")).toBeVisible();
+  const language = page.locator("summary.language-switch");
+  await expect(language).toBeVisible();
+  await language.click();
+  const chinese = page.getByRole("link", { name: "中文", exact: true });
+  await expect(chinese).toBeVisible();
+  const chineseBox = await chinese.boundingBox();
+  expect(chineseBox).not.toBeNull();
+  expect(chineseBox!.height).toBeGreaterThanOrEqual(44);
   await expect(page.locator("#themeToggle")).toBeVisible();
   await expect(page.locator(".theme-toggle-label")).toHaveText("Theme");
+});
+
+test("phone footer names the country in the page language", async ({ page }) => {
+  await page.route("**/api/geo**", async (route) => {
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({
+        country: "AE",
+        names: {
+          en: "United Arab Emirates",
+          zh: "阿拉伯联合酋长国",
+          ar: "الإمارات العربية المتحدة",
+        },
+        name: "United Arab Emirates",
+      }),
+    });
+  });
+  await page.setViewportSize({ width: 320, height: 568 });
+  await page.goto("/ar/");
+  const region = page.locator("[data-footer-region-name]");
+  await expect(region).toHaveText("الإمارات العربية المتحدة");
+  const overflow = await page.evaluate(() => {
+    const doc = document.documentElement;
+    return Math.max(doc.scrollWidth, document.body.scrollWidth) - doc.clientWidth;
+  });
+  expect(overflow).toBeLessThanOrEqual(1);
 });
 
 test("contact offers list is visible", async ({ page }) => {
