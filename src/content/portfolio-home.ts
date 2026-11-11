@@ -1,3 +1,4 @@
+import { HERO_PITCH, homeSurface } from "./chrome";
 import type { Locale } from "./types";
 import { getNotes } from "./notes";
 
@@ -98,7 +99,7 @@ const featuredZh = [
   },
 ];
 
-export function getPortfolioHome(locale: Locale): PortfolioHome {
+function buildPortfolioHome(locale: "en" | "zh"): PortfolioHome {
   const isZh = locale === "zh";
 
   return {
@@ -330,14 +331,41 @@ export function getPortfolioHome(locale: Locale): PortfolioHome {
   };
 }
 
+export function getPortfolioHome(locale: Locale): PortfolioHome {
+  const home = buildPortfolioHome(locale === "zh" ? "zh" : "en");
+  if (locale === "en" || locale === "zh") return home;
+  const t = homeSurface(locale);
+  const swap = (href: string) => href.replace(/^\/(?:en|zh)\//, `/${locale}/`);
+  return {
+    ...home,
+    greeting: t.kicker,
+    heroKicker: t.kicker,
+    ctaDemo: t.ctaDemo,
+    ctaDemoHref: swap(home.ctaDemoHref),
+    ctaGithub: t.github,
+    featuredMore: t.learnMore,
+    articlesTitle: t.notesTitle,
+    articlesCta: t.viewAll,
+    ossTitle: t.ossTitle,
+    ossOrgLabel: t.ossCta,
+    servicesTitle: t.servicesTitle,
+    servicesLead: t.servicesLead,
+    featured: home.featured.map((item, index) => ({
+      ...item,
+      title: index === 0 ? item.title : item.title,
+      pitch: index === 0 ? HERO_PITCH[locale] : item.pitch,
+      description: index === 1 ? t.dockerSub : item.description,
+      href: swap(item.href),
+    })),
+    whatIDo: home.whatIDo.map((item) => ({ ...item, href: swap(item.href) })),
+  };
+}
+
 export function getLatestArticles(locale: Locale) {
   return getNotes(locale).slice(0, 3).map((note) => ({
     title: note.title,
     description: note.description,
-    href:
-      locale === "zh"
-        ? `/zh/blog/${note.slug}`
-        : `/en/blog/${note.slug}`,
+    href: `/${locale}/blog/${note.slug}`,
     tags: note.tags,
   }));
 }

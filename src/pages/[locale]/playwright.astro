@@ -1,0 +1,15 @@
+---
+import LabPage from "../../components/LabPage.astro";
+import { getPlaywrightLab } from "../../content/labs";
+import { LOCALES } from "../../content/locales";
+import type { Locale } from "../../content/types";
+
+export function getStaticPaths() {
+  return LOCALES.map((locale) => ({ params: { locale } }));
+}
+
+const { locale } = Astro.params;
+const lang = locale as Locale;
+---
+
+<LabPage locale={lang} pageId="playwright" lab={getPlaywrightLab(lang)} />

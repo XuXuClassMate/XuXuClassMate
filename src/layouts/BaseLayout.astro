@@ -2,9 +2,9 @@
 import Icon from "../components/Icon.astro";
 import {
   absoluteUrl,
-  alternateLocalePath,
   canonicalPath,
   getCopy,
+  hrefForLocale,
   hreflangLinks,
   jsonLdGraph,
   pageHref,
@@ -13,6 +13,7 @@ import {
   type NoteSlug,
   type PageId,
 } from "../lib/i18n";
+import { LOCALE_LABELS, LOCALES, OG_LOCALE, textDirection } from "../content/locales";
 import { getPortfolioHome } from "../content/portfolio-home";
 import "../styles/global.css";
 
@@ -54,7 +55,12 @@ const canonical = absoluteUrl(
 );
 const alternates = hreflangLinks(page, caseSlug, noteSlug);
 const homeHref = pageHref(locale, "home");
-const langSwitchHref = alternateLocalePath(Astro.url.pathname);
+const localeLinks = LOCALES.map((code) => ({
+  code,
+  href: hrefForLocale(Astro.url.pathname, code),
+  label: LOCALE_LABELS[code],
+  current: code === locale,
+}));
 const active = page === "home" ? undefined : page;
 const ogTitle = meta.ogTitle ?? meta.title;
 const ogImage = absoluteUrl(ogImagePath ?? "/images/og-default.jpg");
@@ -66,7 +72,7 @@ const demoHref = homeNav.ctaDemoHref;
 ---
 
 <!doctype html>
-<html lang={locale} style="--liquid-tint: 0.45">
+<html lang={locale} dir={textDirection(locale)} style="--liquid-tint: 0.45">
   <head>
     <meta charset="UTF-8" />
     <script is:inline>
@@ -133,7 +139,7 @@ const demoHref = homeNav.ctaDemoHref;
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={copy.brand} />
-    <meta property="og:locale" content={locale === "zh" ? "zh_CN" : "en_US"} />
+    <meta property="og:locale" content={OG_LOCALE[locale]} />
     <meta property="og:url" content={canonical} />
     <meta property="og:title" content={ogTitle} />
     <meta property="og:description" content={meta.description} />
@@ -252,14 +258,27 @@ const demoHref = homeNav.ctaDemoHref;
                 Demo
               </a>
               <div class="nav-utils">
-                <a
-                  href={langSwitchHref}
-                  class="language-switch"
-                  aria-label={copy.languageSwitchHint}
-                  title={copy.languageSwitchHint}
-                >
-                  {copy.languageSwitch}
-                </a>
+                <details class="locale-menu">
+                  <summary class="language-switch" aria-label={copy.languageSwitchHint}>
+                    {LOCALE_LABELS[locale]}
+                  </summary>
+                  <ul class="locale-menu-list">
+                    {
+                      localeLinks.map((item) => (
+                        <li>
+                          <a
+                            href={item.href}
+                            hreflang={item.code}
+                            lang={item.code}
+                            aria-current={item.current ? "page" : undefined}
+                          >
+                            {item.label}
+                          </a>
+                        </li>
+                      ))
+                    }
+                  </ul>
+                </details>
                 <button
                   type="button"
                   class="theme-toggle"

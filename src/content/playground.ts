@@ -1,3 +1,4 @@
+import { contentLocale } from "./locales";
 import type { Locale } from "./types";
 
 export type PlaygroundMode = "interactive" | "live" | "install";
@@ -98,14 +99,15 @@ const EXPERIENCES: ExperienceDef[] = [
 export function getPlaygroundExperiences(
   locale: Locale,
 ): PlaygroundExperience[] {
+  const lang = contentLocale(locale);
   return EXPERIENCES.map((item) => ({
     id: item.id,
     title: item.title,
-    description: item.description[locale],
+    description: item.description[lang],
     mode: item.mode,
-    modeLabel: MODE_LABELS[item.mode][locale],
-    ctaLabel: item.ctaLabel[locale],
-    ctaHref: item.ctaHref[locale],
+    modeLabel: MODE_LABELS[item.mode][lang],
+    ctaLabel: item.ctaLabel[lang],
+    ctaHref: item.ctaHref[lang].replace(/^\/(?:en|zh)\//, `/${locale}/`),
     ctaExternal: item.ctaExternal,
     githubHref: item.githubHref,
     tryAnchor: item.tryAnchor,

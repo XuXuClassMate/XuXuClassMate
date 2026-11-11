@@ -1,3 +1,4 @@
+import { contentLocale } from "./locales";
 import type { Card, CaseSlug, Locale } from "./types";
 
 type ProjectId = CaseSlug;
@@ -275,12 +276,12 @@ export const PROJECTS: Record<ProjectId, ProjectDef> = {
 };
 
 function groupLabel(locale: Locale, group: ProjectGroupId): string {
-  return GROUP_LABELS[group][locale];
+  return GROUP_LABELS[group][contentLocale(locale)];
 }
 
 function toCard(locale: Locale, id: ProjectId): Card {
   const project = PROJECTS[id];
-  const copy = project[locale];
+  const copy = project[contentLocale(locale)];
   return {
     title: copy.title,
     description: copy.description,

@@ -110,10 +110,14 @@ const body = pages
         ? "/"
         : `/en${page.path.slice(3)}`
       : page.path;
-    const zhHref = enHref === "/" ? "/zh/" : enHref.replace(/^\/en\//, "/zh/");
-    const hreflang = `    <xhtml:link rel="alternate" hreflang="en" href="${ORIGIN}${enHref}" />
-    <xhtml:link rel="alternate" hreflang="zh" href="${ORIGIN}${zhHref}" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="${ORIGIN}${enHref === "/" ? "/" : enHref}" />`;
+    const codes = ["en", "zh", "es", "hi", "ar", "pt", "fr", "ru", "ja", "de"];
+    const hreflang = [
+      ...codes.map((code) => {
+        const href = code === "en" ? enHref : enHref === "/" ? `/${code}/` : enHref.replace(/^\/en\//, `/${code}/`);
+        return `    <xhtml:link rel="alternate" hreflang="${code}" href="${ORIGIN}${href}" />`;
+      }),
+      `    <xhtml:link rel="alternate" hreflang="x-default" href="${ORIGIN}${enHref === "/" ? "/" : enHref}" />`,
+    ].join("\n");
 
     return `  <url>
     <loc>${ORIGIN}${page.path}</loc>

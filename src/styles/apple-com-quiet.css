@@ -20,6 +20,10 @@ body.site-apple {
   text-rendering: optimizeLegibility;
 }
 
+body.site-apple .locale-menu {
+  position: relative;
+}
+
 body.site-apple .language-switch {
   display: inline-flex;
   align-items: center;
@@ -29,11 +33,54 @@ body.site-apple .language-switch {
   font-size: 12px;
   font-weight: 400;
   letter-spacing: -0.01em;
+  list-style: none;
+  cursor: pointer;
+}
+
+body.site-apple .language-switch::-webkit-details-marker {
+  display: none;
+}
+
+body.site-apple .locale-menu-list {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 30;
+  min-width: 168px;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background: rgba(251, 251, 253, 0.96);
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+html[dir="rtl"] body.site-apple .locale-menu-list {
+  right: auto;
+  left: 0;
+}
+
+body.site-apple .locale-menu-list a {
+  display: block;
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: #1d1d1f;
+  font-size: 14px;
   text-decoration: none;
 }
 
-body.site-apple .language-switch:hover {
-  text-decoration: underline;
+body.site-apple .locale-menu-list a:hover,
+body.site-apple .locale-menu-list a[aria-current="page"] {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+@media (max-width: 768px) {
+  body.site-apple .locale-menu-list {
+    position: static;
+    box-shadow: none;
+    background: transparent;
+    padding-left: 28px;
+  }
 }
 
 body.site-apple .header {

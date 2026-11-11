@@ -1,3 +1,4 @@
+import { contentLocale } from "./locales";
 import type { Locale } from "./types";
 
 /** Edit this file monthly — Now page content lives here. */
@@ -181,13 +182,14 @@ function localizeHref(locale: Locale, href?: string): string | undefined {
 }
 
 export function getNowSections(locale: Locale): NowSection[] {
+  const lang = contentLocale(locale);
   return SECTIONS.map((section) => ({
     id: section.id,
-    title: section.title[locale],
-    description: section.description[locale],
+    title: section.title[lang],
+    description: section.description[lang],
     items: section.items.map((item) => ({
-      title: item[locale].title,
-      note: item[locale].note,
+      title: item[lang].title,
+      note: item[lang].note,
       href: localizeHref(locale, item.href),
     })),
   }));

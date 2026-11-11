@@ -1,3 +1,5 @@
+import { homeSurface } from "../content/chrome";
+import { LOCALES, OG_LOCALE } from "../content/locales";
 import { getNote as getNoteFromContent } from "../content/notes";
 import { en } from "../content/en";
 import { zh } from "../content/zh";
@@ -11,11 +13,67 @@ import type {
 
 export const SITE_ORIGIN = "https://www.xuxuclassmate.com";
 
-const catalogs: Record<Locale, LocaleCopy> = { en, zh };
+function withSurface(locale: Locale): LocaleCopy {
+  const t = homeSurface(locale);
+  return {
+    ...en,
+    languageSwitch: t.language,
+    languageSwitchHint: t.language,
+    menuLabel: t.menu,
+    skipToContent: t.skip,
+    themeToggle: t.theme,
+    themeToLight: t.themeLight,
+    themeToDark: t.themeDark,
+    copyEmail: t.copyEmail,
+    copiedEmail: t.copied,
+    contactLabel: t.contactLabel,
+    contactHint: t.contactHint,
+    nav: {
+      ...en.nav,
+      products: t.products,
+      engineering: t.engineering,
+      about: t.about,
+      notes: t.notes,
+      blog: t.notes,
+      openSource: t.openSource,
+      innonestx: t.openSource,
+    },
+    home: {
+      ...en.home,
+      footerDesc: t.footerDesc,
+      title: t.homeTitle,
+      description: t.homeDescription,
+    },
+    meta: {
+      ...en.meta,
+      home: {
+        ...en.meta.home,
+        title: t.homeTitle,
+        description: t.homeDescription,
+        ogTitle: t.homeTitle,
+      },
+    },
+  };
+}
+
+const catalogs: Record<Locale, LocaleCopy> = {
+  en,
+  zh,
+  es: withSurface("es"),
+  hi: withSurface("hi"),
+  ar: withSurface("ar"),
+  pt: withSurface("pt"),
+  fr: withSurface("fr"),
+  ru: withSurface("ru"),
+  ja: withSurface("ja"),
+  de: withSurface("de"),
+};
 
 export function getCopy(locale: Locale = "en"): LocaleCopy {
   return catalogs[locale] ?? en;
 }
+
+export { LOCALES, OG_LOCALE };
 
 export function getCase(locale: Locale, slug: CaseSlug) {
   return getCopy(locale).work.cases.find((entry) => entry.slug === slug);
@@ -25,26 +83,21 @@ export function getNote(locale: Locale, slug: NoteSlug | string) {
   return getNoteFromContent(locale, slug);
 }
 
+const LOCALE_PATTERN = LOCALES.join("|");
+
 function cleanPath(path: string): string {
-  if (path === "/zh/index.html" || path === "/zh.html" || path === "/zh/" || path === "/zh") {
-    return "/zh/";
+  if (path.endsWith(".html")) path = path.slice(0, -5);
+  if (path === "/index" || path === "/en" || path === "/en/index") return "/";
+  for (const code of LOCALES) {
+    if (code === "en") continue;
+    if (path === `/${code}` || path === `/${code}/index`) return `/${code}/`;
   }
-  if (
-    path === "/en/index.html" ||
-    path === "/en.html" ||
-    path === "/en/" ||
-    path === "/en" ||
-    path === "/index.html"
-  ) {
-    return "/";
-  }
-  if (path.endsWith(".html")) return path.slice(0, -5);
   return path;
 }
 
 /** Public path for a page. Root `/` is the English home. */
 export function pageHref(locale: Locale, page: PageId): string {
-  if (page === "home") return locale === "zh" ? "/zh/" : "/";
+  if (page === "home") return locale === "en" ? "/" : `/${locale}/`;
   if (page === "notes") return `/${locale}/blog`;
   if (page === "innonestx") return `/${locale}/open-source`;
   return `/${locale}/${page}`;
@@ -58,19 +111,27 @@ export function noteHref(locale: Locale, slug: NoteSlug): string {
   return `/${locale}/blog/${slug}`;
 }
 
-/** Same page in the other language. English home stays `/`. */
-export function alternateLocalePath(pathname: string): string {
+/** English canonical path (`/` or `/en/...`) for any localized URL. */
+export function englishPath(pathname: string): string {
   const trimmed =
     pathname.length > 1 && pathname.endsWith("/") ? pathname.slice(0, -1) : pathname;
   const path = cleanPath(trimmed);
-  if (path === "/" || path === "/zh/") return path === "/" ? "/zh/" : "/";
-  const match = path.match(/^\/(en|zh)(\/.*)?$/);
-  if (!match) return `/zh${path.startsWith("/") ? path : `/${path}`}`;
-  const from = match[1] as Locale;
-  const rest = cleanPath(match[2] ?? "/");
-  const to: Locale = from === "en" ? "zh" : "en";
-  if (rest === "/" || rest === "") return to === "en" ? "/" : "/zh/";
-  return `/${to}${rest.startsWith("/") ? rest : `/${rest}`}`;
+  if (path === "/" || LOCALES.some((code) => path === `/${code}/` || path === `/${code}`)) {
+    return "/";
+  }
+  const match = path.match(new RegExp(`^/(${LOCALE_PATTERN})(/.*)?$`));
+  if (!match) return path.startsWith("/") ? path : `/${path}`;
+  const rest = match[2] ?? "/";
+  if (rest === "/" || rest === "") return "/";
+  return `/en${rest.startsWith("/") ? rest : `/${rest}`}`;
+}
+
+/** Same page in another language. English home stays `/`. */
+export function hrefForLocale(pathname: string, locale: Locale): string {
+  const enPath = englishPath(pathname);
+  if (enPath === "/") return pageHref(locale, "home");
+  if (locale === "en") return enPath;
+  return `/${locale}${enPath.slice(3)}`;
 }
 
 export function canonicalPath(locale: Locale, page: PageId): string {
@@ -87,23 +148,17 @@ export function hreflangLinks(
   caseSlug?: CaseSlug,
   noteSlug?: NoteSlug,
 ): { hreflang: string; href: string }[] {
-  const enHref = absoluteUrl(
-    caseSlug
-      ? caseHref("en", caseSlug)
-      : noteSlug
-        ? noteHref("en", noteSlug)
-        : pageHref("en", page),
-  );
-  const zhHref = absoluteUrl(
-    caseSlug
-      ? caseHref("zh", caseSlug)
-      : noteSlug
-        ? noteHref("zh", noteSlug)
-        : pageHref("zh", page),
-  );
+  const pathFor = (code: Locale) =>
+    absoluteUrl(
+      caseSlug
+        ? caseHref(code, caseSlug)
+        : noteSlug
+          ? noteHref(code, noteSlug)
+          : pageHref(code, page),
+    );
+  const enHref = pathFor("en");
   return [
-    { hreflang: "en", href: enHref },
-    { hreflang: "zh", href: zhHref },
+    ...LOCALES.map((code) => ({ hreflang: code, href: pathFor(code) })),
     { hreflang: "x-default", href: enHref },
   ];
 }
@@ -129,7 +184,7 @@ export function jsonLdGraph(
         ? noteHref(locale, noteSlug)
         : canonicalPath(locale, page),
   );
-  const lang = locale === "zh" ? "zh" : "en";
+  const lang = locale;
 
   const person = {
     "@type": "Person",

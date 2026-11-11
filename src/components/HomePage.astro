@@ -1,6 +1,7 @@
 ---
 import Footer from "./Footer.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { homeSurface } from "../content/chrome";
 import { getPortfolioHome } from "../content/portfolio-home";
 import { getCopy, pageHref, type Locale } from "../lib/i18n";
 
@@ -16,20 +17,20 @@ const orgHref = pageHref(locale, "open-source");
 const highlights = copy.home.highlights;
 const [flagship, dockerFeatured] = home.featured;
 const pulls = highlights.find((item) => item.metric === "docker:total-pulls");
-const learnMore = home.featuredMore;
-const demoLabel = home.ctaDemo;
-const isZh = locale === "zh";
-const buyLabel = isZh ? "试用" : "Try";
+const surface = homeSurface(locale);
+const learnMore = surface.learnMore;
+const demoLabel = surface.ctaDemo;
+const buyLabel = surface.try;
 ---
 
 <BaseLayout locale={locale} page="home">
   <section class="section section-ribbon">
     <div class="ribbon-wrapper">
       <p class="ribbon-copy">
-        {isZh ? "AI 测试用例生成器演示已经就绪。" : "The AI test case generator demo is ready."}
+        {surface.ribbon}
       </p>
       <a class="ribbon-link" href={home.ctaDemoHref}>
-        {isZh ? "试用" : "Try it"}
+        {surface.ribbonCta}
         <span aria-hidden="true">›</span>
       </a>
     </div>
@@ -95,7 +96,7 @@ const buyLabel = isZh ? "试用" : "Try";
               <div class="tile-copy-wrapper">
                 <h2 class="tile-headline">{dockerFeatured.title}</h2>
                 <p class="tile-subhead">
-                  {isZh ? "测试数据库镜像。开箱即用。" : "Test DB images. Ready to run."}
+                  {surface.dockerSub}
                 </p>
               </div>
               <div class="tile-ctas">
@@ -134,10 +135,10 @@ const buyLabel = isZh ? "试用" : "Try";
         <div class="tile-content">
           <div class="tile-copy-wrapper">
             <h2 class="tile-headline">
-              {isZh ? "生成式测试" : "Generative testing"}
+              {surface.genTitle}
             </h2>
             <p class="tile-subhead">
-              {isZh ? "从需求到可评审的用例。" : "From requirements to reviewable cases."}
+              {surface.genSub}
             </p>
           </div>
           <div class="tile-ctas">

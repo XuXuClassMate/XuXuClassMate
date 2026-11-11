@@ -1,0 +1,17 @@
+---
+import NotePage from "../../../components/NotePage.astro";
+import { NOTE_SLUGS } from "../../../content/notes";
+import { LOCALES } from "../../../content/locales";
+import type { Locale } from "../../../content/types";
+import type { NoteSlug } from "../../../lib/i18n";
+
+export function getStaticPaths() {
+  return LOCALES.flatMap((locale) =>
+    NOTE_SLUGS.map((slug) => ({ params: { locale, slug } })),
+  );
+}
+
+const { locale, slug } = Astro.params;
+---
+
+<NotePage locale={locale as Locale} slug={slug as NoteSlug} />

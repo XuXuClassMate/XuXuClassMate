@@ -1,4 +1,5 @@
-import type { Note, NoteCategory, NoteSection, PageMeta } from "./types";
+import { contentLocale } from "./locales";
+import type { Locale, Note, NoteCategory, NoteSection, PageMeta } from "./types";
 import {
   ENGINEERING_ARTICLES,
   NOTE_CATEGORIES,
@@ -866,29 +867,30 @@ CLI / pip/npm     npm 路径                pip / CLI 路径
   },
 ];
 
-export function getNotes(locale: "en" | "zh"): Note[] {
+export function getNotes(locale: Locale): Note[] {
+  const lang = contentLocale(locale);
   const fieldGuides = NOTES.map((note) => {
-    const copy = note[locale];
+    const copy = note[lang];
     return {
       slug: note.slug,
       title: copy.title,
       description: copy.description,
       category: note.category,
-      proof: note.proof[locale],
-      tags: note.tags[locale],
+      proof: note.proof[lang],
+      tags: note.tags[lang],
       sections: copy.sections,
-      related: note.related[locale],
-      ctas: note.ctas[locale],
+      related: note.related[lang],
+      ctas: note.ctas[lang],
       embed: note.embed,
       meta: copy.meta,
     } satisfies Note;
   });
 
-  const landings = ENGINEERING_ARTICLES.map((article) => toNote(locale, article));
+  const landings = ENGINEERING_ARTICLES.map((article) => toNote(lang, article));
   return [...landings, ...fieldGuides];
 }
 
-export function getNote(locale: "en" | "zh", slug: string): Note | undefined {
+export function getNote(locale: Locale, slug: string): Note | undefined {
   return getNotes(locale).find((note) => note.slug === slug);
 }
 

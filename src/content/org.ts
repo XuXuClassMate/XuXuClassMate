@@ -1,4 +1,5 @@
-import type { Card } from "./types";
+import { contentLocale } from "./locales";
+import type { Card, Locale } from "./types";
 
 export type OssCategoryId =
   | "AI"
@@ -240,22 +241,23 @@ const ORG_PROJECTS: OrgProjectDef[] = [
   },
 ];
 
-function toProject(locale: "en" | "zh", project: OrgProjectDef): OrgProject {
+function toProject(locale: Locale, project: OrgProjectDef): OrgProject {
+  const lang = contentLocale(locale);
   return {
     title: project.title,
-    description: project.description[locale],
+    description: project.description[lang],
     href: project.href,
-    linkLabel: project.linkLabel[locale],
+    linkLabel: project.linkLabel[lang],
     ctaHref: project.ctaHref,
-    ctaLabel: project.ctaLabel?.[locale],
-    tags: project.tags[locale],
-    status: project.status[locale],
+    ctaLabel: project.ctaLabel?.[lang],
+    tags: project.tags[lang],
+    status: project.status[lang],
     org: project.org,
     category: project.category,
   };
 }
 
-export function getOrgProjects(locale: "en" | "zh"): OrgProject[] {
+export function getOrgProjects(locale: Locale): OrgProject[] {
   return ORG_PROJECTS.map((project) => toProject(locale, project));
 }
 
@@ -266,12 +268,13 @@ export type OrgCategoryGroup = {
   projects: OrgProject[];
 };
 
-export function getOrgCategories(locale: "en" | "zh"): OrgCategoryGroup[] {
+export function getOrgCategories(locale: Locale): OrgCategoryGroup[] {
+  const lang = contentLocale(locale);
   const projects = getOrgProjects(locale);
   return OSS_CATEGORY_ORDER.map((id) => ({
     id,
-    title: CATEGORY_META[id][locale].title,
-    description: CATEGORY_META[id][locale].description,
+    title: CATEGORY_META[id][lang].title,
+    description: CATEGORY_META[id][lang].description,
     projects: projects.filter((project) => project.category === id),
   }));
 }

@@ -115,7 +115,8 @@ test("generator interactive demo runs sample flow", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "AI Test Case Generator",
   );
-  await expect(page.locator(".nav-links .language-switch")).toHaveAttribute(
+  await page.locator("summary.language-switch").click();
+  await expect(page.getByRole("link", { name: "中文", exact: true })).toHaveAttribute(
     "href",
     "/zh/demo/ai-testcase-generator",
   );
@@ -272,9 +273,11 @@ test("desktop nav keeps products, engineering, open source, and about", async ({
   await expect(page.getByRole("button", { name: /Work/ })).toHaveCount(0);
   await expect(page.getByRole("button", { name: /More/ })).toHaveCount(0);
   await expect(page.locator("#glassTintToggle")).toHaveCount(0);
-  await expect(
-    nav.getByRole("link", { name: /Switch to Chinese/i }),
-  ).toHaveAttribute("href", "/zh/");
+  await page.locator("summary.language-switch").click();
+  await expect(page.getByRole("link", { name: "中文", exact: true })).toHaveAttribute(
+    "href",
+    "/zh/",
+  );
   await expect(page.locator("#themeToggle")).toBeVisible();
 
   await page.goto("/en/design-lab");
@@ -352,7 +355,7 @@ test("mobile nav is a full-screen apple menu with theme and language", async ({
   }
   await expect(page.getByRole("button", { name: /Work/ })).toHaveCount(0);
   await expect(page.locator("#glassTintToggle")).toHaveCount(0);
-  await expect(page.locator(".nav-links .language-switch")).toBeVisible();
+  await expect(page.locator("summary.language-switch")).toBeVisible();
   await expect(page.locator("#themeToggle")).toBeVisible();
   await expect(page.locator(".theme-toggle-label")).toHaveText("Theme");
 });

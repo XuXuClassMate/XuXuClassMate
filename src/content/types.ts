@@ -1,4 +1,14 @@
-export type Locale = "en" | "zh";
+export type Locale =
+  | "en"
+  | "zh"
+  | "es"
+  | "hi"
+  | "ar"
+  | "pt"
+  | "fr"
+  | "ru"
+  | "ja"
+  | "de";
 
 export type PageId =
   | "home"

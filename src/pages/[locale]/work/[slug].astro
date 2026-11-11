@@ -1,0 +1,24 @@
+---
+import CaseStudyPage from "../../../components/CaseStudyPage.astro";
+import { LOCALES } from "../../../content/locales";
+import type { Locale } from "../../../content/types";
+import type { CaseSlug } from "../../../lib/i18n";
+
+export function getStaticPaths() {
+  const slugs: CaseSlug[] = [
+    "testcase-generator",
+    "trading-assistant",
+    "custom-mail",
+    "globalpulse",
+    "docker-hub-api-gateway",
+    "docker-suite",
+    "automation-framework",
+    "fullstack-e2e",
+  ];
+  return LOCALES.flatMap((locale) => slugs.map((slug) => ({ params: { locale, slug } })));
+}
+
+const { locale, slug } = Astro.params;
+---
+
+<CaseStudyPage locale={locale as Locale} slug={slug as CaseSlug} />

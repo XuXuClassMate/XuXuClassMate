@@ -25,6 +25,8 @@ describe("i18n paths", () => {
     expect(pageHref("en", "now")).toBe("/en/now");
     expect(pageHref("zh", "home")).toBe("/zh/");
     expect(pageHref("zh", "about")).toBe("/zh/about");
+    expect(pageHref("es", "home")).toBe("/es/");
+    expect(pageHref("ja", "work")).toBe("/ja/work");
   });
 
   it("maps case study routes", () => {
@@ -53,11 +55,19 @@ describe("i18n paths", () => {
 
   it("builds hreflang alternates", () => {
     const root = hreflangLinks("home");
-    expect(root).toEqual([
-      { hreflang: "en", href: "https://www.xuxuclassmate.com/" },
-      { hreflang: "zh", href: "https://www.xuxuclassmate.com/zh/" },
-      { hreflang: "x-default", href: "https://www.xuxuclassmate.com/" },
-    ]);
+    expect(root.find((item) => item.hreflang === "en")?.href).toBe(
+      "https://www.xuxuclassmate.com/",
+    );
+    expect(root.find((item) => item.hreflang === "zh")?.href).toBe(
+      "https://www.xuxuclassmate.com/zh/",
+    );
+    expect(root.find((item) => item.hreflang === "es")?.href).toBe(
+      "https://www.xuxuclassmate.com/es/",
+    );
+    expect(root.find((item) => item.hreflang === "x-default")?.href).toBe(
+      "https://www.xuxuclassmate.com/",
+    );
+    expect(root).toHaveLength(11);
 
     const work = hreflangLinks("work");
     expect(work.find((l) => l.hreflang === "en")?.href).toBe(
