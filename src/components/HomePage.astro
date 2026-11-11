@@ -1,10 +1,7 @@
 ---
 import Footer from "./Footer.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import {
-  getLatestArticles,
-  getPortfolioHome,
-} from "../content/portfolio-home";
+import { getPortfolioHome } from "../content/portfolio-home";
 import { getCopy, pageHref, type Locale } from "../lib/i18n";
 
 type Props = {
@@ -22,40 +19,17 @@ const pulls = highlights.find((item) => item.metric === "docker:total-pulls");
 const learnMore = home.featuredMore;
 const demoLabel = home.ctaDemo;
 const buyLabel = "Try";
-const articles = getLatestArticles(locale).slice(0, 4);
-const serviceCover: Record<string, string> = {
-  www: "/images/home/hero-product.jpg",
-  nas: "/images/cover-docker.jpg",
-  pulse: "/images/cover-globalpulse.jpg",
-  mail: "/images/cover-custom-mail.jpg",
-  watch: "/images/cover-globalpulse.jpg",
-  ssh: "/images/cover-automation.jpg",
-};
-const entertainment = [
-  ...articles.map((item) => ({
-    title: item.title,
-    detail: "",
-    href: item.href,
-    image: "/images/home/promo-notes.jpg",
-  })),
-  ...home.services.map((s) => ({
-    title: s.title,
-    detail: s.detail,
-    href: s.href,
-    image: serviceCover[s.id] ?? "/images/cover-docker.jpg",
-  })),
-];
 ---
 
 <BaseLayout locale={locale} page="home">
   <section class="section section-ribbon">
     <div class="ribbon-wrapper">
       <p class="ribbon-copy">
-        Shop the AI test case generator demo online.
+        The AI test case generator demo is ready.
       </p>
       <a class="ribbon-link" href={home.ctaDemoHref}>
-        Shop
-        <span aria-hidden="true"> ›</span>
+        Try it
+        <span aria-hidden="true">›</span>
       </a>
     </div>
   </section>
@@ -92,7 +66,7 @@ const entertainment = [
             </div>
             <div class="tile-image-wrapper">
               <img
-                src="/images/home/hero-product.jpg"
+                src="/images/home/hero-main.jpg"
                 alt=""
                 width="2560"
                 height="2866"
@@ -134,7 +108,7 @@ const entertainment = [
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {pulls.linkLabel}
+                    Docker Hub
                   </a>
                 ) : null}
               </div>
@@ -202,7 +176,7 @@ const entertainment = [
           </div>
         </div>
         <div class="tile-image-wrapper">
-          <img src="/images/home/promo-docker-cover.jpg" alt="" width="800" height="450" loading="lazy" />
+          <img src="/images/home/promo-flagship.jpg" alt="" width="800" height="450" loading="lazy" />
         </div>
       </article>
       <article class="tile-wrapper theme-light">
@@ -220,68 +194,6 @@ const entertainment = [
     </section>
 
   </main>
-
-  <section
-    class="section section-entertainment"
-    data-entertainment-gallery
-    aria-label="Engineering & services"
-  >
-    <div class="entertainment-header">
-      <h2 class="entertainment-title">
-        Endless engineering.
-      </h2>
-      <div class="entertainment-controls">
-        <button type="button" class="entertainment-nav" data-entertainment-prev aria-label="Previous">
-          <span aria-hidden="true">‹</span>
-        </button>
-        <button type="button" class="entertainment-nav" data-entertainment-next aria-label="Next">
-          <span aria-hidden="true">›</span>
-        </button>
-      </div>
-    </div>
-    <div class="entertainment-track" data-entertainment-track>
-      <ul class="entertainment-list">
-        {
-          entertainment.map((item) => (
-            <li class="entertainment-item">
-              <a href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}>
-                <div class="entertainment-art">
-                  <img src={item.image} alt="" width="400" height="225" loading="lazy" />
-                </div>
-                <p class="entertainment-label">{item.title}</p>
-                {item.detail ? (
-                  <p class="entertainment-detail">{item.detail}</p>
-                ) : null}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </section>
-
-  <section class="section section-services" id="services">
-    <div class="container">
-      <h2 class="section-title">{home.servicesTitle}</h2>
-      <p class="section-lead">{home.servicesLead}</p>
-      <ul class="service-directory">
-        {
-          home.services.map((item) => (
-            <li>
-              <a href={item.href} target="_blank" rel="noopener noreferrer">
-                <span class="service-directory-name">{item.title}</span>
-                <span class="service-directory-detail">{item.detail}</span>
-                <span class="service-directory-host">
-                  {item.host}
-                  <span aria-hidden="true">›</span>
-                </span>
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </section>
 
   <Footer
     brand={copy.brand}

@@ -30,10 +30,6 @@ const aboutLinks = [
   { label: copy.nav.now, href: pageHref(locale, "now") },
   { label: "GitHub", href: "https://github.com/XuXuClassMate" },
 ];
-const serviceLinks = home.services.map((item) => ({
-  label: item.title,
-  href: item.href,
-}));
 const rightsReserved = "All rights reserved.";
 const legalCopy = `Copyright © 2020-2026 ${brand}. ${rightsReserved}`;
 const regionLabel = "Your location";
@@ -73,18 +69,6 @@ const regionLabel = "Your location";
                 target={link.href.startsWith("http") ? "_blank" : undefined}
                 rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
               >
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div class="footer-apple-col">
-        <h2 class="footer-apple-heading">{home.servicesTitle}</h2>
-        <ul>
-          {serviceLinks.map((link) => (
-            <li>
-              <a href={link.href} target="_blank" rel="noopener noreferrer">
                 {link.label}
               </a>
             </li>

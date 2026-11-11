@@ -83,28 +83,22 @@ html.apple-motion body.page-home .apple-stage:not(.is-in) .tile-copy-wrapper,
 html.apple-motion body.page-home .apple-stage:not(.is-in) .tile-ctas,
 html.apple-motion body.page-home .apple-stage:not(.is-in) .tile-image-wrapper,
 html.apple-motion body.page-home .section-entertainment:not(.is-in) .entertainment-header,
-html.apple-motion body.page-home .section-entertainment:not(.is-in) .entertainment-track,
-html.apple-motion body.page-home .section-services:not(.is-in) .section-title,
-html.apple-motion body.page-home .section-services:not(.is-in) .section-lead,
-html.apple-motion body.page-home .section-services:not(.is-in) .service-directory {
+html.apple-motion body.page-home .section-entertainment:not(.is-in) .entertainment-track {
   opacity: 0;
   transform: translate3d(0, 28px, 0);
 }
 
 html.apple-motion body.page-home .apple-stage.is-in .tile-copy-wrapper,
-html.apple-motion body.page-home .section-services.is-in .section-title,
 html.apple-motion body.page-home .section-entertainment.is-in .entertainment-header {
   animation: apple-rise 0.9s cubic-bezier(0.28, 0.11, 0.32, 1) both;
 }
 
-html.apple-motion body.page-home .apple-stage.is-in .tile-ctas,
-html.apple-motion body.page-home .section-services.is-in .section-lead {
+html.apple-motion body.page-home .apple-stage.is-in .tile-ctas {
   animation: apple-rise 0.9s cubic-bezier(0.28, 0.11, 0.32, 1) 0.08s both;
 }
 
 html.apple-motion body.page-home .apple-stage.is-in .tile-image-wrapper,
-html.apple-motion body.page-home .section-entertainment.is-in .entertainment-track,
-html.apple-motion body.page-home .section-services.is-in .service-directory {
+html.apple-motion body.page-home .section-entertainment.is-in .entertainment-track {
   animation: apple-rise 1.05s cubic-bezier(0.28, 0.11, 0.32, 1) 0.12s both;
 }
 
@@ -323,10 +317,7 @@ body.page-home .entertainment-track.is-dragging a {
   html.apple-motion body.page-home .apple-stage:not(.is-in) .tile-ctas,
   html.apple-motion body.page-home .apple-stage:not(.is-in) .tile-image-wrapper,
   html.apple-motion body.page-home .section-entertainment:not(.is-in) .entertainment-header,
-  html.apple-motion body.page-home .section-entertainment:not(.is-in) .entertainment-track,
-  html.apple-motion body.page-home .section-services:not(.is-in) .section-title,
-  html.apple-motion body.page-home .section-services:not(.is-in) .section-lead,
-  html.apple-motion body.page-home .section-services:not(.is-in) .service-directory {
+  html.apple-motion body.page-home .section-entertainment:not(.is-in) .entertainment-track {
     opacity: 1;
     transform: none;
   }

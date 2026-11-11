@@ -889,7 +889,7 @@ function initMetricSheen(): void {
 function initAppleStage(): void {
   const stages = [
     ...document.querySelectorAll<HTMLElement>(
-      ".page-home .section-hero, .page-home .section-promo, .page-home .section-promo-duo, .page-home .section-entertainment, .page-home .section-services",
+      ".page-home .section-hero, .page-home .section-promo, .page-home .section-promo-duo, .page-home .section-entertainment",
     ),
   ];
   for (const stage of stages) stage.classList.add("apple-stage");

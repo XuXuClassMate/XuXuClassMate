@@ -27,6 +27,7 @@ test("home renders and language switch works", async ({ page }) => {
     page.getByText("From requirements to reviewable test cases.").first(),
   ).toBeVisible();
   await expect(page.getByText("Built with Astro")).toHaveCount(0);
+  await expect(page.getByText("These sites are running under this name.")).toHaveCount(0);
   await expect(page.getByText("Cloudflare Pages")).toHaveCount(0);
 });
 
