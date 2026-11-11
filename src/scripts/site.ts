@@ -886,6 +886,128 @@ function initMetricSheen(): void {
   for (const group of groups) observer.observe(group);
 }
 
+function initAppleStage(): void {
+  const stages = [
+    ...document.querySelectorAll<HTMLElement>(
+      ".page-home .section-hero, .page-home .section-promo, .page-home .section-promo-duo, .page-home .section-entertainment, .page-home .section-services",
+    ),
+  ];
+  for (const stage of stages) stage.classList.add("apple-stage");
+
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce || !("IntersectionObserver" in window)) {
+    for (const stage of stages) stage.classList.add("is-in");
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        entry.target.classList.add("is-in");
+        observer.unobserve(entry.target);
+      }
+    },
+    { threshold: 0.16, rootMargin: "0px 0px -6% 0px" },
+  );
+
+  for (const stage of stages) {
+    const rect = stage.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.9 && rect.bottom > 0) {
+      stage.classList.add("is-in");
+    } else {
+      observer.observe(stage);
+    }
+  }
+
+  const hero = document.querySelector<HTMLElement>(
+    ".page-home .section-hero .tile-image-wrapper",
+  );
+  if (!hero || window.innerWidth < 769) return;
+
+  let ticking = false;
+  const update = () => {
+    const rect = hero.getBoundingClientRect();
+    const total = Math.max(rect.height, 1);
+    const progress = Math.min(1, Math.max(0, -rect.top / total));
+    hero.style.setProperty("--apple-p", progress.toFixed(3));
+    ticking = false;
+  };
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  };
+  update();
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+}
+
+function initEntertainmentShelf(): void {
+  const track = document.querySelector<HTMLElement>("[data-entertainment-track]");
+  if (!track) return;
+
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const distance = () => {
+    const item = track.querySelector<HTMLElement>(".entertainment-item");
+    return item ? item.getBoundingClientRect().width + 20 : 300;
+  };
+  const scrollByCard = (direction: number) => {
+    track.scrollBy({
+      left: direction * distance(),
+      behavior: reduce ? "auto" : "smooth",
+    });
+  };
+
+  document
+    .querySelector("[data-entertainment-prev]")
+    ?.addEventListener("click", () => scrollByCard(-1));
+  document
+    .querySelector("[data-entertainment-next]")
+    ?.addEventListener("click", () => scrollByCard(1));
+
+  let originX = 0;
+  let originLeft = 0;
+  let tracking = false;
+  let dragged = false;
+
+  track.addEventListener("pointerdown", (event) => {
+    if (event.pointerType === "mouse" && event.button !== 0) return;
+    tracking = true;
+    dragged = false;
+    originX = event.clientX;
+    originLeft = track.scrollLeft;
+  });
+
+  track.addEventListener("pointermove", (event) => {
+    if (!tracking) return;
+    const delta = event.clientX - originX;
+    if (!dragged && Math.abs(delta) < 8) return;
+    if (!dragged) {
+      dragged = true;
+      track.classList.add("is-dragging");
+      track.setPointerCapture(event.pointerId);
+    }
+    track.scrollLeft = originLeft - delta;
+  });
+
+  const release = () => {
+    if (!tracking) return;
+    tracking = false;
+    track.classList.remove("is-dragging");
+    if (!dragged) return;
+    const swallow = (event: Event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      track.removeEventListener("click", swallow, true);
+    };
+    track.addEventListener("click", swallow, true);
+  };
+
+  track.addEventListener("pointerup", release);
+  track.addEventListener("pointercancel", release);
+}
+
 function bootPage() {
   initLiquidOptics();
   initMobileNav();
@@ -894,6 +1016,8 @@ function bootPage() {
   initExportCinema();
   initHighlightsCarousel();
   initHeaderScroll();
+  initAppleStage();
+  initEntertainmentShelf();
   initScrollReveal();
   initShowcaseSettle();
   initMetricSheen();

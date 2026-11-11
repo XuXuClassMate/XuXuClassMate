@@ -1,0 +1,349 @@
+/*
+ * apple.com motion. Loads last.
+ * Store tiles rise in, the hero image settles as you scroll, nav links
+ * fade instead of filling, and the mobile menu staggers open.
+ */
+
+html.apple-motion {
+  scroll-behavior: smooth;
+}
+
+@keyframes apple-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 28px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes apple-menu-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* —— Nav: apple.com text links, denser bar after scroll —— */
+@media (min-width: 769px) {
+  body.site-apple .nav-links-scroll .nav-item {
+    background: transparent !important;
+    border-radius: 0 !important;
+    opacity: 0.8;
+    transition: opacity 0.2s ease !important;
+  }
+
+  body.site-apple .nav-links-scroll .nav-item:hover,
+  body.site-apple .nav-links-scroll .nav-item:focus-visible {
+    background: transparent !important;
+    opacity: 1;
+  }
+
+  body.site-apple .nav-links-scroll .nav-item:active {
+    background: transparent !important;
+    opacity: 0.56;
+  }
+}
+
+body.site-apple .header {
+  transition: height 0.32s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+body.site-apple .header.is-scrolled::after {
+  background: color-mix(in srgb, #fbfbfd 88%, transparent) !important;
+  backdrop-filter: saturate(180%) blur(22px) !important;
+  -webkit-backdrop-filter: saturate(180%) blur(22px) !important;
+}
+
+html[data-theme="dark"] body.site-apple .header.is-scrolled::after {
+  background: color-mix(in srgb, #000 72%, transparent) !important;
+}
+
+/* —— Store tiles: full-viewport chapters —— */
+body.page-home .section-hero .tile-wrapper,
+body.page-home .section-promo .tile-wrapper {
+  min-height: min(760px, calc(100svh - 48px));
+}
+
+body.page-home .section-hero .tile-image-wrapper,
+body.page-home .section-promo .tile-image-wrapper {
+  margin-top: auto;
+  overflow: clip;
+}
+
+html.apple-motion body.page-home .apple-stage:not(.is-in) .tile-copy-wrapper,
+html.apple-motion body.page-home .apple-stage:not(.is-in) .tile-ctas,
+html.apple-motion body.page-home .apple-stage:not(.is-in) .tile-image-wrapper,
+html.apple-motion body.page-home .section-entertainment:not(.is-in) .entertainment-header,
+html.apple-motion body.page-home .section-entertainment:not(.is-in) .entertainment-track,
+html.apple-motion body.page-home .section-services:not(.is-in) .section-title,
+html.apple-motion body.page-home .section-services:not(.is-in) .section-lead,
+html.apple-motion body.page-home .section-services:not(.is-in) .service-directory {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+}
+
+html.apple-motion body.page-home .apple-stage.is-in .tile-copy-wrapper,
+html.apple-motion body.page-home .section-services.is-in .section-title,
+html.apple-motion body.page-home .section-entertainment.is-in .entertainment-header {
+  animation: apple-rise 0.9s cubic-bezier(0.28, 0.11, 0.32, 1) both;
+}
+
+html.apple-motion body.page-home .apple-stage.is-in .tile-ctas,
+html.apple-motion body.page-home .section-services.is-in .section-lead {
+  animation: apple-rise 0.9s cubic-bezier(0.28, 0.11, 0.32, 1) 0.08s both;
+}
+
+html.apple-motion body.page-home .apple-stage.is-in .tile-image-wrapper,
+html.apple-motion body.page-home .section-entertainment.is-in .entertainment-track,
+html.apple-motion body.page-home .section-services.is-in .service-directory {
+  animation: apple-rise 1.05s cubic-bezier(0.28, 0.11, 0.32, 1) 0.12s both;
+}
+
+@media (min-width: 769px) {
+  html.apple-motion body.page-home .section-hero .tile-image-wrapper img {
+    transform: scale(calc(1.06 - (var(--apple-p, 0) * 0.06)));
+    transform-origin: center bottom;
+    will-change: transform;
+  }
+
+  html.apple-motion body.page-home .section-promo .tile-wrapper:hover .tile-image-wrapper img,
+  html.apple-motion body.page-home .section-promo-duo .tile-wrapper:hover .tile-image-wrapper img {
+    transform: scale(1.03);
+    transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+}
+
+/* —— Controls: pill press + chevron nudge —— */
+body.site-apple .apple-button:not(.apple-button-secondary),
+body.site-apple .btn-primary {
+  background: #0071e3 !important;
+  box-shadow: none !important;
+  transition:
+    background 0.2s ease,
+    transform 0.2s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+body.site-apple .apple-button:not(.apple-button-secondary):hover,
+body.site-apple .btn-primary:hover {
+  background: #0077ed !important;
+}
+
+body.site-apple .apple-button:not(.apple-button-secondary):active,
+body.site-apple .btn-primary:active,
+body.site-apple .copy-email-btn:active,
+body.site-apple .entertainment-nav:active {
+  transform: scale(0.96);
+}
+
+body.site-apple .apple-button-secondary::after {
+  content: "›";
+  display: inline-block;
+  margin-left: 0.28em;
+  transition: transform 0.32s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+body.page-home .ribbon-link span {
+  display: inline-block;
+  transition: transform 0.32s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+body.site-apple .apple-button-secondary:hover::after,
+body.page-home .ribbon-link:hover span {
+  transform: translateX(4px);
+}
+
+body.site-apple .apple-button-secondary,
+body.page-home .section-promo.theme-light .apple-button-secondary {
+  color: #0066cc !important;
+}
+
+body.site-apple .theme-dark .apple-button-secondary,
+html[data-theme="dark"] body.site-apple .apple-button-secondary {
+  color: #2997ff !important;
+}
+
+/* —— Inner pages: title arrival + media zoom —— */
+html.apple-motion body.site-apple:not(.page-home) .hero-content {
+  animation: apple-rise 0.85s cubic-bezier(0.28, 0.11, 0.32, 1) both;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body.site-apple .project-card img,
+  body.site-apple .note-card img,
+  body.site-apple article img {
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  body.site-apple .project-card:hover img,
+  body.site-apple .note-card:hover img {
+    transform: scale(1.035);
+  }
+}
+
+/* —— Mobile menu: solid sheet, then staggered links —— */
+@media (max-width: 768px) {
+  body.site-apple .header.globalnav .logo,
+  body.site-apple .mobile-nav-toggle {
+    z-index: 1200;
+  }
+
+  body.site-apple .nav-links.show {
+    background: #fbfbfd !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  html[data-theme="dark"] body.site-apple .nav-links.show {
+    background: #000000 !important;
+  }
+
+  body.site-apple .nav-links.show .nav-links-scroll {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    height: auto;
+    max-height: none;
+    gap: 0;
+  }
+
+  body.site-apple .nav-links.show .nav-item--demo {
+    display: flex;
+  }
+
+  body.site-apple .nav-links.show .nav-utils {
+    margin-top: 18px;
+    width: auto;
+    align-self: center;
+    border-top: 0;
+  }
+
+  html.apple-motion body.site-apple .nav-links.show .nav-item,
+  html.apple-motion body.site-apple .nav-links.show .nav-utils {
+    animation: apple-menu-in 0.62s cubic-bezier(0.32, 0.08, 0.24, 1) both;
+  }
+
+  html.apple-motion body.site-apple .nav-links.show .nav-item:nth-child(1) {
+    animation-delay: 0.04s;
+  }
+
+  html.apple-motion body.site-apple .nav-links.show .nav-item:nth-child(2) {
+    animation-delay: 0.08s;
+  }
+
+  html.apple-motion body.site-apple .nav-links.show .nav-item:nth-child(3) {
+    animation-delay: 0.12s;
+  }
+
+  html.apple-motion body.site-apple .nav-links.show .nav-item:nth-child(4) {
+    animation-delay: 0.16s;
+  }
+
+  html.apple-motion body.site-apple .nav-links.show .nav-item:nth-child(5) {
+    animation-delay: 0.2s;
+  }
+
+  html.apple-motion body.site-apple .nav-links.show .nav-item:nth-child(6) {
+    animation-delay: 0.24s;
+  }
+
+  html.apple-motion body.site-apple .nav-links.show .nav-utils {
+    animation-delay: 0.28s;
+  }
+
+  body.page-home .section-hero .tile-wrapper,
+  body.page-home .section-promo .tile-wrapper {
+    min-height: 0;
+  }
+}
+
+/* —— Shelf controls, the way the store scrolls a row —— */
+body.page-home .entertainment-header {
+  position: relative;
+}
+
+body.page-home .entertainment-controls {
+  display: none;
+}
+
+@media (min-width: 769px) {
+  body.page-home .entertainment-controls {
+    position: absolute;
+    right: 22px;
+    top: 50%;
+    display: flex;
+    gap: 8px;
+    transform: translateY(-50%);
+  }
+}
+
+body.page-home .entertainment-nav {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  color: #f5f5f7;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+body.page-home .entertainment-nav:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+body.page-home .entertainment-track {
+  mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+}
+
+body.page-home .entertainment-track.is-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+}
+
+body.page-home .entertainment-track.is-dragging a {
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.apple-motion body.page-home .apple-stage:not(.is-in) .tile-copy-wrapper,
+  html.apple-motion body.page-home .apple-stage:not(.is-in) .tile-ctas,
+  html.apple-motion body.page-home .apple-stage:not(.is-in) .tile-image-wrapper,
+  html.apple-motion body.page-home .section-entertainment:not(.is-in) .entertainment-header,
+  html.apple-motion body.page-home .section-entertainment:not(.is-in) .entertainment-track,
+  html.apple-motion body.page-home .section-services:not(.is-in) .section-title,
+  html.apple-motion body.page-home .section-services:not(.is-in) .section-lead,
+  html.apple-motion body.page-home .section-services:not(.is-in) .service-directory {
+    opacity: 1;
+    transform: none;
+  }
+
+  html.apple-motion body.page-home .apple-stage.is-in .tile-copy-wrapper,
+  html.apple-motion body.page-home .apple-stage.is-in .tile-ctas,
+  html.apple-motion body.page-home .apple-stage.is-in .tile-image-wrapper,
+  html.apple-motion body.site-apple:not(.page-home) .hero-content,
+  html.apple-motion body.site-apple .nav-links.show .nav-item,
+  html.apple-motion body.site-apple .nav-links.show .nav-utils {
+    animation: none;
+  }
+
+  html.apple-motion body.page-home .section-hero .tile-image-wrapper img,
+  body.site-apple .apple-button-secondary::after,
+  body.page-home .ribbon-link span {
+    transform: none;
+    transition: none;
+  }
+}

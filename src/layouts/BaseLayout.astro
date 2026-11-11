@@ -89,6 +89,9 @@ const demoHref = homeNav.ctaDemoHref;
         }
         const root = document.documentElement;
         root.setAttribute("data-theme", theme);
+        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          root.classList.add("apple-motion");
+        }
         root.style.colorScheme = theme;
         root.style.backgroundColor = theme === "dark" ? "#121212" : "#f5f5f7";
         try {
