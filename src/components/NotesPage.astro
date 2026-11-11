@@ -38,7 +38,7 @@ const page = copy.notes;
                 <p>{item.description}</p>
                 {item.proof ? <p class="note-card-proof">{item.proof}</p> : null}
                 <a class="read-more" href={noteHref(locale, item.slug)}>
-                  {locale === "zh" ? "阅读全文" : "Read the note"}
+                  Read the note
                   <span aria-hidden="true">→</span>
                 </a>
               </article>

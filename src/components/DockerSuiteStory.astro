@@ -8,7 +8,6 @@ import { getMetrics, resolveMetric } from "../lib/metrics";
 type Props = { locale: Locale };
 
 const { locale } = Astro.props;
-const isZh = locale === "zh";
 const copy = getCopy(locale);
 const page = copy.work;
 const study = getCase(locale, "docker-suite");
@@ -19,9 +18,7 @@ if (!study) {
   throw new Error("Missing docker-suite case");
 }
 
-const databases = isZh
-  ? ["达梦", "瀚高", "人大金仓", "TiDB"]
-  : ["Dameng", "Highgo", "Kingbase", "TiDB"];
+const databases = ["Dameng", "Highgo", "Kingbase", "TiDB"];
 ---
 
 <BaseLayout locale={locale} page="work" caseSlug="docker-suite" ogImagePath={study.cover} metaOverride={study.meta}>
@@ -29,7 +26,7 @@ const databases = isZh
     <section class="story-hero story-hero--infra">
       <div class="story-wrap">
         <BackNav href={workHref} label={page.caseBackLabel} />
-        <p class="subtitle">{isZh ? "基础设施" : "INFRASTRUCTURE"}</p>
+        <p class="subtitle">INFRASTRUCTURE</p>
         <h1>{study.title}</h1>
         <p class="story-lead">{study.description}</p>
         <ul class="db-row">
@@ -40,7 +37,7 @@ const databases = isZh
 
     <section class="story-band story-band--proof">
       <div class="story-wrap">
-        <h2>{isZh ? "使用数据" : "Usage Statistics"}</h2>
+        <h2>Usage Statistics</h2>
         <div class="story-metrics">
           {
             study.metrics.map((metric) => (
@@ -65,7 +62,7 @@ const databases = isZh
 
     <section class="story-band">
       <div class="story-wrap">
-        <h2>{isZh ? "快速开始" : "Quick Start"}</h2>
+        <h2>Quick Start</h2>
         {study.deployment?.summary ? <p class="story-lead">{study.deployment.summary}</p> : null}
         <div class="terminal">
           <div class="terminal-bar">
@@ -75,13 +72,13 @@ const databases = isZh
               type="button"
               class="terminal-copy"
               data-copy-target="docker-pulls"
-              data-copy-label={isZh ? "复制" : "Copy"}
-              data-copied-label={isZh ? "已复制" : "Copied"}
+              data-copy-label="Copy"
+              data-copied-label="Copied"
             >
-              {isZh ? "复制" : "Copy"}
+              "Copy"
             </button>
           </div>
-          <pre class="terminal-body" id="docker-pulls"><code><span class="tok-cmt">{isZh ? "# CI 里固定标签。端口和环境变量以该镜像文档为准。" : "# Pin a tag in CI. Ports and env follow that image's docs."}</span>
+          <pre class="terminal-body" id="docker-pulls"><code><span class="tok-cmt"># Pin a tag in CI. Ports and env follow that image's docs.</span>
 <span class="tok-cmd">docker</span> <span class="tok-kw">pull</span> <span class="tok-img">xuxuclassmate/dameng</span>
 <span class="tok-cmd">docker</span> <span class="tok-kw">pull</span> <span class="tok-img">xuxuclassmate/highgo</span>
 <span class="tok-cmd">docker</span> <span class="tok-kw">pull</span> <span class="tok-img">xuxuclassmate/kingbase</span>
@@ -100,13 +97,9 @@ const databases = isZh
 
     <section class="story-band">
       <div class="story-wrap">
-        <h2>{isZh ? "文档" : "Documentation"}</h2>
+        <h2>Documentation</h2>
         <p class="story-lead">
-          {
-            isZh
-              ? "CI 里固定标签。端口和环境变量以各镜像文档为准，不另造一层封装。"
-              : "Pin tags in CI. Ports and environment variables follow each image's docs — no extra wrapper."
-          }
+          Pin tags in CI. Ports and environment variables follow each image's docs — no extra wrapper.
         </p>
         <div class="story-links">
           {

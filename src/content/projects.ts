@@ -21,7 +21,7 @@ type ProjectDef = {
   ctaHref?: string;
   image: string;
   en: LocalizedFields;
-  zh: LocalizedFields;
+
 };
 
 export type ProjectGroup = {
@@ -32,20 +32,20 @@ export type ProjectGroup = {
 
 const GROUP_LABELS: Record<
   ProjectGroupId,
-  { en: string; zh: string }
+  { en: string; }
 > = {
   quality: {
-    en: "Quality Engineering",
-    zh: "质量工程",
+    en: "Quality Engineering"
+
   },
   infra: {
-    en: "Developer Infrastructure",
-    zh: "开发者基础设施",
+    en: "Developer Infrastructure"
+
   },
   agent: {
-    en: "AI / Agent Projects",
-    zh: "AI / Agent 项目",
-  },
+    en: "AI / Agent Projects"
+
+  }
 };
 
 const GROUP_ORDER: ProjectGroupId[] = ["quality", "infra", "agent"];
@@ -61,7 +61,7 @@ const PROJECT_ORDER: ProjectId[] = [
   "docker-hub-api-gateway",
   "globalpulse",
   "custom-mail",
-  "trading-assistant",
+  "trading-assistant"
 ];
 
 export const PROJECTS: Record<ProjectId, ProjectDef> = {
@@ -79,18 +79,9 @@ export const PROJECTS: Record<ProjectId, ProjectDef> = {
       linkLabel: "GitHub",
       ctaLabel: "Docker Hub",
       imageAlt: "AI Test Case Generator cover",
-      caseLabel: "Case study",
-    },
-    zh: {
-      title: "AI 测试用例生成器",
-      description:
-        "面向 PRD 与多模态 QA 输入的 AI 用例生成——接入 PDF / Word / TXT / 图片 / 视频，经三角色评审闭环，导出 Excel / Markdown / XMind。支持 Docker、本地源码、npm 与 OpenClaw 插件。",
-      tags: ["TypeScript", "多模态 AI", "OpenClaw"],
-      linkLabel: "GitHub",
-      ctaLabel: "Docker Hub",
-      imageAlt: "AI 测试用例生成器封面",
-      caseLabel: "案例详解",
-    },
+      caseLabel: "Case study"
+    }
+
   },
   "trading-assistant": {
     id: "trading-assistant",
@@ -106,18 +97,9 @@ export const PROJECTS: Record<ProjectId, ProjectDef> = {
       linkLabel: "GitHub",
       ctaLabel: "ClawHub",
       imageAlt: "Trading Assistant Core cover",
-      caseLabel: "Case study",
-    },
-    zh: {
-      title: "Trading Assistant Core",
-      description:
-        "OpenClaw Agent 技能：支撑阻力、多指标信号、仓位与风险提醒。可通过 ClawHub、Docker 或 pip / `ta` CLI 安装。",
-      tags: ["Agent 技能", "ClawHub", "CLI"],
-      linkLabel: "GitHub",
-      ctaLabel: "ClawHub",
-      imageAlt: "Trading Assistant 封面",
-      caseLabel: "案例详解",
-    },
+      caseLabel: "Case study"
+    }
+
   },
   globalpulse: {
     id: "globalpulse",
@@ -133,18 +115,9 @@ export const PROJECTS: Record<ProjectId, ProjectDef> = {
       linkLabel: "GitHub",
       ctaLabel: "Live",
       imageAlt: "GlobalPulse cover",
-      caseLabel: "Case study",
-    },
-    zh: {
-      title: "GlobalPulse",
-      description:
-        "自托管的市场情报与定时财经/全球热点简报（Cloudflare Workers）— Admin UI、Cron 投递，以及Telegram / webhook 推送。",
-      tags: ["Cloudflare", "Workers", "简报"],
-      linkLabel: "GitHub",
-      ctaLabel: "在线体验",
-      imageAlt: "GlobalPulse 封面",
-      caseLabel: "案例详解",
-    },
+      caseLabel: "Case study"
+    }
+
   },
   "custom-mail": {
     id: "custom-mail",
@@ -160,18 +133,9 @@ export const PROJECTS: Record<ProjectId, ProjectDef> = {
       linkLabel: "GitHub",
       ctaLabel: "Live",
       imageAlt: "Custom Mail cover",
-      caseLabel: "Case study",
-    },
-    zh: {
-      title: "Custom Mail",
-      description:
-        "跑在 Cloudflare Workers 上的私有发信控制台（Rust）——撰写、Markdown 预览、附件、发送记录。可品牌化配置，可插拔 ESP（Brevo / Resend / …），支持 Docker 与 ClawHub 安装。",
-      tags: ["Cloudflare", "Workers", "Rust"],
-      linkLabel: "GitHub",
-      ctaLabel: "在线体验",
-      imageAlt: "Custom Mail 封面",
-      caseLabel: "案例详解",
-    },
+      caseLabel: "Case study"
+    }
+
   },
   "docker-hub-api-gateway": {
     id: "docker-hub-api-gateway",
@@ -187,18 +151,9 @@ export const PROJECTS: Record<ProjectId, ProjectDef> = {
       linkLabel: "GitHub",
       ctaLabel: "Live API",
       imageAlt: "Docker Hub API Gateway cover",
-      caseLabel: "Case study",
-    },
-    zh: {
-      title: "Docker Hub API Gateway",
-      description:
-        "面向 Docker Hub 的统一 REST API 网关 — 用户统计、SVG 卡片、仓库/标签查询、OpenAPI 文档与交互式调试（中英）。",
-      tags: ["API", "Docker Hub", "Hono"],
-      linkLabel: "GitHub",
-      ctaLabel: "在线 API",
-      imageAlt: "Docker Hub API Gateway 封面",
-      caseLabel: "案例详解",
-    },
+      caseLabel: "Case study"
+    }
+
   },
   "docker-suite": {
     id: "docker-suite",
@@ -212,17 +167,9 @@ export const PROJECTS: Record<ProjectId, ProjectDef> = {
       tags: ["Docker", "Dameng", "Highgo"],
       linkLabel: "Docker Hub",
       imageAlt: "Test DB Docker Suite cover",
-      caseLabel: "Case study",
-    },
-    zh: {
-      title: "测试库 Docker 套件",
-      description:
-        "即用数据库镜像——达梦、瀚高、人大金仓、TiDB 等，开发 / 测试 / 运维 / DBA 都能用，见 Docker Hub 实时拉取量。",
-      tags: ["Docker", "Dameng", "Highgo"],
-      linkLabel: "Docker Hub",
-      imageAlt: "测试库 Docker 套件封面",
-      caseLabel: "案例详解",
-    },
+      caseLabel: "Case study"
+    }
+
   },
   "automation-framework": {
     id: "automation-framework",
@@ -236,17 +183,9 @@ export const PROJECTS: Record<ProjectId, ProjectDef> = {
       tags: ["Java", "RestAssured", "API"],
       linkLabel: "GitHub",
       imageAlt: "Java API Automation cover",
-      caseLabel: "Case study",
-    },
-    zh: {
-      title: "Java 接口自动化",
-      description:
-        "基于 Java、JUnit、RestAssured、Maven 与 Allure 的可扩展接口自动化。",
-      tags: ["Java", "RestAssured", "API"],
-      linkLabel: "GitHub",
-      imageAlt: "Java 接口自动化封面",
-      caseLabel: "案例详解",
-    },
+      caseLabel: "Case study"
+    }
+
   },
   "fullstack-e2e": {
     id: "fullstack-e2e",
@@ -260,27 +199,19 @@ export const PROJECTS: Record<ProjectId, ProjectDef> = {
       tags: ["Playwright", "E2E", "TypeScript"],
       linkLabel: "Coming soon",
       imageAlt: "Full-Stack E2E Framework cover",
-      caseLabel: "Case study",
-    },
-    zh: {
-      title: "Playwright 全链路 E2E",
-      description:
-        "覆盖前端、API、后端、MySQL、Redis 与消息队列的全链路自动化。仓库即将公开。",
-      tags: ["Playwright", "E2E", "TypeScript"],
-      linkLabel: "即将上线",
-      imageAlt: "全链路 E2E 框架封面",
-      caseLabel: "案例详解",
-    },
-  },
+      caseLabel: "Case study"
+    }
+
+  }
 };
 
-function groupLabel(locale: Locale, group: ProjectGroupId): string {
-  return GROUP_LABELS[group][locale];
+function groupLabel(group: ProjectGroupId): string {
+  return GROUP_LABELS[group].en;
 }
 
-function toCard(locale: Locale, id: ProjectId): Card {
+function toCard(id: ProjectId): Card {
   const project = PROJECTS[id];
-  const copy = project[locale];
+  const copy = project.en;
   return {
     title: copy.title,
     description: copy.description,
@@ -289,52 +220,41 @@ function toCard(locale: Locale, id: ProjectId): Card {
     linkLabel: project.href === "#" ? undefined : copy.linkLabel,
     status:
       project.href === "#"
-        ? locale === "zh"
-          ? "即将公开"
-          : "Coming Soon"
+        ? "Coming Soon"
         : project.id === "automation-framework"
-          ? locale === "zh"
-            ? "稳定"
-            : "Stable"
-          : locale === "zh"
-            ? "使用中"
-            : "Active",
+          ? "Stable"
+          : "Active",
     ctaHref: project.ctaHref,
     ctaLabel: copy.ctaLabel,
-    category: groupLabel(locale, project.group),
+    category: groupLabel(project.group),
     image: project.image,
     imageAlt: copy.imageAlt,
     slug: project.id,
-    caseHref: `/${locale}/work/${project.id}`,
+    caseHref: `/en/work/${project.id}`,
     caseLabel: copy.caseLabel,
     demoHref:
       id === "testcase-generator"
-        ? `/${locale}/demo/ai-testcase-generator`
+        ? "/en/demo/ai-testcase-generator"
         : undefined,
-    demoLabel:
-      id === "testcase-generator"
-        ? locale === "zh"
-          ? "试用 Demo"
-          : "Demo"
-        : undefined,
+    demoLabel: id === "testcase-generator" ? "Demo" : undefined
   };
 }
 
-export function getFeaturedProjects(locale: Locale): Card[] {
-  return FEATURED_IDS.map((id) => toCard(locale, id));
+export function getFeaturedProjects(_locale: Locale): Card[] {
+  return FEATURED_IDS.map((id) => toCard(id));
 }
 
-export function getWorkProjects(locale: Locale): Card[] {
-  return PROJECT_ORDER.map((id) => toCard(locale, id));
+export function getWorkProjects(_locale: Locale): Card[] {
+  return PROJECT_ORDER.map((id) => toCard(id));
 }
 
-export function getProjectGroups(locale: Locale): ProjectGroup[] {
+export function getProjectGroups(_locale: Locale): ProjectGroup[] {
   return GROUP_ORDER.map((group) => ({
     id: group,
-    title: groupLabel(locale, group),
+    title: groupLabel(group),
     projects: PROJECT_ORDER.filter((id) => PROJECTS[id].group === group).map(
-      (id) => toCard(locale, id),
-    ),
+      (id) => toCard(id),
+    )
   })).filter((section) => section.projects.length > 0);
 }
 

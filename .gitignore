@@ -15,7 +15,7 @@ playwright-report/
 landing-desktop.png
 .wrangler/
 
-# Watch / NAS Workers — 仅本地维护与 wrangler 部署，不进入公开仓库
+# Watch / NAS Workers — local only, deployed with wrangler, not in the public repo
 cloudflare/watch/
 cloudflare/nas-login-branding/
 cloudflare/shared/

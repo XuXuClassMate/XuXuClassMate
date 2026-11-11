@@ -2,7 +2,7 @@
 import Icon from "./Icon.astro";
 import type { SocialLink } from "../content/types";
 import { getPortfolioHome } from "../content/portfolio-home";
-import { CONTACT_EMAIL, getCopy, pageHref, type Locale } from "../lib/i18n";
+import { getCopy, pageHref, type Locale } from "../lib/i18n";
 
 type Props = {
   brand: string;
@@ -12,13 +12,12 @@ type Props = {
 };
 
 const { brand, description, social } = Astro.props;
-const locale: Locale = Astro.url.pathname.startsWith("/zh") ? "zh" : "en";
+const locale: Locale = "en";
 const copy = getCopy(locale);
 const home = getPortfolioHome(locale);
-const isZh = locale === "zh";
 const shopLinks = [
   { label: copy.nav.products ?? "Products", href: pageHref(locale, "work") },
-  { label: isZh ? "交互 Demo" : "Live demo", href: home.ctaDemoHref },
+  { label: "Live demo", href: home.ctaDemoHref },
   { label: copy.nav.openSource, href: pageHref(locale, "open-source") },
 ];
 const learnLinks = [
@@ -35,11 +34,9 @@ const serviceLinks = home.services.map((item) => ({
   label: item.title,
   href: item.href,
 }));
-const rightsReserved = isZh ? "保留所有权利。" : "All rights reserved.";
-const legalCopy = isZh
-  ? `Copyright © 2020-2026 ${brand}。${rightsReserved}`
-  : `Copyright © 2020-2026 ${brand}. ${rightsReserved}`;
-const regionLabel = isZh ? "所在地区" : "Your location";
+const rightsReserved = "All rights reserved.";
+const legalCopy = `Copyright © 2020-2026 ${brand}. ${rightsReserved}`;
+const regionLabel = "Your location";
 ---
 
 <footer class="footer footer--apple">
@@ -47,7 +44,7 @@ const regionLabel = isZh ? "所在地区" : "Your location";
     <p class="footer-apple-lead">{description}</p>
     <div class="footer-apple-grid">
       <div class="footer-apple-col">
-        <h2 class="footer-apple-heading">{isZh ? "产品" : "Shop"}</h2>
+        <h2 class="footer-apple-heading">Shop</h2>
         <ul>
           {shopLinks.map((link) => (
             <li>
@@ -57,7 +54,7 @@ const regionLabel = isZh ? "所在地区" : "Your location";
         </ul>
       </div>
       <div class="footer-apple-col">
-        <h2 class="footer-apple-heading">{isZh ? "工程" : "Learn"}</h2>
+        <h2 class="footer-apple-heading">Learn</h2>
         <ul>
           {learnLinks.map((link) => (
             <li>
@@ -67,7 +64,7 @@ const regionLabel = isZh ? "所在地区" : "Your location";
         </ul>
       </div>
       <div class="footer-apple-col">
-        <h2 class="footer-apple-heading">{isZh ? "关于" : "About"}</h2>
+        <h2 class="footer-apple-heading">About</h2>
         <ul>
           {aboutLinks.map((link) => (
             <li>
@@ -95,10 +92,10 @@ const regionLabel = isZh ? "所在地区" : "Your location";
         </ul>
       </div>
       <div class="footer-apple-col footer-apple-col--connect">
-        <h2 class="footer-apple-heading">{isZh ? "连接" : "Connect"}</h2>
+        <h2 class="footer-apple-heading">Connect</h2>
         <ul class="footer-apple-social">
           <li>
-            <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+            <a class="contact-email" data-contact-mail href="/en/about"></a>
           </li>
           {
             social.map((item) => (
@@ -123,10 +120,10 @@ const regionLabel = isZh ? "所在地区" : "Your location";
       </p>
     </div>
   </div>
-  <script is:inline define:vars={{ footerLang: isZh ? "zh" : "en" }}>
+  <script is:inline define:vars={{ footerLang: "en" }}>
     (function () {
-      var row = document.querySelector("[data-footer-region]");
-      var nameEl = document.querySelector("[data-footer-region-name]");
+      const row = document.querySelector("[data-footer-region]");
+      const nameEl = document.querySelector("[data-footer-region-name]");
       if (!row || !nameEl) return;
       fetch("/api/geo?lang=" + encodeURIComponent(footerLang), { credentials: "same-origin" })
         .then(function (res) {
@@ -134,7 +131,7 @@ const regionLabel = isZh ? "所在地区" : "Your location";
         })
         .then(function (data) {
           if (!data || !data.country) return;
-          var label =
+          const label =
             data.names && data.names[footerLang] != null
               ? data.names[footerLang]
               : data.name;

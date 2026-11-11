@@ -2,7 +2,7 @@
 
 Bilingual personal site and engineering portfolio for **XuXuClassMate** — QA Engineer / SDET focused on AI testing, test automation, Docker test infrastructure, and OpenClaw agent skills.
 
-**Live:** [www.xuxuclassmate.com](https://www.xuxuclassmate.com) · English `/en/*` · 中文 `/zh/*`
+**Live:** [www.xuxuclassmate.com](https://www.xuxuclassmate.com) · English `/` and `/en/*`
 
 [![Docker Hub stats](https://docker-hub-pull-counter.vercel.app/api/docker-stats?username=xuxuclassmate)](https://hub.docker.com/u/xuxuclassmate)
 

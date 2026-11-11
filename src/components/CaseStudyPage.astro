@@ -32,37 +32,36 @@ if (!study) {
 
 const coverDark =
   study.coverDark ?? study.cover.replace(/\.jpg$/i, "-dark.jpg");
-const isZh = locale === "zh";
 const narrative = slug === "testcase-generator" || slug === "docker-suite";
 const infra = slug === "docker-suite";
 const narrativeTitles: Record<string, string> = infra
   ? {
-      problem: isZh ? "这个项目解决什么" : "What it is for",
-      features: isZh ? "支持的数据库" : "Supported databases",
-      role: isZh ? "我做了什么" : "What I did",
-      deployment: isZh ? "拉取并运行" : "Pull and run",
-      metrics: isZh ? "Docker Hub 数据" : "Docker Hub proof",
+      problem: "What it is for",
+      features: "Supported databases",
+      role: "What I did",
+      deployment: "Pull and run",
+      metrics: "Docker Hub proof",
       github: "GitHub",
-      liveDemo: isZh ? "安装入口" : "Install path",
-      outcomes: isZh ? "交付了什么" : "What shipped",
-      artifacts: isZh ? "可核验证据" : "Inspectable proof",
-      links: isZh ? "链接" : "Links",
+      liveDemo: "Install path",
+      outcomes: "What shipped",
+      artifacts: "Inspectable proof",
+      links: "Links",
     }
   : {
-      problem: isZh ? "问题" : "The Problem",
-      solution: isZh ? "工作方式" : "How It Works",
-      features: isZh ? "产品能力" : "Product Features",
-      architecture: isZh ? "工程实现" : "Engineering",
-      role: isZh ? "我做了什么" : "What I did",
-      stack: isZh ? "技术" : "Stack",
-      metrics: isZh ? "证据与入口" : "Proof & Access",
-      deployment: isZh ? "如何运行" : "How to run",
+      problem: "The Problem",
+      solution: "How It Works",
+      features: "Product Features",
+      architecture: "Engineering",
+      role: "What I did",
+      stack: "Stack",
+      metrics: "Proof & Access",
+      deployment: "How to run",
       github: "GitHub",
-      liveDemo: isZh ? "试用" : "Try it",
-      tradeoffs: isZh ? "取舍" : "Tradeoffs",
-      outcomes: isZh ? "交付了什么" : "What shipped",
-      artifacts: isZh ? "可核验证据" : "Inspectable proof",
-      links: isZh ? "链接" : "Links",
+      liveDemo: "Try it",
+      tradeoffs: "Tradeoffs",
+      outcomes: "What shipped",
+      artifacts: "Inspectable proof",
+      links: "Links",
     };
 const regionKeys = new Set(
   infra
@@ -129,7 +128,7 @@ const sectionNumbers = (() => {
 })();
 
 const relatedNoteLinks = study.links.filter((link) =>
-  /blog|note|article|笔记|文章|case study|案例/i.test(link.label),
+  /blog|note|article|case study/i.test(link.label),
 );
 ---
 
@@ -353,9 +352,7 @@ const relatedNoteLinks = study.links.filter((link) =>
               </ul>
             ) : (
               <p>
-                {isZh
-                  ? "角色说明补充中。"
-                  : "Role details are being expanded."}
+                Role details are being expanded.
               </p>
             )
           }
@@ -480,9 +477,7 @@ const relatedNoteLinks = study.links.filter((link) =>
               </>
             ) : (
               <p>
-                {isZh
-                  ? "部署与运行说明见下方 GitHub / Live Demo。"
-                  : "See GitHub / Live Demo below for how to run this project."}
+                See GitHub / Live Demo below for how to run this project.
               </p>
             )
           }
@@ -502,18 +497,14 @@ const relatedNoteLinks = study.links.filter((link) =>
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  {isZh ? "打开 GitHub 仓库" : "Open GitHub repository"}
+                  "Open GitHub repository"
                 </a>
               </div>
             ) : (
               <p>
                 {study.status === "upcoming"
-                  ? isZh
-                    ? "源码仓库即将公开。"
-                    : "Source repository coming soon."
-                  : isZh
-                    ? "暂无公开 GitHub 仓库。"
-                    : "No public GitHub repository yet."}
+                  ? "Source repository coming soon."
+                  : "No public GitHub repository yet."}
               </p>
             )
           }
@@ -537,7 +528,7 @@ const relatedNoteLinks = study.links.filter((link) =>
                   target={liveDemoExternal ? "_blank" : undefined}
                   rel={liveDemoExternal ? "noopener noreferrer" : undefined}
                 >
-                  {isZh ? "打开在线体验 / 安装入口" : "Open live demo / install path"}
+                  "Open live demo / install path"
                 </a>
                 {study.tryItNow ? (
                   <a class="project-link project-link--secondary" href="#try-it-now">
@@ -547,9 +538,7 @@ const relatedNoteLinks = study.links.filter((link) =>
               </div>
             ) : (
               <p>
-                {isZh
-                  ? "在线体验入口即将补充。"
-                  : "Live demo link coming soon."}
+                Live demo link coming soon.
               </p>
             )
           }
@@ -622,7 +611,7 @@ const relatedNoteLinks = study.links.filter((link) =>
                             : undefined
                         }
                       >
-                        {item.linkLabel ?? (isZh ? "打开" : "Open")}
+                        {item.linkLabel ?? ("Open")}
                       </a>
                     ) : null}
                   </article>
@@ -641,9 +630,7 @@ const relatedNoteLinks = study.links.filter((link) =>
               />
               {relatedNoteLinks.length > 0 ? (
                 <p class="case-section-lead">
-                  {isZh
-                    ? "安装入口、证据与延伸阅读。"
-                    : "Install paths, proof, and deeper reading."}
+                  Install paths, proof, and deeper reading.
                 </p>
               ) : null}
               <div class="project-links">
@@ -707,7 +694,7 @@ const relatedNoteLinks = study.links.filter((link) =>
       <div class="container">
         <div class="back-nav-footer-panel">
           <p class="back-nav-footer-hint">
-            {isZh ? "继续浏览其他项目" : "Browse more projects"}
+            "Browse more projects"
           </p>
           <BackNav href={workHref} label={page.caseBackLabel} prominent />
         </div>

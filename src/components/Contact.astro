@@ -1,6 +1,4 @@
 ---
-import { CONTACT_EMAIL } from "../lib/i18n";
-
 type Props = {
   label: string;
   hint: string;
@@ -28,12 +26,11 @@ const { label, hint, offers = [], copyLabel, copiedLabel } = Astro.props;
           ) : null
         }
         <div class="contact-actions">
-          <a class="contact-email" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+          <a class="contact-email" data-contact-mail href="/en/about"></a>
           <button
             type="button"
             class="copy-email-btn"
             id="copyEmailBtn"
-            data-email={CONTACT_EMAIL}
             data-copy-label={copyLabel}
             data-copied-label={copiedLabel}
           >

@@ -2,7 +2,7 @@
 import Footer from "./Footer.astro";
 import PageHero from "./PageHero.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { CONTACT_EMAIL, getCopy, pageHref, type Locale } from "../lib/i18n";
+import { getCopy, pageHref, type Locale } from "../lib/i18n";
 
 type Props = { locale: Locale };
 
@@ -173,14 +173,11 @@ const playgroundHref = pageHref(locale, "playground");
             >
               {page.orgCtaLabel}
             </a>
-            <a class="contact-email" href={`mailto:${CONTACT_EMAIL}`}>
-              {CONTACT_EMAIL}
-            </a>
+            <a class="contact-email" data-contact-mail href="/en/about"></a>
             <button
               type="button"
               class="copy-email-btn"
               id="copyEmailBtn"
-              data-email={CONTACT_EMAIL}
               data-copy-label={copy.copyEmail}
               data-copied-label={copy.copiedEmail}
             >

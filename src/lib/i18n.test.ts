@@ -1,14 +1,12 @@
 import { describe, expect, it } from "vitest";
 import {
   absoluteUrl,
-  alternateLocalePath,
   canonicalPath,
   caseHref,
   getCase,
   getNote,
   hreflangLinks,
   jsonLdGraph,
-  languageHref,
   noteHref,
   pageHref,
 } from "./i18n";
@@ -16,9 +14,8 @@ import {
 describe("i18n paths", () => {
   it("maps home and section routes", () => {
     expect(pageHref("en", "home")).toBe("/");
-    expect(pageHref("zh", "home")).toBe("/zh/");
     expect(pageHref("en", "learn")).toBe("/en/learn");
-    expect(pageHref("zh", "work")).toBe("/zh/work");
+    expect(pageHref("en", "work")).toBe("/en/work");
     expect(pageHref("en", "notes")).toBe("/en/blog");
     expect(pageHref("en", "blog")).toBe("/en/blog");
     expect(pageHref("en", "about")).toBe("/en/about");
@@ -32,49 +29,20 @@ describe("i18n paths", () => {
     expect(caseHref("en", "testcase-generator")).toBe(
       "/en/work/testcase-generator",
     );
-    expect(caseHref("zh", "docker-suite")).toBe("/zh/work/docker-suite");
+    expect(caseHref("en", "docker-suite")).toBe("/en/work/docker-suite");
   });
 
   it("maps note routes", () => {
     expect(noteHref("en", "enterprise-db-docker-qa")).toBe(
       "/en/blog/enterprise-db-docker-qa",
     );
-    expect(noteHref("zh", "clawhub-skill-shipping")).toBe(
-      "/zh/blog/clawhub-skill-shipping",
-    );
-  });
-
-  it("switches language the same way as the legacy site", () => {
-    expect(languageHref("en", "home")).toBe("/zh/");
-    expect(languageHref("zh", "home")).toBe("/");
-    expect(languageHref("en", "learn")).toBe("/zh/learn");
-    expect(languageHref("zh", "learn")).toBe("/en/learn");
-  });
-
-  it("keeps nested paths when swapping locale from the URL", () => {
-    expect(alternateLocalePath("/en/demo/ai-testcase-generator")).toBe(
-      "/zh/demo/ai-testcase-generator",
-    );
-    expect(alternateLocalePath("/zh/demo/ai-testcase-generator.html")).toBe(
-      "/en/demo/ai-testcase-generator",
-    );
-    expect(alternateLocalePath("/en/work/testcase-generator.html")).toBe(
-      "/zh/work/testcase-generator",
-    );
-    expect(alternateLocalePath("/zh/blog/clawhub-skill-shipping")).toBe(
+    expect(noteHref("en", "clawhub-skill-shipping")).toBe(
       "/en/blog/clawhub-skill-shipping",
     );
-    expect(alternateLocalePath("/")).toBe("/zh/");
-    expect(alternateLocalePath("/zh/")).toBe("/");
-    expect(alternateLocalePath("/zh.html")).toBe("/");
-    expect(alternateLocalePath("/en.html")).toBe("/zh/");
-    expect(alternateLocalePath("/en/")).toBe("/zh/");
-    expect(alternateLocalePath("/en/learn.html")).toBe("/zh/learn");
   });
 
   it("builds canonicals for root and locale homes", () => {
     expect(canonicalPath("en", "home")).toBe("/");
-    expect(canonicalPath("zh", "home")).toBe("/zh/");
     expect(canonicalPath("en", "learn")).toBe("/en/learn");
     expect(absoluteUrl("/en/learn")).toBe(
       "https://www.xuxuclassmate.com/en/learn",
@@ -85,7 +53,6 @@ describe("i18n paths", () => {
     const root = hreflangLinks("home");
     expect(root).toEqual([
       { hreflang: "en", href: "https://www.xuxuclassmate.com/" },
-      { hreflang: "zh", href: "https://www.xuxuclassmate.com/zh/" },
       { hreflang: "x-default", href: "https://www.xuxuclassmate.com/" },
     ]);
 
@@ -113,25 +80,20 @@ describe("i18n paths", () => {
     ).toBe(true);
   });
 
-  it("resolves case studies in both locales", () => {
+  it("resolves case studies", () => {
     expect(getCase("en", "trading-assistant")?.title).toBe(
       "Trading Assistant Core",
     );
-    expect(getCase("zh", "testcase-generator")?.slug).toBe(
-      "testcase-generator",
-    );
+    expect(getCase("en", "testcase-generator")?.slug).toBe("testcase-generator");
     expect(getCase("en", "globalpulse")?.slug).toBe("globalpulse");
-    expect(getCase("zh", "docker-hub-api-gateway")?.title).toBe(
-      "Docker Hub API Gateway",
-    );
     expect(getCase("en", "testcase-generator")?.tradeoffs?.length).toBeGreaterThan(
       0,
     );
   });
 
-  it("resolves notes in both locales", () => {
+  it("resolves notes", () => {
     expect(getNote("en", "enterprise-db-docker-qa")?.title).toContain("Dameng");
-    expect(getNote("zh", "clawhub-skill-shipping")?.slug).toBe(
+    expect(getNote("en", "clawhub-skill-shipping")?.slug).toBe(
       "clawhub-skill-shipping",
     );
     expect(

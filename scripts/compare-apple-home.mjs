@@ -5,14 +5,6 @@
  */
 const origin = process.argv[2] ?? "https://www.xuxuclassmate.com";
 
-const checks = [
-  { id: "tile-headline", selector: ".tile-headline" },
-  { id: "section-promo", selector: ".section-promo, .section-hero" },
-  { id: "apple-button", selector: ".apple-button" },
-  { id: "tile-image", selector: ".tile-image-wrapper img" },
-  { id: "no-tabbar-mobile", selector: ".tabbar", expectHidden: true, mobile: true },
-];
-
 async function fetchHtml(url) {
   const res = await fetch(url, { headers: { "User-Agent": "parity-check" } });
   return await res.text();

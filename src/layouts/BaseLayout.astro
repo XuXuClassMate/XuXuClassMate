@@ -2,7 +2,6 @@
 import Icon from "../components/Icon.astro";
 import {
   absoluteUrl,
-  alternateLocalePath,
   canonicalPath,
   getCopy,
   hreflangLinks,
@@ -55,24 +54,21 @@ const canonical = absoluteUrl(
 const alternates = caseSlug
   ? [
       { hreflang: "en", href: absoluteUrl(`/en/work/${caseSlug}`) },
-      { hreflang: "zh", href: absoluteUrl(`/zh/work/${caseSlug}`) },
       { hreflang: "x-default", href: absoluteUrl(`/en/work/${caseSlug}`) },
     ]
   : noteSlug
     ? [
         { hreflang: "en", href: absoluteUrl(`/en/blog/${noteSlug}`) },
-        { hreflang: "zh", href: absoluteUrl(`/zh/blog/${noteSlug}`) },
         { hreflang: "x-default", href: absoluteUrl(`/en/blog/${noteSlug}`) },
       ]
     : hreflangLinks(page);
-const homeHref = locale === "zh" ? pageHref("zh", "home") : "/";
+const homeHref = "/";
 const active = page === "home" ? undefined : page;
 const ogTitle = meta.ogTitle ?? meta.title;
 const ogImage = absoluteUrl(ogImagePath ?? "/images/og-default.jpg");
 const structuredData = noindex
   ? null
   : jsonLdGraph(locale, page, caseSlug, noteSlug);
-const langSwitchHref = alternateLocalePath(Astro.url.pathname);
 const homeNav = getPortfolioHome(locale);
 const demoHref = homeNav.ctaDemoHref;
 ---
@@ -142,11 +138,7 @@ const demoHref = homeNav.ctaDemoHref;
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={copy.brand} />
-    <meta property="og:locale" content={locale === "zh" ? "zh_CN" : "en_US"} />
-    <meta
-      property="og:locale:alternate"
-      content={locale === "zh" ? "en_US" : "zh_CN"}
-    />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:url" content={canonical} />
     <meta property="og:title" content={ogTitle} />
     <meta property="og:description" content={meta.description} />
@@ -262,17 +254,9 @@ const demoHref = homeNav.ctaDemoHref;
                 href={demoHref}
                 class="nav-item nav-item--demo"
               >
-                {locale === "zh" ? "Demo" : "Demo"}
+                Demo
               </a>
               <div class="nav-utils">
-                <a
-                  href={langSwitchHref}
-                  class="language-switch"
-                  aria-label={copy.languageSwitchHint}
-                  title={copy.languageSwitchHint}
-                >
-                  {copy.languageSwitch}
-                </a>
                 <button
                   type="button"
                   class="theme-toggle"
@@ -321,10 +305,10 @@ const demoHref = homeNav.ctaDemoHref;
     <slot />
 
     <button class="nav-scrim" id="navScrim" type="button" tabindex="-1" aria-hidden="true"></button>
-    <nav class="tabbar lg-regular" aria-label={locale === "zh" ? "主要页面" : "Primary"}>
+    <nav class="tabbar lg-regular" aria-label="Primary">
       <a class:list={["tabbar-item", { "is-active": page === "home" }]} href={homeHref}>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5Z"></path></svg>
-        <span>{locale === "zh" ? "首页" : "Home"}</span>
+        <span>Home</span>
       </a>
       <a class:list={["tabbar-item", { "is-active": page === "work" }]} href={pageHref(locale, "work")}>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.5"></rect><rect x="13" y="4" width="7" height="7" rx="1.5"></rect><rect x="4" y="13" width="7" height="7" rx="1.5"></rect><rect x="13" y="13" width="7" height="7" rx="1.5"></rect></svg>

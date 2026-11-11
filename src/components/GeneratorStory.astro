@@ -8,7 +8,6 @@ import { getMetrics, resolveMetric } from "../lib/metrics";
 type Props = { locale: Locale };
 
 const { locale } = Astro.props;
-const isZh = locale === "zh";
 const copy = getCopy(locale);
 const page = copy.work;
 const study = getCase(locale, "testcase-generator");
@@ -19,53 +18,46 @@ if (!study) {
   throw new Error("Missing testcase-generator case");
 }
 
-const productLine = isZh
-  ? "可安装的 AI 工具，可信赖的质量。"
-  : "AI tools you can install — quality you can trust.";
+const productLine = "AI tools you can install — quality you can trust.";
 
 const shots = [
   {
     src: "/images/product-generator-input.jpg",
-    title: isZh ? "上传需求" : "Upload a requirement",
-    alt: isZh ? "交互 Demo 中已载入的需求" : "A requirement loaded in the interactive demo",
-    body: isZh
-      ? "PDF、Word、图片或视频进去之后，先抽出验收标准，再写用例。"
-      : "PDF, Word, image, or video goes in. Acceptance criteria come out before any case is written.",
+    title: "Upload a requirement",
+    alt: "A requirement loaded in the interactive demo",
+    body: "PDF, Word, image, or video goes in. Acceptance criteria come out before any case is written.",
   },
   {
     src: "/images/product-generator-cases.jpg",
-    title: isZh ? "AI 生成" : "AI generates cases",
-    alt: isZh ? "生成的结构化测试用例" : "Structured test cases from the interactive demo",
-    body: isZh
-      ? "生成带步骤、预期结果和优先级的结构化用例。"
-      : "Drafts structured cases with steps, expected results, and priority.",
+    title: "AI generates cases",
+    alt: "Structured test cases from the interactive demo",
+    body: "Drafts structured cases with steps, expected results, and priority.",
   },
   {
     src: "/images/product-generator-review.jpg",
-    title: isZh ? "人工审核" : "Human review",
-    alt: isZh ? "QA、开发、产品角色审核" : "QA, developer, and product review roles",
-    body: isZh
-      ? "QA、开发和产品按覆盖、逻辑、可执行、清晰、安全打分。默认 90 分过线，最多五轮。"
-      : "QA, Dev, and Product score the same cases on coverage, logic, executability, clarity, and security. The default bar is 90 out of 100, across at most five rounds.",
+    title: "Human review",
+    alt: "QA, developer, and product review roles",
+    body: "QA, Dev, and Product score the same cases on coverage, logic, executability, clarity, and security. The default bar is 90 out of 100, across at most five rounds.",
   },
   {
-    title: isZh ? "一键导出三种格式" : "Three export formats, one reviewed set",
-    alt: isZh ? "导出 Excel、Markdown、XMind 动画示意" : "Animated Excel, Markdown, and XMind export",
-    body: isZh
-      ? "评审通过的用例会同时打包成三种团队已在用的交付物，各取所需、内容一致。"
-      : "Every case that clears review ships in three artifacts teams already use—same scenarios, different surfaces.",
+    title: "Three export formats, one reviewed set",
+    alt: "Animated Excel, Markdown, and XMind export",
+    body: "Every case that clears review ships in three artifacts teams already use—same scenarios, different surfaces.",
     export: true,
-    bullets: isZh
-      ? [
-          { name: "Excel", detail: "用例表、优先级与执行状态，给测试与项目管理。" },
-          { name: "Markdown", detail: "可进仓库与 Wiki，方便评审留痕与版本对比。" },
-          { name: "XMind", detail: "思维导图分工坊对齐，快速拆模块与场景树。" },
-        ]
-      : [
-          { name: "Excel", detail: "Sheets with priority and run status for QA and project tracking." },
-          { name: "Markdown", detail: "Repo- and wiki-ready text for review history and diffs." },
-          { name: "XMind", detail: "Mind-map workshops to align modules and scenario trees." },
-        ],
+    bullets: [
+      {
+        name: "Excel",
+        detail: "Sheets with priority and run status for QA and project tracking.",
+      },
+      {
+        name: "Markdown",
+        detail: "Repo- and wiki-ready text for review history and diffs.",
+      },
+      {
+        name: "XMind",
+        detail: "Mind-map workshops to align modules and scenario trees.",
+      },
+    ],
   },
 ];
 
@@ -92,7 +84,7 @@ function paintCommand(command: string): string {
       <div class="story-wrap story-split">
         <div class="story-copy">
           <BackNav href={workHref} label={page.caseBackLabel} />
-          <p class="subtitle">{isZh ? "旗舰" : "FLAGSHIP"}</p>
+          <p class="subtitle">FLAGSHIP</p>
           <h1>{study.title}</h1>
           <p class="story-line">{productLine}</p>
           <div class="story-links">
@@ -122,7 +114,7 @@ function paintCommand(command: string): string {
 
     <section class="story-band" id="workflow">
       <div class="story-wrap">
-        <h2>{isZh ? "工作流" : "Workflow"}</h2>
+        <h2>Workflow</h2>
         <ol class="story-flow">
           {
             study.pipeline?.stages.map((stage, index) => (
@@ -130,9 +122,7 @@ function paintCommand(command: string): string {
                 <span>{String(index + 1).padStart(2, "0")}</span>
                 <strong>
                   {
-                    (isZh
-                      ? ["上传需求", "AI 生成", "人工审核", "结构化导出"]
-                      : ["Requirements upload", "AI generation", "Human review", "Structured export"])[index] ?? stage
+                    (["Requirements upload", "AI generation", "Human review", "Structured export"])[index] ?? stage
                   }
                 </strong>
                 {stage}
@@ -146,7 +136,7 @@ function paintCommand(command: string): string {
     <section class="story-band story-film" id="features">
       <div class="film" data-film>
         <div class="film-pin">
-          <h2>{isZh ? "产品功能" : "Product Features"}</h2>
+          <h2>Product Features</h2>
           <div class="film-stage">
             {
               shots.map((shot) => (
@@ -159,15 +149,15 @@ function paintCommand(command: string): string {
                           <div class="export-cinema-beam" aria-hidden="true" />
                           <div class="export-cinema-source">
                             <span class="export-cinema-badge">
-                              {isZh ? "评审已通过" : "Review cleared"}
+                              "Review cleared"
                             </span>
                             <p class="export-cinema-count">
-                              {isZh ? "同一份用例集" : "One reviewed case set"}
+                              "One reviewed case set"
                             </p>
                             <ul class="export-cinema-log" aria-hidden="true">
-                              <li>{isZh ? "打包 Excel…" : "Packaging Excel…"}</li>
-                              <li>{isZh ? "写入 Markdown…" : "Writing Markdown…"}</li>
-                              <li>{isZh ? "生成 XMind…" : "Building XMind…"}</li>
+                              <li>Packaging Excel…</li>
+                              <li>Writing Markdown…</li>
+                              <li>Building XMind…</li>
                             </ul>
                           </div>
                           <ul class="export-cinema-formats">
@@ -190,7 +180,7 @@ function paintCommand(command: string): string {
                                   <strong>{item.name}</strong>
                                   <span class="export-format-detail">{item.detail}</span>
                                   <span class="export-format-ready" aria-hidden="true">
-                                    {isZh ? "可下载" : "Ready"}
+                                    "Ready"
                                   </span>
                                 </li>
                               ))
@@ -237,7 +227,7 @@ function paintCommand(command: string): string {
 
     <section class="story-band" id="engineering">
       <div class="story-wrap">
-        <h2>{isZh ? "工程架构" : "Engineering Architecture"}</h2>
+        <h2>Engineering Architecture</h2>
         {
           study.architecture?.map((chain) => (
             <div class="story-arch">
@@ -266,13 +256,9 @@ function paintCommand(command: string): string {
 
     <section class="story-band story-band--proof" id="proof">
       <div class="story-wrap">
-        <h2>{isZh ? "采用证明" : "Proof & Adoption"}</h2>
+        <h2>Proof & Adoption</h2>
         <p class="story-lead">
-          {
-            isZh
-              ? "Docker 拉取经 Docker Hub API Gateway 实时采集；npm 与 OpenClaw / ClawHub 同步刷新。"
-              : "Docker pulls refresh live via the Docker Hub API Gateway; npm and OpenClaw / ClawHub stay in sync."
-          }
+          Docker pulls refresh live via the Docker Hub API Gateway; npm and OpenClaw / ClawHub stay in sync.
         </p>
         <div class="story-metrics">
           {
@@ -309,7 +295,7 @@ function paintCommand(command: string): string {
           >
             <img
               src="https://docker-hub-pull-counter.vercel.app/api/docker-stats?username=xuxuclassmate&repo=testcase-generator"
-              alt={isZh ? "testcase-generator Docker 拉取实时卡片" : "testcase-generator Docker pulls live card"}
+              alt="testcase-generator Docker pulls live card"
               width="420"
               height="180"
             />
@@ -320,7 +306,7 @@ function paintCommand(command: string): string {
 
     <section class="story-band story-band--start" id="start">
       <div class="story-wrap">
-        <h2>{isZh ? "开始使用" : "Get Started"}</h2>
+        <h2>Get Started</h2>
         {study.tryItNow?.note ? <p class="story-tip">{study.tryItNow.note}</p> : null}
         {
           study.tryItNow?.command ? (
@@ -332,10 +318,10 @@ function paintCommand(command: string): string {
                   type="button"
                   class="terminal-copy"
                   data-copy-target="generator-run"
-                  data-copy-label={isZh ? "复制" : "Copy"}
-                  data-copied-label={isZh ? "已复制" : "Copied"}
+                  data-copy-label="Copy"
+                  data-copied-label="Copied"
                 >
-                  {isZh ? "复制" : "Copy"}
+                  "Copy"
                 </button>
               </div>
               <pre class="terminal-body" id="generator-run" set:html={paintCommand(study.tryItNow.command)} />

@@ -38,17 +38,17 @@ const lab = getAiTestingLab(locale);
           </div>
           <div class="ai-live-grid">
             <div>
-              <h4>{locale === "zh" ? "问题" : "Problem"}</h4>
+              <h4>Problem</h4>
               <p>{lab.live.problem}</p>
             </div>
             <div>
-              <h4>{locale === "zh" ? "做法" : "Approach"}</h4>
+              <h4>Approach</h4>
               <p>{lab.live.approach}</p>
             </div>
           </div>
           <div class="ai-live-flow">
             <p class="ai-live-label">
-              {locale === "zh" ? "输入" : "Input"} → {lab.live.input}
+              Input → {lab.live.input}
             </p>
             <ul class="stack-list stack-list--inline">
               {lab.live.outputs.map((item) => (

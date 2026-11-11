@@ -18,7 +18,7 @@ export const OSS_CATEGORY_ORDER: OssCategoryId[] = [
   "Testing",
   "Developer Tools",
   "Infrastructure",
-  "Automation",
+  "Automation"
 ];
 
 type OrgProjectDef = {
@@ -27,16 +27,16 @@ type OrgProjectDef = {
   category: OssCategoryId;
   org: "InnoNestX" | "XuXuClassMate";
   ctaHref?: string;
-  ctaLabel?: { en: string; zh: string };
-  linkLabel: { en: string; zh: string };
-  tags: { en: string[]; zh: string[] };
-  status: { en: string; zh: string };
-  description: { en: string; zh: string };
+  ctaLabel?: { en: string; };
+  linkLabel: { en: string; };
+  tags: { en: string[]; };
+  status: { en: string; };
+  description: { en: string; };
 };
 
 type CategoryMeta = {
   en: { title: string; description: string };
-  zh: { title: string; description: string };
+
 };
 
 const CATEGORY_META: Record<OssCategoryId, CategoryMeta> = {
@@ -44,59 +44,42 @@ const CATEGORY_META: Record<OssCategoryId, CategoryMeta> = {
     en: {
       title: "AI",
       description:
-        "Installable AI products and agent skills — multimodal QA, risk tooling, and review loops.",
-    },
-    zh: {
-      title: "AI",
-      description:
-        "可安装的 AI 产品与 Agent 技能——多模态 QA、风险工具与评审闭环。",
-    },
+        "Installable AI products and agent skills — multimodal QA, risk tooling, and review loops."
+    }
+
   },
   Testing: {
     en: {
       title: "Testing",
       description:
-        "Environment and quality tooling that cuts setup time — for developers, QA, ops, and DBAs.",
-    },
-    zh: {
-      title: "Testing",
-      description:
-        "缩短环境搭建成本的质量与基础设施工具——开发、测试、运维、DBA 都能用。",
-    },
+        "Environment and quality tooling that cuts setup time — for developers, QA, ops, and DBAs."
+    }
+
   },
   "Developer Tools": {
     en: {
       title: "Developer Tools",
       description:
-        "APIs, gateways, and developer-facing utilities used in real workflows.",
-    },
-    zh: {
-      title: "Developer Tools",
-      description: "API、网关与开发者工具——服务真实工作流。",
-    },
+        "APIs, gateways, and developer-facing utilities used in real workflows."
+    }
+
   },
   Infrastructure: {
     en: {
       title: "Infrastructure",
       description:
-        "Runnable systems on Cloudflare Workers and related delivery stacks.",
-    },
-    zh: {
-      title: "Infrastructure",
-      description: "可运行的系统——Cloudflare Workers 与投递栈。",
-    },
+        "Runnable systems on Cloudflare Workers and related delivery stacks."
+    }
+
   },
   Automation: {
     en: {
       title: "Automation",
       description:
-        "API and E2E automation frameworks — patterns you can fork and extend.",
-    },
-    zh: {
-      title: "Automation",
-      description: "接口与 E2E 自动化框架——可 fork、可扩展的模式。",
-    },
-  },
+        "API and E2E automation frameworks — patterns you can fork and extend."
+    }
+
+  }
 };
 
 const ORG_PROJECTS: OrgProjectDef[] = [
@@ -106,17 +89,17 @@ const ORG_PROJECTS: OrgProjectDef[] = [
     category: "AI",
     org: "InnoNestX",
     ctaHref: "https://clawhub.ai/xuxuclassmate/ai-testcase-generator",
-    ctaLabel: { en: "ClawHub skill", zh: "ClawHub 技能" },
-    linkLabel: { en: "GitHub", zh: "GitHub" },
+    ctaLabel: { en: "ClawHub skill" },
+    linkLabel: { en: "GitHub" },
     tags: {
-      en: ["AI Testing", "ClawHub", "Docker"],
-      zh: ["AI Testing", "ClawHub", "Docker"],
+      en: ["AI Testing", "ClawHub", "Docker"]
+
     },
-    status: { en: "Open source", zh: "开源" },
+    status: { en: "Open source" },
     description: {
-      en: "Shift testing left with multi-modal AI. Feed PRDs, images, or video walk-throughs — get production-grade, reviewable cases. Deploy via Docker, npm, or ClawHub.",
-      zh: "用多模态 AI 把测试左移。输入 PRD、图片或视频演示，即时得到可评审的生产级用例。支持 Docker、npm 或 ClawHub 部署。",
-    },
+      en: "Shift testing left with multi-modal AI. Feed PRDs, images, or video walk-throughs — get production-grade, reviewable cases. Deploy via Docker, npm, or ClawHub."
+
+    }
   },
   {
     title: "Trading Assistant",
@@ -124,33 +107,33 @@ const ORG_PROJECTS: OrgProjectDef[] = [
     category: "AI",
     org: "InnoNestX",
     ctaHref: "https://clawhub.ai/xuxuclassmate/trading-assistant-core",
-    ctaLabel: { en: "ClawHub skill", zh: "ClawHub 技能" },
-    linkLabel: { en: "GitHub", zh: "GitHub" },
+    ctaLabel: { en: "ClawHub skill" },
+    linkLabel: { en: "GitHub" },
     tags: {
-      en: ["OpenClaw", "Risk", "CLI"],
-      zh: ["OpenClaw", "风险", "CLI"],
+      en: ["OpenClaw", "Risk", "CLI"]
+
     },
-    status: { en: "Open source", zh: "开源" },
+    status: { en: "Open source" },
     description: {
-      en: "Signals, sizing, and risk checks as an installable OpenClaw skill.",
-      zh: "信号、仓位与风险检查，打包为可安装 OpenClaw 技能。",
-    },
+      en: "Signals, sizing, and risk checks as an installable OpenClaw skill."
+
+    }
   },
   {
     title: "Test DB Docker Suite",
     href: "https://hub.docker.com/u/xuxuclassmate",
     category: "Testing",
     org: "XuXuClassMate",
-    linkLabel: { en: "Docker Hub", zh: "Docker Hub" },
+    linkLabel: { en: "Docker Hub" },
     tags: {
-      en: ["Docker Testing", "Dameng", "Highgo"],
-      zh: ["Docker Testing", "达梦", "瀚高"],
+      en: ["Docker Testing", "Dameng", "Highgo"]
+
     },
-    status: { en: "Live", zh: "在线" },
+    status: { en: "Live" },
     description: {
-      en: "Ready-to-run DB images — Dameng, Highgo, Kingbase, TiDB and more — for developers, QA, ops, and DBAs.",
-      zh: "即用数据库镜像——达梦、瀚高、人大金仓、TiDB 等，开发 / 测试 / 运维 / DBA 都能直接用。",
-    },
+      en: "Ready-to-run DB images — Dameng, Highgo, Kingbase, TiDB and more — for developers, QA, ops, and DBAs."
+
+    }
   },
   {
     title: "Docker Hub API Gateway",
@@ -158,17 +141,17 @@ const ORG_PROJECTS: OrgProjectDef[] = [
     category: "Developer Tools",
     org: "InnoNestX",
     ctaHref: "https://docker-hub-pull-counter.vercel.app",
-    ctaLabel: { en: "Open API", zh: "打开 API" },
-    linkLabel: { en: "GitHub", zh: "GitHub" },
+    ctaLabel: { en: "Open API" },
+    linkLabel: { en: "GitHub" },
     tags: {
-      en: ["API", "OpenAPI", "SVG cards"],
-      zh: ["API", "OpenAPI", "SVG 卡片"],
+      en: ["API", "OpenAPI", "SVG cards"]
+
     },
-    status: { en: "Live", zh: "在线" },
+    status: { en: "Live" },
     description: {
-      en: "REST + SVG stats for Docker Hub pulls — dogfooded by this site’s metrics.",
-      zh: "Docker Hub 拉取量的 REST + SVG 统计——本站指标也在用。",
-    },
+      en: "REST + SVG stats for Docker Hub pulls — dogfooded by this site’s metrics."
+
+    }
   },
   {
     title: "GlobalPulse",
@@ -176,17 +159,17 @@ const ORG_PROJECTS: OrgProjectDef[] = [
     category: "Infrastructure",
     org: "InnoNestX",
     ctaHref: "https://pulse.xuxuclassmate.com/",
-    ctaLabel: { en: "Open live site", zh: "打开在线站点" },
-    linkLabel: { en: "GitHub", zh: "GitHub" },
+    ctaLabel: { en: "Open live site" },
+    linkLabel: { en: "GitHub" },
     tags: {
-      en: ["Cloudflare Workers", "Briefings", "Multi-channel"],
-      zh: ["Cloudflare Workers", "简报", "多通道"],
+      en: ["Cloudflare Workers", "Briefings", "Multi-channel"]
+
     },
-    status: { en: "Live", zh: "在线" },
+    status: { en: "Live" },
     description: {
-      en: "Self-hosted market intelligence and scheduled briefings on Cloudflare Workers.",
-      zh: "自托管市场情报与定时简报——基于 Cloudflare Workers。",
-    },
+      en: "Self-hosted market intelligence and scheduled briefings on Cloudflare Workers."
+
+    }
   },
   {
     title: "Custom Mail",
@@ -194,69 +177,69 @@ const ORG_PROJECTS: OrgProjectDef[] = [
     category: "Infrastructure",
     org: "InnoNestX",
     ctaHref: "https://mail.xuxuclassmate.com",
-    ctaLabel: { en: "Open live site", zh: "打开在线站点" },
-    linkLabel: { en: "GitHub", zh: "GitHub" },
+    ctaLabel: { en: "Open live site" },
+    linkLabel: { en: "GitHub" },
     tags: {
-      en: ["Cloudflare Workers", "Rust", "Email"],
-      zh: ["Cloudflare Workers", "Rust", "邮件"],
+      en: ["Cloudflare Workers", "Rust", "Email"]
+
     },
-    status: { en: "Live", zh: "在线" },
+    status: { en: "Live" },
     description: {
-      en: "Private outbound mail workspace on Workers — Markdown compose, attachments, history, pluggable ESP.",
-      zh: "Workers 上的私有发信工作台——Markdown 撰写、附件、历史记录、可插拔 ESP。",
-    },
+      en: "Private outbound mail workspace on Workers — Markdown compose, attachments, history, pluggable ESP."
+
+    }
   },
   {
     title: "Java API Automation",
     href: "https://github.com/XuXuClassMate/My_Test_JAProject",
     category: "Automation",
     org: "XuXuClassMate",
-    linkLabel: { en: "GitHub", zh: "GitHub" },
+    linkLabel: { en: "GitHub" },
     tags: {
-      en: ["Java", "RestAssured", "Allure"],
-      zh: ["Java", "RestAssured", "Allure"],
+      en: ["Java", "RestAssured", "Allure"]
+
     },
-    status: { en: "Open source", zh: "开源" },
+    status: { en: "Open source" },
     description: {
-      en: "Scalable API automation with Java, JUnit, RestAssured, Maven, and Allure.",
-      zh: "基于 Java、JUnit、RestAssured、Maven 与 Allure 的可扩展接口自动化。",
-    },
+      en: "Scalable API automation with Java, JUnit, RestAssured, Maven, and Allure."
+
+    }
   },
   {
     title: "Playwright E2E Framework",
     href: "#",
     category: "Automation",
     org: "InnoNestX",
-    linkLabel: { en: "Coming soon", zh: "即将上线" },
+    linkLabel: { en: "Coming soon" },
     tags: {
-      en: ["Playwright", "E2E", "TypeScript"],
-      zh: ["Playwright", "E2E", "TypeScript"],
+      en: ["Playwright", "E2E", "TypeScript"]
+
     },
-    status: { en: "Planned", zh: "规划中" },
+    status: { en: "Planned" },
     description: {
-      en: "Full-chain UI + API automation patterns — repository moving under InnoNestX.",
-      zh: "全链路 UI + API 自动化模式——仓库将迁入 InnoNestX。",
-    },
-  },
+      en: "Full-chain UI + API automation patterns — repository moving under InnoNestX."
+
+    }
+  }
 ];
 
-function toProject(locale: "en" | "zh", project: OrgProjectDef): OrgProject {
+function toProject(project: OrgProjectDef): OrgProject {
   return {
     title: project.title,
-    description: project.description[locale],
+    description: project.description.en,
     href: project.href,
-    linkLabel: project.linkLabel[locale],
+    linkLabel: project.linkLabel.en,
     ctaHref: project.ctaHref,
-    ctaLabel: project.ctaLabel?.[locale],
-    tags: project.tags[locale],
-    status: project.status[locale],
+    ctaLabel: project.ctaLabel?.en,
+    tags: project.tags.en,
+    status: project.status.en,
     org: project.org,
     category: project.category,
   };
 }
 
-export function getOrgProjects(locale: "en" | "zh"): OrgProject[] {
-  return ORG_PROJECTS.map((project) => toProject(locale, project));
+export function getOrgProjects(_locale: "en"): OrgProject[] {
+  return ORG_PROJECTS.map((project) => toProject(project));
 }
 
 export type OrgCategoryGroup = {
@@ -266,12 +249,12 @@ export type OrgCategoryGroup = {
   projects: OrgProject[];
 };
 
-export function getOrgCategories(locale: "en" | "zh"): OrgCategoryGroup[] {
-  const projects = getOrgProjects(locale);
+export function getOrgCategories(_locale: "en"): OrgCategoryGroup[] {
+  const projects = getOrgProjects("en");
   return OSS_CATEGORY_ORDER.map((id) => ({
     id,
-    title: CATEGORY_META[id][locale].title,
-    description: CATEGORY_META[id][locale].description,
+    title: CATEGORY_META[id].en.title,
+    description: CATEGORY_META[id].en.description,
     projects: projects.filter((project) => project.category === id),
   }));
 }

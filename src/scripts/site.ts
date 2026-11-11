@@ -352,11 +352,23 @@ function initTerminalCopy(): void {
   });
 }
 
+function contactAddress(): string {
+  return ["mail", "xuxuclassmate.com"].join(String.fromCharCode(64));
+}
+
+function initContactMail(): void {
+  const address = contactAddress();
+  document.querySelectorAll<HTMLAnchorElement>("[data-contact-mail]").forEach((el) => {
+    el.textContent = address;
+    el.setAttribute("href", `mailto:${address}`);
+  });
+}
+
 function initCopyEmail(): void {
   const button = document.getElementById("copyEmailBtn");
   if (!(button instanceof HTMLButtonElement)) return;
 
-  const email = button.dataset.email ?? "";
+  const email = button.dataset.email || contactAddress();
   const copyLabel = button.dataset.copyLabel ?? "Copy email";
   const copiedLabel = button.dataset.copiedLabel ?? "Copied";
 
@@ -886,6 +898,7 @@ function bootPage() {
   initShowcaseSettle();
   initMetricSheen();
   initProjectFilters();
+  initContactMail();
   initCopyEmail();
   initTerminalCopy();
   initHighlightCountUp();

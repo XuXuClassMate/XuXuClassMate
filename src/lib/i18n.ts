@@ -1,6 +1,5 @@
 import { getNote as getNoteFromContent } from "../content/notes";
 import { en } from "../content/en";
-import { zh } from "../content/zh";
 import type {
   CaseSlug,
   Locale,
@@ -10,106 +9,40 @@ import type {
 } from "../content/types";
 
 export const SITE_ORIGIN = "https://www.xuxuclassmate.com";
-export const CONTACT_EMAIL = "mail@xuxuclassmate.com";
 
-const catalogs: Record<Locale, LocaleCopy> = { en, zh };
-
-export function getCopy(locale: Locale): LocaleCopy {
-  return catalogs[locale];
+export function getCopy(_locale?: Locale): LocaleCopy {
+  return en;
 }
 
 export function getCase(locale: Locale, slug: CaseSlug) {
-  return getCopy(locale).work.cases.find((entry) => entry.slug === slug);
+  return getCopy("en").work.cases.find((entry) => entry.slug === slug);
 }
 
 export function getNote(locale: Locale, slug: NoteSlug | string) {
-  return getNoteFromContent(locale, slug);
+  return getNoteFromContent("en", slug);
 }
 
-/** Strip a trailing `.html` so public links match canonical (non-redirect) URLs. */
-function cleanPath(path: string): string {
-  if (
-    path === "/zh/index.html" ||
-    path === "/zh.html" ||
-    path === "/zh/" ||
-    path === "/zh"
-  ) {
-    return "/zh/";
-  }
-  if (
-    path === "/en/index.html" ||
-    path === "/en.html" ||
-    path === "/en/" ||
-    path === "/en" ||
-    path === "/index.html"
-  ) {
-    return "/";
-  }
-  if (path.endsWith(".html")) return path.slice(0, -5);
-  return path;
-}
-
-/** Public path for a page. Root `/` is the English home (same as legacy). */
+/** Public path for a page. Root `/` is the English home. */
 export function pageHref(locale: Locale, page: PageId): string {
-  if (page === "home") {
-    return locale === "zh" ? "/zh/" : "/";
-  }
-  // Legacy aliases → current canonical routes (avoid hop via .html redirects).
-  if (page === "notes") return `/${locale}/blog`;
-  if (page === "innonestx") return `/${locale}/open-source`;
-  return `/${locale}/${page}`;
+  if (page === "home") return "/";
+  if (page === "notes") return "/en/blog";
+  if (page === "innonestx") return "/en/open-source";
+  return `/en/${page}`;
 }
 
 export function caseHref(locale: Locale, slug: CaseSlug): string {
-  return `/${locale}/work/${slug}`;
+  return `/en/work/${slug}`;
 }
 
 export function noteHref(locale: Locale, slug: NoteSlug): string {
-  return `/${locale}/blog/${slug}`;
-}
-
-export function languageHref(locale: Locale, page: PageId): string {
-  const twin: Locale = locale === "en" ? "zh" : "en";
-  return pageHref(twin, page);
-}
-
-/**
- * Same-page language twin from the current URL path (`/en/...` ↔ `/zh/...`).
- * Prefers root `/` for the English home instead of `/en/` or `/en/index.html`.
- */
-export function alternateLocalePath(pathname: string): string {
-  const trimmed =
-    pathname.length > 1 && pathname.endsWith("/")
-      ? pathname.slice(0, -1)
-      : pathname;
-  const path = cleanPath(trimmed);
-
-  if (path === "/" || path === "/zh/") {
-    return path === "/" ? "/zh/" : "/";
-  }
-
-  const match = path.match(/^\/(en|zh)(\/.*)$/);
-  if (!match) {
-    return `/zh${path.startsWith("/") ? path : `/${path}`}`;
-  }
-
-  const from = match[1] as Locale;
-  const rest = cleanPath(match[2]);
-  const to: Locale = from === "en" ? "zh" : "en";
-  if (rest === "/" || rest === "" || rest === "/zh/") {
-    return to === "en" ? "/" : "/zh/";
-  }
-  return `/${to}${rest.startsWith("/") ? rest : `/${rest}`}`;
+  return `/en/blog/${slug}`;
 }
 
 export function canonicalPath(locale: Locale, page: PageId): string {
-  if (page === "home") {
-    // English home always canonicalizes to `/` (avoid `/` vs `/en/` duplicate).
-    return locale === "zh" ? "/zh/" : "/";
-  }
-  if (page === "notes") return `/${locale}/blog`;
-  if (page === "innonestx") return `/${locale}/open-source`;
-  return `/${locale}/${page}`;
+  if (page === "home") return "/";
+  if (page === "notes") return "/en/blog";
+  if (page === "innonestx") return "/en/open-source";
+  return `/en/${page}`;
 }
 
 export function absoluteUrl(path: string): string {
@@ -120,23 +53,18 @@ export function absoluteUrl(path: string): string {
 export function hreflangLinks(
   page: PageId,
 ): { hreflang: string; href: string }[] {
-  if (page === "home") {
-    return [
-      { hreflang: "en", href: absoluteUrl("/") },
-      { hreflang: "zh", href: absoluteUrl("/zh/") },
-      { hreflang: "x-default", href: absoluteUrl("/") },
-    ];
-  }
-
   const resolved =
-    page === "notes" ? "blog" : page === "innonestx" ? "open-source" : page;
-  const enPath = `/en/${resolved}`;
-  const zhPath = `/zh/${resolved}`;
-
+    page === "home"
+      ? "/"
+      : page === "notes"
+        ? "/en/blog"
+        : page === "innonestx"
+          ? "/en/open-source"
+          : `/en/${page}`;
+  const href = absoluteUrl(resolved === "/" ? "/" : resolved);
   return [
-    { hreflang: "en", href: absoluteUrl(enPath) },
-    { hreflang: "zh", href: absoluteUrl(zhPath) },
-    { hreflang: "x-default", href: absoluteUrl(enPath) },
+    { hreflang: "en", href },
+    { hreflang: "x-default", href },
   ];
 }
 
@@ -156,9 +84,9 @@ export function jsonLdGraph(
     copy.meta.home;
   const pageUrl = absoluteUrl(
     caseSlug
-      ? `/${locale}/work/${caseSlug}`
+      ? `/en/work/${caseSlug}`
       : noteSlug
-        ? `/${locale}/blog/${noteSlug}`
+        ? `/en/blog/${noteSlug}`
         : canonicalPath(locale, page),
   );
 
@@ -168,7 +96,6 @@ export function jsonLdGraph(
     name: "XuXuClassMate",
     alternateName: ["xuxuclassmate"],
     url: SITE_ORIGIN,
-    email: CONTACT_EMAIL,
     jobTitle: "QA Engineer / SDET / AI Testing",
     description: meta.description,
     image: absoluteUrl("/images/og-default.jpg"),
@@ -201,7 +128,7 @@ export function jsonLdGraph(
     "@id": `${SITE_ORIGIN}/#website`,
     name: "XuXuClassMate",
     url: SITE_ORIGIN,
-    inLanguage: ["en", "zh"],
+    inLanguage: ["en"],
     publisher: { "@id": `${SITE_ORIGIN}/#person` },
   };
 
@@ -218,7 +145,7 @@ export function jsonLdGraph(
     description: meta.description,
     isPartOf: { "@id": `${SITE_ORIGIN}/#website` },
     about: { "@id": `${SITE_ORIGIN}/#person` },
-    inLanguage: locale,
+    inLanguage: "en",
     ...(note
       ? {
           headline: note.title,

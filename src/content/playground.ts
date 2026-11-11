@@ -23,18 +23,18 @@ type ExperienceDef = {
   githubHref?: string;
   tryAnchor?: string;
   ctaExternal?: boolean;
-  ctaHref: { en: string; zh: string };
-  description: { en: string; zh: string };
-  ctaLabel: { en: string; zh: string };
+  ctaHref: { en: string; };
+  description: { en: string; };
+  ctaLabel: { en: string; };
 };
 
 const MODE_LABELS: Record<
   PlaygroundMode,
-  { en: string; zh: string }
+  { en: string; }
 > = {
-  interactive: { en: "Interactive", zh: "站内体验" },
-  live: { en: "Live", zh: "在线产品" },
-  install: { en: "Install", zh: "本机安装" },
+  interactive: { en: "Interactive" },
+  live: { en: "Live" },
+  install: { en: "Install" }
 };
 
 const EXPERIENCES: ExperienceDef[] = [
@@ -44,17 +44,17 @@ const EXPERIENCES: ExperienceDef[] = [
     title: "AI Test Case Generator",
     githubHref: "https://github.com/InnoNestX/testcase-generator",
     ctaHref: {
-      en: "/en/demo/ai-testcase-generator",
-      zh: "/zh/demo/ai-testcase-generator",
+      en: "/en/demo/ai-testcase-generator"
+
     },
     description: {
-      en: "Shift testing left with multi-modal AI. Feed a sample PRD in the browser — curated demo output, not a live LLM.",
-      zh: "用多模态 AI 把测试左移。浏览器内喂入示例 PRD——精选演示输出，不调用真实 LLM。",
+      en: "Shift testing left with multi-modal AI. Feed a sample PRD in the browser — curated demo output, not a live LLM."
+
     },
     ctaLabel: {
-      en: "Open interactive demo",
-      zh: "打开交互演示",
-    },
+      en: "Open interactive demo"
+
+    }
   },
   {
     id: "docker-hub-api",
@@ -63,17 +63,17 @@ const EXPERIENCES: ExperienceDef[] = [
     githubHref: "https://github.com/InnoNestX/docker-hub-pull-counter",
     tryAnchor: "try-docker-hub-api",
     ctaHref: {
-      en: "#try-docker-hub-api",
-      zh: "#try-docker-hub-api",
+      en: "#try-docker-hub-api"
+
     },
     description: {
-      en: "Look up Docker Hub pull stats through the same public gateway this site dogfoods.",
-      zh: "用本站同款公开网关查询 Docker Hub 拉取量——当场试一次。",
+      en: "Look up Docker Hub pull stats through the same public gateway this site dogfoods."
+
     },
     ctaLabel: {
-      en: "Try the API here",
-      zh: "在本页试用 API",
-    },
+      en: "Try the API here"
+
+    }
   },
   {
     id: "docker-suite",
@@ -81,31 +81,31 @@ const EXPERIENCES: ExperienceDef[] = [
     title: "Test DB Docker Suite",
     ctaExternal: true,
     ctaHref: {
-      en: "https://hub.docker.com/u/xuxuclassmate",
-      zh: "https://hub.docker.com/u/xuxuclassmate",
+      en: "https://hub.docker.com/u/xuxuclassmate"
+
     },
     description: {
-      en: "Ready-to-run Dameng / Highgo / Kingbase / TiDB images — pull and run on your machine (not in-browser).",
-      zh: "达梦 / 瀚高 / 人大金仓 / TiDB 即用镜像——在本机 Docker 拉取运行（非浏览器内跑库）。",
+      en: "Ready-to-run Dameng / Highgo / Kingbase / TiDB images — pull and run on your machine (not in-browser)."
+
     },
     ctaLabel: {
-      en: "Open Docker Hub",
-      zh: "打开 Docker Hub",
-    },
-  },
+      en: "Open Docker Hub"
+
+    }
+  }
 ];
 
 export function getPlaygroundExperiences(
-  locale: Locale,
+  _locale: Locale,
 ): PlaygroundExperience[] {
   return EXPERIENCES.map((item) => ({
     id: item.id,
     title: item.title,
-    description: item.description[locale],
+    description: item.description.en,
     mode: item.mode,
-    modeLabel: MODE_LABELS[item.mode][locale],
-    ctaLabel: item.ctaLabel[locale],
-    ctaHref: item.ctaHref[locale],
+    modeLabel: MODE_LABELS[item.mode].en,
+    ctaLabel: item.ctaLabel.en,
+    ctaHref: item.ctaHref.en,
     ctaExternal: item.ctaExternal,
     githubHref: item.githubHref,
     tryAnchor: item.tryAnchor,

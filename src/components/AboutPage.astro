@@ -13,7 +13,6 @@ const { locale } = Astro.props;
 const copy = getCopy(locale);
 const about = getAbout(locale);
 const home = getPortfolioHome(locale);
-const isZh = locale === "zh";
 ---
 
 <BaseLayout locale={locale} page="about" metaOverride={about.meta}>
@@ -29,27 +28,23 @@ const isZh = locale === "zh";
 
     <section class="home-section">
       <div class="container">
-        <h2 class="section-title">{isZh ? "简介" : "Introduction"}</h2>
+        <h2 class="section-title">Introduction</h2>
         <p class="section-lead">{about.intro}</p>
       </div>
     </section>
 
     <section class="home-section">
       <div class="container">
-        <h2 class="section-title">{isZh ? "工程经历" : "Engineering Journey"}</h2>
+        <h2 class="section-title">Engineering Journey</h2>
         <p class="section-lead">
-          {
-            isZh
-              ? "从测试自动化、接口和性能，做到可安装的 AI 测试工具。重点一直是让质量工作能在真实环境里跑起来。"
-              : "From test automation, APIs, and performance into installable AI testing tools. The through-line is quality work that runs in a real environment."
-          }
+          From test automation, APIs, and performance into installable AI testing tools. The through-line is quality work that runs in a real environment.
         </p>
       </div>
     </section>
 
     <section class="home-section">
       <div class="container">
-        <h2 class="section-title">{isZh ? "部分结果" : "Selected Results"}</h2>
+        <h2 class="section-title">Selected Results</h2>
         <div class="story-metrics">
           {
             home.achievements.slice(0, 2).map((item) => (
@@ -65,7 +60,7 @@ const isZh = locale === "zh";
 
     <section class="home-section">
       <div class="container">
-        <h2 class="section-title">{isZh ? "工程原则" : "Engineering Philosophy"}</h2>
+        <h2 class="section-title">Engineering Philosophy</h2>
         <div class="principle-list">
           {
             copy.home.principles.map((item) => (
@@ -81,13 +76,9 @@ const isZh = locale === "zh";
 
     <section class="home-section">
       <div class="container">
-        <h2 class="section-title">{isZh ? "当前重点" : "Current Focus"}</h2>
+        <h2 class="section-title">Current Focus</h2>
         <p class="section-lead">
-          {
-            isZh
-              ? "当前深耕 AI Testing、Agentic QA 和自动化基础设施：把用例生成器做成可安装产品，并维持可直接拉取的测试数据库镜像。"
-              : "AI Testing, Agentic QA, and automation infrastructure: shipping the test-case generator as an installable product, and keeping the test-database images pullable."
-          }
+          AI Testing, Agentic QA, and automation infrastructure: shipping the test-case generator as an installable product, and keeping the test-database images pullable.
         </p>
       </div>
     </section>

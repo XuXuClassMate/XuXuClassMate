@@ -5,7 +5,6 @@ import type { Locale } from "../lib/i18n";
 type Props = { locale: Locale };
 
 const { locale } = Astro.props;
-const isZh = locale === "zh";
 ---
 
 <BaseLayout
@@ -13,21 +12,17 @@ const isZh = locale === "zh";
   page="about"
   noindex={true}
   metaOverride={{
-    title: isZh ? "设计实验室" : "Design Lab",
-    description: isZh ? "玻璃材质调试，不面向普通访客。" : "Glass material controls, not part of the public site.",
+    title: "Design Lab",
+    description: "Glass material controls, not part of the public site.",
     keywords: "design lab",
   }}
 >
   <main id="main-content" class="story apple-page design-lab-page">
     <section class="story-hero">
       <div class="story-wrap">
-        <h1>{isZh ? "设计实验室" : "Design Lab"}</h1>
+        <h1>Design Lab</h1>
         <p class="story-lead">
-          {
-            isZh
-              ? "玻璃通透度只在这里调整，不出现在普通导航里。"
-              : "Glass tint lives here, not in the public navigation."
-          }
+          Glass tint lives here, not in the public navigation.
         </p>
         <div class="glass-tint" data-glass-tint>
           <button
@@ -38,12 +33,12 @@ const isZh = locale === "zh";
             aria-controls="glassTintPanel"
             data-glass-tint-toggle
           >
-            {isZh ? "玻璃" : "Glass"}
+            "Glass"
           </button>
           <div class="glass-tint-panel" id="glassTintPanel" data-glass-tint-panel>
             <div class="glass-tint-label">
-              <span>{isZh ? "通透" : "Clear"}</span>
-              <span>{isZh ? "着色" : "Tinted"}</span>
+              <span>Clear</span>
+              <span>Tinted</span>
             </div>
             <input
               id="glassTintSlider"
@@ -51,7 +46,7 @@ const isZh = locale === "zh";
               min="0"
               max="100"
               value="45"
-              aria-label={isZh ? "调整玻璃着色" : "Adjust glass tint"}
+              aria-label="Adjust glass tint"
               data-glass-tint-slider
             />
           </div>

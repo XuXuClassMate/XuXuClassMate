@@ -32,12 +32,6 @@ test("home renders and language switch works", async ({ page }) => {
   await expect(page.getByText("80%+").first()).toBeVisible();
   await expect(page.getByText("Built with Astro")).toHaveCount(0);
   await expect(page.getByText("Cloudflare Pages")).toHaveCount(0);
-  await page.getByRole("link", { name: "Switch to Chinese" }).click();
-  await expect(page).toHaveURL(/\/zh\/?$/);
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "AI 测试用例生成器",
-  );
-  await expect(page.locator(".hero-desc")).toContainText("AI 测试工具");
 });
 
 test("footer exposes professional profiles only", async ({ page }) => {
@@ -123,10 +117,7 @@ test("generator interactive demo runs sample flow", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "AI Test Case Generator",
   );
-  await expect(page.locator(".nav-links .language-switch")).toHaveAttribute(
-    "href",
-    "/zh/demo/ai-testcase-generator",
-  );
+  await expect(page.locator(".nav-links .language-switch")).toHaveCount(0);
   await expect(page.locator(".footer-desc")).not.toHaveText(
     /Shift testing left with multi-modal AI — a browser demo/,
   );
@@ -360,7 +351,7 @@ test("mobile nav is a full-screen apple menu with theme and language", async ({
   }
   await expect(page.getByRole("button", { name: /Work/ })).toHaveCount(0);
   await expect(page.locator("#glassTintToggle")).toHaveCount(0);
-  await expect(page.locator(".nav-links .language-switch")).toBeVisible();
+  await expect(page.locator(".nav-links .language-switch")).toHaveCount(0);
   await expect(page.locator("#themeToggle")).toBeVisible();
   await expect(page.locator(".theme-toggle-label")).toHaveText("Theme");
 });
@@ -379,18 +370,18 @@ test("new case studies render with project OG covers", async ({ page }) => {
     "https://www.xuxuclassmate.com/images/cover-globalpulse.jpg",
   );
 
-  await page.goto("/zh/work/docker-hub-api-gateway");
+  await page.goto("/en/work/docker-hub-api-gateway");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "Docker Hub API Gateway",
   );
 });
 
 test("docker suite proof shows top pull metrics", async ({ page }) => {
-  await page.goto("/zh/work/docker-suite");
-  await expect(page.getByRole("heading", { name: "使用数据" })).toBeVisible();
-  await expect(page.getByText("达梦", { exact: true })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "快速开始" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "文档" })).toBeVisible();
+  await page.goto("/en/work/docker-suite");
+  await expect(page.getByRole("heading", { name: "Usage Statistics" })).toBeVisible();
+  await expect(page.getByText("Dameng", { exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Quick Start" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Documentation" })).toBeVisible();
   await expect(page.getByText("docker pull xuxuclassmate/dameng")).toBeVisible();
   await expect(page.locator('[data-metric="docker:dameng"]')).toBeVisible();
   await expect(page.locator('[data-metric="docker:highgo"]')).toBeVisible();
@@ -489,7 +480,7 @@ test("H5 layout fits common phone widths without horizontal overflow", async ({
     { width: 414, height: 896 }, // iPhone 11 / XR
     { width: 430, height: 932 }, // iPhone 15 Pro Max
   ];
-  const paths = ["/", "/zh/", "/en/demo/ai-testcase-generator", "/en/work"];
+  const paths = ["/", "/en/demo/ai-testcase-generator", "/en/work"];
 
   for (const phone of phones) {
     await page.setViewportSize(phone);

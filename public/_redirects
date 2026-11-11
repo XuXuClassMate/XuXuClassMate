@@ -1,5 +1,6 @@
 # Trailing-slash normalization
-/zh /zh/ 301
+/zh/* /en/:splat 301
+/zh / 301
 /en /en/ 301
 /favicon.ico /images/logo.svg 200
 

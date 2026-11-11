@@ -18,11 +18,10 @@ const blogHref = pageHref(locale, "blog");
 const orgHref = pageHref(locale, "open-source");
 const highlights = copy.home.highlights;
 const [flagship, dockerFeatured] = home.featured;
-const isZh = locale === "zh";
 const pulls = highlights.find((item) => item.metric === "docker:total-pulls");
 const learnMore = home.featuredMore;
 const demoLabel = home.ctaDemo;
-const buyLabel = isZh ? "体验" : "Try";
+const buyLabel = "Try";
 const articles = getLatestArticles(locale).slice(0, 4);
 const serviceCover: Record<string, string> = {
   www: "/images/home/hero-product.jpg",
@@ -52,12 +51,10 @@ const entertainment = [
   <section class="section section-ribbon">
     <div class="ribbon-wrapper">
       <p class="ribbon-copy">
-        {isZh
-          ? "在线试用 AI 测试用例生成器。"
-          : "Shop the AI test case generator demo online."}
+        Shop the AI test case generator demo online.
       </p>
       <a class="ribbon-link" href={home.ctaDemoHref}>
-        {isZh ? "立即体验" : "Shop"}
+        Shop
         <span aria-hidden="true"> ›</span>
       </a>
     </div>
@@ -123,7 +120,7 @@ const entertainment = [
               <div class="tile-copy-wrapper">
                 <h2 class="tile-headline">{dockerFeatured.title}</h2>
                 <p class="tile-subhead">
-                  {isZh ? "多库 Docker，即开即用。" : "Test DB images. Ready to run."}
+                  "Test DB images. Ready to run."
                 </p>
               </div>
               <div class="tile-ctas">
@@ -162,12 +159,10 @@ const entertainment = [
         <div class="tile-content">
           <div class="tile-copy-wrapper">
             <h2 class="tile-headline">
-              {isZh ? "生成式测试工程" : "Generative testing"}
+              "Generative testing"
             </h2>
             <p class="tile-subhead">
-              {isZh
-                ? "从需求到可评审用例。"
-                : "From requirements to reviewable cases."}
+              From requirements to reviewable cases.
             </p>
           </div>
           <div class="tile-ctas">
@@ -197,7 +192,7 @@ const entertainment = [
       </div>
     </section>
 
-    <section class="section section-promo-duo" aria-label={isZh ? "精选" : "Featured"}>
+    <section class="section section-promo-duo" aria-label="Featured">
       <article class="tile-wrapper theme-light">
         <a class="tile-link" href={orgHref} aria-hidden="true" tabindex="-1" />
         <div class="tile-content">
@@ -229,11 +224,11 @@ const entertainment = [
   <section
     class="section section-entertainment"
     data-entertainment-gallery
-    aria-label={isZh ? "工程内容与服务" : "Engineering & services"}
+    aria-label="Engineering & services"
   >
     <div class="entertainment-header">
       <h2 class="entertainment-title">
-        {isZh ? "持续更新的工程内容。" : "Endless engineering."}
+        "Endless engineering."
       </h2>
     </div>
     <div class="entertainment-track" data-entertainment-track>
