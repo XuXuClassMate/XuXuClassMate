@@ -61,13 +61,11 @@ describe("i18n paths", () => {
     expect(root.find((item) => item.hreflang === "zh")?.href).toBe(
       "https://www.xuxuclassmate.com/zh/",
     );
-    expect(root.find((item) => item.hreflang === "es")?.href).toBe(
-      "https://www.xuxuclassmate.com/es/",
-    );
+    expect(root.find((item) => item.hreflang === "es")).toBeUndefined();
     expect(root.find((item) => item.hreflang === "x-default")?.href).toBe(
       "https://www.xuxuclassmate.com/",
     );
-    expect(root).toHaveLength(11);
+    expect(root).toHaveLength(3);
 
     const work = hreflangLinks("work");
     expect(work.find((l) => l.hreflang === "en")?.href).toBe(

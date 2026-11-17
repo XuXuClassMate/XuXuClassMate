@@ -4,478 +4,506 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.xuxuclassmate.com/</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.00</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/" />
     <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.xuxuclassmate.com/es/" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://www.xuxuclassmate.com/hi/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://www.xuxuclassmate.com/ar/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://www.xuxuclassmate.com/pt/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.xuxuclassmate.com/fr/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://www.xuxuclassmate.com/ru/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://www.xuxuclassmate.com/ja/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.xuxuclassmate.com/de/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/" />
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/work/testcase-generator</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work/testcase-generator" />
     <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/work/testcase-generator" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.xuxuclassmate.com/es/work/testcase-generator" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://www.xuxuclassmate.com/hi/work/testcase-generator" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://www.xuxuclassmate.com/ar/work/testcase-generator" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://www.xuxuclassmate.com/pt/work/testcase-generator" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.xuxuclassmate.com/fr/work/testcase-generator" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://www.xuxuclassmate.com/ru/work/testcase-generator" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://www.xuxuclassmate.com/ja/work/testcase-generator" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.xuxuclassmate.com/de/work/testcase-generator" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/work/testcase-generator" />
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/zh/work/testcase-generator</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work/testcase-generator" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/work/testcase-generator" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/work/testcase-generator" />
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/demo/ai-testcase-generator</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.92</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/demo/ai-testcase-generator" />
     <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/demo/ai-testcase-generator" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.xuxuclassmate.com/es/demo/ai-testcase-generator" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://www.xuxuclassmate.com/hi/demo/ai-testcase-generator" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://www.xuxuclassmate.com/ar/demo/ai-testcase-generator" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://www.xuxuclassmate.com/pt/demo/ai-testcase-generator" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.xuxuclassmate.com/fr/demo/ai-testcase-generator" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://www.xuxuclassmate.com/ru/demo/ai-testcase-generator" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://www.xuxuclassmate.com/ja/demo/ai-testcase-generator" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.xuxuclassmate.com/de/demo/ai-testcase-generator" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/demo/ai-testcase-generator" />
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/zh/demo/ai-testcase-generator</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.92</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/demo/ai-testcase-generator" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/demo/ai-testcase-generator" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/demo/ai-testcase-generator" />
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/about</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/about" />
     <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/about" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.xuxuclassmate.com/es/about" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://www.xuxuclassmate.com/hi/about" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://www.xuxuclassmate.com/ar/about" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://www.xuxuclassmate.com/pt/about" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.xuxuclassmate.com/fr/about" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://www.xuxuclassmate.com/ru/about" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://www.xuxuclassmate.com/ja/about" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.xuxuclassmate.com/de/about" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/about" />
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/learn</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/learn" />
     <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/learn" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.xuxuclassmate.com/es/learn" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://www.xuxuclassmate.com/hi/learn" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://www.xuxuclassmate.com/ar/learn" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://www.xuxuclassmate.com/pt/learn" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.xuxuclassmate.com/fr/learn" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://www.xuxuclassmate.com/ru/learn" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://www.xuxuclassmate.com/ja/learn" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.xuxuclassmate.com/de/learn" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/learn" />
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/work</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work" />
     <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/work" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.xuxuclassmate.com/es/work" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://www.xuxuclassmate.com/hi/work" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://www.xuxuclassmate.com/ar/work" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://www.xuxuclassmate.com/pt/work" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.xuxuclassmate.com/fr/work" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://www.xuxuclassmate.com/ru/work" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://www.xuxuclassmate.com/ja/work" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.xuxuclassmate.com/de/work" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/work" />
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/blog</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog" />
     <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/blog" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.xuxuclassmate.com/es/blog" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://www.xuxuclassmate.com/hi/blog" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://www.xuxuclassmate.com/ar/blog" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://www.xuxuclassmate.com/pt/blog" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.xuxuclassmate.com/fr/blog" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://www.xuxuclassmate.com/ru/blog" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://www.xuxuclassmate.com/ja/blog" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.xuxuclassmate.com/de/blog" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/blog" />
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/ai-testing</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/ai-testing" />
     <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/ai-testing" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.xuxuclassmate.com/es/ai-testing" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://www.xuxuclassmate.com/hi/ai-testing" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://www.xuxuclassmate.com/ar/ai-testing" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://www.xuxuclassmate.com/pt/ai-testing" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.xuxuclassmate.com/fr/ai-testing" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://www.xuxuclassmate.com/ru/ai-testing" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://www.xuxuclassmate.com/ja/ai-testing" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.xuxuclassmate.com/de/ai-testing" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/ai-testing" />
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/playwright</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/playwright" />
     <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/playwright" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.xuxuclassmate.com/es/playwright" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://www.xuxuclassmate.com/hi/playwright" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://www.xuxuclassmate.com/ar/playwright" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://www.xuxuclassmate.com/pt/playwright" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.xuxuclassmate.com/fr/playwright" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://www.xuxuclassmate.com/ru/playwright" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://www.xuxuclassmate.com/ja/playwright" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.xuxuclassmate.com/de/playwright" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/playwright" />
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/infrastructure</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/infrastructure" />
     <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/infrastructure" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.xuxuclassmate.com/es/infrastructure" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://www.xuxuclassmate.com/hi/infrastructure" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://www.xuxuclassmate.com/ar/infrastructure" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://www.xuxuclassmate.com/pt/infrastructure" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.xuxuclassmate.com/fr/infrastructure" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://www.xuxuclassmate.com/ru/infrastructure" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://www.xuxuclassmate.com/ja/infrastructure" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.xuxuclassmate.com/de/infrastructure" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/infrastructure" />
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/open-source</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/open-source" />
     <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/open-source" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.xuxuclassmate.com/es/open-source" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://www.xuxuclassmate.com/hi/open-source" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://www.xuxuclassmate.com/ar/open-source" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://www.xuxuclassmate.com/pt/open-source" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.xuxuclassmate.com/fr/open-source" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://www.xuxuclassmate.com/ru/open-source" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://www.xuxuclassmate.com/ja/open-source" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.xuxuclassmate.com/de/open-source" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/open-source" />
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/now</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/now" />
     <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/now" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.xuxuclassmate.com/es/now" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://www.xuxuclassmate.com/hi/now" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://www.xuxuclassmate.com/ar/now" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://www.xuxuclassmate.com/pt/now" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.xuxuclassmate.com/fr/now" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://www.xuxuclassmate.com/ru/now" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://www.xuxuclassmate.com/ja/now" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.xuxuclassmate.com/de/now" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/now" />
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/zh/</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/" />
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/zh/about</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/about" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/about" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/about" />
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/zh/learn</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/learn" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/learn" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/learn" />
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/zh/work</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/work" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/work" />
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/zh/blog</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/blog" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/blog" />
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/zh/ai-testing</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/ai-testing" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/ai-testing" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/ai-testing" />
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/zh/playwright</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/playwright" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/playwright" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/playwright" />
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/zh/infrastructure</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/infrastructure" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/infrastructure" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/infrastructure" />
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/zh/open-source</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/open-source" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/open-source" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/open-source" />
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/zh/now</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/now" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/now" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/now" />
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/playground</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/playground" />
     <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/playground" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.xuxuclassmate.com/es/playground" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://www.xuxuclassmate.com/hi/playground" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://www.xuxuclassmate.com/ar/playground" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://www.xuxuclassmate.com/pt/playground" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.xuxuclassmate.com/fr/playground" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://www.xuxuclassmate.com/ru/playground" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://www.xuxuclassmate.com/ja/playground" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.xuxuclassmate.com/de/playground" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/playground" />
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/blog/ai-testcase-generator-multimodal</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/ai-testcase-generator-multimodal" />
     <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/blog/ai-testcase-generator-multimodal" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.xuxuclassmate.com/es/blog/ai-testcase-generator-multimodal" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://www.xuxuclassmate.com/hi/blog/ai-testcase-generator-multimodal" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://www.xuxuclassmate.com/ar/blog/ai-testcase-generator-multimodal" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://www.xuxuclassmate.com/pt/blog/ai-testcase-generator-multimodal" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.xuxuclassmate.com/fr/blog/ai-testcase-generator-multimodal" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://www.xuxuclassmate.com/ru/blog/ai-testcase-generator-multimodal" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://www.xuxuclassmate.com/ja/blog/ai-testcase-generator-multimodal" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.xuxuclassmate.com/de/blog/ai-testcase-generator-multimodal" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/blog/ai-testcase-generator-multimodal" />
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/blog/ai-assisted-test-case-generation</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/ai-assisted-test-case-generation" />
     <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/blog/ai-assisted-test-case-generation" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.xuxuclassmate.com/es/blog/ai-assisted-test-case-generation" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://www.xuxuclassmate.com/hi/blog/ai-assisted-test-case-generation" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://www.xuxuclassmate.com/ar/blog/ai-assisted-test-case-generation" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://www.xuxuclassmate.com/pt/blog/ai-assisted-test-case-generation" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.xuxuclassmate.com/fr/blog/ai-assisted-test-case-generation" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://www.xuxuclassmate.com/ru/blog/ai-assisted-test-case-generation" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://www.xuxuclassmate.com/ja/blog/ai-assisted-test-case-generation" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.xuxuclassmate.com/de/blog/ai-assisted-test-case-generation" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/blog/ai-assisted-test-case-generation" />
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/zh/playground</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/playground" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/playground" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/playground" />
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/zh/blog/ai-testcase-generator-multimodal</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/ai-testcase-generator-multimodal" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/blog/ai-testcase-generator-multimodal" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/blog/ai-testcase-generator-multimodal" />
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/zh/blog/ai-assisted-test-case-generation</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/ai-assisted-test-case-generation" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/blog/ai-assisted-test-case-generation" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/blog/ai-assisted-test-case-generation" />
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/work/fullstack-e2e</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work/fullstack-e2e" />
     <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/work/fullstack-e2e" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.xuxuclassmate.com/es/work/fullstack-e2e" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://www.xuxuclassmate.com/hi/work/fullstack-e2e" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://www.xuxuclassmate.com/ar/work/fullstack-e2e" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://www.xuxuclassmate.com/pt/work/fullstack-e2e" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.xuxuclassmate.com/fr/work/fullstack-e2e" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://www.xuxuclassmate.com/ru/work/fullstack-e2e" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://www.xuxuclassmate.com/ja/work/fullstack-e2e" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.xuxuclassmate.com/de/work/fullstack-e2e" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/work/fullstack-e2e" />
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/work/automation-framework</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work/automation-framework" />
     <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/work/automation-framework" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.xuxuclassmate.com/es/work/automation-framework" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://www.xuxuclassmate.com/hi/work/automation-framework" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://www.xuxuclassmate.com/ar/work/automation-framework" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://www.xuxuclassmate.com/pt/work/automation-framework" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.xuxuclassmate.com/fr/work/automation-framework" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://www.xuxuclassmate.com/ru/work/automation-framework" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://www.xuxuclassmate.com/ja/work/automation-framework" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.xuxuclassmate.com/de/work/automation-framework" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/work/automation-framework" />
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/work/trading-assistant</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work/trading-assistant" />
     <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/work/trading-assistant" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.xuxuclassmate.com/es/work/trading-assistant" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://www.xuxuclassmate.com/hi/work/trading-assistant" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://www.xuxuclassmate.com/ar/work/trading-assistant" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://www.xuxuclassmate.com/pt/work/trading-assistant" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.xuxuclassmate.com/fr/work/trading-assistant" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://www.xuxuclassmate.com/ru/work/trading-assistant" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://www.xuxuclassmate.com/ja/work/trading-assistant" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.xuxuclassmate.com/de/work/trading-assistant" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/work/trading-assistant" />
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/work/custom-mail</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work/custom-mail" />
     <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/work/custom-mail" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.xuxuclassmate.com/es/work/custom-mail" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://www.xuxuclassmate.com/hi/work/custom-mail" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://www.xuxuclassmate.com/ar/work/custom-mail" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://www.xuxuclassmate.com/pt/work/custom-mail" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.xuxuclassmate.com/fr/work/custom-mail" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://www.xuxuclassmate.com/ru/work/custom-mail" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://www.xuxuclassmate.com/ja/work/custom-mail" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.xuxuclassmate.com/de/work/custom-mail" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/work/custom-mail" />
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/work/globalpulse</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work/globalpulse" />
     <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/work/globalpulse" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.xuxuclassmate.com/es/work/globalpulse" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://www.xuxuclassmate.com/hi/work/globalpulse" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://www.xuxuclassmate.com/ar/work/globalpulse" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://www.xuxuclassmate.com/pt/work/globalpulse" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.xuxuclassmate.com/fr/work/globalpulse" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://www.xuxuclassmate.com/ru/work/globalpulse" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://www.xuxuclassmate.com/ja/work/globalpulse" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.xuxuclassmate.com/de/work/globalpulse" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/work/globalpulse" />
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/work/docker-hub-api-gateway</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work/docker-hub-api-gateway" />
     <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/work/docker-hub-api-gateway" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.xuxuclassmate.com/es/work/docker-hub-api-gateway" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://www.xuxuclassmate.com/hi/work/docker-hub-api-gateway" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://www.xuxuclassmate.com/ar/work/docker-hub-api-gateway" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://www.xuxuclassmate.com/pt/work/docker-hub-api-gateway" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.xuxuclassmate.com/fr/work/docker-hub-api-gateway" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://www.xuxuclassmate.com/ru/work/docker-hub-api-gateway" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://www.xuxuclassmate.com/ja/work/docker-hub-api-gateway" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.xuxuclassmate.com/de/work/docker-hub-api-gateway" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/work/docker-hub-api-gateway" />
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/work/docker-suite</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work/docker-suite" />
     <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/work/docker-suite" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.xuxuclassmate.com/es/work/docker-suite" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://www.xuxuclassmate.com/hi/work/docker-suite" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://www.xuxuclassmate.com/ar/work/docker-suite" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://www.xuxuclassmate.com/pt/work/docker-suite" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.xuxuclassmate.com/fr/work/docker-suite" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://www.xuxuclassmate.com/ru/work/docker-suite" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://www.xuxuclassmate.com/ja/work/docker-suite" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.xuxuclassmate.com/de/work/docker-suite" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/work/docker-suite" />
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/blog/playwright-e2e-framework</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/playwright-e2e-framework" />
     <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/blog/playwright-e2e-framework" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.xuxuclassmate.com/es/blog/playwright-e2e-framework" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://www.xuxuclassmate.com/hi/blog/playwright-e2e-framework" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://www.xuxuclassmate.com/ar/blog/playwright-e2e-framework" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://www.xuxuclassmate.com/pt/blog/playwright-e2e-framework" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.xuxuclassmate.com/fr/blog/playwright-e2e-framework" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://www.xuxuclassmate.com/ru/blog/playwright-e2e-framework" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://www.xuxuclassmate.com/ja/blog/playwright-e2e-framework" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.xuxuclassmate.com/de/blog/playwright-e2e-framework" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/blog/playwright-e2e-framework" />
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/blog/locust-api-performance-testing</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/locust-api-performance-testing" />
     <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/blog/locust-api-performance-testing" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.xuxuclassmate.com/es/blog/locust-api-performance-testing" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://www.xuxuclassmate.com/hi/blog/locust-api-performance-testing" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://www.xuxuclassmate.com/ar/blog/locust-api-performance-testing" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://www.xuxuclassmate.com/pt/blog/locust-api-performance-testing" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.xuxuclassmate.com/fr/blog/locust-api-performance-testing" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://www.xuxuclassmate.com/ru/blog/locust-api-performance-testing" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://www.xuxuclassmate.com/ja/blog/locust-api-performance-testing" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.xuxuclassmate.com/de/blog/locust-api-performance-testing" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/blog/locust-api-performance-testing" />
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/blog/dockerized-test-environment</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/dockerized-test-environment" />
     <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/blog/dockerized-test-environment" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.xuxuclassmate.com/es/blog/dockerized-test-environment" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://www.xuxuclassmate.com/hi/blog/dockerized-test-environment" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://www.xuxuclassmate.com/ar/blog/dockerized-test-environment" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://www.xuxuclassmate.com/pt/blog/dockerized-test-environment" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.xuxuclassmate.com/fr/blog/dockerized-test-environment" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://www.xuxuclassmate.com/ru/blog/dockerized-test-environment" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://www.xuxuclassmate.com/ja/blog/dockerized-test-environment" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.xuxuclassmate.com/de/blog/dockerized-test-environment" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/blog/dockerized-test-environment" />
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/blog/ai-agent-software-testing</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/ai-agent-software-testing" />
     <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/blog/ai-agent-software-testing" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.xuxuclassmate.com/es/blog/ai-agent-software-testing" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://www.xuxuclassmate.com/hi/blog/ai-agent-software-testing" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://www.xuxuclassmate.com/ar/blog/ai-agent-software-testing" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://www.xuxuclassmate.com/pt/blog/ai-agent-software-testing" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.xuxuclassmate.com/fr/blog/ai-agent-software-testing" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://www.xuxuclassmate.com/ru/blog/ai-agent-software-testing" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://www.xuxuclassmate.com/ja/blog/ai-agent-software-testing" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.xuxuclassmate.com/de/blog/ai-agent-software-testing" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/blog/ai-agent-software-testing" />
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/blog/enterprise-db-docker-qa</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/enterprise-db-docker-qa" />
     <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/blog/enterprise-db-docker-qa" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.xuxuclassmate.com/es/blog/enterprise-db-docker-qa" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://www.xuxuclassmate.com/hi/blog/enterprise-db-docker-qa" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://www.xuxuclassmate.com/ar/blog/enterprise-db-docker-qa" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://www.xuxuclassmate.com/pt/blog/enterprise-db-docker-qa" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.xuxuclassmate.com/fr/blog/enterprise-db-docker-qa" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://www.xuxuclassmate.com/ru/blog/enterprise-db-docker-qa" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://www.xuxuclassmate.com/ja/blog/enterprise-db-docker-qa" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.xuxuclassmate.com/de/blog/enterprise-db-docker-qa" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/blog/enterprise-db-docker-qa" />
   </url>
   <url>
     <loc>https://www.xuxuclassmate.com/en/blog/clawhub-skill-shipping</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/clawhub-skill-shipping" />
     <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/blog/clawhub-skill-shipping" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.xuxuclassmate.com/es/blog/clawhub-skill-shipping" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://www.xuxuclassmate.com/hi/blog/clawhub-skill-shipping" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://www.xuxuclassmate.com/ar/blog/clawhub-skill-shipping" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://www.xuxuclassmate.com/pt/blog/clawhub-skill-shipping" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.xuxuclassmate.com/fr/blog/clawhub-skill-shipping" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://www.xuxuclassmate.com/ru/blog/clawhub-skill-shipping" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://www.xuxuclassmate.com/ja/blog/clawhub-skill-shipping" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.xuxuclassmate.com/de/blog/clawhub-skill-shipping" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/blog/clawhub-skill-shipping" />
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/zh/work/fullstack-e2e</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work/fullstack-e2e" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/work/fullstack-e2e" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/work/fullstack-e2e" />
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/zh/work/automation-framework</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work/automation-framework" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/work/automation-framework" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/work/automation-framework" />
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/zh/work/trading-assistant</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work/trading-assistant" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/work/trading-assistant" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/work/trading-assistant" />
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/zh/work/custom-mail</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work/custom-mail" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/work/custom-mail" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/work/custom-mail" />
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/zh/work/globalpulse</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work/globalpulse" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/work/globalpulse" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/work/globalpulse" />
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/zh/work/docker-hub-api-gateway</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work/docker-hub-api-gateway" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/work/docker-hub-api-gateway" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/work/docker-hub-api-gateway" />
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/zh/work/docker-suite</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/work/docker-suite" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/work/docker-suite" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/work/docker-suite" />
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/zh/blog/playwright-e2e-framework</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/playwright-e2e-framework" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/blog/playwright-e2e-framework" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/blog/playwright-e2e-framework" />
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/zh/blog/locust-api-performance-testing</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/locust-api-performance-testing" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/blog/locust-api-performance-testing" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/blog/locust-api-performance-testing" />
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/zh/blog/dockerized-test-environment</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/dockerized-test-environment" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/blog/dockerized-test-environment" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/blog/dockerized-test-environment" />
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/zh/blog/ai-agent-software-testing</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/ai-agent-software-testing" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/blog/ai-agent-software-testing" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/blog/ai-agent-software-testing" />
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/zh/blog/enterprise-db-docker-qa</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/enterprise-db-docker-qa" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/blog/enterprise-db-docker-qa" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/blog/enterprise-db-docker-qa" />
+  </url>
+  <url>
+    <loc>https://www.xuxuclassmate.com/zh/blog/clawhub-skill-shipping</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.xuxuclassmate.com/en/blog/clawhub-skill-shipping" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.xuxuclassmate.com/zh/blog/clawhub-skill-shipping" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.xuxuclassmate.com/en/blog/clawhub-skill-shipping" />
   </url>
 </urlset>

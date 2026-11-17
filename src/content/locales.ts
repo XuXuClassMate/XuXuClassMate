@@ -40,6 +40,13 @@ export const OG_LOCALE: Record<Locale, string> = {
   de: "de_DE",
 };
 
+/** Fully translated locales. The other eight stay available, but are not indexable. */
+export const INDEXABLE_LOCALES = ["en", "zh"] as const satisfies readonly Locale[];
+
+export function isIndexableLocale(locale: Locale): boolean {
+  return (INDEXABLE_LOCALES as readonly string[]).includes(locale);
+}
+
 export function textDirection(locale: Locale): "ltr" | "rtl" {
   return locale === "ar" ? "rtl" : "ltr";
 }

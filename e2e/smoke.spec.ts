@@ -556,7 +556,7 @@ test("build ships redirects and headers", async () => {
   expect(redirectBody.indexOf("/en/blog/domestic-db-docker-qa.html")).toBeLessThan(
     redirectBody.indexOf("/*.html /:splat 200"),
   );
-  expect(redirectBody).toContain("/en /en/ 301");
+  expect(redirectBody).toContain("/en /en/index.html 200");
   expect(readFileSync(headers, "utf8")).toContain("Content-Security-Policy");
 });
 

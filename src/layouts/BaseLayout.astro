@@ -13,7 +13,7 @@ import {
   type NoteSlug,
   type PageId,
 } from "../lib/i18n";
-import { LOCALE_LABELS, LOCALES, OG_LOCALE, textDirection } from "../content/locales";
+import { isIndexableLocale, LOCALE_LABELS, LOCALES, OG_LOCALE, textDirection } from "../content/locales";
 import { getPortfolioHome } from "../content/portfolio-home";
 import "../styles/global.css";
 
@@ -64,7 +64,8 @@ const localeLinks = LOCALES.map((code) => ({
 const active = page === "home" ? undefined : page;
 const ogTitle = meta.ogTitle ?? meta.title;
 const ogImage = absoluteUrl(ogImagePath ?? "/images/og-default.jpg");
-const structuredData = noindex
+const hideFromIndex = noindex || !isIndexableLocale(locale);
+const structuredData = hideFromIndex
   ? null
   : jsonLdGraph(locale, page, caseSlug, noteSlug);
 const homeNav = getPortfolioHome(locale);
@@ -115,8 +116,8 @@ const demoHref = homeNav.ctaDemoHref;
     <meta name="mobile-web-app-capable" content="yes" />
     <title>{meta.title}</title>
     {
-      noindex ? (
-        <meta name="robots" content="noindex, nofollow" />
+      hideFromIndex ? (
+        <meta name="robots" content={noindex ? "noindex, nofollow" : "noindex, follow"} />
       ) : (
         <meta
           name="robots"
@@ -124,7 +125,7 @@ const demoHref = homeNav.ctaDemoHref;
         />
       )
     }
-    {!noindex ? <link rel="canonical" href={canonical} /> : null}
+    {!hideFromIndex ? <link rel="canonical" href={canonical} /> : null}
     {
       alternates.map((link) => (
         <link rel="alternate" hreflang={link.hreflang} href={link.href} />

@@ -1,5 +1,5 @@
 import { homeSurface } from "../content/chrome";
-import { LOCALES, OG_LOCALE } from "../content/locales";
+import { INDEXABLE_LOCALES, LOCALES, OG_LOCALE } from "../content/locales";
 import { getNote as getNoteFromContent } from "../content/notes";
 import { en } from "../content/en";
 import { zh } from "../content/zh";
@@ -158,7 +158,7 @@ export function hreflangLinks(
     );
   const enHref = pathFor("en");
   return [
-    ...LOCALES.map((code) => ({ hreflang: code, href: pathFor(code) })),
+    ...INDEXABLE_LOCALES.map((code) => ({ hreflang: code, href: pathFor(code) })),
     { hreflang: "x-default", href: enHref },
   ];
 }

@@ -101,6 +101,13 @@ for (const slug of posts) {
   });
 }
 
+pages.push(
+  ...pages.map((page) => ({
+    ...page,
+    path: page.path === "/" ? "/zh/" : page.path.replace(/^\/en\//, "/zh/"),
+    priority: page.path === "/" ? "0.90" : page.priority,
+  })),
+);
 pages.sort((a, b) => Number(b.priority) - Number(a.priority));
 
 const body = pages
@@ -110,12 +117,10 @@ const body = pages
         ? "/"
         : `/en${page.path.slice(3)}`
       : page.path;
-    const codes = ["en", "zh", "es", "hi", "ar", "pt", "fr", "ru", "ja", "de"];
+    const zhHref = enHref === "/" ? "/zh/" : enHref.replace(/^\/en\//, "/zh/");
     const hreflang = [
-      ...codes.map((code) => {
-        const href = code === "en" ? enHref : enHref === "/" ? `/${code}/` : enHref.replace(/^\/en\//, `/${code}/`);
-        return `    <xhtml:link rel="alternate" hreflang="${code}" href="${ORIGIN}${href}" />`;
-      }),
+      `    <xhtml:link rel="alternate" hreflang="en" href="${ORIGIN}${enHref}" />`,
+      `    <xhtml:link rel="alternate" hreflang="zh" href="${ORIGIN}${zhHref}" />`,
       `    <xhtml:link rel="alternate" hreflang="x-default" href="${ORIGIN}${enHref === "/" ? "/" : enHref}" />`,
     ].join("\n");
 

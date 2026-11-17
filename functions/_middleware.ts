@@ -27,6 +27,9 @@ const RETIRED_PATHS = new Set([
 ]);
 
 /** Extensionless aliases whose HTML canonical points at a different URL. */
+/** Chrome-only translations. Indexing them makes Google report duplicates. */
+const THIN_LOCALES = new Set(["es", "hi", "ar", "pt", "fr", "ru", "ja", "de"]);
+
 const RENAMED_ALIASES = new Set([
   "/en/blog/domestic-db-docker-qa",
   "/zh/blog/domestic-db-docker-qa",
@@ -35,6 +38,11 @@ const RENAMED_ALIASES = new Set([
   "/en/innonestx",
   "/zh/innonestx",
 ]);
+
+function isThinLocalePath(pathname: string): boolean {
+  const segment = pathname.split("/").filter(Boolean)[0];
+  return !!segment && THIN_LOCALES.has(segment);
+}
 
 function isAliasPath(pathname: string): boolean {
   if (pathname.endsWith(".html")) return true;
@@ -121,7 +129,7 @@ export async function onRequest(context: MiddlewareContext): Promise<Response> {
   }
 
   const response = await context.next();
-  if (isAliasPath(pathname) && response.status === 200) {
+  if ((isAliasPath(pathname) || isThinLocalePath(pathname)) && response.status === 200) {
     return asNoindex(response);
   }
   return response;
