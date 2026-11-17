@@ -1,6 +1,8 @@
+import { slashRewrite } from "../src/lib/slash-rewrite";
+
 type MiddlewareContext = {
   request: Request;
-  next: () => Promise<Response>;
+  next: (input?: Request | string, init?: RequestInit) => Promise<Response>;
 };
 
 const PRIMARY_HOST = "www.xuxuclassmate.com";
@@ -128,7 +130,14 @@ export async function onRequest(context: MiddlewareContext): Promise<Response> {
     return asNoindex(upstream);
   }
 
-  const response = await context.next();
+  const rewrittenPath = slashRewrite(pathname);
+  const target = new URL(url);
+  if (rewrittenPath) target.pathname = rewrittenPath;
+  const request = rewrittenPath ? new Request(target, context.request) : context.request;
+  const response = await context.next(request);
+  if (rewrittenPath && response.status === 200) {
+    return asNoindex(response);
+  }
   if ((isAliasPath(pathname) || isThinLocalePath(pathname)) && response.status === 200) {
     return asNoindex(response);
   }
