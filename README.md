@@ -41,6 +41,15 @@
 
 ---
 
+### Selected work
+
+- **[AI Test Case Generator](https://github.com/InnoNestX/testcase-generator)** — multimodal requirements → reviewable, structured test cases
+- **[Test DB Docker Suite](https://hub.docker.com/u/xuxuclassmate)** — ready-to-run database images for QA and development
+- **[Docker Hub API Gateway](https://github.com/InnoNestX/docker-hub-pull-counter)** — REST + SVG stats cards for Docker Hub
+- **[GlobalPulse](https://github.com/InnoNestX/GlobalPulse)** — scheduled market-intelligence briefings on Cloudflare
+
+---
+
 ### Analytics
 
 <div align="center">
