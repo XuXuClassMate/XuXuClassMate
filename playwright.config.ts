@@ -1,23 +1,42 @@
 import { defineConfig, devices } from "@playwright/test";
 
+/**
+ * Playwright: visual + smoke checks against the production build.
+ * Starts `next start` on :3000 and runs the suite at three viewports.
+ */
 export default defineConfig({
-  testDir: "e2e",
+  testDir: "./tests",
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 1 : 0,
+  retries: 0,
+  reporter: [["list"]],
   use: {
-    baseURL: "http://127.0.0.1:4321",
+    baseURL: "http://localhost:3000",
     trace: "on-first-retry",
-  },
-  webServer: {
-    command: "npm run build && npm run preview -- --host 127.0.0.1 --port 4321",
-    port: 4321,
-    reuseExistingServer: !process.env.CI,
   },
   projects: [
     {
-      name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
+      name: "desktop",
+      use: { ...devices["Desktop Chrome"], viewport: { width: 1440, height: 900 } },
+    },
+    {
+      name: "tablet",
+      use: { ...devices["Desktop Chrome"], viewport: { width: 768, height: 1024 } },
+    },
+    {
+      name: "mobile",
+      use: {
+        ...devices["Desktop Chrome"],
+        viewport: { width: 390, height: 844 },
+        isMobile: true,
+        hasTouch: true,
+      },
     },
   ],
+  webServer: {
+    command: "npm run start",
+    url: "http://localhost:3000",
+    reuseExistingServer: true,
+    timeout: 120_000,
+  },
 });
