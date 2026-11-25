@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { Reveal } from "@/components/reveal";
+import { Aurora } from "@/components/aurora";
 import { T } from "@/components/i18n";
 import { Icon } from "@/components/icons";
 import { AI_ROLES } from "@/lib/about-content";
@@ -23,7 +24,8 @@ export default function AiWorkflowPage() {
   return (
     <>
       {/* Hero */}
-      <section className="ambient relative overflow-hidden pt-[calc(var(--nav-h)+80px)]">
+      <section className="relative overflow-hidden pt-[calc(var(--nav-h)+80px)]">
+        <Aurora />
         <div className="container-ap pb-16 text-center">
           <Reveal>
             <p className="eyebrow">

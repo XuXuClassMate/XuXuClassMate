@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import { useTx } from "@/components/i18n";
+import { Aurora } from "@/components/aurora";
 
 const ease = [0.22, 0.61, 0.36, 1] as const;
 
@@ -19,7 +20,8 @@ export function Hero() {
         };
 
   return (
-    <section className="ambient relative overflow-hidden pt-[calc(var(--nav-h)+64px)]">
+    <section className="relative overflow-hidden pt-[calc(var(--nav-h)+64px)]">
+      <Aurora />
       <div className="container-ap pb-20 text-center">
         <motion.p className="eyebrow" {...rise(0.05)}>
           {tx({

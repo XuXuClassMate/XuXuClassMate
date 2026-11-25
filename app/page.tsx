@@ -7,6 +7,7 @@ import { Reveal } from "@/components/reveal";
 import { buttonVariants } from "@/components/ui/button";
 import { T, type Localized } from "@/components/i18n";
 import { Icon } from "@/components/icons";
+import { Aurora } from "@/components/aurora";
 import { AI_ROLES, AI_HUMAN_NOTE } from "@/lib/about-content";
 
 const INFRA: Localized = {
@@ -251,7 +252,8 @@ export default function Home() {
       </section>
 
       {/* Closing CTA */}
-      <section id="try" className="ambient relative overflow-hidden bg-[var(--color-bg)]">
+      <section id="try" className="relative overflow-hidden bg-[var(--color-bg)]">
+        <Aurora />
         <div className="container-ap py-32 text-center">
           <Reveal>
             <h2 className="display-1 mx-auto max-w-[16ch]">

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { Reveal } from "@/components/reveal";
+import { Aurora } from "@/components/aurora";
 import { T, type Localized } from "@/components/i18n";
 import { Icon } from "@/components/icons";
 import { CAPABILITIES, AI_ROLES, AI_HUMAN_NOTE, OUTPUTS } from "@/lib/about-content";
@@ -89,7 +90,8 @@ const PRINCIPLES: { title: Localized; body: Localized }[] = [
 export default function AboutPage() {
   return (
     <>
-      <section className="pt-[calc(var(--nav-h)+80px)]">
+      <section className="relative overflow-hidden pt-[calc(var(--nav-h)+80px)]">
+        <Aurora />
         <div className="container-ap pb-20 text-center">
           <Reveal>
             <p className="eyebrow">

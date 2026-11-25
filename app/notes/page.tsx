@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { NOTES } from "@/lib/notes";
 import { Reveal } from "@/components/reveal";
+import { Aurora } from "@/components/aurora";
 import { T, LocalDate } from "@/components/i18n";
 
 export const metadata: Metadata = {
@@ -13,7 +14,8 @@ export const metadata: Metadata = {
 export default function NotesPage() {
   return (
     <>
-      <section className="pt-[calc(var(--nav-h)+80px)]">
+      <section className="relative overflow-hidden pt-[calc(var(--nav-h)+80px)]">
+        <Aurora />
         <div className="container-ap pb-14 text-center">
           <Reveal>
             <p className="eyebrow">

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { PRODUCTS, getProduct, GROUP_LABEL } from "@/lib/products";
 import { Reveal } from "@/components/reveal";
+import { Aurora } from "@/components/aurora";
 import { buttonVariants } from "@/components/ui/button";
 import { FeatureVisual } from "@/components/feature-visual";
 import { T } from "@/components/i18n";
@@ -34,7 +35,8 @@ export default async function ProductPage({
   return (
     <>
       {/* Hero */}
-      <section className="pt-[calc(var(--nav-h)+80px)]">
+      <section className="relative overflow-hidden pt-[calc(var(--nav-h)+80px)]">
+        <Aurora />
         <div className="container-ap pb-20 text-center">
           <Reveal>
             <p className="eyebrow">

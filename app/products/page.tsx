@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { PRODUCTS, GROUPS, GROUP_LABEL, type ProductGroup } from "@/lib/products";
 import { Reveal } from "@/components/reveal";
+import { Aurora } from "@/components/aurora";
 import { T } from "@/components/i18n";
 import { Icon, type IconName } from "@/components/icons";
 
@@ -20,7 +21,8 @@ export const metadata: Metadata = {
 export default function ProductsPage() {
   return (
     <>
-      <section className="pt-[calc(var(--nav-h)+72px)]">
+      <section className="relative overflow-hidden pt-[calc(var(--nav-h)+72px)]">
+        <Aurora />
         <div className="container-ap pb-14 text-center">
           <Reveal>
             <p className="eyebrow">

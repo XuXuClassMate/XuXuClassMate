@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { Reveal } from "@/components/reveal";
+import { Aurora } from "@/components/aurora";
 import { PRODUCTS, GROUP_LABEL } from "@/lib/products";
 import { T } from "@/components/i18n";
 
@@ -19,7 +20,8 @@ const LINKS = [
 export default function OpenSourcePage() {
   return (
     <>
-      <section className="pt-[calc(var(--nav-h)+80px)]">
+      <section className="relative overflow-hidden pt-[calc(var(--nav-h)+80px)]">
+        <Aurora />
         <div className="container-ap pb-16 text-center">
           <Reveal>
             <p className="eyebrow">
