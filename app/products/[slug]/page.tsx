@@ -59,6 +59,10 @@ export default async function ProductPage({
   const p = getProduct(slug);
   if (!p) notFound();
 
+  // Offset the feature-visual motifs per product so no two product pages show
+  // the same sequence of visuals.
+  const visualOffset = Math.max(0, PRODUCTS.findIndex((x) => x.slug === p.slug));
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
@@ -135,7 +139,7 @@ export default async function ProductPage({
               </p>
             </Reveal>
             <Reveal className={i % 2 === 1 ? "md:order-1" : ""}>
-              <FeatureVisual index={i} label={`${p.slug} · 0${i + 1}`} />
+              <FeatureVisual index={i + visualOffset} label={`${p.slug} · 0${i + 1}`} />
             </Reveal>
           </div>
         </section>
