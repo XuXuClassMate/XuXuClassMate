@@ -6,79 +6,80 @@ import { Services } from "@/components/services";
 import { Reveal } from "@/components/reveal";
 import { buttonVariants } from "@/components/ui/button";
 import { T, type Localized } from "@/components/i18n";
-import { Icon } from "@/components/icons";
+import { Icon, type IconName } from "@/components/icons";
 import { Aurora } from "@/components/aurora";
 import { AI_ROLES, AI_HUMAN_NOTE } from "@/lib/about-content";
 
-const INFRA: Localized = {
-  en: "Developer infrastructure",
-  zh: "开发者基础设施",
-  ar: "بنية تحتية للمطوّرين",
-  fr: "Infrastructure développeur",
-  ru: "Инфраструктура разработки",
-  es: "Infraestructura para desarrolladores",
-};
-const AGENT: Localized = {
-  en: "AI / agent",
-  zh: "AI / 智能体",
-  ar: "ذكاء اصطناعي / وكيل",
-  fr: "IA / agent",
-  ru: "ИИ / агент",
-  es: "IA / agente",
-};
-
-const PRODUCTS: { name: string; href: string; blurb: Localized; tone: Localized }[] = [
+const FAMILIES: {
+  icon: IconName;
+  href: string;
+  title: Localized;
+  desc: Localized;
+}[] = [
   {
-    name: "Test DB Docker Suite",
-    href: "/products/docker-suite",
-    blurb: {
-      en: "Dameng · Highgo · Kingbase · TiDB, up in one pull.",
-      zh: "达梦 · Highgo · 人大金仓 · TiDB,一键拉起。",
-      ar: "Dameng · Highgo · Kingbase · TiDB، بسحبة واحدة.",
-      fr: "Dameng · Highgo · Kingbase · TiDB, en une commande.",
-      ru: "Dameng · Highgo · Kingbase · TiDB — одной командой.",
-      es: "Dameng · Highgo · Kingbase · TiDB, en un pull.",
+    icon: "quality",
+    href: "/products/testcase-generator",
+    title: { en: "Quality Engineering", zh: "质量工程", ar: "هندسة الجودة", fr: "Ingénierie qualité", ru: "Инженерия качества", es: "Ingeniería de calidad" },
+    desc: {
+      en: "AI test-case generation with a scored human review before anything ships.",
+      zh: "AI 生成测试用例,交付前经过量化的人工评审。",
+      ar: "توليد حالات اختبار بالذكاء الاصطناعي مع مراجعة بشرية مُقيَّمة قبل أي تسليم.",
+      fr: "Génération de cas de test par IA avec une revue humaine notée avant toute livraison.",
+      ru: "ИИ-генерация тест-кейсов с оценочной проверкой человеком до любой поставки.",
+      es: "Generación de casos de prueba con IA y una revisión humana puntuada antes de entregar.",
     },
-    tone: INFRA,
   },
   {
-    name: "Docker Hub API Gateway",
-    href: "/products/docker-hub-api-gateway",
-    blurb: {
-      en: "REST + SVG stats cards for Docker Hub.",
-      zh: "面向 Docker Hub 的 REST 接口与 SVG 统计卡。",
-      ar: "واجهات REST وبطاقات إحصاء SVG لـ Docker Hub.",
-      fr: "API REST + cartes de stats SVG pour Docker Hub.",
-      ru: "REST + SVG-карточки статистики для Docker Hub.",
-      es: "REST + tarjetas de estadísticas SVG para Docker Hub.",
+    icon: "infra",
+    href: "/products",
+    title: { en: "Developer Infrastructure", zh: "开发者基础设施", ar: "البنية التحتية للمطوّرين", fr: "Infrastructure développeur", ru: "Инфраструктура разработки", es: "Infraestructura para desarrolladores" },
+    desc: {
+      en: "Pullable, seeded test databases and a Docker Hub API gateway.",
+      zh: "可拉取、带种子数据的测试库,以及 Docker Hub API 网关。",
+      ar: "قواعد بيانات اختبار قابلة للسحب ومزوّدة بالبيانات، وبوابة API لـ Docker Hub.",
+      fr: "Des bases de test récupérables et initialisées, et une passerelle API Docker Hub.",
+      ru: "Загружаемые тестовые базы с данными и API-шлюз Docker Hub.",
+      es: "Bases de prueba descargables y con datos, y una pasarela API de Docker Hub.",
     },
-    tone: INFRA,
   },
   {
-    name: "GlobalPulse",
+    icon: "ai",
     href: "/products/globalpulse",
-    blurb: {
-      en: "Scheduled market-intelligence briefings on Cloudflare.",
-      zh: "在 Cloudflare 上定时推送的市场情报简报。",
-      ar: "إحاطات معلومات السوق المجدولة على Cloudflare.",
-      fr: "Briefings de veille de marché planifiés sur Cloudflare.",
-      ru: "Запланированные брифинги рыночной аналитики на Cloudflare.",
-      es: "Briefings de inteligencia de mercado programados en Cloudflare.",
+    title: { en: "AI / Agent", zh: "AI / 智能体", ar: "ذكاء اصطناعي / وكيل", fr: "IA / agent", ru: "ИИ / агент", es: "IA / agente" },
+    desc: {
+      en: "Scheduled market briefings and a trading toolkit, on the edge.",
+      zh: "定时市场简报与交易工具,运行在边缘。",
+      ar: "إحاطات سوق مجدولة وأدوات تداول، على الحافة.",
+      fr: "Briefings de marché planifiés et une boîte à outils de trading, sur le edge.",
+      ru: "Запланированные рыночные брифинги и набор для трейдинга — на краю сети.",
+      es: "Briefings de mercado programados y un kit de trading, en el edge.",
     },
-    tone: AGENT,
   },
   {
-    name: "Trading Assistant Core",
-    href: "https://github.com/XuXuClassMate/trading-assistant",
-    blurb: {
-      en: "An OpenClaw skill, shipped on ClawHub.",
-      zh: "一个 OpenClaw 技能,发布在 ClawHub。",
-      ar: "مهارة OpenClaw، منشورة على ClawHub.",
-      fr: "Une compétence OpenClaw, publiée sur ClawHub.",
-      ru: "Навык OpenClaw, опубликован на ClawHub.",
-      es: "Una habilidad de OpenClaw, publicada en ClawHub.",
+    icon: "generate",
+    href: "/ai-workflow",
+    title: { en: "Agent skills", zh: "智能体技能", ar: "مهارات الوكلاء", fr: "Compétences d'agent", ru: "Навыки агентов", es: "Habilidades de agente" },
+    desc: {
+      en: "10 skills shipped on ClawHub — testing, stock, transcription, and more.",
+      zh: "在 ClawHub 发布的 10 个技能——测试、股票、语音转写等。",
+      ar: "10 مهارات منشورة على ClawHub — اختبار، أسهم، تفريغ صوتي، والمزيد.",
+      fr: "10 compétences publiées sur ClawHub — tests, bourse, transcription, et plus.",
+      ru: "10 навыков на ClawHub — тестирование, биржа, транскрипция и другое.",
+      es: "10 habilidades publicadas en ClawHub — pruebas, bolsa, transcripción y más.",
     },
-    tone: AGENT,
+  },
+  {
+    icon: "nas",
+    href: "/#services",
+    title: { en: "Self-hosted services", zh: "自托管服务", ar: "خدمات ذاتية الاستضافة", fr: "Services auto-hébergés", ru: "Собственные сервисы", es: "Servicios autoalojados" },
+    desc: {
+      en: "NAS, Mail, SSH, Watch, and Pulse — all under one name.",
+      zh: "NAS、Mail、SSH、Watch、Pulse——都在同一个名字下。",
+      ar: "NAS وMail وSSH وWatch وPulse — كلها تحت اسم واحد.",
+      fr: "NAS, Mail, SSH, Watch et Pulse — tous sous un même nom.",
+      ru: "NAS, Mail, SSH, Watch и Pulse — всё под одним именем.",
+      es: "NAS, Mail, SSH, Watch y Pulse — todo bajo un mismo nombre.",
+    },
   },
 ];
 
@@ -87,10 +88,70 @@ export default function Home() {
     <>
       <Hero />
 
-      {/* Flagship: pinned scroll narrative (GSAP) */}
+      {/* Data overview — live numbers */}
+      <LiveStats />
+
+      {/* Overview: everything, grouped */}
+      <section id="overview" className="ambient bg-[var(--color-bg)]">
+        <div className="container-ap py-28">
+          <Reveal>
+            <p className="eyebrow">
+              <T en="Overview" zh="总览" ar="نظرة عامة" fr="Aperçu" ru="Обзор" es="Resumen" />
+            </p>
+            <h2 className="display-2 mt-3 max-w-[20ch]">
+              <T en="Everything I build, in one place." zh="我做的一切,汇于一处。" ar="كل ما أبنيه، في مكان واحد." fr="Tout ce que je construis, au même endroit." ru="Всё, что я создаю — в одном месте." es="Todo lo que construyo, en un solo lugar." />
+            </h2>
+            <p className="lead mt-5 max-w-[60ch]">
+              <T
+                en="A QA Engineer & SDET's toolbox — AI testing tools, developer infrastructure, agent skills, and the services that run them. Built in the open, measured live."
+                zh="一位 QA 工程师 / SDET 的工具箱——AI 测试工具、开发者基础设施、智能体技能,以及支撑它们运行的服务。开放构建,实时度量。"
+                ar="صندوق أدوات مهندس جودة و SDET — أدوات اختبار بالذكاء الاصطناعي، وبنية تحتية للمطوّرين، ومهارات وكلاء، والخدمات التي تشغّلها. بُني علناً، ويُقاس مباشرةً."
+                fr="La boîte à outils d'un ingénieur QA & SDET — outils de test IA, infrastructure développeur, compétences d'agent, et les services qui les font tourner. Construit au grand jour, mesuré en direct."
+                ru="Набор инструментов QA-инженера и SDET — ИИ-инструменты тестирования, инфраструктура разработки, навыки агентов и сервисы, которые их запускают. Создано открыто, измеряется вживую."
+                es="La caja de herramientas de un ingeniero QA y SDET — herramientas de prueba con IA, infraestructura para desarrolladores, habilidades de agente y los servicios que las ejecutan. Construido en abierto, medido en vivo."
+              />
+            </p>
+          </Reveal>
+          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {FAMILIES.map((f) => (
+              <Reveal key={f.title.en}>
+                <Link
+                  href={f.href}
+                  className="card-ap group flex h-full flex-col rounded-[var(--radius-ap)] bg-[var(--color-surface)] p-8"
+                >
+                  <span className="grid h-11 w-11 place-items-center rounded-xl bg-[color-mix(in_srgb,var(--color-accent)_12%,transparent)] text-[var(--color-accent)]">
+                    <Icon name={f.icon} size={22} />
+                  </span>
+                  <h3 className="mt-4 text-[22px] font-semibold tracking-tight">
+                    <T {...f.title} />
+                  </h3>
+                  <p className="mt-2 text-[16px] leading-relaxed text-muted">
+                    <T {...f.desc} />
+                  </p>
+                  <span className="link-ap mt-6">
+                    <T en="Explore" zh="查看" ar="استكشف" fr="Explorer" ru="Открыть" es="Explorar" />
+                  </span>
+                </Link>
+              </Reveal>
+            ))}
+            <Reveal>
+              <Link
+                href="/products"
+                className="card-ap group flex h-full flex-col justify-center rounded-[var(--radius-ap)] border border-dashed border-[var(--color-line)] bg-transparent p-8 text-center"
+              >
+                <span className="text-[22px] font-semibold tracking-tight text-[var(--color-accent)]">
+                  <T en="All products →" zh="全部产品 →" ar="كل المنتجات →" fr="Tous les produits →" ru="Все продукты →" es="Todos los productos →" />
+                </span>
+              </Link>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* Flagship deep-dive: the AI test-case generator (GSAP pinned narrative) */}
       <ProductPin />
 
-      {/* Docker suite chapter */}
+      {/* Developer infrastructure chapter */}
       <section id="docker" className="bg-[var(--color-bg)]">
         <div className="container-ap grid items-center gap-12 py-28 md:grid-cols-2">
           <Reveal>
@@ -131,56 +192,6 @@ export default function Home() {
               </p>
             </div>
           </Reveal>
-        </div>
-      </section>
-
-      {/* Proof — live numbers */}
-      <LiveStats />
-
-      {/* Products grid */}
-      <section id="products" className="ambient bg-[var(--color-bg)]">
-        <div className="container-ap py-28">
-          <Reveal>
-            <h2 className="display-2 max-w-[18ch]">
-              <T en="A small toolbox that ships to production." zh="一个能交付到生产环境的小工具箱。" ar="صندوق أدوات صغير يصل إلى الإنتاج." fr="Une petite boîte à outils livrée en production." ru="Небольшой набор инструментов, доходящий до продакшена." es="Una pequeña caja de herramientas que llega a producción." />
-            </h2>
-          </Reveal>
-          <div className="mt-14 grid gap-6 sm:grid-cols-2">
-            {PRODUCTS.map((p) => {
-              const external = p.href.startsWith("http");
-              const cardClass =
-                "card-ap group flex h-full flex-col rounded-[var(--radius-ap)] bg-[var(--color-surface)] p-8";
-              const inner = (
-                <>
-                  <p className="text-[13px] font-medium text-muted">
-                    <T {...p.tone} />
-                  </p>
-                  <h3 className="mt-2 text-[26px] font-semibold tracking-tight" dir="ltr">
-                    {p.name}
-                  </h3>
-                  <p className="mt-2 text-[17px] leading-relaxed text-muted">
-                    <T {...p.blurb} />
-                  </p>
-                  <span className="link-ap mt-6">
-                    <T en="Learn more" zh="了解更多" ar="اعرف المزيد" fr="En savoir plus" ru="Подробнее" es="Saber más" />
-                  </span>
-                </>
-              );
-              return (
-                <Reveal key={p.name}>
-                  {external ? (
-                    <a href={p.href} target="_blank" rel="noopener noreferrer" className={cardClass}>
-                      {inner}
-                    </a>
-                  ) : (
-                    <Link href={p.href} className={cardClass}>
-                      {inner}
-                    </Link>
-                  )}
-                </Reveal>
-              );
-            })}
-          </div>
         </div>
       </section>
 
@@ -256,15 +267,15 @@ export default function Home() {
         <Aurora />
         <div className="container-ap py-32 text-center">
           <Reveal>
-            <h2 className="display-1 mx-auto max-w-[16ch]">
-              <T en="See your requirements become test cases." zh="看着你的需求变成测试用例。" ar="شاهد متطلباتك تتحوّل إلى حالات اختبار." fr="Voyez vos exigences devenir des cas de test." ru="Смотрите, как требования становятся тест-кейсами." es="Mira tus requisitos convertirse en casos de prueba." />
+            <h2 className="display-1 mx-auto max-w-[18ch]">
+              <T en="Explore the toolbox." zh="逛逛这个工具箱。" ar="استكشف صندوق الأدوات." fr="Explorez la boîte à outils." ru="Загляните в набор инструментов." es="Explora la caja de herramientas." />
             </h2>
             <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Link href="/products/testcase-generator" className={buttonVariants({ size: "lg" })}>
-                <T en="Try the generator" zh="试用生成器" ar="جرّب المولّد" fr="Essayer le générateur" ru="Попробовать генератор" es="Probar el generador" />
+              <Link href="/products" className={buttonVariants({ size: "lg" })}>
+                <T en="See the products" zh="查看产品" ar="شاهد المنتجات" fr="Voir les produits" ru="Смотреть продукты" es="Ver los productos" />
               </Link>
-              <Link href="/products" className={buttonVariants({ size: "lg", variant: "secondary" })}>
-                <T en="Explore the work" zh="查看作品" ar="استكشف الأعمال" fr="Explorer le travail" ru="Изучить работы" es="Explorar el trabajo" />
+              <Link href="/products/testcase-generator" className={buttonVariants({ size: "lg", variant: "secondary" })}>
+                <T en="Try the generator" zh="试用生成器" ar="جرّب المولّد" fr="Essayer le générateur" ru="Попробовать генератор" es="Probar el generador" />
               </Link>
             </div>
           </Reveal>

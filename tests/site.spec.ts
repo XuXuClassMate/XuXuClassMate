@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 const ROUTES = [
-  { path: "/", heading: "Test cases your team can actually review." },
+  { path: "/", heading: "AI testing tools, built to run." },
   { path: "/products", heading: "Tools that install and run." },
   { path: "/products/testcase-generator", heading: "AI Test Case Generator" },
   { path: "/products/docker-suite", heading: "Test DB Docker Suite" },

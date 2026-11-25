@@ -34,35 +34,35 @@ export function Hero() {
             es: "Ingeniería de calidad potenciada por IA",
           })}
         </motion.p>
-        <motion.h1 className="display-1 mx-auto mt-3 max-w-[16ch]" {...rise(0.12)}>
+        <motion.h1 className="display-1 mx-auto mt-3 max-w-[17ch]" {...rise(0.12)}>
           {tx({
-            en: "Test cases your team can actually review.",
-            zh: "团队真正能评审的测试用例。",
-            ar: "حالات اختبار يمكن لفريقك مراجعتها فعلاً.",
-            fr: "Des cas de test que votre équipe peut vraiment relire.",
-            ru: "Тест-кейсы, которые команда действительно может проверить.",
-            es: "Casos de prueba que tu equipo puede revisar de verdad.",
+            en: "AI testing tools, built to run.",
+            zh: "AI 测试工具,为运行而生。",
+            ar: "أدوات اختبار بالذكاء الاصطناعي، صُنعت لتعمل.",
+            fr: "Des outils de test IA, faits pour tourner.",
+            ru: "ИИ-инструменты тестирования, созданные, чтобы работать.",
+            es: "Herramientas de prueba con IA, hechas para funcionar.",
           })}
         </motion.h1>
-        <motion.p className="lead mx-auto mt-5 max-w-[42ch]" {...rise(0.2)}>
+        <motion.p className="lead mx-auto mt-5 max-w-[46ch]" {...rise(0.2)}>
           {tx({
-            en: "Turn a requirement — PDF, image, or spec — into structured, reviewable test cases, and run them on pullable test databases.",
-            zh: "把一份需求——PDF、截图或文档——变成结构化、可评审的测试用例,并在可一键拉取的测试数据库上运行。",
-            ar: "حوّل متطلباً — ملف PDF أو صورة أو مواصفات — إلى حالات اختبار منظّمة وقابلة للمراجعة، وشغّلها على قواعد بيانات اختبار قابلة للسحب.",
-            fr: "Transformez une exigence — PDF, image ou spécification — en cas de test structurés et relisables, puis exécutez-les sur des bases de test prêtes à l'emploi.",
-            ru: "Превратите требование — PDF, изображение или спецификацию — в структурированные, проверяемые тест-кейсы и запускайте их на готовых тестовых базах данных.",
-            es: "Convierte un requisito — PDF, imagen o especificación — en casos de prueba estructurados y revisables, y ejecútalos en bases de datos de prueba listas para usar.",
+            en: "From an AI test-case generator to pullable test databases, a Docker Hub gateway, scheduled agents, and ClawHub skills — a small toolbox shipped to production and measured in the open.",
+            zh: "从 AI 测试用例生成器,到可拉取的测试数据库、Docker Hub 网关、定时智能体与 ClawHub 技能——一个交付到生产、并在公开处实时度量的小工具箱。",
+            ar: "من مولّد حالات اختبار بالذكاء الاصطناعي إلى قواعد بيانات اختبار قابلة للسحب، وبوابة Docker Hub، ووكلاء مجدولين، ومهارات ClawHub — صندوق أدوات صغير سُلّم إلى الإنتاج ويُقاس علناً.",
+            fr: "D'un générateur de cas de test IA aux bases de test récupérables, une passerelle Docker Hub, des agents planifiés et des compétences ClawHub — une petite boîte à outils livrée en production et mesurée au grand jour.",
+            ru: "От ИИ-генератора тест-кейсов до загружаемых тестовых баз, шлюза Docker Hub, запланированных агентов и навыков ClawHub — небольшой набор инструментов, поставленный в продакшен и измеряемый открыто.",
+            es: "De un generador de casos de prueba con IA a bases de prueba descargables, una pasarela de Docker Hub, agentes programados y habilidades de ClawHub — una pequeña caja de herramientas llevada a producción y medida en abierto.",
           })}
         </motion.p>
         <motion.div
           className="mt-7 flex items-center justify-center gap-7"
           {...rise(0.28)}
         >
-          <Link href="/#try" className="link-ap">
-            {tx({ en: "Try the generator", zh: "试用生成器", ar: "جرّب المولّد", fr: "Essayer le générateur", ru: "Попробовать генератор", es: "Probar el generador" })}
-          </Link>
-          <Link href="/#products" className="link-ap">
+          <Link href="/#overview" className="link-ap">
             {tx({ en: "See the work", zh: "查看作品", ar: "شاهد الأعمال", fr: "Voir le travail", ru: "Смотреть работы", es: "Ver el trabajo" })}
+          </Link>
+          <Link href="/products/testcase-generator" className="link-ap">
+            {tx({ en: "Try the generator", zh: "试用生成器", ar: "جرّب المولّد", fr: "Essayer le générateur", ru: "Попробовать генератор", es: "Probar el generador" })}
           </Link>
         </motion.div>
       </div>
