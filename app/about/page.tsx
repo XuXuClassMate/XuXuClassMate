@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Reveal } from "@/components/reveal";
 import { Aurora } from "@/components/aurora";
+import { LiveStat } from "@/components/live-stat";
 import { T, type Localized } from "@/components/i18n";
 import { Icon } from "@/components/icons";
 import { CAPABILITIES, AI_ROLES, AI_HUMAN_NOTE, OUTPUTS } from "@/lib/about-content";
@@ -110,6 +111,18 @@ export default function AboutPage() {
                 es="Soy ingeniero QA y SDET: construyo herramientas de prueba con IA y la infraestructura para ejecutarlas — automatización de pruebas, pruebas de API y rendimiento, entornos de prueba Docker y generación de pruebas con IA."
               />
             </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <LiveStat
+                kind="docker-pulls"
+                fallback={85285}
+                label={{ en: "Docker pulls", zh: "Docker 拉取次数", ar: "عمليات سحب Docker", fr: "Pulls Docker", ru: "Docker-загрузок", es: "Pulls de Docker" }}
+              />
+              <LiveStat
+                kind="claw-total"
+                fallback={10868}
+                label={{ en: "ClawHub downloads", zh: "ClawHub 下载量", ar: "تنزيلات ClawHub", fr: "Téléchargements ClawHub", ru: "Загрузки ClawHub", es: "Descargas de ClawHub" }}
+              />
+            </div>
           </Reveal>
         </div>
       </section>

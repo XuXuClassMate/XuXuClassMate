@@ -6,7 +6,34 @@ import { Reveal } from "@/components/reveal";
 import { Aurora } from "@/components/aurora";
 import { buttonVariants } from "@/components/ui/button";
 import { FeatureVisual } from "@/components/feature-visual";
-import { T } from "@/components/i18n";
+import { LiveStat } from "@/components/live-stat";
+import { T, type Localized } from "@/components/i18n";
+
+type StatCfg = {
+  kind: "docker-pulls" | "api-calls" | "claw-skill";
+  slug?: string;
+  fallback: number;
+  label: Localized;
+};
+
+const PRODUCT_STAT: Record<string, StatCfg> = {
+  "testcase-generator": {
+    kind: "claw-skill",
+    slug: "ai-testcase-generator",
+    fallback: 1350,
+    label: { en: "ClawHub downloads", zh: "ClawHub 下载量", ar: "تنزيلات ClawHub", fr: "Téléchargements ClawHub", ru: "Загрузки ClawHub", es: "Descargas de ClawHub" },
+  },
+  "docker-suite": {
+    kind: "docker-pulls",
+    fallback: 85285,
+    label: { en: "Docker pulls", zh: "Docker 拉取次数", ar: "عمليات سحب Docker", fr: "Pulls Docker", ru: "Docker-загрузок", es: "Pulls de Docker" },
+  },
+  "docker-hub-api-gateway": {
+    kind: "api-calls",
+    fallback: 4811,
+    label: { en: "API calls served", zh: "API 调用量", ar: "طلبات API مُخدّمة", fr: "Appels API servis", ru: "Обработано API-запросов", es: "Llamadas API servidas" },
+  },
+};
 
 export function generateStaticParams() {
   return PRODUCTS.map((p) => ({ slug: p.slug }));
@@ -53,6 +80,11 @@ export default async function ProductPage({
                 <T {...p.cta.label} />
               </Link>
             </div>
+            {PRODUCT_STAT[p.slug] && (
+              <div className="mt-8 flex justify-center">
+                <LiveStat {...PRODUCT_STAT[p.slug]} />
+              </div>
+            )}
           </Reveal>
         </div>
       </section>

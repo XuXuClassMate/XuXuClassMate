@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Reveal } from "@/components/reveal";
 import { Aurora } from "@/components/aurora";
+import { LiveStat } from "@/components/live-stat";
 import { T } from "@/components/i18n";
 import { Icon } from "@/components/icons";
 import { AI_ROLES } from "@/lib/about-content";
@@ -37,6 +38,19 @@ export default function AiWorkflowPage() {
             <p className="lead mx-auto mt-6 max-w-[62ch] text-start">
               <T {...WF_SUMMARY} />
             </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <LiveStat
+                kind="claw-total"
+                fallback={10868}
+                label={{ en: "ClawHub downloads", zh: "ClawHub 下载量", ar: "تنزيلات ClawHub", fr: "Téléchargements ClawHub", ru: "Загрузки ClawHub", es: "Descargas de ClawHub" }}
+              />
+              <span className="inline-flex items-center gap-2 rounded-full border border-[var(--color-line)] bg-[var(--color-surface)] px-4 py-2 text-[14px]">
+                <strong className="font-semibold text-ink">10</strong>
+                <span className="text-muted">
+                  <T en="skills shipped" zh="个已发布技能" ar="مهارات منشورة" fr="compétences publiées" ru="опубликованных навыков" es="habilidades publicadas" />
+                </span>
+              </span>
+            </div>
           </Reveal>
         </div>
       </section>

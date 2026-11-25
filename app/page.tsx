@@ -138,7 +138,7 @@ export default function Home() {
       <LiveStats />
 
       {/* Products grid */}
-      <section id="products" className="bg-[var(--color-bg)]">
+      <section id="products" className="ambient bg-[var(--color-bg)]">
         <div className="container-ap py-28">
           <Reveal>
             <h2 className="display-2 max-w-[18ch]">
@@ -223,7 +223,7 @@ export default function Home() {
       <Services />
 
       {/* Engineering notes teaser */}
-      <section id="engineering" className="bg-[var(--color-bg)]">
+      <section id="engineering" className="ambient bg-[var(--color-bg)]">
         <div className="container-ap py-28 text-center">
           <Reveal>
             <p className="eyebrow">

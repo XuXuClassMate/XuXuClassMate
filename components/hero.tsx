@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { useTx } from "@/components/i18n";
 import { Aurora } from "@/components/aurora";
@@ -151,61 +152,118 @@ function GeneratorWindow() {
       },
     },
   ];
+  const total = cases.length;
+  const rootRef = useRef<HTMLDivElement>(null);
+  const [started, setStarted] = useState(false);
+  const [revealed, setRevealed] = useState(reduce ? total : 0);
+  const [typed, setTyped] = useState(0);
+
+  const current = revealed < total ? cases[revealed] : null;
+  const curTitle = current ? tx(current.title) : "";
+  const done = reduce || revealed >= total;
+
+  // Start generating once the window scrolls into view.
+  useEffect(() => {
+    if (reduce) return;
+    const el = rootRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          setStarted(true);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.3 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [reduce]);
+
+  // Typewriter: type the current case title, then reveal it and advance.
+  useEffect(() => {
+    if (reduce || !started || !current) return;
+    if (typed < curTitle.length) {
+      const id = setTimeout(() => setTyped((v) => v + 1), 24);
+      return () => clearTimeout(id);
+    }
+    const id = setTimeout(() => {
+      setRevealed((v) => v + 1);
+      setTyped(0);
+    }, 360);
+    return () => clearTimeout(id);
+  }, [started, typed, revealed, curTitle, current, reduce]);
+
+  const meta = (c: (typeof cases)[number]) => (
+    <>
+      {tx({ en: "Steps", zh: "步骤", ar: "خطوات", fr: "Étapes", ru: "Шаги", es: "Pasos" })} {c.steps} ·{" "}
+      {tx({ en: "Expected", zh: "预期", ar: "المتوقع", fr: "Attendu", ru: "Ожидается", es: "Esperado" })}:{" "}
+      <span className="text-[#6fd39a]">{tx(c.expected)}</span>
+    </>
+  );
+
   return (
-    <div className="mx-auto max-w-[920px] overflow-hidden rounded-[var(--radius-ap)] border border-[var(--color-line)] bg-panel shadow-[0_30px_80px_-20px_rgba(0,0,0,0.35)]">
+    <div
+      ref={rootRef}
+      className="mx-auto max-w-[920px] overflow-hidden rounded-[var(--radius-ap)] border border-[var(--color-line)] bg-panel shadow-[0_30px_80px_-20px_rgba(0,0,0,0.35)]"
+    >
       <div className="flex items-center gap-2 border-b border-white/10 px-5 py-3.5" dir="ltr">
         <span className="h-3 w-3 rounded-full bg-white/15" />
         <span className="h-3 w-3 rounded-full bg-white/15" />
         <span className="h-3 w-3 rounded-full bg-white/15" />
         <span className="ml-3 flex items-center gap-2 font-mono text-[12px] text-panel-muted">
           <span className="relative flex h-1.5 w-1.5">
-            <span className="absolute inline-flex h-full w-full rounded-full bg-[#6fd39a] opacity-70 motion-safe:animate-ping" />
-            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#6fd39a]" />
+            {done && (
+              <span className="absolute inline-flex h-full w-full rounded-full bg-[#6fd39a] opacity-70 motion-safe:animate-ping" />
+            )}
+            <span
+              className={`relative inline-flex h-1.5 w-1.5 rounded-full ${done ? "bg-[#6fd39a]" : "bg-[#f5c451] motion-safe:animate-pulse"}`}
+            />
           </span>
-          testcase-generator — {tx({ en: "reviewed set", zh: "已评审用例集", ar: "مجموعة مُراجَعة", fr: "ensemble relu", ru: "проверенный набор", es: "conjunto revisado" })}
+          testcase-generator —{" "}
+          {done
+            ? tx({ en: "reviewed set", zh: "已评审用例集", ar: "مجموعة مُراجَعة", fr: "ensemble relu", ru: "проверенный набор", es: "conjunto revisado" })
+            : "generating…"}
         </span>
       </div>
-      <motion.div
-        className="grid gap-3 p-5 sm:p-7"
-        {...(reduce
-          ? {}
-          : {
-              initial: "hidden",
-              animate: "show",
-              variants: {
-                hidden: {},
-                show: { transition: { staggerChildren: 0.12, delayChildren: 0.55 } },
-              },
-            })}
-      >
-        {cases.map((c) => (
-          <motion.div
-            key={c.id}
-            variants={
-              reduce
-                ? undefined
-                : {
-                    hidden: { opacity: 0, y: 12 },
-                    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease } },
-                  }
-            }
-            className="rounded-xl border border-white/10 p-4 text-left"
-          >
-            <div className="flex items-center justify-between">
-              <span className="font-mono text-[13px] text-[#5ac8fa]">{c.id}</span>
-              <span className="rounded-full bg-[var(--color-accent)] px-2.5 py-0.5 text-[11px] font-medium text-white">
-                {c.p}
-              </span>
-            </div>
-            <p className="mt-1.5 text-[15px] text-panel-ink">{tx(c.title)}</p>
-            <p className="mt-1 font-mono text-[12px] text-panel-muted">
-              {tx({ en: "Steps", zh: "步骤", ar: "خطوات", fr: "Étapes", ru: "Шаги", es: "Pasos" })} {c.steps} ·{" "}
-              {tx({ en: "Expected", zh: "预期", ar: "المتوقع", fr: "Attendu", ru: "Ожидается", es: "Esperado" })}:{" "}
-              <span className="text-[#6fd39a]">{tx(c.expected)}</span>
-            </p>
-          </motion.div>
-        ))}
-      </motion.div>
+      <div className="grid gap-3 p-5 sm:p-7">
+        {cases.map((c, i) => {
+          if (done || i < revealed) {
+            return (
+              <div key={c.id} className="rounded-xl border border-white/10 p-4 text-left">
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-[13px] text-[#5ac8fa]">{c.id}</span>
+                  <span className="rounded-full bg-[var(--color-accent)] px-2.5 py-0.5 text-[11px] font-medium text-white">
+                    {c.p}
+                  </span>
+                </div>
+                <p className="mt-1.5 text-[15px] text-panel-ink">{tx(c.title)}</p>
+                <p className="mt-1 font-mono text-[12px] text-panel-muted">{meta(c)}</p>
+              </div>
+            );
+          }
+          if (i === revealed && started) {
+            return (
+              <div
+                key={c.id}
+                className="rounded-xl border border-[#5ac8fa]/30 bg-white/[0.02] p-4 text-left"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-[13px] text-[#5ac8fa]">{c.id}</span>
+                  <span className="rounded-full bg-white/10 px-2.5 py-0.5 text-[11px] font-medium text-panel-muted">
+                    {c.p}
+                  </span>
+                </div>
+                <p className="mt-1.5 text-[15px] text-panel-ink">
+                  {curTitle.slice(0, typed)}
+                  <span className="ml-0.5 inline-block h-[1.05em] w-[2px] translate-y-[2px] bg-[#5ac8fa] align-middle motion-safe:animate-pulse" />
+                </p>
+              </div>
+            );
+          }
+          return null;
+        })}
+      </div>
     </div>
   );
 }
