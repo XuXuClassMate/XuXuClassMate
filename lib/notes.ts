@@ -44,9 +44,89 @@ const CAT = {
     ru: "AI-тестирование",
     es: "Pruebas con IA",
   },
+  performance: {
+    en: "Performance",
+    zh: "性能",
+    ar: "الأداء",
+    fr: "Performance",
+    ru: "Производительность",
+    es: "Rendimiento",
+  },
+  security: {
+    en: "Quality",
+    zh: "质量",
+    ar: "الجودة",
+    fr: "Qualité",
+    ru: "Качество",
+    es: "Calidad",
+  },
 } satisfies Record<string, Localized>;
 
 export const NOTES: Note[] = [
+  {
+    slug: "front-end-performance",
+    title: {
+      en: "Front-end performance you can defend",
+      zh: "站得住脚的前端性能",
+      ar: "أداء واجهة أمامية يمكنك الدفاع عنه",
+      fr: "Des performances front-end défendables",
+      ru: "Производительность фронтенда, которую можно отстоять",
+      es: "Rendimiento front-end que puedes defender",
+    },
+    date: "2026-10-12",
+    readingTime: MIN(5),
+    category: CAT.performance,
+    excerpt: {
+      en: "First paint and time-to-interactive aren't a vibe — they're numbers you baseline, track, and can explain to developers.",
+      zh: "首屏与可交互时间不是感觉,而是能定基准、可跟踪、也能对研发讲清楚的数字。",
+      ar: "أول رسم وزمن التفاعل ليسا إحساساً — بل أرقام تضع لها أساساً وتتابعها وتشرحها للمطورين.",
+      fr: "Le premier rendu et le time-to-interactive ne sont pas une impression — ce sont des chiffres qu'on étalonne, suit et explique aux devs.",
+      ru: "Первая отрисовка и время до интерактивности — это не ощущение, а цифры, которые задаёшь как базу, отслеживаешь и объясняешь разработчикам.",
+      es: "El primer render y el time-to-interactive no son una sensación — son números que fijas como base, sigues y explicas a desarrollo.",
+    },
+    body: [
+      {
+        heading: {
+          en: "Measure on a stable baseline",
+          zh: "在稳定基准上测量",
+          ar: "قِس على أساس مستقر",
+          fr: "Mesurer sur une base stable",
+          ru: "Измеряй на стабильной базе",
+          es: "Mide sobre una base estable",
+        },
+        paragraphs: [
+          {
+            en: "Performance conclusions only hold when the environment is stable. I baseline on a fixed test environment — not a dev box whose numbers drift — and report first paint, time-to-interactive, main-bundle size, and render-blocking resources.",
+            zh: "性能结论只有在环境稳定时才成立。我以固定的测试环境作基准(而不是数字飘忽的开发机),报告首屏、可交互时间、主包体积与阻塞渲染的资源。",
+            ar: "لا تصمد خلاصات الأداء إلا حين تكون البيئة مستقرة. أضع الأساس على بيئة اختبار ثابتة — لا على جهاز تطوير تتذبذب أرقامه — وأبلّغ عن أول رسم وزمن التفاعل وحجم الحزمة الرئيسية والموارد المعيقة للعرض.",
+            fr: "Les conclusions de performance ne tiennent que si l'environnement est stable. J'étalonne sur un environnement de test fixe — pas une machine de dev aux chiffres mouvants — et je rapporte premier rendu, time-to-interactive, taille du bundle principal et ressources bloquant le rendu.",
+            ru: "Выводы о производительности верны лишь при стабильной среде. Я задаю базу на фиксированной тестовой среде — не на dev-машине с плавающими числами — и отчитываюсь о первой отрисовке, времени до интерактивности, размере основного бандла и блокирующих ресурсах.",
+            es: "Las conclusiones de rendimiento solo se sostienen con un entorno estable. Fijo la base en un entorno de prueba fijo — no en una máquina de dev con números cambiantes — e informo primer render, time-to-interactive, tamaño del bundle principal y recursos que bloquean el render.",
+          },
+        ],
+      },
+      {
+        heading: {
+          en: "Weak network is the real test",
+          zh: "弱网才是真正的考验",
+          ar: "الشبكة الضعيفة هي الاختبار الحقيقي",
+          fr: "Le réseau faible est le vrai test",
+          ru: "Слабая сеть — настоящий тест",
+          es: "La red débil es la prueba real",
+        },
+        paragraphs: [
+          {
+            en: "Most users aren't on fibre. Throttling to a weak network surfaces the blocking resources and layout shifts a fast connection hides, and turns “it feels slow” into a tracked before/after delta.",
+            zh: "大多数用户并不在光纤上。把网络限速到弱网,会暴露快连接下看不到的阻塞资源与布局抖动,也把“感觉有点慢”变成可跟踪的前后对比。",
+            ar: "معظم المستخدمين ليسوا على الألياف. يكشف خفض السرعة إلى شبكة ضعيفة الموارد المعيقة وتزحزح التخطيط التي يخفيها الاتصال السريع، ويحوّل “يبدو بطيئاً” إلى فرق مُتابَع قبل/بعد.",
+            fr: "La plupart des utilisateurs ne sont pas en fibre. Brider en réseau faible révèle les ressources bloquantes et les décalages de mise en page qu'une connexion rapide masque, et transforme « ça semble lent » en un écart avant/après suivi.",
+            ru: "Большинство пользователей не на оптоволокне. Троттлинг до слабой сети вскрывает блокирующие ресурсы и сдвиги вёрстки, скрытые быстрым соединением, и превращает «кажется медленно» в отслеживаемую разницу до/после.",
+            es: "La mayoría no está en fibra. Limitar a red débil revela los recursos bloqueantes y los saltos de layout que una conexión rápida oculta, y convierte “se siente lento” en una diferencia antes/después medible.",
+          },
+        ],
+      },
+    ],
+  },
   {
     slug: "playwright-at-scale",
     title: {
@@ -186,6 +266,70 @@ export const NOTES: Note[] = [
             fr: "Des ports fixes et un temps de démarrage connu rendent les images directement intégrables aux pipelines. L'environnement de test cesse d'être la raison d'un build rouge.",
             ru: "Фиксированные порты и известное время старта делают образы готовыми для пайплайнов. Тестовая среда перестаёт быть причиной красной сборки.",
             es: "Puertos fijos y un tiempo de arranque conocido hacen que las imágenes encajen en los pipelines. El entorno de prueba deja de ser el motivo de un build en rojo.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "permissions-multi-tenant",
+    title: {
+      en: "Where bugs hide: permissions and multi-tenant",
+      zh: "缺陷藏身之处:权限与多租户",
+      ar: "حيث تختبئ العلل: الصلاحيات وتعدّد المستأجرين",
+      fr: "Où se cachent les bugs : permissions et multi-tenant",
+      ru: "Где прячутся баги: права доступа и мультитенантность",
+      es: "Dónde se esconden los bugs: permisos y multi-tenant",
+    },
+    date: "2026-07-15",
+    readingTime: MIN(6),
+    category: CAT.security,
+    excerpt: {
+      en: "The hardest defects aren't crashes — they're a user quietly seeing data that belongs to someone else. You find them by testing data scope, not menus.",
+      zh: "最难的缺陷不是崩溃,而是一个用户悄悄看到了本属于别人的数据。要靠测试数据范围发现它们,而不是看菜单。",
+      ar: "أصعب العلل ليست الأعطال — بل أن يرى مستخدم بهدوء بيانات تخص غيره. تكتشفها باختبار نطاق البيانات لا القوائم.",
+      fr: "Les pires défauts ne sont pas des plantages — c'est un utilisateur qui voit discrètement les données d'un autre. On les trouve en testant la portée des données, pas les menus.",
+      ru: "Самые тяжёлые дефекты — не падения, а когда пользователь тихо видит чужие данные. Их находят, проверяя область видимости данных, а не меню.",
+      es: "Los peores defectos no son caídas — es un usuario viendo en silencio datos de otro. Se encuentran probando el alcance de los datos, no los menús.",
+    },
+    body: [
+      {
+        heading: {
+          en: "Menus lie; data scope tells the truth",
+          zh: "菜单会骗人,数据范围才是实情",
+          ar: "القوائم تكذب؛ نطاق البيانات يقول الحقيقة",
+          fr: "Les menus mentent ; la portée des données dit vrai",
+          ru: "Меню лгут; правду говорит область данных",
+          es: "Los menús mienten; el alcance de los datos dice la verdad",
+        },
+        paragraphs: [
+          {
+            en: "Hiding a button is not access control. I test permissions at the data layer: log in as a low-privilege user, then call the same endpoints and pass the same record IDs a privileged user would. If the server returns the row, the hidden menu was theatre.",
+            zh: "隐藏按钮不是访问控制。我在数据层测试权限:以低权限用户登录,再调用高权限用户会用的同一批接口、传入同样的记录 ID。如果服务端把那条数据返回了,那个藏起来的菜单只是做做样子。",
+            ar: "إخفاء زر ليس تحكماً في الوصول. أختبر الصلاحيات في طبقة البيانات: أسجّل الدخول كمستخدم منخفض الصلاحية، ثم أستدعي نفس المسارات وأمرّر نفس معرّفات السجلات التي يستخدمها مستخدم ذو صلاحية. إن أعاد الخادم الصف، فالقائمة المخفية مجرد تمثيل.",
+            fr: "Cacher un bouton n'est pas du contrôle d'accès. Je teste les permissions au niveau des données : je me connecte en utilisateur peu privilégié, puis j'appelle les mêmes endpoints avec les mêmes IDs d'enregistrement qu'un utilisateur privilégié. Si le serveur renvoie la ligne, le menu caché n'était que du décor.",
+            ru: "Спрятать кнопку — не контроль доступа. Я проверяю права на уровне данных: вхожу как пользователь с низкими правами и вызываю те же эндпоинты с теми же ID записей, что и привилегированный пользователь. Если сервер вернул строку, скрытое меню было бутафорией.",
+            es: "Ocultar un botón no es control de acceso. Pruebo permisos en la capa de datos: entro como usuario de bajo privilegio y llamo a los mismos endpoints con los mismos IDs de registro que usaría uno privilegiado. Si el servidor devuelve la fila, el menú oculto era puro teatro.",
+          },
+        ],
+      },
+      {
+        heading: {
+          en: "Probe for escalation across tenants",
+          zh: "跨租户探测越权",
+          ar: "اختبر التصعيد عبر المستأجرين",
+          fr: "Sonder l'escalade entre tenants",
+          ru: "Ищи эскалацию между тенантами",
+          es: "Sondea la escalada entre tenants",
+        },
+        paragraphs: [
+          {
+            en: "In a multi-tenant system the sharp question is: can tenant A read or write tenant B's data? I take a valid ID from one account and replay it while authenticated as another — horizontal escalation. A single leak here outweighs a hundred cosmetic bugs, so these cases get written down and run every release.",
+            zh: "在多租户系统里,最尖锐的问题是:租户 A 能否读写租户 B 的数据?我拿一个账户的合法 ID,在另一账户登录态下重放——横向越权。这里一个泄露,胜过一百个外观缺陷,所以这些用例都要记录下来,每次发版都跑。",
+            ar: "في نظام متعدد المستأجرين، السؤال الحاد: هل يستطيع المستأجر (أ) قراءة أو كتابة بيانات المستأجر (ب)؟ آخذ معرّفاً صحيحاً من حساب وأعيد تشغيله وأنا مُصادَق كحساب آخر — تصعيد أفقي. تسريب واحد هنا يفوق مئة علة شكلية، لذا تُوثَّق هذه الحالات وتُشغَّل كل إصدار.",
+            fr: "Dans un système multi-tenant, la vraie question est : le tenant A peut-il lire ou écrire les données du tenant B ? Je prends un ID valide d'un compte et le rejoue authentifié en tant qu'un autre — escalade horizontale. Une seule fuite ici pèse plus que cent bugs cosmétiques, alors ces cas sont consignés et rejoués à chaque release.",
+            ru: "В мультитенантной системе острый вопрос: может ли тенант A читать или изменять данные тенанта B? Я беру валидный ID одного аккаунта и воспроизвожу его под аутентификацией другого — горизонтальная эскалация. Одна такая утечка весомее сотни косметических багов, поэтому эти случаи записываются и прогоняются каждый релиз.",
+            es: "En un sistema multi-tenant la pregunta clave es: ¿puede el tenant A leer o escribir datos del tenant B? Tomo un ID válido de una cuenta y lo reproduzco autenticado como otra — escalada horizontal. Una sola fuga aquí pesa más que cien bugs cosméticos, así que estos casos se anotan y se corren en cada release.",
           },
         ],
       },
