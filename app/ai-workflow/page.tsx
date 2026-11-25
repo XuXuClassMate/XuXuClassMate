@@ -14,12 +14,18 @@ import {
   FLOW,
   HUMAN_LOOP,
   SAFETY,
+  TOOLS,
+  TOOLS_LABEL,
+  TOOLS_NOTE,
+  SKILL_GROUPS,
+  EXAMPLE_INTRO,
+  EXAMPLE_STEPS,
 } from "@/lib/ai-workflow-content";
 
 export const metadata: Metadata = {
   title: "AI collaboration workflow — XuXuClassMate",
   description:
-    "A one-person test team run with AI: a lead dispatches to role-split assistants (test execution, defects, notifications, code, docs), tied together by handoff rules, memory, and safety redlines — with the human on the key decisions.",
+    "A one-person test team run with AI: a lead dispatches to role-split assistants (test execution, defects, notifications, code, docs) across a 23-skill library, tied together by handoff rules, memory, and safety redlines. The skills are plain Markdown and run on any agent runtime — OpenClaw, Cursor, ChatGPT, Claude, GrokBot.",
 };
 
 export default function AiWorkflowPage() {
@@ -46,11 +52,34 @@ export default function AiWorkflowPage() {
                 label={{ en: "ClawHub downloads", zh: "ClawHub 下载量", ar: "تنزيلات ClawHub", fr: "Téléchargements ClawHub", ru: "Загрузки ClawHub", es: "Descargas de ClawHub" }}
               />
               <span className="inline-flex items-center gap-2 rounded-full border border-[var(--color-line)] bg-[var(--color-surface)] px-4 py-2 text-[14px]">
-                <strong className="font-semibold text-ink">10</strong>
+                <strong className="font-semibold text-ink">23</strong>
                 <span className="text-muted">
-                  <T en="skills shipped" zh="个已发布技能" ar="مهارات منشورة" fr="compétences publiées" ru="опубликованных навыков" es="habilidades publicadas" />
+                  <T en="skills in the pack" zh="个技能收录在包里" ar="مهارة في الحزمة" fr="compétences dans le pack" ru="навыков в наборе" es="habilidades en el pack" />
                 </span>
               </span>
+            </div>
+
+            {/* Runtime compatibility tags */}
+            <div className="mt-10">
+              <p className="text-[13px] font-medium uppercase tracking-wide text-muted">
+                <T {...TOOLS_LABEL} />
+              </p>
+              <div className="mt-4 flex flex-wrap justify-center gap-2.5">
+                {TOOLS.map((t, i) => (
+                  <span
+                    key={t.name}
+                    className="inline-flex items-center gap-2 rounded-full border border-[var(--color-line)] bg-[var(--color-surface)] px-4 py-2 text-[14px] font-medium text-ink"
+                  >
+                    <span style={{ color: HUES[i % HUES.length] }}>
+                      <Icon name={t.icon} size={16} />
+                    </span>
+                    {t.name}
+                  </span>
+                ))}
+              </div>
+              <p className="mx-auto mt-4 max-w-[52ch] text-[14px] leading-relaxed text-muted">
+                <T {...TOOLS_NOTE} />
+              </p>
             </div>
           </Reveal>
         </div>
@@ -117,8 +146,50 @@ export default function AiWorkflowPage() {
         </div>
       </section>
 
-      {/* End-to-end flow */}
+      {/* Skill library */}
       <section className="bg-[var(--color-surface)]">
+        <div className="container-ap py-24">
+          <Reveal>
+            <h2 className="display-2 max-w-[20ch]">
+              <T {...WF_HEADINGS.skills} />
+            </h2>
+          </Reveal>
+          <div className="mt-12 space-y-10">
+            {SKILL_GROUPS.map((g, gi) => (
+              <Reveal key={g.group.en} delay={(gi % 3) * 0.05}>
+                <div className="flex items-center gap-4">
+                  <h3 className="text-[14px] font-semibold uppercase tracking-wide" style={{ color: HUES[gi % HUES.length] }}>
+                    <T {...g.group} />
+                  </h3>
+                  <span className="h-px flex-1 bg-[var(--color-line)]" />
+                  <span className="font-mono text-[12px] text-muted">
+                    {String(g.skills.length).padStart(2, "0")}
+                  </span>
+                </div>
+                <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {g.skills.map((s) => (
+                    <article
+                      key={s.name.en}
+                      className="card-ap h-full rounded-[var(--radius-ap)] border border-[var(--color-line)] bg-[var(--color-bg)] p-5"
+                      style={{ borderTop: `2px solid ${HUES[gi % HUES.length]}` }}
+                    >
+                      <h4 className="text-[16px] font-semibold tracking-tight">
+                        <T {...s.name} />
+                      </h4>
+                      <p className="mt-2 text-[14px] leading-relaxed text-muted">
+                        <T {...s.desc} />
+                      </p>
+                    </article>
+                  ))}
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* End-to-end flow */}
+      <section className="bg-[var(--color-bg)]">
         <div className="container-ap py-24">
           <Reveal>
             <h2 className="display-2 max-w-[18ch]">
@@ -140,6 +211,42 @@ export default function AiWorkflowPage() {
                       <T {...s.body} />
                     </p>
                   </div>
+                </div>
+              </Reveal>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* Worked example */}
+      <section className="bg-[var(--color-surface)]">
+        <div className="container-ap py-24">
+          <Reveal>
+            <h2 className="display-2 max-w-[18ch]">
+              <T {...WF_HEADINGS.example} />
+            </h2>
+            <p className="lead mt-5 max-w-[64ch] text-start">
+              <T {...EXAMPLE_INTRO} />
+            </p>
+          </Reveal>
+          <ol className="mt-12 grid gap-5 md:grid-cols-2">
+            {EXAMPLE_STEPS.map((s, i) => (
+              <Reveal as="li" key={s.n} delay={(i % 2) * 0.06}>
+                <div className="card-ap h-full rounded-[var(--radius-ap)] bg-[var(--color-bg)] p-6">
+                  <div className="flex items-center gap-3">
+                    <span
+                      className="grid h-8 w-8 shrink-0 place-items-center rounded-lg font-mono text-[13px] font-semibold"
+                      style={{ backgroundColor: `color-mix(in srgb, ${HUES[i % HUES.length]} 15%, transparent)`, color: HUES[i % HUES.length] }}
+                    >
+                      {s.n}
+                    </span>
+                    <h3 className="text-[18px] font-semibold tracking-tight">
+                      <T {...s.title} />
+                    </h3>
+                  </div>
+                  <p className="mt-3 text-[15px] leading-relaxed text-muted">
+                    <T {...s.body} />
+                  </p>
                 </div>
               </Reveal>
             ))}

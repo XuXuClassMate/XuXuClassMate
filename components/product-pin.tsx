@@ -1,9 +1,10 @@
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useTx, type Localized } from "@/components/i18n";
+import { useTx, useLang, type Localized } from "@/components/i18n";
+import { cn } from "@/lib/utils";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -132,13 +133,30 @@ const L = {
 
 export function ProductPin() {
   const root = useRef<HTMLDivElement>(null);
+  const { lang } = useLang();
   const tx = useTx();
+  // Whether to run the pinned, cross-fading narrative. Off for reduced-motion,
+  // small screens, and RTL (GSAP pin + position:fixed misplaces the stage in
+  // RTL and the absolutely-stacked steps spill onto the section above). When
+  // off, the steps render as a plain vertical flow — no overlap.
+  const [pin, setPin] = useState(false);
 
+  // Decide whether to pin; re-evaluates on language (direction) change.
   useLayoutEffect(() => {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const decide = () =>
+      setPin(!reduce && window.innerWidth >= 768 && lang !== "ar");
+    decide();
+    window.addEventListener("resize", decide);
+    return () => window.removeEventListener("resize", decide);
+  }, [lang]);
+
+  // Build the GSAP timeline only once the DOM is in the pinned (absolute)
+  // layout, so ScrollTrigger measures the real stacked positions.
+  useLayoutEffect(() => {
+    if (!pin) return;
     const el = root.current;
     if (!el) return;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce || window.innerWidth < 768) return;
 
     const ctx = gsap.context(() => {
       const panels = gsap.utils.toArray<HTMLElement>(".pin-step");
@@ -179,7 +197,7 @@ export function ProductPin() {
     }, el);
 
     return () => ctx.revert();
-  }, []);
+  }, [pin]);
 
   return (
     <section
@@ -188,7 +206,7 @@ export function ProductPin() {
       className="bg-panel text-panel-ink"
       aria-label={tx(L.aria)}
     >
-      <div className="pin-stage flex min-h-screen items-center">
+      <div className={cn("pin-stage flex items-center", pin && "min-h-screen")}>
         <div className="container-ap grid w-full items-center gap-12 py-14 md:grid-cols-2">
           {/* Copy / steps */}
           <div>
@@ -198,12 +216,15 @@ export function ProductPin() {
             <h2 className="display-2 mt-3 text-panel-ink">{tx(L.heading)}</h2>
 
             {/* Desktop: stacked pinned steps; mobile: all shown */}
-            <div className="relative mt-9 min-h-[180px]">
+            <div className={cn("relative mt-9", pin && "min-h-[180px]")}>
               {STEPS.map((s, i) => (
                 <div
                   key={s.k}
-                  className="pin-step mb-8 md:absolute md:inset-0 md:mb-0"
-                  style={{ opacity: i === 0 ? 1 : undefined }}
+                  className={cn(
+                    "pin-step mb-8",
+                    pin && "md:absolute md:inset-0 md:mb-0",
+                  )}
+                  style={pin ? { opacity: i === 0 ? 1 : undefined } : undefined}
                 >
                   <span className="pin-num font-mono text-[13px] text-[#5ac8fa]">
                     {s.k}
@@ -220,12 +241,15 @@ export function ProductPin() {
           </div>
 
           {/* Visual: one surface per step, cross-fading in lockstep with the copy */}
-          <div className="relative md:aspect-[4/3]">
+          <div className={cn("relative", pin && "md:aspect-[4/3]")}>
             {STEPS.map((s, i) => (
               <div
                 key={s.k}
-                className="pin-vis mb-5 md:absolute md:inset-0 md:mb-0"
-                style={{ opacity: i === 0 ? 1 : undefined }}
+                className={cn(
+                  "pin-vis mb-5",
+                  pin && "md:absolute md:inset-0 md:mb-0",
+                )}
+                style={pin ? { opacity: i === 0 ? 1 : undefined } : undefined}
               >
                 <StepVisual index={i} />
               </div>
