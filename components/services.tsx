@@ -8,6 +8,7 @@ type Service = {
   host: string;
   href: string;
   icon: IconName;
+  color: string;
   detail: Localized;
 };
 
@@ -17,6 +18,7 @@ const SERVICES: Service[] = [
     host: "nas.xuxuclassmate.com",
     href: "https://nas.xuxuclassmate.com",
     icon: "nas",
+    color: "var(--c-teal)",
     detail: {
       en: "Self-hosted storage.",
       zh: "自托管存储。",
@@ -31,6 +33,7 @@ const SERVICES: Service[] = [
     host: "mail.xuxuclassmate.com",
     href: "https://mail.xuxuclassmate.com",
     icon: "mail",
+    color: "var(--c-blue)",
     detail: {
       en: "Compose, attachments, and history.",
       zh: "撰写、附件、发送记录。",
@@ -45,6 +48,7 @@ const SERVICES: Service[] = [
     host: "ssh.xuxuclassmate.com",
     href: "https://ssh.xuxuclassmate.com/",
     icon: "ssh",
+    color: "var(--c-purple)",
     detail: {
       en: "Secure shell for the server.",
       zh: "服务器安全终端。",
@@ -59,6 +63,7 @@ const SERVICES: Service[] = [
     host: "watch.xuxuclassmate.com",
     href: "https://watch.xuxuclassmate.com/",
     icon: "watch",
+    color: "var(--c-pink)",
     detail: {
       en: "Traffic and security monitor.",
       zh: "站点流量与安全监控。",
@@ -73,6 +78,7 @@ const SERVICES: Service[] = [
     host: "pulse.xuxuclassmate.com",
     href: "https://pulse.xuxuclassmate.com/",
     icon: "pulse",
+    color: "var(--c-amber)",
     detail: {
       en: "Scheduled market briefings and console.",
       zh: "定时市场简报与控制台。",
@@ -128,7 +134,10 @@ export function Services() {
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <span className="grid h-10 w-10 place-items-center rounded-xl bg-[color-mix(in_srgb,var(--color-accent)_12%,transparent)] text-[var(--color-accent)]">
+                  <span
+                    className="grid h-10 w-10 place-items-center rounded-xl"
+                    style={{ backgroundColor: `color-mix(in srgb, ${s.color} 15%, transparent)`, color: s.color }}
+                  >
                     <Icon name={s.icon} />
                   </span>
                   <h3 className="text-[20px] font-semibold tracking-tight" dir="ltr">

@@ -26,15 +26,6 @@ const NAV: { label: Localized; href: string }[] = [
   },
 ];
 
-const TRY: Localized = {
-  en: "Try the generator",
-  zh: "试用生成器",
-  ar: "جرّب المولّد",
-  fr: "Essayer le générateur",
-  ru: "Попробовать генератор",
-  es: "Probar el generador",
-};
-
 export function SiteNav() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
@@ -97,14 +88,6 @@ export function SiteNav() {
                   </Link>
                 </li>
               ))}
-              <li>
-                <Link
-                  href="/#try"
-                  className="text-[13px] font-medium text-[var(--color-accent)] hover:underline"
-                >
-                  {tx(TRY)}
-                </Link>
-              </li>
             </ul>
             <div className="flex items-center gap-1">
               <LangMenu />
@@ -155,7 +138,7 @@ export function SiteNav() {
         )}
       >
         <ul className="container-ap flex flex-col gap-1 pt-6">
-          {[...NAV, { label: TRY, href: "/#try" }].map((item) => (
+          {NAV.map((item) => (
             <li key={item.href} className="border-b border-[var(--color-line)]">
               <Link
                 href={item.href}

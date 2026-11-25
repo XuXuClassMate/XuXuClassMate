@@ -39,6 +39,29 @@
 :root {
   --nav-h: 48px;
   color-scheme: light;
+
+  /* Multi-hue accent palette (Apple-system-ish) — used to color-code sections,
+     cards, and chips so the site reads rich, not monochrome. */
+  --c-blue: #0071e3;
+  --c-indigo: #5a4be0;
+  --c-purple: #a23ad8;
+  --c-pink: #ff2d78;
+  --c-teal: #0ea5a0;
+  --c-green: #22a95b;
+  --c-amber: #e8820e;
+  --c-cyan: #0aa5d8;
+}
+
+/* Brighter hues on dark, for contrast on black. */
+html.dark {
+  --c-blue: #2997ff;
+  --c-indigo: #7d7aff;
+  --c-purple: #cf6bf2;
+  --c-pink: #ff6b9d;
+  --c-teal: #40d6c8;
+  --c-green: #30d158;
+  --c-amber: #ff9f0a;
+  --c-cyan: #5ac8fa;
 }
 
 /* ---- Dark theme: flip the swappable tokens (html.dark beats :root) ---- */
@@ -307,8 +330,8 @@ body {
   height: 46vw;
   left: -6vw;
   top: -14vw;
-  opacity: 0.22;
-  background: radial-gradient(circle, var(--color-accent), transparent 68%);
+  opacity: 0.3;
+  background: radial-gradient(circle, var(--c-blue), transparent 68%);
   animation: aurora-a 24s ease-in-out infinite;
 }
 .aurora .a2 {
@@ -316,22 +339,32 @@ body {
   height: 40vw;
   right: -8vw;
   top: -8vw;
-  opacity: 0.2;
-  background: radial-gradient(circle, #5ac8fa, transparent 68%);
+  opacity: 0.26;
+  background: radial-gradient(circle, var(--c-cyan), transparent 68%);
   animation: aurora-b 28s ease-in-out infinite;
 }
 .aurora .a3 {
-  width: 38vw;
-  height: 38vw;
-  left: 32vw;
-  top: 0;
-  opacity: 0.16;
-  background: radial-gradient(circle, #8e8ffa, transparent 68%);
+  width: 40vw;
+  height: 40vw;
+  left: 30vw;
+  top: -2vw;
+  opacity: 0.24;
+  background: radial-gradient(circle, var(--c-purple), transparent 66%);
   animation: aurora-c 32s ease-in-out infinite;
 }
-html.dark .aurora .a1 { opacity: 0.4; }
-html.dark .aurora .a2 { opacity: 0.34; }
-html.dark .aurora .a3 { opacity: 0.28; }
+.aurora .a4 {
+  width: 30vw;
+  height: 30vw;
+  right: 14vw;
+  top: 2vw;
+  opacity: 0.18;
+  background: radial-gradient(circle, var(--c-pink), transparent 66%);
+  animation: aurora-b 36s ease-in-out infinite;
+}
+html.dark .aurora .a1 { opacity: 0.42; }
+html.dark .aurora .a2 { opacity: 0.36; }
+html.dark .aurora .a3 { opacity: 0.34; }
+html.dark .aurora .a4 { opacity: 0.26; }
 
 @keyframes aurora-a {
   0%, 100% { transform: translate(-8%, -6%) scale(1); }
@@ -347,4 +380,12 @@ html.dark .aurora .a3 { opacity: 0.28; }
 }
 @media (prefers-reduced-motion: reduce) {
   .aurora span { animation: none; }
+}
+
+/* Gradient text for a vivid headline accent (Apple-style). */
+.text-gradient {
+  background: linear-gradient(95deg, var(--c-blue), var(--c-purple) 50%, var(--c-cyan));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }

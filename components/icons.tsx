@@ -50,7 +50,10 @@ export type IconName =
   | "defect"
   | "notify"
   | "docs"
-  | "code";
+  | "code"
+  // stats
+  | "download"
+  | "box";
 
 const PATHS: Record<IconName, React.ReactNode> = {
   // Quality engineering — a checklist clipboard
@@ -196,6 +199,21 @@ const PATHS: Record<IconName, React.ReactNode> = {
   ),
   // Code — brackets
   code: <path d="M8 8l-4 4 4 4M16 8l4 4-4 4" />,
+
+  // Download — arrow into a tray
+  download: (
+    <>
+      <path d="M12 3v11M8 10l4 4 4-4" />
+      <path d="M5 19h14" />
+    </>
+  ),
+  // Box — a container/image
+  box: (
+    <>
+      <path d="M3 7.5l9-4.5 9 4.5v9l-9 4.5-9-4.5v-9Z" />
+      <path d="M3 7.5l9 4.5 9-4.5M12 12v9" />
+    </>
+  ),
 };
 
 export function Icon({ name, size, className }: { name: IconName } & IconProps) {

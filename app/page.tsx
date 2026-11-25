@@ -12,12 +12,14 @@ import { AI_ROLES, AI_HUMAN_NOTE } from "@/lib/about-content";
 
 const FAMILIES: {
   icon: IconName;
+  color: string;
   href: string;
   title: Localized;
   desc: Localized;
 }[] = [
   {
     icon: "quality",
+    color: "var(--c-blue)",
     href: "/products/testcase-generator",
     title: { en: "Quality Engineering", zh: "质量工程", ar: "هندسة الجودة", fr: "Ingénierie qualité", ru: "Инженерия качества", es: "Ingeniería de calidad" },
     desc: {
@@ -31,6 +33,7 @@ const FAMILIES: {
   },
   {
     icon: "infra",
+    color: "var(--c-teal)",
     href: "/products",
     title: { en: "Developer Infrastructure", zh: "开发者基础设施", ar: "البنية التحتية للمطوّرين", fr: "Infrastructure développeur", ru: "Инфраструктура разработки", es: "Infraestructura para desarrolladores" },
     desc: {
@@ -44,6 +47,7 @@ const FAMILIES: {
   },
   {
     icon: "ai",
+    color: "var(--c-purple)",
     href: "/products/globalpulse",
     title: { en: "AI / Agent", zh: "AI / 智能体", ar: "ذكاء اصطناعي / وكيل", fr: "IA / agent", ru: "ИИ / агент", es: "IA / agente" },
     desc: {
@@ -57,6 +61,7 @@ const FAMILIES: {
   },
   {
     icon: "generate",
+    color: "var(--c-amber)",
     href: "/ai-workflow",
     title: { en: "Agent skills", zh: "智能体技能", ar: "مهارات الوكلاء", fr: "Compétences d'agent", ru: "Навыки агентов", es: "Habilidades de agente" },
     desc: {
@@ -70,6 +75,7 @@ const FAMILIES: {
   },
   {
     icon: "nas",
+    color: "var(--c-pink)",
     href: "/#services",
     title: { en: "Self-hosted services", zh: "自托管服务", ar: "خدمات ذاتية الاستضافة", fr: "Services auto-hébergés", ru: "Собственные сервисы", es: "Servicios autoalojados" },
     desc: {
@@ -117,9 +123,15 @@ export default function Home() {
               <Reveal key={f.title.en}>
                 <Link
                   href={f.href}
-                  className="card-ap group flex h-full flex-col rounded-[var(--radius-ap)] bg-[var(--color-surface)] p-8"
+                  className="card-ap group flex h-full flex-col rounded-[var(--radius-ap)] border border-[var(--color-line)] bg-[var(--color-surface)] p-8"
+                  style={{
+                    backgroundImage: `radial-gradient(120% 90% at 100% -10%, color-mix(in srgb, ${f.color} 9%, transparent), transparent 55%)`,
+                  }}
                 >
-                  <span className="grid h-11 w-11 place-items-center rounded-xl bg-[color-mix(in_srgb,var(--color-accent)_12%,transparent)] text-[var(--color-accent)]">
+                  <span
+                    className="grid h-11 w-11 place-items-center rounded-xl"
+                    style={{ backgroundColor: `color-mix(in srgb, ${f.color} 15%, transparent)`, color: f.color }}
+                  >
                     <Icon name={f.icon} size={22} />
                   </span>
                   <h3 className="mt-4 text-[22px] font-semibold tracking-tight">
@@ -128,7 +140,7 @@ export default function Home() {
                   <p className="mt-2 text-[16px] leading-relaxed text-muted">
                     <T {...f.desc} />
                   </p>
-                  <span className="link-ap mt-6">
+                  <span className="link-ap mt-6" style={{ color: f.color }}>
                     <T en="Explore" zh="查看" ar="استكشف" fr="Explorer" ru="Открыть" es="Explorar" />
                   </span>
                 </Link>
@@ -151,50 +163,6 @@ export default function Home() {
       {/* Flagship deep-dive: the AI test-case generator (GSAP pinned narrative) */}
       <ProductPin />
 
-      {/* Developer infrastructure chapter */}
-      <section id="docker" className="bg-[var(--color-bg)]">
-        <div className="container-ap grid items-center gap-12 py-28 md:grid-cols-2">
-          <Reveal>
-            <p className="eyebrow">
-              <T en="Test DB Docker Suite" zh="测试数据库 Docker 套件" ar="حزمة Docker لقواعد بيانات الاختبار" fr="Suite Docker de bases de test" ru="Docker-набор тестовых БД" es="Suite Docker de bases de prueba" />
-            </p>
-            <h2 className="display-2 mt-3">
-              <T en="Test databases, one command away." zh="测试数据库,一条命令即达。" ar="قواعد بيانات اختبار على بُعد أمر واحد." fr="Des bases de test à une commande." ru="Тестовые базы данных в одну команду." es="Bases de datos de prueba a un comando." />
-            </h2>
-            <p className="lead mt-5 max-w-[40ch]">
-              <T
-                en="Ready-to-run images for the databases teams actually test against — pulled, seeded, and disposable."
-                zh="为团队真正会用来测试的数据库准备的开箱即用镜像——可拉取、带种子数据、用完即弃。"
-                ar="صور جاهزة للتشغيل لقواعد البيانات التي تختبرها الفرق فعلاً — قابلة للسحب، مزوّدة ببيانات أولية، وقابلة للتخلّص."
-                fr="Des images prêtes à l'emploi pour les bases que les équipes testent vraiment — récupérables, initialisées et jetables."
-                ru="Готовые к запуску образы баз, против которых команды действительно тестируют — загружаемые, с данными и одноразовые."
-                es="Imágenes listas para ejecutar de las bases que los equipos realmente prueban — descargables, con datos y desechables."
-              />
-            </p>
-            <div className="mt-7">
-              <a href="https://hub.docker.com/u/xuxuclassmate" target="_blank" rel="noopener noreferrer" className="link-ap">
-                <T en="Pull from Docker Hub" zh="从 Docker Hub 拉取" ar="اسحب من Docker Hub" fr="Récupérer depuis Docker Hub" ru="Загрузить из Docker Hub" es="Descargar de Docker Hub" />
-              </a>
-            </div>
-          </Reveal>
-          <Reveal>
-            <div className="overflow-hidden rounded-[var(--radius-ap)] border border-[var(--color-line)] bg-panel p-6 font-mono text-[13px] leading-relaxed text-panel-ink shadow-[0_24px_60px_-24px_rgba(0,0,0,0.3)]" dir="ltr">
-              <p className="text-panel-muted"># one pull, one run</p>
-              <p className="mt-2">
-                <span className="text-[#6fd39a]">$</span> docker pull{" "}
-                <span className="text-[#5ac8fa]">xuxuclassmate/testdb-kingbase</span>
-              </p>
-              <p>
-                <span className="text-[#6fd39a]">$</span> docker run -p 54321:54321 testdb-kingbase
-              </p>
-              <p className="mt-2 text-panel-muted">
-                → ready in ~6s · seeded · wiped on stop
-              </p>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
       {/* AI collaboration workflow highlight (dark band) */}
       <section id="ai-workflow" className="bg-panel text-panel-ink">
         <div className="container-ap py-28">
@@ -210,17 +178,20 @@ export default function Home() {
             </p>
           </Reveal>
           <div className="mt-10 flex flex-wrap gap-3">
-            {AI_ROLES.map((r) => (
-              <span
-                key={r.title.en}
-                className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-4 py-2 text-[14px] text-panel-ink"
-              >
-                <span className="text-[#5ac8fa]">
-                  <Icon name={r.icon} size={16} />
+            {AI_ROLES.map((r, i) => {
+              const hues = ["#2997ff", "#cf6bf2", "#40d6c8", "#ff9f0a", "#ff6b9d", "#5ac8fa"];
+              return (
+                <span
+                  key={r.title.en}
+                  className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-4 py-2 text-[14px] text-panel-ink"
+                >
+                  <span style={{ color: hues[i % hues.length] }}>
+                    <Icon name={r.icon} size={16} />
+                  </span>
+                  <T {...r.title} />
                 </span>
-                <T {...r.title} />
-              </span>
-            ))}
+              );
+            })}
           </div>
           <div className="mt-9">
             <Link href="/ai-workflow" className="link-ap" style={{ color: "#5ac8fa" }}>

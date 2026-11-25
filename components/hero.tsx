@@ -34,7 +34,7 @@ export function Hero() {
             es: "Ingeniería de calidad potenciada por IA",
           })}
         </motion.p>
-        <motion.h1 className="display-1 mx-auto mt-3 max-w-[17ch]" {...rise(0.12)}>
+        <motion.h1 className="display-1 text-gradient mx-auto mt-3 max-w-[17ch] pb-1" {...rise(0.12)}>
           {tx({
             en: "AI testing tools, built to run.",
             zh: "AI 测试工具,为运行而生。",

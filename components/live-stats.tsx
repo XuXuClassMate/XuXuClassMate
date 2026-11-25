@@ -6,11 +6,11 @@
 import { useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "motion/react";
 import { useTx } from "@/components/i18n";
+import { Icon, type IconName } from "@/components/icons";
 
 const GW = "https://docker-hub-pull-counter.vercel.app";
 const USER = "xuxuclassmate";
 const CLAW = "https://clawhub.ai/api/v1/skills/";
-// The owner-scoped skill slugs on ClawHub (summed live for total downloads).
 const CLAW_SLUGS = [
   "skill-publishing",
   "free-api-discovery",
@@ -34,7 +34,6 @@ type Stats = {
   history: number[];
 };
 
-// Last-known values, so the section is never empty (SSR / no-JS / fetch fail).
 const FALLBACK: Stats = {
   pulls: 85285,
   images: 13,
@@ -61,7 +60,7 @@ function useCountUp(target: number, run: boolean, reduce: boolean) {
     const from = fromRef.current;
     let raf = 0;
     const start = performance.now();
-    const dur = 1000;
+    const dur = 1100;
     const tick = (t: number) => {
       const p = Math.min(1, (t - start) / dur);
       const e = 1 - Math.pow(1 - p, 3);
@@ -78,18 +77,19 @@ function useCountUp(target: number, run: boolean, reduce: boolean) {
 
 function Sparkline({ values, className }: { values: number[]; className?: string }) {
   if (values.length < 2) return null;
-  const w = 220;
-  const h = 60;
+  const w = 240;
+  const h = 72;
   const min = Math.min(...values);
   const max = Math.max(...values);
   const span = max - min || 1;
   const pts = values.map((v, i) => {
     const x = (i / (values.length - 1)) * w;
-    const y = h - ((v - min) / span) * (h - 6) - 3;
+    const y = h - ((v - min) / span) * (h - 10) - 5;
     return [x, y] as const;
   });
   const line = pts.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(" ");
   const area = `0,${h} ${line} ${w},${h}`;
+  const [ex, ey] = pts[pts.length - 1];
   return (
     <svg
       width="100%"
@@ -98,23 +98,43 @@ function Sparkline({ values, className }: { values: number[]; className?: string
       className={className}
       aria-hidden="true"
     >
-      <polygon points={area} fill="var(--color-accent)" opacity="0.1" />
+      <defs>
+        <linearGradient id="spark-grad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="var(--color-accent)" stopOpacity="0.28" />
+          <stop offset="100%" stopColor="var(--color-accent)" stopOpacity="0" />
+        </linearGradient>
+      </defs>
+      <polygon points={area} fill="url(#spark-grad)" />
       <polyline
         points={line}
         fill="none"
         stroke="var(--color-accent)"
-        strokeWidth="2"
+        strokeWidth="2.5"
         strokeLinecap="round"
         strokeLinejoin="round"
         vectorEffect="non-scaling-stroke"
       />
-      <circle
-        cx={pts[pts.length - 1][0]}
-        cy={pts[pts.length - 1][1]}
-        r="2.5"
-        fill="var(--color-accent)"
-      />
+      <circle cx={ex} cy={ey} r="6" fill="var(--color-accent)" opacity="0.18" />
+      <circle cx={ex} cy={ey} r="3" fill="var(--color-accent)" />
     </svg>
+  );
+}
+
+const CARD =
+  "card-ap relative overflow-hidden rounded-[var(--radius-ap)] border border-[var(--color-line)] bg-[var(--color-bg)] p-8 shadow-[var(--shadow-card)]";
+const GLOW: React.CSSProperties = {
+  backgroundImage:
+    "radial-gradient(130% 90% at 100% -10%, color-mix(in srgb, var(--color-accent) 7%, transparent), transparent 55%)",
+};
+
+function Chip({ name, color = "var(--color-accent)" }: { name: IconName; color?: string }) {
+  return (
+    <span
+      className="grid h-10 w-10 place-items-center rounded-xl"
+      style={{ backgroundColor: `color-mix(in srgb, ${color} 15%, transparent)`, color }}
+    >
+      <Icon name={name} size={20} />
+    </span>
   );
 }
 
@@ -136,7 +156,7 @@ export function LiveStats() {
           io.disconnect();
         }
       },
-      { threshold: 0.3 },
+      { threshold: 0.2 },
     );
     io.observe(el);
     return () => io.disconnect();
@@ -148,7 +168,6 @@ export function LiveStats() {
     const jsonOf = (u: string) => fetch(u, { signal: sig }).then((r) => r.json());
 
     (async () => {
-      // Docker + gateway stats
       const docker = (async () => {
         const [s, g, h] = await Promise.all([
           jsonOf(`${GW}/api/user/stats?username=${USER}`),
@@ -168,7 +187,6 @@ export function LiveStats() {
         };
       })();
 
-      // ClawHub: sum downloads across the owner's skills
       const claw = (async () => {
         const settled = await Promise.allSettled(
           CLAW_SLUGS.map((slug) => jsonOf(`${CLAW}${slug}`)),
@@ -178,10 +196,7 @@ export function LiveStats() {
         for (const r of settled) {
           if (r.status !== "fulfilled") continue;
           const d = r.value;
-          if (
-            d?.owner?.handle === USER &&
-            typeof d?.skill?.stats?.downloads === "number"
-          ) {
+          if (d?.owner?.handle === USER && typeof d?.skill?.stats?.downloads === "number") {
             total += d.skill.stats.downloads;
             count += 1;
           }
@@ -195,9 +210,7 @@ export function LiveStats() {
       if (sig.aborted) return;
       setData({ ...d, ...c });
       setLive(true);
-    })().catch(() => {
-      /* keep fallback */
-    });
+    })().catch(() => {});
 
     return () => ac.abort();
   }, []);
@@ -209,17 +222,23 @@ export function LiveStats() {
   const claw = useCountUp(data.clawDownloads, run, reduce);
   const fmt = (n: number) => n.toLocaleString("en-US");
 
-  const small = [
+  const small: { icon: IconName; color: string; value: string; label: string; sub?: string }[] = [
     {
+      icon: "download",
+      color: "var(--c-purple)",
       value: fmt(claw),
       label: tx({ en: "ClawHub downloads", zh: "ClawHub 下载量", ar: "تنزيلات ClawHub", fr: "Téléchargements ClawHub", ru: "Загрузки ClawHub", es: "Descargas de ClawHub" }),
       sub: `${data.clawSkills} ${tx({ en: "skills", zh: "个技能", ar: "مهارات", fr: "compétences", ru: "навыков", es: "habilidades" })}`,
     },
     {
+      icon: "infra",
+      color: "var(--c-teal)",
       value: fmt(images),
       label: tx({ en: "Public images", zh: "公开镜像", ar: "صور عامة", fr: "Images publiques", ru: "Публичных образов", es: "Imágenes públicas" }),
     },
     {
+      icon: "api",
+      color: "var(--c-amber)",
       value: fmt(apiCalls),
       label: tx({ en: "API calls served", zh: "API 调用量", ar: "طلبات API مُخدّمة", fr: "Appels API servis", ru: "Обработано API-запросов", es: "Llamadas API servidas" }),
     },
@@ -228,20 +247,16 @@ export function LiveStats() {
   return (
     <section className="bg-[var(--color-surface)]">
       <div ref={ref} className="container-ap py-28">
-        <div className="flex items-center gap-2">
-          <span className="relative flex h-2 w-2">
+        <span className="inline-flex items-center gap-2 rounded-full border border-[var(--color-line)] bg-[var(--color-bg)] px-3 py-1 text-[13px] font-medium text-ink">
+          <span className="relative flex h-1.5 w-1.5" aria-hidden="true">
             {live && (
               <span className="absolute inline-flex h-full w-full rounded-full bg-[#34c759] opacity-70 motion-safe:animate-ping" />
             )}
-            <span
-              className={`relative inline-flex h-2 w-2 rounded-full ${live ? "bg-[#34c759]" : "bg-muted"}`}
-            />
+            <span className={`relative inline-flex h-1.5 w-1.5 rounded-full ${live ? "bg-[#34c759]" : "bg-muted"}`} />
           </span>
-          <p className="eyebrow" style={{ marginTop: 0 }}>
-            {tx({ en: "Live", zh: "实时数据", ar: "مباشر", fr: "En direct", ru: "Вживую", es: "En vivo" })}
-          </p>
-        </div>
-        <h2 className="display-2 mt-3 max-w-[20ch]">
+          {tx({ en: "Live", zh: "实时数据", ar: "مباشر", fr: "En direct", ru: "Вживую", es: "En vivo" })}
+        </span>
+        <h2 className="display-2 mt-4 max-w-[20ch]">
           {tx({
             en: "Proof, in real numbers.",
             zh: "用真实数据说话。",
@@ -264,32 +279,33 @@ export function LiveStats() {
 
         <div className="mt-12 space-y-6">
           {/* Featured: Docker pulls + sparkline */}
-          <article className="card-ap rounded-[var(--radius-ap)] bg-[var(--color-bg)] p-8 md:flex md:items-center md:justify-between md:gap-12">
+          <article className={`${CARD} md:flex md:items-center md:justify-between md:gap-12`} style={GLOW}>
             <div>
-              <div className="text-[clamp(44px,6.4vw,76px)] font-semibold leading-none tracking-tight text-ink">
+              <div className="flex items-center gap-3">
+                <Chip name="box" color="var(--c-blue)" />
+                <p className="text-[15px] text-muted">
+                  {tx({ en: "Docker pulls", zh: "Docker 拉取次数", ar: "عمليات سحب Docker", fr: "Pulls Docker", ru: "Docker-загрузок", es: "Pulls de Docker" })}
+                </p>
+              </div>
+              <div className="mt-4 text-[clamp(46px,6.6vw,80px)] font-semibold leading-none tracking-tight text-ink">
                 {fmt(pulls)}
               </div>
-              <p className="mt-3 text-[17px] text-muted">
-                {tx({ en: "Docker pulls", zh: "Docker 拉取次数", ar: "عمليات سحب Docker", fr: "Pulls Docker", ru: "Docker-загрузок", es: "Pulls de Docker" })}
-              </p>
-              <p className="mt-1 font-mono text-[12px] text-[#34c759]">
-                +{fmt(delta)} ·{" "}
+              <span className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-[#34c759]/12 px-3 py-1 font-mono text-[12px] font-medium text-[#1a9c43] dark:text-[#4fd37a]">
+                ↑ {fmt(delta)} ·{" "}
                 {tx({ en: "last 30 days", zh: "近 30 天", ar: "آخر 30 يوماً", fr: "30 derniers jours", ru: "за 30 дней", es: "últimos 30 días" })}
-              </p>
+              </span>
             </div>
-            <div className="mt-6 md:mt-0 md:w-[48%]">
-              <Sparkline values={data.history} className="h-[72px] w-full" />
+            <div className="mt-7 md:mt-0 md:w-[46%]">
+              <Sparkline values={data.history} className="h-[84px] w-full" />
             </div>
           </article>
 
           {/* Supporting stats */}
           <div className="grid gap-6 sm:grid-cols-3">
             {small.map((s) => (
-              <article
-                key={s.label}
-                className="card-ap flex flex-col justify-center rounded-[var(--radius-ap)] bg-[var(--color-bg)] p-8"
-              >
-                <div className="text-[clamp(34px,4vw,48px)] font-semibold leading-none tracking-tight text-ink">
+              <article key={s.label} className={CARD} style={GLOW}>
+                <Chip name={s.icon} color={s.color} />
+                <div className="mt-5 text-[clamp(34px,4vw,48px)] font-semibold leading-none tracking-tight text-ink">
                   {s.value}
                 </div>
                 <p className="mt-3 text-[16px] text-muted">{s.label}</p>

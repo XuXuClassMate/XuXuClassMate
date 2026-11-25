@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Reveal } from "@/components/reveal";
 import { Aurora } from "@/components/aurora";
 import { LiveStat } from "@/components/live-stat";
+import { HUES } from "@/lib/hues";
 import { T } from "@/components/i18n";
 import { Icon } from "@/components/icons";
 import { AI_ROLES } from "@/lib/about-content";
@@ -95,7 +96,10 @@ export default function AiWorkflowPage() {
             {AI_ROLES.map((r, i) => (
               <Reveal key={r.title.en} delay={(i % 3) * 0.06}>
                 <article className="card-ap flex h-full items-start gap-4 rounded-[var(--radius-ap)] border border-[var(--color-line)] bg-[var(--color-bg)] p-6">
-                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[color-mix(in_srgb,var(--color-accent)_12%,transparent)] text-[var(--color-accent)]">
+                  <span
+                    className="grid h-10 w-10 shrink-0 place-items-center rounded-xl"
+                    style={{ backgroundColor: `color-mix(in srgb, ${HUES[i % HUES.length]} 15%, transparent)`, color: HUES[i % HUES.length] }}
+                  >
                     <Icon name={r.icon} size={20} />
                   </span>
                   <div>

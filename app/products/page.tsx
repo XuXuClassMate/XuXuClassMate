@@ -12,6 +12,12 @@ const GROUP_ICON: Record<ProductGroup, IconName> = {
   "AI / Agent": "ai",
 };
 
+const GROUP_COLOR: Record<ProductGroup, string> = {
+  "Quality Engineering": "var(--c-blue)",
+  "Developer Infrastructure": "var(--c-teal)",
+  "AI / Agent": "var(--c-purple)",
+};
+
 export const metadata: Metadata = {
   title: "Products — XuXuClassMate",
   description:
@@ -53,7 +59,7 @@ export default function ProductsPage() {
           <section key={group} className="container-ap py-12">
             <Reveal>
               <h2 className="flex items-center gap-2.5 text-[21px] font-semibold text-muted">
-                <span className="text-[var(--color-accent)]">
+                <span style={{ color: GROUP_COLOR[group] }}>
                   <Icon name={GROUP_ICON[group]} size={22} />
                 </span>
                 <T {...GROUP_LABEL[group]} />

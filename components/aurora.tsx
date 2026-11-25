@@ -9,6 +9,7 @@ export function Aurora({ className }: { className?: string }) {
       <span className="a1" />
       <span className="a2" />
       <span className="a3" />
+      <span className="a4" />
     </div>
   );
 }
