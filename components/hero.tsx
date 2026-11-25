@@ -256,7 +256,7 @@ function GeneratorWindow() {
                 </div>
                 <p className="mt-1.5 text-[15px] text-panel-ink">
                   {curTitle.slice(0, typed)}
-                  <span className="ml-0.5 inline-block h-[1.05em] w-[2px] translate-y-[2px] bg-[#5ac8fa] align-middle motion-safe:animate-pulse" />
+                  <span aria-hidden="true" className="ml-0.5 inline-block h-[1.05em] w-[2px] translate-y-[2px] bg-[#5ac8fa] align-middle motion-safe:animate-pulse" />
                 </p>
               </div>
             );

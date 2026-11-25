@@ -91,7 +91,7 @@ export function LiveStat({
     <span
       className={`inline-flex items-center gap-2 rounded-full border border-[var(--color-line)] bg-[var(--color-surface)] px-4 py-2 text-[14px] ${className ?? ""}`}
     >
-      <span className="relative flex h-1.5 w-1.5">
+      <span className="relative flex h-1.5 w-1.5" aria-hidden="true">
         {live && (
           <span className="absolute inline-flex h-full w-full rounded-full bg-[#34c759] opacity-70 motion-safe:animate-ping" />
         )}

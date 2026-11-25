@@ -2,6 +2,8 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Reveal } from "@/components/reveal";
 import { Aurora } from "@/components/aurora";
+import { LiveStat } from "@/components/live-stat";
+import { StatBars } from "@/components/stat-bars";
 import { PRODUCTS, GROUP_LABEL } from "@/lib/products";
 import { T } from "@/components/i18n";
 
@@ -52,6 +54,32 @@ export default function OpenSourcePage() {
                   {l.label}
                 </a>
               ))}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Open-source, by the numbers (live) */}
+      <section className="bg-[var(--color-surface)]">
+        <div className="container-ap py-20">
+          <Reveal>
+            <h2 className="display-2 max-w-[20ch]">
+              <T en="Open source, by the numbers." zh="开源,用数据说话。" ar="المصدر المفتوح، بالأرقام." fr="L'open source, en chiffres." ru="Открытый код в цифрах." es="Open source, en números." />
+            </h2>
+          </Reveal>
+          <Reveal>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <LiveStat kind="docker-pulls" fallback={85285} label={{ en: "Docker pulls", zh: "Docker 拉取次数", ar: "عمليات سحب Docker", fr: "Pulls Docker", ru: "Docker-загрузок", es: "Pulls de Docker" }} />
+              <LiveStat kind="claw-total" fallback={10868} label={{ en: "ClawHub downloads", zh: "ClawHub 下载量", ar: "تنزيلات ClawHub", fr: "Téléchargements ClawHub", ru: "Загрузки ClawHub", es: "Descargas de ClawHub" }} />
+              <LiveStat kind="api-calls" fallback={4811} label={{ en: "API calls served", zh: "API 调用量", ar: "طلبات API مُخدّمة", fr: "Appels API servis", ru: "Обработано API-запросов", es: "Llamadas API servidas" }} />
+            </div>
+          </Reveal>
+          <Reveal>
+            <div className="mt-12 rounded-[var(--radius-ap)] border border-[var(--color-line)] bg-[var(--color-bg)] p-8">
+              <p className="eyebrow mb-6">
+                <T en="Top images by Docker pulls" zh="镜像拉取排行" ar="أعلى الصور حسب عمليات سحب Docker" fr="Top images par pulls Docker" ru="Топ образов по загрузкам Docker" es="Top imágenes por pulls de Docker" />
+              </p>
+              <StatBars limit={6} />
             </div>
           </Reveal>
         </div>

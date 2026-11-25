@@ -59,8 +59,24 @@ export default async function ProductPage({
   const p = getProduct(slug);
   if (!p) notFound();
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: p.name.en,
+    description: p.summary.en,
+    applicationCategory: "DeveloperApplication",
+    operatingSystem: "Cross-platform",
+    url: `https://www.xuxuclassmate.com/products/${p.slug}`,
+    author: { "@type": "Person", name: "XuXuClassMate" },
+    offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Hero */}
       <section className="relative overflow-hidden pt-[calc(var(--nav-h)+80px)]">
         <Aurora />
