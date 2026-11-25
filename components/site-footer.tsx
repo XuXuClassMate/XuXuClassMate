@@ -26,6 +26,10 @@ const COLS: {
     title: { en: "Engineering", zh: "工程", ar: "الهندسة", fr: "Ingénierie", ru: "Инженерия", es: "Ingeniería" },
     links: [
       {
+        label: { en: "AI workflow", zh: "AI 协作流程", ar: "سير عمل الذكاء الاصطناعي", fr: "Workflow IA", ru: "AI-процесс", es: "Flujo con IA" },
+        href: "/ai-workflow",
+      },
+      {
         label: { en: "Notes", zh: "笔记", ar: "ملاحظات", fr: "Notes", ru: "Заметки", es: "Notas" },
         href: "/notes",
       },

@@ -6,6 +6,7 @@ const ROUTES = [
   { path: "/products/testcase-generator", heading: "AI Test Case Generator" },
   { path: "/products/docker-suite", heading: "Test DB Docker Suite" },
   { path: "/about", heading: "Quality engineering, shipped." },
+  { path: "/ai-workflow", heading: "A one-person test team, run with AI." },
   { path: "/notes", heading: "Field notes from shipping quality." },
   { path: "/notes/playwright-at-scale", heading: "Keeping Playwright fast when the suite grows" },
   { path: "/open-source", heading: "Built in the open, shipped to run." },

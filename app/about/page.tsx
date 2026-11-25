@@ -195,6 +195,11 @@ export default function AboutPage() {
             <p className="lead mt-5 max-w-[52ch]">
               <T {...AI_HUMAN_NOTE} />
             </p>
+            <div className="mt-6">
+              <Link href="/ai-workflow" className="link-ap">
+                <T en="See the full workflow" zh="查看完整流程" ar="شاهد سير العمل الكامل" fr="Voir le workflow complet" ru="Весь процесс целиком" es="Ver el flujo completo" />
+              </Link>
+            </div>
           </Reveal>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {AI_ROLES.map((r, i) => (

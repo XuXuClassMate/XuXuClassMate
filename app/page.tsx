@@ -211,7 +211,7 @@ export default function Home() {
             ))}
           </div>
           <div className="mt-9">
-            <Link href="/about#ai-workflow" className="link-ap" style={{ color: "#5ac8fa" }}>
+            <Link href="/ai-workflow" className="link-ap" style={{ color: "#5ac8fa" }}>
               <T en="See how it works" zh="了解工作方式" ar="شاهد كيف يعمل" fr="Voir comment ça marche" ru="Как это работает" es="Ver cómo funciona" />
             </Link>
           </div>
