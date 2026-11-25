@@ -1,0 +1,39 @@
+name: Deploy apple-next (Cloudflare Pages)
+
+# Builds the Next.js static export in apple-next/ and deploys it to a
+# Cloudflare Pages project, separate from the Astro site.
+#
+# Requires repo secrets CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID.
+# Set repo variable CF_NEXT_PROJECT to your Pages project name
+# (defaults to "xuxuclassmate-next"; the project must already exist).
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "apple-next/**"
+      - ".github/workflows/deploy-next.yml"
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apple-next
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: apple-next/package-lock.json
+      - run: npm ci
+      - run: npm run build
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: apple-next
+          command: pages deploy out --project-name=${{ vars.CF_NEXT_PROJECT || 'xuxuclassmate-next' }}

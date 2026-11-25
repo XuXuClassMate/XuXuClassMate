@@ -1,9 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  cacheComponents: true,
-  partialPrefetching: true,
+  // Static export: the site is fully prerendered content, so it ships as
+  // static HTML to Cloudflare Pages. (cacheComponents / PPR are dynamic
+  // features and are incompatible with output: "export".)
+  output: "export",
+  images: { unoptimized: true },
   turbopack: {
     root: import.meta.dirname,
     rules: {

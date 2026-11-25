@@ -1,5 +1,8 @@
 import { ImageResponse } from "next/og";
 
+// Generate at build time (required for output: "export").
+export const dynamic = "force-static";
+
 export const alt = "XuXuClassMate — AI testing tools for QA teams";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
