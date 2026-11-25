@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { PRODUCTS, getProduct } from "@/lib/products";
+import { PRODUCTS, getProduct, GROUP_LABEL } from "@/lib/products";
 import { Reveal } from "@/components/reveal";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { FeatureVisual } from "@/components/feature-visual";
+import { T } from "@/components/i18n";
 
 export function generateStaticParams() {
   return PRODUCTS.map((p) => ({ slug: p.slug }));
@@ -18,7 +19,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const p = getProduct(slug);
   if (!p) return { title: "Product — XuXuClassMate" };
-  return { title: `${p.name} — XuXuClassMate`, description: p.summary };
+  return { title: `${p.name.en} — XuXuClassMate`, description: p.summary.en };
 }
 
 export default async function ProductPage({
@@ -36,12 +37,18 @@ export default async function ProductPage({
       <section className="pt-[calc(var(--nav-h)+80px)]">
         <div className="container-ap pb-20 text-center">
           <Reveal>
-            <p className="eyebrow">{p.group}</p>
-            <h1 className="display-1 mx-auto mt-3 max-w-[16ch]">{p.name}</h1>
-            <p className="lead mx-auto mt-5 max-w-[42ch]">{p.tagline}</p>
+            <p className="eyebrow">
+              <T {...GROUP_LABEL[p.group]} />
+            </p>
+            <h1 className="display-1 mx-auto mt-3 max-w-[16ch]">
+              <T {...p.name} />
+            </h1>
+            <p className="lead mx-auto mt-5 max-w-[42ch]">
+              <T {...p.tagline} />
+            </p>
             <div className="mt-7 flex justify-center">
               <Link href="/#try" className="link-ap">
-                {p.cta.label}
+                <T {...p.cta.label} />
               </Link>
             </div>
           </Reveal>
@@ -53,7 +60,7 @@ export default async function ProductPage({
         <div className="container-ap py-24">
           <Reveal>
             <p className="mx-auto max-w-[24ch] text-center text-[clamp(28px,3.4vw,40px)] font-semibold leading-tight tracking-tight">
-              {p.summary}
+              <T {...p.summary} />
             </p>
           </Reveal>
         </div>
@@ -62,7 +69,7 @@ export default async function ProductPage({
       {/* Feature chapters, alternating */}
       {p.features.map((f, i) => (
         <section
-          key={f.title}
+          key={f.title.en}
           className={i % 2 === 1 ? "bg-[var(--color-surface)]" : "bg-[var(--color-bg)]"}
         >
           <div className="container-ap grid items-center gap-10 py-24 md:grid-cols-2">
@@ -70,10 +77,14 @@ export default async function ProductPage({
               <p className="font-mono text-[13px] text-[var(--color-accent)]">
                 {String(i + 1).padStart(2, "0")}
               </p>
-              <h2 className="display-2 mt-3">{f.title}</h2>
-              <p className="lead mt-4 max-w-[40ch]">{f.body}</p>
+              <h2 className="display-2 mt-3">
+                <T {...f.title} />
+              </h2>
+              <p className="lead mt-4 max-w-[40ch]">
+                <T {...f.body} />
+              </p>
             </Reveal>
-            <Reveal delay={0.1} className={i % 2 === 1 ? "md:order-1" : ""}>
+            <Reveal className={i % 2 === 1 ? "md:order-1" : ""}>
               <FeatureVisual index={i} label={`${p.slug} · 0${i + 1}`} />
             </Reveal>
           </div>
@@ -81,21 +92,25 @@ export default async function ProductPage({
       ))}
 
       {/* Specs */}
-      <section className="bg-ink text-ink-invert">
+      <section className="bg-panel text-panel-ink">
         <div className="container-ap py-24">
           <Reveal>
-            <h2 className="display-2 text-ink-invert">Specs</h2>
+            <h2 className="display-2 text-panel-ink">
+              <T en="Specs" zh="规格" ar="المواصفات" fr="Spécifications" ru="Характеристики" es="Especificaciones" />
+            </h2>
           </Reveal>
           <dl className="mt-10 grid gap-x-10 gap-y-6 sm:grid-cols-2">
             {p.specs.map((s) => (
               <Reveal
-                key={s.label}
+                key={s.label.en}
                 as="div"
                 className="flex justify-between border-b border-white/10 pb-5"
               >
-                <dt className="text-[17px] text-muted-invert">{s.label}</dt>
-                <dd className="text-right text-[17px] font-medium text-ink-invert">
-                  {s.value}
+                <dt className="text-[17px] text-panel-muted">
+                  <T {...s.label} />
+                </dt>
+                <dd className="text-right text-[17px] font-medium text-panel-ink">
+                  <T {...s.value} />
                 </dd>
               </Reveal>
             ))}
@@ -107,14 +122,23 @@ export default async function ProductPage({
       <section className="bg-[var(--color-bg)]">
         <div className="container-ap py-28 text-center">
           <Reveal>
-            <h2 className="display-2 mx-auto max-w-[18ch]">{p.cta.label}.</h2>
-            <p className="lead mx-auto mt-4 max-w-[40ch]">{p.cta.note}</p>
+            <h2 className="display-2 mx-auto max-w-[18ch]">
+              <T {...p.cta.label} />
+            </h2>
+            <p className="lead mx-auto mt-4 max-w-[40ch]">
+              <T {...p.cta.note} />
+            </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Button size="lg">{p.cta.label}</Button>
-              <Link href="/products">
-                <Button size="lg" variant="secondary">
-                  All products
-                </Button>
+              <a
+                href={p.cta.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={buttonVariants({ size: "lg" })}
+              >
+                <T {...p.cta.label} />
+              </a>
+              <Link href="/products" className={buttonVariants({ size: "lg", variant: "secondary" })}>
+                <T en="All products" zh="全部产品" ar="كل المنتجات" fr="Tous les produits" ru="Все продукты" es="Todos los productos" />
               </Link>
             </div>
           </Reveal>

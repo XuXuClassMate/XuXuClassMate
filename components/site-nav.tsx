@@ -4,17 +4,41 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { useTx, type Localized } from "@/components/i18n";
+import { ThemeToggle, LangMenu } from "@/components/site-controls";
 
-const NAV = [
-  { label: "Products", href: "/products" },
-  { label: "Engineering", href: "/notes" },
-  { label: "About", href: "/about" },
-  { label: "Open Source", href: "/open-source" },
+const NAV: { label: Localized; href: string }[] = [
+  {
+    label: { en: "Products", zh: "产品", ar: "المنتجات", fr: "Produits", ru: "Продукты", es: "Productos" },
+    href: "/products",
+  },
+  {
+    label: { en: "Engineering", zh: "工程笔记", ar: "الهندسة", fr: "Ingénierie", ru: "Инженерия", es: "Ingeniería" },
+    href: "/notes",
+  },
+  {
+    label: { en: "About", zh: "关于", ar: "نبذة", fr: "À propos", ru: "О нас", es: "Acerca de" },
+    href: "/about",
+  },
+  {
+    label: { en: "Open Source", zh: "开源", ar: "مفتوح المصدر", fr: "Open Source", ru: "Открытый код", es: "Código abierto" },
+    href: "/open-source",
+  },
 ];
+
+const TRY: Localized = {
+  en: "Try the generator",
+  zh: "试用生成器",
+  ar: "جرّب المولّد",
+  fr: "Essayer le générateur",
+  ru: "Попробовать генератор",
+  es: "Probar el generador",
+};
 
 export function SiteNav() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const tx = useTx();
   const isActive = (href: string) =>
     href.startsWith("/") && !href.includes("#")
       ? pathname === href || pathname.startsWith(href + "/")
@@ -33,67 +57,79 @@ export function SiteNav() {
         <nav className="container-ap flex h-full items-center justify-between">
           <Link
             href="/"
-            className="text-[18px] font-semibold tracking-tight text-ink"
+            className="flex items-center gap-2 text-[18px] font-semibold tracking-tight text-ink"
             onClick={() => setOpen(false)}
           >
-            XuXuClassMate
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo.svg" alt="" width={24} height={24} className="block" />
+            <span>XuXuClassMate</span>
           </Link>
 
-          <ul className="hidden items-center gap-8 md:flex">
-            {NAV.map((item) => (
-              <li key={item.href}>
+          <div className="hidden items-center gap-8 md:flex">
+            <ul className="flex items-center gap-8">
+              {NAV.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    aria-current={isActive(item.href) ? "page" : undefined}
+                    className={cn(
+                      "text-[13px] transition-colors hover:text-ink",
+                      isActive(item.href)
+                        ? "text-ink underline decoration-[1.5px] underline-offset-[6px]"
+                        : "text-ink/80",
+                    )}
+                  >
+                    {tx(item.label)}
+                  </Link>
+                </li>
+              ))}
+              <li>
                 <Link
-                  href={item.href}
-                  aria-current={isActive(item.href) ? "page" : undefined}
-                  className={cn(
-                    "text-[13px] transition-colors hover:text-ink",
-                    isActive(item.href)
-                      ? "text-ink underline decoration-[1.5px] underline-offset-[6px]"
-                      : "text-ink/80",
-                  )}
+                  href="/#try"
+                  className="text-[13px] font-medium text-[var(--color-accent)] hover:underline"
                 >
-                  {item.label}
+                  {tx(TRY)}
                 </Link>
               </li>
-            ))}
-            <li>
-              <Link
-                href="/#try"
-                className="text-[13px] font-medium text-[var(--color-accent)] hover:underline"
-              >
-                Try the generator
-              </Link>
-            </li>
-          </ul>
+            </ul>
+            <div className="flex items-center gap-1">
+              <LangMenu />
+              <ThemeToggle />
+            </div>
+          </div>
 
-          <button
-            type="button"
-            className="flex h-9 w-9 items-center justify-center md:hidden"
-            aria-label="Menu"
-            aria-expanded={open}
-            onClick={() => setOpen((v) => !v)}
-          >
-            <span className="relative block h-[14px] w-[18px]">
-              <span
-                className={cn(
-                  "absolute left-0 block h-[1.5px] w-full bg-ink transition-all duration-300",
-                  open ? "top-[6px] rotate-45" : "top-0",
-                )}
-              />
-              <span
-                className={cn(
-                  "absolute left-0 top-[6px] block h-[1.5px] w-full bg-ink transition-all duration-300",
-                  open ? "opacity-0" : "opacity-100",
-                )}
-              />
-              <span
-                className={cn(
-                  "absolute left-0 block h-[1.5px] w-full bg-ink transition-all duration-300",
-                  open ? "top-[6px] -rotate-45" : "top-[12px]",
-                )}
-              />
-            </span>
-          </button>
+          <div className="flex items-center gap-1 md:hidden">
+            <LangMenu />
+            <ThemeToggle />
+            <button
+              type="button"
+              className="flex h-9 w-9 items-center justify-center"
+              aria-label="Menu"
+              aria-expanded={open}
+              onClick={() => setOpen((v) => !v)}
+            >
+              <span className="relative block h-[14px] w-[18px]">
+                <span
+                  className={cn(
+                    "absolute left-0 block h-[1.5px] w-full bg-ink transition-all duration-300",
+                    open ? "top-[6px] rotate-45" : "top-0",
+                  )}
+                />
+                <span
+                  className={cn(
+                    "absolute left-0 top-[6px] block h-[1.5px] w-full bg-ink transition-all duration-300",
+                    open ? "opacity-0" : "opacity-100",
+                  )}
+                />
+                <span
+                  className={cn(
+                    "absolute left-0 block h-[1.5px] w-full bg-ink transition-all duration-300",
+                    open ? "top-[6px] -rotate-45" : "top-[12px]",
+                  )}
+                />
+              </span>
+            </button>
+          </div>
         </nav>
       </div>
 
@@ -105,14 +141,14 @@ export function SiteNav() {
         )}
       >
         <ul className="container-ap flex flex-col gap-1 pt-6">
-          {[...NAV, { label: "Try the generator", href: "/#try" }].map((item) => (
+          {[...NAV, { label: TRY, href: "/#try" }].map((item) => (
             <li key={item.href} className="border-b border-[var(--color-line)]">
               <Link
                 href={item.href}
                 className="block py-4 text-[22px] font-medium tracking-tight text-ink"
                 onClick={() => setOpen(false)}
               >
-                {item.label}
+                {tx(item.label)}
               </Link>
             </li>
           ))}

@@ -6,8 +6,11 @@ export const dynamic = "force-static";
 export const size = { width: 32, height: 32 };
 export const contentType = "image/png";
 
-// Original brandmark: an "X" wordmark initial on the accent square.
+// Brandmark: the layered blue chevron, on a deep navy tile.
+const MARK = `<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none"><g transform="translate(2,2) scale(1.2)"><path d="M8 8L16 0L24 8L16 16L8 8Z" fill="#4E89FE"/><path d="M24 8L32 16L24 24L16 16L24 8Z" fill="#4E89FE" fill-opacity="0.7"/><path d="M16 16L8 24L0 16L8 8L16 16Z" fill="#4E89FE" fill-opacity="0.4"/></g></svg>`;
+
 export default function Icon() {
+  const src = `data:image/svg+xml;base64,${Buffer.from(MARK).toString("base64")}`;
   return new ImageResponse(
     (
       <div
@@ -17,15 +20,12 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#0071e3",
-          color: "#ffffff",
-          fontSize: 22,
-          fontWeight: 700,
+          background: "#0a1026",
           borderRadius: 7,
-          fontFamily: "sans-serif",
         }}
       >
-        X
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img width={23} height={23} src={src} alt="" />
       </div>
     ),
     { ...size },

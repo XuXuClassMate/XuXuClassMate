@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Enable class-based dark mode (dark: variants) alongside the token overrides. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* ---- Design tokens (Apple-style: white / light grey, one blue accent) ---- */
 @theme {
   --color-bg: #ffffff;
@@ -13,6 +16,14 @@
   --color-ink-invert: #f5f5f7;
   --color-muted-invert: #a1a1a6;
 
+  /* Showcase panels that stay dark in BOTH themes (the generator window, the
+     pinned chapter, terminals, the specs band). These never flip. */
+  --color-panel: #1d1d1f;
+  --color-panel-2: #0b0b0c;
+  --color-panel-ink: #f5f5f7;
+  --color-panel-muted: #a1a1a6;
+  --color-panel-line: rgba(255, 255, 255, 0.1);
+
   --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
     "Helvetica Neue", Helvetica, Arial, sans-serif;
 
@@ -21,6 +32,20 @@
 
 :root {
   --nav-h: 48px;
+  color-scheme: light;
+}
+
+/* ---- Dark theme: flip the swappable tokens (html.dark beats :root) ---- */
+html.dark {
+  --color-bg: #000000;
+  --color-surface: #141416;
+  --color-surface-2: #1c1c1e;
+  --color-ink: #f5f5f7;
+  --color-muted: #a1a1a6;
+  --color-accent: #2997ff;
+  --color-accent-strong: #2997ff;
+  --color-line: rgba(255, 255, 255, 0.12);
+  color-scheme: dark;
 }
 
 * {

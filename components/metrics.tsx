@@ -1,14 +1,49 @@
 "use client";
 
+/* The count-up animation syncs from props on mount by design. */
+/* eslint-disable react-hooks/set-state-in-effect */
+
 import { useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "motion/react";
+import { useTx, type Localized } from "@/components/i18n";
 
-type Metric = { value: number; suffix?: string; label: string };
+type Metric = { value: number; suffix?: string; label: Localized };
 
 const METRICS: Metric[] = [
-  { value: 56, label: "Reviewed test cases per run" },
-  { value: 90, suffix: "%", label: "Default review bar" },
-  { value: 4, label: "Databases, one pull away" },
+  {
+    value: 56,
+    label: {
+      en: "Reviewed test cases per run",
+      zh: "每次运行评审的用例数",
+      ar: "حالات اختبار مُراجَعة لكل تشغيل",
+      fr: "Cas de test relus par exécution",
+      ru: "Проверенных тест-кейсов за запуск",
+      es: "Casos de prueba revisados por ejecución",
+    },
+  },
+  {
+    value: 90,
+    suffix: "%",
+    label: {
+      en: "Default review bar",
+      zh: "默认评审线",
+      ar: "حدّ المراجعة الافتراضي",
+      fr: "Seuil de revue par défaut",
+      ru: "Порог проверки по умолчанию",
+      es: "Umbral de revisión por defecto",
+    },
+  },
+  {
+    value: 4,
+    label: {
+      en: "Databases, one pull away",
+      zh: "一键拉取的数据库",
+      ar: "قواعد بيانات على بُعد سحبة واحدة",
+      fr: "Des bases à une commande",
+      ru: "Базы данных в одну команду",
+      es: "Bases de datos a un pull",
+    },
+  },
 ];
 
 function useCountUp(target: number, run: boolean, reduce: boolean) {
@@ -58,7 +93,7 @@ export function Metrics() {
     <section className="bg-[var(--color-surface)]">
       <div ref={ref} className="container-ap grid gap-10 py-24 sm:grid-cols-3">
         {METRICS.map((m) => (
-          <Stat key={m.label} m={m} run={run} reduce={reduce} />
+          <Stat key={m.label.en} m={m} run={run} reduce={reduce} />
         ))}
       </div>
     </section>
@@ -67,13 +102,14 @@ export function Metrics() {
 
 function Stat({ m, run, reduce }: { m: Metric; run: boolean; reduce: boolean }) {
   const n = useCountUp(m.value, run, reduce);
+  const tx = useTx();
   return (
     <div className="text-center">
       <div className="text-[clamp(44px,6vw,72px)] font-semibold leading-none tracking-tight text-ink">
         {n}
         {m.suffix}
       </div>
-      <p className="mt-3 text-[17px] text-muted">{m.label}</p>
+      <p className="mt-3 text-[17px] text-muted">{tx(m.label)}</p>
     </div>
   );
 }

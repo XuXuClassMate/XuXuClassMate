@@ -1,126 +1,600 @@
-export type ProductGroup = "Quality Engineering" | "Developer Infrastructure" | "AI / Agent";
+import type { Localized } from "@/components/i18n";
+
+export type ProductGroup =
+  | "Quality Engineering"
+  | "Developer Infrastructure"
+  | "AI / Agent";
+
+export const GROUP_LABEL: Record<ProductGroup, Localized> = {
+  "Quality Engineering": {
+    en: "Quality Engineering",
+    zh: "质量工程",
+    ar: "هندسة الجودة",
+    fr: "Ingénierie qualité",
+    ru: "Инженерия качества",
+    es: "Ingeniería de calidad",
+  },
+  "Developer Infrastructure": {
+    en: "Developer Infrastructure",
+    zh: "开发者基础设施",
+    ar: "البنية التحتية للمطوّرين",
+    fr: "Infrastructure développeur",
+    ru: "Инфраструктура разработки",
+    es: "Infraestructura para desarrolladores",
+  },
+  "AI / Agent": {
+    en: "AI / Agent",
+    zh: "AI / 智能体",
+    ar: "ذكاء اصطناعي / وكيل",
+    fr: "IA / agent",
+    ru: "ИИ / агент",
+    es: "IA / agente",
+  },
+};
 
 export type Product = {
   slug: string;
-  name: string;
+  name: Localized;
   group: ProductGroup;
-  tagline: string;
-  summary: string;
-  features: { title: string; body: string }[];
-  specs: { label: string; value: string }[];
-  cta: { label: string; note: string };
+  tagline: Localized;
+  summary: Localized;
+  features: { title: Localized; body: Localized }[];
+  specs: { label: Localized; value: Localized }[];
+  cta: { label: Localized; note: Localized; href: string };
+};
+
+const RUNTIME: Localized = {
+  en: "Runtime",
+  zh: "运行时",
+  ar: "بيئة التشغيل",
+  fr: "Runtime",
+  ru: "Среда выполнения",
+  es: "Runtime",
+};
+const CF_WORKERS: Localized = {
+  en: "Cloudflare Workers",
+  zh: "Cloudflare Workers",
+  ar: "Cloudflare Workers",
+  fr: "Cloudflare Workers",
+  ru: "Cloudflare Workers",
+  es: "Cloudflare Workers",
 };
 
 export const PRODUCTS: Product[] = [
   {
     slug: "testcase-generator",
-    name: "AI Test Case Generator",
+    name: {
+      en: "AI Test Case Generator",
+      zh: "AI 测试用例生成器",
+      ar: "مولّد حالات الاختبار بالذكاء الاصطناعي",
+      fr: "Générateur de cas de test IA",
+      ru: "ИИ-генератор тест-кейсов",
+      es: "Generador de casos de prueba con IA",
+    },
     group: "Quality Engineering",
-    tagline: "Requirements in. Reviewable test cases out.",
-    summary:
-      "Turn a PDF, screenshot, or plain spec into structured test cases with steps, expected results, and priority — then put them through a real review before they ship.",
+    tagline: {
+      en: "Requirements in. Reviewable test cases out.",
+      zh: "输入需求,产出可评审的测试用例。",
+      ar: "متطلبات تدخل، وحالات اختبار قابلة للمراجعة تخرج.",
+      fr: "Des exigences en entrée. Des cas de test relisables en sortie.",
+      ru: "На входе требования. На выходе проверяемые тест-кейсы.",
+      es: "Entran requisitos. Salen casos de prueba revisables.",
+    },
+    summary: {
+      en: "Turn a PDF, screenshot, or plain spec into structured test cases with steps, expected results, and priority — then put them through a real review before they ship.",
+      zh: "把 PDF、截图或纯文档变成结构化测试用例——含步骤、预期结果与优先级——并在交付前经过一轮真实评审。",
+      ar: "حوّل ملف PDF أو لقطة شاشة أو مواصفات بسيطة إلى حالات اختبار منظّمة بخطوات ونتائج متوقعة وأولوية — ثم أخضِعها لمراجعة حقيقية قبل التسليم.",
+      fr: "Transformez un PDF, une capture ou une simple spécification en cas de test structurés avec étapes, résultats attendus et priorité — puis soumettez-les à une vraie revue avant livraison.",
+      ru: "Превратите PDF, скриншот или простую спецификацию в структурированные тест-кейсы с шагами, ожидаемыми результатами и приоритетом — и проведите их через реальную проверку до поставки.",
+      es: "Convierte un PDF, una captura o una especificación simple en casos de prueba estructurados con pasos, resultados esperados y prioridad — y pásalos por una revisión real antes de entregarlos.",
+    },
     features: [
       {
-        title: "Multimodal input",
-        body: "Read a requirement from a document, an image, or a short spec. Acceptance criteria are drawn out before a single case is written.",
+        title: {
+          en: "Multimodal input",
+          zh: "多模态输入",
+          ar: "إدخال متعدد الوسائط",
+          fr: "Entrée multimodale",
+          ru: "Мультимодальный ввод",
+          es: "Entrada multimodal",
+        },
+        body: {
+          en: "Read a requirement from a document, an image, or a short spec. Acceptance criteria are drawn out before a single case is written.",
+          zh: "从文档、图片或简短说明中读取需求。在写下第一条用例前,先梳理出验收标准。",
+          ar: "اقرأ المتطلب من مستند أو صورة أو مواصفات قصيرة. وتُستخلَص معايير القبول قبل كتابة أي حالة.",
+          fr: "Lit une exigence depuis un document, une image ou une courte spécification. Les critères d'acceptation sont dégagés avant d'écrire le moindre cas.",
+          ru: "Читает требование из документа, изображения или короткой спецификации. Критерии приёмки выделяются до написания первого кейса.",
+          es: "Lee un requisito desde un documento, una imagen o una especificación breve. Los criterios de aceptación se extraen antes de escribir un solo caso.",
+        },
       },
       {
-        title: "Structured drafts",
-        body: "Every case carries steps, expected results, and a priority — grounded in the requirement, never invented.",
+        title: {
+          en: "Structured drafts",
+          zh: "结构化草稿",
+          ar: "مسودات منظّمة",
+          fr: "Brouillons structurés",
+          ru: "Структурированные черновики",
+          es: "Borradores estructurados",
+        },
+        body: {
+          en: "Every case carries steps, expected results, and a priority — grounded in the requirement, never invented.",
+          zh: "每条用例都带步骤、预期结果与优先级——源自需求,绝不凭空捏造。",
+          ar: "تحمل كل حالة خطوات ونتائج متوقعة وأولوية — مستندة إلى المتطلب لا مُختلَقة.",
+          fr: "Chaque cas porte des étapes, des résultats attendus et une priorité — ancré dans l'exigence, jamais inventé.",
+          ru: "Каждый кейс содержит шаги, ожидаемые результаты и приоритет — на основе требования, не выдуманный.",
+          es: "Cada caso lleva pasos, resultados esperados y prioridad — basado en el requisito, nunca inventado.",
+        },
       },
       {
-        title: "Human review, scored",
-        body: "QA, dev, and product score coverage, logic, and clarity. The default bar is 90 out of 100; only a set that clears it ships.",
+        title: {
+          en: "Human review, scored",
+          zh: "人工评审,量化打分",
+          ar: "مراجعة بشرية مُقيَّمة",
+          fr: "Revue humaine, notée",
+          ru: "Оценочная проверка людьми",
+          es: "Revisión humana, puntuada",
+        },
+        body: {
+          en: "QA, dev, and product score coverage, logic, and clarity. The default bar is 90 out of 100; only a set that clears it ships.",
+          zh: "QA、研发与产品对覆盖度、逻辑与清晰度打分。默认达标线为 90/100,只有通过的用例集才会交付。",
+          ar: "يقيّم فريق الجودة والتطوير والمنتج التغطية والمنطق والوضوح. الحدّ الافتراضي 90 من 100؛ ولا يُسلَّم إلا ما يتجاوزه.",
+          fr: "QA, dev et produit notent la couverture, la logique et la clarté. Le seuil par défaut est de 90 sur 100 ; seul un ensemble qui le franchit est livré.",
+          ru: "QA, разработка и продукт оценивают покрытие, логику и ясность. Порог по умолчанию — 90 из 100; поставляется только набор, прошедший его.",
+          es: "QA, desarrollo y producto puntúan la cobertura, la lógica y la claridad. El umbral por defecto es 90 de 100; solo se entrega un conjunto que lo supera.",
+        },
       },
       {
-        title: "Three exports, one set",
-        body: "Ship the reviewed set as Excel, Markdown, and XMind — the same scenarios on the surfaces teams already use.",
+        title: {
+          en: "Three exports, one set",
+          zh: "一套用例,三种导出",
+          ar: "ثلاثة تصديرات، مجموعة واحدة",
+          fr: "Trois exports, un ensemble",
+          ru: "Три экспорта, один набор",
+          es: "Tres exportaciones, un conjunto",
+        },
+        body: {
+          en: "Ship the reviewed set as Excel, Markdown, and XMind — the same scenarios on the surfaces teams already use.",
+          zh: "把评审过的用例集导出为 Excel、Markdown 与 XMind——同样的场景,交付到团队已在用的工具里。",
+          ar: "سلّم المجموعة المُراجَعة بصيغ Excel وMarkdown وXMind — نفس السيناريوهات على الأدوات التي تستخدمها الفرق أصلاً.",
+          fr: "Livrez l'ensemble relu en Excel, Markdown et XMind — les mêmes scénarios sur les outils que les équipes utilisent déjà.",
+          ru: "Поставляйте проверенный набор как Excel, Markdown и XMind — те же сценарии на инструментах, которыми команды уже пользуются.",
+          es: "Entrega el conjunto revisado como Excel, Markdown y XMind — los mismos escenarios en las herramientas que los equipos ya usan.",
+        },
       },
     ],
     specs: [
-      { label: "Input", value: "PDF · image · spec" },
-      { label: "Output", value: "Excel · Markdown · XMind" },
-      { label: "Review", value: "QA · Dev · Product, 90/100" },
-      { label: "Runs as", value: "Installable tool" },
+      {
+        label: { en: "Input", zh: "输入", ar: "الإدخال", fr: "Entrée", ru: "Ввод", es: "Entrada" },
+        value: {
+          en: "PDF · image · spec",
+          zh: "PDF · 图片 · 文档",
+          ar: "PDF · صورة · مواصفات",
+          fr: "PDF · image · spéc.",
+          ru: "PDF · изображение · спека",
+          es: "PDF · imagen · spec",
+        },
+      },
+      {
+        label: { en: "Output", zh: "输出", ar: "الإخراج", fr: "Sortie", ru: "Вывод", es: "Salida" },
+        value: {
+          en: "Excel · Markdown · XMind",
+          zh: "Excel · Markdown · XMind",
+          ar: "Excel · Markdown · XMind",
+          fr: "Excel · Markdown · XMind",
+          ru: "Excel · Markdown · XMind",
+          es: "Excel · Markdown · XMind",
+        },
+      },
+      {
+        label: { en: "Review", zh: "评审", ar: "المراجعة", fr: "Revue", ru: "Проверка", es: "Revisión" },
+        value: {
+          en: "QA · Dev · Product, 90/100",
+          zh: "QA · 研发 · 产品,90/100",
+          ar: "الجودة · التطوير · المنتج، 90/100",
+          fr: "QA · Dev · Produit, 90/100",
+          ru: "QA · Разработка · Продукт, 90/100",
+          es: "QA · Desarrollo · Producto, 90/100",
+        },
+      },
+      {
+        label: {
+          en: "Runs as",
+          zh: "运行形态",
+          ar: "يعمل كـ",
+          fr: "S'exécute comme",
+          ru: "Запускается как",
+          es: "Se ejecuta como",
+        },
+        value: {
+          en: "Installable tool",
+          zh: "可安装的工具",
+          ar: "أداة قابلة للتثبيت",
+          fr: "Outil installable",
+          ru: "Устанавливаемый инструмент",
+          es: "Herramienta instalable",
+        },
+      },
     ],
-    cta: { label: "Try the generator", note: "Runs locally; your requirements stay yours." },
+    cta: {
+      label: {
+        en: "Try the generator",
+        zh: "试用生成器",
+        ar: "جرّب المولّد",
+        fr: "Essayer le générateur",
+        ru: "Попробовать генератор",
+        es: "Probar el generador",
+      },
+      note: {
+        en: "Runs locally; your requirements stay yours.",
+        zh: "本地运行;你的需求始终属于你。",
+        ar: "يعمل محلياً؛ تبقى متطلباتك ملكك.",
+        fr: "Fonctionne en local ; vos exigences restent les vôtres.",
+        ru: "Работает локально; ваши требования остаются вашими.",
+        es: "Funciona en local; tus requisitos siguen siendo tuyos.",
+      },
+      href: "https://hub.docker.com/r/xuxuclassmate/testcase-generator",
+    },
   },
   {
     slug: "docker-suite",
-    name: "Test DB Docker Suite",
+    name: {
+      en: "Test DB Docker Suite",
+      zh: "测试数据库 Docker 套件",
+      ar: "حزمة Docker لقواعد بيانات الاختبار",
+      fr: "Suite Docker de bases de test",
+      ru: "Docker-набор тестовых БД",
+      es: "Suite Docker de bases de prueba",
+    },
     group: "Developer Infrastructure",
-    tagline: "Test databases, one pull away.",
-    summary:
-      "Ready-to-run images for the databases teams actually test against — Dameng, Highgo, Kingbase, and TiDB — pulled, seeded, and disposable.",
+    tagline: {
+      en: "Test databases, one pull away.",
+      zh: "测试数据库,一键拉取即用。",
+      ar: "قواعد بيانات اختبار على بُعد سحبة واحدة.",
+      fr: "Des bases de test à un pull.",
+      ru: "Тестовые базы данных в один pull.",
+      es: "Bases de datos de prueba a un pull.",
+    },
+    summary: {
+      en: "Ready-to-run images for the databases teams actually test against — Dameng, Highgo, Kingbase, and TiDB — pulled, seeded, and disposable.",
+      zh: "为团队真正用于测试的数据库准备的开箱即用镜像——达梦、Highgo、人大金仓与 TiDB——可拉取、带种子数据、用完即弃。",
+      ar: "صور جاهزة للتشغيل لقواعد البيانات التي تختبرها الفرق فعلاً — Dameng وHighgo وKingbase وTiDB — قابلة للسحب ومزوّدة بالبيانات وقابلة للتخلّص.",
+      fr: "Des images prêtes à l'emploi pour les bases que les équipes testent vraiment — Dameng, Highgo, Kingbase et TiDB — récupérables, initialisées et jetables.",
+      ru: "Готовые к запуску образы баз, против которых команды действительно тестируют — Dameng, Highgo, Kingbase и TiDB — загружаемые, с данными и одноразовые.",
+      es: "Imágenes listas para ejecutar de las bases que los equipos realmente prueban — Dameng, Highgo, Kingbase y TiDB — descargables, con datos y desechables.",
+    },
     features: [
       {
-        title: "One command up",
-        body: "Pull and run. Each image is seeded and ready in seconds, then wiped on stop so every run starts clean.",
+        title: {
+          en: "One command up",
+          zh: "一条命令拉起",
+          ar: "أمر واحد للتشغيل",
+          fr: "Une commande pour démarrer",
+          ru: "Запуск одной командой",
+          es: "Arranca con un comando",
+        },
+        body: {
+          en: "Pull and run. Each image is seeded and ready in seconds, then wiped on stop so every run starts clean.",
+          zh: "拉取即运行。每个镜像数秒内带种子数据就绪,停止即清空,每次运行都从干净状态开始。",
+          ar: "اسحب وشغّل. كل صورة مزوّدة بالبيانات وجاهزة خلال ثوانٍ، ثم تُمحى عند الإيقاف ليبدأ كل تشغيل نظيفاً.",
+          fr: "Récupérez et lancez. Chaque image est initialisée et prête en quelques secondes, puis effacée à l'arrêt pour que chaque exécution démarre propre.",
+          ru: "Загрузите и запустите. Каждый образ наполнен данными и готов за секунды, затем очищается при остановке, чтобы каждый запуск начинался чисто.",
+          es: "Descarga y ejecuta. Cada imagen está inicializada y lista en segundos, y se borra al parar para que cada ejecución empiece limpia.",
+        },
       },
       {
-        title: "The databases that are hard to get",
-        body: "Dameng, Highgo, Kingbase, TiDB — the ones that usually block a test environment, packaged to just run.",
+        title: {
+          en: "The databases that are hard to get",
+          zh: "那些难搞的数据库",
+          ar: "قواعد البيانات التي يصعب الحصول عليها",
+          fr: "Les bases difficiles à obtenir",
+          ru: "Базы, которые трудно достать",
+          es: "Las bases difíciles de conseguir",
+        },
+        body: {
+          en: "Dameng, Highgo, Kingbase, TiDB — the ones that usually block a test environment, packaged to just run.",
+          zh: "达梦、Highgo、人大金仓、TiDB——这些通常会卡住测试环境的数据库,已打包成即开即用。",
+          ar: "Dameng وHighgo وKingbase وTiDB — تلك التي تعرقل عادةً بيئة الاختبار، مُغلّفة لتعمل فوراً.",
+          fr: "Dameng, Highgo, Kingbase, TiDB — celles qui bloquent d'ordinaire un environnement de test, empaquetées pour simplement tourner.",
+          ru: "Dameng, Highgo, Kingbase, TiDB — те, что обычно блокируют тестовую среду, упакованы, чтобы просто работать.",
+          es: "Dameng, Highgo, Kingbase, TiDB — las que suelen bloquear un entorno de prueba, empaquetadas para que simplemente funcionen.",
+        },
       },
       {
-        title: "Built for CI",
-        body: "Deterministic startup and fixed ports make the images drop-in for pipelines and local runs alike.",
+        title: {
+          en: "Built for CI",
+          zh: "为 CI 而生",
+          ar: "مبنيّة من أجل CI",
+          fr: "Conçu pour la CI",
+          ru: "Создано для CI",
+          es: "Hecho para CI",
+        },
+        body: {
+          en: "Deterministic startup and fixed ports make the images drop-in for pipelines and local runs alike.",
+          zh: "确定性的启动与固定端口,让镜像在流水线与本地运行中都能即插即用。",
+          ar: "بدء تشغيل حتمي ومنافذ ثابتة تجعل الصور صالحة للإدراج في خطوط الأنابيب والتشغيل المحلي على حدّ سواء.",
+          fr: "Un démarrage déterministe et des ports fixes rendent les images intégrables aux pipelines comme aux exécutions locales.",
+          ru: "Детерминированный старт и фиксированные порты делают образы пригодными и для пайплайнов, и для локальных запусков.",
+          es: "Un arranque determinista y puertos fijos hacen que las imágenes encajen tanto en pipelines como en ejecuciones locales.",
+        },
       },
     ],
     specs: [
-      { label: "Databases", value: "Dameng · Highgo · Kingbase · TiDB" },
-      { label: "Startup", value: "~6s, seeded" },
-      { label: "Lifecycle", value: "Disposable, wiped on stop" },
-      { label: "Registry", value: "Docker Hub" },
+      {
+        label: {
+          en: "Databases",
+          zh: "数据库",
+          ar: "قواعد البيانات",
+          fr: "Bases de données",
+          ru: "Базы данных",
+          es: "Bases de datos",
+        },
+        value: {
+          en: "Dameng · Highgo · Kingbase · TiDB",
+          zh: "达梦 · Highgo · 人大金仓 · TiDB",
+          ar: "Dameng · Highgo · Kingbase · TiDB",
+          fr: "Dameng · Highgo · Kingbase · TiDB",
+          ru: "Dameng · Highgo · Kingbase · TiDB",
+          es: "Dameng · Highgo · Kingbase · TiDB",
+        },
+      },
+      {
+        label: { en: "Startup", zh: "启动", ar: "البدء", fr: "Démarrage", ru: "Запуск", es: "Arranque" },
+        value: {
+          en: "~6s, seeded",
+          zh: "约 6 秒,带种子数据",
+          ar: "~6 ثوانٍ، مزوّدة بالبيانات",
+          fr: "~6 s, initialisée",
+          ru: "~6 с, с данными",
+          es: "~6 s, con datos",
+        },
+      },
+      {
+        label: {
+          en: "Lifecycle",
+          zh: "生命周期",
+          ar: "دورة الحياة",
+          fr: "Cycle de vie",
+          ru: "Жизненный цикл",
+          es: "Ciclo de vida",
+        },
+        value: {
+          en: "Disposable, wiped on stop",
+          zh: "用完即弃,停止即清空",
+          ar: "قابلة للتخلّص، تُمحى عند الإيقاف",
+          fr: "Jetable, effacée à l'arrêt",
+          ru: "Одноразовая, очищается при остановке",
+          es: "Desechable, se borra al parar",
+        },
+      },
+      {
+        label: { en: "Registry", zh: "镜像仓库", ar: "السجلّ", fr: "Registre", ru: "Реестр", es: "Registro" },
+        value: {
+          en: "Docker Hub",
+          zh: "Docker Hub",
+          ar: "Docker Hub",
+          fr: "Docker Hub",
+          ru: "Docker Hub",
+          es: "Docker Hub",
+        },
+      },
     ],
-    cta: { label: "Pull from Docker Hub", note: "Public images, versioned tags." },
+    cta: {
+      label: {
+        en: "Pull from Docker Hub",
+        zh: "从 Docker Hub 拉取",
+        ar: "اسحب من Docker Hub",
+        fr: "Récupérer depuis Docker Hub",
+        ru: "Загрузить из Docker Hub",
+        es: "Descargar de Docker Hub",
+      },
+      note: {
+        en: "Public images, versioned tags.",
+        zh: "公开镜像,带版本标签。",
+        ar: "صور علنية بوسوم إصدارات.",
+        fr: "Images publiques, tags versionnés.",
+        ru: "Публичные образы, версионированные теги.",
+        es: "Imágenes públicas, tags versionados.",
+      },
+      href: "https://hub.docker.com/u/xuxuclassmate",
+    },
   },
   {
     slug: "docker-hub-api-gateway",
-    name: "Docker Hub API Gateway",
+    name: {
+      en: "Docker Hub API Gateway",
+      zh: "Docker Hub API 网关",
+      ar: "بوابة واجهة Docker Hub",
+      fr: "Passerelle API Docker Hub",
+      ru: "API-шлюз Docker Hub",
+      es: "Gateway de API de Docker Hub",
+    },
     group: "Developer Infrastructure",
-    tagline: "Docker Hub stats, as an API and a card.",
-    summary:
-      "A REST gateway over Docker Hub with ready-made SVG stat cards — the live pull counts behind the suite, available to anyone.",
+    tagline: {
+      en: "Docker Hub stats, as an API and a card.",
+      zh: "Docker Hub 统计,既是 API 也是卡片。",
+      ar: "إحصاءات Docker Hub، كواجهة وبطاقة.",
+      fr: "Les stats Docker Hub, en API et en carte.",
+      ru: "Статистика Docker Hub как API и карточка.",
+      es: "Estadísticas de Docker Hub, como API y tarjeta.",
+    },
+    summary: {
+      en: "A REST gateway over Docker Hub with ready-made SVG stat cards — the live pull counts behind the suite, available to anyone.",
+      zh: "一个架在 Docker Hub 之上的 REST 网关,附带现成的 SVG 统计卡——套件背后的实时拉取量,对所有人开放。",
+      ar: "بوابة REST فوق Docker Hub مع بطاقات إحصاء SVG جاهزة — أعداد السحب الحيّة خلف الحزمة، متاحة للجميع.",
+      fr: "Une passerelle REST au-dessus de Docker Hub avec des cartes de stats SVG prêtes — les compteurs de pull en direct derrière la suite, pour tous.",
+      ru: "REST-шлюз над Docker Hub с готовыми SVG-карточками статистики — живые счётчики загрузок за набором, доступные всем.",
+      es: "Una pasarela REST sobre Docker Hub con tarjetas de estadísticas SVG listas — los contadores de pull en vivo detrás de la suite, para cualquiera.",
+    },
     features: [
       {
-        title: "REST over Docker Hub",
-        body: "A clean API for pulls, tags, and repository details, cached close to the edge.",
+        title: {
+          en: "REST over Docker Hub",
+          zh: "Docker Hub 之上的 REST",
+          ar: "REST فوق Docker Hub",
+          fr: "REST au-dessus de Docker Hub",
+          ru: "REST над Docker Hub",
+          es: "REST sobre Docker Hub",
+        },
+        body: {
+          en: "A clean API for pulls, tags, and repository details, cached close to the edge.",
+          zh: "面向拉取量、标签与仓库详情的简洁 API,就近在边缘缓存。",
+          ar: "واجهة نظيفة لأعداد السحب والوسوم وتفاصيل المستودع، مُخزَّنة مؤقتاً قرب الحافة.",
+          fr: "Une API propre pour les pulls, les tags et les détails de dépôt, mise en cache près du edge.",
+          ru: "Чистый API для загрузок, тегов и деталей репозитория, кэшируется близко к краю сети.",
+          es: "Una API limpia para pulls, tags y detalles del repositorio, cacheada cerca del edge.",
+        },
       },
       {
-        title: "Drop-in SVG cards",
-        body: "Embeddable stat cards that render live pull counts in a README or a site, no build step.",
+        title: {
+          en: "Drop-in SVG cards",
+          zh: "即插即用的 SVG 卡片",
+          ar: "بطاقات SVG جاهزة للإدراج",
+          fr: "Cartes SVG prêtes à l'emploi",
+          ru: "Готовые SVG-карточки",
+          es: "Tarjetas SVG listas",
+        },
+        body: {
+          en: "Embeddable stat cards that render live pull counts in a README or a site, no build step.",
+          zh: "可嵌入的统计卡,在 README 或网站中实时渲染拉取量,无需构建步骤。",
+          ar: "بطاقات إحصاء قابلة للتضمين تعرض أعداد السحب الحيّة في README أو موقع، دون خطوة بناء.",
+          fr: "Des cartes de stats intégrables qui affichent les compteurs de pull en direct dans un README ou un site, sans étape de build.",
+          ru: "Встраиваемые карточки статистики, показывающие живые счётчики загрузок в README или на сайте, без шага сборки.",
+          es: "Tarjetas de estadísticas integrables que muestran contadores de pull en vivo en un README o un sitio, sin paso de build.",
+        },
       },
     ],
     specs: [
-      { label: "Surface", value: "REST + SVG" },
-      { label: "Runtime", value: "Cloudflare Workers" },
-      { label: "Spec", value: "OpenAPI" },
+      {
+        label: { en: "Surface", zh: "形态", ar: "الواجهة", fr: "Surface", ru: "Поверхность", es: "Superficie" },
+        value: { en: "REST + SVG", zh: "REST + SVG", ar: "REST + SVG", fr: "REST + SVG", ru: "REST + SVG", es: "REST + SVG" },
+      },
+      {
+        label: RUNTIME,
+        value: CF_WORKERS,
+      },
+      {
+        label: { en: "Spec", zh: "规范", ar: "المواصفة", fr: "Spécification", ru: "Спецификация", es: "Especificación" },
+        value: { en: "OpenAPI", zh: "OpenAPI", ar: "OpenAPI", fr: "OpenAPI", ru: "OpenAPI", es: "OpenAPI" },
+      },
     ],
-    cta: { label: "Read the API", note: "Open endpoints, no key for public stats." },
+    cta: {
+      label: {
+        en: "Read the API",
+        zh: "查看 API",
+        ar: "اقرأ الواجهة",
+        fr: "Lire l'API",
+        ru: "Открыть API",
+        es: "Ver la API",
+      },
+      note: {
+        en: "Open endpoints, no key for public stats.",
+        zh: "开放端点,公开统计无需密钥。",
+        ar: "نقاط نهاية مفتوحة، بلا مفتاح للإحصاءات العلنية.",
+        fr: "Points d'accès ouverts, pas de clé pour les stats publiques.",
+        ru: "Открытые эндпоинты, без ключа для публичной статистики.",
+        es: "Endpoints abiertos, sin clave para estadísticas públicas.",
+      },
+      href: "https://github.com/InnoNestX",
+    },
   },
   {
     slug: "globalpulse",
-    name: "GlobalPulse",
+    name: {
+      en: "GlobalPulse",
+      zh: "GlobalPulse",
+      ar: "GlobalPulse",
+      fr: "GlobalPulse",
+      ru: "GlobalPulse",
+      es: "GlobalPulse",
+    },
     group: "AI / Agent",
-    tagline: "Scheduled market briefings, on the edge.",
-    summary:
-      "A self-hosted agent that gathers market signals and sends scheduled briefings, running on Cloudflare with KV config and cron.",
+    tagline: {
+      en: "Scheduled market briefings, on the edge.",
+      zh: "定时市场简报,运行在边缘。",
+      ar: "إحاطات سوق مجدولة، على الحافة.",
+      fr: "Briefings de marché planifiés, sur le edge.",
+      ru: "Запланированные рыночные брифинги на краю сети.",
+      es: "Briefings de mercado programados, en el edge.",
+    },
+    summary: {
+      en: "A self-hosted agent that gathers market signals and sends scheduled briefings, running on Cloudflare with KV config and cron.",
+      zh: "一个自托管智能体,采集市场信号并定时推送简报,运行在 Cloudflare 上,使用 KV 配置与 cron。",
+      ar: "وكيل ذاتي الاستضافة يجمع إشارات السوق ويرسل إحاطات مجدولة، يعمل على Cloudflare بإعداد KV وcron.",
+      fr: "Un agent auto-hébergé qui collecte des signaux de marché et envoie des briefings planifiés, tournant sur Cloudflare avec config KV et cron.",
+      ru: "Самостоятельно размещаемый агент, который собирает рыночные сигналы и шлёт запланированные брифинги, работает на Cloudflare с конфигом KV и cron.",
+      es: "Un agente autoalojado que reúne señales de mercado y envía briefings programados, ejecutándose en Cloudflare con config KV y cron.",
+    },
     features: [
       {
-        title: "Scheduled by cron",
-        body: "Briefings land on a schedule you set, assembled from market signals and calendars.",
+        title: {
+          en: "Scheduled by cron",
+          zh: "由 cron 定时",
+          ar: "مجدول عبر cron",
+          fr: "Planifié par cron",
+          ru: "По расписанию cron",
+          es: "Programado por cron",
+        },
+        body: {
+          en: "Briefings land on a schedule you set, assembled from market signals and calendars.",
+          zh: "简报按你设定的计划送达,由市场信号与日历汇编而成。",
+          ar: "تصل الإحاطات وفق جدول تحدّده، مجمّعة من إشارات السوق والتقاويم.",
+          fr: "Les briefings arrivent selon un calendrier que vous définissez, assemblés à partir de signaux de marché et de calendriers.",
+          ru: "Брифинги приходят по заданному вами расписанию, собранные из рыночных сигналов и календарей.",
+          es: "Los briefings llegan según un horario que defines, armados a partir de señales de mercado y calendarios.",
+        },
       },
       {
-        title: "Self-hosted, edge-native",
-        body: "Runs on Cloudflare Workers with KV for config — no server to keep alive.",
+        title: {
+          en: "Self-hosted, edge-native",
+          zh: "自托管,边缘原生",
+          ar: "ذاتي الاستضافة، أصيل على الحافة",
+          fr: "Auto-hébergé, natif edge",
+          ru: "Самохостинг, нативно на краю",
+          es: "Autoalojado, nativo del edge",
+        },
+        body: {
+          en: "Runs on Cloudflare Workers with KV for config — no server to keep alive.",
+          zh: "运行在 Cloudflare Workers 上,用 KV 存配置——无需维护常驻服务器。",
+          ar: "يعمل على Cloudflare Workers مع KV للإعداد — دون خادم تبقيه حيّاً.",
+          fr: "Tourne sur Cloudflare Workers avec KV pour la config — aucun serveur à maintenir en vie.",
+          ru: "Работает на Cloudflare Workers с KV для конфигурации — не нужно держать сервер живым.",
+          es: "Se ejecuta en Cloudflare Workers con KV para la configuración — sin servidor que mantener vivo.",
+        },
       },
     ],
     specs: [
-      { label: "Runtime", value: "Cloudflare Workers" },
-      { label: "Config", value: "KV" },
-      { label: "Cadence", value: "Cron" },
+      {
+        label: RUNTIME,
+        value: CF_WORKERS,
+      },
+      {
+        label: { en: "Config", zh: "配置", ar: "الإعداد", fr: "Config", ru: "Конфигурация", es: "Configuración" },
+        value: { en: "KV", zh: "KV", ar: "KV", fr: "KV", ru: "KV", es: "KV" },
+      },
+      {
+        label: { en: "Cadence", zh: "频率", ar: "الوتيرة", fr: "Cadence", ru: "Частота", es: "Cadencia" },
+        value: { en: "Cron", zh: "Cron", ar: "Cron", fr: "Cron", ru: "Cron", es: "Cron" },
+      },
     ],
-    cta: { label: "See the project", note: "Self-hosted; bring your own keys." },
+    cta: {
+      label: {
+        en: "See the project",
+        zh: "查看项目",
+        ar: "شاهد المشروع",
+        fr: "Voir le projet",
+        ru: "Открыть проект",
+        es: "Ver el proyecto",
+      },
+      note: {
+        en: "Self-hosted; bring your own keys.",
+        zh: "自托管;自带密钥。",
+        ar: "ذاتي الاستضافة؛ أحضِر مفاتيحك.",
+        fr: "Auto-hébergé ; apportez vos propres clés.",
+        ru: "Самохостинг; свои ключи.",
+        es: "Autoalojado; trae tus propias claves.",
+      },
+      href: "https://pulse.xuxuclassmate.com/",
+    },
   },
 ];
 
