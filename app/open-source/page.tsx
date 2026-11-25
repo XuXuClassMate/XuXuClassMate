@@ -61,7 +61,7 @@ export default function OpenSourcePage() {
             <Reveal key={p.slug}>
               <Link
                 href={`/products/${p.slug}`}
-                className="group flex h-full flex-col rounded-[var(--radius-ap)] border border-[var(--color-line)] bg-[var(--color-bg)] p-8 transition-transform duration-500 hover:-translate-y-1"
+                className="card-ap group flex h-full flex-col rounded-[var(--radius-ap)] border border-[var(--color-line)] bg-[var(--color-bg)] p-8"
               >
                 <p className="text-[13px] font-medium text-muted">
                   <T {...GROUP_LABEL[p.group]} />

@@ -19,7 +19,7 @@ export function Hero() {
         };
 
   return (
-    <section className="relative overflow-hidden pt-[calc(var(--nav-h)+64px)]">
+    <section className="ambient relative overflow-hidden pt-[calc(var(--nav-h)+64px)]">
       <div className="container-ap pb-20 text-center">
         <motion.p className="eyebrow" {...rise(0.05)}>
           {tx({
@@ -83,6 +83,7 @@ export function Hero() {
 
 function GeneratorWindow() {
   const tx = useTx();
+  const reduce = useReducedMotion();
   const cases = [
     {
       id: "TC-01",
@@ -150,18 +151,42 @@ function GeneratorWindow() {
   ];
   return (
     <div className="mx-auto max-w-[920px] overflow-hidden rounded-[var(--radius-ap)] border border-[var(--color-line)] bg-panel shadow-[0_30px_80px_-20px_rgba(0,0,0,0.35)]">
-      <div className="flex items-center gap-2 border-b border-white/10 px-5 py-3.5">
+      <div className="flex items-center gap-2 border-b border-white/10 px-5 py-3.5" dir="ltr">
         <span className="h-3 w-3 rounded-full bg-white/15" />
         <span className="h-3 w-3 rounded-full bg-white/15" />
         <span className="h-3 w-3 rounded-full bg-white/15" />
-        <span className="ml-3 font-mono text-[12px] text-panel-muted">
+        <span className="ml-3 flex items-center gap-2 font-mono text-[12px] text-panel-muted">
+          <span className="relative flex h-1.5 w-1.5">
+            <span className="absolute inline-flex h-full w-full rounded-full bg-[#6fd39a] opacity-70 motion-safe:animate-ping" />
+            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#6fd39a]" />
+          </span>
           testcase-generator — {tx({ en: "reviewed set", zh: "已评审用例集", ar: "مجموعة مُراجَعة", fr: "ensemble relu", ru: "проверенный набор", es: "conjunto revisado" })}
         </span>
       </div>
-      <div className="grid gap-3 p-5 sm:p-7">
+      <motion.div
+        className="grid gap-3 p-5 sm:p-7"
+        {...(reduce
+          ? {}
+          : {
+              initial: "hidden",
+              animate: "show",
+              variants: {
+                hidden: {},
+                show: { transition: { staggerChildren: 0.12, delayChildren: 0.55 } },
+              },
+            })}
+      >
         {cases.map((c) => (
-          <div
+          <motion.div
             key={c.id}
+            variants={
+              reduce
+                ? undefined
+                : {
+                    hidden: { opacity: 0, y: 12 },
+                    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease } },
+                  }
+            }
             className="rounded-xl border border-white/10 p-4 text-left"
           >
             <div className="flex items-center justify-between">
@@ -176,9 +201,9 @@ function GeneratorWindow() {
               {tx({ en: "Expected", zh: "预期", ar: "المتوقع", fr: "Attendu", ru: "Ожидается", es: "Esperado" })}:{" "}
               <span className="text-[#6fd39a]">{tx(c.expected)}</span>
             </p>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 }

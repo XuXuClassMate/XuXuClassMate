@@ -44,6 +44,8 @@ export function SiteNav() {
       ? pathname === href || pathname.startsWith(href + "/")
       : false;
 
+  const [scrolled, setScrolled] = useState(false);
+
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => {
@@ -51,9 +53,21 @@ export function SiteNav() {
     };
   }, [open]);
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 4);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <header className="fixed inset-x-0 top-0 z-50">
-      <div className="h-[var(--nav-h)] border-b border-[var(--color-line)] bg-[color-mix(in_srgb,var(--color-bg)_80%,transparent)] backdrop-blur-xl backdrop-saturate-150">
+      <div
+        className={cn(
+          "nav-bar h-[var(--nav-h)] border-b border-[var(--color-line)] bg-[color-mix(in_srgb,var(--color-bg)_80%,transparent)] backdrop-blur-xl backdrop-saturate-150",
+          scrolled && "scrolled",
+        )}
+      >
         <nav className="container-ap flex h-full items-center justify-between">
           <Link
             href="/"

@@ -136,7 +136,7 @@ export default function AboutPage() {
         <div className="mt-12 grid gap-6 sm:grid-cols-2">
           {PRINCIPLES.map((p) => (
             <Reveal key={p.title.en}>
-              <article className="h-full rounded-[var(--radius-ap)] bg-[var(--color-surface)] p-8">
+              <article className="card-ap h-full rounded-[var(--radius-ap)] bg-[var(--color-surface)] p-8">
                 <h3 className="text-[22px] font-semibold tracking-tight">
                   <T {...p.title} />
                 </h3>

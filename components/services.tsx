@@ -1,11 +1,13 @@
 "use client";
 
 import { useTx, type Localized } from "@/components/i18n";
+import { Icon, type IconName } from "@/components/icons";
 
 type Service = {
   title: string;
   host: string;
   href: string;
+  icon: IconName;
   detail: Localized;
 };
 
@@ -14,6 +16,7 @@ const SERVICES: Service[] = [
     title: "NAS",
     host: "nas.xuxuclassmate.com",
     href: "https://nas.xuxuclassmate.com",
+    icon: "nas",
     detail: {
       en: "Self-hosted storage.",
       zh: "自托管存储。",
@@ -27,6 +30,7 @@ const SERVICES: Service[] = [
     title: "Mail",
     host: "mail.xuxuclassmate.com",
     href: "https://mail.xuxuclassmate.com",
+    icon: "mail",
     detail: {
       en: "Compose, attachments, and history.",
       zh: "撰写、附件、发送记录。",
@@ -40,6 +44,7 @@ const SERVICES: Service[] = [
     title: "SSH",
     host: "ssh.xuxuclassmate.com",
     href: "https://ssh.xuxuclassmate.com/",
+    icon: "ssh",
     detail: {
       en: "Secure shell for the server.",
       zh: "服务器安全终端。",
@@ -53,6 +58,7 @@ const SERVICES: Service[] = [
     title: "Watch",
     host: "watch.xuxuclassmate.com",
     href: "https://watch.xuxuclassmate.com/",
+    icon: "watch",
     detail: {
       en: "Traffic and security monitor.",
       zh: "站点流量与安全监控。",
@@ -66,6 +72,7 @@ const SERVICES: Service[] = [
     title: "GlobalPulse",
     host: "pulse.xuxuclassmate.com",
     href: "https://pulse.xuxuclassmate.com/",
+    icon: "pulse",
     detail: {
       en: "Scheduled market briefings and console.",
       zh: "定时市场简报与控制台。",
@@ -117,18 +124,23 @@ export function Services() {
               href={s.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex flex-col rounded-[var(--radius-ap)] border border-[var(--color-line)] bg-[var(--color-bg)] p-6 transition-transform duration-300 hover:-translate-y-1"
+              className="card-ap group flex flex-col rounded-[var(--radius-ap)] border border-[var(--color-line)] bg-[var(--color-bg)] p-6"
             >
               <div className="flex items-center justify-between">
-                <h3 className="text-[20px] font-semibold tracking-tight" dir="ltr">
-                  {s.title}
-                </h3>
+                <div className="flex items-center gap-3">
+                  <span className="grid h-10 w-10 place-items-center rounded-xl bg-[color-mix(in_srgb,var(--color-accent)_12%,transparent)] text-[var(--color-accent)]">
+                    <Icon name={s.icon} />
+                  </span>
+                  <h3 className="text-[20px] font-semibold tracking-tight" dir="ltr">
+                    {s.title}
+                  </h3>
+                </div>
                 <span className="link-ap text-[15px]">{tx(OPEN)}</span>
               </div>
-              <p className="mt-1 font-mono text-[12px] text-muted" dir="ltr">
+              <p className="mt-3 font-mono text-[12px] text-muted" dir="ltr">
                 {s.host}
               </p>
-              <p className="mt-3 text-[15px] leading-relaxed text-muted">
+              <p className="mt-2 text-[15px] leading-relaxed text-muted">
                 {tx(s.detail)}
               </p>
             </a>

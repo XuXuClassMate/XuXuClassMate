@@ -26,8 +26,14 @@
 
   --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
     "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-arabic: "SF Arabic", "Geeza Pro", "Noto Naskh Arabic", "Noto Sans Arabic",
+    var(--font-sans);
 
   --radius-ap: 18px;
+
+  /* Elevation system (D): one consistent card shadow + its hover lift. */
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.04), 0 10px 30px -14px rgba(0, 0, 0, 0.14);
+  --shadow-card-hover: 0 2px 6px rgba(0, 0, 0, 0.06), 0 26px 56px -18px rgba(0, 0, 0, 0.22);
 }
 
 :root {
@@ -38,13 +44,15 @@
 /* ---- Dark theme: flip the swappable tokens (html.dark beats :root) ---- */
 html.dark {
   --color-bg: #000000;
-  --color-surface: #141416;
-  --color-surface-2: #1c1c1e;
+  --color-surface: #16161a;
+  --color-surface-2: #202026;
   --color-ink: #f5f5f7;
-  --color-muted: #a1a1a6;
+  --color-muted: #a7a7ad;
   --color-accent: #2997ff;
-  --color-accent-strong: #2997ff;
-  --color-line: rgba(255, 255, 255, 0.12);
+  --color-accent-strong: #3aa0ff;
+  --color-line: rgba(255, 255, 255, 0.14);
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.5), 0 12px 32px -16px rgba(0, 0, 0, 0.7);
+  --shadow-card-hover: 0 2px 8px rgba(0, 0, 0, 0.6), 0 30px 60px -20px rgba(0, 0, 0, 0.85);
   color-scheme: dark;
 }
 
@@ -71,6 +79,51 @@ body {
   html {
     scroll-behavior: auto;
   }
+}
+
+/* ---- Smooth theme transition (C). Only color properties, only when the
+   viewer allows motion. Elements with their own transition utility keep it. */
+@media (prefers-reduced-motion: no-preference) {
+  body * {
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  }
+}
+
+/* ---- Per-language typography (A): Latin negative tracking is wrong for
+   CJK / Arabic / Cyrillic, so tune each by the <html lang> attribute. */
+:lang(zh) {
+  letter-spacing: 0;
+}
+:lang(zh) .display-1,
+:lang(zh) .display-2 {
+  letter-spacing: 0;
+  line-height: 1.14;
+}
+:lang(zh) .lead {
+  letter-spacing: 0;
+  line-height: 1.5;
+}
+
+:lang(ar) {
+  letter-spacing: 0;
+  font-family: var(--font-arabic);
+}
+:lang(ar) .display-1,
+:lang(ar) .display-2 {
+  letter-spacing: 0;
+  line-height: 1.28;
+}
+:lang(ar) .lead {
+  letter-spacing: 0;
+  line-height: 1.7;
+}
+
+:lang(ru) {
+  letter-spacing: -0.006em;
+}
+:lang(ru) .display-1,
+:lang(ru) .display-2 {
+  letter-spacing: -0.01em;
 }
 
 /* Keyboard focus ring (mouse clicks don't trigger :focus-visible) */
@@ -160,5 +213,74 @@ body {
     font-size: 1.15em;
     line-height: 0;
     transform: translateY(0.04em);
+    transition: transform 0.25s ease;
+  }
+  .link-ap:hover::after {
+    transform: translateY(0.04em) translateX(3px);
+  }
+  /* In RTL the chevron faces the other way and slides left. */
+  [dir="rtl"] .link-ap::after {
+    content: "\2039";
+  }
+  [dir="rtl"] .link-ap:hover::after {
+    transform: translateY(0.04em) translateX(-3px);
+  }
+
+  /* Card interaction (C+D): one consistent lift + shadow on hover. */
+  .card-ap {
+    transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1),
+      box-shadow 0.4s ease, border-color 0.3s ease;
+  }
+  @media (hover: hover) {
+    .card-ap:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card-hover);
+    }
+  }
+
+  /* Button press feedback (C). */
+  .press:active {
+    transform: scale(0.98);
+  }
+
+  /* Nav scroll elevation (B). */
+  .nav-bar {
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
+  }
+  .nav-bar.scrolled {
+    box-shadow: 0 0.5px 0 var(--color-line), 0 10px 30px -18px rgba(0, 0, 0, 0.35);
+    background: color-mix(in srgb, var(--color-bg) 92%, transparent);
+  }
+
+  /* Ambient depth behind the hero (D). Tints with the accent, adapts to theme. */
+  .ambient {
+    position: relative;
+    isolation: isolate;
+  }
+  .ambient::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(
+        60% 42% at 50% -4%,
+        color-mix(in srgb, var(--color-accent) 12%, transparent),
+        transparent 70%
+      );
+  }
+
+  /* Restrained scroll reveal (F): small, once, motion-safe only. */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+    .reveal.is-in {
+      opacity: 1;
+      transform: none;
+    }
   }
 }

@@ -1,8 +1,15 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { PRODUCTS, GROUPS, GROUP_LABEL } from "@/lib/products";
+import { PRODUCTS, GROUPS, GROUP_LABEL, type ProductGroup } from "@/lib/products";
 import { Reveal } from "@/components/reveal";
 import { T } from "@/components/i18n";
+import { Icon, type IconName } from "@/components/icons";
+
+const GROUP_ICON: Record<ProductGroup, IconName> = {
+  "Quality Engineering": "quality",
+  "Developer Infrastructure": "infra",
+  "AI / Agent": "ai",
+};
 
 export const metadata: Metadata = {
   title: "Products — XuXuClassMate",
@@ -43,7 +50,10 @@ export default function ProductsPage() {
         return (
           <section key={group} className="container-ap py-12">
             <Reveal>
-              <h2 className="text-[21px] font-semibold text-muted">
+              <h2 className="flex items-center gap-2.5 text-[21px] font-semibold text-muted">
+                <span className="text-[var(--color-accent)]">
+                  <Icon name={GROUP_ICON[group]} size={22} />
+                </span>
                 <T {...GROUP_LABEL[group]} />
               </h2>
             </Reveal>
@@ -58,8 +68,8 @@ export default function ProductsPage() {
                     href={`/products/${p.slug}`}
                     className={
                       single
-                        ? "group flex flex-col gap-4 rounded-[var(--radius-ap)] bg-[var(--color-surface)] p-8 transition-transform duration-500 hover:-translate-y-1 sm:flex-row sm:items-center sm:justify-between sm:p-10"
-                        : "group flex h-full flex-col rounded-[var(--radius-ap)] bg-[var(--color-surface)] p-8 transition-transform duration-500 hover:-translate-y-1"
+                        ? "card-ap group flex flex-col gap-4 rounded-[var(--radius-ap)] bg-[var(--color-surface)] p-8 sm:flex-row sm:items-center sm:justify-between sm:p-10"
+                        : "card-ap group flex h-full flex-col rounded-[var(--radius-ap)] bg-[var(--color-surface)] p-8"
                     }
                   >
                     <div className={single ? "max-w-[46ch]" : ""}>

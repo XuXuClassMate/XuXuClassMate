@@ -146,7 +146,7 @@ export default function Home() {
             {PRODUCTS.map((p) => {
               const external = p.href.startsWith("http");
               const cardClass =
-                "group flex h-full flex-col rounded-[var(--radius-ap)] bg-[var(--color-surface)] p-8 transition-transform duration-500 hover:-translate-y-1";
+                "card-ap group flex h-full flex-col rounded-[var(--radius-ap)] bg-[var(--color-surface)] p-8";
               const inner = (
                 <>
                   <p className="text-[13px] font-medium text-muted">
@@ -214,7 +214,7 @@ export default function Home() {
       </section>
 
       {/* Closing CTA */}
-      <section id="try" className="bg-[var(--color-bg)]">
+      <section id="try" className="ambient relative overflow-hidden bg-[var(--color-bg)]">
         <div className="container-ap py-32 text-center">
           <Reveal>
             <h2 className="display-1 mx-auto max-w-[16ch]">

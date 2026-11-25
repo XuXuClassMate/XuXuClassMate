@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
  * retizethemed to our tokens — not the shadcn default theme.
  */
 const buttonVariants = cva(
-  "inline-flex items-center justify-center rounded-full font-normal transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center rounded-full font-normal transition-[transform,background-color,color] duration-200 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
