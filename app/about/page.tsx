@@ -14,6 +14,17 @@ export const metadata: Metadata = {
     "QA Engineer and SDET focused on test automation, AI testing, and shipping quality tools that run in production.",
 };
 
+const CONTACT_CHANNELS: {
+  name: string;
+  handle: string;
+  href: string;
+  icon: "code" | "box" | "download";
+}[] = [
+  { name: "GitHub", handle: "InnoNestX", href: "https://github.com/InnoNestX", icon: "code" },
+  { name: "Docker Hub", handle: "xuxuclassmate", href: "https://hub.docker.com/u/xuxuclassmate", icon: "box" },
+  { name: "ClawHub", handle: "xuxuclassmate", href: "https://clawhub.ai/xuxuclassmate", icon: "download" },
+];
+
 const PRINCIPLES: { title: Localized; body: Localized }[] = [
   {
     title: {
@@ -293,9 +304,59 @@ export default function AboutPage() {
               <Link href="/products" className="link-ap">
                 <T en="See the products" zh="查看产品" ar="شاهد المنتجات" fr="Voir les produits" ru="Смотреть продукты" es="Ver los productos" />
               </Link>
-              <Link href="/#try" className="link-ap">
+              <Link href="#contact" className="link-ap">
                 <T en="Get in touch" zh="取得联系" ar="تواصل معي" fr="Me contacter" ru="Связаться" es="Contactar" />
               </Link>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Contact */}
+      <section
+        id="contact"
+        className="scroll-mt-[var(--nav-h)] bg-[var(--color-surface)]"
+      >
+        <div className="container-ap py-24 text-center">
+          <Reveal>
+            <p className="eyebrow">
+              <T en="Contact" zh="联系" ar="تواصل" fr="Contact" ru="Контакты" es="Contacto" />
+            </p>
+            <h2 className="display-2 mx-auto mt-3 max-w-[16ch]">
+              <T en="Let's talk." zh="聊一聊。" ar="لنتحدّث." fr="Discutons." ru="Давайте поговорим." es="Hablemos." />
+            </h2>
+            <p className="lead mx-auto mt-5 max-w-[46ch]">
+              <T
+                en="The fastest way to reach me is in the open — where I ship and measure everything. Find me on any of these."
+                zh="找我最快的方式就在公开处——我在那里交付并实时度量一切。通过下面任意一个渠道都能联系到我。"
+                ar="أسرع طريقة للوصول إليّ هي في العلن — حيث أطلق وأقيس كل شيء. تجدني عبر أيٍّ من هذه القنوات."
+                fr="Le plus rapide pour me joindre, c'est au grand jour — là où je livre et mesure tout. Retrouvez-moi sur l'un de ces canaux."
+                ru="Быстрее всего связаться со мной — в открытую, там, где я всё выпускаю и измеряю. Найдите меня в любом из этих мест."
+                es="La forma más rápida de contactarme es en abierto — donde publico y mido todo. Encuéntrame en cualquiera de estos canales."
+              />
+            </p>
+            <div className="mx-auto mt-10 grid max-w-[720px] gap-4 sm:grid-cols-3">
+              {CONTACT_CHANNELS.map((c, i) => (
+                <a
+                  key={c.name}
+                  href={c.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="card-ap flex flex-col items-center gap-3 rounded-[var(--radius-ap)] border border-[var(--color-line)] bg-[var(--color-bg)] p-7"
+                  style={{ borderTop: `2px solid ${HUES[i % HUES.length]}` }}
+                >
+                  <span
+                    className="grid h-11 w-11 place-items-center rounded-xl"
+                    style={{ backgroundColor: `color-mix(in srgb, ${HUES[i % HUES.length]} 15%, transparent)`, color: HUES[i % HUES.length] }}
+                  >
+                    <Icon name={c.icon} size={22} />
+                  </span>
+                  <span className="text-[17px] font-semibold tracking-tight text-ink">
+                    {c.name}
+                  </span>
+                  <span className="font-mono text-[13px] text-muted">@{c.handle}</span>
+                </a>
+              ))}
             </div>
           </Reveal>
         </div>

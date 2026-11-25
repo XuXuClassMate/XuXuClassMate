@@ -56,7 +56,7 @@ const COLS: {
       },
       {
         label: { en: "Contact", zh: "联系", ar: "تواصل", fr: "Contact", ru: "Контакты", es: "Contacto" },
-        href: "/#try",
+        href: "/about#contact",
       },
     ],
   },
