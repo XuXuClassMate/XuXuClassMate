@@ -2,6 +2,8 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Reveal } from "@/components/reveal";
 import { T, type Localized } from "@/components/i18n";
+import { Icon } from "@/components/icons";
+import { CAPABILITIES, AI_ROLES, AI_HUMAN_NOTE, OUTPUTS } from "@/lib/about-content";
 
 export const metadata: Metadata = {
   title: "About — XuXuClassMate",
@@ -149,7 +151,102 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Capabilities */}
       <section className="bg-[var(--color-surface)]">
+        <div className="container-ap py-24">
+          <Reveal>
+            <p className="eyebrow">
+              <T en="Capabilities" zh="核心能力" ar="القدرات" fr="Compétences" ru="Компетенции" es="Capacidades" />
+            </p>
+            <h2 className="display-2 mt-3 max-w-[18ch]">
+              <T en="What I test, and how." zh="我测什么,怎么测。" ar="ماذا أختبر، وكيف." fr="Ce que je teste, et comment." ru="Что я тестирую и как." es="Qué pruebo, y cómo." />
+            </h2>
+          </Reveal>
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {CAPABILITIES.map((c, i) => (
+              <Reveal key={c.title.en} delay={(i % 3) * 0.06}>
+                <article className="card-ap h-full rounded-[var(--radius-ap)] bg-[var(--color-bg)] p-7">
+                  <span className="grid h-11 w-11 place-items-center rounded-xl bg-[color-mix(in_srgb,var(--color-accent)_12%,transparent)] text-[var(--color-accent)]">
+                    <Icon name={c.icon} size={22} />
+                  </span>
+                  <h3 className="mt-4 text-[20px] font-semibold tracking-tight">
+                    <T {...c.title} />
+                  </h3>
+                  <p className="mt-2 text-[16px] leading-relaxed text-muted">
+                    <T {...c.body} />
+                  </p>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* AI collaboration workflow */}
+      <section id="ai-workflow" className="bg-[var(--color-bg)]">
+        <div className="container-ap py-24">
+          <Reveal>
+            <p className="eyebrow">
+              <T en="AI collaboration" zh="AI 协作" ar="التعاون مع الذكاء الاصطناعي" fr="Collaboration IA" ru="Работа с ИИ" es="Colaboración con IA" />
+            </p>
+            <h2 className="display-2 mt-3 max-w-[20ch]">
+              <T en="A team of AI assistants, split by role." zh="一支按角色分工的 AI 助手团队。" ar="فريق من مساعدي الذكاء الاصطناعي، موزّع بالأدوار." fr="Une équipe d'assistants IA, répartis par rôle." ru="Команда ИИ-ассистентов, разделённая по ролям." es="Un equipo de asistentes de IA, repartidos por rol." />
+            </h2>
+            <p className="lead mt-5 max-w-[52ch]">
+              <T {...AI_HUMAN_NOTE} />
+            </p>
+          </Reveal>
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {AI_ROLES.map((r, i) => (
+              <Reveal key={r.title.en} delay={(i % 3) * 0.06}>
+                <article className="card-ap flex h-full items-start gap-4 rounded-[var(--radius-ap)] border border-[var(--color-line)] bg-[var(--color-bg)] p-6">
+                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[color-mix(in_srgb,var(--color-accent)_12%,transparent)] text-[var(--color-accent)]">
+                    <Icon name={r.icon} size={20} />
+                  </span>
+                  <div>
+                    <h3 className="text-[18px] font-semibold tracking-tight">
+                      <T {...r.title} />
+                    </h3>
+                    <p className="mt-1 text-[15px] leading-relaxed text-muted">
+                      <T {...r.body} />
+                    </p>
+                  </div>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Outputs */}
+      <section className="bg-[var(--color-surface)]">
+        <div className="container-ap py-24">
+          <Reveal>
+            <p className="eyebrow">
+              <T en="What I deliver" zh="主要产出" ar="ما أُسلّمه" fr="Ce que je livre" ru="Что я поставляю" es="Lo que entrego" />
+            </p>
+            <h2 className="display-2 mt-3 max-w-[18ch]">
+              <T en="Evidence, not just opinions." zh="交付证据,而不只是结论。" ar="أدلّة، لا مجرّد آراء." fr="Des preuves, pas juste des avis." ru="Доказательства, а не только мнения." es="Evidencia, no solo opiniones." />
+            </h2>
+          </Reveal>
+          <div className="mt-12 grid gap-6 sm:grid-cols-2">
+            {OUTPUTS.map((o, i) => (
+              <Reveal key={o.title.en} delay={(i % 2) * 0.06}>
+                <article className="card-ap h-full rounded-[var(--radius-ap)] bg-[var(--color-bg)] p-7">
+                  <h3 className="text-[20px] font-semibold tracking-tight">
+                    <T {...o.title} />
+                  </h3>
+                  <p className="mt-2 text-[16px] leading-relaxed text-muted">
+                    <T {...o.body} />
+                  </p>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[var(--color-bg)]">
         <div className="container-ap py-24 text-center">
           <Reveal>
             <h2 className="display-2 mx-auto max-w-[18ch]">

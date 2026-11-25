@@ -6,6 +6,8 @@ import { Services } from "@/components/services";
 import { Reveal } from "@/components/reveal";
 import { buttonVariants } from "@/components/ui/button";
 import { T, type Localized } from "@/components/i18n";
+import { Icon } from "@/components/icons";
+import { AI_ROLES, AI_HUMAN_NOTE } from "@/lib/about-content";
 
 const INFRA: Localized = {
   en: "Developer infrastructure",
@@ -177,6 +179,41 @@ export default function Home() {
                 </Reveal>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* AI collaboration workflow highlight (dark band) */}
+      <section id="ai-workflow" className="bg-panel text-panel-ink">
+        <div className="container-ap py-28">
+          <Reveal>
+            <p className="eyebrow" style={{ color: "#5ac8fa" }}>
+              <T en="AI collaboration" zh="AI 协作" ar="التعاون مع الذكاء الاصطناعي" fr="Collaboration IA" ru="Работа с ИИ" es="Colaboración con IA" />
+            </p>
+            <h2 className="display-2 mt-3 max-w-[20ch] text-panel-ink">
+              <T en="A one-person test team, run with AI." zh="用 AI 带起来的一人测试团队。" ar="فريق اختبار من شخص واحد، يُدار بالذكاء الاصطناعي." fr="Une équipe de test d'une personne, menée avec l'IA." ru="Команда тестирования из одного человека — на базе ИИ." es="Un equipo de pruebas de una persona, gestionado con IA." />
+            </h2>
+            <p className="mt-5 max-w-[52ch] text-[17px] leading-relaxed text-panel-muted">
+              <T {...AI_HUMAN_NOTE} />
+            </p>
+          </Reveal>
+          <div className="mt-10 flex flex-wrap gap-3">
+            {AI_ROLES.map((r) => (
+              <span
+                key={r.title.en}
+                className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-4 py-2 text-[14px] text-panel-ink"
+              >
+                <span className="text-[#5ac8fa]">
+                  <Icon name={r.icon} size={16} />
+                </span>
+                <T {...r.title} />
+              </span>
+            ))}
+          </div>
+          <div className="mt-9">
+            <Link href="/about#ai-workflow" className="link-ap" style={{ color: "#5ac8fa" }}>
+              <T en="See how it works" zh="了解工作方式" ar="شاهد كيف يعمل" fr="Voir comment ça marche" ru="Как это работает" es="Ver cómo funciona" />
+            </Link>
           </div>
         </div>
       </section>
