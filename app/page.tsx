@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Hero } from "@/components/hero";
 import { ProductPin } from "@/components/product-pin";
-import { Metrics } from "@/components/metrics";
+import { LiveStats } from "@/components/live-stats";
 import { Services } from "@/components/services";
 import { Reveal } from "@/components/reveal";
 import { buttonVariants } from "@/components/ui/button";
@@ -134,8 +134,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Proof */}
-      <Metrics />
+      {/* Proof — live numbers */}
+      <LiveStats />
 
       {/* Products grid */}
       <section id="products" className="bg-[var(--color-bg)]">
