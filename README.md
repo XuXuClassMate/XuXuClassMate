@@ -1,36 +1,14 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# XuXuClassMate
 
-## Getting Started
+[www.xuxuclassmate.com](https://www.xuxuclassmate.com)
 
-First, run the development server:
+QA / SDET 个人站点。把已经交出去的测试工具、基础设施和现场笔记摊开，用公开数据说话。
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 站点里有什么
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **产品** — AI 测试用例生成器、达梦 / Highgo / 金仓 / TiDB 测试库镜像、Open Stats Gateway、relay 多智能体流程
+- **工程笔记** — 性能预算、Playwright、用完即弃的测试库、权限与多租户、AI 在 QA 里怎么用
+- **AI 工作流** — 一个人带一队助手时的分工、交接和红线
+- **实时指标** — Docker 拉取、ClawHub 下载、页面浏览等，经 [open.xuxuclassmate.com](https://open.xuxuclassmate.com) 公开查询
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+工具源码在 [InnoNestX](https://github.com/InnoNestX)，镜像在 [Docker Hub](https://hub.docker.com/u/xuxuclassmate)，技能在 [ClawHub](https://clawhub.ai/xuxuclassmate)。
