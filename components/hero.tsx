@@ -1,9 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { useTx } from "@/components/i18n";
+import { useTx, type Localized } from "@/components/i18n";
 import { Aurora } from "@/components/aurora";
 
 const ease = [0.22, 0.61, 0.36, 1] as const;
@@ -54,20 +53,17 @@ export function Hero() {
             es: "De un generador de casos de prueba con IA a bases de prueba descargables, una pasarela de Docker Hub, agentes programados y habilidades de ClawHub — una pequeña caja de herramientas llevada a producción y medida en abierto.",
           })}
         </motion.p>
-        <motion.div
-          className="mt-7 flex items-center justify-center gap-7"
-          {...rise(0.28)}
-        >
+        <motion.div className="mt-7 flex items-center justify-center gap-7" {...rise(0.28)}>
           <Link href="/#overview" className="link-ap">
             {tx({ en: "See the work", zh: "查看作品", ar: "شاهد الأعمال", fr: "Voir le travail", ru: "Смотреть работы", es: "Ver el trabajo" })}
           </Link>
-          <Link href="/products/testcase-generator" className="link-ap">
-            {tx({ en: "Try the generator", zh: "试用生成器", ar: "جرّب المولّد", fr: "Essayer le générateur", ru: "Попробовать генератор", es: "Probar el generador" })}
+          <Link href="/products" className="link-ap">
+            {tx({ en: "Browse the toolbox", zh: "浏览工具箱", ar: "تصفّح الصندوق", fr: "Parcourir la boîte", ru: "Открыть набор", es: "Ver la caja" })}
           </Link>
         </motion.div>
       </div>
 
-      {/* Product visual: the generator's real output, as a window */}
+      {/* Hero visual: the whole toolbox at a glance (distinct from the testcase-generator deep-dive below) */}
       <motion.div
         className="container-ap pb-24"
         {...(reduce
@@ -78,191 +74,85 @@ export function Hero() {
               transition: { duration: 0.9, delay: 0.36, ease },
             })}
       >
-        <GeneratorWindow />
+        <ToolboxWindow />
       </motion.div>
     </section>
   );
 }
 
-function GeneratorWindow() {
+type Tool = { name: string; kind: Localized; tag: string; accent: string };
+
+function ToolboxWindow() {
   const tx = useTx();
-  const reduce = useReducedMotion();
-  const cases = [
+  const tools: Tool[] = [
     {
-      id: "TC-01",
-      p: "P0",
-      title: {
-        en: "Request OTP with a valid email",
-        zh: "使用有效邮箱请求验证码",
-        ar: "طلب رمز OTP ببريد صالح",
-        fr: "Demander un OTP avec un e-mail valide",
-        ru: "Запрос OTP с корректным email",
-        es: "Solicitar OTP con un correo válido",
-      },
-      steps: 3,
-      expected: {
-        en: "OTP sent, 5-min countdown",
-        zh: "验证码已发送,5 分钟倒计时",
-        ar: "تم إرسال الرمز، عدّ تنازلي 5 دقائق",
-        fr: "OTP envoyé, compte à rebours 5 min",
-        ru: "OTP отправлен, отсчёт 5 мин",
-        es: "OTP enviado, cuenta atrás 5 min",
-      },
+      name: "testcase-generator",
+      kind: { en: "Requirements → reviewed test cases", zh: "需求 → 评审后的测试用例", ar: "المتطلبات → حالات اختبار مُراجَعة", fr: "Exigences → cas de test relus", ru: "Требования → проверенные тест-кейсы", es: "Requisitos → casos de prueba revisados" },
+      tag: "Docker · MCP",
+      accent: "#5ac8fa",
     },
     {
-      id: "TC-02",
-      p: "P1",
-      title: {
-        en: "Reject an invalid email format",
-        zh: "拒绝非法邮箱格式",
-        ar: "رفض صيغة بريد غير صالحة",
-        fr: "Rejeter un format d'e-mail invalide",
-        ru: "Отклонить неверный формат email",
-        es: "Rechazar un formato de correo inválido",
-      },
-      steps: 3,
-      expected: {
-        en: "Inline error, no OTP",
-        zh: "行内报错,不发送验证码",
-        ar: "خطأ ضمن الحقل، بدون OTP",
-        fr: "Erreur en ligne, pas d'OTP",
-        ru: "Ошибка рядом с полем, без OTP",
-        es: "Error en línea, sin OTP",
-      },
+      name: "test-db-suite",
+      kind: { en: "Pullable, seeded test databases", zh: "可拉取、带种子数据的测试库", ar: "قواعد بيانات اختبار قابلة للسحب ومُهيّأة", fr: "Bases de test récupérables et amorcées", ru: "Загружаемые тестовые БД с данными", es: "Bases de prueba descargables con datos" },
+      tag: "Docker",
+      accent: "#2dd4bf",
     },
     {
-      id: "TC-03",
-      p: "P2",
-      title: {
-        en: "Resend is rate-limited after 3 tries",
-        zh: "重发 3 次后被限流",
-        ar: "تحديد معدّل إعادة الإرسال بعد 3 محاولات",
-        fr: "Renvoi limité après 3 essais",
-        ru: "Повторная отправка ограничена после 3 попыток",
-        es: "Reenvío limitado tras 3 intentos",
-      },
-      steps: 4,
-      expected: {
-        en: "Cooldown shown, send disabled",
-        zh: "显示冷却,发送禁用",
-        ar: "عرض مهلة، تعطيل الإرسال",
-        fr: "Délai affiché, envoi désactivé",
-        ru: "Показан таймаут, отправка отключена",
-        es: "Enfriamiento mostrado, envío desactivado",
-      },
+      name: "docker-hub-api-gateway",
+      kind: { en: "Docker Hub stats, one API", zh: "Docker Hub 数据,一个 API", ar: "إحصاءات Docker Hub عبر API واحد", fr: "Stats Docker Hub, une API", ru: "Статистика Docker Hub, один API", es: "Estadísticas de Docker Hub, una API" },
+      tag: "Workers",
+      accent: "#a78bfa",
+    },
+    {
+      name: "relay",
+      kind: { en: "Multi-agent dev+test workflow", zh: "多智能体开发+测试工作流", ar: "سير عمل تطوير واختبار متعدد الوكلاء", fr: "Workflow dev+test multi-agents", ru: "Мультиагентный процесс dev+test", es: "Flujo dev+test multiagente" },
+      tag: "ClawHub · Docker",
+      accent: "#f5b556",
+    },
+    {
+      name: "scheduled-agents",
+      kind: { en: "Routines that watch and report", zh: "定时巡检并汇报的智能体", ar: "روتينات تراقب وتُبلّغ", fr: "Routines qui surveillent et rapportent", ru: "Routines, что следят и отчитываются", es: "Rutinas que vigilan e informan" },
+      tag: "Agents",
+      accent: "#f06da0",
     },
   ];
-  const total = cases.length;
-  const rootRef = useRef<HTMLDivElement>(null);
-  const [started, setStarted] = useState(false);
-  const [revealed, setRevealed] = useState(reduce ? total : 0);
-  const [typed, setTyped] = useState(0);
-
-  const current = revealed < total ? cases[revealed] : null;
-  const curTitle = current ? tx(current.title) : "";
-  const done = reduce || revealed >= total;
-
-  // Start generating once the window scrolls into view.
-  useEffect(() => {
-    if (reduce) return;
-    const el = rootRef.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) {
-          setStarted(true);
-          io.disconnect();
-        }
-      },
-      { threshold: 0.3 },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, [reduce]);
-
-  // Typewriter: type the current case title, then reveal it and advance.
-  useEffect(() => {
-    if (reduce || !started || !current) return;
-    if (typed < curTitle.length) {
-      const id = setTimeout(() => setTyped((v) => v + 1), 24);
-      return () => clearTimeout(id);
-    }
-    const id = setTimeout(() => {
-      setRevealed((v) => v + 1);
-      setTyped(0);
-    }, 360);
-    return () => clearTimeout(id);
-  }, [started, typed, revealed, curTitle, current, reduce]);
-
-  const meta = (c: (typeof cases)[number]) => (
-    <>
-      {tx({ en: "Steps", zh: "步骤", ar: "خطوات", fr: "Étapes", ru: "Шаги", es: "Pasos" })} {c.steps} ·{" "}
-      {tx({ en: "Expected", zh: "预期", ar: "المتوقع", fr: "Attendu", ru: "Ожидается", es: "Esperado" })}:{" "}
-      <span className="text-[#6fd39a]">{tx(c.expected)}</span>
-    </>
-  );
 
   return (
-    <div
-      ref={rootRef}
-      className="mx-auto max-w-[920px] overflow-hidden rounded-[var(--radius-ap)] border border-[var(--color-line)] bg-panel shadow-[0_30px_80px_-20px_rgba(0,0,0,0.35)]"
-    >
+    <div className="mx-auto max-w-[920px] overflow-hidden rounded-[var(--radius-ap)] border border-[var(--color-line)] bg-panel shadow-[0_30px_80px_-20px_rgba(0,0,0,0.35)]">
       <div className="flex items-center gap-2 border-b border-white/10 px-5 py-3.5" dir="ltr">
         <span className="h-3 w-3 rounded-full bg-white/15" />
         <span className="h-3 w-3 rounded-full bg-white/15" />
         <span className="h-3 w-3 rounded-full bg-white/15" />
         <span className="ml-3 flex items-center gap-2 font-mono text-[12px] text-panel-muted">
           <span className="relative flex h-1.5 w-1.5">
-            {done && (
-              <span className="absolute inline-flex h-full w-full rounded-full bg-[#6fd39a] opacity-70 motion-safe:animate-ping" />
-            )}
-            <span
-              className={`relative inline-flex h-1.5 w-1.5 rounded-full ${done ? "bg-[#6fd39a]" : "bg-[#f5c451] motion-safe:animate-pulse"}`}
-            />
+            <span className="absolute inline-flex h-full w-full rounded-full bg-[#6fd39a] opacity-70 motion-safe:animate-ping" />
+            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#6fd39a]" />
           </span>
-          testcase-generator —{" "}
-          {done
-            ? tx({ en: "reviewed set", zh: "已评审用例集", ar: "مجموعة مُراجَعة", fr: "ensemble relu", ru: "проверенный набор", es: "conjunto revisado" })
-            : "generating…"}
+          {tx({ en: "the toolbox — shipped & measured in the open", zh: "工具箱 — 已交付并公开度量", ar: "صندوق الأدوات — مُسلّم ويُقاس علناً", fr: "la boîte à outils — livrée et mesurée au grand jour", ru: "набор — выпущен и измеряется открыто", es: "la caja — enviada y medida en abierto" })}
         </span>
       </div>
       <div className="grid gap-3 p-5 sm:p-7">
-        {cases.map((c, i) => {
-          if (done || i < revealed) {
-            return (
-              <div key={c.id} className="rounded-xl border border-white/10 p-4 text-left">
-                <div className="flex items-center justify-between">
-                  <span className="font-mono text-[13px] text-[#5ac8fa]">{c.id}</span>
-                  <span className="rounded-full bg-[var(--color-accent)] px-2.5 py-0.5 text-[11px] font-medium text-white">
-                    {c.p}
-                  </span>
-                </div>
-                <p className="mt-1.5 text-[15px] text-panel-ink">{tx(c.title)}</p>
-                <p className="mt-1 font-mono text-[12px] text-panel-muted">{meta(c)}</p>
-              </div>
-            );
-          }
-          if (i === revealed && started) {
-            return (
-              <div
-                key={c.id}
-                className="rounded-xl border border-[#5ac8fa]/30 bg-white/[0.02] p-4 text-left"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="font-mono text-[13px] text-[#5ac8fa]">{c.id}</span>
-                  <span className="rounded-full bg-white/10 px-2.5 py-0.5 text-[11px] font-medium text-panel-muted">
-                    {c.p}
-                  </span>
-                </div>
-                <p className="mt-1.5 text-[15px] text-panel-ink">
-                  {curTitle.slice(0, typed)}
-                  <span aria-hidden="true" className="ml-0.5 inline-block h-[1.05em] w-[2px] translate-y-[2px] bg-[#5ac8fa] align-middle motion-safe:animate-pulse" />
-                </p>
-              </div>
-            );
-          }
-          return null;
-        })}
+        {tools.map((t) => (
+          <div
+            key={t.name}
+            className="flex items-center gap-4 rounded-xl border border-white/10 p-4 text-left"
+          >
+            <span
+              className="hidden h-9 w-9 shrink-0 place-items-center rounded-lg font-mono text-[13px] sm:grid"
+              style={{ backgroundColor: `color-mix(in srgb, ${t.accent} 16%, transparent)`, color: t.accent }}
+              aria-hidden="true"
+            >
+              {t.name.slice(0, 2)}
+            </span>
+            <div className="min-w-0 flex-1">
+              <p className="truncate font-mono text-[13px]" style={{ color: t.accent }}>{t.name}</p>
+              <p className="mt-0.5 text-[14px] text-panel-ink">{tx(t.kind)}</p>
+            </div>
+            <span className="shrink-0 rounded-full border border-white/10 px-2.5 py-0.5 font-mono text-[11px] text-panel-muted">
+              {t.tag}
+            </span>
+          </div>
+        ))}
       </div>
     </div>
   );
