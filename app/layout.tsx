@@ -4,6 +4,7 @@ import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { ThemeProvider } from "@/components/theme";
 import { I18nProvider, T } from "@/components/i18n";
+import { Analytics } from "@/components/analytics";
 
 const DESCRIPTION =
   "Turn requirements into structured, reviewable test cases, and run them on pullable test databases. QA Engineer · SDET · AI testing.";
@@ -69,6 +70,7 @@ export default function RootLayout({
       <body className="antialiased">
         <ThemeProvider>
           <I18nProvider>
+            <Analytics />
             <a href="#main-content" className="skip-link">
               <T en="Skip to content" zh="跳到主要内容" ar="تخطَّ إلى المحتوى" fr="Aller au contenu" ru="Перейти к содержимому" es="Saltar al contenido" />
             </a>
