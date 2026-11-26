@@ -9,9 +9,8 @@ import { useTx } from "@/components/i18n";
 import { Icon, type IconName } from "@/components/icons";
 
 const GW = "https://open.xuxuclassmate.com";
-const USER = "xuxuclassmate";
-// ClawHub + GitHub aggregates are computed and cached server-side by the gateway
-// (/api/portfolio); the site just pulls the latest value so no visitor recomputes it.
+// All stats (Docker + ClawHub + GitHub) are aggregated and cached in Redis by the
+// gateway (/api/portfolio); the site just pulls the latest value — no recomputation.
 
 type Stats = {
   pulls: number;
@@ -160,58 +159,33 @@ export function LiveStats() {
   useEffect(() => {
     const ac = new AbortController();
     const sig = ac.signal;
-    const jsonOf = (u: string) => fetch(u, { signal: sig }).then((r) => r.json());
 
+    // Everything (Docker + ClawHub + GitHub) is aggregated and cached in Redis by
+    // the gateway; the site pulls this one endpoint, no per-visitor recomputation.
     (async () => {
-      const docker = (async () => {
-        const [s, g, h] = await Promise.all([
-          jsonOf(`${GW}/api/user/stats?username=${USER}`),
-          jsonOf(`${GW}/api/stats`),
-          jsonOf(`${GW}/api/user/history?username=${USER}`),
-        ]);
-        const points: number[] = Array.isArray(h?.points)
-          ? h.points.map((p: { totalPulls: number }) => p.totalPulls)
-          : [];
-        return {
-          pulls: Number(s?.totalPulls) || FALLBACK.pulls,
-          images: Number(s?.repositoryCount) || FALLBACK.images,
-          apiCalls: Number(g?.totalCalls) || FALLBACK.apiCalls,
-          monthDelta:
-            points.length > 1 ? points[points.length - 1] - points[0] : FALLBACK.monthDelta,
-          history: points.length > 1 ? points : FALLBACK.history,
-        };
-      })();
-
-      // ClawHub + GitHub are aggregated and cached server-side; pull the one value.
-      const portfolio = (async () => {
-        try {
-          const p = await jsonOf(`${GW}/api/portfolio`);
-          if (p && (Number(p.clawSkills) > 0 || Number(p.clawPlugins) > 0)) {
-            return {
-              clawDownloads: Number(p.clawDownloads) || FALLBACK.clawDownloads,
-              clawSkills: Number(p.clawSkills) || FALLBACK.clawSkills,
-              clawPlugins: Number(p.clawPlugins) || FALLBACK.clawPlugins,
-              ghIssues: Number(p.ghIssues) || FALLBACK.ghIssues,
-              ghPRs: Number(p.ghPRs) || FALLBACK.ghPRs,
-            };
-          }
-        } catch {
-          /* fall through to fallback */
-        }
-        return {
-          clawDownloads: FALLBACK.clawDownloads,
-          clawSkills: FALLBACK.clawSkills,
-          clawPlugins: FALLBACK.clawPlugins,
-          ghIssues: FALLBACK.ghIssues,
-          ghPRs: FALLBACK.ghPRs,
-        };
-      })();
-
-      const [d, p] = await Promise.all([docker, portfolio]);
-      if (sig.aborted) return;
-      setData({ ...d, ...p });
-      setLive(true);
-    })().catch(() => {});
+      try {
+        const p = await fetch(`${GW}/api/portfolio`, { signal: sig }).then((r) => r.json());
+        if (sig.aborted || !p) return;
+        const healthy = Number(p.clawSkills) > 0 || Number(p.pulls) > 0;
+        if (!healthy) return;
+        const hist = Array.isArray(p.history) ? p.history.map(Number).filter(Number.isFinite) : [];
+        setData({
+          pulls: Number(p.pulls) || FALLBACK.pulls,
+          images: Number(p.images) || FALLBACK.images,
+          apiCalls: Number(p.apiCalls) || FALLBACK.apiCalls,
+          monthDelta: Number(p.monthDelta) || FALLBACK.monthDelta,
+          history: hist.length > 1 ? hist : FALLBACK.history,
+          clawDownloads: Number(p.clawDownloads) || FALLBACK.clawDownloads,
+          clawSkills: Number(p.clawSkills) || FALLBACK.clawSkills,
+          clawPlugins: Number(p.clawPlugins) || FALLBACK.clawPlugins,
+          ghIssues: Number(p.ghIssues) || FALLBACK.ghIssues,
+          ghPRs: Number(p.ghPRs) || FALLBACK.ghPRs,
+        });
+        setLive(true);
+      } catch {
+        /* keep fallback */
+      }
+    })();
 
     return () => ac.abort();
   }, []);
