@@ -5,6 +5,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { ThemeProvider } from "@/components/theme";
 import { I18nProvider, T } from "@/components/i18n";
 import { Analytics } from "@/components/analytics";
+import { ClientErrorBoundary } from "@/components/client-error-boundary";
 
 const DESCRIPTION =
   "Turn requirements into structured, reviewable test cases, and run them on pullable test databases. QA Engineer · SDET · AI testing.";
@@ -83,7 +84,9 @@ export default function RootLayout({
               <T en="Skip to content" zh="跳到主要内容" ar="تخطَّ إلى المحتوى" fr="Aller au contenu" ru="Перейти к содержимому" es="Saltar al contenido" />
             </a>
             <SiteNav />
-            <main id="main-content">{children}</main>
+            <ClientErrorBoundary>
+              <main id="main-content">{children}</main>
+            </ClientErrorBoundary>
             <SiteFooter />
           </I18nProvider>
         </ThemeProvider>

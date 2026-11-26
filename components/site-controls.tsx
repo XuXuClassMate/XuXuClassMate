@@ -15,7 +15,7 @@ export function ThemeToggle({ className }: { className?: string }) {
       onClick={toggle}
       aria-label={dark ? "Switch to light theme" : "Switch to dark theme"}
       className={cn(
-        "grid h-9 w-9 place-items-center rounded-full text-ink/80 transition-colors hover:bg-[color-mix(in_srgb,var(--color-ink)_8%,transparent)] hover:text-ink",
+        "nav-tap grid h-11 w-11 place-items-center rounded-full text-ink/80 transition-colors hover:bg-[color-mix(in_srgb,var(--color-ink)_8%,transparent)] hover:text-ink",
         className,
       )}
     >
@@ -51,14 +51,15 @@ export function LangMenu({ className }: { className?: string }) {
 
   useEffect(() => {
     if (!open) return;
-    const onDown = (e: MouseEvent) => {
+    // iOS 上 mousedown 经常不冒泡,用 pointerdown 才能点空白处收起菜单。
+    const onDown = (e: PointerEvent) => {
       if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
     };
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
-    document.addEventListener("mousedown", onDown);
+    document.addEventListener("pointerdown", onDown);
     document.addEventListener("keydown", onKey);
     return () => {
-      document.removeEventListener("mousedown", onDown);
+      document.removeEventListener("pointerdown", onDown);
       document.removeEventListener("keydown", onKey);
     };
   }, [open]);
@@ -71,7 +72,7 @@ export function LangMenu({ className }: { className?: string }) {
         aria-haspopup="menu"
         aria-expanded={open}
         aria-label="Change language"
-        className="flex h-9 items-center gap-1.5 rounded-full px-2.5 text-ink/80 transition-colors hover:bg-[color-mix(in_srgb,var(--color-ink)_8%,transparent)] hover:text-ink"
+        className="nav-tap flex h-11 items-center gap-1.5 rounded-full px-2.5 text-ink/80 transition-colors hover:bg-[color-mix(in_srgb,var(--color-ink)_8%,transparent)] hover:text-ink"
       >
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.6" />
@@ -100,7 +101,7 @@ export function LangMenu({ className }: { className?: string }) {
                 setOpen(false);
               }}
               className={cn(
-                "flex w-full items-center justify-between gap-4 px-4 py-2.5 text-left text-[14px] transition-colors hover:bg-[var(--color-surface)]",
+                "nav-tap flex w-full items-center justify-between gap-4 px-4 py-2.5 text-left text-[14px] transition-colors hover:bg-[var(--color-surface)]",
                 l === lang ? "text-ink" : "text-ink/75",
               )}
             >

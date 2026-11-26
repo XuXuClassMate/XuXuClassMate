@@ -8,7 +8,7 @@ import { T, LocalDate } from "@/components/i18n";
 export const metadata: Metadata = {
   title: "Engineering Notes — XuXuClassMate",
   description:
-    "Field notes on Playwright, Docker test infrastructure, and AI in QA — written from real work.",
+    "Field notes on performance budgets, Playwright flake, disposable test databases, permissions, and AI in QA — written from real work.",
 };
 
 export default function NotesPage() {
@@ -26,12 +26,12 @@ export default function NotesPage() {
             </h1>
             <p className="lead mx-auto mt-5 max-w-[44ch]">
               <T
-                en="Playwright, Docker test infrastructure, and AI in QA — written from real work, not theory."
-                zh="Playwright、Docker 测试基础设施,以及 QA 中的 AI——写自真实工作,而非空谈。"
-                ar="Playwright، وبنية اختبار Docker، والذكاء الاصطناعي في ضمان الجودة — مكتوبة من عمل حقيقي لا من نظريات."
-                fr="Playwright, l'infrastructure de test Docker et l'IA en QA — écrit à partir de travail réel, pas de théorie."
-                ru="Playwright, тестовая инфраструктура на Docker и ИИ в QA — из реальной работы, а не теории."
-                es="Playwright, infraestructura de pruebas con Docker e IA en QA — escrito desde el trabajo real, no la teoría."
+                en="How I actually test: performance budgets, Playwright flake, disposable databases, permissions, and AI review — field notes, not outlines."
+                zh="我实际怎么测:性能预算、Playwright 不稳定、用完即弃的库、权限,以及 AI 评审——现场笔记,不是提纲。"
+                ar="كيف أختبر فعلاً: ميزانيات أداء، وتذبذب Playwright، وقواعد قابلة للتخلّص، وصلاحيات، ومراجعة الذكاء الاصطناعي — ملاحظات ميدان لا مخططات."
+                fr="Comment je teste vraiment : budgets de perf, instabilité Playwright, bases jetables, permissions, revue IA — notes de terrain, pas des plans."
+                ru="Как я реально тестирую: бюджеты производительности, флак Playwright, одноразовые базы, права, ревью ИИ — полевые заметки, не конспекты."
+                es="Cómo testeo de verdad: presupuestos de rendimiento, flake de Playwright, bases desechables, permisos y revisión con IA — notas de campo, no esquemas."
               />
             </p>
           </Reveal>

@@ -1,0 +1,206 @@
+import { CAT, MIN, loc, type Note } from "./shared";
+
+export const frontEndPerformance: Note = {
+  slug: "front-end-performance",
+  title: loc(
+    "Front-end performance you can defend",
+    "站得住脚的前端性能",
+    "أداء واجهة أمامية يمكنك الدفاع عنه",
+    "Des performances front-end défendables",
+    "Производительность фронтенда, которую можно отстоять",
+    "Rendimiento front-end que puedes defender",
+  ),
+  date: "2026-10-12",
+  readingTime: MIN(14),
+  category: CAT.performance,
+  excerpt: loc(
+    "This site scored fine on a MacBook and went blank on an iPhone 11. A performance finding I cannot replay on a named device, network, and percentile is an opinion — not a bug I can hand to a developer.",
+    "这个站在 MacBook 上分数还行,iPhone 11 上一度白屏。不能在指定机型、网络和分位上复现的性能结论,只是看法,不是能交给研发的缺陷。",
+    "هذا الموقع بدا جيداً على ماك بوك وذهب فارغاً على آيفون 11. خلاصة أداء لا أُعيدها على جهاز وشبكة ورتبة مسمّاة رأي، لا علّة أسلّمها لمطوّر.",
+    "Ce site passait sur MacBook et s'est vidé sur iPhone 11. Un constat de perf que je ne peux pas rejouer sur un appareil, un réseau et un percentile nommés n'est qu'un avis.",
+    "Сайт выглядел нормально на MacBook и опустел на iPhone 11. Вывод о производительности без названного устройства, сети и процентиля — мнение, не баг для разработчика.",
+    "Este sitio puntuaba bien en un MacBook y se quedó en blanco en un iPhone 11. Un hallazgo que no puedo repetir en un dispositivo, red y percentil concretos es una opinión.",
+  ),
+  body: [
+    {
+      heading: loc(
+        "The machine that actually opened the page",
+        "真正打开页面的那台机器",
+        "الجهاز الذي فتح الصفحة فعلاً",
+        "La machine qui a vraiment ouvert la page",
+        "Машина, которая реально открыла страницу",
+        "La máquina que de verdad abrió la página",
+      ),
+      paragraphs: [
+        loc(
+          "I shipped a marketing site that looked finished on my laptop: Lighthouse in the nineties, GSAP pin on the generator story, a frosted nav, numbers counting up from zero. Then I opened it in Chrome on an iPhone 11. First it was a blank sheet the same colour as the background. After the overlay fix, the layout was right — and every live metric sat at 0. Language, theme, and the menu did nothing when tapped.",
+          "我把营销站做完时,笔记本上看着像成品:Lighthouse 九十分、生成器那一段 GSAP pin、一条毛玻璃导航、数字从 0 往上滚。然后用 iPhone 11 的 Chrome 打开。先是一整张和背景同色的白屏。遮罩修掉以后版面是对的——指标全是 0,语言、主题、菜单点了没反应。",
+          "شحنت موقعاً تسويقياً بدا مكتملاً على حاسوبي: Lighthouse في التسعينات، وتثبيت GSAP، وشريط بلور، وأرقام تعدّ من صفر. ثم فتحته في كروم على آيفون 11. أولاً ورقة فارغة بلون الخلفية. بعد إصلاح الطبقة صارت الصفحة صحيحة — وكل مقياس على 0. اللغة والسمة والقائمة بلا رد عند النقر.",
+          "J'ai livré un site marketing fini sur mon laptop : Lighthouse dans les 90, pin GSAP, nav floutée, compteurs depuis zéro. Puis Chrome sur iPhone 11. D'abord une feuille blanche. Après le masque, la mise en page était juste — et chaque métrique à 0. Langue, thème, menu : aucun tap.",
+          "Выкатил маркетинг-сайт, на ноуте готовый: Lighthouse под 90, GSAP pin, матовая шапка, счётчики с нуля. Потом Chrome на iPhone 11. Сначала белый лист цвета фона. После оверлея вёрстка верная — все метрики 0. Язык, тема, меню не реагировали на tap.",
+          "Publiqué un sitio de marketing que en el portátil parecía hecho: Lighthouse en los 90, pin de GSAP, nav esmerilada, números desde 0. Luego Chrome en un iPhone 11. Primero una hoja del color del fondo. Tras el overlay el layout estaba bien — y cada métrica en 0. Idioma, tema y menú no respondían al toque.",
+        ),
+        loc(
+          "None of that shows up as a red Lighthouse Performance score. The blank frame was `opacity:0` still sitting in the compositor (a closed menu, a Motion entrance, a clipped gradient). The dead taps were `backdrop-filter` on the same node as the buttons. The zeros were a count-up that never ran because the JS bundle targeted Safari 16.4 and iOS Chrome is still WebKit — if the bundle does not parse, hydration never happens, and SSR HTML of `0` is what you live with.",
+          "这些都不会把 Lighthouse 性能分打红。白屏是合成层里还停着的 `opacity:0`(关上的菜单、Motion 入场、裁切渐变)。点不动是按钮和 `backdrop-filter` 在同一节点上。全是 0,是因为数字从 0 起跳,而包的编译目标是 Safari 16.4,iOS 上的 Chrome 内核仍是 WebKit——包解析失败就没有 hydration,静态 HTML 里的 0 就是用户看到的全部。",
+          "لا يظهر شيء من هذا كدرجة Lighthouse حمراء. الإطار الفارغ `opacity:0` عالق في المُركّب. النقر الميت `backdrop-filter` على عقدة الأزرار. الأصفار عدّاد لم يجرِ لأن الحزمة استهدفت Safari 16.4 وكروم iOS ما زال WebKit — إن فشل التحليل لا يحدث hydration، وHTML لصفر هو ما تراه.",
+          "Rien de ça ne rougit un score Lighthouse. Le blanc, c'était `opacity:0` encore dans le compositeur. Les taps morts, `backdrop-filter` sur le même nœud que les boutons. Les zéros, un count-up jamais hydraté : cible Safari 16.4, Chrome iOS = WebKit. Si le bundle ne parse pas, le HTML à 0 est tout ce qui reste.",
+          "Ничто из этого не краснит Lighthouse. Белый кадр — `opacity:0` в композиторе. Мёртвые tap — `backdrop-filter` на том же узле, что кнопки. Нули — count-up без гидрации: цель Safari 16.4, iOS Chrome всё ещё WebKit. Бандл не парсится — живёшь с SSR-нулём.",
+          "Nada de eso pone rojo el Lighthouse. El marco en blanco era `opacity:0` en el compositor. Los toques muertos, `backdrop-filter` en el mismo nodo que los botones. Los ceros, un count-up que no hidrató: objetivo Safari 16.4, Chrome iOS sigue siendo WebKit. Si el bundle no parsea, el HTML con 0 es todo.",
+        ),
+      ],
+    },
+    {
+      heading: loc(
+        "Write the SLO like an acceptance line",
+        "SLO 要写成验收句",
+        "اكتب هدف الخدمة كسطر قبول",
+        "Écrire le SLO comme une ligne d'acceptation",
+        "Пиши SLO как строку приёмки",
+        "Escribe el SLO como una línea de aceptación",
+      ),
+      paragraphs: [
+        loc(
+          "Users do not feel a score. They feel Largest Contentful Paint, Interaction to Next Paint, and Cumulative Layout Shift — and whether the first paint is the real UI or a colour-matched void. I write those the same way I write functional acceptance: who, on what, under which network, at which percentile, compared to what budget.",
+          "用户没有「分数」这种体感。他们有的是 LCP、INP、CLS,以及第一屏到底是真界面还是一块同色空。我会写成功能验收那种句子:谁、什么设备、哪种网络、哪个分位、对照哪条预算。",
+          "المستخدم لا يحس بالدرجة. يحس بـ LCP وINP وCLS، وهل الرسم الأول واجهة حقيقية أم فراغ بلون الخلفية. أكتبها كما أكتب القبول الوظيفي: من، وعلى أي جهاز، وأي شبكة، وأي رتبة، مقابل أي ميزانية.",
+          "L'utilisateur ne sent pas un score. Il sent LCP, INP, CLS, et si le premier paint est l'UI ou un vide de la même couleur. Je les écris comme une recette : qui, sur quoi, sous quel réseau, à quel percentile, contre quel budget.",
+          "Пользователь не чувствует балл. Он чувствует LCP, INP, CLS и то, первый кадр — это UI или пустота того же цвета. Пишу как функциональную приёмку: кто, на чём, в какой сети, на каком процентиле, против какого бюджета.",
+          "El usuario no siente una nota. Siente LCP, INP, CLS y si el primer paint es la UI o un vacío del mismo color. Lo escribo como aceptación funcional: quién, en qué, bajo qué red, en qué percentil, frente a qué presupuesto.",
+        ),
+      ],
+      bullets: [
+        loc(
+          "The SLO I actually used after the iPhone 11 incident: first contentful UI on iPhone 11 Chrome (414×896, dpr 2), Slow 4G, cold cache, LCP p75 < 2.5s, INP p75 < 200ms, CLS p75 < 0.1 — and the language control must toggle on the first tap.",
+          "iPhone 11 那次之后我真正写下的 SLO:iPhone 11 Chrome(414×896,dpr 2)、Slow 4G、冷缓存,首屏是真 UI 而不是同色空;LCP p75 < 2.5s,INP p75 < 200ms,CLS p75 < 0.1——而且语言按钮第一次 tap 就要切。",
+          "هدف الخدمة بعد حادثة الآيفون 11: واجهة حقيقية على كروم آيفون 11 (414×896، dpr 2)، Slow 4G، كاش بارد، LCP p75 < 2.5s، INP p75 < 200ms، CLS p75 < 0.1 — وزر اللغة يجب أن يبدّل من أول نقرة.",
+          "Le SLO après l'iPhone 11 : UI réelle sur Chrome iPhone 11 (414×896, dpr 2), Slow 4G, cache froid, LCP p75 < 2,5 s, INP p75 < 200 ms, CLS p75 < 0,1 — et le sélecteur de langue doit basculer au premier tap.",
+          "SLO после iPhone 11: настоящий UI в Chrome iPhone 11 (414×896, dpr 2), Slow 4G, холодный кэш, LCP p75 < 2,5 с, INP p75 < 200 мс, CLS p75 < 0,1 — и язык переключается с первого tap.",
+          "El SLO tras el iPhone 11: UI real en Chrome iPhone 11 (414×896, dpr 2), Slow 4G, caché fría, LCP p75 < 2,5 s, INP p75 < 200 ms, CLS p75 < 0,1 — y el idioma debe cambiar en el primer toque.",
+        ),
+        loc(
+          "Averages lie. 1.2s at p50 and 6s at p95 is a failure wearing a green mean. Default gate is p75 (CrUX); money, login, and support journeys get p95.",
+          "平均值会撒谎。p50 1.2s、p95 6s,只是顶着绿色均值的失败。默认门禁 p75(跟 CrUX 对齐);涉及钱、登录、客服的路径用 p95。",
+          "المتوسطات تكذب. 1.2s عند p50 و6s عند p95 فشل بمتوسط أخضر. البوابة الافتراضية p75 (CrUX)؛ المال والدخول والدعم تأخذ p95.",
+          "Les moyennes mentent. 1,2 s en p50 et 6 s en p95 : un échec au mean vert. Garde-fou p75 (CrUX) ; argent, login, support : p95.",
+          "Средние врут. 1,2 с на p50 и 6 с на p95 — провал с зелёным средним. Порог p75 (CrUX); деньги, логин, поддержка — p95.",
+          "Los promedios mienten. 1,2 s en p50 y 6 s en p95 es un fallo con media verde. Umbral p75 (CrUX); dinero, login y soporte, p95.",
+        ),
+      ],
+    },
+    {
+      heading: loc(
+        "Lab green, field red",
+        "实验室绿、现场红",
+        "المختبر أخضر والميدان أحمر",
+        "Labo vert, terrain rouge",
+        "Лаба зелёная, поле красное",
+        "Lab verde, campo rojo",
+      ),
+      paragraphs: [
+        loc(
+          "Playwright on desktop Chrome with an iPhone 11 viewport is not an iPhone 11. It will not parse-fail a Safari 16.4 bundle, and it will not eat taps with WebKit's `backdrop-filter` compositor bug. I still run it — it catches layout — but the oracle for “does this phone work” is the phone, or at least a WebKit browser, not a resized Chromium.",
+          "桌面 Chrome 里套一个 iPhone 11 视口,那不是 iPhone 11。它不会让 Safari 16.4 的包解析失败,也不会复现 WebKit 把 `backdrop-filter` 做成合成层吞掉 tap。我还是会跑——能抓版面——但「这台手机能不能用」的预言是真机,至少是 WebKit,不是缩小的 Chromium。",
+          "كروم سطح المكتب بمنفذ آيفون 11 ليس آيفون 11. لن يفشل في تحليل حزمة Safari 16.4 ولن يبتلع النقر بعلّة `backdrop-filter` في WebKit. ما زلت أشغّله — يمسك التخطيط — لكن نبوءة «هل يعمل هذا الهاتف» هي الهاتف، أو WebKit على الأقل، لا كروميوم مُصغّر.",
+          "Chrome desktop avec un viewport iPhone 11 n'est pas un iPhone 11. Il ne fera pas échouer un bundle Safari 16.4, ni manger les taps avec le compositor `backdrop-filter` de WebKit. Je le lance quand même — ça prend le layout — mais l'oracle « ce téléphone marche » est le téléphone, ou WebKit, pas un Chromium redimensionné.",
+          "Десктопный Chrome с вьюпортом iPhone 11 — не iPhone 11. Он не уронит бандл Safari 16.4 и не съест tap багом композитора `backdrop-filter` в WebKit. Всё равно гоняю — ловит вёрстку — но оракул «этот телефон работает» — сам телефон или хотя бы WebKit, не уменьшенный Chromium.",
+          "Chrome de escritorio con viewport iPhone 11 no es un iPhone 11. No hará fallar un bundle Safari 16.4 ni se comerá los toques con el compositor `backdrop-filter` de WebKit. Igual lo corro — pilla el layout — pero el oráculo de “¿este teléfono funciona?” es el teléfono, o WebKit, no un Chromium redimensionado.",
+        ),
+        loc(
+          "CI still owns the repeatable half: Lighthouse CI, WebPageTest, Playwright + trace, on a mid-range profile (CPU 4×, Slow 4G ≈ 1.6 Mbps / 150 ms RTT, cold cache). After release I sample field p75 for the same URLs. If lab is green and a real iPhone is red, I do not tune Lighthouse — I ask which journey the lab skipped: auth, the real LCP node, or the JS the phone could not parse.",
+          "可重复的那一半仍归 CI:Lighthouse CI、WebPageTest、Playwright + trace,档位用中端(CPU 4×、Slow 4G 大约下行 1.6 Mbps / RTT 150 ms、冷缓存)。发版后对同一批 URL 抽现场 p75。实验室绿、真机红,我不会去调 Lighthouse——先问实验室路径跳过了什么:登录、真正的 LCP 节点,还是手机解析不了的 JS。",
+          "CI تملك النصف القابل للتكرار: Lighthouse CI وWebPageTest وPlaywright مع تتبع، على ملف متوسط (CPU 4×، Slow 4G، كاش بارد). بعد الإصدار أعيّن p75 الميداني لنفس العناوين. مختبر أخضر وآيفون أحمر: لا أضبط Lighthouse — أسأل أي مسار تخطّاه المختبر.",
+          "La CI garde la moitié rejouable : Lighthouse CI, WebPageTest, Playwright + trace, profil milieu de gamme. Après release je sample le p75 terrain. Labo vert, iPhone rouge : je ne règle pas Lighthouse — je demande quel parcours le labo a sauté.",
+          "CI держит повторяемую половину: Lighthouse CI, WebPageTest, Playwright + trace, средний профиль. После релиза семплирую полевой p75. Лаба зелёная, iPhone красный — не тюню Lighthouse, спрашиваю, какой сценарий лаба пропустила.",
+          "CI se queda con la mitad repetible: Lighthouse CI, WebPageTest, Playwright + traza, perfil de gama media. Tras el release muestreo el p75 de campo. Lab verde, iPhone rojo: no afino Lighthouse — pregunto qué recorrido se saltó el lab.",
+        ),
+      ],
+    },
+    {
+      heading: loc(
+        "What goes in the ticket",
+        "工单里放什么",
+        "ماذا يُوضع في التذكرة",
+        "Ce qui va dans le ticket",
+        "Что класть в тикет",
+        "Qué va en el ticket",
+      ),
+      paragraphs: [
+        loc(
+          "A red Lighthouse gauge is not a finding. After the iPhone 11 session the useful ticket named the LCP node (or the fact there was no LCP because the compositor held opacity 0), the request or layer that blocked it, and the pass condition on that same profile: first tap on language changes `document.documentElement.lang`. If I cannot name the owner — image, font, bundle target, third-party tag, overlay — I have not finished investigating.",
+          "一张 Lighthouse 红表不是缺陷。iPhone 11 那次有用的工单写的是:LCP 节点(或者根本没有 LCP,因为合成层把 opacity 钉在 0)、挡住它的请求或图层、同一档位下怎样算过:点一次语言,`document.documentElement.lang` 就要变。叫不出责任方——图、字体、编译目标、第三方 tag、遮罩——调查就还没完。",
+          "مقياس Lighthouse أحمر ليس نتيجة. بعد جلسة الآيفون 11 التذكرة المفيدة سمّت عقدة LCP (أو غيابها لأن المُركّب ثبّت الشفافية 0) والطلب أو الطبقة الحاجبة وشرط النجاح على الملف نفسه: أول نقرة لغة تغيّر `document.documentElement.lang`. إن لم أسمِّ المالك ف التحقيق لم يكتمل.",
+          "Une jauge Lighthouse rouge n'est pas un constat. Après l'iPhone 11, le ticket utile nommait le nœud LCP (ou son absence), la requête ou couche bloquante, et le pass : un tap sur la langue change `document.documentElement.lang`. Si je ne nomme pas le responsable, l'investigation n'est pas finie.",
+          "Красная шкала Lighthouse — не находка. После iPhone 11 полезный тикет называл узел LCP (или его отсутствие), запрос или слой, и pass: первый tap по языку меняет `document.documentElement.lang`. Не могу назвать владельца — расследование не закончено.",
+          "Un gauge rojo de Lighthouse no es un hallazgo. Tras el iPhone 11, el ticket útil nombraba el nodo LCP (o su ausencia), la petición o capa que lo bloqueaba, y el pass: un toque en idioma cambia `document.documentElement.lang`. Si no nombro al dueño, no terminé de investigar.",
+        ),
+      ],
+      bullets: [
+        loc(
+          "Repro: URL, auth, browser (CriOS vs Safari vs desktop Chrome), device or emulation, throttle, cold vs warm. Say which of those you actually used — “mobile” is not a profile.",
+          "复现:URL、登录态、浏览器(CriOS / Safari / 桌面 Chrome)、真机或仿真、限速、冷/热启动。写你真正用了哪一档——「mobile」不是档位。",
+          "إعادة الإنتاج: العنوان، المصادقة، المتصفح (CriOS مقابل Safari مقابل كروم سطح المكتب)، الجهاز، الخنق، بارد أو دافئ. «جوّال» ليس ملفاً.",
+          "Repro : URL, auth, navigateur (CriOS / Safari / Chrome desktop), appareil, throttle, froid/chaud. « Mobile » n'est pas un profil.",
+          "Repro: URL, auth, браузер (CriOS / Safari / десктоп Chrome), устройство, троттлинг, холод/тепло. «Mobile» — не профиль.",
+          "Repro: URL, auth, navegador (CriOS / Safari / Chrome de escritorio), dispositivo, throttle, frío/caliente. “Móvil” no es un perfil.",
+        ),
+        loc(
+          "Oracle: LCP/INP/CLS or “first tap did X”; percentile; n runs; median. One lucky green run is not a pass.",
+          "预言:LCP/INP/CLS,或「第一次 tap 做了 X」;分位;跑了几次;中位数。一次运气好的绿灯不算过。",
+          "النبوءة: LCP/INP/CLS أو «أول نقرة فعلت X»؛ الرتبة؛ عدد التشغيلات؛ الوسيط.",
+          "Oracle : LCP/INP/CLS ou « le premier tap a fait X » ; percentile ; n runs ; médiane.",
+          "Оракул: LCP/INP/CLS или «первый tap сделал X»; процентиль; n прогонов; медиана.",
+          "Oráculo: LCP/INP/CLS o “el primer toque hizo X”; percentil; n runs; mediana.",
+        ),
+        loc(
+          "Evidence: trace or HAR, filmstrip, the overlay computed style (`display`, `opacity`, `pointer-events`), browserslist target.",
+          "证据:trace 或 HAR、filmstrip、遮罩的计算样式(`display`、`opacity`、`pointer-events`)、browserslist 目标。",
+          "الدليل: تتبع أو HAR، شريط صور، أسلوب الطبقة المحسوب، هدف browserslist.",
+          "Preuve : trace ou HAR, filmstrip, style calculé du masque, cible browserslist.",
+          "Доказательство: trace или HAR, filmstrip, computed style оверлея, цель browserslist.",
+          "Evidencia: traza o HAR, filmstrip, estilo computado del overlay, objetivo browserslist.",
+        ),
+      ],
+    },
+    {
+      heading: loc(
+        "When “slow” is a functional bug",
+        "「慢」有时就是功能缺陷",
+        "حين يكون «بطيء» عيباً وظيفياً",
+        "Quand « lent » est un bug fonctionnel",
+        "Когда «медленно» — функциональный баг",
+        "Cuando “lento” es un bug funcional",
+      ),
+      paragraphs: [
+        loc(
+          "CLS shoved a sticky header over the language control on a narrow screen; the tap hit the overlay instead. That is not polish — it is a control that does not work. INP showed up as double submits and “the app froze”. A two-second handler after Pay is a checkout defect. White screens from `opacity:0` animations, huge blurs, or a script that never yields look like “it will not open” on a mid-range phone. I file those as blockers and attach the timeline, not a UI screenshot only.",
+          "窄屏上粘性头把语言按钮顶走,tap 打在遮罩上。那不是体验优化——是控件坏了。INP 会表现为连点两单、「应用卡死」。支付后主线程卡两秒,是结账缺陷。`opacity:0` 动画、大面积模糊、从不让出主线程的脚本,在中端手机上就是「打不开」。我按阻断报,附时间线,不只贴界面图。",
+          "CLS دفع رأساً لاصقاً فوق زر اللغة؛ النقرة ضربت الطبقة. ليست لمسة — عنصر لا يعمل. يظهر INP كإرسال مزدوج و«تجمّد التطبيق». معالج ثانيتين بعد الدفع عيب دفع. الشاشات البيضاء من `opacity:0` تبدو «لن يفتح» على هاتف متوسط. أبلّغها كحاجبة مع الخط الزمني.",
+          "Le CLS a poussé le header sticky sur le sélecteur de langue ; le tap a touché le masque. Ce n'est pas du polish — le contrôle ne marche pas. L'INP, c'est double soumission et « l'app a freeze ». Un handler de 2 s après Payer est un défaut de checkout. Les blancs (`opacity:0`, gros blur) ressemblent à « ça ne s'ouvre pas ». Bloqueurs, avec timeline.",
+          "CLS сдвинул липкую шапку на язык; tap попал в оверлей. Это не полировка — контроль не работает. INP — двойной submit и «приложение зависло». Обработчик на 2 с после оплаты — дефект чекаута. Белый экран из `opacity:0` на среднем телефоне — «не открывается». Блокер, с таймлайном.",
+          "CLS empujó el header sticky sobre el idioma; el toque dio en el overlay. No es pulido: el control no funciona. INP es doble envío y “la app se congeló”. Un handler de 2 s tras Pagar es un defecto de checkout. Las pantallas en blanco por `opacity:0` en un gama media se leen “no abre”. Bloqueantes, con línea de tiempo.",
+        ),
+      ],
+    },
+    {
+      heading: loc(
+        "What I will not gate a release on",
+        "我不会拿什么卡发版",
+        "ما لن أجعله بوابة إصدار",
+        "Ce sur quoi je ne bloquerai pas une release",
+        "На чём не завалю релиз",
+        "En qué no tumbaré un release",
+      ),
+      paragraphs: [
+        loc(
+          "I will not fail a release on a single Lighthouse Performance number, desktop-only runs, or Fast 3G pretending to be a phone. I will not retry a 5-second p95 until it greens and call it flake. If the tail is fat, a slice of users is slow — that is the bug. I will fail a release if the first tap on a primary control does nothing on the device we claim to support.",
+          "我不会用单一 Lighthouse 性能分、只跑桌面、或 Fast 3G 冒充手机来卡发版。也不会把 5 秒的 p95 重试到变绿再叫偶发。尾巴厚,就是一部分用户慢——那就是缺陷。号称支持的设备上,主控件第一次 tap 没反应,这个我会卡发版。",
+          "لن أفشل إصداراً على درجة Lighthouse واحدة أو تشغيلات سطح المكتب فقط أو Fast 3G. ولن أعيد p95 من 5 ثوان حتى يخضرّ. الذيل السمين يعني شريحة بطيئة — وتلك العلة. سأفشل الإصدار إن لم ترد السيطرة الأساسية من أول نقرة على جهاز ندّعي دعمه.",
+          "Je ne bloquerai pas une release sur un score Lighthouse unique, des runs desktop, ou du Fast 3G. Je ne relancerai pas un p95 à 5 s jusqu'au vert. Une queue grasse, c'est une tranche lente — le bug. Je bloquerai si le premier tap d'un contrôle principal ne fait rien sur l'appareil qu'on dit supporter.",
+          "Не завалю релиз из‑за одного Lighthouse, только десктопа или Fast 3G. Не буду крутить p95 в 5 с до зелёного. Толстый хвост — доля пользователей медленная. Это баг. Завалю релиз, если первый tap по главному контролю молчит на заявленном устройстве.",
+          "No tumbaré un release por una sola nota de Lighthouse, runs de escritorio o Fast 3G. No reintentaré un p95 de 5 s hasta el verde. Cola gorda: un trozo de usuarios lento. Ese es el bug. Sí tumbaré el release si el primer toque de un control principal no hace nada en el dispositivo que decimos soportar.",
+        ),
+      ],
+    },
+  ],
+};

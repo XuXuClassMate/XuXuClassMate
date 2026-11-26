@@ -55,17 +55,27 @@ export default async function NotePage({
           <div className="mt-14 space-y-12 pb-28">
             {n.body.map((section) => (
               <Reveal key={section.heading.en} as="section">
-                <h2 className="text-[26px] font-semibold tracking-tight">
+                <h2 className="text-[26px] font-semibold tracking-tight text-pretty">
                   <T {...section.heading} />
                 </h2>
                 {section.paragraphs.map((p, i) => (
                   <p
                     key={i}
-                    className="mt-4 text-[18px] leading-[1.6] text-ink/90"
+                    className="mt-4 text-[18px] leading-[1.6] text-ink/90 text-pretty"
                   >
                     <T {...p} />
                   </p>
                 ))}
+                {/* 步骤、预算、缺陷模板等要点用列表,方便测试同学扫读 */}
+                {section.bullets && section.bullets.length > 0 ? (
+                  <ul className="mt-4 list-disc space-y-2 ps-5 text-[18px] leading-[1.6] text-ink/90">
+                    {section.bullets.map((item, i) => (
+                      <li key={i} className="text-pretty">
+                        <T {...item} />
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
               </Reveal>
             ))}
           </div>

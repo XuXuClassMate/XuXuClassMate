@@ -90,6 +90,17 @@ html.dark {
   box-sizing: border-box;
 }
 
+/* 生成器章节:拉高滚动距离,让 sticky 舞台在手机上也能按步叠化。
+   同时写 vh/dvh,旧 iOS 吃 vh,新系统用 dvh 避开地址栏抖动。 */
+.pin-track-active {
+  height: calc(var(--pin-pages, 5) * 100vh);
+  height: calc(var(--pin-pages, 5) * 100dvh);
+}
+.pin-stage-active {
+  min-height: calc(100vh - var(--nav-h));
+  min-height: calc(100dvh - var(--nav-h));
+}
+
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -104,7 +115,7 @@ body {
   color: var(--color-ink);
   font-family: var(--font-sans);
   letter-spacing: -0.012em;
-  overflow-x: clip;
+  /* 不在 body 上设 overflow-x:clip,否则 sticky 生成器章节在 iOS 上钉不住。 */
   min-width: 0;
 }
 
@@ -291,13 +302,29 @@ body {
     transform: scale(0.98);
   }
 
-  /* Nav scroll elevation (B). */
+  /* Nav scroll elevation (B). 背景色在这一层,毛玻璃在 .nav-bar-frost,互不抢点击。 */
   .nav-bar {
+    background: color-mix(in srgb, var(--color-bg) 80%, transparent);
     transition: box-shadow 0.3s ease, background-color 0.3s ease;
+  }
+  .nav-bar-frost {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: color-mix(in srgb, var(--color-bg) 72%, transparent);
+    -webkit-backdrop-filter: blur(20px) saturate(1.5);
+    backdrop-filter: blur(20px) saturate(1.5);
   }
   .nav-bar.scrolled {
     box-shadow: 0 0.5px 0 var(--color-line), 0 10px 30px -18px rgba(0, 0, 0, 0.35);
     background: color-mix(in srgb, var(--color-bg) 92%, transparent);
+  }
+  /* iOS 取消 300ms 点击延迟,并避免透明高亮盖住按钮。 */
+  .nav-tap {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
   }
 
   /* Ambient depth behind the hero (D). Tints with the accent, adapts to theme. */

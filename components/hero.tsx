@@ -6,6 +6,7 @@ import { motion, useReducedMotion } from "motion/react";
 import { useLang, useTx, type Localized } from "@/components/i18n";
 import { Aurora } from "@/components/aurora";
 import { formatCompactCount, formatCount } from "@/lib/format-number";
+import { subscribeMediaQuery } from "@/lib/media-query";
 
 const ease = [0.22, 0.61, 0.36, 1] as const;
 
@@ -18,8 +19,9 @@ function HeroLiveStat() {
   const { lang } = useLang();
   const reduce = useReducedMotion();
   const [pulls, setPulls] = useState(86000);
-  const [shown, setShown] = useState(reduce ? 86000 : 0);
-  const fromRef = useRef(0);
+  // 静态 HTML 就要带出垫底数字。从 0 起跳时,iOS 若 hydration 失败会永远停在 0。
+  const [shown, setShown] = useState(86000);
+  const fromRef = useRef(86000);
 
   useEffect(() => {
     const ac = new AbortController();
@@ -95,8 +97,7 @@ function useHeroMotion() {
     );
     const sync = () => setEnabled(mq.matches && !reduce);
     sync();
-    mq.addEventListener("change", sync);
-    return () => mq.removeEventListener("change", sync);
+    return subscribeMediaQuery(mq, sync);
   }, [reduce]);
   return enabled;
 }

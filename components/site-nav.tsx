@@ -55,11 +55,14 @@ export function SiteNav() {
     <header className="fixed inset-x-0 top-0 z-50">
       <div
         className={cn(
-          "nav-bar h-[var(--nav-h)] border-b border-[var(--color-line)] bg-[var(--color-bg)]/80 backdrop-blur-xl backdrop-saturate-150",
+          "nav-bar relative h-[var(--nav-h)] border-b border-[var(--color-line)]",
           scrolled && "scrolled",
         )}
       >
-        <nav className="container-ap flex h-full items-center justify-between">
+        {/* 毛玻璃单独一层且不接收点击。iOS WebKit 会把带 backdrop-filter 的父级
+            做成合成层,语言 / 主题 / 菜单的 tap 经常点了没反应。 */}
+        <div className="nav-bar-frost" aria-hidden="true" />
+        <nav className="relative z-10 container-ap flex h-full items-center justify-between">
           <Link
             href="/"
             className="flex items-center gap-2 text-[18px] font-semibold tracking-tight text-ink"
@@ -100,7 +103,7 @@ export function SiteNav() {
             <ThemeToggle />
             <button
               type="button"
-              className="flex h-11 w-11 items-center justify-center"
+              className="nav-tap flex h-11 w-11 items-center justify-center"
               aria-label="Menu"
               aria-expanded={open}
               onClick={() => setOpen((v) => !v)}
@@ -134,10 +137,11 @@ export function SiteNav() {
           经常合成失败,会变成一块和背景同色的遮罩,看起来像整页空白。 */}
       <div
         hidden={!open}
+        inert={!open}
         aria-hidden={!open}
         className={cn(
           "fixed inset-0 top-[var(--nav-h)] z-40 bg-[var(--color-bg)]",
-          open ? "block md:hidden" : "hidden",
+          open ? "block md:hidden" : "pointer-events-none hidden",
         )}
       >
         <ul className="container-ap flex flex-col gap-1 pt-6">

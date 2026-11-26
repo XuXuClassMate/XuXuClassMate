@@ -1,12 +1,20 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState, type CSSProperties } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useTx, useLang, type Localized } from "@/components/i18n";
 import { cn } from "@/lib/utils";
 
-gsap.registerPlugin(ScrollTrigger);
+try {
+  gsap.registerPlugin(ScrollTrigger);
+  // iOS 地址栏伸缩会反复触发 resize,打断 scrub;忽略视觉视口抖动。
+  if (typeof window !== "undefined") {
+    ScrollTrigger.config({ ignoreMobileResize: true });
+  }
+} catch {
+  // ScrollTrigger 在部分 iOS WebView 初始化失败时,不要拖垮整页 hydration。
+}
 
 const STEPS: { k: string; title: Localized; body: Localized }[] = [
   {
@@ -135,17 +143,13 @@ export function ProductPin() {
   const root = useRef<HTMLDivElement>(null);
   const { lang } = useLang();
   const tx = useTx();
-  // Whether to run the pinned, cross-fading narrative. Off for reduced-motion,
-  // small screens, and RTL (GSAP pin + position:fixed misplaces the stage in
-  // RTL and the absolutely-stacked steps spill onto the section above). When
-  // off, the steps render as a plain vertical flow — no overlap.
+  // 滚动叠化叙事。减弱动态效果 / RTL 时改成普通竖排(绝对定位叠层会溢到上一屏)。
+  // 窄屏同样启用:改用 CSS sticky 后不再依赖 GSAP pin,手机滑动也能切步骤。
   const [pin, setPin] = useState(false);
 
-  // Decide whether to pin; re-evaluates on language (direction) change.
   useLayoutEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const decide = () =>
-      setPin(!reduce && window.innerWidth >= 768 && lang !== "ar");
+    const decide = () => setPin(!reduce && lang !== "ar");
     decide();
     window.addEventListener("resize", decide);
     return () => window.removeEventListener("resize", decide);
@@ -163,12 +167,18 @@ export function ProductPin() {
       const visuals = gsap.utils.toArray<HTMLElement>(".pin-vis");
       const total = panels.length;
 
+      const coarse = window.matchMedia("(pointer: coarse)").matches;
+      const navH =
+        getComputedStyle(document.documentElement).getPropertyValue("--nav-h").trim() ||
+        "48px";
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: ".pin-track",
-          start: "top top",
+          // 避开顶部固定导航,否则 iOS 上 start 会被挡住,第一步叠化不触发。
+          start: `top top+=${navH}`,
           end: "bottom bottom",
-          scrub: 0.6,
+          // 触控跟手,桌面保留一点惯性。
+          scrub: coarse ? true : 0.6,
           invalidateOnRefresh: true,
         },
       });
@@ -205,7 +215,13 @@ export function ProductPin() {
       });
     }, el);
 
-    return () => ctx.revert();
+    const refresh = () => ScrollTrigger.refresh();
+    requestAnimationFrame(refresh);
+    window.addEventListener("orientationchange", refresh);
+    return () => {
+      window.removeEventListener("orientationchange", refresh);
+      ctx.revert();
+    };
   }, [pin, lang]);
 
   return (
@@ -217,11 +233,22 @@ export function ProductPin() {
     >
       {/* pin-track 拉高滚动距离；pin-stage 用 sticky 钉在视口里，始终占满父级宽度。 */}
       <div
-        className="pin-track"
-        style={pin ? { height: `${(STEPS.length + 1) * 100}vh` } : undefined}
+        className={cn("pin-track", pin && "pin-track-active")}
+        style={
+          pin
+            ? ({ ["--pin-pages"]: String(STEPS.length + 1) } as CSSProperties)
+            : undefined
+        }
       >
-        <div className={cn("pin-stage flex w-full items-center", pin && "sticky top-0 min-h-screen")}>
-          <div className="container-ap grid w-full items-center gap-12 py-14 md:grid-cols-2">
+        <div
+          className={cn(
+            "pin-stage flex w-full bg-panel",
+            pin
+              ? "pin-stage-active sticky top-[var(--nav-h)] items-start md:items-center"
+              : "items-center",
+          )}
+        >
+          <div className="container-ap grid w-full items-center gap-6 py-8 md:grid-cols-2 md:gap-12 md:py-14">
           {/* Copy / steps */}
           <div>
             <p className="eyebrow" style={{ color: "#5ac8fa" }}>
@@ -229,24 +256,25 @@ export function ProductPin() {
             </p>
             <h2 className="display-2 mt-3 text-panel-ink">{tx(L.heading)}</h2>
 
-            {/* Desktop: stacked pinned steps; mobile: all shown */}
-            <div className={cn("relative mt-9", pin && "min-h-[180px]")}>
+            {/* pin 时绝对叠层,一次只露一步;关掉则竖排全部展开。 */}
+            <div className={cn("relative mt-5 md:mt-9", pin && "min-h-[128px] md:min-h-[180px]")}>
               {STEPS.map((s, i) => (
                 <div
                   key={s.k}
-                  className={cn(
-                    "pin-step mb-8",
-                    pin && "md:absolute md:inset-0 md:mb-0",
-                  )}
-                  style={pin ? { opacity: i === 0 ? 1 : undefined } : undefined}
+                  className={cn("pin-step", pin ? "absolute inset-0" : "mb-8")}
+                  style={
+                    pin
+                      ? { opacity: i === 0 ? 1 : 0, visibility: i === 0 ? "visible" : "hidden" }
+                      : undefined
+                  }
                 >
                   <span className="pin-num font-mono text-[13px] text-[#5ac8fa]">
                     {s.k}
                   </span>
-                  <h3 className="mt-2 text-[24px] font-semibold tracking-tight text-panel-ink">
+                  <h3 className="mt-2 text-[22px] font-semibold tracking-tight text-panel-ink md:text-[24px]">
                     {tx(s.title)}
                   </h3>
-                  <p className="mt-2 max-w-[42ch] text-[17px] leading-relaxed text-panel-muted">
+                  <p className="mt-2 max-w-[42ch] text-[16px] leading-relaxed text-panel-muted md:text-[17px]">
                     {tx(s.body)}
                   </p>
                 </div>
@@ -255,15 +283,21 @@ export function ProductPin() {
           </div>
 
           {/* Visual: one surface per step, cross-fading in lockstep with the copy */}
-          <div className={cn("relative", pin && "md:aspect-[4/3]")}>
+          <div
+            className={cn(
+              "relative w-full overflow-hidden",
+              pin && "h-[min(36dvh,300px)] md:h-auto md:aspect-[4/3]",
+            )}
+          >
             {STEPS.map((s, i) => (
               <div
                 key={s.k}
-                className={cn(
-                  "pin-vis mb-5",
-                  pin && "md:absolute md:inset-0 md:mb-0",
-                )}
-                style={pin ? { opacity: i === 0 ? 1 : undefined } : undefined}
+                className={cn("pin-vis h-full", pin ? "absolute inset-0" : "mb-5")}
+                style={
+                  pin
+                    ? { opacity: i === 0 ? 1 : 0, visibility: i === 0 ? "visible" : "hidden" }
+                    : undefined
+                }
               >
                 <StepVisual index={i} />
               </div>

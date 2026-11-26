@@ -11,6 +11,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { subscribeMediaQuery } from "@/lib/media-query";
 
 export type Theme = "light" | "dark";
 
@@ -38,19 +39,22 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     setThemeState(root.classList.contains("dark") ? "dark" : "light");
 
     // Follow the system while there is no explicit saved preference.
-    const mq = window.matchMedia("(prefers-color-scheme: dark)");
-    const onSystem = () => {
-      let saved: string | null = null;
-      try {
-        saved = localStorage.getItem("theme");
-      } catch {}
-      if (saved === "light" || saved === "dark") return;
-      const next: Theme = mq.matches ? "dark" : "light";
-      root.classList.toggle("dark", next === "dark");
-      setThemeState(next);
-    };
-    mq.addEventListener("change", onSystem);
-    return () => mq.removeEventListener("change", onSystem);
+    try {
+      const mq = window.matchMedia("(prefers-color-scheme: dark)");
+      const onSystem = () => {
+        let saved: string | null = null;
+        try {
+          saved = localStorage.getItem("theme");
+        } catch {}
+        if (saved === "light" || saved === "dark") return;
+        const next: Theme = mq.matches ? "dark" : "light";
+        root.classList.toggle("dark", next === "dark");
+        setThemeState(next);
+      };
+      return subscribeMediaQuery(mq, onSystem);
+    } catch {
+      // iOS 13 及更早的 matchMedia API 残缺时,仍保留首屏读到的 theme,不要拖垮 hydration。
+    }
   }, []);
 
   const setTheme = (t: Theme) => {

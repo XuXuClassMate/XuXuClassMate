@@ -8,7 +8,11 @@ const ROUTES = [
   { path: "/about", heading: "Quality engineering, shipped." },
   { path: "/ai-workflow", heading: "A one-person test team, run with AI." },
   { path: "/notes", heading: "Field notes from shipping quality." },
+  { path: "/notes/front-end-performance", heading: "Front-end performance you can defend" },
   { path: "/notes/playwright-at-scale", heading: "Keeping Playwright fast when the suite grows" },
+  { path: "/notes/disposable-test-databases", heading: "Disposable test databases with Docker" },
+  { path: "/notes/permissions-multi-tenant", heading: "Where bugs hide: permissions and multi-tenant" },
+  { path: "/notes/ai-in-qa", heading: "Where AI actually helps in QA" },
   { path: "/open-source", heading: "Built in the open, shipped to run." },
 ];
 

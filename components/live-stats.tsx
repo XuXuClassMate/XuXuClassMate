@@ -38,7 +38,8 @@ const FALLBACK: Stats = {
   clawPlugins: 1,
   ghIssues: 147,
   ghPRs: 31,
-  pageViews: 0,
+  // 浏览量接口会先写入再返回,比 portfolio 慢。给一个接近现值的垫底,避免卡片从 0 空转。
+  pageViews: 573000,
   scans30d: 400960,
   history: [
     78523, 79009, 79482, 79647, 80016, 80499, 80812, 81148, 81637, 82200,
@@ -47,8 +48,9 @@ const FALLBACK: Stats = {
 };
 
 function useCountUp(target: number, run: boolean, reduce: boolean) {
-  const [n, setN] = useState(reduce ? target : 0);
-  const fromRef = useRef(0);
+  // 静态导出的 HTML 就要带出垫底数字。从 0 起跳时,iOS 若 JS 没挂上会永远显示 0。
+  const [n, setN] = useState(target);
+  const fromRef = useRef(target);
   useEffect(() => {
     if (!run) return;
     if (reduce) {
@@ -56,10 +58,19 @@ function useCountUp(target: number, run: boolean, reduce: boolean) {
       fromRef.current = target;
       return;
     }
-    const from = fromRef.current;
+    let from = fromRef.current;
+    if (from === target) return;
+    // 浏览量这种大数若从 0 滚到几十万,「万」档会连跳一秒,旁边的小数字早已停住。
+    // 从终值附近起跳,只播最后一截,观感和其他指标一致。
+    if (from === 0 && target >= 10_000) {
+      from = Math.round(target * 0.92);
+      fromRef.current = from;
+      setN(from);
+    }
+    const span = Math.abs(target - from);
+    const dur = span >= 10_000 ? 520 : 1100;
     let raf = 0;
     const start = performance.now();
-    const dur = 1100;
     const tick = (t: number) => {
       const p = Math.min(1, (t - start) / dur);
       const e = 1 - Math.pow(1 - p, 3);
@@ -142,88 +153,97 @@ export function LiveStats() {
   const { lang } = useLang();
   const reduce = useReducedMotion() ?? false;
   const ref = useRef<HTMLDivElement>(null);
-  const [run, setRun] = useState(false);
   const [data, setData] = useState<Stats>(FALLBACK);
   const [live, setLive] = useState(false);
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      (entries) => {
-        if (entries[0]?.isIntersecting) {
-          setRun(true);
-          io.disconnect();
-        }
-      },
-      { threshold: 0.2 },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
-  useEffect(() => {
     const ac = new AbortController();
     const sig = ac.signal;
+    // 上次浏览量先画出来,不必等会写入的 /api/views。
+    try {
+      const cached = Number(sessionStorage.getItem("stat-page-views"));
+      if (cached > 0) setData((d) => ({ ...d, pageViews: cached }));
+    } catch {
+      /* private mode */
+    }
 
-    // Stats (Docker + ClawHub + GitHub) are aggregated and cached in Redis by the
-    // gateway; /api/views is a live page-view counter (one increment per load).
-    (async () => {
-      try {
-        const [p, v] = await Promise.all([
-          fetch(`${GW}/api/portfolio`, { signal: sig }).then((r) => r.json()).catch(() => null),
-          fetch(`${GW}/api/views`, { signal: sig }).then((r) => r.json()).catch(() => null),
-        ]);
-        if (sig.aborted) return;
-        const views = Number(v && v.total) || FALLBACK.pageViews;
-        const scans = Number(v && v.scans30d) || FALLBACK.scans30d;
-        const healthy = p && (Number(p.clawSkills) > 0 || Number(p.pulls) > 0);
-        const hist = p && Array.isArray(p.history) ? p.history.map(Number).filter(Number.isFinite) : [];
+    // portfolio 走 Redis 缓存,views 每次要落盘,拆开请求,浏览量不再拖住其他指标。
+    fetch(`${GW}/api/portfolio`, { signal: sig })
+      .then((r) => r.json())
+      .then((p) => {
+        if (sig.aborted || !p) return;
+        const healthy = Number(p.clawSkills) > 0 || Number(p.pulls) > 0;
+        if (!healthy) return;
+        const hist = Array.isArray(p.history)
+          ? p.history.map(Number).filter(Number.isFinite)
+          : [];
         setData((d) => ({
           ...d,
-          ...(healthy
-            ? {
-                pulls: Number(p.pulls) || FALLBACK.pulls,
-                images: Number(p.images) || FALLBACK.images,
-                apiCalls: Number(p.apiCalls) || FALLBACK.apiCalls,
-                monthDelta: Number(p.monthDelta) || FALLBACK.monthDelta,
-                history: hist.length > 1 ? hist : FALLBACK.history,
-                clawDownloads: Number(p.clawDownloads) || FALLBACK.clawDownloads,
-                clawSkills: Number(p.clawSkills) || FALLBACK.clawSkills,
-                clawPlugins: Number(p.clawPlugins) || FALLBACK.clawPlugins,
-                ghIssues: Number(p.ghIssues) || FALLBACK.ghIssues,
-                ghPRs: Number(p.ghPRs) || FALLBACK.ghPRs,
-              }
-            : {}),
-          pageViews: views,
-          scans30d: scans,
+          pulls: Number(p.pulls) || d.pulls,
+          images: Number(p.images) || d.images,
+          apiCalls: Number(p.apiCalls) || d.apiCalls,
+          monthDelta: Number(p.monthDelta) || d.monthDelta,
+          history: hist.length > 1 ? hist : d.history,
+          clawDownloads: Number(p.clawDownloads) || d.clawDownloads,
+          clawSkills: Number(p.clawSkills) || d.clawSkills,
+          clawPlugins: Number(p.clawPlugins) || d.clawPlugins,
+          ghIssues: Number(p.ghIssues) || d.ghIssues,
+          ghPRs: Number(p.ghPRs) || d.ghPRs,
         }));
         setLive(true);
-      } catch {
-        /* keep fallback */
-      }
-    })();
+      })
+      .catch(() => {});
+
+    fetch(`${GW}/api/views`, { signal: sig })
+      .then((r) => r.json())
+      .then((v) => {
+        if (sig.aborted || !v) return;
+        const views = Number(v.total) || 0;
+        const scans = Number(v.scans30d) || 0;
+        if (views > 0) {
+          try {
+            sessionStorage.setItem("stat-page-views", String(views));
+          } catch {
+            /* ignore */
+          }
+        }
+        setData((d) => ({
+          ...d,
+          pageViews: views > 0 ? views : d.pageViews,
+          scans30d: scans > 0 ? scans : d.scans30d,
+        }));
+      })
+      .catch(() => {});
 
     return () => ac.abort();
   }, []);
 
-  const pulls = useCountUp(data.pulls, run, reduce);
-  const images = useCountUp(data.images, run, reduce);
-  const apiCalls = useCountUp(data.apiCalls, run, reduce);
-  const delta = useCountUp(data.monthDelta, run, reduce);
-  const claw = useCountUp(data.clawDownloads, run, reduce);
-  const ghIssues = useCountUp(data.ghIssues, run, reduce);
-  const views = useCountUp(data.pageViews, run, reduce);
-  const scans = useCountUp(data.scans30d, run, reduce);
+  // 不等 IntersectionObserver。iOS Chrome 上 IO 经常不回调,数字会一直停在 0。
+  const pulls = useCountUp(data.pulls, true, reduce);
+  const images = useCountUp(data.images, true, reduce);
+  const apiCalls = useCountUp(data.apiCalls, true, reduce);
+  const delta = useCountUp(data.monthDelta, true, reduce);
+  const claw = useCountUp(data.clawDownloads, true, reduce);
+  const ghIssues = useCountUp(data.ghIssues, true, reduce);
+  const views = useCountUp(data.pageViews, true, reduce);
+  const scans = useCountUp(data.scans30d, true, reduce);
   // 大数字卡:满百万再缩写,保留「真实数字」观感;小卡更窄,满一万就缩。
   const fmtHero = (n: number) => formatCompactCount(n, lang, 1_000_000);
   const fmt = (n: number) => formatCompactCount(n, lang, 10_000);
 
-  const small: { icon: IconName; color: string; value: string; label: string; sub?: string }[] = [
+  const small: {
+    icon: IconName;
+    color: string;
+    value: string;
+    exact: string;
+    label: string;
+    sub?: string;
+  }[] = [
     {
       icon: "download",
       color: "var(--c-purple)",
       value: fmt(claw),
+      exact: formatCount(data.clawDownloads, lang),
       label: tx({ en: "ClawHub downloads", zh: "ClawHub 下载量", ar: "تنزيلات ClawHub", fr: "Téléchargements ClawHub", ru: "Загрузки ClawHub", es: "Descargas de ClawHub" }),
       sub: `${data.clawSkills} ${tx({ en: data.clawSkills === 1 ? "skill" : "skills", zh: "个技能", ar: "مهارات", fr: data.clawSkills === 1 ? "compétence" : "compétences", ru: "навыков", es: data.clawSkills === 1 ? "habilidad" : "habilidades" })} · ${data.clawPlugins} ${tx({ en: data.clawPlugins === 1 ? "plugin" : "plugins", zh: "个插件", ar: "ملحقات", fr: "plugin" + (data.clawPlugins === 1 ? "" : "s"), ru: "плагинов", es: "plugin" + (data.clawPlugins === 1 ? "" : "s") })}`,
     },
@@ -231,6 +251,7 @@ export function LiveStats() {
       icon: "code",
       color: "var(--c-teal)",
       value: fmt(ghIssues),
+      exact: formatCount(data.ghIssues, lang),
       label: tx({ en: "GitHub issues opened", zh: "GitHub 提交的 issues", ar: "مشكلات GitHub المفتوحة", fr: "Issues GitHub ouvertes", ru: "Issues на GitHub", es: "Issues abiertas en GitHub" }),
       sub: `${data.ghPRs} ${tx({ en: data.ghPRs === 1 ? "pull request" : "pull requests", zh: "个 PR", ar: "طلبات سحب", fr: data.ghPRs === 1 ? "pull request" : "pull requests", ru: "pull-реквестов", es: data.ghPRs === 1 ? "pull request" : "pull requests" })}`,
     },
@@ -238,18 +259,21 @@ export function LiveStats() {
       icon: "api",
       color: "var(--c-amber)",
       value: fmt(apiCalls),
+      exact: formatCount(data.apiCalls, lang),
       label: tx({ en: "API calls served", zh: "API 调用量", ar: "طلبات API مُخدّمة", fr: "Appels API servis", ru: "Обработано API-запросов", es: "Llamadas API servidas" }),
     },
     {
       icon: "analytics",
       color: "var(--c-pink)",
       value: fmt(views),
+      exact: formatCount(data.pageViews, lang),
       label: tx({ en: "Page views", zh: "页面浏览量", ar: "مشاهدات الصفحة", fr: "Pages vues", ru: "Просмотров страниц", es: "Vistas de página" }),
     },
     {
       icon: "permissions",
       color: "var(--c-indigo)",
       value: fmt(scans),
+      exact: formatCount(data.scans30d, lang),
       label: tx({ en: "Malicious scans blocked", zh: "恶意扫描拦截", ar: "عمليات فحص خبيثة محظورة", fr: "Scans malveillants bloqués", ru: "Заблокировано сканирований", es: "Escaneos maliciosos bloqueados" }),
       sub: tx({ en: "last 30 days · all domains", zh: "近 30 天 · 全部域名", ar: "آخر 30 يوماً · كل النطاقات", fr: "30 derniers jours · tous domaines", ru: "за 30 дней · все домены", es: "últimos 30 días · todos los dominios" }),
     },
@@ -325,7 +349,11 @@ export function LiveStats() {
             {small.map((s) => (
               <article key={s.label} className={CARD.replace("p-8", "p-5")} style={GLOW}>
                 <Chip name={s.icon} color={s.color} />
-                <div className="mt-5 truncate text-[clamp(24px,2.2vw,32px)] font-semibold leading-none tracking-tight text-ink tabular-nums" dir="ltr">
+                <div
+                  className="mt-5 truncate text-[clamp(24px,2.2vw,32px)] font-semibold leading-none tracking-tight text-ink tabular-nums"
+                  title={s.exact}
+                  dir="ltr"
+                >
                   {s.value}
                 </div>
                 <p className="mt-3 text-[16px] text-muted">{s.label}</p>
