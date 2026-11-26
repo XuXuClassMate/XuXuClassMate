@@ -82,7 +82,7 @@ export function Hero() {
   );
 }
 
-type Tool = { name: string; kind: Localized; tag: string; accent: string };
+type Tool = { name: string; kind: Localized; tag: string; accent: string; href: string };
 
 function ToolboxWindow() {
   const tx = useTx();
@@ -93,30 +93,35 @@ function ToolboxWindow() {
       kind: { en: "Requirements → reviewed test cases", zh: "需求 → 评审后的测试用例", ar: "المتطلبات → حالات اختبار مُراجَعة", fr: "Exigences → cas de test relus", ru: "Требования → проверенные тест-кейсы", es: "Requisitos → casos de prueba revisados" },
       tag: "Docker · MCP",
       accent: "#5ac8fa",
+      href: "/products/testcase-generator",
     },
     {
       name: "test-db-suite",
       kind: { en: "Pullable, seeded test databases", zh: "可拉取、带种子数据的测试库", ar: "قواعد بيانات اختبار قابلة للسحب ومُهيّأة", fr: "Bases de test récupérables et amorcées", ru: "Загружаемые тестовые БД с данными", es: "Bases de prueba descargables con datos" },
       tag: "Docker",
       accent: "#2dd4bf",
+      href: "/products/docker-suite",
     },
     {
       name: "docker-hub-api-gateway",
       kind: { en: "Docker Hub stats, one API", zh: "Docker Hub 数据,一个 API", ar: "إحصاءات Docker Hub عبر API واحد", fr: "Stats Docker Hub, une API", ru: "Статистика Docker Hub, один API", es: "Estadísticas de Docker Hub, una API" },
       tag: "Workers",
       accent: "#a78bfa",
+      href: "/products/docker-hub-api-gateway",
     },
     {
       name: "relay",
       kind: { en: "Multi-agent dev+test workflow", zh: "多智能体开发+测试工作流", ar: "سير عمل تطوير واختبار متعدد الوكلاء", fr: "Workflow dev+test multi-agents", ru: "Мультиагентный процесс dev+test", es: "Flujo dev+test multiagente" },
       tag: "ClawHub · Docker",
       accent: "#f5b556",
+      href: "/products/relay",
     },
     {
       name: "scheduled-agents",
       kind: { en: "Routines that watch and report", zh: "定时巡检并汇报的智能体", ar: "روتينات تراقب وتُبلّغ", fr: "Routines qui surveillent et rapportent", ru: "Routines, что следят и отчитываются", es: "Rutinas que vigilan e informan" },
       tag: "Agents",
       accent: "#f06da0",
+      href: "/products/globalpulse",
     },
   ];
 
@@ -137,7 +142,7 @@ function ToolboxWindow() {
       <div className="grid gap-3 p-5 sm:p-7">
         {tools.map((t, i) => (
           <MotionLink
-            href="/products"
+            href={t.href}
             key={t.name}
             style={{ ["--acc" as string]: t.accent } as React.CSSProperties}
             className="group flex items-center gap-4 rounded-xl border border-white/10 p-4 text-left transition-colors duration-300 hover:border-[color-mix(in_srgb,var(--acc)_50%,transparent)] hover:bg-[color-mix(in_srgb,var(--acc)_8%,transparent)] hover:shadow-[0_14px_36px_-16px_var(--acc)]"

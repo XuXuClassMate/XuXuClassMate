@@ -558,7 +558,7 @@ export const PRODUCTS: Product[] = [
         ru: "Публичные образы, версионированные теги.",
         es: "Imágenes públicas, tags versionados.",
       },
-      href: "https://hub.docker.com/u/xuxuclassmate",
+      href: "https://hub.docker.com/r/xuxuclassmate/dameng",
     },
   },
   {
@@ -657,7 +657,7 @@ export const PRODUCTS: Product[] = [
         ru: "Открытые эндпоинты, без ключа для публичной статистики.",
         es: "Endpoints abiertos, sin clave para estadísticas públicas.",
       },
-      href: "https://github.com/InnoNestX",
+      href: "https://github.com/InnoNestX/docker-hub-pull-counter",
     },
   },
   {
