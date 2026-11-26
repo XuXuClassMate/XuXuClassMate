@@ -183,7 +183,7 @@ export default function Home() {
               return (
                 <span
                   key={r.title.en}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-4 py-2 text-[14px] text-panel-ink"
+                  className="inline-flex items-center gap-2 rounded-full border border-[var(--color-line)] bg-[var(--color-surface)] px-4 py-2 text-[14px] text-panel-ink"
                 >
                   <span style={{ color: hues[i % hues.length] }}>
                     <Icon name={r.icon} size={16} />

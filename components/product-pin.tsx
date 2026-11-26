@@ -276,7 +276,7 @@ function Shell({
         <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
         <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
         <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
-        <span className="ml-2 font-mono text-[11px] text-panel-muted">{label}</span>
+        <span className="ml-2 font-mono text-[11px] text-[#a1a1a6]">{label}</span>
       </div>
       <div className="flex-1 p-5">{children}</div>
     </div>
@@ -307,8 +307,8 @@ function StepVisual({ index }: { index: number }) {
               >
                 {f.icon}
               </span>
-              <span className="text-[14px] text-panel-ink">{f.name}</span>
-              <span className="ml-auto font-mono text-[11px] text-panel-muted">
+              <span className="text-[14px] text-[#f5f5f7]">{f.name}</span>
+              <span className="ml-auto font-mono text-[11px] text-[#a1a1a6]">
                 {tx(L.ready)}
               </span>
             </div>
@@ -362,9 +362,9 @@ function StepVisual({ index }: { index: number }) {
       <Shell label="review">
         <div className="flex h-full flex-col justify-center gap-4">
           <div className="text-center">
-            <div className="text-[44px] font-semibold leading-none tracking-tight text-panel-ink">
+            <div className="text-[44px] font-semibold leading-none tracking-tight text-[#f5f5f7]">
               92
-              <span className="text-[22px] text-panel-muted"> / 100</span>
+              <span className="text-[22px] text-[#a1a1a6]"> / 100</span>
             </div>
             <p className="mt-1.5 text-[12px] font-medium text-[#6fd39a]">
               {tx(L.passed)}
@@ -379,8 +379,8 @@ function StepVisual({ index }: { index: number }) {
                 <span className="grid h-5 w-5 place-items-center rounded-full bg-[#6fd39a]/20 text-[11px] text-[#6fd39a]">
                   ✓
                 </span>
-                <span className="text-[13px] text-panel-ink">{tx(r.who)}</span>
-                <span className="ml-auto font-mono text-[12px] text-panel-muted">
+                <span className="text-[13px] text-[#f5f5f7]">{tx(r.who)}</span>
+                <span className="ml-auto font-mono text-[12px] text-[#a1a1a6]">
                   {r.score}
                 </span>
               </div>
@@ -409,8 +409,8 @@ function StepVisual({ index }: { index: number }) {
               className="h-8 w-8 shrink-0 rounded-lg"
               style={{ background: `${f.tint}33`, border: `1px solid ${f.tint}66` }}
             />
-            <span className="text-[14px] text-panel-ink">{f.name}</span>
-            <span className="font-mono text-[11px] text-panel-muted">{f.ext}</span>
+            <span className="text-[14px] text-[#f5f5f7]">{f.name}</span>
+            <span className="font-mono text-[11px] text-[#a1a1a6]">{f.ext}</span>
             <span className="ml-auto font-mono text-[11px] text-[#6fd39a]">
               {tx(L.exported)}
             </span>

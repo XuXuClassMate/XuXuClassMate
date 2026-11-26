@@ -22,6 +22,7 @@ type Stats = {
   clawPlugins: number;
   ghIssues: number;
   ghPRs: number;
+  pageViews: number;
   history: number[];
 };
 
@@ -35,6 +36,7 @@ const FALLBACK: Stats = {
   clawPlugins: 1,
   ghIssues: 147,
   ghPRs: 31,
+  pageViews: 0,
   history: [
     78523, 79009, 79482, 79647, 80016, 80499, 80812, 81148, 81637, 82200,
     82800, 83400, 84100, 84700, 85285,
@@ -160,27 +162,36 @@ export function LiveStats() {
     const ac = new AbortController();
     const sig = ac.signal;
 
-    // Everything (Docker + ClawHub + GitHub) is aggregated and cached in Redis by
-    // the gateway; the site pulls this one endpoint, no per-visitor recomputation.
+    // Stats (Docker + ClawHub + GitHub) are aggregated and cached in Redis by the
+    // gateway; /api/views is a live page-view counter (one increment per load).
     (async () => {
       try {
-        const p = await fetch(`${GW}/api/portfolio`, { signal: sig }).then((r) => r.json());
-        if (sig.aborted || !p) return;
-        const healthy = Number(p.clawSkills) > 0 || Number(p.pulls) > 0;
-        if (!healthy) return;
-        const hist = Array.isArray(p.history) ? p.history.map(Number).filter(Number.isFinite) : [];
-        setData({
-          pulls: Number(p.pulls) || FALLBACK.pulls,
-          images: Number(p.images) || FALLBACK.images,
-          apiCalls: Number(p.apiCalls) || FALLBACK.apiCalls,
-          monthDelta: Number(p.monthDelta) || FALLBACK.monthDelta,
-          history: hist.length > 1 ? hist : FALLBACK.history,
-          clawDownloads: Number(p.clawDownloads) || FALLBACK.clawDownloads,
-          clawSkills: Number(p.clawSkills) || FALLBACK.clawSkills,
-          clawPlugins: Number(p.clawPlugins) || FALLBACK.clawPlugins,
-          ghIssues: Number(p.ghIssues) || FALLBACK.ghIssues,
-          ghPRs: Number(p.ghPRs) || FALLBACK.ghPRs,
-        });
+        const [p, v] = await Promise.all([
+          fetch(`${GW}/api/portfolio`, { signal: sig }).then((r) => r.json()).catch(() => null),
+          fetch(`${GW}/api/views`, { signal: sig }).then((r) => r.json()).catch(() => null),
+        ]);
+        if (sig.aborted) return;
+        const views = Number(v && v.total) || FALLBACK.pageViews;
+        const healthy = p && (Number(p.clawSkills) > 0 || Number(p.pulls) > 0);
+        const hist = p && Array.isArray(p.history) ? p.history.map(Number).filter(Number.isFinite) : [];
+        setData((d) => ({
+          ...d,
+          ...(healthy
+            ? {
+                pulls: Number(p.pulls) || FALLBACK.pulls,
+                images: Number(p.images) || FALLBACK.images,
+                apiCalls: Number(p.apiCalls) || FALLBACK.apiCalls,
+                monthDelta: Number(p.monthDelta) || FALLBACK.monthDelta,
+                history: hist.length > 1 ? hist : FALLBACK.history,
+                clawDownloads: Number(p.clawDownloads) || FALLBACK.clawDownloads,
+                clawSkills: Number(p.clawSkills) || FALLBACK.clawSkills,
+                clawPlugins: Number(p.clawPlugins) || FALLBACK.clawPlugins,
+                ghIssues: Number(p.ghIssues) || FALLBACK.ghIssues,
+                ghPRs: Number(p.ghPRs) || FALLBACK.ghPRs,
+              }
+            : {}),
+          pageViews: views,
+        }));
         setLive(true);
       } catch {
         /* keep fallback */
@@ -196,6 +207,7 @@ export function LiveStats() {
   const delta = useCountUp(data.monthDelta, run, reduce);
   const claw = useCountUp(data.clawDownloads, run, reduce);
   const ghIssues = useCountUp(data.ghIssues, run, reduce);
+  const views = useCountUp(data.pageViews, run, reduce);
   const fmt = (n: number) => n.toLocaleString("en-US");
 
   const small: { icon: IconName; color: string; value: string; label: string; sub?: string }[] = [
@@ -218,6 +230,12 @@ export function LiveStats() {
       color: "var(--c-amber)",
       value: fmt(apiCalls),
       label: tx({ en: "API calls served", zh: "API 调用量", ar: "طلبات API مُخدّمة", fr: "Appels API servis", ru: "Обработано API-запросов", es: "Llamadas API servidas" }),
+    },
+    {
+      icon: "analytics",
+      color: "var(--c-pink)",
+      value: fmt(views),
+      label: tx({ en: "Page views", zh: "页面浏览量", ar: "مشاهدات الصفحة", fr: "Pages vues", ru: "Просмотров страниц", es: "Vistas de página" }),
     },
   ];
 
@@ -283,7 +301,7 @@ export function LiveStats() {
           </article>
 
           {/* Supporting stats */}
-          <div className="grid gap-6 sm:grid-cols-3">
+          <div className="grid gap-6 grid-cols-2 lg:grid-cols-4">
             {small.map((s) => (
               <article key={s.label} className={CARD} style={GLOW}>
                 <Chip name={s.icon} color={s.color} />

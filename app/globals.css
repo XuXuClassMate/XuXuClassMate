@@ -16,13 +16,13 @@
   --color-ink-invert: #f5f5f7;
   --color-muted-invert: #a1a1a6;
 
-  /* Showcase panels that stay dark in BOTH themes (the generator window, the
-     pinned chapter, terminals, the specs band). These never flip. */
-  --color-panel: #1d1d1f;
-  --color-panel-2: #0b0b0c;
-  --color-panel-ink: #f5f5f7;
-  --color-panel-muted: #a1a1a6;
-  --color-panel-line: rgba(255, 255, 255, 0.1);
+  /* Showcase panels (generator window, pinned chapter, terminals, specs band).
+     These flip with the theme so the whole page switches together. Light values: */
+  --color-panel: #f5f5f7;
+  --color-panel-2: #ececee;
+  --color-panel-ink: #1d1d1f;
+  --color-panel-muted: #6e6e73;
+  --color-panel-line: rgba(0, 0, 0, 0.1);
 
   --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
     "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -77,6 +77,13 @@ html.dark {
   --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.5), 0 12px 32px -16px rgba(0, 0, 0, 0.7);
   --shadow-card-hover: 0 2px 8px rgba(0, 0, 0, 0.6), 0 30px 60px -20px rgba(0, 0, 0, 0.85);
   color-scheme: dark;
+
+  /* Panels flip back to dark in dark mode. */
+  --color-panel: #1d1d1f;
+  --color-panel-2: #0b0b0c;
+  --color-panel-ink: #f5f5f7;
+  --color-panel-muted: #a1a1a6;
+  --color-panel-line: rgba(255, 255, 255, 0.1);
 }
 
 * {

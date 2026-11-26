@@ -182,12 +182,12 @@ function ToolboxWindow() {
   ];
 
   return (
-    <div className="mx-auto max-w-[920px] overflow-hidden rounded-[var(--radius-ap)] border border-[var(--color-line)] bg-panel shadow-[0_30px_80px_-20px_rgba(0,0,0,0.35)]">
+    <div className="mx-auto max-w-[920px] overflow-hidden rounded-[var(--radius-ap)] border border-white/10 bg-[#1d1d1f] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.35)]">
       <div className="flex items-center gap-2 border-b border-white/10 px-5 py-3.5" dir="ltr">
         <span className="h-3 w-3 rounded-full bg-white/15" />
         <span className="h-3 w-3 rounded-full bg-white/15" />
         <span className="h-3 w-3 rounded-full bg-white/15" />
-        <span className="ml-3 flex items-center gap-2 font-mono text-[12px] text-panel-muted">
+        <span className="ml-3 flex items-center gap-2 font-mono text-[12px] text-[#a1a1a6]">
           <span className="relative flex h-1.5 w-1.5">
             <span className="absolute inline-flex h-full w-full rounded-full bg-[#6fd39a] opacity-70 motion-safe:animate-ping" />
             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#6fd39a]" />
@@ -222,9 +222,9 @@ function ToolboxWindow() {
             </span>
             <div className="min-w-0 flex-1">
               <p className="truncate font-mono text-[13px]" style={{ color: t.accent }}>{t.name}</p>
-              <p className="mt-0.5 text-[14px] text-panel-ink">{tx(t.kind)}</p>
+              <p className="mt-0.5 text-[14px] text-[#f5f5f7]">{tx(t.kind)}</p>
             </div>
-            <span className="shrink-0 rounded-full border border-white/10 px-2.5 py-0.5 font-mono text-[11px] text-panel-muted transition-colors duration-300 group-hover:border-[color-mix(in_srgb,var(--acc)_45%,transparent)] group-hover:text-panel-ink">
+            <span className="shrink-0 rounded-full border border-white/10 px-2.5 py-0.5 font-mono text-[11px] text-[#a1a1a6] transition-colors duration-300 group-hover:border-[color-mix(in_srgb,var(--acc)_45%,transparent)] group-hover:text-[#f5f5f7]">
               {t.tag}
             </span>
             <span
