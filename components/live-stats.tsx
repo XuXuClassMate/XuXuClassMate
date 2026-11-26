@@ -265,14 +265,14 @@ export function LiveStats() {
       color: "var(--c-purple)",
       value: fmt(claw),
       label: tx({ en: "ClawHub downloads", zh: "ClawHub 下载量", ar: "تنزيلات ClawHub", fr: "Téléchargements ClawHub", ru: "Загрузки ClawHub", es: "Descargas de ClawHub" }),
-      sub: `${data.clawSkills} ${tx({ en: "skills", zh: "个技能", ar: "مهارات", fr: "compétences", ru: "навыков", es: "habilidades" })} · ${data.clawPlugins} ${tx({ en: "plugins", zh: "个插件", ar: "ملحقات", fr: "plugins", ru: "плагинов", es: "plugins" })}`,
+      sub: `${data.clawSkills} ${tx({ en: data.clawSkills === 1 ? "skill" : "skills", zh: "个技能", ar: "مهارات", fr: data.clawSkills === 1 ? "compétence" : "compétences", ru: "навыков", es: data.clawSkills === 1 ? "habilidad" : "habilidades" })} · ${data.clawPlugins} ${tx({ en: data.clawPlugins === 1 ? "plugin" : "plugins", zh: "个插件", ar: "ملحقات", fr: "plugin" + (data.clawPlugins === 1 ? "" : "s"), ru: "плагинов", es: "plugin" + (data.clawPlugins === 1 ? "" : "s") })}`,
     },
     {
       icon: "code",
       color: "var(--c-teal)",
       value: fmt(ghIssues),
       label: tx({ en: "GitHub issues opened", zh: "GitHub 提交的 issues", ar: "مشكلات GitHub المفتوحة", fr: "Issues GitHub ouvertes", ru: "Issues на GitHub", es: "Issues abiertas en GitHub" }),
-      sub: `${data.ghPRs} ${tx({ en: "pull requests", zh: "个 PR", ar: "طلبات سحب", fr: "pull requests", ru: "pull-реквестов", es: "pull requests" })}`,
+      sub: `${data.ghPRs} ${tx({ en: data.ghPRs === 1 ? "pull request" : "pull requests", zh: "个 PR", ar: "طلبات سحب", fr: data.ghPRs === 1 ? "pull request" : "pull requests", ru: "pull-реквестов", es: data.ghPRs === 1 ? "pull request" : "pull requests" })}`,
     },
     {
       icon: "api",
@@ -334,7 +334,7 @@ export function LiveStats() {
                   {tx({ en: "last 30 days", zh: "近 30 天", ar: "آخر 30 يوماً", fr: "30 derniers jours", ru: "за 30 дней", es: "últimos 30 días" })}
                 </span>
                 <span className="font-mono text-[12px] text-muted">
-                  {fmt(images)} {tx({ en: "public images", zh: "个公开镜像", ar: "صورة عامة", fr: "images publiques", ru: "публичных образов", es: "imágenes públicas" })}
+                  {fmt(images)} {tx({ en: data.images === 1 ? "public image" : "public images", zh: "个公开镜像", ar: "صورة عامة", fr: data.images === 1 ? "image publique" : "images publiques", ru: "публичных образов", es: data.images === 1 ? "imagen pública" : "imágenes públicas" })}
                 </span>
               </div>
             </div>
