@@ -23,6 +23,7 @@ type Stats = {
   ghIssues: number;
   ghPRs: number;
   pageViews: number;
+  scans30d: number;
   history: number[];
 };
 
@@ -37,6 +38,7 @@ const FALLBACK: Stats = {
   ghIssues: 147,
   ghPRs: 31,
   pageViews: 0,
+  scans30d: 400960,
   history: [
     78523, 79009, 79482, 79647, 80016, 80499, 80812, 81148, 81637, 82200,
     82800, 83400, 84100, 84700, 85285,
@@ -172,6 +174,7 @@ export function LiveStats() {
         ]);
         if (sig.aborted) return;
         const views = Number(v && v.total) || FALLBACK.pageViews;
+        const scans = Number(v && v.scans30d) || FALLBACK.scans30d;
         const healthy = p && (Number(p.clawSkills) > 0 || Number(p.pulls) > 0);
         const hist = p && Array.isArray(p.history) ? p.history.map(Number).filter(Number.isFinite) : [];
         setData((d) => ({
@@ -191,6 +194,7 @@ export function LiveStats() {
               }
             : {}),
           pageViews: views,
+          scans30d: scans,
         }));
         setLive(true);
       } catch {
@@ -208,6 +212,7 @@ export function LiveStats() {
   const claw = useCountUp(data.clawDownloads, run, reduce);
   const ghIssues = useCountUp(data.ghIssues, run, reduce);
   const views = useCountUp(data.pageViews, run, reduce);
+  const scans = useCountUp(data.scans30d, run, reduce);
   const fmt = (n: number) => n.toLocaleString("en-US");
 
   const small: { icon: IconName; color: string; value: string; label: string; sub?: string }[] = [
@@ -236,6 +241,13 @@ export function LiveStats() {
       color: "var(--c-pink)",
       value: fmt(views),
       label: tx({ en: "Page views", zh: "页面浏览量", ar: "مشاهدات الصفحة", fr: "Pages vues", ru: "Просмотров страниц", es: "Vistas de página" }),
+    },
+    {
+      icon: "permissions",
+      color: "var(--c-indigo)",
+      value: fmt(scans),
+      label: tx({ en: "Malicious scans blocked", zh: "恶意扫描拦截", ar: "عمليات فحص خبيثة محظورة", fr: "Scans malveillants bloqués", ru: "Заблокировано сканирований", es: "Escaneos maliciosos bloqueados" }),
+      sub: tx({ en: "last 30 days · all domains", zh: "近 30 天 · 全部域名", ar: "آخر 30 يوماً · كل النطاقات", fr: "30 derniers jours · tous domaines", ru: "за 30 дней · все домены", es: "últimos 30 días · todos los dominios" }),
     },
   ];
 
@@ -301,11 +313,11 @@ export function LiveStats() {
           </article>
 
           {/* Supporting stats */}
-          <div className="grid gap-6 grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-6 grid-cols-2 lg:grid-cols-5">
             {small.map((s) => (
               <article key={s.label} className={CARD} style={GLOW}>
                 <Chip name={s.icon} color={s.color} />
-                <div className="mt-5 text-[clamp(34px,4vw,48px)] font-semibold leading-none tracking-tight text-ink">
+                <div className="mt-5 text-[clamp(28px,3vw,42px)] font-semibold leading-none tracking-tight text-ink">
                   {s.value}
                 </div>
                 <p className="mt-3 text-[16px] text-muted">{s.label}</p>
