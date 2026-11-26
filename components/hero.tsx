@@ -7,6 +7,8 @@ import { Aurora } from "@/components/aurora";
 
 const ease = [0.22, 0.61, 0.36, 1] as const;
 
+const MotionLink = motion.create(Link);
+
 export function Hero() {
   const reduce = useReducedMotion();
   const tx = useTx();
@@ -84,6 +86,7 @@ type Tool = { name: string; kind: Localized; tag: string; accent: string };
 
 function ToolboxWindow() {
   const tx = useTx();
+  const reduce = useReducedMotion();
   const tools: Tool[] = [
     {
       name: "testcase-generator",
@@ -132,13 +135,25 @@ function ToolboxWindow() {
         </span>
       </div>
       <div className="grid gap-3 p-5 sm:p-7">
-        {tools.map((t) => (
-          <div
+        {tools.map((t, i) => (
+          <MotionLink
+            href="/products"
             key={t.name}
-            className="flex items-center gap-4 rounded-xl border border-white/10 p-4 text-left"
+            style={{ ["--acc" as string]: t.accent } as React.CSSProperties}
+            className="group flex items-center gap-4 rounded-xl border border-white/10 p-4 text-left transition-colors duration-300 hover:border-[color-mix(in_srgb,var(--acc)_50%,transparent)] hover:bg-[color-mix(in_srgb,var(--acc)_8%,transparent)] hover:shadow-[0_14px_36px_-16px_var(--acc)]"
+            {...(reduce
+              ? {}
+              : {
+                  initial: { opacity: 0, y: 16 },
+                  whileInView: { opacity: 1, y: 0 },
+                  viewport: { once: true, margin: "-40px" },
+                  transition: { duration: 0.5, delay: i * 0.08, ease },
+                  whileHover: { y: -3 },
+                  whileTap: { scale: 0.99 },
+                })}
           >
             <span
-              className="hidden h-9 w-9 shrink-0 place-items-center rounded-lg font-mono text-[13px] sm:grid"
+              className="hidden h-9 w-9 shrink-0 place-items-center rounded-lg font-mono text-[13px] transition-transform duration-300 group-hover:scale-110 sm:grid"
               style={{ backgroundColor: `color-mix(in srgb, ${t.accent} 16%, transparent)`, color: t.accent }}
               aria-hidden="true"
             >
@@ -148,10 +163,17 @@ function ToolboxWindow() {
               <p className="truncate font-mono text-[13px]" style={{ color: t.accent }}>{t.name}</p>
               <p className="mt-0.5 text-[14px] text-panel-ink">{tx(t.kind)}</p>
             </div>
-            <span className="shrink-0 rounded-full border border-white/10 px-2.5 py-0.5 font-mono text-[11px] text-panel-muted">
+            <span className="shrink-0 rounded-full border border-white/10 px-2.5 py-0.5 font-mono text-[11px] text-panel-muted transition-colors duration-300 group-hover:border-[color-mix(in_srgb,var(--acc)_45%,transparent)] group-hover:text-panel-ink">
               {t.tag}
             </span>
-          </div>
+            <span
+              aria-hidden="true"
+              className="-ml-1 shrink-0 translate-x-[-6px] font-mono text-[15px] opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100"
+              style={{ color: t.accent }}
+            >
+              →
+            </span>
+          </MotionLink>
         ))}
       </div>
     </div>

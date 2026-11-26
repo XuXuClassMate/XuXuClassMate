@@ -65,12 +65,12 @@ const FAMILIES: {
     href: "/ai-workflow",
     title: { en: "Agent skills", zh: "智能体技能", ar: "مهارات الوكلاء", fr: "Compétences d'agent", ru: "Навыки агентов", es: "Habilidades de agente" },
     desc: {
-      en: "10 skills shipped on ClawHub — testing, stock, transcription, and more.",
-      zh: "在 ClawHub 发布的 10 个技能——测试、股票、语音转写等。",
-      ar: "10 مهارات منشورة على ClawHub — اختبار، أسهم، تفريغ صوتي، والمزيد.",
-      fr: "10 compétences publiées sur ClawHub — tests, bourse, transcription, et plus.",
-      ru: "10 навыков на ClawHub — тестирование, биржа, транскрипция и другое.",
-      es: "10 habilidades publicadas en ClawHub — pruebas, bolsa, transcripción y más.",
+      en: "Agent skills & plugins shipped on ClawHub — testing, stock, transcription, multi-agent workflow, and more.",
+      zh: "在 ClawHub 发布的智能体技能与插件——测试、股票、语音转写、多智能体工作流等。",
+      ar: "مهارات وملحقات وكلاء منشورة على ClawHub — اختبار، أسهم، تفريغ صوتي، سير عمل متعدد الوكلاء، والمزيد.",
+      fr: "Compétences et plugins d'agent publiés sur ClawHub — tests, bourse, transcription, workflow multi-agents, et plus.",
+      ru: "Навыки и плагины агентов на ClawHub — тестирование, биржа, транскрипция, мультиагентный процесс и другое.",
+      es: "Habilidades y plugins de agente en ClawHub — pruebas, bolsa, transcripción, flujo multiagente y más.",
     },
   },
   {

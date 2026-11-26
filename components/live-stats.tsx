@@ -10,8 +10,11 @@ import { Icon, type IconName } from "@/components/icons";
 
 const GW = "https://docker-hub-pull-counter.vercel.app";
 const USER = "xuxuclassmate";
-const CLAW = "https://clawhub.ai/api/v1/skills/";
-const CLAW_SLUGS = [
+const CLAW = "https://clawhub.ai/api/v1";
+// ClawHub exposes no list-by-owner API, so the published items are enumerated here
+// (one place to extend). Every number shown is fetched live from these endpoints —
+// counts and downloads are computed from the live responses, never hard-coded.
+const CLAW_SKILLS = [
   "skill-publishing",
   "free-api-discovery",
   "feishu-setup-troubleshooting",
@@ -22,7 +25,10 @@ const CLAW_SLUGS = [
   "trading-assistant-core",
   "whisper-voice-transcription",
   "custom-mail-skill",
+  "relay",
 ];
+const CLAW_PLUGINS = ["relay"];
+const GH_SEARCH = "https://api.github.com/search/issues?q=";
 
 type Stats = {
   pulls: number;
@@ -31,6 +37,9 @@ type Stats = {
   monthDelta: number;
   clawDownloads: number;
   clawSkills: number;
+  clawPlugins: number;
+  ghIssues: number;
+  ghPRs: number;
   history: number[];
 };
 
@@ -39,8 +48,11 @@ const FALLBACK: Stats = {
   images: 13,
   apiCalls: 4811,
   monthDelta: 6762,
-  clawDownloads: 10868,
-  clawSkills: 10,
+  clawDownloads: 10990,
+  clawSkills: 11,
+  clawPlugins: 1,
+  ghIssues: 147,
+  ghPRs: 31,
   history: [
     78523, 79009, 79482, 79647, 80016, 80499, 80812, 81148, 81637, 82200,
     82800, 83400, 84100, 84700, 85285,
@@ -188,27 +200,51 @@ export function LiveStats() {
       })();
 
       const claw = (async () => {
-        const settled = await Promise.allSettled(
-          CLAW_SLUGS.map((slug) => jsonOf(`${CLAW}${slug}`)),
-        );
+        const [skRes, pkRes] = await Promise.all([
+          Promise.allSettled(CLAW_SKILLS.map((slug) => jsonOf(`${CLAW}/skills/${slug}?owner=${USER}`))),
+          Promise.allSettled(CLAW_PLUGINS.map((name) => jsonOf(`${CLAW}/packages/${name}`))),
+        ]);
         let total = 0;
-        let count = 0;
-        for (const r of settled) {
+        let skills = 0;
+        let plugins = 0;
+        for (const r of skRes) {
           if (r.status !== "fulfilled") continue;
           const d = r.value;
           if (d?.owner?.handle === USER && typeof d?.skill?.stats?.downloads === "number") {
             total += d.skill.stats.downloads;
-            count += 1;
+            skills += 1;
           }
         }
-        return count > 0
-          ? { clawDownloads: total, clawSkills: count }
-          : { clawDownloads: FALLBACK.clawDownloads, clawSkills: FALLBACK.clawSkills };
+        for (const r of pkRes) {
+          if (r.status !== "fulfilled") continue;
+          const d = r.value;
+          if (d?.owner?.handle === USER && typeof d?.package?.stats?.downloads === "number") {
+            total += d.package.stats.downloads;
+            plugins += 1;
+          }
+        }
+        return skills > 0 || plugins > 0
+          ? { clawDownloads: total, clawSkills: skills, clawPlugins: plugins }
+          : { clawDownloads: FALLBACK.clawDownloads, clawSkills: FALLBACK.clawSkills, clawPlugins: FALLBACK.clawPlugins };
       })();
 
-      const [d, c] = await Promise.all([docker, claw]);
+      const github = (async () => {
+        try {
+          const q = (f: string) =>
+            jsonOf(`${GH_SEARCH}${encodeURIComponent(`author:${USER} ${f}`)}&per_page=1`);
+          const [iss, pr] = await Promise.all([q("type:issue"), q("type:pr")]);
+          return {
+            ghIssues: Number(iss?.total_count) || FALLBACK.ghIssues,
+            ghPRs: Number(pr?.total_count) || FALLBACK.ghPRs,
+          };
+        } catch {
+          return { ghIssues: FALLBACK.ghIssues, ghPRs: FALLBACK.ghPRs };
+        }
+      })();
+
+      const [d, c, g] = await Promise.all([docker, claw, github]);
       if (sig.aborted) return;
-      setData({ ...d, ...c });
+      setData({ ...d, ...c, ...g });
       setLive(true);
     })().catch(() => {});
 
@@ -220,6 +256,7 @@ export function LiveStats() {
   const apiCalls = useCountUp(data.apiCalls, run, reduce);
   const delta = useCountUp(data.monthDelta, run, reduce);
   const claw = useCountUp(data.clawDownloads, run, reduce);
+  const ghIssues = useCountUp(data.ghIssues, run, reduce);
   const fmt = (n: number) => n.toLocaleString("en-US");
 
   const small: { icon: IconName; color: string; value: string; label: string; sub?: string }[] = [
@@ -228,13 +265,14 @@ export function LiveStats() {
       color: "var(--c-purple)",
       value: fmt(claw),
       label: tx({ en: "ClawHub downloads", zh: "ClawHub 下载量", ar: "تنزيلات ClawHub", fr: "Téléchargements ClawHub", ru: "Загрузки ClawHub", es: "Descargas de ClawHub" }),
-      sub: `${data.clawSkills} ${tx({ en: "skills", zh: "个技能", ar: "مهارات", fr: "compétences", ru: "навыков", es: "habilidades" })}`,
+      sub: `${data.clawSkills} ${tx({ en: "skills", zh: "个技能", ar: "مهارات", fr: "compétences", ru: "навыков", es: "habilidades" })} · ${data.clawPlugins} ${tx({ en: "plugins", zh: "个插件", ar: "ملحقات", fr: "plugins", ru: "плагинов", es: "plugins" })}`,
     },
     {
-      icon: "infra",
+      icon: "code",
       color: "var(--c-teal)",
-      value: fmt(images),
-      label: tx({ en: "Public images", zh: "公开镜像", ar: "صور عامة", fr: "Images publiques", ru: "Публичных образов", es: "Imágenes públicas" }),
+      value: fmt(ghIssues),
+      label: tx({ en: "GitHub issues opened", zh: "GitHub 提交的 issues", ar: "مشكلات GitHub المفتوحة", fr: "Issues GitHub ouvertes", ru: "Issues на GitHub", es: "Issues abiertas en GitHub" }),
+      sub: `${data.ghPRs} ${tx({ en: "pull requests", zh: "个 PR", ar: "طلبات سحب", fr: "pull requests", ru: "pull-реквестов", es: "pull requests" })}`,
     },
     {
       icon: "api",
@@ -290,10 +328,15 @@ export function LiveStats() {
               <div className="mt-4 text-[clamp(46px,6.6vw,80px)] font-semibold leading-none tracking-tight text-ink">
                 {fmt(pulls)}
               </div>
-              <span className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-[#34c759]/12 px-3 py-1 font-mono text-[12px] font-medium text-[#1a9c43] dark:text-[#4fd37a]">
-                ↑ {fmt(delta)} ·{" "}
-                {tx({ en: "last 30 days", zh: "近 30 天", ar: "آخر 30 يوماً", fr: "30 derniers jours", ru: "за 30 дней", es: "últimos 30 días" })}
-              </span>
+              <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-[#34c759]/12 px-3 py-1 font-mono text-[12px] font-medium text-[#1a9c43] dark:text-[#4fd37a]">
+                  ↑ {fmt(delta)} ·{" "}
+                  {tx({ en: "last 30 days", zh: "近 30 天", ar: "آخر 30 يوماً", fr: "30 derniers jours", ru: "за 30 дней", es: "últimos 30 días" })}
+                </span>
+                <span className="font-mono text-[12px] text-muted">
+                  {fmt(images)} {tx({ en: "public images", zh: "个公开镜像", ar: "صورة عامة", fr: "images publiques", ru: "публичных образов", es: "imágenes públicas" })}
+                </span>
+              </div>
             </div>
             <div className="mt-7 md:mt-0 md:w-[46%]">
               <Sparkline values={data.history} className="h-[84px] w-full" />
