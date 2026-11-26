@@ -93,6 +93,7 @@ html.dark {
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
   scroll-behavior: smooth;
 }
@@ -103,6 +104,8 @@ body {
   color: var(--color-ink);
   font-family: var(--font-sans);
   letter-spacing: -0.012em;
+  overflow-x: clip;
+  min-width: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -111,11 +114,12 @@ body {
   }
 }
 
-/* ---- Smooth theme transition (C). Only color properties, only when the
-   viewer allows motion. Elements with their own transition utility keep it. */
+/* 主题色过渡只打在根节点。body * { transition } 会让 iPhone 给每个节点建层,
+   旧机容易 GPU 合成失败,整页变成空白。 */
 @media (prefers-reduced-motion: no-preference) {
-  body * {
-    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  html,
+  body {
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 }
 
@@ -132,6 +136,20 @@ body {
 :lang(zh) .lead {
   letter-spacing: 0;
   line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+/* keep-all 只在够宽时启用:窄屏(iPhone 11 414px)遇长词会撑破 overflow-hidden */
+@media (min-width: 768px) {
+  :lang(zh) .lead {
+    overflow-wrap: normal;
+    word-break: keep-all;
+  }
+}
+/* 卡片小标题避免「口」单独吊行;大标题仍走 .display-* 的 balance */
+:lang(zh) h3,
+:lang(zh) h4 {
+  line-break: strict;
+  text-wrap: pretty;
 }
 
 :lang(ar) {
@@ -315,6 +333,17 @@ body {
   }
 }
 
+/* iPhone / 窄屏不把内容藏到 opacity:0。IntersectionObserver 在 iOS Chrome
+   上经常不回调,首屏会一直空白。 */
+@media (max-width: 767px) {
+  .reveal,
+  .reveal.is-in {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 /* ---- Aurora: animated gradient backdrop for hero / signature moments ---- */
 .aurora {
   position: absolute;
@@ -373,6 +402,15 @@ html.dark .aurora .a2 { opacity: 0.36; }
 html.dark .aurora .a3 { opacity: 0.34; }
 html.dark .aurora .a4 { opacity: 0.26; }
 
+/* 必须写在 .a1–.a4 之后,否则 animation 会被更高优先级盖掉。 */
+@media (max-width: 767px) {
+  .aurora span {
+    filter: blur(36px);
+    will-change: auto;
+    animation: none;
+  }
+}
+
 @keyframes aurora-a {
   0%, 100% { transform: translate(-8%, -6%) scale(1); }
   50% { transform: translate(10%, 6%) scale(1.15); }
@@ -394,5 +432,14 @@ html.dark .aurora .a4 { opacity: 0.26; }
   background: linear-gradient(95deg, var(--c-blue), var(--c-purple) 50%, var(--c-cyan));
   -webkit-background-clip: text;
   background-clip: text;
-  color: transparent;
+  color: var(--color-ink);
+  -webkit-text-fill-color: transparent;
+}
+/* clip + transform/opacity 在 iOS 上会把字画成全透明;窄屏改实色,保证标题可见 */
+@media (max-width: 767px) {
+  .text-gradient {
+    background: none;
+    -webkit-text-fill-color: unset;
+    color: var(--color-ink);
+  }
 }

@@ -5,7 +5,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "motion/react";
-import { useTx } from "@/components/i18n";
+import { useLang, useTx } from "@/components/i18n";
+import { formatCompactCount, formatCount } from "@/lib/format-number";
 import { Icon, type IconName } from "@/components/icons";
 
 const GW = "https://open.xuxuclassmate.com";
@@ -138,6 +139,7 @@ function Chip({ name, color = "var(--color-accent)" }: { name: IconName; color?:
 
 export function LiveStats() {
   const tx = useTx();
+  const { lang } = useLang();
   const reduce = useReducedMotion() ?? false;
   const ref = useRef<HTMLDivElement>(null);
   const [run, setRun] = useState(false);
@@ -213,7 +215,9 @@ export function LiveStats() {
   const ghIssues = useCountUp(data.ghIssues, run, reduce);
   const views = useCountUp(data.pageViews, run, reduce);
   const scans = useCountUp(data.scans30d, run, reduce);
-  const fmt = (n: number) => n.toLocaleString("en-US");
+  // 大数字卡:满百万再缩写,保留「真实数字」观感;小卡更窄,满一万就缩。
+  const fmtHero = (n: number) => formatCompactCount(n, lang, 1_000_000);
+  const fmt = (n: number) => formatCompactCount(n, lang, 10_000);
 
   const small: { icon: IconName; color: string; value: string; label: string; sub?: string }[] = [
     {
@@ -294,8 +298,12 @@ export function LiveStats() {
                   {tx({ en: "Docker pulls", zh: "Docker 拉取次数", ar: "عمليات سحب Docker", fr: "Pulls Docker", ru: "Docker-загрузок", es: "Pulls de Docker" })}
                 </p>
               </div>
-              <div className="mt-4 text-[clamp(46px,6.6vw,80px)] font-semibold leading-none tracking-tight text-ink">
-                {fmt(pulls)}
+              <div
+                className="mt-4 text-[clamp(46px,6.6vw,80px)] font-semibold leading-none tracking-tight text-ink tabular-nums"
+                title={formatCount(data.pulls, lang)}
+                dir="ltr"
+              >
+                {fmtHero(pulls)}
               </div>
               <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-[#34c759]/12 px-3 py-1 font-mono text-[12px] font-medium text-[#1a9c43] dark:text-[#4fd37a]">
@@ -317,7 +325,7 @@ export function LiveStats() {
             {small.map((s) => (
               <article key={s.label} className={CARD.replace("p-8", "p-5")} style={GLOW}>
                 <Chip name={s.icon} color={s.color} />
-                <div className="mt-5 text-[clamp(24px,2.2vw,32px)] font-semibold leading-none tracking-tight text-ink tabular-nums">
+                <div className="mt-5 truncate text-[clamp(24px,2.2vw,32px)] font-semibold leading-none tracking-tight text-ink tabular-nums" dir="ltr">
                   {s.value}
                 </div>
                 <p className="mt-3 text-[16px] text-muted">{s.label}</p>

@@ -7,6 +7,7 @@ import { HUES } from "@/lib/hues";
 import { T } from "@/components/i18n";
 import { Icon } from "@/components/icons";
 import { AI_ROLES } from "@/lib/about-content";
+import { cn } from "@/lib/utils";
 import {
   WF_SUMMARY,
   WF_HEADINGS,
@@ -34,7 +35,7 @@ export default function AiWorkflowPage() {
       {/* Hero */}
       <section className="relative overflow-hidden pt-[calc(var(--nav-h)+80px)]">
         <Aurora />
-        <div className="container-ap pb-16 text-center">
+        <div className="container-ap pb-24 text-center">
           <Reveal>
             <p className="eyebrow">
               <T en="AI collaboration" zh="AI 协作" ar="التعاون مع الذكاء الاصطناعي" fr="Collaboration IA" ru="Работа с ИИ" es="Colaboración con IA" />
@@ -42,18 +43,19 @@ export default function AiWorkflowPage() {
             <h1 className="display-1 mx-auto mt-3 max-w-[18ch]">
               <T en="A one-person test team, run with AI." zh="用 AI 带起来的一人测试团队。" ar="فريق اختبار من شخص واحد، يُدار بالذكاء الاصطناعي." fr="Une équipe de test d'une personne, menée avec l'IA." ru="Команда тестирования из одного человека — на базе ИИ." es="Un equipo de pruebas de una persona, gestionado con IA." />
             </h1>
-            <p className="lead mx-auto mt-6 max-w-[62ch] text-start">
+            {/* 标题居中时导语也居中,避免左对齐段落把首屏撑歪 */}
+            <p className="lead mx-auto mt-6 max-w-[60ch]">
               <T {...WF_SUMMARY} />
             </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
               <LiveStat
                 kind="claw-total"
                 fallback={10868}
                 label={{ en: "ClawHub downloads", zh: "ClawHub 下载量", ar: "تنزيلات ClawHub", fr: "Téléchargements ClawHub", ru: "Загрузки ClawHub", es: "Descargas de ClawHub" }}
               />
-              <span className="inline-flex items-center gap-2 rounded-full border border-[var(--color-line)] bg-[var(--color-surface)] px-4 py-2 text-[14px]">
-                <strong className="font-semibold text-ink">23</strong>
-                <span className="text-muted">
+              <span className="inline-flex min-w-0 max-w-full items-center gap-2 rounded-full border border-[var(--color-line)] bg-[var(--color-surface)] px-4 py-2 text-[14px]">
+                <strong className="shrink-0 font-semibold tabular-nums text-ink">23</strong>
+                <span className="min-w-0 truncate text-muted">
                   <T en="skills in the pack" zh="个技能收录在包里" ar="مهارة في الحزمة" fr="compétences dans le pack" ru="навыков в наборе" es="habilidades en el pack" />
                 </span>
               </span>
@@ -61,7 +63,7 @@ export default function AiWorkflowPage() {
 
             {/* Runtime compatibility tags */}
             <div className="mt-10">
-              <p className="text-[13px] font-medium uppercase tracking-wide text-muted">
+              <p className="text-[13px] font-medium text-muted">
                 <T {...TOOLS_LABEL} />
               </p>
               <div className="mt-4 flex flex-wrap justify-center gap-2.5">
@@ -95,15 +97,15 @@ export default function AiWorkflowPage() {
           </Reveal>
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             {PRINCIPLES.map((p, i) => (
-              <Reveal key={p.title.en} delay={(i % 3) * 0.06}>
-                <article className="card-ap h-full rounded-[var(--radius-ap)] bg-[var(--color-bg)] p-7">
+              <Reveal key={p.title.en} delay={(i % 3) * 0.06} className="h-full">
+                <article className="card-ap flex h-full flex-col rounded-[var(--radius-ap)] bg-[var(--color-bg)] p-7">
                   <span className="font-mono text-[13px] text-[var(--color-accent)]">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <h3 className="mt-3 text-[20px] font-semibold tracking-tight">
+                  <h3 className="mt-3 text-[20px] font-semibold leading-snug tracking-tight text-balance">
                     <T {...p.title} />
                   </h3>
-                  <p className="mt-2 text-[16px] leading-relaxed text-muted">
+                  <p className="mt-2 text-[16px] leading-relaxed text-muted text-pretty">
                     <T {...p.body} />
                   </p>
                 </article>
@@ -123,7 +125,7 @@ export default function AiWorkflowPage() {
           </Reveal>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {AI_ROLES.map((r, i) => (
-              <Reveal key={r.title.en} delay={(i % 3) * 0.06}>
+              <Reveal key={r.title.en} delay={(i % 3) * 0.06} className="h-full">
                 <article className="card-ap flex h-full items-start gap-4 rounded-[var(--radius-ap)] border border-[var(--color-line)] bg-[var(--color-bg)] p-6">
                   <span
                     className="grid h-10 w-10 shrink-0 place-items-center rounded-xl"
@@ -131,11 +133,11 @@ export default function AiWorkflowPage() {
                   >
                     <Icon name={r.icon} size={20} />
                   </span>
-                  <div>
-                    <h3 className="text-[18px] font-semibold tracking-tight">
+                  <div className="min-w-0">
+                    <h3 className="text-[18px] font-semibold leading-snug tracking-tight text-pretty">
                       <T {...r.title} />
                     </h3>
-                    <p className="mt-1 text-[15px] leading-relaxed text-muted">
+                    <p className="mt-1 text-[15px] leading-relaxed text-muted text-pretty">
                       <T {...r.body} />
                     </p>
                   </div>
@@ -166,17 +168,31 @@ export default function AiWorkflowPage() {
                     {String(g.skills.length).padStart(2, "0")}
                   </span>
                 </div>
-                <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {/* 1/2/4 张时不用三列,避免末行孤张把分组撑歪 */}
+                <div
+                  className={cn(
+                    "mt-5 grid gap-4",
+                    g.skills.length === 1
+                      ? "max-w-xl"
+                      : g.skills.length === 2 || g.skills.length === 4
+                        ? "sm:grid-cols-2"
+                        : "sm:grid-cols-2 lg:grid-cols-3",
+                  )}
+                >
                   {g.skills.map((s) => (
                     <article
                       key={s.name.en}
-                      className="card-ap h-full rounded-[var(--radius-ap)] border border-[var(--color-line)] bg-[var(--color-bg)] p-5"
-                      style={{ borderTop: `2px solid ${HUES[gi % HUES.length]}` }}
+                      className="card-ap flex h-full flex-col rounded-[var(--radius-ap)] border border-[var(--color-line)] bg-[var(--color-bg)] p-5"
                     >
-                      <h4 className="text-[16px] font-semibold tracking-tight">
+                      <span
+                        className="mb-3 h-0.5 w-8 rounded-full"
+                        style={{ background: HUES[gi % HUES.length] }}
+                        aria-hidden="true"
+                      />
+                      <h4 className="text-[16px] font-semibold leading-snug tracking-tight text-pretty">
                         <T {...s.name} />
                       </h4>
-                      <p className="mt-2 text-[14px] leading-relaxed text-muted">
+                      <p className="mt-2 text-[14px] leading-relaxed text-muted text-pretty">
                         <T {...s.desc} />
                       </p>
                     </article>
@@ -200,14 +216,14 @@ export default function AiWorkflowPage() {
             {FLOW.map((s) => (
               <Reveal as="li" key={s.n}>
                 <div className="card-ap flex items-start gap-5 rounded-[var(--radius-ap)] bg-[var(--color-bg)] p-6">
-                  <span className="font-mono text-[22px] font-semibold leading-none text-[var(--color-accent)]">
+                  <span className="mt-0.5 font-mono text-[22px] font-semibold leading-none text-[var(--color-accent)]">
                     {s.n}
                   </span>
-                  <div>
-                    <h3 className="text-[19px] font-semibold tracking-tight">
+                  <div className="min-w-0">
+                    <h3 className="text-[19px] font-semibold leading-snug tracking-tight text-pretty">
                       <T {...s.title} />
                     </h3>
-                    <p className="mt-1.5 text-[16px] leading-relaxed text-muted">
+                    <p className="mt-1.5 text-[16px] leading-relaxed text-muted text-pretty">
                       <T {...s.body} />
                     </p>
                   </div>
@@ -225,26 +241,26 @@ export default function AiWorkflowPage() {
             <h2 className="display-2 max-w-[18ch]">
               <T {...WF_HEADINGS.example} />
             </h2>
-            <p className="lead mt-5 max-w-[64ch] text-start">
+            <p className="lead mt-5 max-w-[52ch] text-pretty">
               <T {...EXAMPLE_INTRO} />
             </p>
           </Reveal>
           <ol className="mt-12 grid gap-5 md:grid-cols-2">
             {EXAMPLE_STEPS.map((s, i) => (
-              <Reveal as="li" key={s.n} delay={(i % 2) * 0.06}>
-                <div className="card-ap h-full rounded-[var(--radius-ap)] bg-[var(--color-bg)] p-6">
-                  <div className="flex items-center gap-3">
+              <Reveal as="li" key={s.n} delay={(i % 2) * 0.06} className="h-full">
+                <div className="card-ap flex h-full flex-col rounded-[var(--radius-ap)] bg-[var(--color-bg)] p-6">
+                  <div className="flex items-start gap-3">
                     <span
                       className="grid h-8 w-8 shrink-0 place-items-center rounded-lg font-mono text-[13px] font-semibold"
                       style={{ backgroundColor: `color-mix(in srgb, ${HUES[i % HUES.length]} 15%, transparent)`, color: HUES[i % HUES.length] }}
                     >
                       {s.n}
                     </span>
-                    <h3 className="text-[18px] font-semibold tracking-tight">
+                    <h3 className="min-w-0 text-[18px] font-semibold leading-snug tracking-tight text-pretty">
                       <T {...s.title} />
                     </h3>
                   </div>
-                  <p className="mt-3 text-[15px] leading-relaxed text-muted">
+                  <p className="mt-3 text-[15px] leading-relaxed text-muted text-pretty">
                     <T {...s.body} />
                   </p>
                 </div>

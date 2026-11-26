@@ -50,7 +50,7 @@ export const PRINCIPLES: { title: Localized; body: Localized }[] = [
   {
     title: {
       en: "One outlet per external write",
-      zh: "一类外部写操作只有一个出口",
+      zh: "外部写操作,只有一个出口",
       ar: "منفذ واحد لكل كتابة خارجية",
       fr: "Une seule sortie par écriture externe",
       ru: "Один выход на каждый внешний запись-канал",

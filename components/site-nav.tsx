@@ -55,7 +55,7 @@ export function SiteNav() {
     <header className="fixed inset-x-0 top-0 z-50">
       <div
         className={cn(
-          "nav-bar h-[var(--nav-h)] border-b border-[var(--color-line)] bg-[color-mix(in_srgb,var(--color-bg)_80%,transparent)] backdrop-blur-xl backdrop-saturate-150",
+          "nav-bar h-[var(--nav-h)] border-b border-[var(--color-line)] bg-[var(--color-bg)]/80 backdrop-blur-xl backdrop-saturate-150",
           scrolled && "scrolled",
         )}
       >
@@ -100,7 +100,7 @@ export function SiteNav() {
             <ThemeToggle />
             <button
               type="button"
-              className="flex h-9 w-9 items-center justify-center"
+              className="flex h-11 w-11 items-center justify-center"
               aria-label="Menu"
               aria-expanded={open}
               onClick={() => setOpen((v) => !v)}
@@ -130,11 +130,14 @@ export function SiteNav() {
         </nav>
       </div>
 
-      {/* Mobile full-screen sheet */}
+      {/* 关闭时必须 display:none。opacity:0 的 fixed 全屏层在 iOS Chrome 上
+          经常合成失败,会变成一块和背景同色的遮罩,看起来像整页空白。 */}
       <div
+        hidden={!open}
+        aria-hidden={!open}
         className={cn(
-          "fixed inset-0 top-[var(--nav-h)] z-40 bg-[var(--color-bg)] transition-opacity duration-300 md:hidden",
-          open ? "opacity-100" : "pointer-events-none opacity-0",
+          "fixed inset-0 top-[var(--nav-h)] z-40 bg-[var(--color-bg)]",
+          open ? "block md:hidden" : "hidden",
         )}
       >
         <ul className="container-ap flex flex-col gap-1 pt-6">

@@ -151,8 +151,8 @@ export function ProductPin() {
     return () => window.removeEventListener("resize", decide);
   }, [lang]);
 
-  // Build the GSAP timeline only once the DOM is in the pinned (absolute)
-  // layout, so ScrollTrigger measures the real stacked positions.
+  // 用 CSS sticky 代替 GSAP pin。ScrollTrigger 的 pin 会 position:fixed，
+  // 宽度一旦丢失，中文按 min-content 收成 1em，标题就会竖排盖住首屏。
   useLayoutEffect(() => {
     if (!pin) return;
     const el = root.current;
@@ -165,15 +165,20 @@ export function ProductPin() {
 
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: ".pin-stage",
+          trigger: ".pin-track",
           start: "top top",
-          end: () => "+=" + window.innerHeight * total,
-          pin: true,
+          end: "bottom bottom",
           scrub: 0.6,
+          invalidateOnRefresh: true,
         },
       });
 
+      // 第 0 步保持可见：fromTo(autoAlpha:0) 会在 timeline 0 把首屏文案隐掉。
       panels.forEach((panel, i) => {
+        if (i === 0) {
+          if (total > 1) tl.to(panel, { autoAlpha: 0, y: -40, duration: 0.5 }, 0.5);
+          return;
+        }
         tl.fromTo(
           panel,
           { autoAlpha: 0, y: 40 },
@@ -185,9 +190,13 @@ export function ProductPin() {
       });
 
       visuals.forEach((vis, i) => {
+        if (i === 0) {
+          if (total > 1) tl.to(vis, { autoAlpha: 0, y: -24, duration: 0.5 }, 0.5);
+          return;
+        }
         tl.fromTo(
           vis,
-          { autoAlpha: i === 0 ? 1 : 0, y: i === 0 ? 0 : 24, scale: 0.98 },
+          { autoAlpha: 0, y: 24, scale: 0.98 },
           { autoAlpha: 1, y: 0, scale: 1, duration: 0.5 },
           i,
         );
@@ -197,7 +206,7 @@ export function ProductPin() {
     }, el);
 
     return () => ctx.revert();
-  }, [pin]);
+  }, [pin, lang]);
 
   return (
     <section
@@ -206,8 +215,13 @@ export function ProductPin() {
       className="bg-panel text-panel-ink"
       aria-label={tx(L.aria)}
     >
-      <div className={cn("pin-stage flex items-center", pin && "min-h-screen")}>
-        <div className="container-ap grid w-full items-center gap-12 py-14 md:grid-cols-2">
+      {/* pin-track 拉高滚动距离；pin-stage 用 sticky 钉在视口里，始终占满父级宽度。 */}
+      <div
+        className="pin-track"
+        style={pin ? { height: `${(STEPS.length + 1) * 100}vh` } : undefined}
+      >
+        <div className={cn("pin-stage flex w-full items-center", pin && "sticky top-0 min-h-screen")}>
+          <div className="container-ap grid w-full items-center gap-12 py-14 md:grid-cols-2">
           {/* Copy / steps */}
           <div>
             <p className="eyebrow" style={{ color: "#5ac8fa" }}>
@@ -254,6 +268,7 @@ export function ProductPin() {
                 <StepVisual index={i} />
               </div>
             ))}
+          </div>
           </div>
         </div>
       </div>

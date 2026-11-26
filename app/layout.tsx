@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { SiteNav } from "@/components/site-nav";
 import { SiteFooter } from "@/components/site-footer";
@@ -36,6 +36,14 @@ const JSON_LD = {
       ],
     },
   ],
+};
+
+// 明确写出 viewport,避免 iPhone Chrome 按桌面宽度缩放或把首屏裁成空白。
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: "cover",
 };
 
 export const metadata: Metadata = {

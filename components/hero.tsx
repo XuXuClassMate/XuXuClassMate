@@ -3,8 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
-import { useTx, type Localized } from "@/components/i18n";
+import { useLang, useTx, type Localized } from "@/components/i18n";
 import { Aurora } from "@/components/aurora";
+import { formatCompactCount, formatCount } from "@/lib/format-number";
 
 const ease = [0.22, 0.61, 0.36, 1] as const;
 
@@ -14,6 +15,7 @@ const MotionLink = motion.create(Link);
 // Redis-backed gateway as the full stats card below; links down to it.
 function HeroLiveStat() {
   const tx = useTx();
+  const { lang } = useLang();
   const reduce = useReducedMotion();
   const [pulls, setPulls] = useState(86000);
   const [shown, setShown] = useState(reduce ? 86000 : 0);
@@ -44,35 +46,72 @@ function HeroLiveStat() {
     return () => cancelAnimationFrame(raf);
   }, [pulls, reduce]);
 
+  const exact = formatCount(pulls, lang);
+  // 胶囊宽度锁在文案截断上:数字用万/K 缩写,标签超出省略,精确值放 title。
+  const title = `${exact} · ${tx({
+    en: "Docker pulls, measured in the open",
+    zh: "Docker 拉取量 · 公开可查",
+    ar: "عمليات سحب Docker، مقيسة علناً",
+    fr: "pulls Docker, mesurés au grand jour",
+    ru: "Docker-загрузок, открыто",
+    es: "pulls de Docker, medido en abierto",
+  })}`;
+
   return (
     <Link
       href="/#overview"
-      className="group inline-flex items-center gap-2.5 rounded-full border border-[var(--color-line)] bg-[var(--color-surface)] px-4 py-2 text-[14px] transition-colors hover:border-[color-mix(in_srgb,var(--color-accent)_45%,transparent)]"
+      title={title}
+      className="group inline-flex min-w-0 max-w-full items-center gap-2 rounded-full border border-[var(--color-line)] bg-[var(--color-surface)] px-3.5 py-2 text-[14px] transition-colors hover:border-[color-mix(in_srgb,var(--color-accent)_45%,transparent)] sm:gap-2.5 sm:px-4"
     >
-      <span className="relative flex h-1.5 w-1.5" aria-hidden="true">
+      <span className="relative flex h-1.5 w-1.5 shrink-0" aria-hidden="true">
         <span className="absolute inline-flex h-full w-full rounded-full bg-[#34c759] opacity-70 motion-safe:animate-ping" />
         <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#34c759]" />
       </span>
-      <span className="font-mono font-semibold tabular-nums text-ink">{shown.toLocaleString("en-US")}</span>
-      <span className="text-muted">
-        {tx({ en: "Docker pulls, measured in the open", zh: "Docker 拉取量 · 公开可查", ar: "عمليات سحب Docker، مقيسة علناً", fr: "pulls Docker, mesurés au grand jour", ru: "Docker-загрузок, открыто", es: "pulls de Docker, medido en abierto" })}
+      <span className="shrink-0 font-mono font-semibold tabular-nums text-ink" dir="ltr">
+        {formatCompactCount(shown, lang)}
       </span>
-      <span aria-hidden="true" className="text-muted transition-transform group-hover:translate-x-0.5">→</span>
+      <span className="min-w-0 truncate text-muted">
+        {tx({
+          en: "Docker pulls",
+          zh: "Docker 拉取量",
+          ar: "عمليات سحب Docker",
+          fr: "pulls Docker",
+          ru: "Docker-загрузок",
+          es: "pulls de Docker",
+        })}
+      </span>
+      <span aria-hidden="true" className="shrink-0 text-muted transition-transform group-hover:translate-x-0.5">→</span>
     </Link>
   );
 }
 
-export function Hero() {
+/** 桌面才做入场隐藏。iOS Chrome 上 Motion 从 opacity:0 起步经常不播放,首屏会一直空白。 */
+function useHeroMotion() {
   const reduce = useReducedMotion();
+  const [enabled, setEnabled] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia(
+      "(min-width: 768px) and (hover: hover) and (prefers-reduced-motion: no-preference)",
+    );
+    const sync = () => setEnabled(mq.matches && !reduce);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, [reduce]);
+  return enabled;
+}
+
+export function Hero() {
+  const motionOk = useHeroMotion();
   const tx = useTx();
   const rise = (delay: number) =>
-    reduce
-      ? {}
-      : {
+    motionOk
+      ? {
           initial: { opacity: 0, y: 28 },
           animate: { opacity: 1, y: 0 },
           transition: { duration: 0.8, delay, ease },
-        };
+        }
+      : {};
 
   return (
     <section className="relative overflow-hidden pt-[calc(var(--nav-h)+64px)]">
@@ -116,7 +155,7 @@ export function Hero() {
             {tx({ en: "Browse the toolbox", zh: "浏览工具箱", ar: "تصفّح الصندوق", fr: "Parcourir la boîte", ru: "Открыть набор", es: "Ver la caja" })}
           </Link>
         </motion.div>
-        <motion.div className="mt-6 flex justify-center" {...rise(0.4)}>
+        <motion.div className="mt-6 flex w-full justify-center" {...rise(0.4)}>
           <HeroLiveStat />
         </motion.div>
       </div>
@@ -124,13 +163,13 @@ export function Hero() {
       {/* Hero visual: the whole toolbox at a glance (distinct from the testcase-generator deep-dive below) */}
       <motion.div
         className="container-ap pb-24"
-        {...(reduce
-          ? {}
-          : {
+        {...(motionOk
+          ? {
               initial: { opacity: 0, y: 48, scale: 0.98 },
               animate: { opacity: 1, y: 0, scale: 1 },
               transition: { duration: 0.9, delay: 0.36, ease },
-            })}
+            }
+          : {})}
       >
         <ToolboxWindow />
       </motion.div>
@@ -142,7 +181,7 @@ type Tool = { name: string; kind: Localized; tag: string; accent: string; href: 
 
 function ToolboxWindow() {
   const tx = useTx();
-  const reduce = useReducedMotion();
+  const motionOk = useHeroMotion();
   const tools: Tool[] = [
     {
       name: "testcase-generator",
@@ -202,16 +241,16 @@ function ToolboxWindow() {
             key={t.name}
             style={{ ["--acc" as string]: t.accent } as React.CSSProperties}
             className="group flex items-center gap-4 rounded-xl border border-white/10 p-4 text-left transition-colors duration-300 hover:border-[color-mix(in_srgb,var(--acc)_50%,transparent)] hover:bg-[color-mix(in_srgb,var(--acc)_8%,transparent)] hover:shadow-[0_14px_36px_-16px_var(--acc)]"
-            {...(reduce
-              ? {}
-              : {
+            {...(motionOk
+              ? {
                   initial: { opacity: 0, y: 16 },
                   whileInView: { opacity: 1, y: 0 },
-                  viewport: { once: true, margin: "-40px" },
+                  viewport: { once: true, margin: "0px" },
                   transition: { duration: 0.5, delay: i * 0.08, ease },
                   whileHover: { y: -3 },
                   whileTap: { scale: 0.99 },
-                })}
+                }
+              : {})}
           >
             <span
               className="hidden h-9 w-9 shrink-0 place-items-center rounded-lg font-mono text-[13px] transition-transform duration-300 group-hover:scale-110 sm:grid"

@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useTx, type Localized } from "@/components/i18n";
+import { useLang, useTx, type Localized } from "@/components/i18n";
+import { formatCompactCount, formatCount } from "@/lib/format-number";
 
 const GW = "https://docker-hub-pull-counter.vercel.app";
 const USER = "xuxuclassmate";
@@ -70,6 +71,7 @@ export function LiveStat({
   className?: string;
 }) {
   const tx = useTx();
+  const { lang } = useLang();
   const [value, setValue] = useState(fallback);
   const [live, setLive] = useState(false);
 
@@ -89,9 +91,10 @@ export function LiveStat({
 
   return (
     <span
-      className={`inline-flex items-center gap-2 rounded-full border border-[var(--color-line)] bg-[var(--color-surface)] px-4 py-2 text-[14px] ${className ?? ""}`}
+      title={formatCount(value, lang)}
+      className={`inline-flex min-w-0 max-w-full items-center gap-2 rounded-full border border-[var(--color-line)] bg-[var(--color-surface)] px-4 py-2 text-[14px] ${className ?? ""}`}
     >
-      <span className="relative flex h-1.5 w-1.5" aria-hidden="true">
+      <span className="relative flex h-1.5 w-1.5 shrink-0" aria-hidden="true">
         {live && (
           <span className="absolute inline-flex h-full w-full rounded-full bg-[#34c759] opacity-70 motion-safe:animate-ping" />
         )}
@@ -99,10 +102,10 @@ export function LiveStat({
           className={`relative inline-flex h-1.5 w-1.5 rounded-full ${live ? "bg-[#34c759]" : "bg-muted"}`}
         />
       </span>
-      <strong className="font-semibold text-ink" dir="ltr">
-        {value.toLocaleString("en-US")}
+      <strong className="shrink-0 font-semibold tabular-nums text-ink" dir="ltr">
+        {formatCompactCount(value, lang)}
       </strong>
-      <span className="text-muted">{tx(label)}</span>
+      <span className="min-w-0 truncate text-muted">{tx(label)}</span>
     </span>
   );
 }

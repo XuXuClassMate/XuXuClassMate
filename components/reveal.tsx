@@ -30,21 +30,32 @@ export function Reveal({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    const revealNow = () => setShown(true);
     if (
       typeof IntersectionObserver === "undefined" ||
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      window.matchMedia("(max-width: 767px)").matches
     ) {
-      setShown(true);
+      revealNow();
       return;
     }
+
+    // 已经在视口里就立刻显示,不等 IO。iOS 上 observer 经常要滚动才回调。
+    const rect = el.getBoundingClientRect();
+    if (rect.bottom > 0 && rect.top < window.innerHeight) {
+      revealNow();
+      return;
+    }
+
     const io = new IntersectionObserver(
       (entries) => {
         if (entries[0]?.isIntersecting) {
-          setShown(true);
+          revealNow();
           io.disconnect();
         }
       },
-      { threshold: 0.15, rootMargin: "0px 0px -8% 0px" },
+      // threshold 0 + 向外扩 root,避免大区块永远达不到可见阈值。
+      { threshold: 0, rootMargin: "80px 0px" },
     );
     io.observe(el);
     return () => io.disconnect();
