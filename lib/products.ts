@@ -41,6 +41,7 @@ export type Product = {
   features: { title: Localized; body: Localized }[];
   specs: { label: Localized; value: Localized }[];
   cta: { label: Localized; note: Localized; href: string };
+  live?: { label: Localized; href: string };
 };
 
 const RUNTIME: Localized = {
@@ -658,6 +659,10 @@ export const PRODUCTS: Product[] = [
         es: "Endpoints abiertos, sin clave para estadísticas públicas.",
       },
       href: "https://github.com/InnoNestX/docker-hub-pull-counter",
+    },
+    live: {
+      label: { en: "Live deployment", zh: "在线部署", ar: "النشر المباشر", fr: "Déploiement en ligne", ru: "Онлайн-развёртывание", es: "Despliegue en vivo" },
+      href: "https://docker-hub-pull-counter.vercel.app/",
     },
   },
   {

@@ -191,6 +191,16 @@ export default async function ProductPage({
               >
                 <T {...p.cta.label} />
               </a>
+              {p.live && p.live.href !== p.cta.href && (
+                <a
+                  href={p.live.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={buttonVariants({ size: "lg", variant: "secondary" })}
+                >
+                  <T {...p.live.label} />
+                </a>
+              )}
               <Link href="/products" className={buttonVariants({ size: "lg", variant: "secondary" })}>
                 <T en="All products" zh="全部产品" ar="كل المنتجات" fr="Tous les produits" ru="Все продукты" es="Todos los productos" />
               </Link>
