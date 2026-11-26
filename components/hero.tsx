@@ -159,9 +159,9 @@ function ToolboxWindow() {
       href: "/products/docker-suite",
     },
     {
-      name: "docker-hub-api-gateway",
-      kind: { en: "Docker Hub stats, one API", zh: "Docker Hub 数据,一个 API", ar: "إحصاءات Docker Hub عبر API واحد", fr: "Stats Docker Hub, une API", ru: "Статистика Docker Hub, один API", es: "Estadísticas de Docker Hub, una API" },
-      tag: "Workers",
+      name: "open-stats-gateway",
+      kind: { en: "Docker + ClawHub + GitHub stats, one API", zh: "Docker + ClawHub + GitHub 统计,一个 API", ar: "إحصاءات Docker وClawHub وGitHub عبر API واحد", fr: "Stats Docker + ClawHub + GitHub, une API", ru: "Статистика Docker + ClawHub + GitHub, один API", es: "Stats de Docker + ClawHub + GitHub, una API" },
+      tag: "Cloudflare",
       accent: "#a78bfa",
       href: "/products/docker-hub-api-gateway",
     },
