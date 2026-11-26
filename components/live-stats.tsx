@@ -8,27 +8,10 @@ import { useReducedMotion } from "motion/react";
 import { useTx } from "@/components/i18n";
 import { Icon, type IconName } from "@/components/icons";
 
-const GW = "https://docker-hub-pull-counter.vercel.app";
+const GW = "https://open.xuxuclassmate.com";
 const USER = "xuxuclassmate";
-const CLAW = "https://clawhub.ai/api/v1";
-// ClawHub exposes no list-by-owner API, so the published items are enumerated here
-// (one place to extend). Every number shown is fetched live from these endpoints —
-// counts and downloads are computed from the live responses, never hard-coded.
-const CLAW_SKILLS = [
-  "skill-publishing",
-  "free-api-discovery",
-  "feishu-setup-troubleshooting",
-  "ai-testcase-generator",
-  "stock-monitor-fixed",
-  "stock-analysis-fixed",
-  "test-master-fixed",
-  "trading-assistant-core",
-  "whisper-voice-transcription",
-  "custom-mail-skill",
-  "relay",
-];
-const CLAW_PLUGINS = ["relay"];
-const GH_SEARCH = "https://api.github.com/search/issues?q=";
+// ClawHub + GitHub aggregates are computed and cached server-side by the gateway
+// (/api/portfolio); the site just pulls the latest value so no visitor recomputes it.
 
 type Stats = {
   pulls: number;
@@ -199,52 +182,34 @@ export function LiveStats() {
         };
       })();
 
-      const claw = (async () => {
-        const [skRes, pkRes] = await Promise.all([
-          Promise.allSettled(CLAW_SKILLS.map((slug) => jsonOf(`${CLAW}/skills/${slug}?owner=${USER}`))),
-          Promise.allSettled(CLAW_PLUGINS.map((name) => jsonOf(`${CLAW}/packages/${name}`))),
-        ]);
-        let total = 0;
-        let skills = 0;
-        let plugins = 0;
-        for (const r of skRes) {
-          if (r.status !== "fulfilled") continue;
-          const d = r.value;
-          if (d?.owner?.handle === USER && typeof d?.skill?.stats?.downloads === "number") {
-            total += d.skill.stats.downloads;
-            skills += 1;
-          }
-        }
-        for (const r of pkRes) {
-          if (r.status !== "fulfilled") continue;
-          const d = r.value;
-          if (d?.owner?.handle === USER && typeof d?.package?.stats?.downloads === "number") {
-            total += d.package.stats.downloads;
-            plugins += 1;
-          }
-        }
-        return skills > 0 || plugins > 0
-          ? { clawDownloads: total, clawSkills: skills, clawPlugins: plugins }
-          : { clawDownloads: FALLBACK.clawDownloads, clawSkills: FALLBACK.clawSkills, clawPlugins: FALLBACK.clawPlugins };
-      })();
-
-      const github = (async () => {
+      // ClawHub + GitHub are aggregated and cached server-side; pull the one value.
+      const portfolio = (async () => {
         try {
-          const q = (f: string) =>
-            jsonOf(`${GH_SEARCH}${encodeURIComponent(`author:${USER} ${f}`)}&per_page=1`);
-          const [iss, pr] = await Promise.all([q("type:issue"), q("type:pr")]);
-          return {
-            ghIssues: Number(iss?.total_count) || FALLBACK.ghIssues,
-            ghPRs: Number(pr?.total_count) || FALLBACK.ghPRs,
-          };
+          const p = await jsonOf(`${GW}/api/portfolio`);
+          if (p && (Number(p.clawSkills) > 0 || Number(p.clawPlugins) > 0)) {
+            return {
+              clawDownloads: Number(p.clawDownloads) || FALLBACK.clawDownloads,
+              clawSkills: Number(p.clawSkills) || FALLBACK.clawSkills,
+              clawPlugins: Number(p.clawPlugins) || FALLBACK.clawPlugins,
+              ghIssues: Number(p.ghIssues) || FALLBACK.ghIssues,
+              ghPRs: Number(p.ghPRs) || FALLBACK.ghPRs,
+            };
+          }
         } catch {
-          return { ghIssues: FALLBACK.ghIssues, ghPRs: FALLBACK.ghPRs };
+          /* fall through to fallback */
         }
+        return {
+          clawDownloads: FALLBACK.clawDownloads,
+          clawSkills: FALLBACK.clawSkills,
+          clawPlugins: FALLBACK.clawPlugins,
+          ghIssues: FALLBACK.ghIssues,
+          ghPRs: FALLBACK.ghPRs,
+        };
       })();
 
-      const [d, c, g] = await Promise.all([docker, claw, github]);
+      const [d, p] = await Promise.all([docker, portfolio]);
       if (sig.aborted) return;
-      setData({ ...d, ...c, ...g });
+      setData({ ...d, ...p });
       setLive(true);
     })().catch(() => {});
 
