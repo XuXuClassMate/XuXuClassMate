@@ -1,5 +1,5 @@
 # Dependabot only reads this file from the default branch (main).
-# The app and workflows live on XuXuClassMate.
+# The app lives on the XuXuClassMate branch, so updates target it.
 version: 2
 updates:
   - package-ecosystem: npm
@@ -8,8 +8,3 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 5
-  - package-ecosystem: github-actions
-    directory: "/"
-    target-branch: XuXuClassMate
-    schedule:
-      interval: monthly
