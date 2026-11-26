@@ -15,14 +15,16 @@ export const metadata: Metadata = {
 };
 
 const CONTACT_CHANNELS: {
-  name: string;
+  name: Localized;
   handle: string;
   href: string;
-  icon: "code" | "box" | "download";
+  icon: "code" | "box" | "download" | "mail";
 }[] = [
-  { name: "GitHub", handle: "InnoNestX", href: "https://github.com/InnoNestX", icon: "code" },
-  { name: "Docker Hub", handle: "xuxuclassmate", href: "https://hub.docker.com/u/xuxuclassmate", icon: "box" },
-  { name: "ClawHub", handle: "xuxuclassmate", href: "https://clawhub.ai/xuxuclassmate", icon: "download" },
+  { name: { en: "GitHub", zh: "GitHub", ar: "GitHub", fr: "GitHub", ru: "GitHub", es: "GitHub" }, handle: "InnoNestX", href: "https://github.com/InnoNestX", icon: "code" },
+  { name: { en: "GitHub", zh: "GitHub", ar: "GitHub", fr: "GitHub", ru: "GitHub", es: "GitHub" }, handle: "XuXuClassMate", href: "https://github.com/XuXuClassMate", icon: "code" },
+  { name: { en: "Docker Hub", zh: "Docker Hub", ar: "Docker Hub", fr: "Docker Hub", ru: "Docker Hub", es: "Docker Hub" }, handle: "xuxuclassmate", href: "https://hub.docker.com/u/xuxuclassmate", icon: "box" },
+  { name: { en: "ClawHub", zh: "ClawHub", ar: "ClawHub", fr: "ClawHub", ru: "ClawHub", es: "ClawHub" }, handle: "xuxuclassmate", href: "https://clawhub.ai/xuxuclassmate", icon: "download" },
+  { name: { en: "Email", zh: "邮箱", ar: "البريد الإلكتروني", fr: "E-mail", ru: "Почта", es: "Correo" }, handle: "mail@xuxuclassmate.com", href: "mailto:mail@xuxuclassmate.com", icon: "mail" },
 ];
 
 const PRINCIPLES: { title: Localized; body: Localized }[] = [
@@ -335,28 +337,33 @@ export default function AboutPage() {
                 es="La forma más rápida de contactarme es en abierto — donde publico y mido todo. Encuéntrame en cualquiera de estos canales."
               />
             </p>
-            <div className="mx-auto mt-10 grid max-w-[720px] gap-4 sm:grid-cols-3">
-              {CONTACT_CHANNELS.map((c, i) => (
-                <a
-                  key={c.name}
-                  href={c.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="card-ap flex flex-col items-center gap-3 rounded-[var(--radius-ap)] border border-[var(--color-line)] bg-[var(--color-bg)] p-7"
-                  style={{ borderTop: `2px solid ${HUES[i % HUES.length]}` }}
-                >
-                  <span
-                    className="grid h-11 w-11 place-items-center rounded-xl"
-                    style={{ backgroundColor: `color-mix(in srgb, ${HUES[i % HUES.length]} 15%, transparent)`, color: HUES[i % HUES.length] }}
+            <div className="mx-auto mt-10 flex max-w-[820px] flex-wrap justify-center gap-4">
+              {CONTACT_CHANNELS.map((c, i) => {
+                const isEmail = c.href.startsWith("mailto:");
+                return (
+                  <a
+                    key={c.href}
+                    href={c.href}
+                    target={isEmail ? undefined : "_blank"}
+                    rel="noopener noreferrer"
+                    className="card-ap flex w-full flex-col items-center gap-3 rounded-[var(--radius-ap)] border border-[var(--color-line)] bg-[var(--color-bg)] p-7 sm:w-[240px]"
+                    style={{ borderTop: `2px solid ${HUES[i % HUES.length]}` }}
                   >
-                    <Icon name={c.icon} size={22} />
-                  </span>
-                  <span className="text-[17px] font-semibold tracking-tight text-ink">
-                    {c.name}
-                  </span>
-                  <span className="font-mono text-[13px] text-muted">@{c.handle}</span>
-                </a>
-              ))}
+                    <span
+                      className="grid h-11 w-11 place-items-center rounded-xl"
+                      style={{ backgroundColor: `color-mix(in srgb, ${HUES[i % HUES.length]} 15%, transparent)`, color: HUES[i % HUES.length] }}
+                    >
+                      <Icon name={c.icon} size={22} />
+                    </span>
+                    <span className="text-[17px] font-semibold tracking-tight text-ink">
+                      <T {...c.name} />
+                    </span>
+                    <span className="break-all font-mono text-[13px] text-muted">
+                      {isEmail ? c.handle : `@${c.handle}`}
+                    </span>
+                  </a>
+                );
+              })}
             </div>
           </Reveal>
         </div>
