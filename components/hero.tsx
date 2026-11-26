@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import { useTx, type Localized } from "@/components/i18n";
@@ -8,6 +9,58 @@ import { Aurora } from "@/components/aurora";
 const ease = [0.22, 0.61, 0.36, 1] as const;
 
 const MotionLink = motion.create(Link);
+
+// One live number woven into the hero (Docker pulls), pulled from the same
+// Redis-backed gateway as the full stats card below; links down to it.
+function HeroLiveStat() {
+  const tx = useTx();
+  const reduce = useReducedMotion();
+  const [pulls, setPulls] = useState(86000);
+  const [shown, setShown] = useState(reduce ? 86000 : 0);
+  const fromRef = useRef(0);
+
+  useEffect(() => {
+    const ac = new AbortController();
+    fetch("https://open.xuxuclassmate.com/api/portfolio", { signal: ac.signal })
+      .then((r) => r.json())
+      .then((d) => { const n = Number(d?.pulls); if (n > 0) setPulls(n); })
+      .catch(() => {});
+    return () => ac.abort();
+  }, []);
+
+  useEffect(() => {
+    if (reduce) { setShown(pulls); fromRef.current = pulls; return; }
+    const from = fromRef.current;
+    let raf = 0;
+    const start = performance.now();
+    const tick = (t: number) => {
+      const p = Math.min(1, (t - start) / 1100);
+      const e = 1 - Math.pow(1 - p, 3);
+      const v = Math.round(from + (pulls - from) * e);
+      setShown(v); fromRef.current = v;
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [pulls, reduce]);
+
+  return (
+    <Link
+      href="/#overview"
+      className="group inline-flex items-center gap-2.5 rounded-full border border-[var(--color-line)] bg-[var(--color-surface)] px-4 py-2 text-[14px] transition-colors hover:border-[color-mix(in_srgb,var(--color-accent)_45%,transparent)]"
+    >
+      <span className="relative flex h-1.5 w-1.5" aria-hidden="true">
+        <span className="absolute inline-flex h-full w-full rounded-full bg-[#34c759] opacity-70 motion-safe:animate-ping" />
+        <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#34c759]" />
+      </span>
+      <span className="font-mono font-semibold tabular-nums text-ink">{shown.toLocaleString("en-US")}</span>
+      <span className="text-muted">
+        {tx({ en: "Docker pulls, measured in the open", zh: "Docker 拉取量 · 公开可查", ar: "عمليات سحب Docker، مقيسة علناً", fr: "pulls Docker, mesurés au grand jour", ru: "Docker-загрузок, открыто", es: "pulls de Docker, medido en abierto" })}
+      </span>
+      <span aria-hidden="true" className="text-muted transition-transform group-hover:translate-x-0.5">→</span>
+    </Link>
+  );
+}
 
 export function Hero() {
   const reduce = useReducedMotion();
@@ -62,6 +115,9 @@ export function Hero() {
           <Link href="/products" className="link-ap">
             {tx({ en: "Browse the toolbox", zh: "浏览工具箱", ar: "تصفّح الصندوق", fr: "Parcourir la boîte", ru: "Открыть набор", es: "Ver la caja" })}
           </Link>
+        </motion.div>
+        <motion.div className="mt-6 flex justify-center" {...rise(0.4)}>
+          <HeroLiveStat />
         </motion.div>
       </div>
 
