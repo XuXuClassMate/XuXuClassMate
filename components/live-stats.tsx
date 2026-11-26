@@ -315,9 +315,9 @@ export function LiveStats() {
           {/* Supporting stats */}
           <div className="grid gap-6 grid-cols-2 lg:grid-cols-5">
             {small.map((s) => (
-              <article key={s.label} className={CARD} style={GLOW}>
+              <article key={s.label} className={CARD.replace("p-8", "p-5")} style={GLOW}>
                 <Chip name={s.icon} color={s.color} />
-                <div className="mt-5 text-[clamp(28px,3vw,42px)] font-semibold leading-none tracking-tight text-ink">
+                <div className="mt-5 text-[clamp(24px,2.2vw,32px)] font-semibold leading-none tracking-tight text-ink tabular-nums">
                   {s.value}
                 </div>
                 <p className="mt-3 text-[16px] text-muted">{s.label}</p>
