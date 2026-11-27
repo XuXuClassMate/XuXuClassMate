@@ -192,7 +192,7 @@ function Chip({ name, color = "var(--color-accent)" }: { name: IconName; color?:
 }
 
 const HERO_NUM =
-  "mt-5 text-[clamp(44px,5.6vw,76px)] font-semibold leading-[0.95] tracking-tight text-ink tabular-nums";
+  "mt-5 text-[clamp(38px,5vw,70px)] font-semibold leading-[0.95] tracking-tight text-ink tabular-nums whitespace-nowrap";
 
 export function LiveStats() {
   const tx = useTx();
@@ -280,6 +280,8 @@ export function LiveStats() {
 
   const fmtHero = (n: number) => formatCompactCount(n, lang, 1_000_000);
   const fmt = (n: number) => formatCompactCount(n, lang, 10_000);
+  // page-view total: full grouped number until 100M, then compact — never overlong
+  const fmtTotal = (n: number) => formatCompactCount(n, lang, 100_000_000);
 
   const t = {
     live: tx({ en: "Live", zh: "实时数据", ar: "مباشر", fr: "En direct", ru: "Вживую", es: "En vivo" }),
@@ -366,7 +368,7 @@ export function LiveStats() {
                 <p className="text-[15px] text-muted">{t.pageViews}</p>
               </div>
               <div className={HERO_NUM} title={formatCount(data.pageViews, lang)} dir="ltr">
-                {formatCount(views, lang)}
+                {fmtTotal(views)}
               </div>
               <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-[#34c759]/12 px-3 py-1 font-mono text-[12px] font-medium text-[#1a9c43] dark:text-[#4fd37a]">
