@@ -5,7 +5,7 @@ import { disposableTestDatabases } from "./disposable-test-databases";
 import { permissionsMultiTenant } from "./permissions-multi-tenant";
 import { aiInQa } from "./ai-in-qa";
 
-export type { Note, NoteSection } from "./shared";
+export type { Note, NoteSection, CodeBlock } from "./shared";
 
 export const NOTES: Note[] = [
   frontEndPerformance,

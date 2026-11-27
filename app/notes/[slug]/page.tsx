@@ -76,6 +76,26 @@ export default async function NotePage({
                     ))}
                   </ul>
                 ) : null}
+                {section.code && section.code.length > 0
+                  ? section.code.map((b, i) => (
+                      <div
+                        key={i}
+                        className="mt-5 overflow-hidden rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)]"
+                      >
+                        {b.label || b.lang ? (
+                          <div className="flex items-center justify-between border-b border-[var(--color-line)] px-4 py-2 font-mono text-[12px] text-muted">
+                            <span>{b.label ?? ""}</span>
+                            {b.lang ? (
+                              <span className="uppercase tracking-wide">{b.lang}</span>
+                            ) : null}
+                          </div>
+                        ) : null}
+                        <pre className="overflow-x-auto p-4 text-[13.5px] leading-[1.6]">
+                          <code className="font-mono text-ink/90">{b.code}</code>
+                        </pre>
+                      </div>
+                    ))
+                  : null}
               </Reveal>
             ))}
           </div>

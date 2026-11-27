@@ -142,5 +142,15 @@ export const permissionsMultiTenant: Note = {
         ),
       ],
     },
+    {
+      heading: loc("Copy-paste examples", "可直接抄的示例", "أمثلة جاهزة للنسخ", "Exemples à copier", "Примеры для копирования", "Ejemplos para copiar"),
+      paragraphs: [
+        loc("The negative tests that actually catch IDOR: replay one tenant's id as another and expect a deny, driven by a role × verb matrix where the 403s are first-class, not an afterthought.", "真正能抓到越权(IDOR)的负向测试:把一个租户的 id 当成另一个去 replay,并期望被拒;由一张「角色 × 动词」矩阵驱动,其中 403 是一等公民,不是补充。", "الاختبارات السلبية التي تمسك IDOR فعلاً: أعد تشغيل معرّف مستأجر كمستأجر آخر وتوقّع الرفض، مدفوعة بمصفوفة دور × فعل تكون فيها الـ403 من الدرجة الأولى.", "Les tests négatifs qui attrapent vraiment l'IDOR : rejouer l'id d'un tenant en tant qu'un autre et attendre un refus, pilotés par une matrice rôle × verbe où les 403 sont de première classe.", "Негативные тесты, которые реально ловят IDOR: повторить id одного арендатора от имени другого и ждать отказа, по матрице роль × глагол, где 403 — первоклассные.", "Las pruebas negativas que de verdad cazan IDOR: reproducir el id de un tenant como otro y esperar un deny, guiadas por una matriz rol × verbo donde los 403 son de primera clase."),
+      ],
+      code: [
+        { lang: "ts", label: "idor.spec.ts", code: "test(\"tenant B cannot read tenant A's order\", async ({ request }) => {\n  const a = await login(request, \"user-a\");            // tenant A\n  const created = await a.post(\"/api/orders\", { data: order });\n  const { id } = await created.json();\n\n  const b = await login(request, \"user-b\");            // tenant B\n  const res = await b.get(`/api/orders/${id}`);        // replay A's id as B\n  expect(res.status()).toBe(403);                       // the deny IS the test\n});" },
+        { lang: "ts", label: "matrix.ts", code: "// copied from the spec, not reverse-engineered from today's UI\nexport const MATRIX = [\n  { role: \"viewer\",       verb: \"GET\",    path: \"/api/orders/:id\", expect: 200 },\n  { role: \"viewer\",       verb: \"DELETE\", path: \"/api/orders/:id\", expect: 403 },\n  { role: \"editor\",       verb: \"PATCH\",  path: \"/api/orders/:id\", expect: 200 },\n  { role: \"other-tenant\", verb: \"GET\",    path: \"/api/orders/:id\", expect: 403 },\n  { role: \"anon\",         verb: \"GET\",    path: \"/api/orders/:id\", expect: 401 },\n];\n// every deny row is a test; a suite of only 200s is how IDOR passes review" },
+      ],
+    },
   ],
 };

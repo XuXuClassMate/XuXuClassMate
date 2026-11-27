@@ -2,11 +2,20 @@ import type { Localized } from "@/components/i18n";
 
 export type { Localized };
 
+/** 代码/命令/配置示例块。label与lang语言中立(文件名或命令类型),正文说明走 paragraphs。 */
+export type CodeBlock = {
+  lang?: string;
+  label?: string;
+  code: string;
+};
+
 export type NoteSection = {
   heading: Localized;
   paragraphs: Localized[];
   /** 可扫读的要点:步骤、预算、缺陷模板等 */
   bullets?: Localized[];
+  /** 对应的代码/命令/配置示例 */
+  code?: CodeBlock[];
 };
 
 export type Note = {

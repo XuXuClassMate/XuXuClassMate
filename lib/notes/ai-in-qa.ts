@@ -132,5 +132,16 @@ export const aiInQa: Note = {
         ),
       ],
     },
+    {
+      heading: loc("Copy-paste examples", "可直接抄的示例", "أمثلة جاهزة للنسخ", "Exemples à copier", "Примеры для копирования", "Ejemplos para copiar"),
+      paragraphs: [
+        loc("The loop I shipped: AI writes the first draft, a rubric scores each case out of 100, only cases over 90 ship, and a check rejects a 200 asserted on an endpoint that never existed.", "我落地的循环:AI 出第一稿,用评分规则给每条用例打 100 分,只有过 90 的才发布,再加一道校验,拒绝「给根本不存在的接口断言 200」。", "الحلقة التي شحنتها: الذكاء الاصطناعي يكتب المسودة الأولى، ومعيار يمنح كل حالة درجة من 100، وتُشحن فقط ما فوق 90، وفحص يرفض 200 على نقطة لم توجد قط.", "La boucle que j'ai livrée : l'IA écrit le premier jet, un barème note chaque cas sur 100, seuls ceux au-dessus de 90 partent, et un contrôle rejette un 200 affirmé sur un endpoint inexistant.", "Цикл, который я внедрил: ИИ пишет черновик, рубрика оценивает каждый кейс из 100, уходят только выше 90, а проверка отклоняет 200 на несуществующем эндпоинте.", "El bucle que lancé: la IA escribe el primer borrador, una rúbrica puntúa cada caso sobre 100, solo pasan los de más de 90, y un control rechaza un 200 afirmado en un endpoint inexistente."),
+      ],
+      code: [
+        { lang: "ts", label: "pipeline.ts", code: "const draft = await generateCases(prd);              // AI multiplies the first draft\nconst scored = draft.map((c) => ({ ...c, score: scoreCase(c) }));\n\nconst shipped = scored.filter((c) => c.score >= 90); // gate: only >= 90 auto-ships\nconst review = scored.filter((c) => c.score < 90);   // humans keep judgment\nexportCases(shipped);" },
+        { lang: "text", label: "rubric", code: "score = 40 * coverage          // does it hit the acceptance criteria?\n      + 30 * oracle_specificity // asserts a real result, not just 200\n      + 20 * reproducibility    // named data, device, preconditions\n      + 10 * data_realism       // 0..100, auto-ship gate >= 90" },
+        { lang: "ts", label: "validate.ts", code: "import { OPENAPI } from \"./openapi\";\n\n// the generator will happily assert 200 on an endpoint that never existed\nfunction validate(c: Case) {\n  if (!OPENAPI.paths[c.path]) {\n    throw new Error(`hallucinated endpoint: ${c.path}`);\n  }\n  if (c.assert.status === 200 && !responseDefinedInSpec(c)) {\n    return reject(c, \"asserts 200 the spec never promises\");\n  }\n}" },
+      ],
+    },
   ],
 };

@@ -176,5 +176,16 @@ export const playwrightAtScale: Note = {
         ),
       ],
     },
+    {
+      heading: loc("Copy-paste examples", "可直接抄的示例", "أمثلة جاهزة للنسخ", "Exemples à copier", "Примеры для копирования", "Ejemplos para copiar"),
+      paragraphs: [
+        loc("The config and CI wiring that keep a growing suite fast and honest: bounded retries, trace only on retry, sharding across machines, and a stable-tag gate so people stop rerunning red until green.", "让越来越大的套件保持又快又诚实的配置与 CI 接线:有限重试、只在重试时抓 trace、按机器分片,以及用 stable 标签把关,免得大家把红的重跑到绿。", "الإعداد وأسلاك CI التي تبقي المجموعة المتنامية سريعة وصادقة: إعادات محدودة، trace عند الإعادة فقط، تقسيم عبر الأجهزة، وبوابة بوسم stable كي يتوقف الناس عن إعادة التشغيل حتى الأخضر.", "La config et le câblage CI qui gardent une suite grandissante rapide et honnête : retries bornés, trace seulement au retry, sharding entre machines, et un gate par tag stable pour arrêter de relancer le rouge jusqu'au vert.", "Конфиг и CI-обвязка, которые держат растущий набор быстрым и честным: ограниченные ретраи, trace только при ретрае, шардинг по машинам и гейт по тегу stable, чтобы перестали перезапускать до зелёного.", "La config y el cableado de CI que mantienen una suite creciente rápida y honesta: reintentos acotados, trace solo en reintento, sharding entre máquinas y un gate por etiqueta stable para dejar de relanzar hasta el verde."),
+      ],
+      code: [
+        { lang: "ts", label: "playwright.config.ts", code: "import { defineConfig } from \"@playwright/test\";\n\nexport default defineConfig({\n  retries: process.env.CI ? 1 : 0,       // one retry, not ten\n  workers: process.env.CI ? 4 : \"50%\",\n  use: {\n    trace: \"on-first-retry\",             // a flake you can replay, not guess\n    screenshot: \"only-on-failure\",\n  },\n  reporter: [[\"html\"], [\"github\"]],\n});" },
+        { lang: "yaml", label: ".github/workflows/e2e.yml", code: "jobs:\n  e2e:\n    strategy:\n      fail-fast: false\n      matrix:\n        shard: [1, 2, 3, 4]\n    steps:\n      - run: npx playwright test --shard=${{ matrix.shard }}/4" },
+        { lang: "ts", label: "checkout.spec.ts", code: "// stable selectors (test-id), and a tag the CI gate greps for\ntest(\"checkout\", { tag: \"@stable\" }, async ({ page }) => {\n  await page.getByTestId(\"pay\").click();        // not text, not nth-child\n  await expect(page.getByTestId(\"receipt\")).toBeVisible();\n});\n\n// gate: npx playwright test --grep @stable\n// flaky-but-useful tests live behind --grep-invert @stable, off the merge path" },
+      ],
+    },
   ],
 };

@@ -202,5 +202,17 @@ export const frontEndPerformance: Note = {
         ),
       ],
     },
+    {
+      heading: loc("Copy-paste examples", "可直接抄的示例", "أمثلة جاهزة للنسخ", "Exemples à copier", "Примеры для копирования", "Ejemplos para copiar"),
+      paragraphs: [
+        loc("Starting points you can paste into a repo: a WebKit iPhone project, a throttled Lighthouse gate, a sane browserslist target, and the first-tap assertion that would have caught the blank screen.", "可以直接贴进仓库的起点:一个 WebKit 的 iPhone 工程、一道限速的 Lighthouse 关卡、一个合理的 browserslist 目标,以及能拦住白屏的「首触」断言。", "نقاط انطلاق تنسخها إلى المستودع: مشروع آيفون على WebKit، بوابة Lighthouse مُخنوقة، هدف browserslist معقول، وتأكيد النقرة الأولى الذي كان سيمسك الشاشة الفارغة.", "Des points de départ à coller dans un repo : un projet iPhone sous WebKit, un gate Lighthouse bridé, une cible browserslist raisonnable, et l'assertion du premier tap qui aurait attrapé l'écran blanc.", "Готовые заготовки для репозитория: проект iPhone на WebKit, throttled-гейт Lighthouse, разумная цель browserslist и проверка первого тапа, которая поймала бы белый экран.", "Puntos de partida para pegar en un repo: un proyecto iPhone con WebKit, un gate de Lighthouse con throttling, un objetivo browserslist sensato y la aserción del primer toque que habría cazado la pantalla en blanco."),
+      ],
+      code: [
+        { lang: "ts", label: "playwright.config.ts", code: "import { defineConfig, devices } from \"@playwright/test\";\n\nexport default defineConfig({\n  projects: [\n    {\n      name: \"iphone-11-webkit\",\n      use: {\n        ...devices[\"iPhone 11\"], // 414x896, dpr 2, mobile UA\n        browserName: \"webkit\",   // iOS Chrome is WebKit — test the real engine\n      },\n    },\n  ],\n});" },
+        { lang: "js", label: "lighthouserc.js", code: "module.exports = {\n  ci: {\n    collect: {\n      url: [\"https://www.xuxuclassmate.com/\"],\n      settings: {\n        formFactor: \"mobile\",\n        // mid-range phone on Slow 4G, cold cache\n        throttling: { cpuSlowdownMultiplier: 4, rttMs: 150, throughputKbps: 1600 },\n      },\n    },\n    assert: {\n      assertions: {\n        \"largest-contentful-paint\": [\"error\", { maxNumericValue: 2500 }],\n        \"interaction-to-next-paint\": [\"error\", { maxNumericValue: 200 }],\n        \"cumulative-layout-shift\": [\"error\", { maxNumericValue: 0.1 }],\n      },\n    },\n  },\n};" },
+        { lang: "text", label: ".browserslistrc", code: "> 0.5%\nlast 2 versions\niOS >= 13\nnot dead\n# don't target away the phones you claim to support (iOS Chrome = WebKit)" },
+        { lang: "ts", label: "first-tap.spec.ts", code: "test(\"language toggles on the first tap (iPhone 11, WebKit)\", async ({ page }) => {\n  await page.goto(\"/\");\n  await page.getByRole(\"button\", { name: /语言|language/i }).tap();\n  // the oracle is a real attribute change, not a screenshot\n  await expect(page.locator(\"html\")).toHaveAttribute(\"lang\", \"zh\");\n});\n\n// catch the invisible overlay that eats taps\nconst dead = await page.evaluate(() => {\n  const el = document.querySelector(\"[data-overlay]\");\n  const s = el && getComputedStyle(el);\n  return s && (s.opacity === \"0\" || s.pointerEvents === \"none\")\n    ? { opacity: s.opacity, pointerEvents: s.pointerEvents }\n    : null;\n});" },
+      ],
+    },
   ],
 };

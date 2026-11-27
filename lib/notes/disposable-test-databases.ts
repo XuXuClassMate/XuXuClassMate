@@ -140,5 +140,16 @@ export const disposableTestDatabases: Note = {
         ),
       ],
     },
+    {
+      heading: loc("Copy-paste examples", "可直接抄的示例", "أمثلة جاهزة للنسخ", "Exemples à copier", "Примеры для копирования", "Ejemplos para copiar"),
+      paragraphs: [
+        loc("Pull, wait for health, seed, run, and throw the whole thing away — the commands and the compose file for a database that exists only for one run.", "拉取、等健康、灌种子、跑用例、整个丢掉——一套只为一次运行而存在的数据库的命令和 compose 文件。", "اسحب، انتظر الصحة، ازرع، شغّل، ثم ارمِ كل شيء — الأوامر وملف compose لقاعدة بيانات تعيش لتشغيل واحد فقط.", "Pull, attendre le health, seed, lancer, puis tout jeter — les commandes et le compose d'une base qui ne vit que pour un run.", "Pull, дождаться health, засеять, прогнать и всё выбросить — команды и compose для базы, живущей ровно один прогон.", "Pull, esperar el health, seed, ejecutar y tirarlo todo — los comandos y el compose de una base que vive solo para un run."),
+      ],
+      code: [
+        { lang: "bash", label: "Terminal — pull / run / throw away", code: "# one isolated DB per run, fixed port, auto-removed on exit\ndocker run -d --rm --name tidb-test -p 4000:4000 pingcap/tidb:latest\ndocker run -d --rm --name kingbase-test -p 54321:54321 kingbasees/kingbase:latest\n\n# ... run the suite against 127.0.0.1 ...\n\ndocker rm -f tidb-test kingbase-test   # no shared schema to argue about on Friday" },
+        { lang: "yaml", label: "docker-compose.test.yml", code: "services:\n  tidb:\n    image: pingcap/tidb:latest\n    ports: [\"4000:4000\"]\n    healthcheck:\n      test: [\"CMD\", \"mysqladmin\", \"ping\", \"-h\", \"127.0.0.1\", \"-P\", \"4000\"]\n      interval: 3s\n      timeout: 2s\n      retries: 20" },
+        { lang: "bash", label: "run.sh — seed then discard", code: "set -euo pipefail\ndocker compose -f docker-compose.test.yml up -d --wait   # block on healthcheck\ntrap 'docker compose -f docker-compose.test.yml down -v' EXIT  # always thrown away\n\nmysql -h 127.0.0.1 -P 4000 -u root < seed.sql            # fresh seed every run\nnpx playwright test                                       # run against it" },
+      ],
+    },
   ],
 };
