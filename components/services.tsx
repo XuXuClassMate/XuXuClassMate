@@ -74,18 +74,19 @@ const SERVICES: Service[] = [
     },
   },
   {
-    title: "Data",
+    // 标题与 data 站顶栏一致，不再用已删掉的「站点分析」眉题
+    title: "DATA ANALYTICS",
     host: "data.xuxuclassmate.com",
     href: "https://data.xuxuclassmate.com/",
     icon: "analytics",
     color: "var(--c-indigo)",
     detail: {
-      en: "Site analytics: traffic, funnels, and mix.",
-      zh: "站点分析：流量、漏斗、构成。",
-      ar: "تحليلات الموقع: الزيارات والقمع والمزيج.",
-      fr: "Analytique du site : trafic, entonnoirs et mix.",
-      ru: "Аналитика сайта: трафик, воронки и состав.",
-      es: "Analítica del sitio: tráfico, embudos y mix.",
+      en: "From traffic trends to user behavior.",
+      zh: "从流量趋势到用户行为。",
+      ar: "من اتجاهات الزيارات إلى سلوك المستخدم.",
+      fr: "Des tendances de trafic au comportement des visiteurs.",
+      ru: "От трендов трафика к поведению посетителей.",
+      es: "De las tendencias de tráfico al comportamiento de los visitantes.",
     },
   },
   {
