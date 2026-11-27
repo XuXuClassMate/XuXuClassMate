@@ -1,17 +1,21 @@
 "use client";
 
-/* Count-up syncs from a live fetch (external source) by design. */
+/* Count-up runs once on mount and retargets in-flight as the live fetch lands,
+   so numbers sweep up a single time to their final value — never stuck at 0,
+   never a second climb when the second request returns. */
 /* eslint-disable react-hooks/set-state-in-effect */
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useReducedMotion } from "motion/react";
 import { useLang, useTx } from "@/components/i18n";
 import { formatCompactCount, formatCount } from "@/lib/format-number";
 import { Icon, type IconName } from "@/components/icons";
 
 const GW = "https://open.xuxuclassmate.com";
-// All stats (Docker + ClawHub + GitHub) are aggregated and cached in Redis by the
-// gateway (/api/portfolio); the site just pulls the latest value — no recomputation.
+// All stats (Docker + ClawHub + GitHub + page views + security) are aggregated and
+// cached in Redis by the gateway; the site just pulls the latest value.
+
+const useIsoLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 type Stats = {
   pulls: number;
@@ -24,64 +28,87 @@ type Stats = {
   ghIssues: number;
   ghPRs: number;
   pageViews: number;
+  pageViewsToday: number;
   scans30d: number;
   history: number[];
 };
 
+// Fallbacks sit CLOSE to the live values so static HTML (no-JS / SEO / iOS) shows
+// real-looking numbers, and the single count-up retargets to the fetched value
+// without any visible jump.
 const FALLBACK: Stats = {
-  pulls: 85285,
-  images: 13,
-  apiCalls: 4811,
-  monthDelta: 6762,
-  clawDownloads: 10990,
+  pulls: 86600,
+  images: 14,
+  apiCalls: 6200,
+  monthDelta: 7460,
+  clawDownloads: 11000,
   clawSkills: 11,
   clawPlugins: 1,
   ghIssues: 147,
-  ghPRs: 31,
-  // 浏览量接口会先写入再返回,比 portfolio 慢。给一个接近现值的垫底,避免卡片从 0 空转。
-  pageViews: 573000,
+  ghPRs: 33,
+  pageViews: 686000,
+  pageViewsToday: 0,
   scans30d: 400960,
   history: [
-    78523, 79009, 79482, 79647, 80016, 80499, 80812, 81148, 81637, 82200,
-    82800, 83400, 84100, 84700, 85285,
+    79009, 79352, 79482, 79567, 79647, 79871, 80016, 80343, 80499, 80679,
+    80812, 80926, 81148, 81474, 81637, 81895, 82080, 82293, 82570, 82848,
+    83104, 83332, 83661, 84109, 84390, 84569, 84846, 85135, 85636, 86471,
   ],
 };
 
-function useCountUp(target: number, run: boolean, reduce: boolean) {
-  // 静态导出的 HTML 就要带出垫底数字。从 0 起跳时,iOS 若 JS 没挂上会永远显示 0。
-  const [n, setN] = useState(target);
-  const fromRef = useRef(target);
-  useEffect(() => {
-    if (!run) return;
-    if (reduce) {
-      setN(target);
-      fromRef.current = target;
+// One count-up, on mount: 0 -> target with ease-out. `targetRef` is read every
+// frame, so when a fetch updates the target mid-sweep the animation glides to the
+// new value instead of restarting. After it lands, late updates snap silently.
+// It must NEVER get stuck at 0: rAF is paused in background tabs, so when the tab
+// is hidden (or motion is reduced) we skip straight to the final value, and a
+// setTimeout backstop guarantees the end value even if rAF never ticks.
+function useCountUp(target: number, reduce: boolean) {
+  const [n, setN] = useState(target); // SSR / first paint = fallback (never a bare 0)
+  const targetRef = useRef(target);
+  targetRef.current = target;
+  const done = useRef(false);
+
+  useIsoLayoutEffect(() => {
+    const finish = () => {
+      done.current = true;
+      setN(targetRef.current);
+    };
+    const hidden = typeof document !== "undefined" && document.visibilityState === "hidden";
+    if (reduce || hidden) {
+      finish();
       return;
     }
-    let from = fromRef.current;
-    if (from === target) return;
-    // 浏览量这种大数若从 0 滚到几十万,「万」档会连跳一秒,旁边的小数字早已停住。
-    // 从终值附近起跳,只播最后一截,观感和其他指标一致。
-    if (from === 0 && target >= 10_000) {
-      from = Math.round(target * 0.92);
-      fromRef.current = from;
-      setN(from);
-    }
-    const span = Math.abs(target - from);
-    const dur = span >= 10_000 ? 520 : 1100;
+    const dur = 1600;
+    const t0 = performance.now();
+    setN(0); // set before first paint (layout effect) — no flash of the fallback
     let raf = 0;
-    const start = performance.now();
+    const safety = window.setTimeout(finish, dur + 500); // rAF-throttle backstop
+    const onHide = () => {
+      if (document.visibilityState === "hidden") finish();
+    };
+    document.addEventListener("visibilitychange", onHide);
     const tick = (t: number) => {
-      const p = Math.min(1, (t - start) / dur);
+      if (done.current) return;
+      const p = Math.min(1, (t - t0) / dur);
       const e = 1 - Math.pow(1 - p, 3);
-      const val = Math.round(from + (target - from) * e);
-      setN(val);
-      fromRef.current = val;
+      setN(Math.round(targetRef.current * e));
       if (p < 1) raf = requestAnimationFrame(tick);
+      else finish();
     };
     raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [run, target, reduce]);
+    return () => {
+      cancelAnimationFrame(raf);
+      clearTimeout(safety);
+      document.removeEventListener("visibilitychange", onHide);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // keep in sync with a late/updated value once the sweep has finished (no re-run)
+  useEffect(() => {
+    if (done.current) setN(targetRef.current);
+  }, [target]);
+
   return n;
 }
 
@@ -148,6 +175,9 @@ function Chip({ name, color = "var(--color-accent)" }: { name: IconName; color?:
   );
 }
 
+const HERO_NUM =
+  "mt-5 text-[clamp(44px,5.6vw,76px)] font-semibold leading-[0.95] tracking-tight text-ink tabular-nums";
+
 export function LiveStats() {
   const tx = useTx();
   const { lang } = useLang();
@@ -159,7 +189,6 @@ export function LiveStats() {
   useEffect(() => {
     const ac = new AbortController();
     const sig = ac.signal;
-    // 上次浏览量先画出来,不必等会写入的 /api/views。
     try {
       const cached = Number(sessionStorage.getItem("stat-page-views"));
       if (cached > 0) setData((d) => ({ ...d, pageViews: cached }));
@@ -167,7 +196,6 @@ export function LiveStats() {
       /* private mode */
     }
 
-    // portfolio 走 Redis 缓存,views 每次要落盘,拆开请求,浏览量不再拖住其他指标。
     fetch(`${GW}/api/portfolio`, { signal: sig })
       .then((r) => r.json())
       .then((p) => {
@@ -200,6 +228,7 @@ export function LiveStats() {
         if (sig.aborted || !v) return;
         const views = Number(v.total) || 0;
         const scans = Number(v.scans30d) || 0;
+        const today = Number(v.today) || 0;
         if (views > 0) {
           try {
             sessionStorage.setItem("stat-page-views", String(views));
@@ -210,6 +239,7 @@ export function LiveStats() {
         setData((d) => ({
           ...d,
           pageViews: views > 0 ? views : d.pageViews,
+          pageViewsToday: today > 0 ? today : d.pageViewsToday,
           scans30d: scans > 0 ? scans : d.scans30d,
         }));
       })
@@ -218,18 +248,37 @@ export function LiveStats() {
     return () => ac.abort();
   }, []);
 
-  // 不等 IntersectionObserver。iOS Chrome 上 IO 经常不回调,数字会一直停在 0。
-  const pulls = useCountUp(data.pulls, true, reduce);
-  const images = useCountUp(data.images, true, reduce);
-  const apiCalls = useCountUp(data.apiCalls, true, reduce);
-  const delta = useCountUp(data.monthDelta, true, reduce);
-  const claw = useCountUp(data.clawDownloads, true, reduce);
-  const ghIssues = useCountUp(data.ghIssues, true, reduce);
-  const views = useCountUp(data.pageViews, true, reduce);
-  const scans = useCountUp(data.scans30d, true, reduce);
-  // 大数字卡:满百万再缩写,保留「真实数字」观感;小卡更窄,满一万就缩。
+  const pulls = useCountUp(data.pulls, reduce);
+  const images = useCountUp(data.images, reduce);
+  const apiCalls = useCountUp(data.apiCalls, reduce);
+  const delta = useCountUp(data.monthDelta, reduce);
+  const claw = useCountUp(data.clawDownloads, reduce);
+  const ghIssues = useCountUp(data.ghIssues, reduce);
+  const views = useCountUp(data.pageViews, reduce);
+  const viewsToday = useCountUp(data.pageViewsToday, reduce);
+  const scans = useCountUp(data.scans30d, reduce);
+
   const fmtHero = (n: number) => formatCompactCount(n, lang, 1_000_000);
   const fmt = (n: number) => formatCompactCount(n, lang, 10_000);
+
+  const t = {
+    live: tx({ en: "Live", zh: "实时数据", ar: "مباشر", fr: "En direct", ru: "Вживую", es: "En vivo" }),
+    title: tx({ en: "Proof, in real numbers.", zh: "用真实数据说话。", ar: "دليلٌ بأرقام حقيقية.", fr: "La preuve, en chiffres réels.", ru: "Доказательство — в реальных цифрах.", es: "La prueba, en números reales." }),
+    sub: tx({
+      en: "Pulled live through the open API gateway — Docker Hub, ClawHub, GitHub, and traffic across every domain.",
+      zh: "经由开放 API 网关实时汇总:Docker Hub、ClawHub、GitHub,以及所有域名的访问量。",
+      ar: "مسحوبة مباشرةً عبر بوابة الـAPI المفتوحة — من Docker Hub وClawHub وGitHub، وحركة المرور عبر كل النطاقات.",
+      fr: "Récupéré en direct via la passerelle API ouverte — Docker Hub, ClawHub, GitHub et le trafic de tous les domaines.",
+      ru: "Собрано вживую через открытый API-шлюз — Docker Hub, ClawHub, GitHub и трафик по всем доменам.",
+      es: "Obtenido en vivo a través de la pasarela API abierta — Docker Hub, ClawHub, GitHub y el tráfico de todos los dominios.",
+    }),
+    dockerPulls: tx({ en: "Docker pulls", zh: "Docker 拉取次数", ar: "عمليات سحب Docker", fr: "Pulls Docker", ru: "Docker-загрузок", es: "Pulls de Docker" }),
+    pageViews: tx({ en: "Page views", zh: "页面浏览量", ar: "مشاهدات الصفحة", fr: "Pages vues", ru: "Просмотров страниц", es: "Vistas de página" }),
+    last30: tx({ en: "last 30 days", zh: "近 30 天", ar: "آخر 30 يوماً", fr: "30 derniers jours", ru: "за 30 дней", es: "últimos 30 días" }),
+    today: tx({ en: "today", zh: "今日", ar: "اليوم", fr: "aujourd'hui", ru: "сегодня", es: "hoy" }),
+    allDomains: tx({ en: "across all domains", zh: "覆盖全部域名", ar: "عبر كل النطاقات", fr: "sur tous les domaines", ru: "по всем доменам", es: "en todos los dominios" }),
+    publicImages: tx({ en: data.images === 1 ? "public image" : "public images", zh: "个公开镜像", ar: "صورة عامة", fr: data.images === 1 ? "image publique" : "images publiques", ru: "публичных образов", es: data.images === 1 ? "imagen pública" : "imágenes públicas" }),
+  };
 
   const small: {
     icon: IconName;
@@ -240,20 +289,20 @@ export function LiveStats() {
     sub?: string;
   }[] = [
     {
+      icon: "permissions",
+      color: "var(--c-indigo)",
+      value: fmt(scans),
+      exact: formatCount(data.scans30d, lang),
+      label: tx({ en: "Malicious scans blocked", zh: "恶意扫描拦截", ar: "عمليات فحص خبيثة محظورة", fr: "Scans malveillants bloqués", ru: "Заблокировано сканирований", es: "Escaneos maliciosos bloqueados" }),
+      sub: `${t.last30} · ${t.allDomains}`,
+    },
+    {
       icon: "download",
       color: "var(--c-purple)",
       value: fmt(claw),
       exact: formatCount(data.clawDownloads, lang),
       label: tx({ en: "ClawHub downloads", zh: "ClawHub 下载量", ar: "تنزيلات ClawHub", fr: "Téléchargements ClawHub", ru: "Загрузки ClawHub", es: "Descargas de ClawHub" }),
       sub: `${data.clawSkills} ${tx({ en: data.clawSkills === 1 ? "skill" : "skills", zh: "个技能", ar: "مهارات", fr: data.clawSkills === 1 ? "compétence" : "compétences", ru: "навыков", es: data.clawSkills === 1 ? "habilidad" : "habilidades" })} · ${data.clawPlugins} ${tx({ en: data.clawPlugins === 1 ? "plugin" : "plugins", zh: "个插件", ar: "ملحقات", fr: "plugin" + (data.clawPlugins === 1 ? "" : "s"), ru: "плагинов", es: "plugin" + (data.clawPlugins === 1 ? "" : "s") })}`,
-    },
-    {
-      icon: "code",
-      color: "var(--c-teal)",
-      value: fmt(ghIssues),
-      exact: formatCount(data.ghIssues, lang),
-      label: tx({ en: "GitHub issues opened", zh: "GitHub 提交的 issues", ar: "مشكلات GitHub المفتوحة", fr: "Issues GitHub ouvertes", ru: "Issues на GitHub", es: "Issues abiertas en GitHub" }),
-      sub: `${data.ghPRs} ${tx({ en: data.ghPRs === 1 ? "pull request" : "pull requests", zh: "个 PR", ar: "طلبات سحب", fr: data.ghPRs === 1 ? "pull request" : "pull requests", ru: "pull-реквестов", es: data.ghPRs === 1 ? "pull request" : "pull requests" })}`,
     },
     {
       icon: "api",
@@ -263,19 +312,12 @@ export function LiveStats() {
       label: tx({ en: "API calls served", zh: "API 调用量", ar: "طلبات API مُخدّمة", fr: "Appels API servis", ru: "Обработано API-запросов", es: "Llamadas API servidas" }),
     },
     {
-      icon: "analytics",
-      color: "var(--c-pink)",
-      value: fmt(views),
-      exact: formatCount(data.pageViews, lang),
-      label: tx({ en: "Page views", zh: "页面浏览量", ar: "مشاهدات الصفحة", fr: "Pages vues", ru: "Просмотров страниц", es: "Vistas de página" }),
-    },
-    {
-      icon: "permissions",
-      color: "var(--c-indigo)",
-      value: fmt(scans),
-      exact: formatCount(data.scans30d, lang),
-      label: tx({ en: "Malicious scans blocked", zh: "恶意扫描拦截", ar: "عمليات فحص خبيثة محظورة", fr: "Scans malveillants bloqués", ru: "Заблокировано сканирований", es: "Escaneos maliciosos bloqueados" }),
-      sub: tx({ en: "last 30 days · all domains", zh: "近 30 天 · 全部域名", ar: "آخر 30 يوماً · كل النطاقات", fr: "30 derniers jours · tous domaines", ru: "за 30 дней · все домены", es: "últimos 30 días · todos los dominios" }),
+      icon: "code",
+      color: "var(--c-teal)",
+      value: fmt(ghIssues),
+      exact: formatCount(data.ghIssues, lang),
+      label: tx({ en: "GitHub issues opened", zh: "GitHub 提交的 issues", ar: "مشكلات GitHub المفتوحة", fr: "Issues GitHub ouvertes", ru: "Issues на GitHub", es: "Issues abiertas en GitHub" }),
+      sub: `${data.ghPRs} ${tx({ en: data.ghPRs === 1 ? "pull request" : "pull requests", zh: "个 PR", ar: "طلبات سحب", fr: data.ghPRs === 1 ? "pull request" : "pull requests", ru: "pull-реквестов", es: data.ghPRs === 1 ? "pull request" : "pull requests" })}`,
     },
   ];
 
@@ -289,68 +331,73 @@ export function LiveStats() {
             )}
             <span className={`relative inline-flex h-1.5 w-1.5 rounded-full ${live ? "bg-[#34c759]" : "bg-muted"}`} />
           </span>
-          {tx({ en: "Live", zh: "实时数据", ar: "مباشر", fr: "En direct", ru: "Вживую", es: "En vivo" })}
+          {t.live}
         </span>
-        <h2 className="display-2 mt-4 max-w-[20ch]">
-          {tx({
-            en: "Proof, in real numbers.",
-            zh: "用真实数据说话。",
-            ar: "دليلٌ بأرقام حقيقية.",
-            fr: "La preuve, en chiffres réels.",
-            ru: "Доказательство — в реальных цифрах.",
-            es: "La prueba, en números reales.",
-          })}
-        </h2>
-        <p className="lead mt-4 max-w-[48ch]">
-          {tx({
-            en: "Pulled live from Docker Hub and ClawHub through the open API gateway.",
-            zh: "经由开放 API 网关,实时取自 Docker Hub 与 ClawHub。",
-            ar: "مسحوبة مباشرةً من Docker Hub وClawHub عبر بوابة الواجهة المفتوحة.",
-            fr: "Récupéré en direct depuis Docker Hub et ClawHub via la passerelle API ouverte.",
-            ru: "Получено вживую из Docker Hub и ClawHub через открытый API-шлюз.",
-            es: "Obtenido en vivo desde Docker Hub y ClawHub a través de la pasarela API abierta.",
-          })}
-        </p>
+        <h2 className="display-2 mt-4 max-w-[20ch]">{t.title}</h2>
+        <p className="lead mt-4 max-w-[54ch]">{t.sub}</p>
 
         <div className="mt-12 space-y-6">
-          {/* Featured: Docker pulls + sparkline */}
-          <article className={`${CARD} md:flex md:items-center md:justify-between md:gap-12`} style={GLOW}>
-            <div>
+          {/* Two headline cards: page-view scale + Docker momentum */}
+          <div className="grid gap-6 md:grid-cols-2">
+            {/* Page views — the biggest number */}
+            <article className={`${CARD} flex flex-col`} style={GLOW}>
+              <div className="flex items-center gap-3">
+                <Chip name="analytics" color="var(--c-pink)" />
+                <p className="text-[15px] text-muted">{t.pageViews}</p>
+              </div>
+              <div className={HERO_NUM} title={formatCount(data.pageViews, lang)} dir="ltr">
+                {fmtHero(views)}
+              </div>
+              <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
+                {data.pageViewsToday > 0 && (
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[#34c759]/12 px-3 py-1 font-mono text-[12px] font-medium text-[#1a9c43] dark:text-[#4fd37a]">
+                    ↑ {fmt(viewsToday)} · {t.today}
+                  </span>
+                )}
+                <span className="font-mono text-[12px] text-muted">{t.allDomains}</span>
+              </div>
+              <div className="mt-auto flex flex-wrap gap-2 pt-7">
+                {["www", "nas", "mail", "watch", "pulse", "open"].map((d) => (
+                  <span
+                    key={d}
+                    className="rounded-md border border-[var(--color-line)] px-2 py-1 font-mono text-[11px] text-muted"
+                  >
+                    {d}
+                  </span>
+                ))}
+              </div>
+            </article>
+
+            {/* Docker pulls — momentum + sparkline */}
+            <article className={`${CARD} flex flex-col`} style={GLOW}>
               <div className="flex items-center gap-3">
                 <Chip name="box" color="var(--c-blue)" />
-                <p className="text-[15px] text-muted">
-                  {tx({ en: "Docker pulls", zh: "Docker 拉取次数", ar: "عمليات سحب Docker", fr: "Pulls Docker", ru: "Docker-загрузок", es: "Pulls de Docker" })}
-                </p>
+                <p className="text-[15px] text-muted">{t.dockerPulls}</p>
               </div>
-              <div
-                className="mt-4 text-[clamp(46px,6.6vw,80px)] font-semibold leading-none tracking-tight text-ink tabular-nums"
-                title={formatCount(data.pulls, lang)}
-                dir="ltr"
-              >
+              <div className={HERO_NUM} title={formatCount(data.pulls, lang)} dir="ltr">
                 {fmtHero(pulls)}
               </div>
-              <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
+              <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-[#34c759]/12 px-3 py-1 font-mono text-[12px] font-medium text-[#1a9c43] dark:text-[#4fd37a]">
-                  ↑ {fmt(delta)} ·{" "}
-                  {tx({ en: "last 30 days", zh: "近 30 天", ar: "آخر 30 يوماً", fr: "30 derniers jours", ru: "за 30 дней", es: "últimos 30 días" })}
+                  ↑ {fmt(delta)} · {t.last30}
                 </span>
                 <span className="font-mono text-[12px] text-muted">
-                  {fmt(images)} {tx({ en: data.images === 1 ? "public image" : "public images", zh: "个公开镜像", ar: "صورة عامة", fr: data.images === 1 ? "image publique" : "images publiques", ru: "публичных образов", es: data.images === 1 ? "imagen pública" : "imágenes públicas" })}
+                  {fmt(images)} {t.publicImages}
                 </span>
               </div>
-            </div>
-            <div className="mt-7 md:mt-0 md:w-[46%]">
-              <Sparkline values={data.history} className="h-[84px] w-full" />
-            </div>
-          </article>
+              <div className="mt-auto pt-6">
+                <Sparkline values={data.history} className="h-[80px] w-full" />
+              </div>
+            </article>
+          </div>
 
-          {/* Supporting stats */}
-          <div className="grid gap-6 grid-cols-2 lg:grid-cols-5">
+          {/* Supporting stats, ordered by magnitude */}
+          <div className="grid gap-6 grid-cols-2 lg:grid-cols-4">
             {small.map((s) => (
-              <article key={s.label} className={CARD.replace("p-8", "p-5")} style={GLOW}>
+              <article key={s.label} className={CARD.replace("p-8", "p-6")} style={GLOW}>
                 <Chip name={s.icon} color={s.color} />
                 <div
-                  className="mt-5 truncate text-[clamp(24px,2.2vw,32px)] font-semibold leading-none tracking-tight text-ink tabular-nums"
+                  className="mt-5 truncate text-[clamp(26px,2.4vw,36px)] font-semibold leading-none tracking-tight text-ink tabular-nums"
                   title={s.exact}
                   dir="ltr"
                 >
