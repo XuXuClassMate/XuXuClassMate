@@ -338,7 +338,7 @@ export function LiveStats() {
 
         <div className="mt-12 space-y-6">
           {/* Two headline cards: page-view scale + Docker momentum */}
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-6 md:grid-cols-2 md:items-start">
             {/* Page views — the biggest number */}
             <article className={`${CARD} flex flex-col`} style={GLOW}>
               <div className="flex items-center gap-3">
@@ -355,16 +355,6 @@ export function LiveStats() {
                   </span>
                 )}
                 <span className="font-mono text-[12px] text-muted">{t.allDomains}</span>
-              </div>
-              <div className="mt-auto flex flex-wrap gap-2 pt-7">
-                {["www", "nas", "mail", "watch", "pulse", "open"].map((d) => (
-                  <span
-                    key={d}
-                    className="rounded-md border border-[var(--color-line)] px-2 py-1 font-mono text-[11px] text-muted"
-                  >
-                    {d}
-                  </span>
-                ))}
               </div>
             </article>
 
