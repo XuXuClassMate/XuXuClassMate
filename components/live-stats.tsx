@@ -28,7 +28,8 @@ type Stats = {
   ghIssues: number;
   ghPRs: number;
   pageViews: number;
-  pageViewsToday: number;
+  pvLast30d: number;
+  pvHistory: number[];
   scans30d: number;
   history: number[];
 };
@@ -47,7 +48,12 @@ const FALLBACK: Stats = {
   ghIssues: 147,
   ghPRs: 33,
   pageViews: 686000,
-  pageViewsToday: 0,
+  pvLast30d: 238000,
+  pvHistory: [
+    1690, 4390, 1170, 3450, 4770, 6530, 4140, 7330, 11400, 9290, 7750, 7150,
+    3470, 6000, 4310, 6660, 6180, 5460, 8710, 19160, 8960, 7020, 7850, 6970,
+    6340, 5810, 9830, 14060, 28510, 14550,
+  ],
   scans30d: 400960,
   history: [
     79009, 79352, 79482, 79567, 79647, 79871, 80016, 80343, 80499, 80679,
@@ -112,7 +118,17 @@ function useCountUp(target: number, reduce: boolean) {
   return n;
 }
 
-function Sparkline({ values, className }: { values: number[]; className?: string }) {
+function Sparkline({
+  values,
+  className,
+  color = "var(--color-accent)",
+  gradId = "spark-grad",
+}: {
+  values: number[];
+  className?: string;
+  color?: string;
+  gradId?: string;
+}) {
   if (values.length < 2) return null;
   const w = 240;
   const h = 72;
@@ -136,23 +152,23 @@ function Sparkline({ values, className }: { values: number[]; className?: string
       aria-hidden="true"
     >
       <defs>
-        <linearGradient id="spark-grad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="var(--color-accent)" stopOpacity="0.28" />
-          <stop offset="100%" stopColor="var(--color-accent)" stopOpacity="0" />
+        <linearGradient id={gradId} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor={color} stopOpacity="0.28" />
+          <stop offset="100%" stopColor={color} stopOpacity="0" />
         </linearGradient>
       </defs>
-      <polygon points={area} fill="url(#spark-grad)" />
+      <polygon points={area} fill={`url(#${gradId})`} />
       <polyline
         points={line}
         fill="none"
-        stroke="var(--color-accent)"
+        stroke={color}
         strokeWidth="2.5"
         strokeLinecap="round"
         strokeLinejoin="round"
         vectorEffect="non-scaling-stroke"
       />
-      <circle cx={ex} cy={ey} r="6" fill="var(--color-accent)" opacity="0.18" />
-      <circle cx={ex} cy={ey} r="3" fill="var(--color-accent)" />
+      <circle cx={ex} cy={ey} r="6" fill={color} opacity="0.18" />
+      <circle cx={ex} cy={ey} r="3" fill={color} />
     </svg>
   );
 }
@@ -228,7 +244,10 @@ export function LiveStats() {
         if (sig.aborted || !v) return;
         const views = Number(v.total) || 0;
         const scans = Number(v.scans30d) || 0;
-        const today = Number(v.today) || 0;
+        const last30 = Number(v.last30d) || 0;
+        const pvHist = Array.isArray(v.history)
+          ? v.history.map(Number).filter(Number.isFinite)
+          : [];
         if (views > 0) {
           try {
             sessionStorage.setItem("stat-page-views", String(views));
@@ -239,7 +258,8 @@ export function LiveStats() {
         setData((d) => ({
           ...d,
           pageViews: views > 0 ? views : d.pageViews,
-          pageViewsToday: today > 0 ? today : d.pageViewsToday,
+          pvLast30d: last30 > 0 ? last30 : d.pvLast30d,
+          pvHistory: pvHist.length > 1 ? pvHist : d.pvHistory,
           scans30d: scans > 0 ? scans : d.scans30d,
         }));
       })
@@ -255,7 +275,7 @@ export function LiveStats() {
   const claw = useCountUp(data.clawDownloads, reduce);
   const ghIssues = useCountUp(data.ghIssues, reduce);
   const views = useCountUp(data.pageViews, reduce);
-  const viewsToday = useCountUp(data.pageViewsToday, reduce);
+  const pvLast30 = useCountUp(data.pvLast30d, reduce);
   const scans = useCountUp(data.scans30d, reduce);
 
   const fmtHero = (n: number) => formatCompactCount(n, lang, 1_000_000);
@@ -338,7 +358,7 @@ export function LiveStats() {
 
         <div className="mt-12 space-y-6">
           {/* Two headline cards: page-view scale + Docker momentum */}
-          <div className="grid gap-6 md:grid-cols-2 md:items-start">
+          <div className="grid gap-6 md:grid-cols-2">
             {/* Page views — the biggest number */}
             <article className={`${CARD} flex flex-col`} style={GLOW}>
               <div className="flex items-center gap-3">
@@ -349,12 +369,13 @@ export function LiveStats() {
                 {fmtHero(views)}
               </div>
               <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
-                {data.pageViewsToday > 0 && (
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[#34c759]/12 px-3 py-1 font-mono text-[12px] font-medium text-[#1a9c43] dark:text-[#4fd37a]">
-                    ↑ {fmt(viewsToday)} · {t.today}
-                  </span>
-                )}
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-[#34c759]/12 px-3 py-1 font-mono text-[12px] font-medium text-[#1a9c43] dark:text-[#4fd37a]">
+                  ↑ {fmt(pvLast30)} · {t.last30}
+                </span>
                 <span className="font-mono text-[12px] text-muted">{t.allDomains}</span>
+              </div>
+              <div className="mt-auto pt-6">
+                <Sparkline values={data.pvHistory} color="var(--c-pink)" gradId="spark-pv" className="h-[80px] w-full" />
               </div>
             </article>
 
