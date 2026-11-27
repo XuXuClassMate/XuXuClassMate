@@ -74,6 +74,21 @@ const SERVICES: Service[] = [
     },
   },
   {
+    title: "Data",
+    host: "data.xuxuclassmate.com",
+    href: "https://data.xuxuclassmate.com/",
+    icon: "analytics",
+    color: "var(--c-indigo)",
+    detail: {
+      en: "Site analytics: traffic, funnels, and mix.",
+      zh: "站点分析：流量、漏斗、构成。",
+      ar: "تحليلات الموقع: الزيارات والقمع والمزيج.",
+      fr: "Analytique du site : trafic, entonnoirs et mix.",
+      ru: "Аналитика сайта: трафик, воронки и состав.",
+      es: "Analítica del sitio: tráfico, embudos y mix.",
+    },
+  },
+  {
     title: "GlobalPulse",
     host: "pulse.xuxuclassmate.com",
     href: "https://pulse.xuxuclassmate.com/",

@@ -79,12 +79,12 @@ const FAMILIES: {
     href: "/#services",
     title: { en: "Self-hosted services", zh: "自托管服务", ar: "خدمات ذاتية الاستضافة", fr: "Services auto-hébergés", ru: "Собственные сервисы", es: "Servicios autoalojados" },
     desc: {
-      en: "NAS, Mail, SSH, Watch, and Pulse — all under one name.",
-      zh: "NAS、Mail、SSH、Watch、Pulse——都在同一个名字下。",
-      ar: "NAS وMail وSSH وWatch وPulse — كلها تحت اسم واحد.",
-      fr: "NAS, Mail, SSH, Watch et Pulse — tous sous un même nom.",
-      ru: "NAS, Mail, SSH, Watch и Pulse — всё под одним именем.",
-      es: "NAS, Mail, SSH, Watch y Pulse — todo bajo un mismo nombre.",
+      en: "NAS, Mail, SSH, Watch, Data, and Pulse — all under one name.",
+      zh: "NAS、Mail、SSH、Watch、Data、Pulse——都在同一个名字下。",
+      ar: "NAS وMail وSSH وWatch وData وPulse — كلها تحت اسم واحد.",
+      fr: "NAS, Mail, SSH, Watch, Data et Pulse — tous sous un même nom.",
+      ru: "NAS, Mail, SSH, Watch, Data и Pulse — всё под одним именем.",
+      es: "NAS, Mail, SSH, Watch, Data y Pulse — todo bajo un mismo nombre.",
     },
   },
 ];
