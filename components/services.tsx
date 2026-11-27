@@ -74,8 +74,8 @@ const SERVICES: Service[] = [
     },
   },
   {
-    // 标题与 data 站顶栏一致，不再用已删掉的「站点分析」眉题
-    title: "DATA ANALYTICS",
+    // 卡片标题保持短名 Data，和 NAS / Watch 一排对齐
+    title: "Data",
     host: "data.xuxuclassmate.com",
     href: "https://data.xuxuclassmate.com/",
     icon: "analytics",
