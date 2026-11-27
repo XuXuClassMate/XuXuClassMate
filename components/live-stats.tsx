@@ -366,7 +366,7 @@ export function LiveStats() {
                 <p className="text-[15px] text-muted">{t.pageViews}</p>
               </div>
               <div className={HERO_NUM} title={formatCount(data.pageViews, lang)} dir="ltr">
-                {fmtHero(views)}
+                {formatCount(views, lang)}
               </div>
               <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-[#34c759]/12 px-3 py-1 font-mono text-[12px] font-medium text-[#1a9c43] dark:text-[#4fd37a]">
